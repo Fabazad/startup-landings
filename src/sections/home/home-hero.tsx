@@ -19,12 +19,10 @@ import { paths } from 'src/routes/paths';
 import { useResponsive } from 'src/hooks/use-responsive';
 
 import { _mock } from 'src/_mock';
-import { CONFIG } from 'src/config-global';
 import { textGradient } from 'src/theme/styles';
 
 import { MotionContainer, varFade } from 'src/components/animate';
 import { Iconify } from 'src/components/iconify';
-import { SvgColor } from 'src/components/svg-color';
 
 import { HeroBackground } from './components/hero-background';
 
@@ -156,36 +154,6 @@ export function HomeHero({ sx, ...other }: BoxProps) {
     </Box>
   );
 
-  const renderIcons = (
-    <Stack spacing={3} sx={{ textAlign: 'center' }}>
-      <AnimatedDiv>
-        <Typography variant="overline" sx={{ opacity: 0.4 }}>
-          Available For
-        </Typography>
-      </AnimatedDiv>
-
-      <Stack spacing={2.5} direction="row">
-        {['js', 'ts', 'nextjs', 'vite', 'figma'].map((platform) => (
-          <AnimatedDiv key={platform}>
-            {platform === 'nextjs' ? (
-              <SvgColor
-                src={`${CONFIG.assetsDir}/assets/icons/platforms/ic-${platform}.svg`}
-                sx={{ width: 24, height: 24 }}
-              />
-            ) : (
-              <Box
-                component="img"
-                alt={platform}
-                src={`${CONFIG.assetsDir}/assets/icons/platforms/ic-${platform}.svg`}
-                sx={{ width: 24, height: 24 }}
-              />
-            )}
-          </AnimatedDiv>
-        ))}
-      </Stack>
-    </Stack>
-  );
-
   return (
     <Box
       ref={scroll.elementRef}
@@ -239,7 +207,6 @@ export function HomeHero({ sx, ...other }: BoxProps) {
           </Stack>
           <m.div style={{ y: y3 }}>{renderRatings}</m.div>
           <m.div style={{ y: y4 }}>{renderButtons}</m.div>
-          <m.div style={{ y: y5 }}>{renderIcons}</m.div>
         </Container>
 
         <HeroBackground />

@@ -1,7 +1,7 @@
-import type { MotionProps } from 'framer-motion';
 import type { BoxProps } from '@mui/material/Box';
+import type { SxProps, Theme } from '@mui/material/styles';
+import type { MotionProps } from 'framer-motion';
 import type { ColorType } from 'src/theme/core/palette';
-import type { Theme, SxProps } from '@mui/material/styles';
 
 import { m } from 'framer-motion';
 
@@ -246,7 +246,7 @@ export function Texts({ sx, ...other }: BoxProps) {
           animate={{ x: ['0%', '-50%'] }}
           transition={{ duration: 64, ease: 'linear', repeat: Infinity }}
         >
-          Minimal Design System Minimal Design System
+          InsightFeed InsightFeed InsightFeed
         </m.text>
       </Box>
     </Box>
