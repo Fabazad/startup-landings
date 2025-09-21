@@ -151,6 +151,8 @@ export function HomeHero({ sx, ...other }: BoxProps) {
           </Button>
         </Stack>
       </AnimatedDiv>
+
+      <a href="#pricing">Pricing</a>
     </Box>
   );
 

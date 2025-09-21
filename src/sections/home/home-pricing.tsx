@@ -4,12 +4,12 @@ import type { StackProps } from '@mui/material/Stack';
 import { m } from 'framer-motion';
 
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
 import { paths } from 'src/routes/paths';
@@ -19,8 +19,8 @@ import { useTabs } from 'src/hooks/use-tabs';
 import { CONFIG } from 'src/config-global';
 import { varAlpha } from 'src/theme/styles';
 
+import { MotionViewport, varFade, varScale } from 'src/components/animate';
 import { Iconify } from 'src/components/iconify';
-import { varFade, varScale, MotionViewport } from 'src/components/animate';
 
 import { SectionTitle } from './components/section-title';
 import { FloatLine, FloatXIcon } from './components/svg-elements';
@@ -89,7 +89,7 @@ export function HomePricing({ sx, ...other }: BoxProps) {
   );
 
   return (
-    <Box component="section" sx={{ py: 10, position: 'relative', ...sx }} {...other}>
+    <Box component="section" sx={{ py: 10, position: 'relative', ...sx }} {...other} id="pricing">
       <MotionViewport>
         <FloatLine vertical sx={{ top: 0, left: 80 }} />
 
