@@ -13,7 +13,10 @@ import { stylesMode, varAlpha } from 'src/theme/styles';
 
 import { MotionViewport, varFade } from 'src/components/animate';
 
+import { Button } from '@mui/material';
 import { Iconify } from 'src/components/iconify';
+import { RouterLink } from 'src/routes/components';
+import { paths } from 'src/routes/paths';
 import { SectionTitle } from './components/section-title';
 import { CircleSvg, FloatLine, FloatPlusIcon } from './components/svg-elements';
 
@@ -27,8 +30,8 @@ type Item = {
 
 type Feature = {
   icon: string;
+  pain: string;
   title: string;
-  description?: string;
   items: Item[];
   imgUrl: string;
 };
@@ -52,6 +55,15 @@ export function HomeFeatures({ sx, ...other }: BoxProps) {
 
   const Description = ({ feature }: { feature: Feature }) => (
     <>
+      <Typography
+        variants={varFade({ distance: 24 }).inLeft}
+        component={m.h6}
+        variant="h6"
+        sx={{ typography: 'overline', color: 'text.disabled', mb: 3 }}
+      >
+        {feature.pain}
+      </Typography>
+
       <SectionTitle
         title={feature.title}
         isFullGradient={true}
@@ -83,6 +95,19 @@ export function HomeFeatures({ sx, ...other }: BoxProps) {
           </Box>
         ))}
       </Stack>
+      <Box variants={varFade({ distance: 24 }).inUp} component={m.div}>
+        <Button
+          component={RouterLink}
+          href={paths.dashboard.root}
+          color="inherit"
+          size="large"
+          variant="contained"
+          startIcon={<Iconify width={24} icon="ph:rocket-launch-duotone" />}
+          sx={{ mt: 5 }}
+        >
+          <span>Essayez gratuitement</span>
+        </Button>
+      </Box>
     </>
   );
 
@@ -187,7 +212,7 @@ const FEATURES: Feature[] = [
   {
     icon: 'mdi:check',
     title: 'Identification automatique des SaaS concurrents.',
-    description: 'Identification automatique des SaaS concurrents.',
+    pain: 'Ne sais pas quoi faire ?',
     items: [
       {
         icon: 'mdi:magnify-scan',
@@ -208,7 +233,7 @@ const FEATURES: Feature[] = [
   {
     icon: 'mdi:check',
     title: 'Analyser leur marché.',
-    description: 'Identification automatique des SaaS concurrents.',
+    pain: 'Identification automatique des SaaS concurrents.',
     items: [
       {
         icon: 'mdi:check',
@@ -228,19 +253,22 @@ const FEATURES: Feature[] = [
   {
     icon: 'lucide:check-line',
     title: 'Surveiller leurs moves en temps réel.',
-    description: 'Identification automatique des SaaS concurrents.',
+    pain: 'Identification automatique des SaaS concurrents.',
     items: [
       {
         icon: 'mdi:check',
-        title: 'Avis clients triés par thèmes & évolution dans le temps.',
+        title: 'Avis clients',
+        description: 'Avis clients triés par thèmes & évolution dans le temps..',
       },
       {
         icon: 'mdi:file-document-outline',
-        title: 'Comparatif des features, cibles et stratégies.',
+        title: 'Features',
+        description: 'Comparatif des features, cibles et stratégies.',
       },
       {
         icon: 'mdi:chart-box-outline',
-        title: 'Données fiables pour détecter forces & faiblesses.',
+        title: 'Cibles',
+        description: 'Données fiables pour détecter forces & faiblesses.',
       },
     ],
     imgUrl: `${CONFIG.assetsDir}/assets/images/home/home-chart.webp`,

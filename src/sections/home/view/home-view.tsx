@@ -10,7 +10,6 @@ import { HomeFAQs } from '../home-faqs';
 import { HomeFeatures } from '../home-features';
 import { HomeForDesigner } from '../home-for-designer';
 import { HomeHero } from '../home-hero';
-import { HomeHighlightFeatures } from '../home-highlight-features';
 import { SocialProofs } from '../home-hugepack-elements';
 import { HomeIntegrations } from '../home-integrations';
 import { HomePricing } from '../home-pricing';
@@ -35,11 +34,9 @@ export function HomeView() {
       <HomeHero />
 
       <Stack sx={{ position: 'relative', bgcolor: 'background.default' }}>
-        <HomeTestimonials />
-
         <HomeFeatures />
 
-        <HomeHighlightFeatures />
+        <HomeTestimonials />
 
         <HomeForDesigner />
 

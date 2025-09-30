@@ -147,7 +147,7 @@ export function HomeHero({ sx, ...other }: BoxProps) {
             variant="contained"
             startIcon={<Iconify width={24} icon="ph:rocket-launch-duotone" />}
           >
-            <span>Essayez InsightFeed gratuitement</span>
+            <span>Essayez gratuitement</span>
           </Button>
         </Stack>
       </AnimatedDiv>

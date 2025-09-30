@@ -278,7 +278,7 @@ function PlanCard({ plan, sx, ...other }: PlanCardProps) {
 // ----------------------------------------------------------------------
 
 const PLANS = [...Array(3)].map((_, index) => ({
-  license: ['Standard', 'Plus', 'Extended'][index],
+  license: ['Standard-1', 'Plus-2', 'Extended-3'][index],
   price: [69, 129, 599][index],
   commons: [
     'One end products',

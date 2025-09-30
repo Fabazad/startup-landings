@@ -24,6 +24,10 @@ import {
   useCarousel,
 } from 'src/components/carousel';
 
+import { Button } from '@mui/material';
+import { Iconify } from 'src/components/iconify';
+import { RouterLink } from 'src/routes/components';
+import { paths } from 'src/routes/paths';
 import { SectionTitle } from './components/section-title';
 import { FloatLine, FloatTriangleDownIcon } from './components/svg-elements';
 import { TextGradient } from './components/text-gradient';
@@ -147,6 +151,19 @@ export function HomeTestimonials({ sx, ...other }: BoxProps) {
 
         <CarouselArrowBasicButtons {...carousel.arrows} options={carousel.options} />
       </Stack>
+      <Box variants={varFade({ distance: 24 }).inUp} component={m.div} sx={{ textAlign: 'center' }}>
+        <Button
+          component={RouterLink}
+          href={paths.dashboard.root}
+          color="inherit"
+          size="large"
+          variant="contained"
+          startIcon={<Iconify width={24} icon="ph:rocket-launch-duotone" />}
+          sx={{ mt: 5 }}
+        >
+          <span>Essayez gratuitement</span>
+        </Button>
+      </Box>
     </Stack>
   );
 
