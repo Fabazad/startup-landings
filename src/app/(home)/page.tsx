@@ -1,4 +1,4 @@
-import { HomeView } from 'src/sections/home/view';
+import { LandingView } from 'src/sections/landing/view';
 
 // ----------------------------------------------------------------------
 
@@ -9,5 +9,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <HomeView />;
+  return <LandingView />;
 }

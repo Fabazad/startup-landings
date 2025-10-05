@@ -6,6 +6,7 @@ import { BackToTop } from 'src/components/animate/back-to-top';
 import { ScrollProgress, useScrollProgress } from 'src/components/animate/scroll-progress';
 
 import { HomeAdvertisement } from '../home-advertisement';
+import { HomeContact } from '../home-contact';
 import { HomeFAQs } from '../home-faqs';
 import { HomeFeatures } from '../home-features';
 import { HomeForDesigner } from '../home-for-designer';
@@ -38,11 +39,13 @@ export function HomeView() {
 
         <HomeTestimonials />
 
+        <HomePricing />
+
+        <HomeContact />
+
         <HomeForDesigner />
 
         <HomeIntegrations />
-
-        <HomePricing />
 
         <HomeFAQs />
 

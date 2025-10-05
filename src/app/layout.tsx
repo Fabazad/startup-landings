@@ -7,25 +7,25 @@ import type { Viewport } from 'next';
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
 
 import { CONFIG } from 'src/config-global';
-import { primary } from 'src/theme/core/palette';
 import { LocalizationProvider } from 'src/locales';
-import { detectLanguage } from 'src/locales/server';
-import { schemeConfig } from 'src/theme/scheme-config';
 import { I18nProvider } from 'src/locales/i18n-provider';
+import { detectLanguage } from 'src/locales/server';
+import { primary } from 'src/theme/core/palette';
+import { schemeConfig } from 'src/theme/scheme-config';
 import { ThemeProvider } from 'src/theme/theme-provider';
 
-import { Snackbar } from 'src/components/snackbar';
-import { ProgressBar } from 'src/components/progress-bar';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
-import { SettingsDrawer, defaultSettings, SettingsProvider } from 'src/components/settings';
+import { ProgressBar } from 'src/components/progress-bar';
+import { defaultSettings, SettingsDrawer, SettingsProvider } from 'src/components/settings';
+import { Snackbar } from 'src/components/snackbar';
 
 import { CheckoutProvider } from 'src/sections/checkout/context';
 
-import { AuthProvider as JwtAuthProvider } from 'src/auth/context/jwt';
-import { AuthProvider as Auth0AuthProvider } from 'src/auth/context/auth0';
 import { AuthProvider as AmplifyAuthProvider } from 'src/auth/context/amplify';
-import { AuthProvider as SupabaseAuthProvider } from 'src/auth/context/supabase';
+import { AuthProvider as Auth0AuthProvider } from 'src/auth/context/auth0';
 import { AuthProvider as FirebaseAuthProvider } from 'src/auth/context/firebase';
+import { AuthProvider as JwtAuthProvider } from 'src/auth/context/jwt';
+import { AuthProvider as SupabaseAuthProvider } from 'src/auth/context/supabase';
 
 // ----------------------------------------------------------------------
 

@@ -26,7 +26,7 @@ import { FloatLine, FloatXIcon } from './components/svg-elements';
 
 // ----------------------------------------------------------------------
 
-export function HomePricing({ sx, ...other }: BoxProps) {
+export function LandingPricing({ sx, ...other }: BoxProps) {
   const tabs = useTabs(PLANS_NEW[0].license);
 
   const renderDescription = (
@@ -192,7 +192,7 @@ function PlanCard({ plan, sx, ...other }: PlanCardProps) {
       <Stack spacing={2.5}>
         {plan.included.map((option) => (
           <Stack
-            key={option}
+            key={`${plan.license}-${option}`}
             component={m.div}
             variants={varFade().in}
             spacing={1.5}
