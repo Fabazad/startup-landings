@@ -1,29 +1,29 @@
 'use client';
 
-import type { Theme, SxProps, Breakpoint } from '@mui/material/styles';
+import type { Breakpoint, SxProps, Theme } from '@mui/material/styles';
 
-import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 
-import { paths } from 'src/routes/paths';
 import { usePathname } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
 import { Logo } from 'src/components/logo';
 
-import { Main } from './main';
-import { NavMobile } from './nav/mobile';
-import { NavDesktop } from './nav/desktop';
-import { Footer, HomeFooter } from './footer';
 import { MenuButton } from '../components/menu-button';
-import { LayoutSection } from '../core/layout-section';
-import { HeaderSection } from '../core/header-section';
-import { navData as mainNavData } from '../config-nav-main';
-import { SignInButton } from '../components/sign-in-button';
 import { SettingsButton } from '../components/settings-button';
+import { SignInButton } from '../components/sign-in-button';
+import { navData as mainNavData } from '../config-nav-main';
+import { HeaderSection } from '../core/header-section';
+import { LayoutSection } from '../core/layout-section';
+import { Footer, HomeFooter } from './footer';
+import { Main } from './main';
+import { NavDesktop } from './nav/desktop';
+import { NavMobile } from './nav/mobile';
 
 import type { NavMainProps } from './nav/types';
 
@@ -40,7 +40,7 @@ export type MainLayoutProps = {
   };
 };
 
-export function MainLayout({ sx, data, children, header }: MainLayoutProps) {
+export function LandingLayout({ sx, data, children, header }: MainLayoutProps) {
   const theme = useTheme();
 
   const pathname = usePathname();
