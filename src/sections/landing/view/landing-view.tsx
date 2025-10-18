@@ -7,10 +7,11 @@ import { ScrollProgress, useScrollProgress } from 'src/components/animate/scroll
 
 import { LandingAdvertisement } from '../landing-advertisement';
 import { LandingContact } from '../landing-contact';
-import { LandingFeatures } from '../landing-features';
-import { LandingHero } from '../landing-hero';
 import { LandingPricing } from '../landing-pricing';
 import { LandingTestimonials } from '../landing-testimonials';
+import { LandingFeatures } from '../LandingFeatures/landing-features';
+import { SAMPLE_FEATURES } from '../LandingFeatures/sample-features';
+import { LandingHero } from '../LandingHero/landing-hero';
 
 // ----------------------------------------------------------------------
 
@@ -28,7 +29,7 @@ export function LandingView() {
       <LandingHero />
 
       <Stack sx={{ position: 'relative', bgcolor: 'background.default' }}>
-        <LandingFeatures />
+        <LandingFeatures features={SAMPLE_FEATURES} />
 
         <LandingTestimonials />
 

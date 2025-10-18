@@ -25,6 +25,7 @@ import { Main } from './main';
 import { NavDesktop } from './nav/desktop';
 import { NavMobile } from './nav/mobile';
 
+import { LanguageButton } from './components/language-button';
 import type { NavMainProps } from './nav/types';
 
 // ----------------------------------------------------------------------
@@ -40,7 +41,7 @@ export type MainLayoutProps = {
   };
 };
 
-export function LandingLayout({ sx, data, children, header }: MainLayoutProps) {
+export function MainLayout({ sx, data, children, header }: MainLayoutProps) {
   const theme = useTheme();
 
   const pathname = usePathname();
@@ -116,6 +117,7 @@ export function LandingLayout({ sx, data, children, header }: MainLayoutProps) {
                   >
                     Purchase
                   </Button>
+                  <LanguageButton />
                 </Box>
               </>
             ),
