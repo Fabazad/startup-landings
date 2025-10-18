@@ -1,10 +1,10 @@
-import { createInstance } from 'i18next';
-import resourcesToBackend from 'i18next-resources-to-backend';
-import { cookies as getCookies } from 'next/headers';
 import { cache } from 'react';
+import { createInstance } from 'i18next';
+import { cookies as getCookies } from 'next/headers';
+import resourcesToBackend from 'i18next-resources-to-backend';
 import { initReactI18next } from 'react-i18next/initReactI18next';
 
-import { cookieName, defaultNS, fallbackLng, i18nOptions } from './config-locales';
+import { defaultNS, cookieName, i18nOptions, fallbackLng } from './config-locales';
 
 import type { LanguageValue } from './config-locales';
 
@@ -19,7 +19,7 @@ import type { LanguageValue } from './config-locales';
  */
 
 export async function detectLanguage() {
-  const cookies = await getCookies();
+  const cookies = getCookies();
 
   const language = cookies.get(cookieName)?.value ?? fallbackLng;
 
