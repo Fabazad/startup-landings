@@ -16,6 +16,11 @@
     },
     "testimonials": {
       "testimonials": "Témoignages"
+    },
+    "pricing": {
+      "titlePart1": "Prix",
+      "titlePart2": "transparents",
+      "description": "Choisissez parmi des options de prix flexibles conçues pour répondre à vos besoins métier et à votre budget, sans frais cachés."
     }
   }
 }

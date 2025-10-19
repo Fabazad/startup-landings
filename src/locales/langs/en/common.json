@@ -16,6 +16,11 @@
     },
     "testimonials": {
       "testimonials": "Testimonials"
+    },
+    "pricing": {
+      "titlePart1": "Transparent",
+      "titlePart2": "pricing",
+      "description": "Choose from flexible pricing options designed to fit your business needs and budget with no hidden fees."
     }
   }
 }

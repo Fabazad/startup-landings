@@ -7,9 +7,9 @@ import { ScrollProgress, useScrollProgress } from 'src/components/animate/scroll
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { LandingAdvertisement } from '../landing-advertisement';
 import { LandingContact } from '../landing-contact';
-import { LandingPricing } from '../landing-pricing';
 import { LandingFeatures } from '../LandingFeatures/landing-features';
 import { LandingHero } from '../LandingHero/landing-hero';
+import { LandingPricing } from '../LandingPricing/landing-pricing';
 import { LandingTestimonials } from '../LandingTestimonials/landing-testimonials';
 
 // ----------------------------------------------------------------------
@@ -18,7 +18,6 @@ export const LandingView = () => {
   const pageProgress = useScrollProgress();
 
   const productIdea = useProductIdea();
-
 
   if (!productIdea) return null;
 
