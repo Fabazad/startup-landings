@@ -80,7 +80,7 @@ export function SectionCaption({ title, variants, sx }: TextProps) {
     <Stack
       component={m.span}
       variants={variants ?? varFade({ distance: 24 }).inUp}
-      sx={{ typography: 'overline', color: 'text.disabled', ...sx }}
+      sx={{ typography: 'overline', color: 'text.disabled', fontSize: '1.2rem', ...sx }}
     >
       {title}
     </Stack>

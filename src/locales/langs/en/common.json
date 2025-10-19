@@ -13,6 +13,9 @@
       "buttons": {
         "try-for-free": "Try for free"
       }
+    },
+    "testimonials": {
+      "testimonials": "Testimonials"
     }
   }
 }

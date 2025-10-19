@@ -13,6 +13,9 @@
       "buttons": {
         "try-for-free": "Essayer gratuitement"
       }
+    },
+    "testimonials": {
+      "testimonials": "Témoignages"
     }
   }
 }

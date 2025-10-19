@@ -8,10 +8,13 @@ import { ScrollProgress, useScrollProgress } from 'src/components/animate/scroll
 import { LandingAdvertisement } from '../landing-advertisement';
 import { LandingContact } from '../landing-contact';
 import { LandingPricing } from '../landing-pricing';
-import { LandingTestimonials } from '../landing-testimonials';
 import { LandingFeatures } from '../LandingFeatures/landing-features';
 import { SAMPLE_FEATURES } from '../LandingFeatures/sample-features';
+import { HERO_TEXTS_SAMPLE } from '../LandingHero/heroTextsSample';
 import { LandingHero } from '../LandingHero/landing-hero';
+import { LandingTestimonials } from '../LandingTestimonials/landing-testimonials';
+import { REVIEWS_SAMPLE } from '../LandingTestimonials/reviewsSample';
+import { TESTIMONIALS_TEXTS_SAMPLE } from '../LandingTestimonials/testimonialsTextsSample';
 
 // ----------------------------------------------------------------------
 
@@ -26,12 +29,15 @@ export function LandingView() {
         sx={{ position: 'fixed' }}
       />
       <BackToTop />
-      <LandingHero />
+      <LandingHero heroTexts={HERO_TEXTS_SAMPLE} />
 
       <Stack sx={{ position: 'relative', bgcolor: 'background.default' }}>
         <LandingFeatures features={SAMPLE_FEATURES} />
 
-        <LandingTestimonials />
+        <LandingTestimonials
+          reviews={REVIEWS_SAMPLE}
+          testimonialsTexts={TESTIMONIALS_TEXTS_SAMPLE}
+        />
 
         <LandingPricing />
 
