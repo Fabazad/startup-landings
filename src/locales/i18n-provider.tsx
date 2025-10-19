@@ -1,16 +1,16 @@
 'use client';
 
 import i18next from 'i18next';
-import { useMemo } from 'react';
-import resourcesToBackend from 'i18next-resources-to-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import resourcesToBackend from 'i18next-resources-to-backend';
+import { useMemo } from 'react';
 import { initReactI18next, I18nextProvider as Provider } from 'react-i18next';
 
 import { localStorageGetItem } from 'src/utils/storage-available';
 
 import { CONFIG } from 'src/config-global';
 
-import { i18nOptions, fallbackLng } from './config-locales';
+import { fallbackLng, i18nOptions } from './config-locales';
 
 import type { LanguageValue } from './config-locales';
 
@@ -51,6 +51,8 @@ export function I18nProvider({ lang, children }: Props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log('I18N PROVIDER');
 
   return <Provider i18n={i18next}>{children}</Provider>;
 }

@@ -1,13 +1,13 @@
 import type { TypographyProps } from '@mui/material/Typography';
-import type { Variants, UseInViewOptions } from 'framer-motion';
+import type { UseInViewOptions, Variants } from 'framer-motion';
 
-import { useRef, useEffect } from 'react';
-import { m, useInView, useAnimation } from 'framer-motion';
+import { m, useAnimation, useInView } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-import { varFade, varContainer } from './variants';
+import { varContainer, varFade } from './variants';
 
 // ----------------------------------------------------------------------
 

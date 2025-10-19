@@ -1,25 +1,26 @@
 'use client';
-
 import Stack from '@mui/material/Stack';
 
 import { BackToTop } from 'src/components/animate/back-to-top';
 import { ScrollProgress, useScrollProgress } from 'src/components/animate/scroll-progress';
 
+import { useProductIdea } from 'src/app/product-idea-provider';
 import { LandingAdvertisement } from '../landing-advertisement';
 import { LandingContact } from '../landing-contact';
 import { LandingPricing } from '../landing-pricing';
 import { LandingFeatures } from '../LandingFeatures/landing-features';
-import { SAMPLE_FEATURES } from '../LandingFeatures/sample-features';
-import { HERO_TEXTS_SAMPLE } from '../LandingHero/heroTextsSample';
 import { LandingHero } from '../LandingHero/landing-hero';
 import { LandingTestimonials } from '../LandingTestimonials/landing-testimonials';
-import { REVIEWS_SAMPLE } from '../LandingTestimonials/reviewsSample';
-import { TESTIMONIALS_TEXTS_SAMPLE } from '../LandingTestimonials/testimonialsTextsSample';
 
 // ----------------------------------------------------------------------
 
-export function LandingView() {
+export const LandingView = () => {
   const pageProgress = useScrollProgress();
+
+  const productIdea = useProductIdea();
+
+
+  if (!productIdea) return null;
 
   return (
     <>
@@ -29,14 +30,14 @@ export function LandingView() {
         sx={{ position: 'fixed' }}
       />
       <BackToTop />
-      <LandingHero heroTexts={HERO_TEXTS_SAMPLE} />
+      <LandingHero heroTexts={productIdea.heroTexts} />
 
       <Stack sx={{ position: 'relative', bgcolor: 'background.default' }}>
-        <LandingFeatures features={SAMPLE_FEATURES} />
+        <LandingFeatures features={productIdea.features} />
 
         <LandingTestimonials
-          reviews={REVIEWS_SAMPLE}
-          testimonialsTexts={TESTIMONIALS_TEXTS_SAMPLE}
+          reviews={productIdea.reviews}
+          testimonialsTexts={productIdea.testimonialsTexts}
         />
 
         <LandingPricing />
@@ -47,4 +48,4 @@ export function LandingView() {
       </Stack>
     </>
   );
-}
+};
