@@ -52,7 +52,7 @@ export function I18nProvider({ lang, children }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log('I18N PROVIDER');
+  console.log('I18N PROVIDER BACK&FRONT');
 
   return <Provider i18n={i18next}>{children}</Provider>;
 }

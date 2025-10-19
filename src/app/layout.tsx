@@ -26,7 +26,7 @@ import { AuthProvider as Auth0AuthProvider } from 'src/auth/context/auth0';
 import { AuthProvider as FirebaseAuthProvider } from 'src/auth/context/firebase';
 import { AuthProvider as JwtAuthProvider } from 'src/auth/context/jwt';
 import { AuthProvider as SupabaseAuthProvider } from 'src/auth/context/supabase';
-import { PRODUCT_IDEAS } from 'src/ProductIdeas';
+import { RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
 import { ProductIdeaProvider } from './product-idea-provider';
 
 // ----------------------------------------------------------------------
@@ -53,14 +53,8 @@ export const metadata = {
   ],
 };
 
-type Props = {
-  children: React.ReactNode;
-};
-
-export default async function RootLayout({ children }: Props) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
-
-  const productIdea = PRODUCT_IDEAS.InsightFeed;
 
   return (
     <html lang={lang ?? 'en'} suppressHydrationWarning>
@@ -77,7 +71,7 @@ export default async function RootLayout({ children }: Props) {
                 <ThemeProvider>
                   <MotionLazy>
                     <CheckoutProvider>
-                      <ProductIdeaProvider value={productIdea}>
+                      <ProductIdeaProvider rawProductIdea={RAW_PRODUCT_IDEAS.InsightFeed}>
                         <Snackbar />
                         <ProgressBar />
                         <SettingsDrawer />

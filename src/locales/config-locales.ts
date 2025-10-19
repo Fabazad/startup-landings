@@ -1,6 +1,7 @@
 // ----------------------------------------------------------------------
 
 export type LanguageValue = 'en' | 'fr';
+export type Translated = Record<LanguageValue, string>;
 
 export const fallbackLng = 'en';
 export const languages = ['en', 'fr'];
