@@ -1,4 +1,5 @@
 import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { useTranslate } from 'src/locales';
 import { varAlpha } from 'src/theme/styles';
 
 export const LandingContact = () => {
@@ -6,6 +7,8 @@ export const LandingContact = () => {
     e.preventDefault();
     console.log('submit');
   };
+
+  const { t } = useTranslate();
 
   return (
     <Stack
@@ -20,17 +23,18 @@ export const LandingContact = () => {
     >
       <Box component="form" onSubmit={handleSubmit}>
         <Typography variant="h3" sx={{ textAlign: 'left' }}>
-          Feel free to contact us. <br />
-          We&apos;ll be glad to hear from you buddy.
+          {t('landing.contact.title')}
+          <br />
+          {t('landing.contact.description')}
         </Typography>
 
         <Box gap={3} display="flex" flexDirection="column" sx={{ my: 5 }}>
           <TextField fullWidth label="Email" required />
-          <TextField fullWidth label="Enter your message here." multiline rows={4} required />
+          <TextField fullWidth label={t('landing.contact.message')} multiline rows={4} required />
         </Box>
 
         <Button size="large" variant="contained" type="submit">
-          Submit
+          {t('landing.contact.submit')}
         </Button>
       </Box>
     </Stack>

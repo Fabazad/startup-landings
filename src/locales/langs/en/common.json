@@ -20,7 +20,14 @@
     "pricing": {
       "titlePart1": "Transparent",
       "titlePart2": "pricing",
-      "description": "Choose from flexible pricing options designed to fit your business needs and budget with no hidden fees."
+      "description": "Choose from flexible pricing options designed to fit your business needs and budget with no hidden fees.",
+      "month": "month"
+    },
+    "contact": {
+      "title": "Feel free to contact us.",
+      "description": "We'll be glad to hear from you buddy.",
+      "message": "Enter your message here.",
+      "submit": "Submit"
     }
   }
 }
