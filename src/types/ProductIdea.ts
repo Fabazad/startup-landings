@@ -54,6 +54,8 @@ type GenericProductIdea<Text extends Translated | string> = {
   id: string;
   name: string;
   themeColor: PrimaryColor;
+  logoUrl: string;
+  faviconUrl: string;
   features: GenericFeature<Text>[];
   heroTexts: {
     description: Text;

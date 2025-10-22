@@ -44,20 +44,19 @@ export const viewport: Viewport = {
   themeColor: primary.main,
 };
 
-export const metadata = {
-  icons: [
-    {
-      rel: 'icon',
-      url: `${CONFIG.assetsDir}/favicon.ico`,
-    },
-  ],
-};
-
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
 
+  const rawProductIdea = RAW_PRODUCT_IDEAS.InsightFeed;
+
   return (
     <html lang={lang ?? 'en'} suppressHydrationWarning>
+      <head>
+        <title>{rawProductIdea.name}</title>
+        <link rel="icon" href={rawProductIdea.faviconUrl} />
+        <link rel="shortcut icon" href={rawProductIdea.faviconUrl} />
+        <link rel="apple-touch-icon" href={rawProductIdea.faviconUrl} />
+      </head>
       <body>
         <InitColorSchemeScript
           defaultMode={schemeConfig.defaultMode}
@@ -70,13 +69,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               <SettingsProvider
                 settings={{
                   ...defaultSettings,
-                  primaryColor: RAW_PRODUCT_IDEAS.InsightFeed.themeColor,
+                  primaryColor: rawProductIdea.themeColor,
+                  fontFamily: 'Nunito Sans Variable',
                 }}
               >
                 <ThemeProvider>
                   <MotionLazy>
                     <CheckoutProvider>
-                      <ProductIdeaProvider rawProductIdea={RAW_PRODUCT_IDEAS.InsightFeed}>
+                      <ProductIdeaProvider rawProductIdea={rawProductIdea}>
                         <Snackbar />
                         <ProgressBar />
                         <SettingsDrawer />
