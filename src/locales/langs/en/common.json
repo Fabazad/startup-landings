@@ -11,7 +11,8 @@
     "hero": {
       "ratings": "+160 Happy customers",
       "buttons": {
-        "try-for-free": "Try for free"
+        "try-for-free": "Try for free",
+        "get-started": "Get started"
       }
     },
     "testimonials": {
@@ -21,7 +22,8 @@
       "titlePart1": "Transparent",
       "titlePart2": "pricing",
       "description": "Choose from flexible pricing options designed to fit your business needs and budget with no hidden fees.",
-      "month": "month"
+      "month": "month",
+      "get-started": "Get started"
     },
     "contact": {
       "title": "Feel free to contact us.",

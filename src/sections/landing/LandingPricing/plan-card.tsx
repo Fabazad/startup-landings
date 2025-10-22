@@ -114,7 +114,7 @@ export const PlanCard = ({
           rel="noopener"
           href={paths.minimalStore}
         >
-          Get started
+          {t('landing.pricing.get-started')}
         </Button>
       </m.div>
     </Stack>

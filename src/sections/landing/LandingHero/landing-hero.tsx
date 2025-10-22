@@ -12,11 +12,12 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import { MotionContainer } from 'src/components/animate';
 
+import { useProductIdea } from 'src/app/product-idea-provider';
 import { HeroBackground } from '../components/hero-background';
 import { Buttons } from './buttons';
 import { Heading } from './heading';
-import { Ratings } from './ratings';
 import { HeroDescription } from './hero-description';
+import { Ratings } from './ratings';
 import { useScrollPercent } from './useScrollPercent';
 import { useTransformY } from './useTransformY';
 
@@ -26,13 +27,10 @@ const smKey = 'sm';
 const mdKey = 'md';
 const lgKey = 'lg';
 
-export const LandingHero = ({
-  sx,
-  heroTexts: { description, headingPart1, headingPart2 },
-  ...other
-}: BoxProps & {
-  heroTexts: { description: string; headingPart1: string; headingPart2: string };
-}) => {
+export const LandingHero = ({ sx, ...other }: BoxProps) => {
+  const {
+    heroTexts: { description, headingPart1, headingPart2 },
+  } = useProductIdea();
   const theme = useTheme();
 
   const scroll = useScrollPercent();

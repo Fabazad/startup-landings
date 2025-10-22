@@ -1,30 +1,27 @@
 'use client';
 
-import type { Theme, SxProps, Breakpoint } from '@mui/material/styles';
+import type { Breakpoint, SxProps, Theme } from '@mui/material/styles';
 
-import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import { useColorScheme, useTheme } from '@mui/material/styles';
 
-import { paths } from 'src/routes/paths';
 import { usePathname } from 'src/routes/hooks';
-
-import { useBoolean } from 'src/hooks/use-boolean';
+import { paths } from 'src/routes/paths';
 
 import { Logo } from 'src/components/logo';
 
-import { Main } from './main';
-import { NavMobile } from './nav/mobile';
-import { NavDesktop } from './nav/desktop';
-import { Footer, HomeFooter } from './footer';
-import { MenuButton } from '../components/menu-button';
-import { LayoutSection } from '../core/layout-section';
 import { HeaderSection } from '../core/header-section';
-import { navData as mainNavData } from '../config-nav-main';
-import { SignInButton } from '../components/sign-in-button';
-import { SettingsButton } from '../components/settings-button';
+import { LayoutSection } from '../core/layout-section';
+import { Footer, HomeFooter } from './footer';
+import { Main } from './main';
 
+import { t } from 'i18next';
+import { Iconify } from 'src/components/iconify';
+import { useSettingsContext } from 'src/components/settings';
+import { LanguageButton } from './components/language-button';
 import type { NavMainProps } from './nav/types';
 
 // ----------------------------------------------------------------------
@@ -40,18 +37,23 @@ export type MainLayoutProps = {
   };
 };
 
-export function MainLayout({ sx, data, children, header }: MainLayoutProps) {
+export function LandingLayout({ sx, data, children, header }: MainLayoutProps) {
   const theme = useTheme();
 
   const pathname = usePathname();
 
-  const mobileNavOpen = useBoolean();
+  const { onUpdateField } = useSettingsContext();
+  const { mode, setMode } = useColorScheme();
+
+  const handleToggleTheme = () => {
+    const newMode = mode === 'dark' ? 'light' : 'dark';
+    onUpdateField('colorScheme', newMode);
+    setMode(newMode);
+  };
 
   const homePage = pathname === '/';
 
   const layoutQuery: Breakpoint = 'md';
-
-  const navData = data?.nav ?? mainNavData;
 
   return (
     <LayoutSection
@@ -70,20 +72,6 @@ export function MainLayout({ sx, data, children, header }: MainLayoutProps) {
             ),
             leftArea: (
               <>
-                {/* -- Nav mobile -- */}
-                <MenuButton
-                  onClick={mobileNavOpen.onTrue}
-                  sx={{
-                    mr: 1,
-                    ml: -1,
-                    [theme.breakpoints.up(layoutQuery)]: { display: 'none' },
-                  }}
-                />
-                <NavMobile
-                  data={navData}
-                  open={mobileNavOpen.value}
-                  onClose={mobileNavOpen.onFalse}
-                />
                 {/* -- Logo -- */}
                 <Logo />
               </>
@@ -91,19 +79,8 @@ export function MainLayout({ sx, data, children, header }: MainLayoutProps) {
             rightArea: (
               <>
                 {/* -- Nav desktop -- */}
-                <NavDesktop
-                  data={navData}
-                  sx={{
-                    display: 'none',
-                    [theme.breakpoints.up(layoutQuery)]: { mr: 2.5, display: 'flex' },
-                  }}
-                />
+
                 <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
-                  {/* -- Settings button -- */}
-                  <SettingsButton />
-                  {/* -- Sign in button -- */}
-                  <SignInButton />
-                  {/* -- Purchase button -- */}
                   <Button
                     variant="contained"
                     rel="noopener"
@@ -114,8 +91,12 @@ export function MainLayout({ sx, data, children, header }: MainLayoutProps) {
                       [theme.breakpoints.up(layoutQuery)]: { display: 'inline-flex' },
                     }}
                   >
-                    Purchase
+                    {t('landing.hero.buttons.get-started')}
                   </Button>
+                  <IconButton aria-label="toggle theme" onClick={handleToggleTheme}>
+                    <Iconify icon={mode === 'dark' ? 'ph:moon' : 'ph:sun'} />
+                  </IconButton>
+                  <LanguageButton />
                 </Box>
               </>
             ),

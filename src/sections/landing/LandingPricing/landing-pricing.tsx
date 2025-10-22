@@ -27,7 +27,7 @@ export function LandingPricing({ sx, ...other }: BoxProps) {
 
   const tabs = useTabs('basic');
 
-  const plans = useProductIdea()?.plans!;
+  const plans = useProductIdea().plans;
 
   const allIncludedOptions = Array.from(
     new Set(Object.values(plans).flatMap((plan) => plan.included))

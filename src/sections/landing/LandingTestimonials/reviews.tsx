@@ -10,10 +10,10 @@ import {
   CarouselDotButtons,
   useCarousel,
 } from 'src/components/carousel';
-import { TryForFreeButton } from 'src/components/try-for-free-button';
 import { maxLine } from 'src/theme/styles';
 import { Review } from 'src/types/ProductIdea';
 import { fToNow } from 'src/utils/format-time';
+import { TryForFreeButton } from '../components/try-for-free-button';
 import { HorizontalDivider } from './horizontal-divider';
 
 export const Reviews = ({ reviews }: { reviews: Review[] }) => {

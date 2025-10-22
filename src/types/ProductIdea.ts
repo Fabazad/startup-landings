@@ -1,3 +1,4 @@
+import { PrimaryColor } from 'src/components/settings';
 import { LanguageValue, Translated } from 'src/locales';
 
 type GenericItem<Text extends Translated | string> = {
@@ -52,6 +53,7 @@ export type Plans = GenericPlans<string>;
 type GenericProductIdea<Text extends Translated | string> = {
   id: string;
   name: string;
+  themeColor: PrimaryColor;
   features: GenericFeature<Text>[];
   heroTexts: {
     description: Text;

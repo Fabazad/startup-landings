@@ -17,6 +17,8 @@ export type SettingsDrawerProps = {
   hideColorScheme?: boolean;
 };
 
+export type PrimaryColor = 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red';
+
 export type SettingsState = {
   fontFamily: string;
   compactLayout: boolean;
@@ -25,7 +27,7 @@ export type SettingsState = {
   contrast: 'default' | 'hight';
   navColor: 'integrate' | 'apparent';
   navLayout: 'vertical' | 'horizontal' | 'mini';
-  primaryColor: 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red';
+  primaryColor: PrimaryColor;
 };
 
 export type SettingsContextValue = SettingsState & {

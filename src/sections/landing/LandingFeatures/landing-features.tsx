@@ -6,13 +6,15 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import { MotionViewport, varFade } from 'src/components/animate';
 
+import { useProductIdea } from 'src/app/product-idea-provider';
 import { Feature } from 'src/types/ProductIdea';
 import { CircleSvg } from '../components/svg-elements';
 import { Description } from './description';
 import { FeatureImage } from './feature-image';
 import { Lines } from './lines';
 
-export function LandingFeatures({ sx, features, ...other }: BoxProps & { features: Feature[] }) {
+export function LandingFeatures({ sx, ...other }: BoxProps) {
+  const { features } = useProductIdea();
   const LeftDescriptionFeature = ({ feature }: { feature: Feature }) => (
     <>
       <Grid xs={12} md={6} lg={7}>

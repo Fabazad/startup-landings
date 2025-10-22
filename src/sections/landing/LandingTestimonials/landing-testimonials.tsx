@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 import { MotionViewport } from 'src/components/animate';
 
 import { useTranslation } from 'react-i18next';
-import { Review } from 'src/types/ProductIdea';
+import { useProductIdea } from 'src/app/product-idea-provider';
 import { SectionTitle } from '../components/section-title';
 import { Lines } from './lines';
 import { Reviews } from './reviews';
@@ -14,15 +14,11 @@ import { TestimonialNumbers } from './testimonial-numbers';
 
 // ----------------------------------------------------------------------
 
-export const LandingTestimonials = ({
-  sx,
-  reviews,
-  testimonialsTexts: { titlePart1, titlePart2 },
-  ...other
-}: BoxProps & {
-  reviews: Review[];
-  testimonialsTexts: { titlePart1: string; titlePart2: string };
-}) => {
+export const LandingTestimonials = ({ sx, ...other }: BoxProps) => {
+  const {
+    reviews,
+    testimonialsTexts: { titlePart1, titlePart2 },
+  } = useProductIdea();
   const { t } = useTranslation();
   return (
     <Box component="section" sx={{ py: 10, position: 'relative', ...sx }} {...other}>

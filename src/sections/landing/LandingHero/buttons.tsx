@@ -1,5 +1,5 @@
 import { Box, Stack } from '@mui/material';
-import { TryForFreeButton } from 'src/components/try-for-free-button';
+import { TryForFreeButton } from '../components/try-for-free-button';
 import { AnimatedDiv } from './animated-div';
 
 export const Buttons = () => {

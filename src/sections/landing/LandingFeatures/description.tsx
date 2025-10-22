@@ -2,9 +2,9 @@ import { Box, Stack, Typography } from '@mui/material';
 import { m } from 'framer-motion';
 import { varFade } from 'src/components/animate';
 import { Iconify } from 'src/components/iconify';
-import { TryForFreeButton } from 'src/components/try-for-free-button';
 import { Feature } from 'src/types/ProductIdea';
 import { SectionTitle } from '../components/section-title';
+import { TryForFreeButton } from '../components/try-for-free-button';
 
 export const Description = ({ feature }: { feature: Feature }) => (
   <>

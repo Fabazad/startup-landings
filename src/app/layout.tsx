@@ -67,7 +67,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <I18nProvider lang={CONFIG.isStaticExport ? undefined : lang}>
           <LocalizationProvider>
             <AuthProvider>
-              <SettingsProvider settings={defaultSettings}>
+              <SettingsProvider
+                settings={{
+                  ...defaultSettings,
+                  primaryColor: RAW_PRODUCT_IDEAS.InsightFeed.themeColor,
+                }}
+              >
                 <ThemeProvider>
                   <MotionLazy>
                     <CheckoutProvider>

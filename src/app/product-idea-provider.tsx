@@ -5,7 +5,12 @@ import { LanguageValue, useTranslate } from 'src/locales';
 import { ProductIdea, RawProductIdea, translateProductIdea } from 'src/types/ProductIdea';
 
 const Ctx = createContext<ProductIdea | null>(null);
-export const useProductIdea = () => useContext(Ctx);
+
+export const useProductIdea = () => {
+  const productIdea = useContext(Ctx);
+  if (!productIdea) throw new Error('useProductIdea must be use inside ProductIdeaProvider');
+  return productIdea;
+};
 
 export const ProductIdeaProvider = ({
   rawProductIdea,
