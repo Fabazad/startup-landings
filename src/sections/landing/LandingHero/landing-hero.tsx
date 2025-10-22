@@ -84,7 +84,7 @@ export const LandingHero = ({ sx, ...other }: BoxProps) => {
         <Container
           component={MotionContainer}
           sx={{
-            py: 3,
+            py: 15,
             gap: 5,
             zIndex: 9,
             display: 'flex',
