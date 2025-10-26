@@ -54,20 +54,14 @@ export const Logo = forwardRef<HTMLDivElement, LogoProps>(
         }}
         {...other}
       >
-        <Box alt="Single logo" component="img" src={logoUrl} width="100%" height="100%" />
         <Box
-          component="h4"
-          typography="h4"
-          sx={{
-            fontSize: 24,
-            fontWeight: 700,
-            color: 'text.primary',
-            ml: 2,
-            mt: { xs: 0.5, md: 1 },
-          }}
-        >
-          {name}
-        </Box>
+          component="img"
+          src={logoUrl}
+          width="100%"
+          height="100%"
+          aria-label="Insight Feed Logo"
+          alt="Insight Feed Logo"
+        />
       </Box>
     );
   }

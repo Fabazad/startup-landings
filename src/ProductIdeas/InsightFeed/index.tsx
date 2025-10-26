@@ -8,7 +8,7 @@ import { TESTIMONIALS_TEXTS_SAMPLE } from './testimonialsTextsSample';
 
 export const INSIGHTFEED_PRODUCT_IDEA: RawProductIdea = {
   id: '1',
-  name: 'InsightFeed',
+  name: 'Insight Feed',
   themeColor: 'purple',
   logoUrl: `${CONFIG.assetsDir}/logo/purple-dear.svg`,
   faviconUrl: `${CONFIG.assetsDir}/favicon/purple-dear.ico`,

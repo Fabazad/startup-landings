@@ -4,12 +4,10 @@ import type { Breakpoint, SxProps, Theme } from '@mui/material/styles';
 
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { useColorScheme, useTheme } from '@mui/material/styles';
 
 import { usePathname } from 'src/routes/hooks';
-import { paths } from 'src/routes/paths';
 
 import { Logo } from 'src/components/logo';
 
@@ -18,9 +16,11 @@ import { LayoutSection } from '../core/layout-section';
 import { Footer, HomeFooter } from './footer';
 import { Main } from './main';
 
-import { t } from 'i18next';
+import { useProductIdea } from 'src/app/product-idea-provider';
 import { Iconify } from 'src/components/iconify';
 import { useSettingsContext } from 'src/components/settings';
+import { SubscriptionModalProvider } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
+import { GetStartedButton } from './components/get-started-button';
 import { LanguageButton } from './components/language-button';
 import type { NavMainProps } from './nav/types';
 
@@ -44,6 +44,7 @@ export function LandingLayout({ sx, data, children, header }: MainLayoutProps) {
 
   const { onUpdateField } = useSettingsContext();
   const { mode, setMode } = useColorScheme();
+  const { name } = useProductIdea();
 
   const handleToggleTheme = () => {
     const newMode = mode === 'dark' ? 'light' : 'dark';
@@ -56,63 +57,67 @@ export function LandingLayout({ sx, data, children, header }: MainLayoutProps) {
   const layoutQuery: Breakpoint = 'md';
 
   return (
-    <LayoutSection
-      /** **************************************
-       * Header
-       *************************************** */
-      headerSection={
-        <HeaderSection
-          layoutQuery={layoutQuery}
-          sx={header?.sx}
-          slots={{
-            topArea: (
-              <Alert severity="info" sx={{ display: 'none', borderRadius: 0 }}>
-                This is an info Alert.
-              </Alert>
-            ),
-            leftArea: (
-              <>
-                {/* -- Logo -- */}
-                <Logo />
-              </>
-            ),
-            rightArea: (
-              <>
-                {/* -- Nav desktop -- */}
-
-                <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
-                  <Button
-                    variant="contained"
-                    rel="noopener"
-                    target="_blank"
-                    href={paths.minimalStore}
+    <SubscriptionModalProvider>
+      <LayoutSection
+        /** **************************************
+         * Header
+         *************************************** */
+        headerSection={
+          <HeaderSection
+            layoutQuery={layoutQuery}
+            sx={header?.sx}
+            slots={{
+              topArea: (
+                <Alert severity="info" sx={{ display: 'none', borderRadius: 0 }}>
+                  This is an info Alert.
+                </Alert>
+              ),
+              leftArea: (
+                <>
+                  {/* -- Logo -- */}
+                  <Logo />
+                  <Box
+                    component="h4"
+                    typography="h4"
                     sx={{
-                      display: 'none',
-                      [theme.breakpoints.up(layoutQuery)]: { display: 'inline-flex' },
+                      fontSize: 24,
+                      fontWeight: 700,
+                      color: 'text.primary',
+                      ml: 2,
+                      mt: 4,
                     }}
                   >
-                    {t('landing.hero.buttons.get-started')}
-                  </Button>
-                  <IconButton aria-label="toggle theme" onClick={handleToggleTheme}>
-                    <Iconify icon={mode === 'dark' ? 'ph:moon' : 'ph:sun'} />
-                  </IconButton>
-                  <LanguageButton />
-                </Box>
-              </>
-            ),
-          }}
-        />
-      }
-      /** **************************************
-       * Footer
-       *************************************** */
-      footerSection={homePage ? <HomeFooter /> : <Footer layoutQuery={layoutQuery} />}
-      /** **************************************
-       * Style
-       *************************************** */
-      sx={sx}
-    >
-      <Main>{children}</Main>
-    </LayoutSection>
+                    {name}
+                  </Box>
+                </>
+              ),
+              rightArea: (
+                <>
+                  {/* -- Nav desktop -- */}
+
+                  <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
+                    <GetStartedButton />
+                    <IconButton aria-label="toggle theme" onClick={handleToggleTheme}>
+                      <Iconify icon={mode === 'dark' ? 'ph:moon' : 'ph:sun'} />
+                    </IconButton>
+                    <LanguageButton />
+                  </Box>
+                </>
+              ),
+            }}
+          />
+        }
+        /** **************************************
+         * Footer
+         *************************************** */
+        footerSection={homePage ? <HomeFooter /> : <Footer layoutQuery={layoutQuery} />}
+        /** **************************************
+         * Style
+         *************************************** */
+        sx={sx}
+      >
+        <Main>{children}</Main>
+      </LayoutSection>
+    </SubscriptionModalProvider>
   );
 }
