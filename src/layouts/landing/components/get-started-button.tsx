@@ -1,17 +1,17 @@
 import { Breakpoint, Button, useTheme } from '@mui/material';
 import { t } from 'i18next';
-import { useSubscriptionModal } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
+import { useSubscription } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
 
 const layoutQuery: Breakpoint = 'md';
 
 export const GetStartedButton = () => {
-  const { setOpen } = useSubscriptionModal();
+  const { setOpenModal } = useSubscription();
   const theme = useTheme();
   return (
     <Button
       variant="contained"
       rel="noopener"
-      onClick={() => setOpen(true)}
+      onClick={() => setOpenModal(true)}
       sx={{
         display: 'none',
         [theme.breakpoints.up(layoutQuery)]: { display: 'inline-flex' },

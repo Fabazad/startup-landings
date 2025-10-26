@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Field, Form } from 'src/components/hook-form';
 
 import { z as zod } from 'zod';
-import { useSubscriptionModal } from './subscriptionModal';
+import { useSubscription } from './subscriptionModal';
 
 const defaultValues = {
   email: '',
@@ -18,13 +18,13 @@ const subscribeFormSchema = zod.object({
 });
 type SubscribeFormSchemaType = zod.infer<typeof subscribeFormSchema>;
 
-export const SubscriptionForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
+export const SubscriptionForm = () => {
   const methods = useForm<SubscribeFormSchemaType>({
     resolver: zodResolver(subscribeFormSchema),
     defaultValues,
   });
 
-  const { setSubscriptionEmail } = useSubscriptionModal();
+  const { setSubscriptionEmail, setOpenModal } = useSubscription();
 
   const onSubmit = async () => {
     const data = methods.getValues();
@@ -47,7 +47,7 @@ export const SubscriptionForm = ({ setOpen }: { setOpen: (open: boolean) => void
         <Field.Text name="email" label="Email" sx={{ mt: 3 }} autoFocus />
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => setOpen(false)}>Cancel</Button>
+        <Button onClick={() => setOpenModal(false)}>Cancel</Button>
         <LoadingButton
           color="primary"
           variant="contained"

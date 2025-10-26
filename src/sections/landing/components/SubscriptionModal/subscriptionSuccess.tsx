@@ -1,8 +1,8 @@
 import { Button, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material';
-import { useSubscriptionModal } from './subscriptionModal';
+import { useSubscription } from './subscriptionModal';
 
 export const SubscriptionSuccess = () => {
-  const { setOpen } = useSubscriptionModal();
+  const { setOpenModal } = useSubscription();
   return (
     <>
       <DialogTitle>Vous êtes inscrit sur la liste d'attente 🎉</DialogTitle>
@@ -13,7 +13,7 @@ export const SubscriptionSuccess = () => {
         </Typography>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => setOpen(false)}>Fermer</Button>
+        <Button onClick={() => setOpenModal(false)}>Fermer</Button>
       </DialogActions>
     </>
   );

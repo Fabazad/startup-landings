@@ -8,19 +8,19 @@ import { SubscriptionSuccess } from './subscriptionSuccess';
 const SUBSCRIBE_MODAL_PARAM = 'subscribeModal';
 const SUBSCRIBE_EMAIL_COOKIE = 'subscribeEmail';
 
-type SubscriptionModalContext = {
-  open: boolean;
-  setOpen: (open: boolean) => void;
+type SubscriptionContext = {
+  openModal: boolean;
+  setOpenModal: (open: boolean) => void;
   subscriptionEmail: string | null;
   setSubscriptionEmail: (subscriptionEmail: string) => void;
 } | null;
 
-const subscriptionModalContext = createContext<SubscriptionModalContext>(null);
+const subscriptionContext = createContext<SubscriptionContext>(null);
 
-export const useSubscriptionModal = () => {
-  const context = useContext(subscriptionModalContext);
+export const useSubscription = () => {
+  const context = useContext(subscriptionContext);
   if (!context) {
-    throw new Error('useSubscriptionModal must be used within a SubscriptionModalProvider');
+    throw new Error('useSubscription must be used within a SubscriptionProvider');
   }
   return context;
 };
@@ -32,7 +32,7 @@ const SubscribeStep = {
 type SubscribeStep = (typeof SubscribeStep)[keyof typeof SubscribeStep];
 
 const SubscriptionModal = () => {
-  const { open, setOpen, subscriptionEmail } = useSubscriptionModal();
+  const { openModal, setOpenModal, subscriptionEmail } = useSubscription();
   const [step, setStep] = useState<SubscribeStep>(
     subscriptionEmail ? SubscribeStep.SUCCESS : SubscribeStep.SUBSCRIBE
   );
@@ -42,20 +42,20 @@ const SubscriptionModal = () => {
   }, [subscriptionEmail]);
 
   return (
-    <Dialog open={open}>
-      {step === SubscribeStep.SUBSCRIBE && <SubscriptionForm setOpen={setOpen} />}
+    <Dialog open={openModal}>
+      {step === SubscribeStep.SUBSCRIBE && <SubscriptionForm />}
       {step === SubscribeStep.SUCCESS && <SubscriptionSuccess />}
     </Dialog>
   );
 };
 
 export const SubscriptionModalProvider = ({ children }: { children: React.ReactNode }) => {
-  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const searchParams = useSearchParams();
 
   useEffect(() => {
     const subscribeParam = searchParams.get(SUBSCRIBE_MODAL_PARAM);
-    setOpen(subscribeParam === 'true');
+    setOpenModal(subscribeParam === 'true');
   }, [searchParams]);
 
   const { state: subscriptionEmailCookie, setState: setSubscriptionEmailCookie } = useCookies<
@@ -75,7 +75,7 @@ export const SubscriptionModalProvider = ({ children }: { children: React.ReactN
     setSubscriptionEmail(subscribeEmail);
   };
 
-  const handleSetOpen = (isOpen: boolean) => {
+  const handleSetOpenModal = (isOpen: boolean) => {
     if (typeof window === 'undefined') return;
     const url = new URL(window.location.href);
     if (isOpen) {
@@ -87,16 +87,16 @@ export const SubscriptionModalProvider = ({ children }: { children: React.ReactN
   };
 
   return (
-    <subscriptionModalContext.Provider
+    <subscriptionContext.Provider
       value={{
-        open,
-        setOpen: handleSetOpen,
+        openModal,
+        setOpenModal: handleSetOpenModal,
         subscriptionEmail,
         setSubscriptionEmail: updateSubscribeEmail,
       }}
     >
       <SubscriptionModal />
       {children}
-    </subscriptionModalContext.Provider>
+    </subscriptionContext.Provider>
   );
 };
