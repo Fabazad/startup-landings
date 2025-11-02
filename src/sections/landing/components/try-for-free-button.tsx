@@ -6,16 +6,29 @@ import { useSubscription } from './SubscriptionModal/subscriptionModal';
 export const TryForFreeButton = () => {
   const { t } = useTranslation();
 
-  const { setOpenModal } = useSubscription();
+  const { setOpenModal, subscriptionEmail } = useSubscription();
+
+  const handleClick = () => {
+    if (subscriptionEmail) {
+      setOpenModal(true);
+    } else {
+      setOpenModal(true);
+    }
+  };
+
   return (
     <Button
       color="inherit"
       size="large"
       variant="contained"
       startIcon={<Iconify width={24} icon="ph:rocket-launch-duotone" />}
-      onClick={() => setOpenModal(true)}
+      onClick={handleClick}
     >
-      <span>{t('landing.hero.buttons.try-for-free')}</span>
+      <span>
+        {subscriptionEmail
+          ? t('landing.hero.buttons.open-waiting-list')
+          : t('landing.hero.buttons.try-for-free')}
+      </span>
     </Button>
   );
 };

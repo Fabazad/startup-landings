@@ -1,19 +1,23 @@
 import { Button, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material';
+import { useTranslate } from 'src/locales';
 import { useSubscription } from './subscriptionModal';
 
 export const SubscriptionSuccess = () => {
+  const { t } = useTranslate();
   const { setOpenModal } = useSubscription();
   return (
     <>
-      <DialogTitle>Vous êtes inscrit sur la liste d'attente 🎉</DialogTitle>
+      <DialogTitle>{t('landing.subscription.success.title')}</DialogTitle>
 
       <DialogContent>
-        <Typography>
-          Merci de votre intérêt ! Nous vous enverrons un email dès que l'application sera prête.
+        <Typography sx={{ whiteSpace: 'pre-line' }}>
+          {t('landing.subscription.success.description')}
         </Typography>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => setOpenModal(false)}>Fermer</Button>
+        <Button onClick={() => setOpenModal(false)}>
+          {t('landing.subscription.success.close')}
+        </Button>
       </DialogActions>
     </>
   );

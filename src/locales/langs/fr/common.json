@@ -12,11 +12,25 @@
       "ratings": "+160 Clients satisfaits",
       "buttons": {
         "try-for-free": "Essayer gratuitement",
-        "get-started": "Commencer"
+        "get-started": "Commencer",
+        "open-waiting-list": "Ouvrir la liste d’attente"
       }
     },
     "testimonials": {
       "testimonials": "Témoignages"
+    },
+    "subscription": {
+      "title": "Rejoindre la beta",
+      "description": "Entrez votre email pour faire partie de la prochaine vague d’utilisateurs.",
+      "submit": "Envoyer",
+      "cancel": "Annuler",
+      "success": {
+        "title": "Vous êtes sur la liste d’attente 🎉",
+        "description": "Merci ! Vous êtes sur la liste d’attente.\nNous ouvrons progressivement les accès pour garantir la qualité de l’expérience.",
+        "close": "Fermer"
+      },
+      "already-subscribed": "Vous êtes déjà inscrit sur la liste d’attente",
+      "failed-to-subscribe": "Erreur lors de l’inscription"
     },
     "pricing": {
       "titlePart1": "Prix",

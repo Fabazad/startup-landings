@@ -24,18 +24,13 @@ export function i18nOptions(lng = fallbackLng, ns = defaultNS) {
 
 // ----------------------------------------------------------------------
 
-export const changeLangMessages: Record<
-  LanguageValue,
-  { success: string; error: string; loading: string }
-> = {
+export const changeLangMessages: Record<LanguageValue, { error: string; loading: string }> = {
   en: {
-    success: 'Language has been changed!',
     error: 'Error changing language!',
     loading: 'Loading...',
   },
 
   fr: {
-    success: 'La langue a été changée!',
     error: 'Erreur lors du changement de langue!',
     loading: 'Chargement...',
   },

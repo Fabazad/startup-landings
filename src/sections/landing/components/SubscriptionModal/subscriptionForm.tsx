@@ -4,6 +4,10 @@ import { Button, DialogActions, DialogContent, DialogTitle, Typography } from '@
 import { useForm } from 'react-hook-form';
 import { Field, Form } from 'src/components/hook-form';
 
+import axios from 'axios';
+import { toast } from 'sonner';
+import { useProductIdea } from 'src/app/product-idea-provider';
+import { useTranslate } from 'src/locales';
 import { z as zod } from 'zod';
 import { useSubscription } from './subscriptionModal';
 
@@ -19,6 +23,10 @@ const subscribeFormSchema = zod.object({
 type SubscribeFormSchemaType = zod.infer<typeof subscribeFormSchema>;
 
 export const SubscriptionForm = () => {
+  const { t } = useTranslate();
+
+  const { name: productName } = useProductIdea();
+
   const methods = useForm<SubscribeFormSchemaType>({
     resolver: zodResolver(subscribeFormSchema),
     defaultValues,
@@ -28,33 +36,49 @@ export const SubscriptionForm = () => {
 
   const onSubmit = async () => {
     const data = methods.getValues();
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setSubscriptionEmail(data.email);
-    } catch (error) {
-      console.error(error);
+
+    const response = await axios.post(
+      '/api/subscriptions',
+      {
+        email: data.email,
+        product: productName,
+      },
+      { validateStatus: () => true }
+    );
+
+    if (response.status !== 201) {
+      if (response.data.error === 'already-subscribed') {
+        toast.error(t('landing.subscription.already-subscribed'));
+        return;
+      }
+      if (response.data.error === 'failed-to-subscribe') {
+        toast.error(t('landing.subscription.failed-to-subscribe'));
+        return;
+      }
+      toast.error(t('landing.subscription.failed-to-subscribe'));
+      return;
     }
+
+    setSubscriptionEmail(data.email);
   };
+
   return (
     <Form methods={methods} onSubmit={methods.handleSubmit(onSubmit)}>
-      <DialogTitle>🚀 Rejoins les premiers utilisateurs</DialogTitle>
+      <DialogTitle>{t('landing.subscription.title')}</DialogTitle>
 
       <DialogContent>
-        <Typography>
-          L’app est en cours de lancement. Entre ton email pour recevoir un accès anticipé à la beta
-          (et quelques bonus 👀).
-        </Typography>
+        <Typography>{t('landing.subscription.description')}</Typography>
         <Field.Text name="email" label="Email" sx={{ mt: 3 }} autoFocus />
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => setOpenModal(false)}>Cancel</Button>
+        <Button onClick={() => setOpenModal(false)}>{t('landing.subscription.cancel')}</Button>
         <LoadingButton
           color="primary"
           variant="contained"
           type="submit"
           loading={methods.formState.isSubmitting}
         >
-          Subscribe
+          {t('landing.subscription.submit')}
         </LoadingButton>
       </DialogActions>
     </Form>

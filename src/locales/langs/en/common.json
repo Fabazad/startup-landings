@@ -12,11 +12,25 @@
       "ratings": "+160 Happy customers",
       "buttons": {
         "try-for-free": "Try for free",
-        "get-started": "Get started"
+        "get-started": "Get started",
+        "open-waiting-list": "Open waiting list"
       }
     },
     "testimonials": {
       "testimonials": "Testimonials"
+    },
+    "subscription": {
+      "title": "Join the beta",
+      "description": "Enter your email to join the next wave of users.",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "success": {
+        "title": "You are on the waiting list 🎉",
+        "description": "Thank you! You are on the waiting list.\nWe will open the access progressively to ensure the quality of the experience.",
+        "close": "Close"
+      },
+      "already-subscribed": "You are already on the waiting list",
+      "failed-to-subscribe": "Failed to subscribe"
     },
     "pricing": {
       "titlePart1": "Transparent",

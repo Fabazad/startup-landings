@@ -32,7 +32,7 @@ const SubscribeStep = {
 type SubscribeStep = (typeof SubscribeStep)[keyof typeof SubscribeStep];
 
 const SubscriptionModal = () => {
-  const { openModal, setOpenModal, subscriptionEmail } = useSubscription();
+  const { openModal, subscriptionEmail } = useSubscription();
   const [step, setStep] = useState<SubscribeStep>(
     subscriptionEmail ? SubscribeStep.SUCCESS : SubscribeStep.SUBSCRIBE
   );
@@ -42,7 +42,7 @@ const SubscriptionModal = () => {
   }, [subscriptionEmail]);
 
   return (
-    <Dialog open={openModal}>
+    <Dialog open={openModal} fullWidth maxWidth="xs">
       {step === SubscribeStep.SUBSCRIBE && <SubscriptionForm />}
       {step === SubscribeStep.SUCCESS && <SubscriptionSuccess />}
     </Dialog>

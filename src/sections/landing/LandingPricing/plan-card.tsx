@@ -1,10 +1,10 @@
-import { Box, Button, capitalize, Divider, Stack, StackProps, Typography } from '@mui/material';
+import { Box, capitalize, Divider, Stack, StackProps, Typography } from '@mui/material';
 import { m } from 'framer-motion';
 import { MotionViewport, varFade, varScale } from 'src/components/animate';
 import { Iconify } from 'src/components/iconify';
 import { useTranslate } from 'src/locales';
-import { paths } from 'src/routes/paths';
 import { Plan } from 'src/types/ProductIdea';
+import { GetStartedButton } from '../components/get-started-button';
 import { FloatLine, FloatXIcon } from '../components/svg-elements';
 
 export const PlanCard = ({
@@ -105,17 +105,7 @@ export const PlanCard = ({
       </Stack>
 
       <m.div variants={varFade({ distance: 24 }).inUp}>
-        <Button
-          fullWidth
-          variant={isPremiumPlan ? 'contained' : 'outlined'}
-          color="inherit"
-          size="large"
-          target="_blank"
-          rel="noopener"
-          href={paths.minimalStore}
-        >
-          {t('landing.pricing.get-started')}
-        </Button>
+        <GetStartedButton outlined={!isPremiumPlan} />
       </m.div>
     </Stack>
   );

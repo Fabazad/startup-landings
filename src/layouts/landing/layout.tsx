@@ -20,8 +20,8 @@ import { useProductIdea } from 'src/app/product-idea-provider';
 import { Iconify } from 'src/components/iconify';
 import { useSettingsContext } from 'src/components/settings';
 import { SubscriptionModalProvider } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
-import { GetStartedButton } from './components/get-started-button';
-import { LanguageButton } from './components/language-button';
+import { GetStartedButton } from '../../sections/landing/components/get-started-button';
+import { LanguageButton } from '../../sections/landing/components/language-button';
 import type { NavMainProps } from './nav/types';
 
 // ----------------------------------------------------------------------

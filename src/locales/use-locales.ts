@@ -32,8 +32,6 @@ export function useTranslate(ns?: string) {
         const currentMessages = messages[newLang] || messages.en;
 
         toast.promise(langChangePromise, {
-          loading: currentMessages.loading,
-          success: () => currentMessages.success,
           error: currentMessages.error,
         });
 
