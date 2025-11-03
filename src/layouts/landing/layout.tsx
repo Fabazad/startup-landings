@@ -38,8 +38,6 @@ export type MainLayoutProps = {
 };
 
 export function LandingLayout({ sx, data, children, header }: MainLayoutProps) {
-  const theme = useTheme();
-
   const pathname = usePathname();
 
   const { onUpdateField } = useSettingsContext();
