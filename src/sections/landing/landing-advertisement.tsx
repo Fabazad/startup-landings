@@ -3,24 +3,27 @@ import type { BoxProps } from '@mui/material/Box';
 import { m } from 'framer-motion';
 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-
-import { paths } from 'src/routes/paths';
 
 import { CONFIG } from 'src/config-global';
 import { textGradient, varAlpha } from 'src/theme/styles';
 
 import { MotionViewport, varFade } from 'src/components/animate';
-import { Iconify } from 'src/components/iconify';
 import { SvgColor } from 'src/components/svg-color';
 
+import { useProductIdea } from 'src/app/product-idea-provider';
+import { useTranslate } from 'src/locales';
+import { GetStartedButton } from './components/get-started-button';
 import { FloatLine, FloatPlusIcon } from './components/svg-elements';
 
 // ----------------------------------------------------------------------
 
 export function LandingAdvertisement({ sx, ...other }: BoxProps) {
+  const { name: productName } = useProductIdea();
+
+  const { t } = useTranslate();
+
   const renderLines = (
     <>
       <FloatPlusIcon sx={{ left: 72, top: '50%', mt: -1 }} />
@@ -36,8 +39,8 @@ export function LandingAdvertisement({ sx, ...other }: BoxProps) {
         variants={varFade({ distance: 24 }).inDown}
         sx={{ m: 0, color: 'common.white', typography: { xs: 'h2', md: 'h1' } }}
       >
-        Get started with
-        <br /> Minimal kit
+        {t('landing.advertisement.get-started-with')}
+        <br /> {productName}
         <Box
           component="span"
           sx={(theme) => ({
@@ -47,7 +50,7 @@ export function LandingAdvertisement({ sx, ...other }: BoxProps) {
             ml: 1,
           })}
         >
-          today
+          {t('landing.advertisement.today')}
         </Box>
       </Box>
 
@@ -58,35 +61,12 @@ export function LandingAdvertisement({ sx, ...other }: BoxProps) {
         justifyContent={{ xs: 'center', md: 'flex-start' }}
       >
         <m.div variants={varFade({ distance: 24 }).inRight}>
-          <Button
+          <GetStartedButton
+            buttonName="get-started-advertisement"
             color="primary"
             size="large"
             variant="contained"
-            target="_blank"
-            rel="noopener"
-            href={paths.minimalStore}
-          >
-            Purchase now
-          </Button>
-        </m.div>
-
-        <m.div variants={varFade({ distance: 24 }).inRight}>
-          <Button
-            color="inherit"
-            size="large"
-            variant="outlined"
-            target="_blank"
-            rel="noopener"
-            href={paths.freeUI}
-            endIcon={<Iconify width={16} icon="eva:external-link-fill" sx={{ mr: 0.5 }} />}
-            sx={{
-              color: 'common.white',
-              borderColor: 'common.white',
-              '&:hover': { borderColor: 'currentColor' },
-            }}
-          >
-            Get free version
-          </Button>
+          />
         </m.div>
       </Stack>
     </Stack>

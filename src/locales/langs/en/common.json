@@ -44,6 +44,10 @@
       "description": "We'll be glad to hear from you buddy.",
       "message": "Enter your message here.",
       "submit": "Submit"
+    },
+    "advertisement": {
+      "get-started-with": "Get started with",
+      "today": "today"
     }
   }
 }

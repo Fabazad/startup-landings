@@ -1,4 +1,4 @@
-import { Breakpoint, Button, useTheme } from '@mui/material';
+import { Breakpoint, Button, ButtonProps, useTheme } from '@mui/material';
 import { sendGAEvent } from '@next/third-parties/google';
 import { t } from 'i18next';
 import { useProductIdea } from 'src/app/product-idea-provider';
@@ -7,9 +7,9 @@ import { useSubscription } from 'src/sections/landing/components/SubscriptionMod
 const layoutQuery: Breakpoint = 'md';
 
 export const GetStartedButton = ({
-  outlined = false,
   buttonName,
-}: {
+  ...other
+}: ButtonProps & {
   outlined?: boolean;
   buttonName: string;
 }) => {
@@ -31,7 +31,8 @@ export const GetStartedButton = ({
 
   return (
     <Button
-      variant={outlined ? 'outlined' : 'contained'}
+      variant={other.variant || 'contained'}
+      {...other}
       rel="noopener"
       onClick={handleClick}
       sx={{

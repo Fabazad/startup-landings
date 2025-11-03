@@ -44,6 +44,10 @@
       "description": "Nous serons ravis de vous répondre.",
       "message": "Entrez votre message ici.",
       "submit": "Envoyer"
+    },
+    "advertisement": {
+      "get-started-with": "Commencez avec",
+      "today": ""
     }
   }
 }

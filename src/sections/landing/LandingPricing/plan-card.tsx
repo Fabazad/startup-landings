@@ -105,7 +105,10 @@ export const PlanCard = ({
       </Stack>
 
       <m.div variants={varFade({ distance: 24 }).inUp}>
-        <GetStartedButton outlined={!isPremiumPlan} buttonName={`get-started-plan-${planName}`} />
+        <GetStartedButton
+          variant={!isPremiumPlan ? 'outlined' : 'contained'}
+          buttonName={`get-started-plan-${planName}`}
+        />
       </m.div>
     </Stack>
   );
