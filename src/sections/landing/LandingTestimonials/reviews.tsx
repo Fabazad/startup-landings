@@ -91,7 +91,7 @@ export const Reviews = ({ reviews }: { reviews: Review[] }) => {
         component={m.div}
         sx={{ textAlign: 'center', mt: 5 }}
       >
-        <TryForFreeButton />
+        <TryForFreeButton buttonName="try-for-free-testimonials" />
       </Box>
     </Stack>
   );

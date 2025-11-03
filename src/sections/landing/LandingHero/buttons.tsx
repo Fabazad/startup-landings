@@ -7,7 +7,7 @@ export const Buttons = () => {
     <Box display="flex" flexWrap="wrap" justifyContent="center" gap={{ xs: 1.5, sm: 2 }}>
       <AnimatedDiv>
         <Stack alignItems="center" spacing={2.5}>
-          <TryForFreeButton />
+          <TryForFreeButton buttonName="try-for-free-hero" />
         </Stack>
       </AnimatedDiv>
     </Box>

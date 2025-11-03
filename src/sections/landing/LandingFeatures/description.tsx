@@ -58,7 +58,7 @@ export const Description = ({ feature }: { feature: Feature }) => (
       component={m.div}
       sx={{ mt: 8, textAlign: { xs: 'center', md: 'left' } }}
     >
-      <TryForFreeButton />
+      <TryForFreeButton buttonName={`try-for-free-feature-${feature.title}`} />
     </Box>
   </>
 );
