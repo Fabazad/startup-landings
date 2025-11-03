@@ -21,8 +21,6 @@ import { Snackbar } from 'src/components/snackbar';
 
 import { CheckoutProvider } from 'src/sections/checkout/context';
 
-import { GoogleAnalytics } from '@next/third-parties/google';
-
 import { AuthProvider as AmplifyAuthProvider } from 'src/auth/context/amplify';
 import { AuthProvider as Auth0AuthProvider } from 'src/auth/context/auth0';
 import { AuthProvider as FirebaseAuthProvider } from 'src/auth/context/firebase';
@@ -30,6 +28,7 @@ import { AuthProvider as JwtAuthProvider } from 'src/auth/context/jwt';
 import { AuthProvider as SupabaseAuthProvider } from 'src/auth/context/supabase';
 import { RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
 import { ProductIdeaProvider } from './product-idea-provider';
+import { PostHogProvider } from './providers/posthog-provider';
 
 // ----------------------------------------------------------------------
 
@@ -78,12 +77,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <ThemeProvider>
                   <MotionLazy>
                     <CheckoutProvider>
-                      <ProductIdeaProvider rawProductIdea={rawProductIdea}>
-                        <Snackbar />
-                        <ProgressBar />
-                        <SettingsDrawer />
-                        {children}
-                      </ProductIdeaProvider>
+                      <PostHogProvider>
+                        <ProductIdeaProvider rawProductIdea={rawProductIdea}>
+                          <Snackbar />
+                          <ProgressBar />
+                          <SettingsDrawer />
+                          {children}
+                        </ProductIdeaProvider>
+                      </PostHogProvider>
                     </CheckoutProvider>
                   </MotionLazy>
                 </ThemeProvider>
@@ -92,7 +93,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </LocalizationProvider>
         </I18nProvider>
       </body>
-      <GoogleAnalytics gaId={rawProductIdea.gaId} />
     </html>
   );
 }

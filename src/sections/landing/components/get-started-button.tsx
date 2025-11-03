@@ -1,6 +1,7 @@
 import { Breakpoint, Button, ButtonProps, useTheme } from '@mui/material';
 import { sendGAEvent } from '@next/third-parties/google';
 import { t } from 'i18next';
+import posthog from 'posthog-js';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { useSubscription } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
 
@@ -22,7 +23,7 @@ export const GetStartedButton = ({
       setOpenModal(true);
     } else {
       setOpenModal(true);
-      sendGAEvent('get_started_button_click', {
+      posthog.capture('get_started_button_click', {
         event_button: buttonName,
         event_product: productName,
       });

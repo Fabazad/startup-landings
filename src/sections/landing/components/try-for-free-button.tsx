@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { sendGAEvent } from '@next/third-parties/google';
+import posthog from 'posthog-js';
 import { useTranslation } from 'react-i18next';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { Iconify } from 'src/components/iconify';
@@ -15,7 +15,7 @@ export const TryForFreeButton = ({ buttonName }: { buttonName: string }) => {
       setOpenModal(true);
     } else {
       setOpenModal(true);
-      sendGAEvent('try_for_free_button_click', {
+      posthog.capture('try_for_free_button_click', {
         event_button: buttonName,
         event_product: productName,
       });

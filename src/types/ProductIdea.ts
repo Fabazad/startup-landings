@@ -68,7 +68,6 @@ type GenericProductIdea<Text extends Translated | string> = {
     titlePart2: Text;
   };
   plans: GenericPlans<Text>;
-  gaId: string;
 };
 
 export type ProductIdea = GenericProductIdea<string>;
