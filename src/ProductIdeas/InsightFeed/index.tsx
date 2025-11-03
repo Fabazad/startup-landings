@@ -17,4 +17,5 @@ export const INSIGHTFEED_PRODUCT_IDEA: RawProductIdea = {
   reviews: REVIEWS_SAMPLE,
   testimonialsTexts: TESTIMONIALS_TEXTS_SAMPLE,
   plans: PLANS_SAMPLE,
+  gaId: 'G-WT53TRH3YS',
 };

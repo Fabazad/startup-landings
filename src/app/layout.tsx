@@ -92,7 +92,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </LocalizationProvider>
         </I18nProvider>
       </body>
-      <GoogleAnalytics gaId="G-WT53TRH3YS" />
+      <GoogleAnalytics gaId={rawProductIdea.gaId} />
     </html>
   );
 }

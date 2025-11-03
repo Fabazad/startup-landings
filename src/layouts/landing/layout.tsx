@@ -94,7 +94,7 @@ export function LandingLayout({ sx, data, children, header }: MainLayoutProps) {
                   {/* -- Nav desktop -- */}
 
                   <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
-                    <GetStartedButton />
+                    <GetStartedButton buttonName="get-started-nav" />
                     <IconButton aria-label="toggle theme" onClick={handleToggleTheme}>
                       <Iconify icon={mode === 'dark' ? 'ph:moon' : 'ph:sun'} />
                     </IconButton>
