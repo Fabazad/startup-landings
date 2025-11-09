@@ -18,7 +18,7 @@ export const HeroDescription = ({
         variant="body2"
         sx={{
           mx: 'auto',
-          [theme.breakpoints.up(smKey)]: { whiteSpace: 'pre' },
+          whiteSpace: 'pre-line',
           [theme.breakpoints.up(lgKey)]: { fontSize: 20, lineHeight: '36px' },
         }}
       >

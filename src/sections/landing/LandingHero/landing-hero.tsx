@@ -101,7 +101,7 @@ export const LandingHero = ({ sx, ...other }: BoxProps) => {
             <m.div style={{ y: y1 }}>
               <Heading lgKey={lgKey} headingPart1={headingPart1} headingPart2={headingPart2} />
             </m.div>
-            <m.div style={{ y: y2 }}>
+            <m.div style={{ y: y2, whiteSpace: 'normal' }}>
               <HeroDescription smKey={smKey} lgKey={lgKey}>
                 {description}
               </HeroDescription>

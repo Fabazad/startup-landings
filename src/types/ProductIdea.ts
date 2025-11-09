@@ -4,7 +4,7 @@ import { LanguageValue, Translated } from 'src/locales';
 type GenericItem<Text extends Translated | string> = {
   icon: string;
   title: Text;
-  description?: Text;
+  description: Text;
 };
 
 export type Item = GenericItem<string>;
@@ -12,8 +12,10 @@ export type RawItem = GenericItem<Translated>;
 
 type GenericFeature<Text extends Translated | string> = {
   icon: string;
+  /** Tell that's this is the end of a pain point that the feature solves. max 70 characters. */
   pain: Text;
   title: Text;
+  /** Minimum 2 items, maximum 3 items. */
   items: GenericItem<Text>[];
   imgUrl: string;
 };
@@ -53,15 +55,20 @@ export type Plans = GenericPlans<string>;
 type GenericProductIdea<Text extends Translated | string> = {
   id: string;
   name: string;
+  /** 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red' **/
   themeColor: PrimaryColor;
   logoUrl: string;
   faviconUrl: string;
+  /** Minimum 3 features, maximum 5 features. */
   features: GenericFeature<Text>[];
   heroTexts: {
+    /** The description should describe the value proposition of the product. */
     description: Text;
+    /** The headings should be punchy and explain the value proposition of the product. */
     headingPart1: Text;
     headingPart2: Text;
   };
+  /** 8 or 12 reviews. */
   reviews: GenericReview<Text>[];
   testimonialsTexts: {
     titlePart1: Text;

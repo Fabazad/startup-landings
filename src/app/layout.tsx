@@ -23,6 +23,7 @@ import { CheckoutProvider } from 'src/sections/checkout/context';
 
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { headers } from 'next/headers';
 import { AuthProvider as AmplifyAuthProvider } from 'src/auth/context/amplify';
 import { AuthProvider as Auth0AuthProvider } from 'src/auth/context/auth0';
 import { AuthProvider as FirebaseAuthProvider } from 'src/auth/context/firebase';
@@ -47,10 +48,22 @@ export const viewport: Viewport = {
   themeColor: primary.main,
 };
 
+const getRawProductIdea = async () => {
+  // get url subdomain from url on server
+  const url = (await headers().get('x-forwarded-host')) ?? '';
+  const subdomain = url.split('.')[0];
+  if (subdomain === 'insightfeed') {
+    return RAW_PRODUCT_IDEAS.InsightFeed;
+  } else if (subdomain === 'triply') {
+    return RAW_PRODUCT_IDEAS.Triply;
+  }
+  return RAW_PRODUCT_IDEAS.InsightFeed;
+};
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
 
-  const rawProductIdea = RAW_PRODUCT_IDEAS.InsightFeed;
+  const rawProductIdea = await getRawProductIdea();
 
   return (
     <html lang={lang ?? 'en'} suppressHydrationWarning>
