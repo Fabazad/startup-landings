@@ -1,5 +1,4 @@
 import { Breakpoint, Button, ButtonProps, useTheme } from '@mui/material';
-import { sendGAEvent } from '@next/third-parties/google';
 import { t } from 'i18next';
 import posthog from 'posthog-js';
 import { useProductIdea } from 'src/app/product-idea-provider';
