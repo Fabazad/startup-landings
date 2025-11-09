@@ -4,7 +4,7 @@ import { LanguageValue, Translated } from 'src/locales';
 type GenericItem<Text extends Translated | string> = {
   icon: string;
   title: Text;
-  description: Text;
+  description?: Text;
 };
 
 export type Item = GenericItem<string>;
