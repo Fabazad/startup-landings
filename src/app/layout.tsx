@@ -21,6 +21,7 @@ import { Snackbar } from 'src/components/snackbar';
 
 import { CheckoutProvider } from 'src/sections/checkout/context';
 
+import { Analytics } from '@vercel/analytics/next';
 import { AuthProvider as AmplifyAuthProvider } from 'src/auth/context/amplify';
 import { AuthProvider as Auth0AuthProvider } from 'src/auth/context/auth0';
 import { AuthProvider as FirebaseAuthProvider } from 'src/auth/context/firebase';
@@ -92,6 +93,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </AuthProvider>
           </LocalizationProvider>
         </I18nProvider>
+        <Analytics />
       </body>
     </html>
   );
