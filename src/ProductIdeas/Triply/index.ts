@@ -5,8 +5,8 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
   id: 'triply',
   name: 'Triply',
   themeColor: 'orange',
-  logoUrl: `${CONFIG.assetsDir}/logo/purple-dear.svg`,
-  faviconUrl: `${CONFIG.assetsDir}/favicon/purple-dear.ico`,
+  logoUrl: `${CONFIG.assetsDir}/logo/yellow-panda.svg`,
+  faviconUrl: `${CONFIG.assetsDir}/favicon/yellow-panda.ico`,
   features: [
     {
       icon: 'lucide:map',

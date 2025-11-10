@@ -5,8 +5,8 @@ export const INSIGHTFEED_JSON2: RawProductIdea = {
   id: 'insightfeed',
   name: 'Insight Feed',
   themeColor: 'purple',
-  logoUrl: `${CONFIG.assetsDir}/logo/purple-dear.svg`,
-  faviconUrl: `${CONFIG.assetsDir}/favicon/purple-dear.ico`,
+  logoUrl: `${CONFIG.assetsDir}/logo/purple-octopus.svg`,
+  faviconUrl: `${CONFIG.assetsDir}/favicon/purple-octopus.ico`,
   features: [
     {
       icon: 'mdi:radar',
