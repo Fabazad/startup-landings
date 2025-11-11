@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import { t } from 'i18next';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { Form } from 'src/components/hook-form';
@@ -54,6 +54,9 @@ export const SubscriptionFeaturesForm = () => {
     }
   };
 
+  const watchedValues = useWatch({ control: methods.control });
+  const isDisabled = Object.values(watchedValues || {}).every((value) => !value);
+
   return (
     <Form methods={methods} onSubmit={methods.handleSubmit(onSubmit)}>
       <DialogTitle>{t('landing.subscription.features.title')}</DialogTitle>
@@ -77,6 +80,7 @@ export const SubscriptionFeaturesForm = () => {
           type="submit"
           loading={methods.formState.isSubmitting}
           sx={{ borderRadius: '9999px' }}
+          disabled={isDisabled}
         >
           {t('landing.subscription.submit')}
         </LoadingButton>
