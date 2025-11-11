@@ -81,8 +81,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title: rawProductIdea.name,
     description: rawProductIdea.heroTexts.description.en,
     icons: rawProductIdea.faviconUrl,
-    // Support light/dark media queries:
-    themeColor: getThemeColorValue(rawProductIdea.themeColor),
+    // red
+    themeColor: '#FF0000',
   };
 }
 
