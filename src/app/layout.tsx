@@ -10,7 +10,6 @@ import { CONFIG } from 'src/config-global';
 import { LocalizationProvider } from 'src/locales';
 import { I18nProvider } from 'src/locales/i18n-provider';
 import { detectLanguage } from 'src/locales/server';
-import { primary } from 'src/theme/core/palette';
 import { schemeConfig } from 'src/theme/scheme-config';
 import { ThemeProvider } from 'src/theme/theme-provider';
 
@@ -47,7 +46,6 @@ const AuthProvider =
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: primary.main,
 };
 
 const getRawProductIdea = async () => {
