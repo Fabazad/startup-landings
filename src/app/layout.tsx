@@ -5,6 +5,7 @@ import 'src/global.css';
 import type { Metadata, Viewport } from 'next';
 
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
+import { error, info, primary, secondary, warning } from 'src/theme/core/palette';
 
 import { CONFIG } from 'src/config-global';
 import { LocalizationProvider } from 'src/locales';
@@ -15,7 +16,12 @@ import { ThemeProvider } from 'src/theme/theme-provider';
 
 import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { ProgressBar } from 'src/components/progress-bar';
-import { defaultSettings, SettingsDrawer, SettingsProvider } from 'src/components/settings';
+import {
+  defaultSettings,
+  PrimaryColor,
+  SettingsDrawer,
+  SettingsProvider,
+} from 'src/components/settings';
 import { Snackbar } from 'src/components/snackbar';
 
 import { CheckoutProvider } from 'src/sections/checkout/context';
@@ -48,6 +54,14 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+function getThemeColorValue(themeColor: PrimaryColor): string {
+  if (themeColor === 'blue') return info.main;
+  if (themeColor === 'purple') return secondary.main;
+  if (themeColor === 'orange') return warning.main;
+  if (themeColor === 'red') return error.main;
+  return primary.main;
+}
+
 const getRawProductIdea = async () => {
   // get url subdomain from url on server
   const url = (await headers().get('x-forwarded-host')) ?? '';
@@ -68,10 +82,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: rawProductIdea.heroTexts.description.en,
     icons: rawProductIdea.faviconUrl,
     // Support light/dark media queries:
-    themeColor: [
-      { media: '(prefers-color-scheme: light)', color: rawProductIdea.themeColor },
-      { media: '(prefers-color-scheme: dark)', color: rawProductIdea.themeColor },
-    ],
+    themeColor: getThemeColorValue(rawProductIdea.themeColor),
   };
 }
 
