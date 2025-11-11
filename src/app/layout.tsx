@@ -49,11 +49,6 @@ const AuthProvider =
   (CONFIG.auth.method === 'auth0' && Auth0AuthProvider) ||
   JwtAuthProvider;
 
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-};
-
 function getThemeColorValue(themeColor: PrimaryColor): string {
   if (themeColor === 'blue') return info.main;
   if (themeColor === 'purple') return secondary.main;
@@ -61,6 +56,15 @@ function getThemeColorValue(themeColor: PrimaryColor): string {
   if (themeColor === 'red') return error.main;
   return primary.main;
 }
+
+export const generateViewport: () => Promise<Viewport> = async () => {
+  const rawProductIdea = await getRawProductIdea();
+  return {
+    width: 'device-width',
+    initialScale: 1,
+    themeColor: getThemeColorValue(rawProductIdea.themeColor),
+  };
+};
 
 const getRawProductIdea = async () => {
   // get url subdomain from url on server
@@ -82,7 +86,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: rawProductIdea.heroTexts.description.en,
     icons: rawProductIdea.faviconUrl,
     // red
-    themeColor: '#FF0000',
+    themeColor: getThemeColorValue(rawProductIdea.themeColor),
   };
 }
 
