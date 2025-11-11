@@ -71,8 +71,8 @@ export async function generateMetadata(): Promise<Metadata> {
     icons: rawProductIdea.faviconUrl,
     // Support light/dark media queries:
     themeColor: [
-      { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-      { media: '(prefers-color-scheme: dark)', color: '#000000' },
+      { media: '(prefers-color-scheme: light)', color: rawProductIdea.themeColor },
+      { media: '(prefers-color-scheme: dark)', color: rawProductIdea.themeColor },
     ],
   };
 }
