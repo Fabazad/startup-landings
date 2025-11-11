@@ -2,7 +2,7 @@ import 'src/global.css';
 
 // ----------------------------------------------------------------------
 
-import type { Viewport } from 'next';
+import type { Metadata, Viewport } from 'next';
 
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
 
@@ -30,8 +30,10 @@ import { AuthProvider as FirebaseAuthProvider } from 'src/auth/context/firebase'
 import { AuthProvider as JwtAuthProvider } from 'src/auth/context/jwt';
 import { AuthProvider as SupabaseAuthProvider } from 'src/auth/context/supabase';
 import { RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
+import { SubscriptionModalProvider } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
 import { ProductIdeaProvider } from './product-idea-provider';
 import { PostHogProvider } from './providers/posthog-provider';
+import ReactQueryProvider from './providers/react-query-provider';
 
 // ----------------------------------------------------------------------
 
@@ -60,6 +62,21 @@ const getRawProductIdea = async () => {
   return RAW_PRODUCT_IDEAS.InsightFeed;
 };
 
+export async function generateMetadata(): Promise<Metadata> {
+  const rawProductIdea = await getRawProductIdea();
+
+  return {
+    title: rawProductIdea.name,
+    description: rawProductIdea.heroTexts.description.en,
+    icons: rawProductIdea.faviconUrl,
+    // Support light/dark media queries:
+    themeColor: [
+      { media: '(prefers-color-scheme: light)', color: rawProductIdea.themeColor },
+      { media: '(prefers-color-scheme: dark)', color: rawProductIdea.themeColor },
+    ],
+  };
+}
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
 
@@ -67,12 +84,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang={lang ?? 'en'} suppressHydrationWarning>
-      <head>
-        <title>{rawProductIdea.name}</title>
-        <link rel="icon" href={rawProductIdea.faviconUrl} />
-        <link rel="shortcut icon" href={rawProductIdea.faviconUrl} />
-        <link rel="apple-touch-icon" href={rawProductIdea.faviconUrl} />
-      </head>
       <body>
         <InitColorSchemeScript
           defaultMode={schemeConfig.defaultMode}
@@ -93,12 +104,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   <MotionLazy>
                     <CheckoutProvider>
                       <PostHogProvider>
-                        <ProductIdeaProvider rawProductIdea={rawProductIdea}>
-                          <Snackbar />
-                          <ProgressBar />
-                          <SettingsDrawer />
-                          {children}
-                        </ProductIdeaProvider>
+                        <ReactQueryProvider>
+                          <ProductIdeaProvider rawProductIdea={rawProductIdea}>
+                            <SubscriptionModalProvider>
+                              <Snackbar />
+                              <ProgressBar />
+                              <SettingsDrawer />
+                              {children}
+                            </SubscriptionModalProvider>
+                          </ProductIdeaProvider>
+                        </ReactQueryProvider>
                       </PostHogProvider>
                     </CheckoutProvider>
                   </MotionLazy>

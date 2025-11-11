@@ -24,6 +24,12 @@
       "description": "Enter your email to join the next wave of users.",
       "submit": "Submit",
       "cancel": "Cancel",
+      "features": {
+        "title": "What features are you interested in?",
+        "description": "Choose the features that you are interested in to offer you the best experience possible."
+      },
+      "no-subscription-email": "You are not on the waiting list",
+      "failed-to-update-subscription-features": "Failed to update subscription features",
       "success": {
         "title": "You are on the waiting list 🎉",
         "description": "Thank you! You are on the waiting list.\nWe will open the access progressively to ensure the quality of the experience.",

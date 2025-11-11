@@ -3,6 +3,7 @@ import { RawFeature } from 'src/types/ProductIdea';
 
 export const FEATURES_SAMPLE: RawFeature[] = [
   {
+    id: 'f1',
     icon: 'mdi:check',
     title: {
       fr: 'Identification automatique des SaaS concurrents.',
@@ -42,6 +43,7 @@ export const FEATURES_SAMPLE: RawFeature[] = [
     imgUrl: `${CONFIG.assetsDir}/assets/images/home/home-chart.webp`,
   },
   {
+    id: 'f2',
     icon: 'mdi:check',
     title: {
       fr: 'Analyser leur marché.',
@@ -77,6 +79,7 @@ export const FEATURES_SAMPLE: RawFeature[] = [
     imgUrl: `${CONFIG.assetsDir}/assets/images/home/home-chart.webp`,
   },
   {
+    id: 'f3',
     icon: 'lucide:check-line',
     title: {
       fr: 'Surveiller leurs moves en temps réel.',

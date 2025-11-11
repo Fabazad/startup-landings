@@ -9,6 +9,7 @@ export const INSIGHTFEED_JSON2: RawProductIdea = {
   faviconUrl: `${CONFIG.assetsDir}/favicon/purple-octopus.ico`,
   features: [
     {
+      id: 'f1',
       icon: 'mdi:radar',
       pain: {
         en: 'Hard to find true competitors fast.',
@@ -56,6 +57,7 @@ export const INSIGHTFEED_JSON2: RawProductIdea = {
       imgUrl: '/assets/insightfeed/feature-discovery.png',
     },
     {
+      id: 'f2',
       icon: 'mdi:eye-check',
       pain: {
         en: 'Manual monitoring costs time.',
@@ -92,6 +94,7 @@ export const INSIGHTFEED_JSON2: RawProductIdea = {
       imgUrl: '/assets/insightfeed/feature-monitoring.png',
     },
     {
+      id: 'f3',
       icon: 'mdi:table-large',
       pain: {
         en: 'Hard to compare plans and features.',
@@ -128,6 +131,7 @@ export const INSIGHTFEED_JSON2: RawProductIdea = {
       imgUrl: '/assets/insightfeed/feature-compare.png',
     },
     {
+      id: 'f4',
       icon: 'mdi:timeline-clock',
       pain: {
         en: 'No historical view of moves.',
@@ -164,6 +168,7 @@ export const INSIGHTFEED_JSON2: RawProductIdea = {
       imgUrl: '/assets/insightfeed/feature-timeline.png',
     },
     {
+      id: 'f5',
       icon: 'mdi:robot-outline',
       pain: {
         en: 'Too much noise in alerts.',

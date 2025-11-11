@@ -4,9 +4,7 @@ import { Button, DialogActions, DialogContent, DialogTitle, Typography } from '@
 import { useForm } from 'react-hook-form';
 import { Field, Form } from 'src/components/hook-form';
 
-import axios from 'axios';
 import { toast } from 'sonner';
-import { useProductIdea } from 'src/app/product-idea-provider';
 import { useTranslate } from 'src/locales';
 import { z as zod } from 'zod';
 import { useSubscription } from './subscriptionModal';
@@ -22,44 +20,28 @@ const subscribeFormSchema = zod.object({
 });
 type SubscribeFormSchemaType = zod.infer<typeof subscribeFormSchema>;
 
-export const SubscriptionForm = () => {
+export const SubscriptionEmailForm = () => {
   const { t } = useTranslate();
-
-  const { name: productName } = useProductIdea();
 
   const methods = useForm<SubscribeFormSchemaType>({
     resolver: zodResolver(subscribeFormSchema),
     defaultValues,
   });
 
-  const { setSubscriptionEmail, setOpenModal } = useSubscription();
+  const { createSubscription, setOpenModal } = useSubscription();
 
   const onSubmit = async () => {
     const data = methods.getValues();
 
-    const response = await axios.post(
-      '/api/subscriptions',
-      {
-        email: data.email,
-        product: productName,
-      },
-      { validateStatus: () => true }
-    );
-
-    if (response.status !== 201) {
-      if (response.data.error === 'already-subscribed') {
+    const response = await createSubscription(data.email);
+    if (response !== null) {
+      if (response.error === 'already-subscribed') {
         toast.error(t('landing.subscription.already-subscribed'));
-        return;
-      }
-      if (response.data.error === 'failed-to-subscribe') {
-        toast.error(t('landing.subscription.failed-to-subscribe'));
         return;
       }
       toast.error(t('landing.subscription.failed-to-subscribe'));
       return;
     }
-
-    setSubscriptionEmail(data.email);
   };
 
   return (
@@ -77,6 +59,7 @@ export const SubscriptionForm = () => {
           variant="contained"
           type="submit"
           loading={methods.formState.isSubmitting}
+          sx={{ borderRadius: '9999px' }}
         >
           {t('landing.subscription.submit')}
         </LoadingButton>

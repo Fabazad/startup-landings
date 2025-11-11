@@ -1,13 +1,13 @@
 'use client';
 
-import { useMemo, useState, useCallback, createContext } from 'react';
+import { createContext, useCallback, useMemo, useState } from 'react';
 
 import { useCookies } from 'src/hooks/use-cookies';
 import { useLocalStorage } from 'src/hooks/use-local-storage';
 
 import { STORAGE_KEY, defaultSettings } from '../config-settings';
 
-import type { SettingsState, SettingsContextValue, SettingsProviderProps } from '../types';
+import type { SettingsContextValue, SettingsProviderProps, SettingsState } from '../types';
 
 // ----------------------------------------------------------------------
 
@@ -22,9 +22,19 @@ export function SettingsProvider({
   settings,
   caches = 'localStorage',
 }: SettingsProviderProps) {
-  const cookies = useCookies<SettingsState>(STORAGE_KEY, settings, defaultSettings);
+  const { colorScheme, ...restSettings } = settings;
+  const { colorScheme: defaultColorScheme, ...defaultRestSettings } = defaultSettings;
 
-  const localStorage = useLocalStorage<SettingsState>(STORAGE_KEY, settings);
+  const cookies = useCookies<Omit<SettingsState, 'colorScheme'>>(
+    STORAGE_KEY,
+    restSettings,
+    defaultRestSettings
+  );
+
+  const localStorage = useLocalStorage<Omit<SettingsState, 'colorScheme'>>(
+    STORAGE_KEY,
+    restSettings
+  );
 
   const values = caches === 'cookie' ? cookies : localStorage;
 
@@ -61,5 +71,6 @@ export function SettingsProvider({
     ]
   );
 
+  // @ts-ignore
   return <SettingsContext.Provider value={memoizedValue}>{children}</SettingsContext.Provider>;
 }

@@ -3,17 +3,16 @@ import posthog from 'posthog-js';
 import { useTranslation } from 'react-i18next';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { Iconify } from 'src/components/iconify';
-import { useSubscription } from './SubscriptionModal/subscriptionModal';
+import { SubscriptionStep, useSubscription } from './SubscriptionModal/subscriptionModal';
 
 export const TryForFreeButton = ({ buttonName }: { buttonName: string }) => {
   const { t } = useTranslation();
   const { name: productName } = useProductIdea();
-  const { setOpenModal, subscriptionEmail } = useSubscription();
+  const { setOpenModal, subscriptionStep } = useSubscription();
 
   const handleClick = () => {
-    if (subscriptionEmail) {
-      setOpenModal(true);
-    } else {
+    setOpenModal(true);
+    if (subscriptionStep === SubscriptionStep.SUBSCRIBE_EMAIL) {
       setOpenModal(true);
       posthog.capture('try_for_free_button_click', {
         event_button: buttonName,
@@ -29,9 +28,12 @@ export const TryForFreeButton = ({ buttonName }: { buttonName: string }) => {
       variant="contained"
       startIcon={<Iconify width={24} icon="ph:rocket-launch-duotone" />}
       onClick={handleClick}
+      sx={{
+        borderRadius: '9999px',
+      }}
     >
       <span>
-        {subscriptionEmail
+        {subscriptionStep === SubscriptionStep.SUCCESS
           ? t('landing.hero.buttons.open-waiting-list')
           : t('landing.hero.buttons.try-for-free')}
       </span>

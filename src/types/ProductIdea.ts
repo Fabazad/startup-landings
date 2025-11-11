@@ -11,6 +11,7 @@ export type Item = GenericItem<string>;
 export type RawItem = GenericItem<Translated>;
 
 type GenericFeature<Text extends Translated | string> = {
+  id: string;
   icon: string;
   /** Tell that's this is the end of a pain point that the feature solves. max 70 characters. */
   pain: Text;

@@ -5,10 +5,11 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
   id: 'triply',
   name: 'Triply',
   themeColor: 'orange',
-  logoUrl: `${CONFIG.assetsDir}/logo/yellow-panda.svg`,
-  faviconUrl: `${CONFIG.assetsDir}/favicon/yellow-panda.ico`,
+  logoUrl: `${CONFIG.assetsDir}/logo/orange-panda.svg`,
+  faviconUrl: `${CONFIG.assetsDir}/favicon/orange-panda.ico`,
   features: [
     {
+      id: 'f1',
       icon: 'lucide:map',
       pain: {
         en: 'Plans scattered across too many tools',
@@ -45,6 +46,7 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
       imgUrl: `${CONFIG.assetsDir}/assets/images/home/triply-hub.webp`,
     },
     {
+      id: 'f2',
       icon: 'lucide:message-square',
       pain: {
         en: 'Messy group chats and lost info',
@@ -81,6 +83,7 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
       imgUrl: `${CONFIG.assetsDir}/assets/images/home/triply-communication.webp`,
     },
     {
+      id: 'f3',
       icon: 'lucide:users-check',
       pain: {
         en: 'No clear ownership or decisions',
@@ -117,6 +120,7 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
       imgUrl: `${CONFIG.assetsDir}/assets/images/home/triply-collaboration.webp`,
     },
     {
+      id: 'f4',
       icon: 'lucide:wallet',
       pain: {
         en: 'Confusing shared expenses at the end',
@@ -153,6 +157,7 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
       imgUrl: `${CONFIG.assetsDir}/assets/images/home/triply-expenses.webp`,
     },
     {
+      id: 'f5',
       icon: 'lucide:images',
       pain: {
         en: 'Memories scattered across phones',

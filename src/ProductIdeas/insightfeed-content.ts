@@ -23,6 +23,7 @@ export const INSIGHTFEED_CONTENT: RawProductIdea = {
   },
   features: [
     {
+      id: 'f1',
       icon: 'mdi:radar',
       title: {
         fr: 'Détection automatique des concurrents',
@@ -70,6 +71,7 @@ export const INSIGHTFEED_CONTENT: RawProductIdea = {
       imgUrl: `${CONFIG.assetsDir}/assets/images/home/competitor-discovery.webp`,
     },
     {
+      id: 'f2',
       icon: 'mdi:bell-ring',
       title: {
         fr: 'Veille des changements clés',
@@ -117,6 +119,7 @@ export const INSIGHTFEED_CONTENT: RawProductIdea = {
       imgUrl: `${CONFIG.assetsDir}/assets/images/home/change-tracking.webp`,
     },
     {
+      id: 'f3',
       icon: 'mdi:comment-text-multiple',
       title: {
         fr: 'Synthèse d’avis par l’IA',
@@ -164,6 +167,7 @@ export const INSIGHTFEED_CONTENT: RawProductIdea = {
       imgUrl: `${CONFIG.assetsDir}/assets/images/home/review-ai.webp`,
     },
     {
+      id: 'f4',
       icon: 'mdi:view-dashboard-outline',
       title: {
         fr: 'Tableaux de bord & alertes',

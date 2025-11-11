@@ -24,6 +24,12 @@
       "description": "Entrez votre email pour faire partie de la prochaine vague d’utilisateurs.",
       "submit": "Envoyer",
       "cancel": "Annuler",
+      "features": {
+        "title": "Quelles fonctionnalités vous intéressent ?",
+        "description": "Choisissez les fonctionnalités qui vous intéressent pour que nous puissions vous offrir la meilleure expérience possible."
+      },
+      "no-subscription-email": "Vous n’êtes pas inscrit sur la liste d’attente",
+      "failed-to-update-subscription-features": "Erreur lors de la mise à jour des fonctionnalités",
       "success": {
         "title": "Vous êtes sur la liste d’attente 🎉",
         "description": "Merci ! Vous êtes sur la liste d’attente.\nNous ouvrons progressivement les accès pour garantir la qualité de l’expérience.",

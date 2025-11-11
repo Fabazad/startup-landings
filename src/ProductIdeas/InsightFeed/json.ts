@@ -23,6 +23,7 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
   },
   features: [
     {
+      id: 'f1',
       icon: 'ph:compass',
       pain: {
         fr: 'Vous manquez de visibilité sur les acteurs proches de votre produit.',
@@ -70,6 +71,7 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       imgUrl: '/assets/insightfeed/feature-discovery.webp',
     },
     {
+      id: 'f2',
       icon: 'ph:binoculars',
       pain: {
         fr: 'La veille manuelle est chronophage et incomplète.',
@@ -117,6 +119,7 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       imgUrl: '/assets/insightfeed/feature-monitoring.webp',
     },
     {
+      id: 'f3',
       icon: 'ph:table',
       pain: {
         fr: 'Comparer les offres prend des heures et les données sont vite obsolètes.',
@@ -153,6 +156,7 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       imgUrl: '/assets/insightfeed/feature-compare.webp',
     },
     {
+      id: 'f4',
       icon: 'ph:timeline',
       pain: {
         fr: 'Difficile d’avoir l’historique précis des changements.',
@@ -189,6 +193,7 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       imgUrl: '/assets/insightfeed/feature-timeline.webp',
     },
     {
+      id: 'f5',
       icon: 'ph:bell-simple',
       pain: {
         fr: 'Trop d’alertes tue l’alerte.',
@@ -225,6 +230,7 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       imgUrl: '/assets/insightfeed/feature-alerts.webp',
     },
     {
+      id: 'f6',
       icon: 'ph:trend-up',
       pain: {
         fr: 'Identifier les concurrents les plus dynamiques n’est pas trivial.',
