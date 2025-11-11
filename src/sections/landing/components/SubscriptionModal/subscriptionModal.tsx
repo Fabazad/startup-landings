@@ -8,7 +8,7 @@ import { useProductIdea } from 'src/app/product-idea-provider';
 import { useCookies } from 'src/hooks/use-cookies';
 import { useSearchParams } from 'src/routes/hooks';
 import { SubscriptionEmailForm } from './subscriptionEmailForm';
-import { SubscriptionFeaturesForm } from './subscriptionFeaturesForm';
+import { SubscriptionFeaturesForm } from './SubscriptionFeaturesForm/subscriptionFeaturesForm';
 import { SubscriptionSuccess } from './subscriptionSuccess';
 
 const SUBSCRIBE_MODAL_PARAM = 'subscribeModal';

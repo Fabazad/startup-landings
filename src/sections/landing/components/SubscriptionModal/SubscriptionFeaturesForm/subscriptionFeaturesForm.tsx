@@ -12,23 +12,19 @@ import { t } from 'i18next';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useProductIdea } from 'src/app/product-idea-provider';
-import { Field, Form } from 'src/components/hook-form';
+import { Form } from 'src/components/hook-form';
 import { z as zod } from 'zod';
-import { useSubscription } from './subscriptionModal';
+import { useSubscription } from '../subscriptionModal';
+import { FeatureOption } from './FeatureOption';
 
 export const SubscriptionFeaturesForm = () => {
   const { setOpenModal, updateSubscriptionFeatures } = useSubscription();
 
   const { features } = useProductIdea();
 
-  const featureOptions = features.map((feature) => ({
-    value: feature.id,
-    label: feature.title,
-  }));
-
   const formSchema = zod.object(
-    featureOptions.reduce<Record<string, zod.ZodType<boolean>>>((acc, featureOption) => {
-      acc[featureOption.value] = zod.boolean();
+    features.reduce<Record<string, zod.ZodType<boolean>>>((acc, feature) => {
+      acc[feature.id] = zod.boolean();
       return acc;
     }, {})
   );
@@ -36,8 +32,8 @@ export const SubscriptionFeaturesForm = () => {
 
   const methods = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
-    defaultValues: featureOptions.reduce<Record<string, boolean>>((acc, featureOption) => {
-      acc[featureOption.value] = false;
+    defaultValues: features.reduce<Record<string, boolean>>((acc, feature) => {
+      acc[feature.id] = false;
       return acc;
     }, {}),
   });
@@ -62,14 +58,14 @@ export const SubscriptionFeaturesForm = () => {
     <Form methods={methods} onSubmit={methods.handleSubmit(onSubmit)}>
       <DialogTitle>{t('landing.subscription.features.title')}</DialogTitle>
 
-      <DialogContent>
+      <DialogContent sx={{ maxHeight: '500px', overflowY: 'auto' }}>
         <Typography>{t('landing.subscription.features.description')}</Typography>
 
         <FormGroup
           sx={{ mt: 3, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' } }}
         >
-          {featureOptions.map((feature) => (
-            <Field.Checkbox key={feature.value} name={feature.value} label={feature.label} />
+          {features.map((feature) => (
+            <FeatureOption key={feature.id} feature={feature} />
           ))}
         </FormGroup>
       </DialogContent>
