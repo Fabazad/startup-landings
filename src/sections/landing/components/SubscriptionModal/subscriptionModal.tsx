@@ -6,6 +6,7 @@ import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { useCookies } from 'src/hooks/use-cookies';
+import { LanguageValue, useTranslate } from 'src/locales';
 import { useSearchParams } from 'src/routes/hooks';
 import { SubscriptionEmailForm } from './subscriptionEmailForm';
 import { SubscriptionFeaturesForm } from './SubscriptionFeaturesForm/subscriptionFeaturesForm';
@@ -48,7 +49,8 @@ export const useSubscription = () => {
 const api = {
   createSubscription: async (
     email: string,
-    productName: string
+    productName: string,
+    language: LanguageValue
   ): Promise<
     { error: 'already-subscribed' | 'failed-to-subscribe' } | { subscriptionId: number }
   > => {
@@ -57,6 +59,7 @@ const api = {
       {
         email: email,
         product: productName,
+        language,
       },
       { validateStatus: () => true }
     );
@@ -133,6 +136,8 @@ export const SubscriptionModalProvider = ({ children }: { children: React.ReactN
     subscriptionId ? SubscriptionStep.SUCCESS : SubscriptionStep.SUBSCRIBE_EMAIL
   );
 
+  const { currentLang } = useTranslate();
+
   const {
     data: hasSubscriptionFeatures,
     refetch: refetchSubscriptionFeatures,
@@ -169,7 +174,11 @@ export const SubscriptionModalProvider = ({ children }: { children: React.ReactN
 
   const createSubscription = async (subscriptionEmail: string) => {
     setIsLoading(true);
-    const response = await api.createSubscription(subscriptionEmail, productName);
+    const response = await api.createSubscription(
+      subscriptionEmail,
+      productName,
+      currentLang.value as LanguageValue
+    );
     if (response !== null && 'error' in response) return { error: response.error };
 
     setSubscriptionIdCookie(response.subscriptionId);

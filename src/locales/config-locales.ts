@@ -1,10 +1,11 @@
 // ----------------------------------------------------------------------
 
-export type LanguageValue = 'en' | 'fr';
+export const LanguageValue = { EN: 'en', FR: 'fr' } as const;
+export type LanguageValue = (typeof LanguageValue)[keyof typeof LanguageValue];
 export type Translated = Record<LanguageValue, string>;
 
-export const fallbackLng = 'en';
-export const languages = ['en', 'fr'];
+export const fallbackLng = LanguageValue.EN;
+export const languages = Object.values(LanguageValue);
 export const defaultNS = 'common';
 export const cookieName = 'i18next';
 

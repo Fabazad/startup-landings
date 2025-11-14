@@ -1,11 +1,17 @@
 import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
+import { CONFIG } from 'src/config-global';
+import { WelcomeEmail } from 'src/emails/welcomeEmail';
 import { supabase } from 'src/lib/supabase';
+import { LanguageValue } from 'src/locales';
 import { z } from 'zod';
 
-// Schéma Zod pour valider le corps de la requête
+const resend = new Resend(CONFIG.resend.apiKey);
+
 const createUserSchema = z.object({
   email: z.string().email('Invalid email address'),
   product: z.string().min(1, 'Product is required'),
+  language: z.nativeEnum(LanguageValue),
 });
 
 // POST /api/users
@@ -21,12 +27,11 @@ export const POST = async (request: Request) => {
     );
   }
 
+  const { product, email, language } = validatedBody.data;
+
   const { data, error } = await supabase
     .from('subscriptions')
-    .insert({
-      email: validatedBody.data.email,
-      product: validatedBody.data.product,
-    })
+    .insert({ email, product })
     .select('id')
     .single<{ id: number }>();
 
@@ -35,6 +40,20 @@ export const POST = async (request: Request) => {
       return NextResponse.json({ error: 'already-subscribed', details: error }, { status: 400 });
     }
     return NextResponse.json({ error: 'failed-to-subscribe', details: error }, { status: 500 });
+  }
+
+  const emailHtml = await resend.emails.send({
+    from: `${product} <onboarding@onama.io>`,
+    to: email,
+    subject: language === LanguageValue.FR ? `Bienvenue sur ${product}` : `Welcome to ${product}`,
+    html: WelcomeEmail({ productName: product, language }),
+  });
+
+  if (emailHtml.error) {
+    return NextResponse.json(
+      { error: 'failed-to-send-email', details: emailHtml.error },
+      { status: 500 }
+    );
   }
 
   return NextResponse.json({ subscriptionId: data.id }, { status: 201 });

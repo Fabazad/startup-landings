@@ -29,6 +29,7 @@ export type ConfigValue = {
   auth0: { clientId: string; domain: string; callbackUrl: string };
   supabase: { url: string; key: string };
   posthog: { key: string; host: string };
+  resend: { apiKey: string };
 };
 
 // ----------------------------------------------------------------------
@@ -93,5 +94,8 @@ export const CONFIG: ConfigValue = {
   posthog: {
     key: process.env.NEXT_PUBLIC_POSTHOG_KEY ?? '',
     host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? '',
+  },
+  resend: {
+    apiKey: process.env.RESEND_API_KEY ?? '',
   },
 };
