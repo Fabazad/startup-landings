@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { CONFIG } from 'src/config-global';
-import { WelcomeEmail } from 'src/emails/welcomeEmail';
+import { WelcomeEmail } from 'src/emails/WelcomeEmail';
 import { supabase } from 'src/lib/supabase';
 import { LanguageValue } from 'src/locales';
 import { z } from 'zod';
@@ -29,6 +29,19 @@ export const POST = async (request: Request) => {
 
   const { product, email, language } = validatedBody.data;
 
+  const existingSubscription = await supabase
+    .from('subscriptions')
+    .select('id')
+    .match({ email, product })
+    .maybeSingle<{ id: number }>();
+
+  if (existingSubscription.data) {
+    return NextResponse.json(
+      { subscriptionId: existingSubscription.data.id, isNewSubscription: false },
+      { status: 200 }
+    );
+  }
+
   const { data, error } = await supabase
     .from('subscriptions')
     .insert({ email, product })
@@ -36,9 +49,6 @@ export const POST = async (request: Request) => {
     .single<{ id: number }>();
 
   if (error) {
-    if (error.code === '23505') {
-      return NextResponse.json({ error: 'already-subscribed', details: error }, { status: 400 });
-    }
     return NextResponse.json({ error: 'failed-to-subscribe', details: error }, { status: 500 });
   }
 
@@ -56,7 +66,7 @@ export const POST = async (request: Request) => {
     );
   }
 
-  return NextResponse.json({ subscriptionId: data.id }, { status: 201 });
+  return NextResponse.json({ subscriptionId: data.id, isNewSubscription: true }, { status: 200 });
 };
 
 const addExpectedFeaturesSchema = z.object({

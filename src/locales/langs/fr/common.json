@@ -14,7 +14,8 @@
         "try-for-free": "Essayer gratuitement",
         "get-started": "Commencer",
         "open-waiting-list": "Ouvrir la liste d’attente"
-      }
+      },
+      "already-subscribed": "Vous êtes déjà inscrit sur la liste d’attente"
     },
     "testimonials": {
       "testimonials": "Témoignages"

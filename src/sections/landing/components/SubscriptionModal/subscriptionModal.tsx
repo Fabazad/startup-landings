@@ -3,7 +3,9 @@
 import { Box, CircularProgress, Dialog } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { t } from 'i18next';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { useCookies } from 'src/hooks/use-cookies';
 import { LanguageValue, useTranslate } from 'src/locales';
@@ -52,9 +54,9 @@ const api = {
     productName: string,
     language: LanguageValue
   ): Promise<
-    { error: 'already-subscribed' | 'failed-to-subscribe' } | { subscriptionId: number }
+    { error: 'failed-to-subscribe' } | { subscriptionId: number; isNewSubscription: boolean }
   > => {
-    const response = await axios.post(
+    const response = await axios.post<{ subscriptionId: number; isNewSubscription: boolean }>(
       '/api/subscriptions',
       {
         email: email,
@@ -64,14 +66,11 @@ const api = {
       { validateStatus: () => true }
     );
 
-    if (response.status !== 201) {
-      if (response.data.error === 'already-subscribed') {
-        return { error: 'already-subscribed' };
-      }
+    if (response.status !== 200) {
       return { error: 'failed-to-subscribe' };
     }
 
-    return { subscriptionId: response.data.subscriptionId };
+    return response.data;
   },
   updateSubscriptionFeatures: async (params: {
     subscriptionId: number;
@@ -182,6 +181,9 @@ export const SubscriptionModalProvider = ({ children }: { children: React.ReactN
     if (response !== null && 'error' in response) return { error: response.error };
 
     setSubscriptionIdCookie(response.subscriptionId);
+    if (!response.isNewSubscription) {
+      toast.info(t('landing.subscription.already-subscribed'));
+    }
     setIsLoading(false);
     return null;
   };

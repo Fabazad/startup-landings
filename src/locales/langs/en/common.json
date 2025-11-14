@@ -14,7 +14,8 @@
         "try-for-free": "Try for free",
         "get-started": "Get started",
         "open-waiting-list": "Open waiting list"
-      }
+      },
+      "already-subscribed": "You are already on the waiting list"
     },
     "testimonials": {
       "testimonials": "Testimonials"
