@@ -11,7 +11,7 @@ export const cookieName = 'i18next';
 
 // ----------------------------------------------------------------------
 
-export function i18nOptions(lng = fallbackLng, ns = defaultNS) {
+export function i18nOptions(lng = fallbackLng as LanguageValue, ns = defaultNS) {
   return {
     // debug: true,
     lng,

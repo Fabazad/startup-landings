@@ -16,7 +16,7 @@ import type { LanguageValue } from './config-locales';
 
 // ----------------------------------------------------------------------
 
-let lng;
+let lng: LanguageValue | undefined;
 
 /**
  * [1] localStorage
@@ -24,7 +24,7 @@ let lng;
  * const lng = localStorageGetItem('i18nextLng')
  */
 if (CONFIG.isStaticExport) {
-  lng = localStorageGetItem('i18nextLng', fallbackLng);
+  lng = localStorageGetItem('i18nextLng', fallbackLng) as LanguageValue | undefined;
 }
 
 const init = CONFIG.isStaticExport

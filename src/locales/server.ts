@@ -1,10 +1,10 @@
-import { cache } from 'react';
 import { createInstance } from 'i18next';
-import { cookies as getCookies } from 'next/headers';
 import resourcesToBackend from 'i18next-resources-to-backend';
+import { cookies as getCookies } from 'next/headers';
+import { cache } from 'react';
 import { initReactI18next } from 'react-i18next/initReactI18next';
 
-import { defaultNS, cookieName, i18nOptions, fallbackLng } from './config-locales';
+import { cookieName, defaultNS, fallbackLng, i18nOptions } from './config-locales';
 
 import type { LanguageValue } from './config-locales';
 
@@ -45,7 +45,7 @@ export const getServerTranslations = cache(async (ns = defaultNS, options = {}) 
 
 // ----------------------------------------------------------------------
 
-const initServerI18next = async (language: string, namespace: string) => {
+const initServerI18next = async (language: LanguageValue, namespace: string) => {
   const i18nInstance = createInstance();
 
   await i18nInstance
