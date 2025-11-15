@@ -10,13 +10,11 @@ import { FloatLine, FloatXIcon } from '../components/svg-elements';
 export const PlanCard = ({
   plan,
   planName,
-  allIncludedOptions,
   sx,
   ...other
 }: StackProps & {
   plan: Plan;
   planName: 'basic' | 'premium' | 'ultimate';
-  allIncludedOptions: string[];
 }) => {
   const { t, currentLang } = useTranslate();
   const isBasicPlan = planName === 'basic';
@@ -81,7 +79,7 @@ export const PlanCard = ({
       </Stack>
 
       <Stack spacing={2.5}>
-        {allIncludedOptions.map((option) => (
+        {plan.included.map((option) => (
           <Stack
             key={`${planName}-${option}`}
             component={m.div}
@@ -91,10 +89,7 @@ export const PlanCard = ({
             alignItems="center"
             sx={{ typography: 'body2' }}
           >
-            <Iconify
-              width={16}
-              icon={plan.included.includes(option) ? 'eva:checkmark-fill' : 'eva:close-fill'}
-            />
+            <Iconify width={16} icon={'eva:checkmark-fill'} />
             {option}
           </Stack>
         ))}

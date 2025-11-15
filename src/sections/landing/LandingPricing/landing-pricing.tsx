@@ -29,10 +29,6 @@ export function LandingPricing({ sx, ...other }: BoxProps) {
 
   const plans = useProductIdea().plans;
 
-  const allIncludedOptions = Array.from(
-    new Set(Object.values(plans).flatMap((plan) => plan.included))
-  );
-
   const renderDescription = (
     <SectionTitle
       caption="plans"
@@ -50,7 +46,6 @@ export function LandingPricing({ sx, ...other }: BoxProps) {
           key={planName}
           planName={planName as 'basic' | 'premium' | 'ultimate'}
           plan={plan}
-          allIncludedOptions={allIncludedOptions}
           sx={(theme) => ({
             ...(planName === 'premium' && {
               [theme.breakpoints.down(1440)]: {
@@ -93,7 +88,6 @@ export function LandingPricing({ sx, ...other }: BoxProps) {
                 key={planName}
                 planName={planName as 'basic' | 'premium' | 'ultimate'}
                 plan={plan}
-                allIncludedOptions={allIncludedOptions}
               />
             )
         )}
