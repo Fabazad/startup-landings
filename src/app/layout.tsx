@@ -75,7 +75,7 @@ const getRawProductIdea = async () => {
   } else if (subdomain === 'triply') {
     return RAW_PRODUCT_IDEAS.Triply;
   }
-  return RAW_PRODUCT_IDEAS.InsightFeed;
+  return RAW_PRODUCT_IDEAS.Triply;
 };
 
 export async function generateMetadata(): Promise<Metadata> {

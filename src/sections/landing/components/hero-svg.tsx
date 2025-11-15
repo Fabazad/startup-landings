@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 
 import { stylesMode } from 'src/theme/styles';
 
+import { useProductIdea } from 'src/app/product-idea-provider';
 import { varFade } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
@@ -207,6 +208,7 @@ export function PlusIcon() {
 // ----------------------------------------------------------------------
 
 export function Texts({ sx, ...other }: BoxProps) {
+  const { name: productName } = useProductIdea();
   return (
     <Box
       component={m.div}
@@ -246,7 +248,7 @@ export function Texts({ sx, ...other }: BoxProps) {
           animate={{ x: ['0%', '-50%'] }}
           transition={{ duration: 64, ease: 'linear', repeat: Infinity }}
         >
-          InsightFeed InsightFeed InsightFeed
+          {productName} {productName} {productName}
         </m.text>
       </Box>
     </Box>
