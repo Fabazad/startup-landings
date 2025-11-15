@@ -20,6 +20,7 @@ export const LandingContact = () => {
         background: (theme) =>
           `linear-gradient(270deg, ${varAlpha(theme.vars.palette.grey['500Channel'], 0.08)}, ${varAlpha(theme.vars.palette.grey['500Channel'], 0)})`,
       }}
+      id="contact"
     >
       <Box component="form" onSubmit={handleSubmit}>
         <Typography variant="h3" sx={{ textAlign: 'left' }}>

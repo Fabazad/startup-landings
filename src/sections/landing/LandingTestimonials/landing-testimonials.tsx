@@ -21,7 +21,12 @@ export const LandingTestimonials = ({ sx, ...other }: BoxProps) => {
   } = useProductIdea();
   const { t } = useTranslation();
   return (
-    <Box component="section" sx={{ py: 10, position: 'relative', ...sx }} {...other}>
+    <Box
+      component="section"
+      sx={{ py: 10, position: 'relative', ...sx }}
+      {...other}
+      id="testimonials"
+    >
       <MotionViewport>
         <Lines />
 

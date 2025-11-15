@@ -23,7 +23,8 @@ import { Iconify } from 'src/components/iconify';
 import { useSettingsContext } from 'src/components/settings';
 import { GetStartedButton } from '../../sections/landing/components/get-started-button';
 import { LanguageButton } from '../../sections/landing/components/language-button';
-import type { NavMainProps } from './nav/types';
+import { NavDesktop } from './nav/desktop/NavDesktop';
+import { NavMobile } from './nav/mobile/NavMobile';
 
 // ----------------------------------------------------------------------
 
@@ -33,12 +34,9 @@ export type MainLayoutProps = {
   header?: {
     sx?: SxProps<Theme>;
   };
-  data?: {
-    nav?: NavMainProps['data'];
-  };
 };
 
-export function LandingLayout({ sx, data, children, header }: MainLayoutProps) {
+export function LandingLayout({ sx, children, header }: MainLayoutProps) {
   const pathname = usePathname();
 
   const { mode, setMode, systemMode } = useColorScheme();
@@ -77,6 +75,7 @@ export function LandingLayout({ sx, data, children, header }: MainLayoutProps) {
             ),
             leftArea: (
               <>
+                <NavMobile />
                 {/* -- Logo -- */}
                 <Logo />
                 <Box
@@ -97,6 +96,7 @@ export function LandingLayout({ sx, data, children, header }: MainLayoutProps) {
             rightArea: (
               <>
                 {/* -- Nav desktop -- */}
+                <NavDesktop />
 
                 <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
                   <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>

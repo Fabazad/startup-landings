@@ -68,6 +68,7 @@ export const LandingHero = ({ sx, ...other }: BoxProps) => {
         ...sx,
       }}
       {...other}
+      id="home"
     >
       <Box
         component={m.div}

@@ -6,13 +6,13 @@ export const Lines = ({ isFirst }: { isFirst: boolean }) => (
   <>
     {isFirst && (
       <>
-        <FloatPlusIcon sx={{ top: 72, left: 72 }} />
-        <FloatLine sx={{ top: 80, left: 0 }} />
+        <FloatPlusIcon sx={{ top: 52, left: 72 }} />
+        <FloatLine sx={{ top: 60, left: 0 }} />
       </>
     )}
-    <FloatPlusIcon sx={{ bottom: 72, left: 72 }} />
+    <FloatPlusIcon sx={{ bottom: 0, left: 72 }} />
     <FloatLine vertical sx={{ top: 0, left: 80 }} />
-    <FloatLine sx={{ bottom: 80, left: 0 }} />
+    <FloatLine sx={{ bottom: 7, left: 0 }} />
     <Divider
       component="div"
       sx={{

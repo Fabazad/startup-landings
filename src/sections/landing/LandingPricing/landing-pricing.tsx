@@ -40,7 +40,11 @@ export function LandingPricing({ sx, ...other }: BoxProps) {
   );
 
   const renderContentDesktop = (
-    <Box gridTemplateColumns="repeat(3, 1fr)" sx={{ display: { xs: 'none', md: 'grid' } }}>
+    <Box
+      gridTemplateColumns="repeat(3, 1fr)"
+      sx={{ display: { xs: 'none', md: 'grid' } }}
+      id="pricing"
+    >
       {Object.entries(plans).map(([planName, plan]) => (
         <PlanCard
           key={planName}

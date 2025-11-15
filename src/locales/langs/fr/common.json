@@ -17,6 +17,13 @@
       },
       "already-subscribed": "Vous êtes déjà inscrit sur la liste d’attente"
     },
+    "nav": {
+      "home": "Accueil",
+      "pricing": "Prix",
+      "testimonials": "Témoignages",
+      "features": "Fonctionnalités",
+      "contact": "Contact"
+    },
     "testimonials": {
       "testimonials": "Témoignages"
     },

@@ -17,6 +17,13 @@
       },
       "already-subscribed": "You are already on the waiting list"
     },
+    "nav": {
+      "home": "Home",
+      "pricing": "Pricing",
+      "testimonials": "Testimonials",
+      "features": "Features",
+      "contact": "Contact"
+    },
     "testimonials": {
       "testimonials": "Testimonials"
     },

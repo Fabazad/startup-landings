@@ -46,11 +46,12 @@ export function LandingFeatures({ sx, ...other }: BoxProps) {
           sx={{
             overflow: 'hidden',
             position: 'relative',
-            pb: { xs: 10, md: 20 },
-            pt: { xs: 10, md: index === 0 ? 20 : 0 },
+            pb: { xs: 10, md: 10 },
+            pt: { xs: 10, md: 20 },
             ...sx,
           }}
           {...other}
+          id={`feature-${feature.id}`}
         >
           <MotionViewport>
             <Lines isFirst={index === 0} />
