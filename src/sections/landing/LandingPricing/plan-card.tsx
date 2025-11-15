@@ -44,7 +44,6 @@ export const PlanCard = ({
       {...other}
     >
       {isPremiumPlan && renderLines}
-
       <Stack direction="row" alignItems="center">
         <Stack flexGrow={1}>
           <m.div variants={varFade({ distance: 24 }).inLeft}>
@@ -77,8 +76,7 @@ export const PlanCard = ({
           </Box>
         </m.div>
       </Stack>
-
-      <Stack spacing={2.5}>
+      <Stack spacing={2.5} sx={{ minHeight: '200px' }}>
         {plan.included.map((option) => (
           <Stack
             key={`${planName}-${option}`}
@@ -93,12 +91,10 @@ export const PlanCard = ({
             {option}
           </Stack>
         ))}
-
-        <m.div variants={varFade({ distance: 24 }).inLeft}>
-          <Divider sx={{ borderStyle: 'dashed' }} />
-        </m.div>
       </Stack>
-
+      <m.div variants={varFade({ distance: 24 }).inLeft}>
+        <Divider sx={{ borderStyle: 'dashed' }} />
+      </m.div>
       <m.div variants={varFade({ distance: 24 }).inUp}>
         <GetStartedButton
           variant={!isPremiumPlan ? 'outlined' : 'contained'}

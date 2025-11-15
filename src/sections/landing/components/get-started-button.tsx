@@ -38,8 +38,7 @@ export const GetStartedButton = ({
       rel="noopener"
       onClick={handleClick}
       sx={{
-        display: 'none',
-        [theme.breakpoints.up(layoutQuery)]: { display: 'inline-flex' },
+        display: 'inline-flex',
         borderRadius: '9999px',
       }}
     >

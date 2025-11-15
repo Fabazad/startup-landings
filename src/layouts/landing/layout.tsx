@@ -16,6 +16,7 @@ import { LayoutSection } from '../core/layout-section';
 import { Footer, HomeFooter } from './footer';
 import { Main } from './main';
 
+import { Stack } from '@mui/material';
 import { useEffect } from 'react';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { Iconify } from 'src/components/iconify';
@@ -98,7 +99,9 @@ export function LandingLayout({ sx, data, children, header }: MainLayoutProps) {
                 {/* -- Nav desktop -- */}
 
                 <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
-                  <GetStartedButton buttonName="get-started-nav" />
+                  <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <GetStartedButton buttonName="get-started-nav" />
+                  </Stack>
                   <IconButton aria-label="toggle theme" onClick={handleToggleTheme}>
                     <Iconify
                       icon={
