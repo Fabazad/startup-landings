@@ -120,7 +120,7 @@ export function LandingAdvertisement({ sx, ...other }: BoxProps) {
   );
 
   return (
-    <Box component="section" sx={{ position: 'relative', ...sx }} {...other}>
+    <Box component="section" sx={{ position: 'relative', py: 20, ...sx }} {...other}>
       <MotionViewport>
         {renderLines}
 

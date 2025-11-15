@@ -7,13 +7,11 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import { useColorScheme } from '@mui/material/styles';
 
-import { usePathname } from 'src/routes/hooks';
-
 import { Logo } from 'src/components/logo';
 
 import { HeaderSection } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
-import { Footer, HomeFooter } from './footer';
+import { HomeFooter } from './footer';
 import { Main } from './main';
 
 import { Stack } from '@mui/material';
@@ -37,8 +35,6 @@ export type MainLayoutProps = {
 };
 
 export function LandingLayout({ sx, children, header }: MainLayoutProps) {
-  const pathname = usePathname();
-
   const { mode, setMode, systemMode } = useColorScheme();
   const { name } = useProductIdea();
   const { onUpdateField, colorScheme } = useSettingsContext();
@@ -53,8 +49,6 @@ export function LandingLayout({ sx, children, header }: MainLayoutProps) {
     onUpdateField('colorScheme', newMode);
     setMode(newMode);
   };
-
-  const homePage = pathname === '/';
 
   const layoutQuery: Breakpoint = 'md';
 
@@ -121,7 +115,7 @@ export function LandingLayout({ sx, children, header }: MainLayoutProps) {
       /** **************************************
        * Footer
        *************************************** */
-      footerSection={homePage ? <HomeFooter /> : <Footer layoutQuery={layoutQuery} />}
+      footerSection={<HomeFooter />}
       /** **************************************
        * Style
        *************************************** */

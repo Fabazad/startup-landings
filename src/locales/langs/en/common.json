@@ -57,11 +57,16 @@
       "title": "Feel free to contact us.",
       "description": "We'll be glad to hear from you buddy.",
       "message": "Enter your message here.",
-      "submit": "Submit"
+      "submit": "Submit",
+      "failed-to-send": "Failed to send contact message",
+      "success": "Contact message sent successfully"
     },
     "advertisement": {
       "get-started-with": "Get started with",
       "today": "today"
     }
+  },
+  "common": {
+    "allRightsReserved": "All rights reserved."
   }
 }

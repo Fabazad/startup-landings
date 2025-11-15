@@ -1,22 +1,23 @@
-import type { Theme, SxProps, Breakpoint } from '@mui/material/styles';
+import type { Breakpoint, SxProps, Theme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Unstable_Grid2';
 
-import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
+import { paths } from 'src/routes/paths';
 
 import { _socials } from 'src/_mock';
-import { TwitterIcon, FacebookIcon, LinkedinIcon, InstagramIcon } from 'src/assets/icons';
+import { FacebookIcon, InstagramIcon, LinkedinIcon, TwitterIcon } from 'src/assets/icons';
 
 import { Logo } from 'src/components/logo';
+import { useTranslate } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -158,6 +159,7 @@ export type HomeFooterProps = {
 };
 
 export function HomeFooter({ sx }: HomeFooterProps) {
+  const { t } = useTranslate();
   return (
     <Box
       component="footer"
@@ -172,9 +174,9 @@ export function HomeFooter({ sx }: HomeFooterProps) {
       <Container>
         <Logo />
         <Box sx={{ mt: 1, typography: 'caption' }}>
-          © All rights reserved.
+          © {t('common.allRightsReserved')}
           <br /> made by
-          <Link href="https://minimals.cc/"> minimals.cc </Link>
+          <Link href="https://onama.io/"> onama.io </Link>
         </Box>
       </Container>
     </Box>

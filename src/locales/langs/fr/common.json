@@ -57,11 +57,16 @@
       "title": "Contactez-nous.",
       "description": "Nous serons ravis de vous répondre.",
       "message": "Entrez votre message ici.",
-      "submit": "Envoyer"
+      "submit": "Envoyer",
+      "failed-to-send": "Erreur lors de l’envoi du message de contact",
+      "success": "Message de contact envoyé avec succès"
     },
     "advertisement": {
       "get-started-with": "Commencez avec",
       "today": ""
     }
+  },
+  "common": {
+    "allRightsReserved": "Tous droits réservés."
   }
 }
