@@ -2,17 +2,17 @@ import { RawProductIdea } from 'src/types/ProductIdea';
 
 export const INSIGHTFEED_JSON: RawProductIdea = {
   id: 'insightfeed',
-  name: 'InsightFeed',
+  name: 'Insight Feed',
   themeColor: 'purple',
   logo: 'octopus',
   heroTexts: {
     description: {
-      en: 'A single hub that discovers your SaaS competitors, tracks their pricing, features and marketing, and alerts you in real time so you stay ahead.',
-      fr: 'Un hub unique qui découvre vos concurrents SaaS, suit leurs prix, fonctionnalités et marketing, et vous alerte en temps réel pour garder une longueur d’avance.',
+      en: 'Identify competitors. Track pricing, features, ads, user feedback and more.\nGet real-time insights to act fast and stay ahead.',
+      fr: 'Identifiez vos concurrents. Suivez leurs prix, fonctionnalités, pubs, retours utilisateurs et plus encore.\nRecevez des alertes en temps réel. Réagissez vite et gardez une longueur d’avance.',
     },
     headingPart1: {
       en: 'Know every move',
-      fr: 'Suis chaque mouvement',
+      fr: 'Suivez chaque mouvement',
     },
     headingPart2: {
       en: 'your competitors make',
@@ -21,95 +21,47 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
   },
   features: [
     {
-      id: 'auto-competitor-discovery',
-      icon: 'mdi-radar',
-      pain: {
-        en: 'No more manual searching, your closest SaaS competitors are found for you.',
-        fr: 'Fini la recherche manuelle, vos concurrents SaaS clés sont trouvés pour vous.',
-      },
-      title: {
-        en: 'Automatic competitor discovery',
-        fr: 'Découverte automatique des concurrents',
-      },
-      items: [
-        {
-          icon: 'mdi-magnify-scan',
-          title: {
-            en: 'Smart similarity engine',
-            fr: 'Moteur de similarité intelligent',
-          },
-          description: {
-            en: 'Find lookalike SaaS based on category, keywords and tech stack in a few clicks.',
-            fr: 'Trouvez des SaaS similaires selon la catégorie, les mots-clés et la stack en quelques clics.',
-          },
-        },
-        {
-          icon: 'mdi-view-grid-plus',
-          title: {
-            en: 'Hidden players revealed',
-            fr: 'Acteurs cachés révélés',
-          },
-          description: {
-            en: 'Uncover emerging or niche competitors you would usually miss in manual research.',
-            fr: 'Dévoilez les concurrents émergents ou de niche souvent manqués en recherche manuelle.',
-          },
-        },
-        {
-          icon: 'mdi-clock-fast',
-          title: {
-            en: 'Hours of research saved',
-            fr: 'Des heures de recherche économisées',
-          },
-          description: {
-            en: 'Replace scattered Google searches and spreadsheets with one automated scan.',
-            fr: 'Remplacez Google, tableaux et notes dispersés par un scan automatisé unique.',
-          },
-        },
-      ],
-      imgUrl: '/images/features/auto-competitor-discovery.png',
-    },
-    {
       id: 'deep-comparison',
       icon: 'mdi-compare',
       pain: {
-        en: 'Stop juggling spreadsheets, instantly see how you stack up on features and pricing.',
+        en: 'Manual benchmarking is slow, painful and outdated the second it’s done. We removes all the grunt work by automating it for you.',
         fr: 'Finis les tableurs, voyez instantanément comment vous vous situez en prix et en fonctionnalités.',
       },
       title: {
-        en: 'Side-by-side offer comparison',
+        en: 'Automated Competitor Benchmarking & Reporting',
         fr: 'Comparateur d’offres détaillé',
       },
       items: [
         {
           icon: 'mdi-table-large',
           title: {
-            en: 'Feature-by-feature matrix',
+            en: 'No More Messy Spreadsheets',
             fr: 'Matrice fonction par fonction',
           },
           description: {
-            en: 'Compare product capabilities, plans and limits in a clean, interactive table.',
+            en: 'All your benchmarking insights live in one clean, shareable dashboard — no tabs, no chaos.',
             fr: 'Comparez capacités, plans et limites dans un tableau clair et interactif.',
           },
         },
         {
           icon: 'mdi-cash-multiple',
           title: {
-            en: 'Pricing & plan insights',
+            en: 'Always Up to Date',
             fr: 'Insights sur les grilles tarifaires',
           },
           description: {
-            en: 'Visualize prices, discounts and packaging to spot gaps and reposition fast.',
+            en: 'Your competitor comparison updates automatically — no manual work needed.',
             fr: 'Visualisez prix, remises et packaging pour repérer les écarts et vous repositionner vite.',
           },
         },
         {
           icon: 'mdi-chart-line',
           title: {
-            en: 'Market position snapshot',
+            en: 'See Strengths, Gaps and Opportunities Instantly',
             fr: 'Photo de votre position marché',
           },
           description: {
-            en: 'See where you lead or lag on value, features and perceived quality at a glance.',
+            en: 'Spot where you lead, where you lag and what your competitors are missing — in minutes, not days.',
             fr: 'Voyez en un coup d’œil où vous surclassez ou rattrapez la concurrence.',
           },
         },
@@ -120,40 +72,40 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       id: 'alerts-monitoring',
       icon: 'mdi-bell-alert',
       pain: {
-        en: 'No more missed launches or price changes, you’re alerted the moment something moves.',
+        en: 'Never miss an important update again — we notify you the moment competitors move.',
         fr: 'Ne ratez plus aucun lancement ni changement de prix, vous êtes alerté dès que ça bouge.',
       },
       title: {
-        en: 'Always-on product & pricing alerts',
+        en: 'Always-on Key Changes Alerts',
         fr: 'Veille continue produits & prix',
       },
       items: [
         {
           icon: 'mdi-bell-ring',
           title: {
-            en: 'Real-time change alerts',
+            en: 'Real-Time Change Alerts',
             fr: 'Alertes de changements en temps réel',
           },
           description: {
-            en: 'Be notified when pages, pricing, changelogs or fundraises change on competitor sites.',
+            en: 'Features, pricing, reviews, ads and more — you know the moment it happens.',
             fr: 'Soyez notifié dès qu’un site concurrent change ses pages, prix, changelog ou annonces.',
           },
         },
         {
           icon: 'mdi-bullhorn',
           title: {
-            en: 'Multi-channel coverage',
+            en: 'Multi-Channel Coverage',
             fr: 'Couverture multi-canale',
           },
           description: {
-            en: 'Track product updates, reviews, content, ads, social and job posts in one place.',
+            en: 'Track Everything, in One Place',
             fr: 'Suivez mises à jour, avis, contenus, pubs, réseaux sociaux et offres d’emploi au même endroit.',
           },
         },
         {
           icon: 'mdi-folder-clock',
           title: {
-            en: 'Never miss a critical move',
+            en: 'Never Miss a Critical Move',
             fr: 'Ne manquez plus un mouvement clé',
           },
           description: {
@@ -165,100 +117,52 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       imgUrl: '/images/features/alerts-monitoring.png',
     },
     {
-      id: 'marketing-seo-reputation',
-      icon: 'mdi-bullseye-arrow',
+      id: 'auto-competitor-discovery',
+      icon: 'mdi-radar',
       pain: {
-        en: 'Stop guessing where rivals invest, see their SEO, ads and reputation strategy clearly.',
-        fr: 'Cessez de deviner où ils investissent, voyez clairement leur SEO, pubs et réputation.',
+        en: 'Stop guessing who your competitors are — we find them and alert you when new ones appear.',
+        fr: 'Fini la recherche manuelle, vos concurrents SaaS clés sont trouvés pour vous.',
       },
       title: {
-        en: 'Marketing, SEO & reputation tracking',
-        fr: 'Suivi marketing, SEO & réputation',
+        en: 'Automatic Competitor Discovery & New Players',
+        fr: 'Découverte automatique des concurrents',
       },
       items: [
         {
-          icon: 'mdi-google-analytics',
+          icon: 'mdi-magnify-scan',
           title: {
-            en: 'Traffic & keyword trends',
-            fr: 'Tendances trafic & mots-clés',
+            en: 'Smart Similarity Engine',
+            fr: 'Moteur de similarité intelligent',
           },
           description: {
-            en: 'Monitor estimated traffic and ranking keywords to understand acquisition levers.',
-            fr: 'Suivez trafic estimé et mots-clés pour comprendre leurs leviers d’acquisition.',
+            en: 'Find lookalike SaaS based on category, keywords and tech stack without endless Google searches.',
+            fr: 'Trouvez des SaaS similaires selon la catégorie, les mots-clés et la stack en quelques clics.',
           },
         },
         {
-          icon: 'mdi-badge-account',
+          icon: 'mdi-view-grid-plus',
           title: {
-            en: 'Review & rating monitoring',
-            fr: 'Veille avis & notations',
+            en: 'New Players Detection',
+            fr: 'Acteurs cachés révélés',
           },
           description: {
-            en: 'Track new reviews and ratings to see how customer perception evolves over time.',
-            fr: 'Suivez nouveaux avis et notes pour voir évoluer la perception client.',
+            en: 'Uncover emerging or niche competitors you would usually miss in manual research.',
+            fr: 'Dévoilez les concurrents émergents ou de niche souvent manqués en recherche manuelle.',
           },
         },
         {
-          icon: 'mdi-billboard',
+          icon: 'mdi-clock-fast',
           title: {
-            en: 'Ad & social insights',
-            fr: 'Insights pubs & réseaux sociaux',
+            en: 'Hours of Research Saved',
+            fr: 'Des heures de recherche économisées',
           },
           description: {
-            en: 'Spot new ads, campaigns and social boosts to align or counter-attack smartly.',
-            fr: 'Repérez nouvelles pubs, campagnes et boosts sociaux pour réagir intelligemment.',
+            en: 'Replace scattered Google searches and spreadsheets with one automated scan.',
+            fr: 'Remplacez Google, tableaux et notes dispersés par un scan automatisé unique.',
           },
         },
       ],
-      imgUrl: '/images/features/marketing-seo-reputation.png',
-    },
-    {
-      id: 'dashboard-reporting',
-      icon: 'mdi-view-dashboard-variant',
-      pain: {
-        en: 'Forget slides and manual reports, your competitive intel is always summarized for you.',
-        fr: 'Oubliez slides et rapports manuels, votre veille est toujours synthétisée pour vous.',
-      },
-      title: {
-        en: 'Central dashboard & automated reports',
-        fr: 'Tableau de bord central & rapports auto',
-      },
-      items: [
-        {
-          icon: 'mdi-view-dashboard',
-          title: {
-            en: 'One command center',
-            fr: 'Un centre de commande unique',
-          },
-          description: {
-            en: 'See competitor moves, gaps and trends in a live dashboard tailored to SaaS teams.',
-            fr: 'Visualisez mouvements, écarts et tendances dans un dashboard pensé pour les équipes SaaS.',
-          },
-        },
-        {
-          icon: 'mdi-file-chart',
-          title: {
-            en: 'Scheduled executive reports',
-            fr: 'Rapports exécutifs programmés',
-          },
-          description: {
-            en: 'Send weekly or monthly digests to founders, product and marketing automatically.',
-            fr: 'Envoyez des synthèses hebdo ou mensuelles aux fondateurs, produit et marketing automatiquement.',
-          },
-        },
-        {
-          icon: 'mdi-shield-check',
-          title: {
-            en: 'Battle-ready sales cards',
-            fr: 'Battle cards prêtes pour la vente',
-          },
-          description: {
-            en: 'Generate battle cards outlining strengths and weaknesses for each key rival.',
-            fr: 'Générez des battle cards avec forces et faiblesses pour chaque rival clé.',
-          },
-        },
-      ],
-      imgUrl: '/images/features/dashboard-reporting.png',
+      imgUrl: '/images/features/auto-competitor-discovery.png',
     },
   ],
   testimonialsTexts: {
