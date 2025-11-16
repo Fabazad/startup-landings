@@ -70,11 +70,11 @@ const getRawProductIdea = async () => {
   // get url subdomain from url on server
   const url = (await headers().get('x-forwarded-host')) ?? '';
   const subdomain = url.split('.')[0];
-  if (subdomain === 'insightfeed') {
-    return RAW_PRODUCT_IDEAS.InsightFeed;
-  } else if (subdomain === 'triply') {
-    return RAW_PRODUCT_IDEAS.Triply;
-  }
+
+  const productIdea = Object.values(RAW_PRODUCT_IDEAS).find(
+    (productIdea) => productIdea.id === subdomain
+  );
+  if (productIdea) return productIdea;
   return RAW_PRODUCT_IDEAS.InsightFeed;
 };
 
@@ -85,7 +85,6 @@ export async function generateMetadata(): Promise<Metadata> {
     title: rawProductIdea.name,
     description: rawProductIdea.heroTexts.description.en,
     icons: `${CONFIG.assetsDir}/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.ico`,
-    // red
     themeColor: getThemeColorValue(rawProductIdea.themeColor),
   };
 }
