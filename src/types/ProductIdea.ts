@@ -12,7 +12,7 @@ export type RawItem = GenericItem<Translated>;
 
 type GenericFeature<Text extends Translated | string> = {
   id: string;
-  /** Use a simple icon from Material Design Icons. */
+  /** Use names from Material Design Icons ones. ex: mdi:account-sync */
   icon: string;
   /** Tell that's this is the end of a pain point that the feature solves and how it solves it. max 70 characters. */
   pain: Text;
@@ -46,6 +46,7 @@ type GenericPlan<Text extends Translated | string> = {
   /** The target persona of the plan or/and the use case of the plan. */
   target: Text;
   price: number;
+  /** The included options of the plan. Max 5 items, avoid using too many items. */
   included: Text[];
 };
 
@@ -72,7 +73,7 @@ type GenericProductIdea<Text extends Translated | string> = {
   heroTexts: {
     /** The description should describe best the value proposition of the product. It has to be punchy, can use multiple lines. Max 300 characters.*/
     description: Text;
-    /** The headings should be punchy, short and should clearly describe what the product does. */
+    /** The headings should be punchy, short (each heading should be max 20 characters) and should clearly describe what the product does. */
     headingPart1: Text;
     headingPart2: Text;
   };

@@ -34,7 +34,7 @@ import { AuthProvider as Auth0AuthProvider } from 'src/auth/context/auth0';
 import { AuthProvider as FirebaseAuthProvider } from 'src/auth/context/firebase';
 import { AuthProvider as JwtAuthProvider } from 'src/auth/context/jwt';
 import { AuthProvider as SupabaseAuthProvider } from 'src/auth/context/supabase';
-import { RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
+import { DEFAULT_PRODUCT_IDEA, RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
 import { SubscriptionModalProvider } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
 import { ProductIdeaProvider } from './product-idea-provider';
 import { PostHogProvider } from './providers/posthog-provider';
@@ -75,7 +75,7 @@ const getRawProductIdea = async () => {
     (productIdea) => productIdea.id === subdomain
   );
   if (productIdea) return productIdea;
-  return RAW_PRODUCT_IDEAS.InsightFeed;
+  return DEFAULT_PRODUCT_IDEA;
 };
 
 export async function generateMetadata(): Promise<Metadata> {
