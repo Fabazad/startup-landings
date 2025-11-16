@@ -33,7 +33,6 @@ export const PlanCard = ({
 
   return (
     <Stack
-      spacing={5}
       component={MotionViewport}
       sx={{
         px: 6,
@@ -76,7 +75,12 @@ export const PlanCard = ({
           </Box>
         </m.div>
       </Stack>
-      <Stack spacing={2.5} sx={{ minHeight: '200px' }}>
+
+      <Typography component="p" sx={{ mt: 2, height: '50px', fontSize: 15 }} color="text.secondary">
+        {plan.target}
+      </Typography>
+
+      <Stack spacing={2.5} sx={{ minHeight: '200px', mt: 4 }}>
         {plan.included.map((option) => (
           <Stack
             key={`${planName}-${option}`}
@@ -92,15 +96,15 @@ export const PlanCard = ({
           </Stack>
         ))}
       </Stack>
-      <m.div variants={varFade({ distance: 24 }).inLeft}>
+      <Stack component={m.div} variants={varFade({ distance: 24 }).inLeft} sx={{ mt: 4 }}>
         <Divider sx={{ borderStyle: 'dashed' }} />
-      </m.div>
-      <m.div variants={varFade({ distance: 24 }).inUp}>
+      </Stack>
+      <Stack component={m.div} variants={varFade({ distance: 24 }).inUp} sx={{ mt: 4 }}>
         <GetStartedButton
           variant={!isPremiumPlan ? 'outlined' : 'contained'}
           buttonName={`get-started-plan-${planName}`}
         />
-      </m.div>
+      </Stack>
     </Stack>
   );
 };

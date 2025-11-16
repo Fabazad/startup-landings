@@ -443,6 +443,10 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
   ],
   plans: {
     basic: {
+      target: {
+        en: 'Solo founders and early-stage teams',
+        fr: 'Fondateurs solos et équipes early-stage',
+      },
       price: 49,
       included: [
         {
@@ -468,6 +472,10 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       ],
     },
     premium: {
+      target: {
+        en: 'Mid-stage teams and growth-focused startups',
+        fr: 'Équipes mid-stage et startups growth-focused',
+      },
       price: 99,
       included: [
         {
@@ -497,6 +505,10 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       ],
     },
     ultimate: {
+      target: {
+        en: 'Enterprise-scale teams and growth-focused startups',
+        fr: 'Équipes enterprise-scale',
+      },
       price: 299,
       included: [
         {

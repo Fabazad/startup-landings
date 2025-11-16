@@ -43,6 +43,8 @@ export type Review = GenericReview<string>;
 export type RawReview = GenericReview<Translated>;
 
 type GenericPlan<Text extends Translated | string> = {
+  /** The target persona of the plan or/and the use case of the plan. */
+  target: Text;
   price: number;
   included: Text[];
 };
@@ -121,14 +123,17 @@ export const translateProductIdea = (
     plans: {
       basic: {
         ...productIdea.plans.basic,
+        target: productIdea.plans.basic.target[lang],
         included: productIdea.plans.basic.included.map((included) => included[lang]),
       },
       premium: {
         ...productIdea.plans.premium,
+        target: productIdea.plans.premium.target[lang],
         included: productIdea.plans.premium.included.map((included) => included[lang]),
       },
       ultimate: {
         ...productIdea.plans.ultimate,
+        target: productIdea.plans.ultimate.target[lang],
         included: productIdea.plans.ultimate.included.map((included) => included[lang]),
       },
     },
