@@ -87,8 +87,6 @@ export async function generateMetadata(): Promise<Metadata> {
   const protocol = headersList.get('x-forwarded-proto') || 'https';
   const baseUrl = `${protocol}://${host}`;
 
-  // Create image URL for preview (prefer PNG for better compatibility, fallback to SVG)
-  // You can also use logo-full.png if you have a dedicated OG image
   const imageUrl = `${baseUrl}${CONFIG.assetsDir}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.svg`;
   const description = rawProductIdea.heroTexts.description.en;
 
