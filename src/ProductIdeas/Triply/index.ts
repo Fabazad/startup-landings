@@ -5,8 +5,7 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
   id: 'triply',
   name: 'Triply',
   themeColor: 'orange',
-  logoUrl: `${CONFIG.assetsDir}/logo/orange-panda.svg`,
-  faviconUrl: `${CONFIG.assetsDir}/favicon/orange-panda.ico`,
+  logo: 'panda',
   features: [
     {
       id: 'f1',
@@ -212,7 +211,6 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
     {
       id: 'r1',
       name: 'Julie M.',
-      avatar: '/assets/avatars/julie.png',
       rating: 5,
       jobTitle: {
         en: 'Team Lead',
@@ -227,7 +225,6 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
     {
       id: 'r2',
       name: 'Paul M.',
-      avatar: '/assets/avatars/paul.png',
       rating: 5,
       jobTitle: {
         en: 'Frequent Traveler',
@@ -242,7 +239,6 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
     {
       id: 'r3',
       name: 'Chloé M.',
-      avatar: '/assets/avatars/chloe.png',
       rating: 4,
       jobTitle: {
         en: 'Event Organizer',
@@ -257,7 +253,6 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
     {
       id: 'r4',
       name: 'Yassine M.',
-      avatar: '/assets/avatars/yassine.png',
       rating: 5,
       jobTitle: {
         en: 'Photographer',
@@ -272,7 +267,6 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
     {
       id: 'r5',
       name: 'Anaïs D.',
-      avatar: '/assets/avatars/anais.png',
       rating: 5,
       jobTitle: {
         en: 'HR Coordinator',
@@ -287,7 +281,6 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
     {
       id: 'r6',
       name: 'Marco S.',
-      avatar: '/assets/avatars/marco.png',
       rating: 4,
       jobTitle: {
         en: 'Student',
@@ -302,7 +295,6 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
     {
       id: 'r7',
       name: 'Léa M.',
-      avatar: '/assets/avatars/lea.png',
       rating: 5,
       jobTitle: {
         en: 'Project Manager',
@@ -317,7 +309,6 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
     {
       id: 'r8',
       name: 'Thomas R.',
-      avatar: '/assets/avatars/thomas.png',
       rating: 5,
       jobTitle: {
         en: 'Startup Founder',

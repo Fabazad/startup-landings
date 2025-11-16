@@ -1,375 +1,527 @@
-import { CONFIG } from 'src/config-global';
 import { RawProductIdea } from 'src/types/ProductIdea';
 
 export const INSIGHTFEED_JSON: RawProductIdea = {
   id: 'insightfeed',
-  name: 'Insight Feed',
+  name: 'InsightFeed',
   themeColor: 'purple',
-  logoUrl: `${CONFIG.assetsDir}/logo/purple-dear.svg`,
-  faviconUrl: `${CONFIG.assetsDir}/favicon/purple-dear.ico`,
+  logo: 'octopus',
   heroTexts: {
     description: {
-      fr: 'Détectez automatiquement vos concurrents SaaS et suivez leurs changements (prix, fonctionnalités, messages) — sans veille manuelle.',
-      en: 'Automatically discover your SaaS competitors and track their changes (pricing, features, messaging) — no manual monitoring.',
+      en: 'A single hub that discovers your SaaS competitors, tracks their pricing, features and marketing, and alerts you in real time so you stay ahead.',
+      fr: 'Un hub unique qui découvre vos concurrents SaaS, suit leurs prix, fonctionnalités et marketing, et vous alerte en temps réel pour garder une longueur d’avance.',
     },
     headingPart1: {
-      fr: 'Trouvez vos concurrents',
-      en: 'Find your competitors',
+      en: 'Know every move',
+      fr: 'Suivez chaque mouvement',
     },
     headingPart2: {
-      fr: 'et suivez leurs évolutions',
-      en: 'and track their every move',
+      en: 'your competitors make',
+      fr: 'de vos concurrents',
     },
   },
   features: [
     {
-      id: 'f1',
-      icon: 'ph:compass',
+      id: 'auto-competitor-discovery',
+      icon: 'mdi-radar',
       pain: {
-        fr: 'Vous manquez de visibilité sur les acteurs proches de votre produit.',
-        en: 'You lack visibility on products closest to yours.',
+        en: 'No more manual searching, your closest SaaS competitors are found for you.',
+        fr: 'Fini la recherche manuelle, vos concurrents SaaS clés sont trouvés pour vous.',
       },
       title: {
-        fr: 'Détection automatique des concurrents',
-        en: 'Automatic Competitor Discovery',
+        en: 'Automatic competitor discovery',
+        fr: 'Découverte automatique des concurrents',
       },
       items: [
         {
-          icon: 'ph:target',
+          icon: 'mdi-magnify-scan',
           title: {
-            fr: 'Analyse des catégories & mots-clés',
-            en: 'Category & keyword analysis',
+            en: 'Smart similarity engine',
+            fr: 'Moteur de similarité intelligent',
           },
           description: {
-            fr: 'Croisement de sources (annuaires, SEO, métadonnées) pour trouver les concurrents pertinents.',
-            en: 'Cross-references directories, SEO and metadata to find relevant competitors.',
+            en: 'Find lookalike SaaS based on category, keywords and tech stack in a few clicks.',
+            fr: 'Trouvez des SaaS similaires selon la catégorie, les mots-clés et la stack en quelques clics.',
           },
         },
         {
-          icon: 'ph:magic-wand',
+          icon: 'mdi-view-grid-plus',
           title: {
-            fr: 'Similarity scoring',
-            en: 'Similarity scoring',
+            en: 'Hidden players revealed',
+            fr: 'Acteurs cachés révélés',
           },
           description: {
-            fr: 'Mesure la proximité fonctionnelle et l’alignement d’offre.',
-            en: 'Measures functional proximity and offer alignment.',
+            en: 'Uncover emerging or niche competitors you would usually miss in manual research.',
+            fr: 'Dévoilez les concurrents émergents ou de niche souvent manqués en recherche manuelle.',
           },
         },
         {
-          icon: 'ph:list-magnifying-glass',
+          icon: 'mdi-clock-fast',
           title: {
-            fr: 'Suggestions intelligentes',
-            en: 'Smart suggestions',
+            en: 'Hours of research saved',
+            fr: 'Des heures de recherche économisées',
           },
           description: {
-            fr: 'Propositions de concurrents émergents à ajouter à votre watchlist.',
-            en: 'Recommends emerging competitors to add to your watchlist.',
+            en: 'Replace scattered Google searches and spreadsheets with one automated scan.',
+            fr: 'Remplacez Google, tableaux et notes dispersés par un scan automatisé unique.',
           },
         },
       ],
-      imgUrl: '/assets/insightfeed/feature-discovery.webp',
+      imgUrl: '/images/features/auto-competitor-discovery.png',
     },
     {
-      id: 'f2',
-      icon: 'ph:binoculars',
+      id: 'deep-comparison',
+      icon: 'mdi-compare',
       pain: {
-        fr: 'La veille manuelle est chronophage et incomplète.',
-        en: 'Manual monitoring is time-consuming and incomplete.',
+        en: 'Stop juggling spreadsheets, instantly see how you stack up on features and pricing.',
+        fr: 'Finis les tableurs, voyez instantanément comment vous vous situez en prix et en fonctionnalités.',
       },
       title: {
-        fr: 'Monitoring des pages clés',
-        en: 'Monitoring of key pages',
+        en: 'Side-by-side offer comparison',
+        fr: 'Comparateur d’offres détaillé',
       },
       items: [
         {
-          icon: 'ph:globe-stand',
+          icon: 'mdi-table-large',
           title: {
-            fr: 'Landing & messaging',
-            en: 'Landing & messaging',
+            en: 'Feature-by-feature matrix',
+            fr: 'Matrice fonction par fonction',
           },
           description: {
-            fr: 'Détection des changements de copies, visuels, CTA.',
-            en: 'Detects copy, visual and CTA changes.',
+            en: 'Compare product capabilities, plans and limits in a clean, interactive table.',
+            fr: 'Comparez capacités, plans et limites dans un tableau clair et interactif.',
           },
         },
         {
-          icon: 'ph:currency-circle-dollar',
+          icon: 'mdi-cash-multiple',
           title: {
-            fr: 'Pricing',
-            en: 'Pricing',
+            en: 'Pricing & plan insights',
+            fr: 'Insights sur les grilles tarifaires',
           },
           description: {
-            fr: 'Suivi des plans, prix, limites et conditions.',
-            en: 'Tracks plans, prices, limits and conditions.',
+            en: 'Visualize prices, discounts and packaging to spot gaps and reposition fast.',
+            fr: 'Visualisez prix, remises et packaging pour repérer les écarts et vous repositionner vite.',
           },
         },
         {
-          icon: 'ph:git-merge',
+          icon: 'mdi-chart-line',
           title: {
-            fr: 'Changelog & blog produit',
-            en: 'Changelog & product blog',
+            en: 'Market position snapshot',
+            fr: 'Photo de votre position marché',
           },
           description: {
-            fr: 'Surveillance des nouvelles fonctionnalités et annonces produit.',
-            en: 'Monitors new features and product announcements.',
+            en: 'See where you lead or lag on value, features and perceived quality at a glance.',
+            fr: 'Voyez en un coup d’œil où vous surclassez ou rattrapez la concurrence.',
           },
         },
       ],
-      imgUrl: '/assets/insightfeed/feature-monitoring.webp',
+      imgUrl: '/images/features/offer-comparison.png',
     },
     {
-      id: 'f3',
-      icon: 'ph:table',
+      id: 'alerts-monitoring',
+      icon: 'mdi-bell-alert',
       pain: {
-        fr: 'Comparer les offres prend des heures et les données sont vite obsolètes.',
-        en: 'Comparing offers takes hours and data becomes stale fast.',
+        en: 'No more missed launches or price changes, you’re alerted the moment something moves.',
+        fr: 'Ne ratez plus aucun lancement ni changement de prix, vous êtes alerté dès que ça bouge.',
       },
       title: {
-        fr: 'Comparateur pricing & fonctionnalités',
-        en: 'Pricing & features comparator',
+        en: 'Always-on product & pricing alerts',
+        fr: 'Veille continue produits & prix',
       },
       items: [
         {
-          icon: 'ph:arrows-left-right',
+          icon: 'mdi-bell-ring',
           title: {
-            fr: 'Tableau interactif',
-            en: 'Interactive table',
+            en: 'Real-time change alerts',
+            fr: 'Alertes de changements en temps réel',
           },
           description: {
-            fr: 'Comparez plans, tarifs, free trials, freemium, support, intégrations.',
-            en: 'Compare plans, prices, free trials, freemium, support, integrations.',
+            en: 'Be notified when pages, pricing, changelogs or fundraises change on competitor sites.',
+            fr: 'Soyez notifié dès qu’un site concurrent change ses pages, prix, changelog ou annonces.',
           },
         },
         {
-          icon: 'ph:download-simple',
+          icon: 'mdi-bullhorn',
           title: {
-            fr: 'Exports & intégrations',
-            en: 'Exports & integrations',
+            en: 'Multi-channel coverage',
+            fr: 'Couverture multi-canale',
           },
           description: {
-            fr: 'Export CSV, synchronisation Notion, Webhooks, Slack.',
-            en: 'CSV export, Notion sync, Webhooks, Slack.',
+            en: 'Track product updates, reviews, content, ads, social and job posts in one place.',
+            fr: 'Suivez mises à jour, avis, contenus, pubs, réseaux sociaux et offres d’emploi au même endroit.',
+          },
+        },
+        {
+          icon: 'mdi-folder-clock',
+          title: {
+            en: 'Never miss a critical move',
+            fr: 'Ne manquez plus un mouvement clé',
+          },
+          description: {
+            en: 'Replace manual checks and scattered alerts with one reliable monitoring engine.',
+            fr: 'Remplacez vérifications manuelles et Google Alerts dispersées par un moteur unique fiable.',
           },
         },
       ],
-      imgUrl: '/assets/insightfeed/feature-compare.webp',
+      imgUrl: '/images/features/alerts-monitoring.png',
     },
     {
-      id: 'f4',
-      icon: 'ph:timeline',
+      id: 'marketing-seo-reputation',
+      icon: 'mdi-bullseye-arrow',
       pain: {
-        fr: 'Difficile d’avoir l’historique précis des changements.',
-        en: 'Hard to keep a precise history of changes.',
+        en: 'Stop guessing where rivals invest, see their SEO, ads and reputation strategy clearly.',
+        fr: 'Cessez de deviner où ils investissent, voyez clairement leur SEO, pubs et réputation.',
       },
       title: {
-        fr: 'Timeline des évolutions',
-        en: 'Evolution timeline',
+        en: 'Marketing, SEO & reputation tracking',
+        fr: 'Suivi marketing, SEO & réputation',
       },
       items: [
         {
-          icon: 'ph:clock',
+          icon: 'mdi-google-analytics',
           title: {
-            fr: 'Historique consolidé',
-            en: 'Consolidated history',
+            en: 'Traffic & keyword trends',
+            fr: 'Tendances trafic & mots-clés',
           },
           description: {
-            fr: 'Visualisez les hausses de prix, sorties de features et pivots.',
-            en: 'Visualize price hikes, feature launches and pivots.',
+            en: 'Monitor estimated traffic and ranking keywords to understand acquisition levers.',
+            fr: 'Suivez trafic estimé et mots-clés pour comprendre leurs leviers d’acquisition.',
           },
         },
         {
-          icon: 'ph:camera',
+          icon: 'mdi-badge-account',
           title: {
-            fr: 'Captures auto',
-            en: 'Auto screenshots',
+            en: 'Review & rating monitoring',
+            fr: 'Veille avis & notations',
           },
           description: {
-            fr: 'Gardez une trace visuelle des changements clés.',
-            en: 'Keeps visual traces of key changes.',
+            en: 'Track new reviews and ratings to see how customer perception evolves over time.',
+            fr: 'Suivez nouveaux avis et notes pour voir évoluer la perception client.',
+          },
+        },
+        {
+          icon: 'mdi-billboard',
+          title: {
+            en: 'Ad & social insights',
+            fr: 'Insights pubs & réseaux sociaux',
+          },
+          description: {
+            en: 'Spot new ads, campaigns and social boosts to align or counter-attack smartly.',
+            fr: 'Repérez nouvelles pubs, campagnes et boosts sociaux pour réagir intelligemment.',
           },
         },
       ],
-      imgUrl: '/assets/insightfeed/feature-timeline.webp',
+      imgUrl: '/images/features/marketing-seo-reputation.png',
     },
     {
-      id: 'f5',
-      icon: 'ph:bell-simple',
+      id: 'dashboard-reporting',
+      icon: 'mdi-view-dashboard-variant',
       pain: {
-        fr: 'Trop d’alertes tue l’alerte.',
-        en: 'Too many alerts become noise.',
+        en: 'Forget slides and manual reports, your competitive intel is always summarized for you.',
+        fr: 'Oubliez slides et rapports manuels, votre veille est toujours synthétisée pour vous.',
       },
       title: {
-        fr: 'Alertes intelligentes (IA)',
-        en: 'Smart alerts (AI)',
+        en: 'Central dashboard & automated reports',
+        fr: 'Tableau de bord central & rapports auto',
       },
       items: [
         {
-          icon: 'ph:lightning',
+          icon: 'mdi-view-dashboard',
           title: {
-            fr: 'Résumé automatique',
-            en: 'Automatic summary',
+            en: 'One command center',
+            fr: 'Un centre de commande unique',
           },
           description: {
-            fr: 'Synthèse claire : « +10% sur le plan Pro, nouveau module AI Assistant, CTA mis à jour ». ',
-            en: 'Clear synthesis: “+10% on Pro plan, new AI Assistant module, updated CTA”.',
+            en: 'See competitor moves, gaps and trends in a live dashboard tailored to SaaS teams.',
+            fr: 'Visualisez mouvements, écarts et tendances dans un dashboard pensé pour les équipes SaaS.',
           },
         },
         {
-          icon: 'ph:slack-logo',
+          icon: 'mdi-file-chart',
           title: {
-            fr: 'Slack, Email, Webhooks',
-            en: 'Slack, Email, Webhooks',
+            en: 'Scheduled executive reports',
+            fr: 'Rapports exécutifs programmés',
           },
           description: {
-            fr: 'Recevez l’essentiel où votre équipe travaille.',
-            en: 'Get the essentials where your team works.',
+            en: 'Send weekly or monthly digests to founders, product and marketing automatically.',
+            fr: 'Envoyez des synthèses hebdo ou mensuelles aux fondateurs, produit et marketing automatiquement.',
           },
         },
-      ],
-      imgUrl: '/assets/insightfeed/feature-alerts.webp',
-    },
-    {
-      id: 'f6',
-      icon: 'ph:trend-up',
-      pain: {
-        fr: 'Identifier les concurrents les plus dynamiques n’est pas trivial.',
-        en: 'Identifying the most dynamic competitors is not trivial.',
-      },
-      title: {
-        fr: 'Score de tendance concurrentielle',
-        en: 'Competitive momentum score',
-      },
-      items: [
         {
-          icon: 'ph:chart-line',
+          icon: 'mdi-shield-check',
           title: {
-            fr: 'Indice 0–100',
-            en: '0–100 index',
+            en: 'Battle-ready sales cards',
+            fr: 'Battle cards prêtes pour la vente',
           },
           description: {
-            fr: 'Basé sur fréquence d’updates, ampleur des changements, couverture produit.',
-            en: 'Based on update frequency, change magnitude, product coverage.',
+            en: 'Generate battle cards outlining strengths and weaknesses for each key rival.',
+            fr: 'Générez des battle cards avec forces et faiblesses pour chaque rival clé.',
           },
         },
       ],
-      imgUrl: '/assets/insightfeed/feature-score.webp',
-    },
-  ],
-  reviews: [
-    {
-      id: 'rvw-001',
-      name: 'Anaïs Dupont',
-      avatar: '/assets/avatars/anais.webp',
-      rating: 5,
-      jobTitle: {
-        fr: 'Fondatrice — SaaS Marketing',
-        en: 'Founder — Marketing SaaS',
-      },
-      content: {
-        fr: 'InsightFeed m’a fait gagner des heures chaque semaine. J’ai ajusté mon pricing en 2 jours avec des données solides.',
-        en: 'InsightFeed saves me hours every week. I adjusted my pricing in 2 days using solid data.',
-      },
-      postedAt: new Date('2024-09-19T21:15:30.000Z'),
-    },
-    {
-      id: 'rvw-002',
-      name: 'Leo Martin',
-      avatar: '/assets/avatars/leo.webp',
-      rating: 5,
-      jobTitle: {
-        fr: 'Head of Product',
-        en: 'Head of Product',
-      },
-      content: {
-        fr: 'La timeline des concurrents est devenue notre réflexe en grooming. Les alertes sont pertinentes, sans bruit.',
-        en: 'The competitor timeline is our go-to in grooming. Alerts are relevant, no noise.',
-      },
-      postedAt: new Date('2024-10-07T09:02:10.000Z'),
-    },
-    {
-      id: 'rvw-003',
-      name: 'Sofia Almeida',
-      avatar: '/assets/avatars/sofia.webp',
-      rating: 4,
-      jobTitle: {
-        fr: 'Growth Manager',
-        en: 'Growth Manager',
-      },
-      content: {
-        fr: 'Le comparateur pricing est super utile. J’aimerais encore plus d’intégrations, mais l’essentiel est là.',
-        en: 'The pricing comparator is super useful. I’d love even more integrations, but the essentials are there.',
-      },
-      postedAt: new Date('2024-11-22T16:45:00.000Z'),
+      imgUrl: '/images/features/dashboard-reporting.png',
     },
   ],
   testimonialsTexts: {
     titlePart1: {
-      fr: 'Ils utilisent InsightFeed pour',
-      en: 'They use InsightFeed to',
+      en: 'Trusted by SaaS',
+      fr: 'Plébiscité par les équipes',
     },
     titlePart2: {
-      fr: 'garder une longueur d’avance.',
-      en: 'keep a long-term advantage.',
+      en: 'founders, PMs and marketers',
+      fr: 'fondateurs, PM et marketeurs SaaS',
     },
   },
+  reviews: [
+    {
+      id: 'rev-1',
+      name: 'Alex R.',
+      rating: 5,
+      jobTitle: {
+        en: 'SaaS Founder',
+        fr: 'Fondateur SaaS',
+      },
+      content: {
+        en: 'We stopped guessing our positioning. InsightFeed shows exactly where we must improve.',
+        fr: 'On a arrêté de deviner notre positionnement. InsightFeed montre exactement où s’améliorer.',
+      },
+      postedAt: new Date('2025-03-02T10:15:00.000Z'),
+    },
+    {
+      id: 'rev-2',
+      name: 'Sam K.',
+      rating: 5,
+      jobTitle: {
+        en: 'Product Manager',
+        fr: 'Product Manager',
+      },
+      content: {
+        en: 'The alerts saved us from being blindsided by a major competitor launch twice already.',
+        fr: 'Les alertes nous ont évité d’être surpris par deux gros lancements concurrents.',
+      },
+      postedAt: new Date('2025-03-10T09:00:00.000Z'),
+    },
+    {
+      id: 'rev-3',
+      name: 'Jordan L.',
+      rating: 5,
+      jobTitle: {
+        en: 'Product Marketing Manager',
+        fr: 'Product Marketing Manager',
+      },
+      content: {
+        en: 'Our battle cards now update themselves. Sales finally has fresh, reliable intel.',
+        fr: 'Nos battle cards se mettent à jour seules. Les sales ont enfin une veille à jour.',
+      },
+      postedAt: new Date('2025-03-18T14:30:00.000Z'),
+    },
+    {
+      id: 'rev-4',
+      name: 'Taylor D.',
+      rating: 4,
+      jobTitle: {
+        en: 'Growth Lead',
+        fr: 'Responsable Growth',
+      },
+      content: {
+        en: 'Great overview of SEO and ads. I’d love even more filters, but it’s already powerful.',
+        fr: 'Super vue d’ensemble du SEO et des pubs. J’aimerais encore plus de filtres, mais c’est déjà très puissant.',
+      },
+      postedAt: new Date('2025-03-25T11:45:00.000Z'),
+    },
+    {
+      id: 'rev-5',
+      name: 'Chris P.',
+      rating: 5,
+      jobTitle: {
+        en: 'Startup CEO',
+        fr: 'CEO de startup',
+      },
+      content: {
+        en: 'In one month we killed two tools and one spreadsheet thanks to this unified dashboard.',
+        fr: 'En un mois, on a remplacé deux outils et un tableur grâce à ce dashboard unifié.',
+      },
+      postedAt: new Date('2025-04-01T08:20:00.000Z'),
+    },
+    {
+      id: 'rev-6',
+      name: 'Robin S.',
+      rating: 5,
+      jobTitle: {
+        en: 'Competitive Intelligence Analyst',
+        fr: 'Analyste veille concurrentielle',
+      },
+      content: {
+        en: 'Monitoring 40+ competitors would be impossible manually. Now it’s just part of my routine.',
+        fr: 'Suivre plus de 40 concurrents serait impossible à la main. Maintenant c’est juste ma routine.',
+      },
+      postedAt: new Date('2025-04-08T16:05:00.000Z'),
+    },
+    {
+      id: 'rev-7',
+      name: 'Morgan T.',
+      rating: 5,
+      jobTitle: {
+        en: 'Head of Marketing',
+        fr: 'Head of Marketing',
+      },
+      content: {
+        en: 'I know exactly where rivals invest in content and ads, and where we can outplay them.',
+        fr: 'Je sais exactement où nos rivaux investissent en contenu et pubs, et où les dépasser.',
+      },
+      postedAt: new Date('2025-04-15T13:10:00.000Z'),
+    },
+    {
+      id: 'rev-8',
+      name: 'Jamie C.',
+      rating: 4,
+      jobTitle: {
+        en: 'VP Product',
+        fr: 'VP Product',
+      },
+      content: {
+        en: 'The feature comparison matrix is gold. UI could be denser, but insights are spot on.',
+        fr: 'La matrice de comparaison est en or. L’UI pourrait être plus dense, mais les insights sont parfaits.',
+      },
+      postedAt: new Date('2025-04-22T17:40:00.000Z'),
+    },
+    {
+      id: 'rev-9',
+      name: 'Lee M.',
+      rating: 5,
+      jobTitle: {
+        en: 'SaaS Founder',
+        fr: 'Fondateur SaaS',
+      },
+      content: {
+        en: 'We use the weekly report in every leadership meeting. It became our market radar.',
+        fr: 'On utilise le rapport hebdo à chaque comité. C’est devenu notre radar marché.',
+      },
+      postedAt: new Date('2025-04-29T09:55:00.000Z'),
+    },
+    {
+      id: 'rev-10',
+      name: 'Riley F.',
+      rating: 5,
+      jobTitle: {
+        en: 'Product Ops',
+        fr: 'Product Ops',
+      },
+      content: {
+        en: 'Setup took less than an hour and the first insights landed the same day.',
+        fr: 'La mise en place a pris moins d’une heure et les premiers insights sont tombés le jour même.',
+      },
+      postedAt: new Date('2025-05-03T15:25:00.000Z'),
+    },
+    {
+      id: 'rev-11',
+      name: 'Noah J.',
+      rating: 5,
+      jobTitle: {
+        en: 'Marketing Manager',
+        fr: 'Marketing Manager',
+      },
+      content: {
+        en: 'Finally a tool that centralizes SEO, reviews and ads instead of adding yet another silo.',
+        fr: 'Enfin un outil qui centralise SEO, avis et pubs au lieu d’ajouter un silo de plus.',
+      },
+      postedAt: new Date('2025-05-10T12:00:00.000Z'),
+    },
+    {
+      id: 'rev-12',
+      name: 'Casey B.',
+      rating: 5,
+      jobTitle: {
+        en: 'Head of Sales Enablement',
+        fr: 'Head of Sales Enablement',
+      },
+      content: {
+        en: 'Our reps feel armed in calls. The competitive cards are always fresh and actionable.',
+        fr: 'Nos sales se sentent armés en call. Les fiches concurrentes sont toujours fraîches et actionnables.',
+      },
+      postedAt: new Date('2025-05-16T10:10:00.000Z'),
+    },
+  ],
   plans: {
     basic: {
-      price: 29,
+      price: 49,
       included: [
         {
-          fr: '3 produits surveillés',
-          en: '3 tracked products',
+          en: 'Track up to 5 competitors with core pages monitored (site, pricing, blog).',
+          fr: 'Suivi jusqu’à 5 concurrents avec surveillance des pages clés (site, tarifs, blog).',
         },
         {
-          fr: 'Détection automatique de concurrents',
-          en: 'Automatic competitor discovery',
+          en: 'Monthly email digest summarizing key product and pricing changes.',
+          fr: 'Synthèse mensuelle par email des principaux changements produits et prix.',
         },
         {
-          fr: 'Alertes email basiques',
-          en: 'Basic email alerts',
+          en: 'Automatic competitor discovery from keywords and categories.',
+          fr: 'Découverte automatique de concurrents à partir de mots-clés et catégories.',
+        },
+        {
+          en: '1 user seat, ideal for solo founders and early-stage teams.',
+          fr: '1 utilisateur, idéal pour fondateurs solos et équipes early-stage.',
+        },
+        {
+          en: 'Essential comparison table for features and pricing.',
+          fr: 'Tableau de comparaison essentiel pour fonctionnalités et tarifs.',
         },
       ],
     },
     premium: {
-      price: 79,
+      price: 99,
       included: [
         {
-          fr: '10 produits surveillés',
-          en: '10 tracked products',
+          en: 'Monitor up to 20 competitors with deeper coverage.',
+          fr: 'Suivi jusqu’à 20 concurrents avec couverture avancée.',
         },
         {
-          fr: 'Alertes Slack + Résumé IA',
-          en: 'Slack alerts + AI summary',
+          en: 'Near real-time alerts for major product, pricing and content changes.',
+          fr: 'Alertes quasi temps réel sur les changements majeurs produit, prix et contenu.',
         },
         {
-          fr: 'Comparateur pricing & fonctionnalités',
-          en: 'Pricing & features comparator',
+          en: 'Marketing, SEO and social visibility insights included.',
+          fr: 'Insights marketing, SEO et visibilité sociale inclus.',
         },
         {
-          fr: 'Timeline des évolutions',
-          en: 'Evolution timeline',
+          en: '5 user seats for founders, product and marketing teams.',
+          fr: '5 utilisateurs pour fondateurs, produit et marketing.',
+        },
+        {
+          en: 'Customizable reports and Slack / email integrations.',
+          fr: 'Rapports personnalisables et intégrations Slack / email.',
+        },
+        {
+          en: 'Export comparison and reports to PDF or CSV.',
+          fr: 'Export des comparatifs et rapports en PDF ou CSV.',
         },
       ],
     },
     ultimate: {
-      price: 199,
+      price: 299,
       included: [
         {
-          fr: '30 produits surveillés',
-          en: '30 tracked products',
+          en: '50+ competitors, segmented by market, geography or product line.',
+          fr: '50+ concurrents, segmentés par marché, zone ou ligne de produit.',
         },
         {
-          fr: 'Multi-utilisateurs et rôles',
-          en: 'Multi-user & roles',
+          en: 'Real-time alerts with advanced filters and priority routing.',
+          fr: 'Alertes temps réel avec filtres avancés et routage prioritaire.',
         },
         {
-          fr: 'Exports CSV, Notion & Webhooks',
-          en: 'CSV, Notion & Webhooks',
+          en: 'Unlimited users with role-based access for sales, product and leadership.',
+          fr: 'Utilisateurs illimités avec accès par rôle pour sales, produit et direction.',
         },
         {
-          fr: 'Rapports consolidés hebdomadaires',
-          en: 'Weekly consolidated reports',
+          en: 'Custom dashboards, battle cards and enterprise-grade reporting.',
+          fr: 'Dashboards sur-mesure, battle cards et reporting niveau entreprise.',
+        },
+        {
+          en: 'Dedicated onboarding, training sessions and priority support SLA.',
+          fr: 'Onboarding dédié, sessions de formation et support prioritaire avec SLA.',
+        },
+        {
+          en: 'API access and advanced integrations (CRM, BI, data warehouse).',
+          fr: 'Accès API et intégrations avancées (CRM, BI, data warehouse).',
         },
       ],
     },

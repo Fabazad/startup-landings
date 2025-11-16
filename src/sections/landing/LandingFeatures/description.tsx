@@ -8,6 +8,12 @@ import { TryForFreeButton } from '../components/try-for-free-button';
 
 export const Description = ({ feature }: { feature: Feature }) => (
   <>
+    <SectionTitle
+      title={feature.title}
+      isFullGradient={true}
+      sx={{ mb: { xs: 2, md: 3 }, textAlign: { xs: 'center', md: 'left' } }}
+    />
+
     <Typography
       variants={varFade({ distance: 24 }).inLeft}
       component={m.h6}
@@ -15,18 +21,12 @@ export const Description = ({ feature }: { feature: Feature }) => (
       sx={{
         typography: 'overline',
         color: 'text.disabled',
-        mb: 3,
+        mb: { xs: 6, md: 8 },
         textAlign: { xs: 'center', md: 'left' },
       }}
     >
       {feature.pain}
     </Typography>
-
-    <SectionTitle
-      title={feature.title}
-      isFullGradient={true}
-      sx={{ mb: { xs: 5, md: 8 }, textAlign: { xs: 'center', md: 'left' } }}
-    />
 
     <Stack
       spacing={6}

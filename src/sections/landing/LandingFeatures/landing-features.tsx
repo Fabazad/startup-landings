@@ -28,10 +28,10 @@ export function LandingFeatures({ sx, ...other }: BoxProps) {
 
   const RightDescriptionFeature = ({ feature }: { feature: Feature }) => (
     <>
-      <Grid md={6} lg={5} sx={{ display: { xs: 'none', md: 'block' } }}>
+      <Grid md={6} lg={6} sx={{ display: { xs: 'none', md: 'block' } }}>
         <FeatureImage feature={feature} isDescriptionRight={true} />
       </Grid>
-      <Grid xs={12} md={6} lg={7}>
+      <Grid xs={12} md={6} lg={6}>
         <Description feature={feature} />
       </Grid>
     </>

@@ -1,4 +1,3 @@
-import { CONFIG } from 'src/config-global';
 import { RawProductIdea } from 'src/types/ProductIdea';
 import { FEATURES_SAMPLE } from './featuresSample';
 import { HERO_TEXTS_SAMPLE } from './hero-texts-sample';
@@ -10,8 +9,7 @@ export const INSIGHTFEED_PRODUCT_IDEA: RawProductIdea = {
   id: '1',
   name: 'Insight Feed',
   themeColor: 'purple',
-  logoUrl: `${CONFIG.assetsDir}/logo/purple-dear.svg`,
-  faviconUrl: `${CONFIG.assetsDir}/favicon/purple-dear.ico`,
+  logo: 'octopus',
   features: FEATURES_SAMPLE,
   heroTexts: HERO_TEXTS_SAMPLE,
   reviews: REVIEWS_SAMPLE,

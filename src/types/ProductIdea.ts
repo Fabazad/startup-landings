@@ -12,11 +12,12 @@ export type RawItem = GenericItem<Translated>;
 
 type GenericFeature<Text extends Translated | string> = {
   id: string;
+  /** Use a simple icon from Material Design Icons. */
   icon: string;
-  /** Tell that's this is the end of a pain point that the feature solves. max 70 characters. */
+  /** Tell that's this is the end of a pain point that the feature solves and how it solves it. max 70 characters. */
   pain: Text;
   title: Text;
-  /** Minimum 2 items, maximum 3 items. */
+  /** 2 or 3 items. Avoid using too many items. */
   items: GenericItem<Text>[];
   imgUrl: string;
 };
@@ -26,11 +27,15 @@ export type RawFeature = GenericFeature<Translated>;
 
 type GenericReview<Text extends Translated | string> = {
   id: string;
+  /** First name and first letter of the last name. Try using non gendered names. */
   name: string;
-  avatar: string;
+  /** The rating should be either 4 or 5. with 80% of the reviews being 5 stars. */
   rating: number;
+  /** The job title should be a the name of the reviewer's role. Matching the personas of the product. */
   jobTitle: Text;
+  /** The content should be a short review of the product. Max 120 characters. */
   content: Text;
+  /** Can be formatted as 'new Date('2025-05-06T10:15:00.000Z')'. */
   postedAt: Date;
 };
 
@@ -58,14 +63,14 @@ type GenericProductIdea<Text extends Translated | string> = {
   name: string;
   /** 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red' **/
   themeColor: PrimaryColor;
-  logoUrl: string;
-  faviconUrl: string;
+  /** The logo should be either 'panda' => cute logo or 'octopus' => more professional logo. */
+  logo: 'panda' | 'octopus';
   /** Minimum 3 features, maximum 5 features. */
   features: GenericFeature<Text>[];
   heroTexts: {
-    /** The description should describe the value proposition of the product. */
+    /** The description should describe best the value proposition of the product. It has to be punchy, can use multiple lines. Max 300 characters.*/
     description: Text;
-    /** The headings should be punchy and explain the value proposition of the product. */
+    /** The headings should be punchy, short and should clearly describe what the product does. */
     headingPart1: Text;
     headingPart2: Text;
   };

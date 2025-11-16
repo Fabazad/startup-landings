@@ -17,23 +17,32 @@ export const FeatureImage = ({
     alignItems="center"
     justifyContent="center"
     sx={{ height: 1, position: 'relative' }}
+    bgcolor="transparent"
   >
     <Box
       sx={{
         left: 0,
         width: 720,
         borderRadius: 2,
-        position: 'absolute',
-        bgcolor: 'background.default',
+        position: 'relative',
+        bgcolor: 'transparent',
+        overflow: 'hidden',
         boxShadow: (theme) =>
           `-40px 40px 80px 0px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
         [stylesMode.dark]: {
           boxShadow: (theme) =>
             `-40px 40px 80px 0px ${varAlpha(theme.vars.palette.common.blackChannel, 0.16)}`,
         },
+        maxWidth: 500,
+        maxHeight: 600,
       }}
     >
-      <Box component="img" alt={feature.title} src={feature.imgUrl} sx={{ width: 720 }} />
+      <Box
+        component="img"
+        alt={feature.title}
+        src={feature.imgUrl}
+        sx={{ bgcolor: 'transparent', width: '100%', height: '100%' }}
+      />
     </Box>
   </Stack>
 );

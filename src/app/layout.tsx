@@ -75,7 +75,7 @@ const getRawProductIdea = async () => {
   } else if (subdomain === 'triply') {
     return RAW_PRODUCT_IDEAS.Triply;
   }
-  return RAW_PRODUCT_IDEAS.Triply;
+  return RAW_PRODUCT_IDEAS.InsightFeed;
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -84,7 +84,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: rawProductIdea.name,
     description: rawProductIdea.heroTexts.description.en,
-    icons: rawProductIdea.faviconUrl,
+    icons: `${CONFIG.assetsDir}/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.ico`,
     // red
     themeColor: getThemeColorValue(rawProductIdea.themeColor),
   };

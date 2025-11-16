@@ -69,7 +69,7 @@ export const LandingContact = () => {
           />
         </Box>
 
-        <Button size="large" variant="contained" type="submit">
+        <Button size="large" variant="contained" type="submit" sx={{ borderRadius: '9999px' }}>
           {t('landing.contact.submit')}
         </Button>
       </Form>

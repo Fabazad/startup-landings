@@ -2,6 +2,7 @@ import { Avatar, Box, Rating, Stack, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import { m } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { _mock } from 'src/_mock';
 import { varFade } from 'src/components/animate';
 import {
   Carousel,
@@ -34,7 +35,7 @@ export const Reviews = ({ reviews }: { reviews: Review[] }) => {
       <HorizontalDivider position="top" />
 
       <Carousel carousel={carousel}>
-        {reviews.map((item) => (
+        {reviews.map((item, index) => (
           <Stack key={item.id} component={m.div} variants={varFade().in}>
             <Stack spacing={1} sx={{ typography: 'subtitle2' }}>
               <Rating
@@ -59,7 +60,11 @@ export const Reviews = ({ reviews }: { reviews: Review[] }) => {
             </Typography>
 
             <Stack direction="row" alignItems="center" spacing={2}>
-              <Avatar alt={item.name} src={item.avatar} sx={{ width: 48, height: 48 }} />
+              <Avatar
+                alt={item.name}
+                src={_mock.image.avatar(index)}
+                sx={{ width: 48, height: 48 }}
+              />
               <Stack sx={{ typography: 'subtitle1' }}>
                 <Box component="span">{item.name}</Box>
                 <Box component="span" sx={{ typography: 'body2', color: 'text.disabled' }}>
