@@ -20,4 +20,4 @@ export const RAW_PRODUCT_IDEAS: Record<ProductIdeaName, RawProductIdea> = {
   [PRODUCT_IDEA_NAMES.VIBY]: VIBY_PRODUCT_IDEA,
 } as const;
 
-export const DEFAULT_PRODUCT_IDEA: RawProductIdea = RAW_PRODUCT_IDEAS.VIBY;
+export const DEFAULT_PRODUCT_IDEA: RawProductIdea = RAW_PRODUCT_IDEAS.INSIGHT_FEED;
