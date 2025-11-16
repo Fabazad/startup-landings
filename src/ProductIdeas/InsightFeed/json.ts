@@ -25,44 +25,44 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       icon: 'mdi-compare',
       pain: {
         en: 'Manual benchmarking is slow, painful and outdated the second it’s done. We removes all the grunt work by automating it for you.',
-        fr: 'Finis les tableurs, voyez instantanément comment vous vous situez en prix et en fonctionnalités.',
+        fr: 'Le benchmark manuel est une perte de temps. Une fois fait, il devient vite obsolète. On l’automatise de A à Z pour vous.',
       },
       title: {
         en: 'Automated Competitor Benchmarking & Reporting',
-        fr: 'Comparateur d’offres détaillé',
+        fr: 'Benchmark concurrentiel & reporting, automatisés',
       },
       items: [
         {
           icon: 'mdi-table-large',
           title: {
             en: 'No More Messy Spreadsheets',
-            fr: 'Matrice fonction par fonction',
+            fr: 'Fini les tableurs ingérables',
           },
           description: {
             en: 'All your benchmarking insights live in one clean, shareable dashboard — no tabs, no chaos.',
-            fr: 'Comparez capacités, plans et limites dans un tableau clair et interactif.',
+            fr: 'Toutes vos insights sont regroupés dans un tableau clair et partagable — pas de tabs, pas de chaos.',
           },
         },
         {
           icon: 'mdi-cash-multiple',
           title: {
             en: 'Always Up to Date',
-            fr: 'Insights sur les grilles tarifaires',
+            fr: 'Toujours à jour',
           },
           description: {
             en: 'Your competitor comparison updates automatically — no manual work needed.',
-            fr: 'Visualisez prix, remises et packaging pour repérer les écarts et vous repositionner vite.',
+            fr: 'Votre comparatif concurrentiel se met à jour automatiquement — aucun travail manuel nécessaire.',
           },
         },
         {
           icon: 'mdi-chart-line',
           title: {
             en: 'See Strengths, Gaps and Opportunities Instantly',
-            fr: 'Photo de votre position marché',
+            fr: 'Vos forces, faiblesses et opportunités en un coup d’œil',
           },
           description: {
             en: 'Spot where you lead, where you lag and what your competitors are missing — in minutes, not days.',
-            fr: 'Voyez en un coup d’œil où vous surclassez ou rattrapez la concurrence.',
+            fr: 'Identifiez vos forces, vos faiblesses et les opportunités que vos concurrents ignorent — en minutes, pas en jours.',
           },
         },
       ],
@@ -73,44 +73,44 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       icon: 'mdi-bell-alert',
       pain: {
         en: 'Never miss an important update again — we notify you the moment competitors move.',
-        fr: 'Ne ratez plus aucun lancement ni changement de prix, vous êtes alerté dès que ça bouge.',
+        fr: 'Ne ratez plus aucun changement clé — on vous alerte dès que vos concurrents bougent.',
       },
       title: {
         en: 'Always-on Key Changes Alerts',
-        fr: 'Veille continue produits & prix',
+        fr: 'Alertes continues sur les changements clés',
       },
       items: [
         {
           icon: 'mdi-bell-ring',
           title: {
             en: 'Real-Time Change Alerts',
-            fr: 'Alertes de changements en temps réel',
+            fr: 'Alertes en temps réel',
           },
           description: {
             en: 'Features, pricing, reviews, ads and more — you know the moment it happens.',
-            fr: 'Soyez notifié dès qu’un site concurrent change ses pages, prix, changelog ou annonces.',
+            fr: 'Fonctionnalités, prix, avis, pubs et plus encore — vous saurez quand ça arrive.',
           },
         },
         {
           icon: 'mdi-bullhorn',
           title: {
             en: 'Multi-Channel Coverage',
-            fr: 'Couverture multi-canale',
+            fr: 'Suivi Multi-Canal',
           },
           description: {
-            en: 'Track Everything, in One Place',
-            fr: 'Suivez mises à jour, avis, contenus, pubs, réseaux sociaux et offres d’emploi au même endroit.',
+            en: 'Track everything, in one place.',
+            fr: 'Suivez tout, à un seul endroit.',
           },
         },
         {
           icon: 'mdi-folder-clock',
           title: {
-            en: 'Never Miss a Critical Move',
-            fr: 'Ne manquez plus un mouvement clé',
+            en: 'Never Miss a Critical Move.',
+            fr: 'Ne Ratez Plus Aucune Information Critique.',
           },
           description: {
             en: 'Replace manual checks and scattered alerts with one reliable monitoring engine.',
-            fr: 'Remplacez vérifications manuelles et Google Alerts dispersées par un moteur unique fiable.',
+            fr: 'Fini les vérifications manuelles et les alertes éparpillées : tout est surveillé automatiquement pour vous.',
           },
         },
       ],
@@ -121,11 +121,11 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       icon: 'mdi-radar',
       pain: {
         en: 'Stop guessing who your competitors are — we find them and alert you when new ones appear.',
-        fr: 'Fini la recherche manuelle, vos concurrents SaaS clés sont trouvés pour vous.',
+        fr: 'Cessez de deviner qui sont vos concurrents — on les trouve et vous alerte quand de nouveaux arrivent sur le marché.',
       },
       title: {
         en: 'Automatic Competitor Discovery & New Players',
-        fr: 'Découverte automatique des concurrents',
+        fr: 'Découverte Automatique des Concurrents & Nouveaux Acteurs',
       },
       items: [
         {
@@ -135,19 +135,19 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
             fr: 'Moteur de similarité intelligent',
           },
           description: {
-            en: 'Find lookalike SaaS based on category, keywords and tech stack without endless Google searches.',
-            fr: 'Trouvez des SaaS similaires selon la catégorie, les mots-clés et la stack en quelques clics.',
+            en: 'Find lookalike SaaS based on category, keywords and features without endless Google searches.',
+            fr: 'Trouvez les SaaS similaires selon la catégorie et mots-clés sans passer des heures à fouiller sur Google.',
           },
         },
         {
           icon: 'mdi-view-grid-plus',
           title: {
             en: 'New Players Detection',
-            fr: 'Acteurs cachés révélés',
+            fr: 'Détection des Nouveaux Acteurs',
           },
           description: {
             en: 'Uncover emerging or niche competitors you would usually miss in manual research.',
-            fr: 'Dévoilez les concurrents émergents ou de niche souvent manqués en recherche manuelle.',
+            fr: 'Repérez les concurrents émergents ou de niche souvent manqués en recherche manuelle.',
           },
         },
         {
