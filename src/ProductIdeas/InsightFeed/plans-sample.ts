@@ -2,6 +2,10 @@ import { RawPlans } from 'src/types/ProductIdea';
 
 export const PLANS_SAMPLE: RawPlans = {
   basic: {
+    target: {
+      en: 'Solo founders and early-stage teams',
+      fr: 'Fondateurs solos et équipes early-stage',
+    },
     price: 69,
     included: [
       {
@@ -19,6 +23,10 @@ export const PLANS_SAMPLE: RawPlans = {
     ],
   },
   premium: {
+    target: {
+      en: 'Small teams and growing businesses',
+      fr: 'Équipes petites et entreprises en croissance',
+    },
     price: 129,
     included: [
       {
@@ -44,6 +52,10 @@ export const PLANS_SAMPLE: RawPlans = {
     ],
   },
   ultimate: {
+    target: {
+      en: 'Enterprise-scale teams and growth-focused startups',
+      fr: 'Équipes enterprise-scale et startups growth-focused',
+    },
     price: 599,
     included: [
       {

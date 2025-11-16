@@ -333,6 +333,10 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
   },
   plans: {
     basic: {
+      target: {
+        en: 'Solo founders and early-stage teams',
+        fr: 'Fondateurs solos et équipes early-stage',
+      },
       price: 0,
       included: [
         {
@@ -350,6 +354,10 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
       ],
     },
     premium: {
+      target: {
+        en: 'Small teams and growing businesses',
+        fr: 'Équipes petites et entreprises en croissance',
+      },
       price: 4.99,
       included: [
         {
@@ -367,6 +375,10 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
       ],
     },
     ultimate: {
+      target: {
+        en: 'Enterprise-scale teams and growth-focused startups',
+        fr: 'Équipes enterprise-scale et startups growth-focused',
+      },
       price: 9.99,
       included: [
         {
