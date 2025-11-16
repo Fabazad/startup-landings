@@ -81,11 +81,37 @@ const getRawProductIdea = async () => {
 export async function generateMetadata(): Promise<Metadata> {
   const rawProductIdea = await getRawProductIdea();
 
+  // Get the current URL for Open Graph
+  const headersList = await headers();
+  const host = headersList.get('x-forwarded-host') || headersList.get('host') || '';
+  const protocol = headersList.get('x-forwarded-proto') || 'https';
+  const baseUrl = `${protocol}://${host}`;
+
+  // Create image URL for preview (prefer PNG for better compatibility, fallback to SVG)
+  // You can also use logo-full.png if you have a dedicated OG image
+  const imageUrl = `${baseUrl}${CONFIG.assetsDir}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.svg`;
+  const description = rawProductIdea.heroTexts.description.en;
+
   return {
     title: rawProductIdea.name,
-    description: rawProductIdea.heroTexts.description.en,
+    description,
     icons: `${CONFIG.assetsDir}/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.ico`,
     themeColor: getThemeColorValue(rawProductIdea.themeColor),
+    openGraph: {
+      type: 'website',
+      url: baseUrl,
+      title: rawProductIdea.name,
+      description,
+      siteName: rawProductIdea.name,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: rawProductIdea.name,
+        },
+      ],
+    },
   };
 }
 
