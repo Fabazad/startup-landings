@@ -12,7 +12,7 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
     },
     headingPart1: {
       en: 'Know every move',
-      fr: 'Suivez chaque mouvement',
+      fr: 'Suis chaque mouvement',
     },
     headingPart2: {
       en: 'your competitors make',
