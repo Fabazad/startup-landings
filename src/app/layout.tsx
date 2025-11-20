@@ -23,17 +23,11 @@ import {
   SettingsProvider,
 } from 'src/components/settings';
 import { Snackbar } from 'src/components/snackbar';
-
-import { CheckoutProvider } from 'src/sections/checkout/context';
-
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { headers } from 'next/headers';
-import { AuthProvider as AmplifyAuthProvider } from 'src/auth/context/amplify';
-import { AuthProvider as Auth0AuthProvider } from 'src/auth/context/auth0';
-import { AuthProvider as FirebaseAuthProvider } from 'src/auth/context/firebase';
-import { AuthProvider as JwtAuthProvider } from 'src/auth/context/jwt';
-import { AuthProvider as SupabaseAuthProvider } from 'src/auth/context/supabase';
+import { StructuredData } from 'src/components/seo/structured-data';
+import { languages } from 'src/locales/config-locales';
 import { DEFAULT_PRODUCT_IDEA, RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
 import { SubscriptionModalProvider } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
 import { ProductIdeaProvider } from './product-idea-provider';
@@ -42,12 +36,6 @@ import ReactQueryProvider from './providers/react-query-provider';
 
 // ----------------------------------------------------------------------
 
-const AuthProvider =
-  (CONFIG.auth.method === 'amplify' && AmplifyAuthProvider) ||
-  (CONFIG.auth.method === 'firebase' && FirebaseAuthProvider) ||
-  (CONFIG.auth.method === 'supabase' && SupabaseAuthProvider) ||
-  (CONFIG.auth.method === 'auth0' && Auth0AuthProvider) ||
-  JwtAuthProvider;
 
 function getThemeColorValue(themeColor: PrimaryColor): string {
   if (themeColor === 'blue') return info.main;
@@ -68,7 +56,8 @@ export const generateViewport: () => Promise<Viewport> = async () => {
 
 const getRawProductIdea = async () => {
   // get url subdomain from url on server
-  const url = (await headers().get('x-forwarded-host')) ?? '';
+  const headersList = await headers();
+  const url = headersList.get('x-forwarded-host') || headersList.get('host') || '';
   const subdomain = url.split('.')[0];
 
   const productIdea = Object.values(RAW_PRODUCT_IDEAS).find(
@@ -90,11 +79,24 @@ export async function generateMetadata(): Promise<Metadata> {
   const imageUrl = `${baseUrl}${CONFIG.assetsDir}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.svg`;
   const description = rawProductIdea.heroTexts.description.en;
 
+  // Generate keywords from product features
+  const keywords = [rawProductIdea.name, ...rawProductIdea.features.map((f) => f.title.en)].join(
+    ', '
+  );
+
+  // Generate alternate languages
+  const alternates = {
+    languages: Object.fromEntries(languages.map((lang) => [lang, `${baseUrl}?lang=${lang}`])),
+    canonical: baseUrl,
+  };
+
   return {
     title: rawProductIdea.name,
     description,
+    keywords,
     icons: `${CONFIG.assetsDir}/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.ico`,
     themeColor: getThemeColorValue(rawProductIdea.themeColor),
+    alternates,
     openGraph: {
       type: 'website',
       url: baseUrl,
@@ -109,6 +111,26 @@ export async function generateMetadata(): Promise<Metadata> {
           alt: rawProductIdea.name,
         },
       ],
+      locale: 'en_US',
+      alternateLocale: languages.filter((l) => l !== 'en').map((l) => (l === 'fr' ? 'fr_FR' : l)),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: rawProductIdea.name,
+      description,
+      images: [imageUrl],
+      creator: '@' + rawProductIdea.name.toLowerCase().replace(/\s+/g, ''),
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
   };
 }
@@ -118,9 +140,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   const rawProductIdea = await getRawProductIdea();
 
+  // Get base URL for structured data
+  const headersList = await headers();
+  const host = headersList.get('x-forwarded-host') || headersList.get('host') || '';
+  const protocol = headersList.get('x-forwarded-proto') || 'https';
+  const baseUrl = `${protocol}://${host}`;
+
   return (
     <html lang={lang ?? 'en'} suppressHydrationWarning>
       <body>
+        <StructuredData rawProductIdea={rawProductIdea} baseUrl={baseUrl} />
         <InitColorSchemeScript
           defaultMode={schemeConfig.defaultMode}
           modeStorageKey={schemeConfig.modeStorageKey}
@@ -128,34 +157,30 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
         <I18nProvider lang={CONFIG.isStaticExport ? undefined : lang}>
           <LocalizationProvider>
-            <AuthProvider>
-              <SettingsProvider
-                settings={{
-                  ...defaultSettings,
-                  primaryColor: rawProductIdea.themeColor,
-                  fontFamily: 'Nunito Sans Variable',
-                }}
-              >
-                <ThemeProvider>
-                  <MotionLazy>
-                    <CheckoutProvider>
-                      <PostHogProvider>
-                        <ReactQueryProvider>
-                          <ProductIdeaProvider rawProductIdea={rawProductIdea}>
-                            <SubscriptionModalProvider>
-                              <Snackbar />
-                              <ProgressBar />
-                              <SettingsDrawer />
-                              {children}
-                            </SubscriptionModalProvider>
-                          </ProductIdeaProvider>
-                        </ReactQueryProvider>
-                      </PostHogProvider>
-                    </CheckoutProvider>
-                  </MotionLazy>
-                </ThemeProvider>
-              </SettingsProvider>
-            </AuthProvider>
+            <SettingsProvider
+              settings={{
+                ...defaultSettings,
+                primaryColor: rawProductIdea.themeColor,
+                fontFamily: 'Nunito Sans Variable',
+              }}
+            >
+              <ThemeProvider>
+                <MotionLazy>
+                  <PostHogProvider>
+                    <ReactQueryProvider>
+                      <ProductIdeaProvider rawProductIdea={rawProductIdea}>
+                        <SubscriptionModalProvider>
+                          <Snackbar />
+                          <ProgressBar />
+                          <SettingsDrawer />
+                          {children}
+                        </SubscriptionModalProvider>
+                      </ProductIdeaProvider>
+                    </ReactQueryProvider>
+                  </PostHogProvider>
+                </MotionLazy>
+              </ThemeProvider>
+            </SettingsProvider>
           </LocalizationProvider>
         </I18nProvider>
         <Analytics />
