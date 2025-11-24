@@ -1,4 +1,5 @@
-import { RawProductIdea } from 'src/types/ProductIdea';
+import { Translated } from 'src/locales';
+import { GenericPlans, RawProductIdea } from 'src/types/ProductIdea';
 
 type StructuredDataProps = {
   rawProductIdea: RawProductIdea;
@@ -14,7 +15,7 @@ export function StructuredData({ rawProductIdea, baseUrl }: StructuredDataProps)
     description: rawProductIdea.heroTexts.description.en,
     applicationCategory: 'WebApplication',
     operatingSystem: 'Web',
-    offers: {
+    offers: rawProductIdea.plans === null ? undefined : {
       '@type': 'AggregateOffer',
       offerCount: 3,
       lowPrice: rawProductIdea.plans.basic.price,

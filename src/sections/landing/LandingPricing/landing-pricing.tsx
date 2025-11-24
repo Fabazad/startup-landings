@@ -29,6 +29,10 @@ export function LandingPricing({ sx, ...other }: BoxProps) {
 
   const plans = useProductIdea().plans;
 
+  if (!plans) {
+    return null;
+  }
+
   const renderDescription = (
     <SectionTitle
       caption="plans"

@@ -16,7 +16,7 @@ export const NavMobile = () => {
   const [openFeatures, setOpenFeatures] = useState(false);
 
   const { t } = useTranslate();
-  const { features } = useProductIdea();
+  const { features, plans } = useProductIdea();
 
   const onClose = () => {
     setOpenDrawer(false);
@@ -88,12 +88,12 @@ export const NavMobile = () => {
               ))}
             </List>
           </Collapse>
-          <ListItemButton component={Link} href="#pricing" onClick={onClose}>
+          {plans && <ListItemButton component={Link} href="#pricing" onClick={onClose}>
             <ListItemIcon>
               <Iconify icon="mdi:cash-multiple" />
             </ListItemIcon>
             <ListItemText primary={t('landing.nav.pricing')} />
-          </ListItemButton>
+          </ListItemButton>}
           <ListItemButton component={Link} href="#testimonials" onClick={onClose}>
             <ListItemIcon>
               <Iconify icon="mdi:people" />

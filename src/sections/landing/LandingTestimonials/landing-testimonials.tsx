@@ -16,7 +16,6 @@ import { TestimonialNumbers } from './testimonial-numbers';
 
 export const LandingTestimonials = ({ sx, ...other }: BoxProps) => {
   const {
-    reviews,
     testimonialsTexts: { titlePart1, titlePart2 },
   } = useProductIdea();
   const { t } = useTranslation();
@@ -38,7 +37,7 @@ export const LandingTestimonials = ({ sx, ...other }: BoxProps) => {
             sx={{ mb: { xs: 5, md: 8 }, textAlign: 'center' }}
           />
 
-          <Reviews reviews={reviews} />
+          <Reviews />
 
           <TestimonialNumbers />
         </Container>

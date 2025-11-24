@@ -6,7 +6,7 @@ import { useTranslate } from 'src/locales';
 export const NavDesktop = () => {
   const { t } = useTranslate();
 
-  const { features } = useProductIdea();
+  const { features, plans } = useProductIdea();
 
   return (
     <Stack direction="row" gap={2} sx={{ display: { xs: 'none', md: 'flex' }, mx: 3 }}>
@@ -44,9 +44,9 @@ export const NavDesktop = () => {
           },
         }}
       />
-      <Button component={Link} href="#pricing" sx={{ px: 1 }}>
+      {plans && <Button component={Link} href="#pricing" sx={{ px: 1 }}>
         {t('landing.nav.pricing')}
-      </Button>
+      </Button>}
       <Button component={Link} href="#testimonials" sx={{ px: 2 }}>
         {t('landing.nav.testimonials')}
       </Button>

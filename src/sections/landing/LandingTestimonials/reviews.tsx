@@ -12,13 +12,16 @@ import {
   useCarousel,
 } from 'src/components/carousel';
 import { maxLine } from 'src/theme/styles';
-import { Review } from 'src/types/ProductIdea';
 import { fToNow } from 'src/utils/format-time';
 import { TryForFreeButton } from '../components/try-for-free-button';
 import { HorizontalDivider } from './horizontal-divider';
+import { useProductIdea } from 'src/app/product-idea-provider';
+import { GetStartedButton } from '../components/get-started-button';
 
-export const Reviews = ({ reviews }: { reviews: Review[] }) => {
+export const Reviews = () => {
   const { t } = useTranslation();
+
+  const { plans, reviews } = useProductIdea();
 
   const carousel = useCarousel({
     align: 'start',
@@ -96,7 +99,7 @@ export const Reviews = ({ reviews }: { reviews: Review[] }) => {
         component={m.div}
         sx={{ textAlign: 'center', mt: 5 }}
       >
-        <TryForFreeButton buttonName="try-for-free-testimonials" />
+        {plans ? <TryForFreeButton buttonName="try-for-free-testimonials" /> : <GetStartedButton buttonName="get-started-testimonials" />}
       </Box>
     </Stack>
   );

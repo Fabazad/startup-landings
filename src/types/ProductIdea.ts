@@ -83,7 +83,7 @@ type GenericProductIdea<Text extends Translated | string> = {
     titlePart1: Text;
     titlePart2: Text;
   };
-  plans: GenericPlans<Text>;
+  plans: GenericPlans<Text> | null;
 };
 
 export type ProductIdea = GenericProductIdea<string>;
@@ -121,7 +121,7 @@ export const translateProductIdea = (
         description: item.description?.[lang],
       })),
     })),
-    plans: {
+    plans: productIdea.plans === null ? null : {
       basic: {
         ...productIdea.plans.basic,
         target: productIdea.plans.basic.target[lang],

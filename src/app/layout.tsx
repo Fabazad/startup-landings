@@ -33,6 +33,7 @@ import { SubscriptionModalProvider } from 'src/sections/landing/components/Subsc
 import { ProductIdeaProvider } from './product-idea-provider';
 import { PostHogProvider } from './providers/posthog-provider';
 import ReactQueryProvider from './providers/react-query-provider';
+import { AuthProvider } from 'src/auth/context/supabase';
 
 // ----------------------------------------------------------------------
 
@@ -157,30 +158,32 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
         <I18nProvider lang={CONFIG.isStaticExport ? undefined : lang}>
           <LocalizationProvider>
-            <SettingsProvider
-              settings={{
-                ...defaultSettings,
-                primaryColor: rawProductIdea.themeColor,
-                fontFamily: 'Nunito Sans Variable',
-              }}
-            >
-              <ThemeProvider>
-                <MotionLazy>
-                  <PostHogProvider>
-                    <ReactQueryProvider>
-                      <ProductIdeaProvider rawProductIdea={rawProductIdea}>
-                        <SubscriptionModalProvider>
-                          <Snackbar />
-                          <ProgressBar />
-                          <SettingsDrawer />
-                          {children}
-                        </SubscriptionModalProvider>
-                      </ProductIdeaProvider>
-                    </ReactQueryProvider>
-                  </PostHogProvider>
-                </MotionLazy>
-              </ThemeProvider>
-            </SettingsProvider>
+            <AuthProvider>
+              <SettingsProvider
+                settings={{
+                  ...defaultSettings,
+                  primaryColor: rawProductIdea.themeColor,
+                  fontFamily: 'Nunito Sans Variable',
+                }}
+              >
+                <ThemeProvider>
+                  <MotionLazy>
+                    <PostHogProvider>
+                      <ReactQueryProvider>
+                        <ProductIdeaProvider rawProductIdea={rawProductIdea}>
+                          <SubscriptionModalProvider>
+                            <Snackbar />
+                            <ProgressBar />
+                            <SettingsDrawer />
+                            {children}
+                          </SubscriptionModalProvider>
+                        </ProductIdeaProvider>
+                      </ReactQueryProvider>
+                    </PostHogProvider>
+                  </MotionLazy>
+                </ThemeProvider>
+              </SettingsProvider>
+            </AuthProvider>
           </LocalizationProvider>
         </I18nProvider>
         <Analytics />
