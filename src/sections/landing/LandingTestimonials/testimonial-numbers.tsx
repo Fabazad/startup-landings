@@ -12,8 +12,8 @@ export const TestimonialNumbers = () => {
 
       <Stack spacing={5} direction={{ xs: 'column', md: 'row' }} divider={<VerticalDivider />}>
         {[
-          { label: 'Inscriptions', value: 12.121 },
-          { label: 'Reviews', value: 260 },
+          { label: 'Inscriptions', value: 1500 },
+          { label: 'Reviews', value: 50 },
           { label: 'Review rate', value: 4.7 },
         ].map((item) => (
           <Stack key={item.label} spacing={2} sx={{ textAlign: 'center', width: 1 }}>
