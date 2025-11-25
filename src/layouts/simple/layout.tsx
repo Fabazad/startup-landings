@@ -1,12 +1,9 @@
 'use client';
 
 import type { Theme, SxProps, Breakpoint } from '@mui/material/styles';
-
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
-
 import { Logo } from 'src/components/logo';
-
 import { Main, CompactContent } from './main';
 import { LayoutSection } from '../core/layout-section';
 import { HeaderSection } from '../core/header-section';
@@ -15,8 +12,6 @@ import { AccountDrawer } from '../components/account-drawer';
 import { ThemeButton } from '../components/theme-button';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import React from 'react';
-
-
 
 // ----------------------------------------------------------------------
 
@@ -45,7 +40,6 @@ export function SimpleLayout({ sx, children, header, content, menuButtons }: Sim
       headerSection={
         <HeaderSection
           layoutQuery={layoutQuery}
-          slotProps={{ container: { maxWidth: false } }}
           sx={header?.sx}
           slots={{
             topArea: (
@@ -53,19 +47,22 @@ export function SimpleLayout({ sx, children, header, content, menuButtons }: Sim
                 This is an info Alert.
               </Alert>
             ),
-            leftArea: <Box sx={{ display: 'flex', alignItems: 'center' }}><Logo /><Box
-              component="h4"
-              typography="h4"
-              sx={{
-                fontSize: 24,
-                fontWeight: 700,
-                color: 'text.primary',
-                ml: 2,
-                mt: 4,
-              }}
-            >
-              {productName}
-            </Box></Box>,
+            leftArea: <>
+              <Logo />
+              <Box
+                component="h4"
+                typography="h4"
+                sx={{
+                  fontSize: 24,
+                  fontWeight: 700,
+                  color: 'text.primary',
+                  ml: 2,
+                  mt: 4,
+                }}
+              >
+                {productName}
+              </Box>
+            </>,
             rightArea: (
               <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
                 <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }} sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -100,13 +97,15 @@ export function SimpleLayout({ sx, children, header, content, menuButtons }: Sim
           children
         )}
       </Main>
-      {menuButtons && <Box bottom={0} left={0} right={0} width="100%" sx={{ display: { xs: 'fixed', md: 'none' }, borderTop: '1px solid', borderColor: 'divider' }}>
-        <Box display="flex" alignItems="center" justifyContent="center" gap={1} width="100%" sx={{ '& > *': { minWidth: '100px' } }}>
-          {menuButtons.map((button, index) => (
-            <React.Fragment key={index}>{button}</React.Fragment>
-          ))}
+      {
+        menuButtons && <Box bottom={0} left={0} right={0} width="100%" sx={{ display: { xs: 'fixed', md: 'none' }, borderTop: '1px solid', borderColor: 'divider' }}>
+          <Box display="flex" alignItems="center" justifyContent="center" gap={1} width="100%" sx={{ '& > *': { minWidth: '100px' } }}>
+            {menuButtons.map((button, index) => (
+              <React.Fragment key={index}>{button}</React.Fragment>
+            ))}
+          </Box>
         </Box>
-      </Box>}
-    </LayoutSection>
+      }
+    </LayoutSection >
   );
 }
