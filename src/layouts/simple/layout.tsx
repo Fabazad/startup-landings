@@ -3,21 +3,20 @@
 import type { Theme, SxProps, Breakpoint } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
-
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
 
 import { Logo } from 'src/components/logo';
 
 import { Main, CompactContent } from './main';
 import { LayoutSection } from '../core/layout-section';
 import { HeaderSection } from '../core/header-section';
-import { SettingsButton } from '../components/settings-button';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { AccountDrawer } from '../components/account-drawer';
 import { ThemeButton } from '../components/theme-button';
+import { Typography } from '@mui/material';
+import { useProductIdea } from 'src/app/product-idea-provider';
+
+
 
 // ----------------------------------------------------------------------
 
@@ -30,10 +29,13 @@ export type SimpleLayoutProps = {
   content?: {
     compact?: boolean;
   };
+  menuButtons?: Array<React.ReactNode>;
 };
 
-export function SimpleLayout({ sx, children, header, content }: SimpleLayoutProps) {
+export function SimpleLayout({ sx, children, header, content, menuButtons }: SimpleLayoutProps) {
   const layoutQuery: Breakpoint = 'md';
+
+  const { name: productName } = useProductIdea();
 
   return (
     <LayoutSection
@@ -51,14 +53,29 @@ export function SimpleLayout({ sx, children, header, content }: SimpleLayoutProp
                 This is an info Alert.
               </Alert>
             ),
-            leftArea: <Logo />,
+            leftArea: <Box sx={{ display: 'flex', alignItems: 'center' }}><Logo /><Box
+              component="h4"
+              typography="h4"
+              sx={{
+                fontSize: 24,
+                fontWeight: 700,
+                color: 'text.primary',
+                ml: 2,
+                mt: 4,
+              }}
+            >
+              {productName}
+            </Box></Box>,
             rightArea: (
               <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
+                <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }} sx={{ display: { xs: 'none', md: 'flex' } }}>
+                  {menuButtons}
+                </Box>
                 <ThemeButton />
                 <LanguageButton />
                 <AccountDrawer />
               </Box>
-            ),
+            )
           }}
         />
       }
@@ -81,6 +98,11 @@ export function SimpleLayout({ sx, children, header, content }: SimpleLayoutProp
           children
         )}
       </Main>
+      {menuButtons && <Box bottom={0} left={0} right={0} width="100%" sx={{ display: { xs: 'fixed', md: 'none' }, borderTop: '1px solid', borderColor: 'divider' }}>
+        <Box display="flex" alignItems="center" justifyContent="center" gap={1} width="100%" sx={{ '& > *': { minWidth: '100px' } }}>
+          {menuButtons}
+        </Box>
+      </Box>}
     </LayoutSection>
   );
 }

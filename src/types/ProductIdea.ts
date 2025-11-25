@@ -68,8 +68,8 @@ type GenericProductIdea<Text extends Translated | string> = {
   name: string;
   /** 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red' | 'lavender' **/
   themeColor: PrimaryColor;
-  /** The logo should be either 'panda' => cute logo or 'octopus' => more professional logo. */
-  logo: 'panda' | 'octopus';
+  /** The logo should be either 'panda' => cute logo, 'octopus' => more professional logo or 'dandelion' => more modern logo. */
+  logo: 'panda' | 'octopus' | 'dandelion';
   /** Minimum 3 features, maximum 5 features. */
   features: GenericFeature<Text>[];
   heroTexts: {

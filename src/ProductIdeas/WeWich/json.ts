@@ -5,7 +5,7 @@ export const WE_WISH_PRODUCT_IDEA: RawProductIdea = {
     "name": "We Wish",
     "isReady": true,
     "themeColor": "lavender",
-    "logo": "panda",
+    "logo": "dandelion",
     "features": [
         {
             "id": "multi-stores-wishlist",
