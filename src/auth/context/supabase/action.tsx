@@ -67,11 +67,11 @@ export const signInWithPassword = async ({
  * Sign in with Google
  *************************************** */
 export const signInWithGoogle = async () => {
+  console.log(window.location.origin);
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: `${window.location.origin}`,
-
+      redirectTo: `${window.location.origin}`
     },
   });
 
