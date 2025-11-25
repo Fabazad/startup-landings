@@ -3,10 +3,10 @@
 import { useAuthContext } from 'src/auth/hooks';
 import { useRouter } from 'next/navigation';
 import { SimpleLayout } from 'src/layouts/simple';
-import { AddButton } from 'src/sections/wewish/nav/AddButton';
-import { MyListsButton } from 'src/sections/wewish/nav/MyListsButton';
-import { NotificationsButton } from 'src/sections/wewish/nav/NotificationsButton';
-import { AddModalProvider } from 'src/sections/wewish/AddModal/provider';
+import { AddButton } from 'src/app/wewish/components/nav/AddButton';
+import { MyListsButton } from 'src/app/wewish/components/nav/MyListsButton';
+import { NotificationsButton } from 'src/app/wewish/components/nav/NotificationsButton';
+import { AddModalProvider } from 'src/app/wewish/components/AddModal/provider';
 
 // ----------------------------------------------------------------------
 

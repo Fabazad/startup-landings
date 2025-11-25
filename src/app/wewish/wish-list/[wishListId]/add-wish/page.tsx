@@ -1,4 +1,4 @@
-import { AddWish } from "src/sections/wewish/AddWish";
+import { AddWish } from "./AddWish";
 
 export default function AddWishPage({ params }: { params: { wishListId: string } }) {
     return <AddWish wishListId={params.wishListId} />;

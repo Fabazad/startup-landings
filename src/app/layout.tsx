@@ -43,7 +43,7 @@ function getThemeColorValue(themeColor: PrimaryColor): string {
   if (themeColor === 'purple') return secondary.main;
   if (themeColor === 'orange') return warning.main;
   if (themeColor === 'red') return error.main;
-  if (themeColor === 'lavender') return primary.main;
+  if (themeColor === 'lavender') return secondary.main;
   return primary.main;
 }
 

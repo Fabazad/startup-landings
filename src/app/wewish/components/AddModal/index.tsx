@@ -1,7 +1,8 @@
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Box, Divider, Typography } from "@mui/material";
 import Link from "next/link";
 import { useTranslate } from "src/locales";
-import { useMyWishLists } from "../hooks/useMyWishLists";
+import { useMyWishLists } from "../../hooks/useMyWishLists";
+import { Iconify } from "src/components/iconify";
 
 export const AddModal = ({ open, onClose }: { open: boolean, onClose: () => void }) => {
 
@@ -11,6 +12,8 @@ export const AddModal = ({ open, onClose }: { open: boolean, onClose: () => void
 
     return (
         <Dialog fullWidth maxWidth="sm" open={open} onClose={onClose} >
+            <Button onClick={onClose} sx={{ position: 'absolute', right: 16, top: 16 }}><Iconify icon="eva:close-fill" /></Button>
+
             <DialogTitle>{wishLists?.length ? t('wewish.addWish') : t('wewish.noLists')}</DialogTitle>
 
             <DialogContent>
