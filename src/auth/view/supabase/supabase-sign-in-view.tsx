@@ -92,9 +92,6 @@ export const SupabaseSignInView = () => {
     }
   };
 
-
-  console.log("origin", window.location.origin);
-
   const renderForm = (
     <Box gap={3} display="flex" flexDirection="column">
       <Field.Text name="email" label={t("auth.email")} InputLabelProps={{ shrink: true }} />

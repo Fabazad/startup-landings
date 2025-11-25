@@ -4,7 +4,7 @@ export const LanguageValue = { EN: 'en', FR: 'fr' } as const;
 export type LanguageValue = (typeof LanguageValue)[keyof typeof LanguageValue];
 export type Translated = Record<LanguageValue, string>;
 
-export const fallbackLng = LanguageValue.EN;
+export const fallbackLng = LanguageValue.FR;
 export const languages = Object.values(LanguageValue);
 export const defaultNS = 'common';
 export const cookieName = 'i18next';

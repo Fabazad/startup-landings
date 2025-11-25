@@ -79,10 +79,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = `${protocol}://${host}`;
 
   const imageUrl = `${baseUrl}${CONFIG.assetsDir}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.svg`;
-  const description = rawProductIdea.heroTexts.description.en;
+  const description = rawProductIdea.heroTexts.description.fr;
 
   // Generate keywords from product features
-  const keywords = [rawProductIdea.name, ...rawProductIdea.features.map((f) => f.title.en)].join(
+  const keywords = [rawProductIdea.name, ...rawProductIdea.features.map((f) => f.title.fr)].join(
     ', '
   );
 
@@ -113,8 +113,8 @@ export async function generateMetadata(): Promise<Metadata> {
           alt: rawProductIdea.name,
         },
       ],
-      locale: 'en_US',
-      alternateLocale: languages.filter((l) => l !== 'en').map((l) => (l === 'fr' ? 'fr_FR' : l)),
+      locale: 'fr_FR',
+      alternateLocale: languages.filter((l) => l !== 'fr').map((l) => (l === 'en' ? 'en_US' : l)),
     },
     twitter: {
       card: 'summary_large_image',

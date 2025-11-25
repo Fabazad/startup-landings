@@ -13,7 +13,7 @@ import { LanguageValue } from './config-locales';
 
 export const allLangs = [
   {
-    value: 'en' as LanguageValue,
+    value: LanguageValue.EN,
     label: 'English',
     countryCode: 'GB',
     adapterLocale: 'en',
@@ -23,7 +23,7 @@ export const allLangs = [
     },
   },
   {
-    value: 'fr' as LanguageValue,
+    value: LanguageValue.FR,
     label: 'French',
     countryCode: 'FR',
     adapterLocale: 'fr',

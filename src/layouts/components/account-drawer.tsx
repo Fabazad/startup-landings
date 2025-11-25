@@ -6,9 +6,7 @@ import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
 import Drawer from '@mui/material/Drawer';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
@@ -68,8 +66,6 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
 
   const { user } = useAuthContext();
 
-  console.log({ user });
-
   const displayName = user?.user_metadata?.full_name || user?.displayName;
 
   const renderAvatar = (
@@ -93,7 +89,7 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
       <AccountButton
         onClick={handleOpenDrawer}
         photoURL={user?.photoURL}
-        displayName={user?.displayName}
+        displayName={displayName}
         sx={sx}
         {...other}
       />
