@@ -1,24 +1,17 @@
 'use client';
 
 import type { Theme, SxProps, Breakpoint } from '@mui/material/styles';
-
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
-
 import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
-
 import { CONFIG } from 'src/config-global';
-
 import { Logo } from 'src/components/logo';
-
 import { Section } from './section';
 import { Main, Content } from './main';
 import { HeaderSection } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
-import { SettingsButton } from '../components/settings-button';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
+import { ThemeButton } from '../components/theme-button';
 
 // ----------------------------------------------------------------------
 
@@ -63,15 +56,8 @@ export function AuthSplitLayout({ sx, section, children, header }: AuthSplitLayo
             ),
             rightArea: (
               <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
-                {/* -- Help link -- */}
-                <Link
-                  href={paths.faqs}
-                  component={RouterLink}
-                  color="inherit"
-                  sx={{ typography: 'subtitle2' }}
-                >
-                  Need help?
-                </Link>
+                <ThemeButton />
+
 
                 {/* -- Settings button -- */}
                 <LanguageButton />

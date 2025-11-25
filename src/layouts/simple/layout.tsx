@@ -17,6 +17,7 @@ import { HeaderSection } from '../core/header-section';
 import { SettingsButton } from '../components/settings-button';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { AccountDrawer } from '../components/account-drawer';
+import { ThemeButton } from '../components/theme-button';
 
 // ----------------------------------------------------------------------
 
@@ -53,6 +54,7 @@ export function SimpleLayout({ sx, children, header, content }: SimpleLayoutProp
             leftArea: <Logo />,
             rightArea: (
               <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
+                <ThemeButton />
                 <LanguageButton />
                 <AccountDrawer />
               </Box>

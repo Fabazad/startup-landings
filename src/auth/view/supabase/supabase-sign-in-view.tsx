@@ -85,7 +85,7 @@ export const SupabaseSignInView = () => {
 
   const handleSignInWithGoogle = async () => {
     try {
-      await signInWithGoogle(currentLang.value);
+      await signInWithGoogle();
     } catch (error) {
       console.error(error);
       setErrorMsg(typeof error === 'string' ? error : error.message);
