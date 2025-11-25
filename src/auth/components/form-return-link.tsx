@@ -6,6 +6,8 @@ import { RouterLink } from 'src/routes/components';
 
 import { Iconify } from 'src/components/iconify';
 
+import { useTranslate } from 'src/locales';
+
 // ----------------------------------------------------------------------
 
 type FormReturnLinkProps = LinkProps & {
@@ -14,7 +16,10 @@ type FormReturnLinkProps = LinkProps & {
   label?: React.ReactNode;
 };
 
-export function FormReturnLink({ sx, href, children, label, icon, ...other }: FormReturnLinkProps) {
+export const FormReturnLink = ({ sx, href, children, label, icon, ...other }: FormReturnLinkProps) => {
+
+  const { t } = useTranslate();
+
   return (
     <Link
       component={RouterLink}
@@ -32,7 +37,7 @@ export function FormReturnLink({ sx, href, children, label, icon, ...other }: Fo
       {...other}
     >
       {icon || <Iconify width={16} icon="eva:arrow-ios-back-fill" />}
-      {label || 'Return to sign in'}
+      {label || t("auth.returnToSignIn")}
     </Link>
   );
 }

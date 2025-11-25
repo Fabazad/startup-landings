@@ -4,6 +4,7 @@ import { RawProductIdea } from 'src/types/ProductIdea';
 export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
   id: 'triply',
   name: 'Triply',
+  isReady: false,
   themeColor: 'orange',
   logo: 'panda',
   features: [

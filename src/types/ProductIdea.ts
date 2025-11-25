@@ -63,8 +63,10 @@ export type Plans = GenericPlans<string>;
 
 type GenericProductIdea<Text extends Translated | string> = {
   id: string;
+  /** By default false. */
+  isReady: boolean;
   name: string;
-  /** 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red' **/
+  /** 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red' | 'lavender' **/
   themeColor: PrimaryColor;
   /** The logo should be either 'panda' => cute logo or 'octopus' => more professional logo. */
   logo: 'panda' | 'octopus';

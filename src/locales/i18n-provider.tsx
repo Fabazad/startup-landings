@@ -10,7 +10,7 @@ import { localStorageGetItem } from 'src/utils/storage-available';
 
 import { CONFIG } from 'src/config-global';
 
-import { fallbackLng, i18nOptions } from './config-locales';
+import { fallbackLng, i18nOptions, cookieName } from './config-locales';
 
 import type { LanguageValue } from './config-locales';
 
@@ -29,7 +29,15 @@ if (CONFIG.isStaticExport) {
 
 const init = CONFIG.isStaticExport
   ? { ...i18nOptions(lng), detection: { caches: ['localStorage'] } }
-  : { ...i18nOptions(), detection: { caches: ['cookie'] } };
+  : {
+    ...i18nOptions(),
+    detection: {
+      order: ['cookie', 'localStorage', 'navigator'],
+      caches: ['localStorage', 'cookie'],
+      lookupCookie: cookieName,
+      cookieOptions: { path: '/', sameSite: 'strict' as const },
+    },
+  };
 
 i18next
   .use(LanguageDetector)

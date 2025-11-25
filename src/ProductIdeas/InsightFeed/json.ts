@@ -3,6 +3,7 @@ import { RawProductIdea } from 'src/types/ProductIdea';
 export const INSIGHTFEED_JSON: RawProductIdea = {
   id: 'insightfeed',
   name: 'Insight Feed',
+  isReady: false,
   themeColor: 'purple',
   logo: 'octopus',
   heroTexts: {

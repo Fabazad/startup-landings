@@ -3,6 +3,7 @@ import { RawProductIdea } from 'src/types/ProductIdea';
 export const VIBY_PRODUCT_IDEA: RawProductIdea = {
   id: 'viby',
   name: 'Viby',
+  isReady: false,
   themeColor: 'purple',
   logo: 'panda',
   features: [

@@ -7,11 +7,13 @@ import { enUS as enUSDate, frFR as frFRDate } from '@mui/x-date-pickers/locales'
 // data grid (MUI)
 import { enUS as enUSDataGrid, frFR as frFRDataGrid } from '@mui/x-data-grid/locales';
 
+import { LanguageValue } from './config-locales';
+
 // ----------------------------------------------------------------------
 
 export const allLangs = [
   {
-    value: 'en',
+    value: 'en' as LanguageValue,
     label: 'English',
     countryCode: 'GB',
     adapterLocale: 'en',
@@ -21,7 +23,7 @@ export const allLangs = [
     },
   },
   {
-    value: 'fr',
+    value: 'fr' as LanguageValue,
     label: 'French',
     countryCode: 'FR',
     adapterLocale: 'fr',

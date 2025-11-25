@@ -3,7 +3,8 @@ import { RawProductIdea } from "src/types/ProductIdea";
 export const WE_WISH_PRODUCT_IDEA: RawProductIdea = {
     "id": "we-wish",
     "name": "We Wish",
-    "themeColor": "red",
+    "isReady": true,
+    "themeColor": "lavender",
     "logo": "panda",
     "features": [
         {

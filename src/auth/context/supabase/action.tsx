@@ -12,6 +12,7 @@ import type {
 import { paths } from 'src/routes/paths';
 
 import { supabase } from 'src/lib/supabase';
+import { LanguageValue } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
@@ -26,6 +27,7 @@ export type SignUpParams = {
   password: string;
   firstName: string;
   lastName: string;
+  lang: LanguageValue;
   options?: SignUpWithPasswordCredentials['options'];
 };
 
@@ -68,7 +70,8 @@ export const signInWithGoogle = async () => {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: `${window.location.origin}${paths.dashboard.root}`,
+      redirectTo: `${window.location.origin}`,
+
     },
   });
 
@@ -88,13 +91,14 @@ export const signUp = async ({
   password,
   firstName,
   lastName,
+  lang,
 }: SignUpParams): Promise<AuthResponse> => {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
       emailRedirectTo: `${window.location.origin}${paths.dashboard.root}`,
-      data: { display_name: `${firstName} ${lastName}` },
+      data: { display_name: `${firstName} ${lastName}`, lang },
     },
   });
 
@@ -133,7 +137,7 @@ export const resetPassword = async ({
   email,
 }: ResetPasswordParams): Promise<{ data: {}; error: null } | { data: null; error: AuthError }> => {
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${window.location.origin}${paths.auth.supabase.updatePassword}`,
+    redirectTo: `${window.location.origin}${paths.auth.updatePassword}`,
   });
 
   if (error) {

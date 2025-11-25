@@ -8,6 +8,7 @@ import { TESTIMONIALS_TEXTS_SAMPLE } from './testimonialsTextsSample';
 export const INSIGHTFEED_PRODUCT_IDEA: RawProductIdea = {
   id: '1',
   name: 'Insight Feed',
+  isReady: false,
   themeColor: 'purple',
   logo: 'octopus',
   features: FEATURES_SAMPLE,

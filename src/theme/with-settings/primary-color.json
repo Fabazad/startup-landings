@@ -38,5 +38,13 @@
     "dark": "#B71833",
     "darker": "#7A0930",
     "contrastText": "#FFFFFF"
+  },
+  "lavender": {
+    "lighter": "#DCCDFB",
+    "light": "#CFBCF8",
+    "main": "#CBB3FF",
+    "dark": "#C2A5FF",
+    "darker": "#BEA0FF",
+    "contrastText": "#FFFFFF"
   }
 }

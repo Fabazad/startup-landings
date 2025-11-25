@@ -23,32 +23,34 @@ import { Form, Field } from 'src/components/hook-form';
 
 import { FormHead } from '../../components/form-head';
 import { updatePassword } from '../../context/supabase';
+import { useTranslate } from 'src/locales';
 
 // ----------------------------------------------------------------------
 
-export type UpdatePasswordSchemaType = zod.infer<typeof UpdatePasswordSchema>;
-
-export const UpdatePasswordSchema = zod
-  .object({
-    password: zod
-      .string()
-      .min(1, { message: 'Password is required!' })
-      .min(6, { message: 'Password must be at least 6 characters!' }),
-    confirmPassword: zod.string().min(1, { message: 'Confirm password is required!' }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords do not match!',
-    path: ['confirmPassword'],
-  });
-
-// ----------------------------------------------------------------------
-
-export function SupabaseUpdatePasswordView() {
+export const SupabaseUpdatePasswordView = () => {
   const router = useRouter();
+  const { t } = useTranslate();
 
   const [errorMsg, setErrorMsg] = useState('');
 
   const password = useBoolean();
+
+
+  const UpdatePasswordSchema = zod
+    .object({
+      password: zod
+        .string()
+        .min(1, { message: t("auth.passwordIsRequired") })
+        .min(6, { message: t("auth.passwordMustBeAtLeast6Characters") }),
+      confirmPassword: zod.string().min(1, { message: t("auth.confirmPasswordIsRequired") }),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: t("auth.passwordsDoNotMatch"),
+      path: ['confirmPassword'],
+    });
+
+  type UpdatePasswordSchemaType = zod.infer<typeof UpdatePasswordSchema>;
+
 
   const defaultValues = { password: '', confirmPassword: '' };
 
@@ -77,8 +79,8 @@ export function SupabaseUpdatePasswordView() {
     <Box gap={3} display="flex" flexDirection="column">
       <Field.Text
         name="password"
-        label="Password"
-        placeholder="6+ characters"
+        label={t("auth.password")}
+        placeholder={t("auth.passwordPlaceholder")}
         type={password.value ? 'text' : 'password'}
         InputLabelProps={{ shrink: true }}
         InputProps={{
@@ -94,7 +96,7 @@ export function SupabaseUpdatePasswordView() {
 
       <Field.Text
         name="confirmPassword"
-        label="Confirm password"
+        label={t("auth.confirmPassword")}
         type={password.value ? 'text' : 'password'}
         InputLabelProps={{ shrink: true }}
         InputProps={{
@@ -114,9 +116,9 @@ export function SupabaseUpdatePasswordView() {
         size="large"
         variant="contained"
         loading={isSubmitting}
-        loadingIndicator="Update password..."
+        loadingIndicator={t("auth.updatingPassword")}
       >
-        Update password
+        {t("auth.updatePassword")}
       </LoadingButton>
     </Box>
   );
@@ -125,8 +127,8 @@ export function SupabaseUpdatePasswordView() {
     <>
       <FormHead
         icon={<NewPasswordIcon />}
-        title="Update password"
-        description="Successful updates enable access using the new password."
+        title={t("auth.updatePassword")}
+        description={t("auth.updatePasswordDescription")}
       />
 
       {!!errorMsg && (

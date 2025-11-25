@@ -3,6 +3,7 @@ import { RawProductIdea } from 'src/types/ProductIdea';
 export const TRAIN_BACK_PRODUCT_IDEA: RawProductIdea = {
   id: 'train-back',
   name: 'Train Back',
+  isReady: false,
   themeColor: 'blue',
   logo: 'octopus',
   heroTexts: {

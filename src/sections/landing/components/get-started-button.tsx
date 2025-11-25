@@ -1,13 +1,13 @@
-import { Breakpoint, Button, ButtonProps, useTheme } from '@mui/material';
+import { Button, ButtonProps, useTheme } from '@mui/material';
 import { t } from 'i18next';
 import posthog from 'posthog-js';
 import { useProductIdea } from 'src/app/product-idea-provider';
+import { paths } from 'src/routes/paths';
 import {
   SubscriptionStep,
   useSubscription,
 } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
-
-const layoutQuery: Breakpoint = 'md';
+import Link from 'next/link';
 
 export const GetStartedButton = ({
   buttonName,
@@ -18,7 +18,7 @@ export const GetStartedButton = ({
 }) => {
   const { setOpenModal, subscriptionStep } = useSubscription();
   const theme = useTheme();
-  const { name: productName } = useProductIdea();
+  const { name: productName, isReady } = useProductIdea();
 
   const handleClick = () => {
     setOpenModal(true);
@@ -31,6 +31,19 @@ export const GetStartedButton = ({
     }
   };
   // rounded button
+
+  if (isReady) return (<Link href={paths.auth.signIn}>
+    <Button
+      variant={other.variant || 'contained'}
+      {...other}
+      sx={{
+        display: 'inline-flex',
+        borderRadius: '9999px',
+      }}
+    >
+      {t('landing.hero.buttons.get-started')}
+    </Button>
+  </Link>)
   return (
     <Button
       variant={other.variant || 'contained'}

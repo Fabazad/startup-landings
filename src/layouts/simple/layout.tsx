@@ -15,6 +15,8 @@ import { Main, CompactContent } from './main';
 import { LayoutSection } from '../core/layout-section';
 import { HeaderSection } from '../core/header-section';
 import { SettingsButton } from '../components/settings-button';
+import { LanguageButton } from 'src/sections/landing/components/language-button';
+import { AccountDrawer } from '../components/account-drawer';
 
 // ----------------------------------------------------------------------
 
@@ -51,17 +53,8 @@ export function SimpleLayout({ sx, children, header, content }: SimpleLayoutProp
             leftArea: <Logo />,
             rightArea: (
               <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
-                {/* -- Help link -- */}
-                <Link
-                  href={paths.faqs}
-                  component={RouterLink}
-                  color="inherit"
-                  sx={{ typography: 'subtitle2' }}
-                >
-                  Need help?
-                </Link>
-                {/* -- Settings button -- */}
-                <SettingsButton />
+                <LanguageButton />
+                <AccountDrawer />
               </Box>
             ),
           }}

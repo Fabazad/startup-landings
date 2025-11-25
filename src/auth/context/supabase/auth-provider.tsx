@@ -63,6 +63,34 @@ export function AuthProvider({ children }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Handle OAuth callback with language parameter
+  useEffect(() => {
+    const handleOAuthLanguage = async () => {
+      if (typeof window === 'undefined') return;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const lang = urlParams.get('lang');
+
+      if (lang && state.user) {
+        try {
+          // Update user metadata with language
+          await supabase.auth.updateUser({
+            data: { lang }
+          });
+
+          // Clean up URL parameter
+          urlParams.delete('lang');
+          const newUrl = `${window.location.pathname}${urlParams.toString() ? `?${urlParams.toString()}` : ''}`;
+          window.history.replaceState({}, '', newUrl);
+        } catch (error) {
+          console.error('Failed to update user language:', error);
+        }
+      }
+    };
+
+    handleOAuthLanguage();
+  }, [state.user]);
+
   // ----------------------------------------------------------------------
 
   const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
@@ -73,12 +101,12 @@ export function AuthProvider({ children }: Props) {
     () => ({
       user: state.user
         ? {
-            ...state.user,
-            id: state.user?.id,
-            accessToken: state.user?.access_token,
-            displayName: `${state.user?.user_metadata.display_name}`,
-            role: state.user?.role ?? 'admin',
-          }
+          ...state.user,
+          id: state.user?.id,
+          accessToken: state.user?.access_token,
+          displayName: `${state.user?.user_metadata.display_name}`,
+          role: state.user?.role ?? 'admin',
+        }
         : null,
       checkUserSession,
       loading: status === 'loading',

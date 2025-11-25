@@ -17,7 +17,7 @@ export type SettingsDrawerProps = {
   hideColorScheme?: boolean;
 };
 
-export type PrimaryColor = 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red';
+export type PrimaryColor = 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red' | 'lavender';
 
 export type SettingsState = {
   fontFamily: string;

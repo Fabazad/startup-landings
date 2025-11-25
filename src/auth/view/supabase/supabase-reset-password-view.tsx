@@ -17,22 +17,25 @@ import { Form, Field } from 'src/components/hook-form';
 import { FormHead } from '../../components/form-head';
 import { resetPassword } from '../../context/supabase';
 import { FormReturnLink } from '../../components/form-return-link';
+import { useTranslate } from 'src/locales';
+
+
 
 // ----------------------------------------------------------------------
 
-export type ResetPasswordSchemaType = zod.infer<typeof ResetPasswordSchema>;
-
-export const ResetPasswordSchema = zod.object({
-  email: zod
-    .string()
-    .min(1, { message: 'Email is required!' })
-    .email({ message: 'Email must be a valid email address!' }),
-});
-
-// ----------------------------------------------------------------------
-
-export function SupabaseResetPasswordView() {
+export const SupabaseResetPasswordView = () => {
   const router = useRouter();
+  const { t } = useTranslate();
+
+  const ResetPasswordSchema = zod.object({
+    email: zod
+      .string()
+      .min(1, { message: (t("auth.emailIsRequired")) })
+      .email({ message: (t("auth.emailMustBeAValidEmailAddress")) }),
+  });
+
+  type ResetPasswordSchemaType = zod.infer<typeof ResetPasswordSchema>;
+
 
   const defaultValues = {
     email: '',
@@ -52,7 +55,7 @@ export function SupabaseResetPasswordView() {
     try {
       await resetPassword({ email: data.email });
 
-      router.push(paths.auth.supabase.verify);
+      router.push(paths.auth.verify);
     } catch (error) {
       console.error(error);
     }
@@ -63,7 +66,7 @@ export function SupabaseResetPasswordView() {
       <Field.Text
         autoFocus
         name="email"
-        label="Email address"
+        label={t("auth.email")}
         placeholder="example@gmail.com"
         InputLabelProps={{ shrink: true }}
       />
@@ -74,9 +77,9 @@ export function SupabaseResetPasswordView() {
         type="submit"
         variant="contained"
         loading={isSubmitting}
-        loadingIndicator="Send request..."
+        loadingIndicator={t("auth.sendRequest")}
       >
-        Send request
+        {t("auth.sendRequest")}
       </LoadingButton>
     </Box>
   );
@@ -85,15 +88,15 @@ export function SupabaseResetPasswordView() {
     <>
       <FormHead
         icon={<PasswordIcon />}
-        title="Forgot your password?"
-        description={`Please enter the email address associated with your account and we'll email you a link to reset your password.`}
+        title={t("auth.forgotPassword")}
+        description={t("auth.resetPasswordDescription")}
       />
 
       <Form methods={methods} onSubmit={onSubmit}>
         {renderForm}
       </Form>
 
-      <FormReturnLink href={paths.auth.supabase.signIn} />
+      <FormReturnLink href={paths.auth.signIn} />
     </>
   );
 }

@@ -29,6 +29,9 @@ export function useTranslate(ns?: string) {
       try {
         const langChangePromise = i18n.changeLanguage(newLang);
 
+        // Note: i18next LanguageDetector automatically saves to localStorage and cookie
+        // when configured with caches: ['localStorage', 'cookie']
+
         const currentMessages = messages[newLang] || messages.en;
 
         toast.promise(langChangePromise, {
