@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { CONFIG } from 'src/config-global';
 import { WelcomeEmail } from 'src/emails/WelcomeEmail';
-import { supabase } from 'src/lib/supabase';
+import { supabase } from 'src/lib/supabase-client';
 import { LanguageValue } from 'src/locales';
 import { z } from 'zod';
 

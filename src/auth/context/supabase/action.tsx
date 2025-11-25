@@ -11,7 +11,7 @@ import type {
 
 import { paths } from 'src/routes/paths';
 
-import { supabase } from 'src/lib/supabase';
+import { supabase } from 'src/lib/supabase-client';
 import { LanguageValue } from 'src/locales';
 
 // ----------------------------------------------------------------------

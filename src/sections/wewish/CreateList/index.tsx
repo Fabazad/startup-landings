@@ -1,0 +1,73 @@
+'use client';
+
+import { useTranslate } from "src/locales";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form } from "src/components/hook-form";
+import { Box, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Field } from "src/components/hook-form";
+import axios from 'axios';
+import { useAuthContext } from "src/auth/hooks";
+import { supabase } from "src/lib/supabase-client";
+
+
+export const CreateList = () => {
+    const { t } = useTranslate();
+    const { user } = useAuthContext();
+    console.log(user);
+
+
+    const defaultValues = {
+        listName: '',
+        description: '',
+    };
+    const createListFormSchema = z.object({
+        listName: z.string().min(1, { message: t("wewish.listNameIsRequired") }),
+        description: z.string().min(1, { message: t("wewish.descriptionIsRequired") }).optional(),
+
+    });
+    type CreateListFormSchemaType = z.infer<typeof createListFormSchema>;
+
+    const methods = useForm<CreateListFormSchemaType>({
+        resolver: zodResolver(createListFormSchema),
+        defaultValues,
+    });
+
+    const {
+        handleSubmit,
+        formState: { isSubmitting },
+    } = methods;
+
+    const onSubmit = async () => {
+        const data = methods.getValues();
+
+        await supabase.from('wish-lists').insert({
+            name: data.listName,
+            description: data.description,
+            user_id: user?.id,
+        });
+    };
+
+    return (
+        <Box sx={{ mt: 3, p: 10 }}>
+            <Form methods={methods} onSubmit={handleSubmit(onSubmit)} >
+                <Typography variant="h5">{t('wewish.addListTitle')}</Typography>
+                <Typography>{t('wewish.addListDescription')}</Typography>
+                <Field.Text name="listName" label="List Name" sx={{ mt: 3 }} autoFocus placeholder={`Ex: John Doe's List`} />
+                <Field.Text name="description" label="Description" sx={{ mt: 3 }} />
+                <LoadingButton
+                    color="primary"
+                    variant="contained"
+                    type="submit"
+                    loading={isSubmitting}
+                    sx={{ borderRadius: '9999px', mt: 3 }}
+
+                >
+                    {t('wewish.addList')}
+                </LoadingButton>
+            </Form>
+        </Box>
+    );
+}   

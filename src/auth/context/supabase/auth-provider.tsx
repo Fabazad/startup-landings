@@ -6,7 +6,7 @@ import { useSetState } from 'src/hooks/use-set-state';
 
 import axios from 'src/utils/axios';
 
-import { supabase } from 'src/lib/supabase';
+import { supabase } from 'src/lib/supabase-client';
 
 import { AuthContext } from '../auth-context';
 
