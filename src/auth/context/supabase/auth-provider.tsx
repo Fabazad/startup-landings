@@ -105,6 +105,7 @@ export function AuthProvider({ children }: Props) {
           id: state.user?.id,
           accessToken: state.user?.access_token,
           displayName: `${state.user?.user_metadata.display_name}`,
+          photoURL: state.user?.user_metadata?.avatar_url || state.user?.user_metadata?.picture,
           role: state.user?.role ?? 'admin',
         }
         : null,

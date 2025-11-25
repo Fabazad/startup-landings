@@ -17,7 +17,7 @@ export const AddModal = ({ open, onClose }: { open: boolean, onClose: () => void
                 {wishLists?.length && (
                     <Box sx={{ mb: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
                         {wishLists?.map((list) => (
-                            <Link key={list.id} href={`/app/wish-list/${list.id}/add-wish`}>
+                            <Link key={list.id} href={`/wewish/wish-list/${list.id}/add-wish`}>
                                 <Button variant="contained" sx={{ width: '100%', borderRadius: '99999px' }}>
                                     {list.name}
                                 </Button>
@@ -30,7 +30,7 @@ export const AddModal = ({ open, onClose }: { open: boolean, onClose: () => void
                 </Divider>
             </DialogContent>
             <DialogActions>
-                <Link href={"/app/wish-list"} style={{ width: '100%' }}>
+                <Link href={"/wewish/wish-list"} style={{ width: '100%' }}>
                     <Button variant="contained" sx={{ width: '100%', borderRadius: '99999px' }}>
                         {wishLists?.length ? t('wewish.addList') : t('wewish.addFirstList')}
                     </Button>

@@ -16,7 +16,7 @@ export default function Page() {
   const router = useRouter();
 
   if (isReady && authenticated) {
-    router.push('/app');
+    router.push('/wewish');
     return;
   }
 

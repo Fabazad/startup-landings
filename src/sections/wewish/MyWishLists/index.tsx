@@ -12,7 +12,7 @@ export const MyWishLists = () => {
         <ul>
             {wishLists?.map((list) => (
                 <li key={list.id}>
-                    <Link href={`/app/wish-list/${list.id}`}>
+                    <Link href={`/wewish/wish-list/${list.id}`}>
                         {list.name}
                     </Link>
                 </li>
