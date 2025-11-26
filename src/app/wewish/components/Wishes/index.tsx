@@ -1,36 +1,25 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import { useWishList } from "src/app/wewish/hooks/useWishList";
-import { Box, Button, Divider, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { useWishes } from "../../hooks/useWishes";
+import { Box, Button, Divider } from "@mui/material";
+import { Typography } from "@mui/material";
 import Link from "next/link";
 import { SplashScreen } from "src/components/loading-screen";
 
-export const WishList = ({ wishListId }: { wishListId: string }) => {
+export const Wishes = ({ wishListId }: { wishListId?: string }) => {
 
-    const { wishList, isLoading } = useWishList({ wishListId });
-    const router = useRouter();
+    const { wishes, isLoading, deleteWish, isDeletingWish } = useWishes({ wishListId });
 
-    if (isLoading) {
-        return <SplashScreen />;
-    }
-
-    if (wishList === undefined) {
-        router.push('/not-found');
-        return;
-    }
+    if (isLoading) return <SplashScreen />;
 
     return (
         <Box>
-            <Typography variant="h3">{wishList.name}</Typography>
-            <Typography variant="body2">{wishList.description}</Typography>
-            <Divider />
-            {wishList.wishes.length > 0 && (
+            <Typography variant="h3">Wishes</Typography>
+            {wishes.length > 0 && (
                 <Box>
                     <Link href={`/wewish/wish-list/${wishListId}/add-wish`}>
                         <Button variant="contained" sx={{ borderRadius: 9999 }}>Ajouter un souhait</Button>
                     </Link>
-                    {wishList.wishes.map((wish) => (
+                    {wishes.map((wish) => (
                         <Box key={`wish-${wish.id}`}>
                             <Typography variant="h4">{wish.name}</Typography>
                             <Typography variant="body2">{wish.description}</Typography>
@@ -41,11 +30,14 @@ export const WishList = ({ wishListId }: { wishListId: string }) => {
                             <Link href={`/wewish/wish/${wish.id}/book`}>
                                 <Button variant="contained" sx={{ borderRadius: 9999 }}>Réserver</Button>
                             </Link>
+                            <LoadingButton variant="contained" sx={{ borderRadius: 9999 }} onClick={() => deleteWish(wish.id)} loading={isDeletingWish === wish.id}>
+                                Supprimer
+                            </LoadingButton>
                         </Box>
                     ))}
                 </Box>
             )}
-            {wishList.wishes.length === 0 && (
+            {wishes.length === 0 && (
                 <Box>
                     <Divider />
                     <Typography variant="body2">Aucun souhait</Typography>

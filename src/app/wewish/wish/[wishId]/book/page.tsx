@@ -15,7 +15,7 @@ import { LoadingButton } from "@mui/lab";
 
 export default function BookPage({ params }: { params: { wishId: string } }) {
     const { wishId } = params;
-    const { wish, isLoading } = useWish({ wishId });
+    const { wish, isLoading, bookWishByUser, bookWishByName, isBooking } = useWish({ wishId });
     const router = useRouter();
     const { user } = useAuthContext();
 
@@ -36,29 +36,32 @@ export default function BookPage({ params }: { params: { wishId: string } }) {
         formState: { isSubmitting },
     } = methods;
 
-
     const bookyByUser = async (userId: string) => {
-        const { data, error } = await supabase
-            .from('wishes')
-            .update({ bookedByUser: userId })
-            .eq('id', wishId);
-
-        if (error) toast.error(error.message);
-        else toast.success('Souhait réservé');
+        try {
+            await bookWishByUser(userId);
+            toast.success('Souhait réservé');
+        } catch (error) {
+            toast.error(error.message);
+        }
     }
 
     const onSubmit = async () => {
         const data = methods.getValues();
         console.log(data);
-        const { error } = await supabase.from('wishes').update({ bookedByName: data.bookedByName }).eq('id', wishId);
-        if (error) toast.error(error.message);
-        else toast.success('Souhait réservé');
+        try {
+            await bookWishByName(data.bookedByName);
+            toast.success('Souhait réservé');
+        } catch (error) {
+            toast.error(error.message);
+        }
     }
 
     const renderForm = () => (
         <Form methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Field.Text name="bookedByName" label="Réserver par" />
-            <LoadingButton variant="contained" sx={{ borderRadius: 9999 }} type="submit" loading={isSubmitting}>Réserver</LoadingButton>
+            <LoadingButton variant="contained" sx={{ borderRadius: 9999 }} type="submit" loading={isSubmitting}>
+                Réserver
+            </LoadingButton>
         </Form>
     )
 
@@ -68,9 +71,13 @@ export default function BookPage({ params }: { params: { wishId: string } }) {
             <Typography variant="h3">{wish.name}</Typography>
             <Typography variant="body2">{wish.description}</Typography>
             <Typography variant="body2">{wish.price}</Typography>
+            {wish.bookedByUser && <Typography variant="body2">Souhait déjà réservé par {wish.bookedByUser.full_name}</Typography>}
+            {wish.bookedByName && <Typography variant="body2">Souhait déjà réservé par {wish.bookedByName}</Typography>}
             {user ? (
                 <Box>
-                    <Button variant="contained" sx={{ borderRadius: 9999 }} onClick={() => bookyByUser(user.id)}>Réserver par moi</Button>
+                    <LoadingButton variant="contained" sx={{ borderRadius: 9999 }} onClick={() => bookyByUser(user.id)} loading={isBooking}>
+                        Réserver par moi
+                    </LoadingButton>
                     <Divider sx={{ my: 2 }}><Typography variant="body2">OU</Typography></Divider>
                     {renderForm()}
                 </Box>

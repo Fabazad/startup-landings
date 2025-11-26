@@ -10,15 +10,19 @@ import { LoadingButton } from "@mui/lab";
 import { Field } from "src/components/hook-form";
 import { useAuthContext } from "src/auth/hooks";
 import { supabase } from "src/lib/supabase-client";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { WishList } from "src/app/wewish/types/WishList";
 
-
-export const CreateList = () => {
+export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
     const { t } = useTranslate();
     const { user } = useAuthContext();
+    const router = useRouter();
+
 
     const defaultValues = {
-        listName: '',
-        description: '',
+        listName: wishList?.name || '',
+        description: wishList?.description || '',
     };
     const createListFormSchema = z.object({
         listName: z.string().min(1, { message: t("wewish.listNameIsRequired") }),
@@ -38,13 +42,31 @@ export const CreateList = () => {
     } = methods;
 
     const onSubmit = async () => {
-        const data = methods.getValues();
+        const values = methods.getValues();
 
-        await supabase.from('wish-lists').insert({
-            name: data.listName,
-            description: data.description,
-            user_id: user?.id,
-        });
+        if (wishList) {
+            const { error } = await supabase.from('wish-lists').update({
+                name: values.listName,
+                description: values.description,
+            }).eq('id', wishList.id);
+
+            if (error) toast.error(error.message);
+            else toast.success('Liste mise à jour');
+
+            router.push(`/wewish/wish-list/${wishList.id}`);
+        } else {
+            const { data, error } = await supabase.from('wish-lists').insert({
+                name: values.listName,
+                description: values.description,
+                user_id: user?.id,
+            }).select("id").single<{ id: number }>();
+
+            if (error) toast.error(error.message);
+
+            if (!data) return;
+
+            router.push(`/wewish/wish-list/${data.id}`);
+        }
     };
 
     return (
@@ -62,7 +84,7 @@ export const CreateList = () => {
                     sx={{ borderRadius: '9999px', mt: 3 }}
 
                 >
-                    {t('wewish.addList')}
+                    {wishList ? t('wewish.updateList') : t('wewish.addList')}
                 </LoadingButton>
             </Form>
         </Box>

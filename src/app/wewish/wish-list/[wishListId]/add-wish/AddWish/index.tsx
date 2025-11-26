@@ -13,11 +13,13 @@ import { Box, Divider } from '@mui/material';
 import { supabase } from 'src/lib/supabase-client';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 // ----------------------------------------------------------------------
 
 export const AddWish = ({ wishListId }: { wishListId: string }) => {
     const { t } = useTranslate();
+    const router = useRouter();
 
     const WishSchema = z.object({
         productUrl: z.string().optional(),
@@ -55,7 +57,7 @@ export const AddWish = ({ wishListId }: { wishListId: string }) => {
                 ...data,
                 listId: wishListId,
             });
-
+            router.push(`/wewish/wish-list/${wishListId}`);
         } catch (error) {
             toast.error('Une erreur est survenue : ' + error);
         }

@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useCallback, useMemo, useState, useEffect } from 'react';
+import { createContext, useContext, useCallback, useMemo, useRef, useEffect } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { Dialog } from '@mui/material';
 
@@ -27,8 +27,8 @@ export const UseModalProvider = ({ children }: { children: React.ReactNode }) =>
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
-    // Store registered modals
-    const [modals, setModals] = useState<Map<string, React.ReactNode>>(new Map());
+    // Store registered modals using ref to avoid state updates during render
+    const modalsRef = useRef<Map<string, React.ReactNode>>(new Map());
 
     // Check which modal should be open from URL
     const currentModalName = searchParams.get('modal');
@@ -48,10 +48,10 @@ export const UseModalProvider = ({ children }: { children: React.ReactNode }) =>
     }, [pathname, router, searchParams]);
 
     const registerModal = useCallback(({ modalContent, modalName }: ModalRegistration) => {
-        setModals(prev => new Map(prev).set(modalName, modalContent));
+        modalsRef.current.set(modalName, modalContent);
     }, []);
 
-    const currentModalContent = currentModalName ? modals.get(currentModalName) : null;
+    const currentModalContent = currentModalName ? modalsRef.current.get(currentModalName) : null;
 
     const contextValue = useMemo(() => ({
         openModal,

@@ -1,5 +1,5 @@
-import { CreateList } from "src/app/wewish/wish-list/CreateList";
+import { UpsertList } from "src/app/wewish/components/UpsertList";
 
 export default function CreateListPage() {
-    return <CreateList />;
+    return <UpsertList />;
 }
