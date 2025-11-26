@@ -11,6 +11,8 @@ import { RouterLink } from 'src/routes/components';
 
 import { CONFIG } from 'src/config-global';
 import { varAlpha, bgGradient } from 'src/theme/styles';
+import { useProductIdea } from 'src/app/product-idea-provider';
+import { Reviews } from 'src/app/auth/sign-up/reviews';
 
 // ----------------------------------------------------------------------
 
@@ -32,12 +34,13 @@ export function Section({
   method,
   layoutQuery,
   methods,
-  title = 'Manage the job',
-  imgUrl = `${CONFIG.assetsDir}/assets/illustrations/illustration-dashboard.webp`,
-  subtitle = 'More effectively with optimized workflows.',
+  title = 'Ce qu\'on dit de nous',
+  imgUrl,
+  subtitle,
   ...other
 }: SectionProps) {
   const theme = useTheme();
+  const { reviews } = useProductIdea();
 
   return (
     <Box
@@ -76,50 +79,16 @@ export function Section({
         )}
       </div>
 
+      {imgUrl && (
       <Box
         component="img"
         alt="Dashboard illustration"
         src={imgUrl}
-        sx={{ width: 1, aspectRatio: '4/3', objectFit: 'cover' }}
-      />
-
-      {!!methods?.length && method && (
-        <Box component="ul" gap={2} display="flex">
-          {methods.map((option) => {
-            const selected = method === option.label.toLowerCase();
-
-            return (
-              <Box
-                key={option.label}
-                component="li"
-                sx={{
-                  ...(!selected && {
-                    cursor: 'not-allowed',
-                    filter: 'grayscale(1)',
-                  }),
-                }}
-              >
-                <Tooltip title={option.label} placement="top">
-                  <Link
-                    component={RouterLink}
-                    href={option.path}
-                    sx={{
-                      ...(!selected && { pointerEvents: 'none' }),
-                    }}
-                  >
-                    <Box
-                      component="img"
-                      alt={option.label}
-                      src={option.icon}
-                      sx={{ width: 32, height: 32 }}
-                    />
-                  </Link>
-                </Tooltip>
-              </Box>
-            );
-          })}
-        </Box>
+        sx={{ width: 1, aspectRatio: '4/3', objectFit: 'cover', borderRadius: 2 }}
+        />
       )}
+
+      <Reviews />
     </Box>
   );
 }
