@@ -8,7 +8,6 @@ import { Form } from "src/components/hook-form";
 import { Box, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { Field } from "src/components/hook-form";
-import axios from 'axios';
 import { useAuthContext } from "src/auth/hooks";
 import { supabase } from "src/lib/supabase-client";
 
@@ -16,8 +15,6 @@ import { supabase } from "src/lib/supabase-client";
 export const CreateList = () => {
     const { t } = useTranslate();
     const { user } = useAuthContext();
-    console.log(user);
-
 
     const defaultValues = {
         listName: '',

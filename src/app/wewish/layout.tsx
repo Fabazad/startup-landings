@@ -7,6 +7,7 @@ import { AddButton } from 'src/app/wewish/components/nav/AddButton';
 import { MyListsButton } from 'src/app/wewish/components/nav/MyListsButton';
 import { NotificationsButton } from 'src/app/wewish/components/nav/NotificationsButton';
 import { AddModalProvider } from 'src/app/wewish/components/AddModal/provider';
+import { UseModalProvider } from 'src/app/wewish/hooks/useModal';
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +21,11 @@ export default function Layout({ children }: {
 
   if (unauthenticated) router.push("/")
 
-  return <AddModalProvider>
-    <SimpleLayout menuButtons={[<MyListsButton />, <AddButton />, <NotificationsButton />]}>{children}</SimpleLayout>
-  </AddModalProvider>;
+  return (
+    <AddModalProvider>
+      <UseModalProvider>
+        <SimpleLayout menuButtons={[<MyListsButton />, <AddButton />, <NotificationsButton />]}>{children}</SimpleLayout>
+      </UseModalProvider>
+    </AddModalProvider>
+  );
 }
