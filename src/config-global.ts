@@ -30,6 +30,7 @@ export type ConfigValue = {
   supabase: { url: string; key: string };
   posthog: { key: string; host: string };
   resend: { apiKey: string };
+  amazon: { affiliateTag: string; accessKey: string; secretKey: string };
 };
 
 // ----------------------------------------------------------------------
@@ -98,4 +99,9 @@ export const CONFIG: ConfigValue = {
   resend: {
     apiKey: process.env.RESEND_API_KEY ?? '',
   },
+  amazon: {
+    affiliateTag: process.env.AMAZON_AFFILIATION_TAG ?? '',
+    accessKey: process.env.AMAZON_ACCESS_KEY ?? '',
+    secretKey: process.env.AMAZON_SECRET_KEY ?? '',
+  }
 };

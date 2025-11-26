@@ -9,6 +9,9 @@ const nextConfig = {
   env: {
     BUILD_STATIC_EXPORT: isStaticExport,
   },
+  experimental: {
+    serverComponentsExternalPackages: ['re2', 'url-regex-safe'],
+  },
   modularizeImports: {
     '@mui/icons-material': {
       transform: '@mui/icons-material/{{member}}',

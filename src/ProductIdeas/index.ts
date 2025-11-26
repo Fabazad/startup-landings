@@ -3,7 +3,7 @@ import { INSIGHTFEED_JSON } from './InsightFeed/json';
 import { TRAIN_BACK_PRODUCT_IDEA } from './TrainBack/json';
 import { TRIPLY_PRODUCT_IDEA } from './Triply';
 import { VIBY_PRODUCT_IDEA } from './Viby/json';
-import { WE_WISH_PRODUCT_IDEA } from './WeWich/json';
+import { WE_WISH_PRODUCT_IDEA } from './WeWish/json';
 
 
 export const PRODUCT_IDEA_NAMES = {
