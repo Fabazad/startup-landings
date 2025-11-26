@@ -16,7 +16,8 @@ export const WishList = ({ wishListId }: { wishListId: string }) => {
     }
 
     if (wishList === undefined) {
-        return router.push('/not-found');
+        router.push('/not-found');
+        return;
     }
 
     return (
