@@ -8,7 +8,7 @@ export const AddModal = ({ open, onClose }: { open: boolean, onClose: () => void
 
     const { t } = useTranslate();
 
-    const { data: wishLists } = useMyWishLists();
+    const { wishLists } = useMyWishLists();
 
     return (
         <Dialog fullWidth maxWidth="sm" open={open} onClose={onClose} >
