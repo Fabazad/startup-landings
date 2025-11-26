@@ -97,14 +97,14 @@ export function SimpleLayout({ sx, children, header, content, menuButtons }: Sim
           children
         )}
       </Main>
-      {
-        menuButtons && <Box bottom={0} left={0} right={0} width="100%" sx={{ display: { xs: 'fixed', md: 'none' }, borderTop: '1px solid', borderColor: 'divider' }}>
-          <Box display="flex" alignItems="center" justifyContent="center" gap={1} width="100%" sx={{ '& > *': { minWidth: '100px' } }}>
-            {menuButtons.map((button, index) => (
+      {menuButtons && (
+        <Box bottom={0} left={0} right={0} width="100%" sx={{ bgcolor: 'background.default', position: 'sticky', borderTop: '1px solid', borderColor: 'divider', display: { xs: 'flex', md: 'none' }, alignItems: 'center', justifyContent: 'center', gap: 1, '& > *': { minWidth: '100px' } }} >
+          {
+            menuButtons.map((button, index) => (
               <React.Fragment key={index}>{button}</React.Fragment>
-            ))}
-          </Box>
-        </Box>
+            ))
+          }
+        </Box>)
       }
     </LayoutSection >
   );
