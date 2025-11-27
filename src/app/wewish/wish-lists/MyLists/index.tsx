@@ -64,8 +64,8 @@ export const MyLists = () => {
 
     return (
         <Box>
-            <Box sx={{ width: '100%' }}>
-                <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Box sx={{ width: '100%' }} >
+                <Box sx={{ display: "flex", justifyContent: "center", borderBottom: '1px solid', borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                         <Tab label="Mes listes" />
                         <Tab label="Listes suivies" />

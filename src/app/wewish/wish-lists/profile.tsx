@@ -6,6 +6,7 @@ import { useAuthContext } from 'src/auth/hooks';
 import { m } from 'framer-motion';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
+import Link from 'next/link';
 
 export const Profile = () => {
   const theme = useTheme();
@@ -22,13 +23,13 @@ export const Profile = () => {
 
   const spacing = 2;
 
-  const height = 180 ;
+  const height = 180;
 
-  const widthButton = 200 ;
+  const widthButton = 200;
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Box sx={{ width: '100%', display: 'flex', flexDirection : 'row', justifyContent : 'space-between' }}>
+      <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', mt: 3, height: height }}>
           <Box
             sx={{
@@ -77,27 +78,29 @@ export const Profile = () => {
               }}
             />
           </Box>
-          <Box sx={{display:"flex", flexDirection:"column", gap:"10px", height:"100%", mt:"30px"}}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: "10px", height: "100%", mt: "30px" }}>
             <Typography variant="h3" sx={{ ml: 3 }}>
               {displayName}
             </Typography>
             <Typography variant="h6" sx={{ ml: 3, fontWeight: 400 }}>
               <b>0</b> liste •  <b>1</b>  liste suivie • <b>16</b> Envies
             </Typography>
-          </Box>      
+          </Box>
         </Box>
-        <Box sx={{height : '100%'}}>
-            <Box sx={{display : 'flex', flexDirection:'column', justifyContent : 'center', height : '100%', gap:'15px'}}>
-                <Button variant="contained" sx={{ borderRadius: 999, px: 1, py : 1, width : widthButton }}>
+        <Box sx={{ height: '100%' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: '15px' }}>
+            <Link href="/wewish/wish-list">
+              <Button variant="contained" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }}>
                 <Typography variant="h6" sx={{ fontWeight: 400 }}>
                   Créer une liste
-            </Typography>
-                </Button>
-                <Button variant="outlined" sx={{ borderRadius: 999, px: 1, py : 1, width : widthButton}}>
-                <Typography variant="h6" sx={{ fontWeight: 400 }}>
-                  Modifier mon profil
-            </Typography>                </Button>
-            </Box>
+                </Typography>
+              </Button>
+            </Link>
+            <Button variant="outlined" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }}>
+              <Typography variant="h6" sx={{ fontWeight: 400 }}>
+                Modifier mon profil
+              </Typography>                </Button>
+          </Box>
         </Box>
       </Box>
     </Box>
