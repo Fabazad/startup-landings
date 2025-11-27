@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Wish } from "../types/Wish";
 import { useAuthContext } from "src/auth/hooks";
 
-export const useWishes = ({ wishListId }: { wishListId?: string }): { wishes: Array<Wish>; isLoading: boolean; deleteWish: (wishId: number) => Promise<void>, isDeletingWish: number | null } => {
+export const useWishes = ({ wishListId }: { wishListId?: number }): { wishes: Array<Wish>; isLoading: boolean; deleteWish: (wishId: number) => Promise<void>, isDeletingWish: number | null } => {
 
     const [isDeletingWish, setIsDeletingWish] = useState<number | null>(null);
     const { user } = useAuthContext();

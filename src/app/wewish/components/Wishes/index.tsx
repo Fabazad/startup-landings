@@ -1,3 +1,5 @@
+"use client"
+
 import { LoadingButton } from "@mui/lab";
 import { useWishes } from "../../hooks/useWishes";
 import { Box, Button, Divider } from "@mui/material";
@@ -5,7 +7,7 @@ import { Typography } from "@mui/material";
 import Link from "next/link";
 import { SplashScreen } from "src/components/loading-screen";
 
-export const Wishes = ({ wishListId }: { wishListId?: string }) => {
+export const Wishes = ({ wishListId }: { wishListId?: number }) => {
 
     const { wishes, isLoading, deleteWish, isDeletingWish } = useWishes({ wishListId });
 

@@ -1,18 +1,16 @@
-'use client';
-
 import { Box, Button, Typography } from "@mui/material";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useWish } from "src/app/wewish/hooks/useWish";
-import { SplashScreen } from "src/components/loading-screen";
+import { NotFoundView, View500 } from "src/sections/error";
+import { getWishQuery } from "../../queries/wish";
 
-export default function WishPage({ params }: { params: { wishId: string } }) {
+export default async function WishPage({ params }: { params: { wishId: string } }) {
 
-    const { wish, isLoading } = useWish({ wishId: params.wishId });
-    const router = useRouter();
+    const wishResult = await getWishQuery(params.wishId);
 
-    if (isLoading) return <SplashScreen />;
-    if (wish === undefined) return router.push('/not-found');
+    if (!wishResult.success) return <View500 />;
+    const wish = wishResult.wish;
+    if (!wish) return <NotFoundView />;
+
 
     return <Box>
         <Typography variant="h3">{wish.name}</Typography>

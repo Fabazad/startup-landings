@@ -8,8 +8,7 @@ const supabaseKey = CONFIG.supabase.key;
 export async function createSupabase() {
     const cookieStore = await cookies();
 
-    console.log(cookieStore);
-
+    console.log("Cookie store", cookieStore.getAll())
     return createServerClient(
         supabaseUrl,
         supabaseKey,
@@ -19,8 +18,9 @@ export async function createSupabase() {
                     return cookieStore.getAll()
                 },
                 setAll(cookiesToSet) {
+                    console.log("SET COOKIES")
                     try {
-                        cookiesToSet.forEach(({ name, value }) => cookieStore.set(name, value))
+                        cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
                     } catch {
                         // The `setAll` method was called from a Server Component.
                         // This can be ignored if you have middleware refreshing

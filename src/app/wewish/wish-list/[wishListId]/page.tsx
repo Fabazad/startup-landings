@@ -1,37 +1,23 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import { useWishList } from "src/app/wewish/hooks/useWishList";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import Link from "next/link";
-import { SplashScreen } from "src/components/loading-screen";
 import { toast } from "sonner";
 import { LoadingButton } from "@mui/lab";
 import { Wishes } from "../../components/Wishes";
+import { deleteWishListQuery, getWishListQuery } from "../../queries/wishList";
+import { View500 } from "src/sections/error";
+import { NotFoundView } from "src/sections/error";
+import { redirect } from "next/navigation";
+import { DeleteButton } from "./DeleteButton";
 
-export default function WishListPage({ params }: { params: { wishListId: string } }) {
+
+export default async function WishListPage({ params }: { params: { wishListId: number } }) {
     const { wishListId } = params;
-    const { wishList, isLoading, deleteList, isDeleting } = useWishList({ wishListId });
-    const router = useRouter();
 
-    if (isLoading) {
-        return <SplashScreen />;
-    }
+    const result = await getWishListQuery(wishListId);
 
-    if (wishList === undefined) {
-        router.push('/not-found');
-        return;
-    }
-
-    const deleteListHandler = async () => {
-        if (!confirm("Êtes-vous sûr de vouloir supprimer cette liste ?")) return;
-        try {
-            await deleteList();
-            router.push('/wewish/wish-lists');
-        } catch (error) {
-            toast.error(error.message);
-        }
-    };
+    if (!result.success) return <View500 />
+    const wishList = result.wishList;
+    if (!wishList) return <NotFoundView />
 
     return (
         <Box>
@@ -40,9 +26,7 @@ export default function WishListPage({ params }: { params: { wishListId: string 
             <Link href={`/wewish/wish-list/${wishListId}/update`}>
                 <Button variant="contained" sx={{ borderRadius: 9999 }}>Modifier</Button>
             </Link>
-            <LoadingButton variant="contained" sx={{ borderRadius: 9999 }} onClick={deleteListHandler} loading={isDeleting}>
-                Supprimer
-            </LoadingButton>
+            <DeleteButton wishListId={wishListId} />
             <Divider />
             <Wishes wishListId={wishListId} />
         </Box>
