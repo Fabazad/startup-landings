@@ -7,7 +7,7 @@ import { useAuthContext } from "src/auth/hooks/use-auth-context";
 import { EmptyContent } from "src/components/empty-content";
 import Link from "next/link";
 import { Iconify } from "src/components/iconify";
-import { WishListItem2 } from "src/app/wewish/components/WishListItem/index copy";
+import { WishListItem } from "src/app/wewish/components/WishListItem";
 
 export const MyWishLists = () => {
 
@@ -39,7 +39,7 @@ export const MyWishLists = () => {
             }}>
             {wishLists?.map((list) => (
                 <Box key={list.id}>
-                    <WishListItem2 wishList={list} />
+                    <WishListItem wishList={list} />
                 </Box>
             ))}
         </Box>)

@@ -26,8 +26,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
     };
     const createListFormSchema = z.object({
         listName: z.string().min(1, { message: t("wewish.listNameIsRequired") }),
-        description: z.string().min(1, { message: t("wewish.descriptionIsRequired") }).optional(),
-
+        description: z.string().optional(),
     });
     type CreateListFormSchemaType = z.infer<typeof createListFormSchema>;
 
