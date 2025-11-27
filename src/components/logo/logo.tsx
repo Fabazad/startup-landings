@@ -1,16 +1,10 @@
-'use client';
-
 import type { BoxProps } from '@mui/material/Box';
-
 import { forwardRef } from 'react';
-
 import Box from '@mui/material/Box';
-
 import { RouterLink } from 'src/routes/components';
-
-import { useProductIdea } from 'src/app/product-idea-provider';
 import { CONFIG } from 'src/config-global';
 import { logoClasses } from './classes';
+import { PrimaryColor } from '../settings';
 
 // ----------------------------------------------------------------------
 
@@ -18,14 +12,17 @@ export type LogoProps = BoxProps & {
   href?: string;
   isSingle?: boolean;
   disableLink?: boolean;
+  themeColor: PrimaryColor;
+  logo: string;
+  productName: string;
 };
 
 export const Logo = forwardRef<HTMLDivElement, LogoProps>(
-  (
-    { width, href = '/', height, isSingle = true, disableLink = false, className, sx, ...other },
+  async (
+    { width, href = '/', height, isSingle = true, disableLink = false, className, themeColor, logo, productName, sx, ...other },
     ref
   ) => {
-    const { logo, themeColor } = useProductIdea();
+
 
     const logoUrl = `${CONFIG.assetsDir}/logo/${themeColor}-${logo}.svg`;
 
@@ -65,6 +62,20 @@ export const Logo = forwardRef<HTMLDivElement, LogoProps>(
           aria-label="Insight Feed Logo"
           alt="Insight Feed Logo"
         />
+        <Box
+          component="h4"
+          typography="h4"
+          sx={{
+            fontSize: 24,
+            fontWeight: 700,
+            color: 'text.primary',
+            mt: 1,
+            ml: 1,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {productName}
+        </Box>
       </Box>
     );
   }

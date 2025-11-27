@@ -1,26 +1,16 @@
-'use client';
-
 import { LandingView } from 'src/sections/landing/view';
-import { useAuthContext } from 'src/auth/hooks/use-auth-context';
-import { useProductIdea } from 'src/app/product-idea-provider';
-import { useRouter } from 'next/navigation';
-import { SplashScreen } from 'src/components/loading-screen';
+import { getProductIdea } from '../getProductIdea';
+import { getAuthUser } from 'src/auth/getAuthUser';
+import { redirect } from 'next/navigation';
 
 
-export default function Page() {
+export default async function Page() {
 
-  const { isReady } = useProductIdea();
+  const [{ isReady }, user] = await Promise.all([getProductIdea(), getAuthUser()])
 
-  const { authenticated, loading } = useAuthContext();
 
-  const router = useRouter();
+  if (isReady && user) return redirect('/wewish');
 
-  if (isReady && authenticated) {
-    router.push('/wewish');
-    return;
-  }
-
-  if (loading) return <SplashScreen />;
 
   return (
     <>

@@ -1,4 +1,6 @@
-import { Button, ButtonProps, useTheme } from '@mui/material';
+"use client";
+
+import { Button, ButtonProps } from '@mui/material';
 import { t } from 'i18next';
 import posthog from 'posthog-js';
 import { useProductIdea } from 'src/app/product-idea-provider';
@@ -17,7 +19,6 @@ export const GetStartedButton = ({
   buttonName: string;
 }) => {
   const { setOpenModal, subscriptionStep } = useSubscription();
-  const theme = useTheme();
   const { name: productName, isReady } = useProductIdea();
 
   const handleClick = () => {

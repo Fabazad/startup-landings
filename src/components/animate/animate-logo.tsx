@@ -7,14 +7,17 @@ import Box from '@mui/material/Box';
 import { varAlpha } from 'src/theme/styles';
 
 import { Logo } from '../logo';
+import { PrimaryColor } from '../settings';
 
 // ----------------------------------------------------------------------
 
 export type AnimateLogoProps = BoxProps & {
-  logo?: React.ReactNode;
+  themeColor: PrimaryColor;
+  logo: string;
+  productName: string;
 };
 
-export function AnimateLogo1({ logo, sx, ...other }: AnimateLogoProps) {
+export function AnimateLogo({ logo, sx, themeColor, productName, ...other }: AnimateLogoProps) {
   return (
     <Box
       sx={{
@@ -39,7 +42,7 @@ export function AnimateLogo1({ logo, sx, ...other }: AnimateLogoProps) {
         }}
         sx={{ display: 'inline-flex' }}
       >
-        {logo ?? <Logo disableLink width={64} height={64} />}
+        {logo ?? <Logo disableLink width={64} height={64} themeColor={themeColor} logo={logo} productName={productName} />}
       </Box>
 
       <Box
@@ -73,49 +76,6 @@ export function AnimateLogo1({ logo, sx, ...other }: AnimateLogoProps) {
           height: 1,
           position: 'absolute',
           border: (theme) => `solid 8px ${varAlpha(theme.vars.palette.primary.darkChannel, 0.24)}`,
-        }}
-      />
-    </Box>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-export function AnimateLogo2({ logo, sx, ...other }: AnimateLogoProps) {
-  return (
-    <Box
-      alignItems="center"
-      justifyContent="center"
-      sx={{
-        width: 96,
-        height: 96,
-        position: 'relative',
-        alignItems: 'center',
-        display: 'inline-flex',
-        justifyContent: 'center',
-        ...sx,
-      }}
-      {...other}
-    >
-      {logo ?? <Logo sx={{ zIndex: 9 }} />}
-
-      <Box
-        component={m.div}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 10, ease: 'linear', repeat: Infinity }}
-        sx={{
-          width: 1,
-          height: 1,
-          opacity: 0.16,
-          borderRadius: '50%',
-          position: 'absolute',
-          transition: (theme) =>
-            theme.transitions.create(['opacity'], {
-              easing: theme.transitions.easing.easeInOut,
-              duration: theme.transitions.duration.shorter,
-            }),
-          background: (theme) =>
-            `linear-gradient(135deg, ${varAlpha(theme.vars.palette.primary.mainChannel, 0)} 50%, ${theme.vars.palette.primary.main} 100%)`,
         }}
       />
     </Box>

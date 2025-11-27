@@ -1,27 +1,18 @@
-'use client';
-
 import type { Breakpoint, SxProps, Theme } from '@mui/material/styles';
-
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
-import { useColorScheme } from '@mui/material/styles';
-
 import { Logo } from 'src/components/logo';
-
 import { HeaderSection } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
 import { HomeFooter } from './footer';
 import { Main } from './main';
-
 import { Stack } from '@mui/material';
-import { useEffect } from 'react';
-import { useProductIdea } from 'src/app/product-idea-provider';
-import { useSettingsContext } from 'src/components/settings'
 import { GetStartedButton } from '../../sections/landing/components/get-started-button';
 import { LanguageButton } from '../../sections/landing/components/language-button';
 import { NavDesktop } from './nav/desktop/NavDesktop';
 import { NavMobile } from './nav/mobile/NavMobile';
 import { ThemeButton } from '../components/theme-button';
+import { getProductIdea } from 'src/app/getProductIdea';
 
 // ----------------------------------------------------------------------
 
@@ -33,15 +24,9 @@ export type MainLayoutProps = {
   };
 };
 
-export function LandingLayout({ sx, children, header }: MainLayoutProps) {
-  const { setMode } = useColorScheme();
-  const { name } = useProductIdea();
-  const { colorScheme } = useSettingsContext();
+export async function LandingLayout({ sx, children, header }: MainLayoutProps) {
 
-  useEffect(() => {
-    if (!colorScheme) setMode('system');
-  }, []);
-
+  const { logo, themeColor, name: productName } = await getProductIdea();
 
   const layoutQuery: Breakpoint = 'md';
 
@@ -64,20 +49,7 @@ export function LandingLayout({ sx, children, header }: MainLayoutProps) {
               <>
                 <NavMobile />
                 {/* -- Logo -- */}
-                <Logo />
-                <Box
-                  component="h4"
-                  typography="h4"
-                  sx={{
-                    fontSize: 24,
-                    fontWeight: 700,
-                    color: 'text.primary',
-                    ml: 2,
-                    mt: 4,
-                  }}
-                >
-                  {name}
-                </Box>
+                <Logo logo={logo} productName={productName} themeColor={themeColor} />
               </>
             ),
             rightArea: (

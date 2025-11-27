@@ -1,3 +1,5 @@
+"use client";
+
 import type { FabProps } from '@mui/material/Fab';
 
 import { useMotionValueEvent, useScroll } from 'framer-motion';

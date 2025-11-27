@@ -8,7 +8,6 @@ const supabaseKey = CONFIG.supabase.key;
 export async function createSupabase() {
     const cookieStore = await cookies();
 
-    console.log("Cookie store", cookieStore.getAll())
     return createServerClient(
         supabaseUrl,
         supabaseKey,

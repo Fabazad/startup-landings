@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Link, Stack } from '@mui/material';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { MegaMenuHorizontal } from 'src/components/mega-menu';

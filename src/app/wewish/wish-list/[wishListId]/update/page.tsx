@@ -1,19 +1,13 @@
-'use client';
-
 import { UpsertList } from "src/app/wewish/components/UpsertList";
-import { useWishList } from "src/app/wewish/hooks/useWishList";
-import { SplashScreen } from "src/components/loading-screen";
-import { useRouter } from "next/navigation";
+import { getWishListQuery } from "src/app/wewish/queries/wishList";
+import { View500 } from "src/sections/error";
 
-export default function UpdateListPage({ params }: { params: { wishListId: number } }) {
+export default async function UpdateListPage({ params }: { params: { wishListId: number } }) {
     const { wishListId } = params;
 
-    const { wishList, isLoading } = useWishList({ wishListId });
+    const res = await getWishListQuery(wishListId);
 
-    const router = useRouter();
+    if (!res.success) return <View500 />
 
-    if (isLoading) return <SplashScreen />;
-    if (!wishList) return router.push('/wewish/wish-lists');
-
-    return <UpsertList wishList={wishList} />;
+    return <UpsertList wishList={res.wishList} />;
 }

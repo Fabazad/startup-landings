@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from '@mui/material';
 import { Iconify } from 'src/components/iconify';
 import { useAddModal } from 'src/app/wewish/components/AddModal/provider';

@@ -1,8 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import Link from "next/link";
-import { getAuthUser } from "../queries/user";
+import { getAuthUser } from "../../../auth/getAuthUser";
 import { getUserWishLists } from "../queries/wishList";
 import { View403, View500 } from "src/sections/error";
+import { DeleteWishListButton } from "../components/DeleteWishListButton";
 
 export default async function WishListsPage() {
 
@@ -25,7 +26,7 @@ export default async function WishListsPage() {
                         <Link href={`/wewish/wish-list/${list.id}`}>
                             <Button variant="contained" sx={{ borderRadius: 9999 }}>Voir</Button>
                         </Link>
-                        <Button variant="contained" sx={{ borderRadius: 9999 }}>Supprimer</Button>
+                        <DeleteWishListButton wishListId={list.id} />
                         <Link href={`/wewish/wish-list/${list.id}/update`}>
                             <Button variant="contained" sx={{ borderRadius: 9999 }}>Modifier</Button>
                         </Link>

@@ -1,5 +1,3 @@
-'use client';
-
 import type { Theme, SxProps, Breakpoint } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
@@ -10,8 +8,8 @@ import { HeaderSection } from '../core/header-section';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { AccountDrawer } from '../components/account-drawer';
 import { ThemeButton } from '../components/theme-button';
-import { useProductIdea } from 'src/app/product-idea-provider';
 import React from 'react';
+import { getProductIdea } from 'src/app/getProductIdea';
 
 // ----------------------------------------------------------------------
 
@@ -27,10 +25,10 @@ export type SimpleLayoutProps = {
   menuButtons?: Array<React.ReactNode>;
 };
 
-export function SimpleLayout({ sx, children, header, content, menuButtons }: SimpleLayoutProps) {
+export async function SimpleLayout({ sx, children, header, content, menuButtons }: SimpleLayoutProps) {
   const layoutQuery: Breakpoint = 'md';
 
-  const { name: productName } = useProductIdea();
+  const { logo, themeColor, name: productName } = await getProductIdea();
 
   return (
     <LayoutSection
@@ -48,20 +46,7 @@ export function SimpleLayout({ sx, children, header, content, menuButtons }: Sim
               </Alert>
             ),
             leftArea: <>
-              <Logo />
-              <Box
-                component="h4"
-                typography="h4"
-                sx={{
-                  fontSize: 24,
-                  fontWeight: 700,
-                  color: 'text.primary',
-                  ml: 2,
-                  mt: 4,
-                }}
-              >
-                {productName}
-              </Box>
+              <Logo logo={logo} productName={productName} themeColor={themeColor} />
             </>,
             rightArea: (
               <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>

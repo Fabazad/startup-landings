@@ -1,3 +1,5 @@
+"use client";
+
 import type { Breakpoint, SxProps, Theme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
@@ -18,6 +20,7 @@ import { FacebookIcon, InstagramIcon, LinkedinIcon, TwitterIcon } from 'src/asse
 
 import { Logo } from 'src/components/logo';
 import { useTranslate } from 'src/locales';
+import { useProductIdea } from 'src/app/product-idea-provider';
 
 // ----------------------------------------------------------------------
 
@@ -50,6 +53,8 @@ export type FooterProps = {
 export function Footer({ layoutQuery, sx }: FooterProps) {
   const theme = useTheme();
 
+  const { name: productName, themeColor, logo } = useProductIdea()
+
   return (
     <Box component="footer" sx={{ position: 'relative', bgcolor: 'background.default', ...sx }}>
       <Divider />
@@ -62,7 +67,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
           [theme.breakpoints.up(layoutQuery)]: { textAlign: 'unset' },
         }}
       >
-        <Logo />
+        <Logo logo={logo} productName={productName} themeColor={themeColor} />
 
         <Grid
           container

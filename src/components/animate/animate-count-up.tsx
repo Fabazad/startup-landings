@@ -1,3 +1,5 @@
+"use client";
+
 import type { TypographyProps } from '@mui/material/Typography';
 import type { UseInViewOptions } from 'framer-motion';
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Menu, MenuItem, SxProps, Theme } from '@mui/material';
 import React from 'react';
 import { FlagIcon } from 'src/components/iconify';

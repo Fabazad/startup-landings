@@ -15,7 +15,7 @@ import { LoadingButton } from "@mui/lab";
 
 export default function BookPage({ params }: { params: { wishId: string } }) {
     const { wishId } = params;
-    const { wish, isLoading, bookWishByUser, bookWishByName, isBooking } = useWish({ wishId });
+    const { wish, bookWishByUser, bookWishByName, isBooking } = useWish({ wishId });
     const router = useRouter();
     const { user } = useAuthContext();
 
@@ -28,7 +28,6 @@ export default function BookPage({ params }: { params: { wishId: string } }) {
         defaultValues: { bookedByName: '' }
     });
 
-    if (isLoading) return <SplashScreen />;
     if (wish === undefined) return router.push('/not-found');
 
     const {

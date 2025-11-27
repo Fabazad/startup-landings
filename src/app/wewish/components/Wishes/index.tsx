@@ -5,13 +5,10 @@ import { useWishes } from "../../hooks/useWishes";
 import { Box, Button, Divider } from "@mui/material";
 import { Typography } from "@mui/material";
 import Link from "next/link";
-import { SplashScreen } from "src/components/loading-screen";
 
 export const Wishes = ({ wishListId }: { wishListId?: number }) => {
 
-    const { wishes, isLoading, deleteWish, isDeletingWish } = useWishes({ wishListId });
-
-    if (isLoading) return <SplashScreen />;
+    const { wishes, deleteWish, isDeletingWish } = useWishes({ wishListId });
 
     return (
         <Box>

@@ -1,13 +1,10 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
 import Link from "next/link";
-import { toast } from "sonner";
-import { LoadingButton } from "@mui/lab";
 import { Wishes } from "../../components/Wishes";
-import { deleteWishListQuery, getWishListQuery } from "../../queries/wishList";
+import { getWishListQuery } from "../../queries/wishList";
 import { View500 } from "src/sections/error";
 import { NotFoundView } from "src/sections/error";
-import { redirect } from "next/navigation";
-import { DeleteButton } from "./DeleteButton";
+import { DeleteWishListButton } from "../../components/DeleteWishListButton";
 
 
 export default async function WishListPage({ params }: { params: { wishListId: number } }) {
@@ -26,7 +23,7 @@ export default async function WishListPage({ params }: { params: { wishListId: n
             <Link href={`/wewish/wish-list/${wishListId}/update`}>
                 <Button variant="contained" sx={{ borderRadius: 9999 }}>Modifier</Button>
             </Link>
-            <DeleteButton wishListId={wishListId} />
+            <DeleteWishListButton wishListId={wishListId} />
             <Divider />
             <Wishes wishListId={wishListId} />
         </Box>

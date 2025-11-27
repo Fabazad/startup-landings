@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect, useCallback, cloneElement } from 'react';
 
 import Stack from '@mui/material/Stack';

@@ -1,3 +1,5 @@
+"use client";
+
 import { Drawer, Link } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';

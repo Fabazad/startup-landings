@@ -97,7 +97,6 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     keywords,
     icons: `${CONFIG.assetsDir}/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.ico`,
-    themeColor: getThemeColorValue(rawProductIdea.themeColor),
     alternates,
     openGraph: {
       type: 'website',
