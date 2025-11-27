@@ -8,7 +8,9 @@ export default async function Page() {
 
   const [{ isReady }, userRes] = await Promise.all([getProductIdea(), getAuthUser()])
 
-  if (isReady && userRes.success) return redirect('/wewish');
+  console.log(userRes)
+
+  if (isReady && userRes.success && userRes.user) return redirect('/wewish');
 
 
   return (

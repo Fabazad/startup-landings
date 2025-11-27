@@ -94,7 +94,7 @@ export const signUp = async ({
     email,
     password,
     options: {
-      emailRedirectTo: `${window.location.origin}${paths.dashboard.root}`,
+      emailRedirectTo: `${window.location.origin}/auth/callback`,
       data: { display_name: `${firstName} ${lastName}`, lang },
     },
   });

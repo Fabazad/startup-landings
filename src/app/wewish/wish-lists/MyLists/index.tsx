@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "src/routes/hooks/use-search-params";
 import { MyWishLists } from "./MyWishLists";
 import { MyArchivedWishLists } from "./MyArchivedWishLists";
+import { FollowedWishLists } from "./FollowedWishLists";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -24,7 +25,7 @@ function CustomTabPanel(props: TabPanelProps) {
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
-            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+            {value === index && <Box sx={{ py: 3 }}>{children}</Box>}
         </div>
     );
 }
@@ -78,7 +79,7 @@ export const MyLists = () => {
                     <MyWishLists />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
-                    Item Two
+                    <FollowedWishLists />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={2}>
                     <MyArchivedWishLists />

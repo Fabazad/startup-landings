@@ -7,22 +7,27 @@ import { NotFoundView } from "src/sections/error";
 import { ArchiveWishListButton } from "../../components/WishListItem/ArchiveWishListButton";
 import { DeleteWishListButton } from "../../components/WishListItem/DeleteWishListButton";
 import { getAuthUser } from "src/auth/getAuthUser";
+import { FollowWishListButton } from "../../components/WishListItem/FollowWishListButton";
+import { UnfollowWishListButton } from "../../components/WishListItem/UnfollowWishListButton";
 
 export default async function WishListPage({ params }: { params: { wishListId: number } }) {
     const { wishListId } = params;
 
-    const [result, userRes] = await Promise.all([getWishListQuery(wishListId), getAuthUser()]);
+    const userRes = await getAuthUser()
+    if (!userRes.success) return <View500 />
+    const user = userRes.user;
 
-    if (!result.success || !userRes.success) return <View500 />
+    const result = await getWishListQuery(wishListId, user?.id);
+
+    if (!result.success) return <View500 />
     const wishList = result.wishList;
     if (!wishList) return <NotFoundView />
-    const user = userRes.user;
 
     return (
         <Box>
             <Typography variant="h3">{wishList.name}</Typography>
             <Typography variant="body2">{wishList.description}</Typography>
-            {wishList.user_id === user.id ? (
+            {wishList.user_id === user?.id && (
                 <>
                     <Link href={`/wewish/wish-list/${wishListId}/update`}>
                         <Button variant="contained" sx={{ borderRadius: 9999 }}>Modifier</Button>
@@ -31,7 +36,9 @@ export default async function WishListPage({ params }: { params: { wishListId: n
                     <DeleteWishListButton wishListId={wishListId} />
                     <Divider />
                 </>
-            ) : (<Button variant="contained" sx={{ borderRadius: 9999 }}>Suivre la liste</Button>)}
+            )}
+            {user && !wishList.isFollowedByMe && (<FollowWishListButton wishListId={wishListId} userId={user.id} />)}
+            {user && wishList.isFollowedByMe && (<UnfollowWishListButton wishListId={wishListId} userId={user.id} />)}
 
             <Wishes wishListId={wishListId} />
         </Box >

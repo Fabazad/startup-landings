@@ -6,25 +6,23 @@ import { WishList } from '../types/WishList';
 
 // ----------------------------------------------------------------------
 
-export function useMyWishLists({ archived }: { archived: boolean }): { wishLists: WishList[]; isLoading: boolean; deleteOne: (id: string) => Promise<void> } {
-    const { authenticated, user } = useAuthContext();
+export function useMyWishLists({ archived, userId }: { archived: boolean, userId?: string }): { wishLists: WishList[]; isLoading: boolean; deleteOne: (id: string) => Promise<void> } {
 
     const { data: wishLists, isLoading, refetch } = useQuery({
-        queryKey: ['wish-lists', user?.id, archived],
+        queryKey: ['my-wish-lists', userId, archived],
         queryFn: async () => {
-            if (!user?.id) throw new Error('User not authenticated');
+            if (!userId) return [];
 
             if (archived) {
-                const res = await getArchivedWishListsQuery(user.id);
+                const res = await getArchivedWishListsQuery(userId);
                 if (!res.success) throw new Error(res.errorCode);
                 return res.wishLists;
             } else {
-                const res = await getUnarchivedWishListsQuery(user.id);
+                const res = await getUnarchivedWishListsQuery(userId);
                 if (!res.success) throw new Error(res.errorCode);
                 return res.wishLists;
             }
         },
-        enabled: authenticated, // Only run query if user is authenticated
     });
 
     const deleteOne = async (id: string) => {

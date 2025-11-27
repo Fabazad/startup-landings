@@ -3,16 +3,18 @@ import { supabase } from "src/lib/supabase-client";
 import { WishList } from "../types/WishList";
 import { useState } from "react";
 import { getWishListQuery } from "../queries/wishList";
+import { useAuthContext } from "src/auth/hooks";
 
 export const useWishList = ({ wishListId }: { wishListId?: number }): { wishList?: WishList; isLoading: boolean; deleteList: () => Promise<void>, isDeleting: boolean } => {
     if (!wishListId) return { wishList: undefined, isLoading: false, deleteList: () => Promise.resolve(), isDeleting: false };
 
+    const { user } = useAuthContext();
     const [isDeleting, setIsDeleting] = useState(false);
 
     const { data: wishList, isLoading } = useQuery<WishList | undefined>({
-        queryKey: ['wish-list', wishListId],
+        queryKey: ['wish-list', wishListId, user],
         queryFn: async () => {
-            const result = await getWishListQuery(wishListId);
+            const result = await getWishListQuery(wishListId, user?.id);
 
             if (!result.success) throw result.errorCode;
             return result.wishList;

@@ -73,8 +73,9 @@ export const SupabaseSignInView = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await signInWithPassword({ email: data.email, password: data.password });
+      const res = await signInWithPassword({ email: data.email, password: data.password });
       await checkUserSession?.();
+      console.log("data", res.data)
 
       router.push("/wewish");
     } catch (error) {

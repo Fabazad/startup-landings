@@ -3,12 +3,13 @@ import Link from "next/link";
 import { useTranslate } from "src/locales";
 import { useMyWishLists } from "../../hooks/useMyWishLists";
 import { Iconify } from "src/components/iconify";
+import { useAuthContext } from "src/auth/hooks/use-auth-context";
 
 export const AddModal = ({ open, onClose }: { open: boolean, onClose: () => void }) => {
 
     const { t } = useTranslate();
-
-    const { wishLists } = useMyWishLists({ archived: false });
+    const { user } = useAuthContext();
+    const { wishLists } = useMyWishLists({ archived: false, userId: user?.id })
 
     return (
         <Dialog fullWidth maxWidth="sm" open={open} onClose={onClose} >

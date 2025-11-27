@@ -6,6 +6,7 @@ export const wishListSchema = z.object({
     description: z.string().optional(),
     archivedAt: z.date().nullable(),
     user_id: z.string(),
+    isFollowedByMe: z.boolean(),
 });
 
 export type WishList = z.infer<typeof wishListSchema>;
