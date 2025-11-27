@@ -64,7 +64,6 @@ export const MyLists = () => {
 
     return (
         <Box>
-            <h1>Mes listes de souhaits</h1>
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
