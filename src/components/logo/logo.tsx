@@ -18,7 +18,7 @@ export type LogoProps = BoxProps & {
 };
 
 export const Logo = forwardRef<HTMLDivElement, LogoProps>(
-  async (
+  (
     { width, href = '/', height, isSingle = true, disableLink = false, className, themeColor, logo, productName, sx, ...other },
     ref
   ) => {

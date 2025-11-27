@@ -1,14 +1,10 @@
+"use client";
+
 import type { BoxProps } from '@mui/material/Box';
 import type { Breakpoint } from '@mui/material/styles';
-
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Tooltip from '@mui/material/Tooltip';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-
-import { RouterLink } from 'src/routes/components';
-
 import { CONFIG } from 'src/config-global';
 import { varAlpha, bgGradient } from 'src/theme/styles';
 import { useProductIdea } from 'src/app/product-idea-provider';
@@ -80,11 +76,11 @@ export function Section({
       </div>
 
       {imgUrl && (
-      <Box
-        component="img"
-        alt="Dashboard illustration"
-        src={imgUrl}
-        sx={{ width: 1, aspectRatio: '4/3', objectFit: 'cover', borderRadius: 2 }}
+        <Box
+          component="img"
+          alt="Dashboard illustration"
+          src={imgUrl}
+          sx={{ width: 1, aspectRatio: '4/3', objectFit: 'cover', borderRadius: 2 }}
         />
       )}
 

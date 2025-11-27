@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar, Box, Rating, Stack, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import { m } from 'framer-motion';

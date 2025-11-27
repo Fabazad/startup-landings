@@ -1,5 +1,7 @@
+"use client";
+
 import type { EmblaCarouselType } from 'embla-carousel';
-import type {} from 'embla-carousel-autoplay';
+import type { } from 'embla-carousel-autoplay';
 
 import { useCallback, useEffect, useState } from 'react';
 

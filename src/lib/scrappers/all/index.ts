@@ -85,8 +85,6 @@ export const scrapAll = async (url: string): Promise<
         // 4. Run Custom Logic (Best for Price and Gallery Images)
         const { price, extraImages } = extractPriceAndImages($);
 
-        console.log(metadata, price, extraImages);
-
 
         // 6. Merge Image Sources (Deduplicate)
         const images = new Set<string>();

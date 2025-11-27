@@ -46,7 +46,6 @@ export default function BookPage({ params }: { params: { wishId: string } }) {
 
     const onSubmit = async () => {
         const data = methods.getValues();
-        console.log(data);
         try {
             await bookWishByName(data.bookedByName);
             toast.success('Souhait réservé');

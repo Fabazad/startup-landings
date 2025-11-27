@@ -9,7 +9,6 @@ export const getImages = (item: Item): Array<string> => {
     ? [item.Images.Primary.Large.URL]
     : [];
 
-  console.log("item.Images", item.Images)
   const variants = item.Images?.Variant as Variants | undefined;
   const variantsUrls = variants
     ? variants.map((v) => v?.Large?.URL).filter<string>((u) => typeof u === "string")

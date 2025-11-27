@@ -3,7 +3,6 @@ import { CONFIG } from 'src/config-global';
 
 export const amazonRequest = async ({ asin }: { asin: string }) => {
     try {
-        console.log(CONFIG.amazon);
         const request = new GetItemsRequest(
             {
                 ItemIdType: "ASIN",

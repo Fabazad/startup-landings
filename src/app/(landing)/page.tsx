@@ -6,10 +6,9 @@ import { redirect } from 'next/navigation';
 
 export default async function Page() {
 
-  const [{ isReady }, user] = await Promise.all([getProductIdea(), getAuthUser()])
+  const [{ isReady }, userRes] = await Promise.all([getProductIdea(), getAuthUser()])
 
-
-  if (isReady && user) return redirect('/wewish');
+  if (isReady && userRes.success) return redirect('/wewish');
 
 
   return (

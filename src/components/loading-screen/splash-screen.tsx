@@ -3,8 +3,6 @@
 import type { BoxProps } from '@mui/material/Box';
 import Box from '@mui/material/Box';
 import Portal from '@mui/material/Portal';
-import { getProductIdea } from 'src/app/getProductIdea';
-import { useProductIdea } from 'src/app/product-idea-provider';
 import { AnimateLogo } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
@@ -14,8 +12,6 @@ type Props = BoxProps & {
 };
 
 export function SplashScreen({ portal = true, sx, ...other }: Props) {
-
-  const { themeColor, logo, name: productName } = useProductIdea()
 
   const content = (
     <Box sx={{ overflow: 'hidden' }}>
@@ -35,7 +31,7 @@ export function SplashScreen({ portal = true, sx, ...other }: Props) {
         }}
         {...other}
       >
-        <AnimateLogo themeColor={themeColor} logo={logo} productName={productName} />
+        <AnimateLogo />
       </Box>
     </Box>
   );

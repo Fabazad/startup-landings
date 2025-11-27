@@ -10,6 +10,7 @@ import { HeaderSection } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { ThemeButton } from '../components/theme-button';
+import { getProductIdea } from 'src/app/getProductIdea';
 
 // ----------------------------------------------------------------------
 
@@ -26,8 +27,10 @@ export type AuthSplitLayoutProps = {
   };
 };
 
-export function AuthSplitLayout({ sx, section, children, header }: AuthSplitLayoutProps) {
+export async function AuthSplitLayout({ sx, section, children, header }: AuthSplitLayoutProps) {
   const layoutQuery: Breakpoint = 'md';
+
+  const { name: productName, themeColor, logo } = await getProductIdea()
 
   return (
     <LayoutSection
@@ -49,7 +52,7 @@ export function AuthSplitLayout({ sx, section, children, header }: AuthSplitLayo
             leftArea: (
               <>
                 {/* -- Logo -- */}
-                <Logo />
+                <Logo themeColor={themeColor} logo={logo} productName={productName} />
               </>
             ),
             rightArea: (

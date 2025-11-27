@@ -165,6 +165,9 @@ export type HomeFooterProps = {
 
 export function HomeFooter({ sx }: HomeFooterProps) {
   const { t } = useTranslate();
+
+  const { name: productName, themeColor, logo } = useProductIdea()
+
   return (
     <Box
       component="footer"
@@ -177,7 +180,7 @@ export function HomeFooter({ sx }: HomeFooterProps) {
       }}
     >
       <Container>
-        <Logo />
+        <Logo themeColor={themeColor} logo={logo} productName={productName} />
         <Box sx={{ mt: 1, typography: 'caption' }}>
           © {t('common.allRightsReserved')}
           <br /> made by

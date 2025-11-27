@@ -17,7 +17,6 @@ export async function createSupabase() {
                     return cookieStore.getAll()
                 },
                 setAll(cookiesToSet) {
-                    console.log("SET COOKIES")
                     try {
                         cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
                     } catch {

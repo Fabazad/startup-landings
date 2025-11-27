@@ -15,9 +15,10 @@ export default async function Layout({ children }: {
 }) {
 
   const userRes = await getAuthUser();
-  if (!userRes.success) return <View500 />;
-  const user = userRes.user;
-  if (!user) return <View403 />;
+  if (!userRes.success) {
+    if (userRes.errorCode === "unauthorized") return <View403 />;
+    return <View500 />;
+  }
 
   return (
     <AddModalProvider>

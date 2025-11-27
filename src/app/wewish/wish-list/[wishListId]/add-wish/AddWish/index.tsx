@@ -67,7 +67,6 @@ export const AddWish = ({ wishListId }: { wishListId: string }) => {
         const value = e.target.value;
         const res = await axios.post<{ title?: string; price?: number; imageUrls?: string[] }>("/api/scrap", { url: value });
         const { title, price } = res.data;
-        console.log("update", title)
 
         if (title) {
             methods.setValue('name', title);

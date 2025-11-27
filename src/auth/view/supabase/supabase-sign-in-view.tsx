@@ -40,7 +40,7 @@ export const SupabaseSignInView = () => {
 
   const password = useBoolean();
 
-  const { t, currentLang } = useTranslate();
+  const { t } = useTranslate();
 
   const SignInSchema = zod.object({
     email: zod
@@ -76,7 +76,7 @@ export const SupabaseSignInView = () => {
       await signInWithPassword({ email: data.email, password: data.password });
       await checkUserSession?.();
 
-      router.push("/app");
+      router.push("/wewish");
     } catch (error) {
       console.error(error);
       setErrorMsg(typeof error === 'string' ? error : error.message);
