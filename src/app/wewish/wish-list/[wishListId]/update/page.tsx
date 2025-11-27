@@ -5,7 +5,7 @@ import { useWishList } from "src/app/wewish/hooks/useWishList";
 import { SplashScreen } from "src/components/loading-screen";
 import { useRouter } from "next/navigation";
 
-export default function UpdateListPage({ params }: { params: { wishListId: string } }) {
+export default function UpdateListPage({ params }: { params: { wishListId: number } }) {
     const { wishListId } = params;
 
     const { wishList, isLoading } = useWishList({ wishListId });
