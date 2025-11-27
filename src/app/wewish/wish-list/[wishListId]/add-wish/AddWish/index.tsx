@@ -23,7 +23,7 @@ export const AddWish = ({ wishListId }: { wishListId: string }) => {
 
     const WishSchema = z.object({
         productUrl: z.string().optional(),
-        name: z.string().min(1, 'Nom du souhait est requis'),
+        name: z.string().min(1, "Nom de l'envie est requis"),
         description: z.string().optional(),
         price: z.coerce.number().optional(),
         isFavorite: z.boolean().optional(),
@@ -90,7 +90,7 @@ export const AddWish = ({ wishListId }: { wishListId: string }) => {
 
                     <Divider />
 
-                    <Field.Text name="name" label="Nom du souhait" />
+                    <Field.Text name="name" label="Nom de l'envie" />
 
                     <Field.Text name="description" label="Description (optionnel)" multiline rows={4} />
 

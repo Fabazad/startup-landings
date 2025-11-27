@@ -16,7 +16,7 @@ export const Wishes = ({ wishListId }: { wishListId?: number }) => {
             {wishes.length > 0 && (
                 <Box>
                     <Link href={`/wewish/wish-list/${wishListId}/add-wish`}>
-                        <Button variant="contained" sx={{ borderRadius: 9999 }}>Ajouter un souhait</Button>
+                        <Button variant="contained" sx={{ borderRadius: 9999 }}>Ajouter une envie</Button>
                     </Link>
                     {wishes.map((wish) => (
                         <Box key={`wish-${wish.id}`}>
@@ -39,9 +39,9 @@ export const Wishes = ({ wishListId }: { wishListId?: number }) => {
             {wishes.length === 0 && (
                 <Box>
                     <Divider />
-                    <Typography variant="body2">Aucun souhait</Typography>
+                    <Typography variant="body2">Aucune envie</Typography>
                     <Link href={`/wewish/wish-list/${wishListId}/add-wish`}>
-                        <Button variant="contained" sx={{ borderRadius: 9999 }}>Ajouter un souhait</Button>
+                        <Button variant="contained" sx={{ borderRadius: 9999 }}>Ajouter une envie</Button>
                     </Link>
                 </Box>
             )}

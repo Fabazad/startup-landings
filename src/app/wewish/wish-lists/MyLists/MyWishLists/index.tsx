@@ -18,12 +18,12 @@ export const MyWishLists = () => {
     if (isLoading) return <AnimateLogo />;
 
     if (!wishLists?.length) return <EmptyContent
-        title="Vous avez aucune liste de souhaits"
+        title="Vous avez aucune liste d'envies"
         action={
             <Link href="/wewish/wish-list" style={{ marginTop: "1rem" }}>
                 <Button variant="contained" sx={{ borderRadius: 999, px: 2 }}>
                     <Iconify icon="material-symbols:add" sx={{ mr: 1 }} />
-                    Créer une liste de souhaits
+                    Créer une liste d'envies
                 </Button>
             </Link>
         } filled sx={{ py: 10 }} />

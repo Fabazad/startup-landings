@@ -71,7 +71,7 @@ export const MyLists = () => {
                         <Tab label="Listes suivies" />
                         <Tab label="Listes archivées" />
                         <Tab label="Mes réservations" />
-                        <Tab label="Tous mes souhaits" />
+                        <Tab label="Toutes mes envies" />
                     </Tabs>
                 </Box>
                 <CustomTabPanel value={value} index={0}>

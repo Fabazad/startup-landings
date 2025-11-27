@@ -57,7 +57,7 @@ export function WishListItem({ wishList }: { wishList: WishList }) {
             </Tooltip>
 
             <Tooltip
-                title="Ajouter un souhait"
+                title="Ajouter une envie"
                 arrow
                 placement='top'
                 slotProps={{
@@ -111,7 +111,7 @@ export function WishListItem({ wishList }: { wishList: WishList }) {
 
 
             <Stack direction="row" alignItems="center" justifyContent="space-between">
-                <Typography variant="subtitle1">{wishCount} souhait{wishCount === 1 ? "" : "s"}</Typography>
+                <Typography variant="subtitle1">{wishCount} envie{wishCount === 1 ? "" : "s"}</Typography>
 
                 <Stack direction="row" spacing={0.5} sx={{ typography: 'subtitle1' }}>
                     <Box component="span">{fCurrency(20)}</Box>

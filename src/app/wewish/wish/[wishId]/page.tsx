@@ -21,7 +21,7 @@ export default async function WishPage({ params }: { params: { wishId: string } 
         <Typography variant="body2">J'accepte de recevoir un cadeau équivalent : {wish.acceptEquivalent ? 'Oui' : 'Non'}</Typography>
         <Typography variant="body2">Lien du produit : {wish.productUrl}</Typography>
         <Link href={`/wewish/wish/${wish.id}/book`}>
-            <Button variant="contained" sx={{ borderRadius: 9999 }}>Réserver ce souhait</Button>
+            <Button variant="contained" sx={{ borderRadius: 9999 }}>Réserver cette envie</Button>
         </Link>
     </Box>;
 }

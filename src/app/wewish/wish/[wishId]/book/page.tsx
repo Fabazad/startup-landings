@@ -38,7 +38,7 @@ export default function BookPage({ params }: { params: { wishId: string } }) {
     const bookyByUser = async (userId: string) => {
         try {
             await bookWishByUser(userId);
-            toast.success('Souhait réservé');
+            toast.success('Envie réservé');
         } catch (error) {
             toast.error(error.message);
         }
@@ -48,7 +48,7 @@ export default function BookPage({ params }: { params: { wishId: string } }) {
         const data = methods.getValues();
         try {
             await bookWishByName(data.bookedByName);
-            toast.success('Souhait réservé');
+            toast.success('Envie réservé');
         } catch (error) {
             toast.error(error.message);
         }
@@ -69,8 +69,8 @@ export default function BookPage({ params }: { params: { wishId: string } }) {
             <Typography variant="h3">{wish.name}</Typography>
             <Typography variant="body2">{wish.description}</Typography>
             <Typography variant="body2">{wish.price}</Typography>
-            {wish.bookedByUser && <Typography variant="body2">Souhait déjà réservé par {wish.bookedByUser.full_name}</Typography>}
-            {wish.bookedByName && <Typography variant="body2">Souhait déjà réservé par {wish.bookedByName}</Typography>}
+            {wish.bookedByUser && <Typography variant="body2">Envie déjà réservé par {wish.bookedByUser.full_name}</Typography>}
+            {wish.bookedByName && <Typography variant="body2">Envie déjà réservé par {wish.bookedByName}</Typography>}
             {user ? (
                 <Box>
                     <LoadingButton variant="contained" sx={{ borderRadius: 9999 }} onClick={() => bookyByUser(user.id)} loading={isBooking}>
