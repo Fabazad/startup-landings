@@ -17,7 +17,7 @@ export default async function ListsPage() {
 
     return (
         <Container>
-            <Profile user={userRes.user} userData={statsRes.stats} />
+            <Profile user={userRes.user} userStats={statsRes.stats} />
             <MyLists />
         </Container>
     );

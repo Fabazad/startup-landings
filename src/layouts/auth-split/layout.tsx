@@ -52,7 +52,7 @@ export async function AuthSplitLayout({ sx, section, children, header }: AuthSpl
             leftArea: (
               <>
                 {/* -- Logo -- */}
-                <Logo themeColor={themeColor} logo={logo} productName={productName} />
+                <Logo themeColor={themeColor} logo={logo} />
               </>
             ),
             rightArea: (

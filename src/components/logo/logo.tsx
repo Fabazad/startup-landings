@@ -9,18 +9,20 @@ export type LogoProps = {
   isSingle?: boolean;
   themeColor: PrimaryColor;
   logo: string;
+  height?: number;
+  width?: number
 };
 
-export const Logo = ({ isSingle = true, themeColor, logo }: LogoProps) => {
+export const Logo = ({ isSingle = true, themeColor, logo, height, width }: LogoProps) => {
 
   const logoUrl = `${CONFIG.assetsDir}/logo/${themeColor}-${logo}.svg`;
 
   const baseSize = {
-    width: 40,
-    height: 40,
+    width: width || 40,
+    height: height || 40,
     ...(!isSingle && {
-      width: 102,
-      height: 36,
+      width: width || 102,
+      height: height || 36,
     }),
   };
 

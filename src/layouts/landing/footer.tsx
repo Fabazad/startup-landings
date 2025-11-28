@@ -67,7 +67,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
           [theme.breakpoints.up(layoutQuery)]: { textAlign: 'unset' },
         }}
       >
-        <Logo logo={logo} productName={productName} themeColor={themeColor} />
+        <Logo logo={logo} themeColor={themeColor} />
 
         <Grid
           container
@@ -180,7 +180,7 @@ export function HomeFooter({ sx }: HomeFooterProps) {
       }}
     >
       <Container>
-        <Logo themeColor={themeColor} logo={logo} productName={productName} />
+        <Logo themeColor={themeColor} logo={logo} />
         <Box sx={{ mt: 1, typography: 'caption' }}>
           © {t('common.allRightsReserved')}
           <br /> made by
