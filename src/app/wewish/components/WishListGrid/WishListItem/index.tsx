@@ -17,11 +17,11 @@ import { useAuthContext } from 'src/auth/hooks/use-auth-context';
 
 // ----------------------------------------------------------------------
 
-type PostItemProps = CardProps & {
+type PostItemProps = {
     wishList: WishList;
 };
 
-export function WishListItem({ wishList, sx, ...other }: PostItemProps) {
+export function WishListItem({ wishList }: PostItemProps) {
     const linkTo = `/wewish/wish-list/${wishList.id}`;
 
     const { user } = useAuthContext()
@@ -31,61 +31,62 @@ export function WishListItem({ wishList, sx, ...other }: PostItemProps) {
 
 
     return (
-        <Link href={linkTo} style={{ textDecoration: "none" }}>
-            <Card sx={{ "&:hover": { boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)" }, "&:hover *": { opacity: 1 }, ...sx }} {...other}>
-                <Box sx={{ position: 'relative' }} >
-                    <AvatarShape
-                        sx={{
-                            left: 0,
-                            zIndex: 9,
-                            width: 88,
-                            height: 36,
-                            bottom: -16,
-                            position: 'absolute',
-                        }}
-                    />
+        <Box sx={{ position: "relative", "&:hover *": { opacity: 1 } }}>
+            <Link href={linkTo} style={{ textDecoration: "none" }}>
+                <Card sx={{ "&:hover": { boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)" } }} >
+                    <Box sx={{ position: 'relative' }} >
+                        <AvatarShape
+                            sx={{
+                                left: 0,
+                                zIndex: 9,
+                                width: 88,
+                                height: 36,
+                                bottom: -16,
+                                position: 'absolute',
+                            }}
+                        />
 
-                    <Avatar
-                        alt={wishList.user.full_name}
-                        src={wishList.user.avatar_url}
-                        sx={{
-                            left: 24,
-                            zIndex: 9,
-                            bottom: -24,
-                            position: 'absolute',
-                        }}
-                    />
+                        <Avatar
+                            alt={wishList.user.full_name}
+                            src={wishList.user.avatar_url}
+                            sx={{
+                                left: 24,
+                                zIndex: 9,
+                                bottom: -24,
+                                position: 'absolute',
+                            }}
+                        />
+                        <Image alt={wishList.name} src={"https://api-prod-minimal-v700.pages.dev/assets/images/cover/cover-5.webp"} ratio="4/3" />
+                    </Box>
 
-                    {!isArchived && isOwner && <ShareButton wishListId={wishList.id} />}
+                    <CardContent sx={{ pt: 3.5 }}>
+                        <Typography variant="caption" component="div" sx={{ mb: 1, color: 'text.disabled' }}>
+                            {wishList.user.full_name}
+                        </Typography>
 
-                    {!isArchived && isOwner && <AddWishButton wishListId={wishList.id} />}
+                        <Typography
+                            color="inherit"
+                            fontWeight={800}
+                            sx={(theme) => ({
+                                ...maxLine({ line: 2, persistent: theme.typography.subtitle2 }),
+                            })}
+                        >
+                            {wishList.name}
+                        </Typography>
+                        <Typography
+                            color="inherit"
+                            variant="subtitle2"
+                            sx={{ mt: 0 }}
+                        >
+                            {wishList.wishCount} envies
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </Link >
+            {!isArchived && isOwner && <ShareButton wishListId={wishList.id} />}
 
-                    <Image alt={wishList.name} src={"https://api-prod-minimal-v700.pages.dev/assets/images/cover/cover-5.webp"} ratio="4/3" />
-                </Box>
+            {!isArchived && isOwner && <AddWishButton wishListId={wishList.id} />}
 
-                <CardContent sx={{ pt: 3.5 }}>
-                    <Typography variant="caption" component="div" sx={{ mb: 1, color: 'text.disabled' }}>
-                        {wishList.user.full_name}
-                    </Typography>
-
-                    <Typography
-                        color="inherit"
-                        fontWeight={800}
-                        sx={(theme) => ({
-                            ...maxLine({ line: 2, persistent: theme.typography.subtitle2 }),
-                        })}
-                    >
-                        {wishList.name}
-                    </Typography>
-                    <Typography
-                        color="inherit"
-                        variant="subtitle2"
-                        sx={{ mt: 0 }}
-                    >
-                        {wishList.wishCount} envies
-                    </Typography>
-                </CardContent>
-            </Card>
-        </Link >
+        </Box>
     );
 }

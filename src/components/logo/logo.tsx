@@ -1,67 +1,50 @@
-import type { BoxProps } from '@mui/material/Box';
-import { forwardRef } from 'react';
+
 import Box from '@mui/material/Box';
-import { RouterLink } from 'src/routes/components';
 import { CONFIG } from 'src/config-global';
-import { logoClasses } from './classes';
 import { PrimaryColor } from '../settings';
 
 // ----------------------------------------------------------------------
 
-export type LogoProps = BoxProps & {
-  href?: string;
+export type LogoProps = {
   isSingle?: boolean;
-  disableLink?: boolean;
   themeColor: PrimaryColor;
   logo: string;
 };
 
-export const Logo = forwardRef<HTMLDivElement, LogoProps>(
-  (
-    { width, href = '/', height, isSingle = true, disableLink = false, className, themeColor, logo, sx, ...other },
-    ref
-  ) => {
+export const Logo = ({ isSingle = true, themeColor, logo }: LogoProps) => {
 
+  const logoUrl = `${CONFIG.assetsDir}/logo/${themeColor}-${logo}.svg`;
 
-    const logoUrl = `${CONFIG.assetsDir}/logo/${themeColor}-${logo}.svg`;
+  const baseSize = {
+    width: 40,
+    height: 40,
+    ...(!isSingle && {
+      width: 102,
+      height: 36,
+    }),
+  };
 
-    const baseSize = {
-      width: width ?? 40,
-      height: height ?? 40,
-      ...(!isSingle && {
-        width: width ?? 102,
-        height: height ?? 36,
-      }),
-    };
-
-    return (
+  return (
+    <Box
+      aria-label="Logo"
+      sx={{
+        ...baseSize,
+        flexShrink: 0,
+        display: 'inline-flex',
+        verticalAlign: 'middle',
+        position: 'relative',
+        textDecoration: 'none',
+      }}
+    >
       <Box
-        ref={ref}
-        component={RouterLink}
-        href={href}
-        className={logoClasses.root.concat(className ? ` ${className}` : '')}
-        aria-label="Logo"
-        sx={{
-          ...baseSize,
-          flexShrink: 0,
-          display: 'inline-flex',
-          verticalAlign: 'middle',
-          ...(disableLink && { pointerEvents: 'none' }),
-          position: 'relative',
-          textDecoration: 'none',
-          ...sx,
-        }}
-        {...other}
-      >
-        <Box
-          component="img"
-          src={logoUrl}
-          width="100%"
-          height="100%"
-          aria-label="Insight Feed Logo"
-          alt="Insight Feed Logo"
-        />
-      </Box>
-    );
-  }
-);
+        component="img"
+        src={logoUrl}
+        width="100%"
+        height="100%"
+        aria-label="Insight Feed Logo"
+        alt="Insight Feed Logo"
+      />
+    </Box>
+  );
+}
+

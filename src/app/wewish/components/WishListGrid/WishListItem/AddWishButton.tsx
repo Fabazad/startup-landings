@@ -21,7 +21,7 @@ export const AddWishButton = ({ wishListId }: { wishListId: number }) => (
             href={`/wewish/wish-list/${wishListId}/add-wish`}
             sx={{
                 right: 16,
-                bottom: 16,
+                top: 184,
                 zIndex: 99,
                 opacity: 0,
                 position: 'absolute',

@@ -7,7 +7,7 @@ import { Iconify } from "src/components/iconify";
 
 export const WishListGrid = ({ wishLists, isLoading, emptyContent }: { wishLists: WishList[]; isLoading: boolean; emptyContent: { button?: { title: string; href: string; }; title: string; } }) => {
 
-    if (!wishLists?.length) return <EmptyContent
+    if (!isLoading && wishLists?.length === 0) return <EmptyContent
         title={emptyContent.title}
         action={
             emptyContent.button && (
