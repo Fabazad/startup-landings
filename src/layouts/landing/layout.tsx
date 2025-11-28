@@ -6,13 +6,15 @@ import { HeaderSection } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
 import { HomeFooter } from './footer';
 import { Main } from './main';
-import { Stack } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import { GetStartedButton } from '../../sections/landing/components/get-started-button';
 import { LanguageButton } from '../../sections/landing/components/language-button';
 import { NavDesktop } from './nav/desktop/NavDesktop';
 import { NavMobile } from './nav/mobile/NavMobile';
 import { ThemeButton } from '../components/theme-button';
 import { getProductIdea } from 'src/app/getProductIdea';
+import { SignInButton } from 'src/sections/landing/components/sign-in-button';
+import Link from 'next/link';
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +28,7 @@ export type MainLayoutProps = {
 
 export async function LandingLayout({ sx, children, header }: MainLayoutProps) {
 
-  const { logo, themeColor, name: productName } = await getProductIdea();
+  const { logo, themeColor, name: productName, isReady } = await getProductIdea();
 
   const layoutQuery: Breakpoint = 'md';
 
@@ -49,7 +51,23 @@ export async function LandingLayout({ sx, children, header }: MainLayoutProps) {
               <>
                 <NavMobile />
                 {/* -- Logo -- */}
-                <Logo logo={logo} productName={productName} themeColor={themeColor} />
+                <Link href="/" style={{ textDecoration: "none", display: "flex" }}>
+                  <Logo logo={logo} themeColor={themeColor} />
+                  <Box
+                    component="h4"
+                    typography="h4"
+                    sx={{
+                      fontSize: 24,
+                      fontWeight: 700,
+                      color: 'text.primary',
+                      my: 0,
+                      ml: 1,
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {productName}
+                  </Box>
+                </Link>
               </>
             ),
             rightArea: (
@@ -59,7 +77,7 @@ export async function LandingLayout({ sx, children, header }: MainLayoutProps) {
 
                 <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
                   <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
-                    <GetStartedButton buttonName="get-started-nav" />
+                    {isReady ? <SignInButton /> : <GetStartedButton buttonName="get-started-nav" />}
                   </Stack>
                   <ThemeButton />
                   <LanguageButton />

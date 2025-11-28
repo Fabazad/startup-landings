@@ -1,8 +1,8 @@
 "use client";
 
 import { LoadingButton } from "@mui/lab";
-import { archiveWishListQuery } from "../../queries/wishList";
 import { useRouter } from "next/navigation";
+import { archiveWishListQuery } from "src/app/wewish/queries/wishList";
 import { toast } from "src/components/snackbar";
 
 export const ArchiveWishListButton = ({ wishListId }: { wishListId: number }) => {

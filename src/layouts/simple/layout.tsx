@@ -10,6 +10,7 @@ import { AccountDrawer } from '../components/account-drawer';
 import { ThemeButton } from '../components/theme-button';
 import React from 'react';
 import { getProductIdea } from 'src/app/getProductIdea';
+import Link from 'next/link';
 
 // ----------------------------------------------------------------------
 
@@ -46,7 +47,23 @@ export async function SimpleLayout({ sx, children, header, content, menuButtons 
               </Alert>
             ),
             leftArea: <>
-              <Logo logo={logo} productName={productName} themeColor={themeColor} />
+              <Link href="/" style={{ textDecoration: "none", display: "flex" }}>
+                <Logo logo={logo} themeColor={themeColor} />
+                <Box
+                  component="h4"
+                  typography="h4"
+                  sx={{
+                    fontSize: 24,
+                    fontWeight: 700,
+                    color: 'text.primary',
+                    my: 0,
+                    ml: 1,
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {productName}
+                </Box>
+              </Link>
             </>,
             rightArea: (
               <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>

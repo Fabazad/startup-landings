@@ -4,8 +4,7 @@ import { Box } from "@mui/material";
 import { useMyWishLists } from "src/app/wewish/hooks/useMyWishLists";
 import { AnimateLogo } from "src/components/animate";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
-import { View403 } from "src/sections/error";
-import { WishListItem } from "src/app/wewish/components/WishListItem";
+import { WishListItem } from "src/app/wewish/components/WishListGrid/WishListItem";
 
 export const MyArchivedWishLists = () => {
 

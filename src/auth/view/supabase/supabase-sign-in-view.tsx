@@ -73,9 +73,8 @@ export const SupabaseSignInView = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const res = await signInWithPassword({ email: data.email, password: data.password });
+      await signInWithPassword({ email: data.email, password: data.password });
       await checkUserSession?.();
-      console.log("data", res.data)
 
       router.push("/wewish");
     } catch (error) {
@@ -134,6 +133,7 @@ export const SupabaseSignInView = () => {
         type="submit"
         variant="contained"
         loading={isSubmitting}
+        sx={{ borderRadius: 999 }}
         loadingIndicator={t("auth.signingIn")}
       >
         {t("auth.signIn")}
@@ -147,8 +147,8 @@ export const SupabaseSignInView = () => {
         title={t("auth.signInToYourAccount")}
         description={
           <>
-            {`Don’t have an account? `}
-            <Link component={RouterLink} href={paths.auth.signUp} variant="subtitle2">
+            {t("auth.dontHaveAnAccount")}{" "}
+            <Link component={RouterLink} href={paths.auth.signUp} variant="subtitle2" sx={{ color: 'text.primary' }}>
               {t("auth.getStarted")}
             </Link>
           </>
@@ -169,7 +169,7 @@ export const SupabaseSignInView = () => {
         variant="outlined"
         startIcon={<GoogleIcon />}
         onClick={handleSignInWithGoogle}
-        sx={{ mb: 3 }}
+        sx={{ mb: 3, borderRadius: 999 }}
       >
         {t('auth.signInWithGoogle')}
       </Button>

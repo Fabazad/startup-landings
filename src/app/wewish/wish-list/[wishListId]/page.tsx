@@ -4,11 +4,11 @@ import { Wishes } from "../../components/Wishes";
 import { getWishListQuery } from "../../queries/wishList";
 import { View500 } from "src/sections/error";
 import { NotFoundView } from "src/sections/error";
-import { ArchiveWishListButton } from "../../components/WishListItem/ArchiveWishListButton";
-import { DeleteWishListButton } from "../../components/WishListItem/DeleteWishListButton";
 import { getAuthUser } from "src/auth/getAuthUser";
-import { FollowWishListButton } from "../../components/WishListItem/FollowWishListButton";
-import { UnfollowWishListButton } from "../../components/WishListItem/UnfollowWishListButton";
+import { ArchiveWishListButton } from "../../components/WishListGrid/WishListItem/ArchiveWishListButton";
+import { DeleteWishListButton } from "../../components/WishListGrid/WishListItem/DeleteWishListButton";
+import { FollowWishListButton } from "../../components/WishListGrid/WishListItem/FollowWishListButton";
+import { UnfollowWishListButton } from "../../components/WishListGrid/WishListItem/UnfollowWishListButton";
 
 export default async function WishListPage({ params }: { params: { wishListId: number } }) {
     const { wishListId } = params;
@@ -27,7 +27,7 @@ export default async function WishListPage({ params }: { params: { wishListId: n
         <Box>
             <Typography variant="h3">{wishList.name}</Typography>
             <Typography variant="body2">{wishList.description}</Typography>
-            {wishList.user_id === user?.id && (
+            {wishList.user.id === user?.id && (
                 <>
                     <Link href={`/wewish/wish-list/${wishListId}/update`}>
                         <Button variant="contained" sx={{ borderRadius: 9999 }}>Modifier</Button>

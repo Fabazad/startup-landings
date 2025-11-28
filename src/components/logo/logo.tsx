@@ -14,12 +14,11 @@ export type LogoProps = BoxProps & {
   disableLink?: boolean;
   themeColor: PrimaryColor;
   logo: string;
-  productName: string;
 };
 
 export const Logo = forwardRef<HTMLDivElement, LogoProps>(
   (
-    { width, href = '/', height, isSingle = true, disableLink = false, className, themeColor, logo, productName, sx, ...other },
+    { width, href = '/', height, isSingle = true, disableLink = false, className, themeColor, logo, sx, ...other },
     ref
   ) => {
 
@@ -62,20 +61,6 @@ export const Logo = forwardRef<HTMLDivElement, LogoProps>(
           aria-label="Insight Feed Logo"
           alt="Insight Feed Logo"
         />
-        <Box
-          component="h4"
-          typography="h4"
-          sx={{
-            fontSize: 24,
-            fontWeight: 700,
-            color: 'text.primary',
-            mt: 1,
-            ml: 1,
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {productName}
-        </Box>
       </Box>
     );
   }

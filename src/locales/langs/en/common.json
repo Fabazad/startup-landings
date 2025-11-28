@@ -13,7 +13,8 @@
       "buttons": {
         "try-for-free": "Try for free",
         "get-started": "Get started",
-        "open-waiting-list": "Open waiting list"
+        "open-waiting-list": "Open waiting list",
+        "signIn": "Sign in"
       },
       "already-subscribed": "You are already on the waiting list"
     },
@@ -108,6 +109,7 @@
     "updatingPassword": "Updating password...",
     "updatePasswordDescription": "Successful updates enable access using the new password.",
     "updatePasswordSuccess": "Password updated successfully",
-    "returnToSignIn": "Return to sign in"
+    "returnToSignIn": "Return to sign in",
+    "dontHaveAnAccount": "Don’t have an account?"
   }
 }

@@ -7,7 +7,7 @@ import { useAuthContext } from "src/auth/hooks/use-auth-context";
 import { EmptyContent } from "src/components/empty-content";
 import Link from "next/link";
 import { Iconify } from "src/components/iconify";
-import { WishListItem } from "src/app/wewish/components/WishListItem";
+import { WishListGrid } from "src/app/wewish/components/WishListGrid";
 
 export const MyWishLists = () => {
 
@@ -29,18 +29,5 @@ export const MyWishLists = () => {
         } filled sx={{ py: 10 }} />
 
     return (
-        <Box gap={3}
-            display="grid"
-            gridTemplateColumns={{
-                xs: 'repeat(1, 1fr)',
-                sm: 'repeat(2, 1fr)',
-                md: 'repeat(3, 1fr)',
-                lg: 'repeat(4, 1fr)',
-            }}>
-            {wishLists?.map((list) => (
-                <Box key={list.id}>
-                    <WishListItem wishList={list} />
-                </Box>
-            ))}
-        </Box>)
+        <WishListGrid wishLists={wishLists} />)
 }

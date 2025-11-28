@@ -132,6 +132,7 @@ export const SupabaseSignUpView = () => {
         type="submit"
         variant="contained"
         loading={isSubmitting}
+        sx={{ borderRadius: 999 }}
         loadingIndicator={t('auth.creatingAccount')}
       >
         {t('auth.createAccount')}
@@ -146,7 +147,7 @@ export const SupabaseSignUpView = () => {
         description={
           <>
             {t("auth.alreadyHaveAnAccount")}{" "}
-            <Link component={RouterLink} href={paths.auth.signIn} variant="subtitle2">
+            <Link component={RouterLink} href={paths.auth.signIn} sx={{ color: 'text.primary' }}>
               {t('auth.signIn')}
             </Link>
           </>
@@ -167,7 +168,7 @@ export const SupabaseSignUpView = () => {
         variant="outlined"
         startIcon={<GoogleIcon />}
         onClick={handleSignInWithGoogle}
-        sx={{ mb: 3 }}
+        sx={{ mb: 3, borderRadius: 999 }}
       >
         {t('auth.signInWithGoogle')}
       </Button>

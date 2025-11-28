@@ -3,6 +3,7 @@
 import { Avatar, Box, Rating, Stack, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import { m } from 'framer-motion';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { _mock } from 'src/_mock';
 import { varFade } from 'src/components/animate';
@@ -26,6 +27,15 @@ export const Reviews = () => {
     align: 'start',
     slidesToShow: { xs: 1, sm: 1, md: 1, lg: 1 },
   });
+
+  // Auto-scroll every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      carousel.arrows.onClickNext();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [carousel.arrows]);
 
   return (
     <Stack sx={{ position: 'relative', py: { xs: 5, md: 8 } }}>

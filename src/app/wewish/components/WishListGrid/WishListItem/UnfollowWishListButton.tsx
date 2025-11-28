@@ -3,7 +3,7 @@
 import { LoadingButton } from "@mui/lab";
 import { toast } from "src/components/snackbar";
 import { useRouter } from "next/navigation";
-import { unfollowListQuery } from "../../queries/wishList";
+import { unfollowListQuery } from "src/app/wewish/queries/wishList";
 
 export const UnfollowWishListButton = ({ wishListId, userId }: { wishListId: number; userId: string }) => {
     const router = useRouter();

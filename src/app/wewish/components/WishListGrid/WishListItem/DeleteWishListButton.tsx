@@ -1,8 +1,8 @@
 "use client";
 
 import { LoadingButton } from "@mui/lab";
-import { deleteWishListQuery } from "../../queries/wishList";
 import { useRouter } from "next/navigation";
+import { deleteWishListQuery } from "src/app/wewish/queries/wishList";
 import { toast } from "src/components/snackbar";
 
 export const DeleteWishListButton = ({ wishListId }: { wishListId: number }) => {

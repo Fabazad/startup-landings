@@ -1,9 +1,9 @@
 "use client";
 
 import { LoadingButton } from "@mui/lab";
-import { followListQuery } from "../../queries/wishList";
 import { toast } from "src/components/snackbar";
 import { useRouter } from "next/navigation";
+import { followListQuery } from "src/app/wewish/queries/wishList";
 
 export const FollowWishListButton = ({ wishListId, userId }: { wishListId: number; userId: string }) => {
     const router = useRouter();
