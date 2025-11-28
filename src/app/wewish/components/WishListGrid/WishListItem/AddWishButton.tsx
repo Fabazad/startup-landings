@@ -25,6 +25,7 @@ export const AddWishButton = ({ wishListId }: { wishListId: number }) => (
                 zIndex: 99,
                 opacity: 0,
                 position: 'absolute',
+                display: { xs: 'none', md: 'inline-flex' },
                 transition: (theme) =>
                     theme.transitions.create('all', {
                         easing: theme.transitions.easing.easeInOut,

@@ -1,6 +1,5 @@
 "use client";
 
-import type { CardProps } from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
@@ -76,7 +75,7 @@ export function WishListItem({ wishList }: PostItemProps) {
                         <Typography
                             color="inherit"
                             variant="subtitle2"
-                            sx={{ mt: 0 }}
+                            sx={{ mt: 1 }}
                         >
                             {wishList.wishCount} envies
                         </Typography>

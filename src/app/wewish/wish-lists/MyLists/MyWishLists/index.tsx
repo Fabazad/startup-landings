@@ -12,8 +12,8 @@ export const MyWishLists = () => {
 
     return (
         <WishListGrid wishLists={wishLists} isLoading={isLoading} emptyContent={{
-            button: { title: "Créer une liste d'envies", href: "/wewish/wish-list" },
-            title: "Vous avez aucune liste d'envies"
+            button: { title: "Créer votre première liste d'envies", href: "/wewish/wish-list" },
+            title: "Vous n'avez aucune liste d'envies"
         }} />
     )
 }

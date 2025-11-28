@@ -12,7 +12,7 @@ export const WishListGrid = ({ wishLists, isLoading, emptyContent }: { wishLists
         action={
             emptyContent.button && (
                 <Link href={emptyContent.button.href} style={{ marginTop: "1rem" }}>
-                    <Button variant="contained" sx={{ borderRadius: 999, px: 2 }}>
+                    <Button variant="contained" sx={{ borderRadius: 999, px: 2 }} size="large">
                         <Iconify icon="material-symbols:add" sx={{ mr: 1 }} />
                         {emptyContent.button.title}
                     </Button>

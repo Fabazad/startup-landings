@@ -4,6 +4,7 @@ import { Iconify } from "src/components/iconify";
 export const ShareButton = ({ wishListId }: { wishListId: number }) => {
     return (
         <Tooltip
+
             title="Partager"
             arrow
             placement='top'
@@ -21,6 +22,7 @@ export const ShareButton = ({ wishListId }: { wishListId: number }) => {
                 size="medium"
                 href={`/wewish/wish-list/${wishListId}/share`}
                 sx={{
+                    display: { xs: 'none', md: 'inline-flex' },
                     right: 16,
                     top: 16,
                     zIndex: 99,
