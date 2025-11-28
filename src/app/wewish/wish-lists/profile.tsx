@@ -23,14 +23,13 @@ export const Profile = () => {
 
   const spacing = 2;
 
-  const height = 180;
-
-  const widthButton = 200;
+  const height = {sm : 100, xs : "unset"} ;
+  const widthButton = {sm : 200, xs : 180} ;
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', mt: 3, height: height }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', my : {sm : 4, xs :3} }}>
+      <Box sx={{ width: '100%', display: {sm : "flex", xs :"none"}, flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', height: height }}>
           <Box
             sx={{
               width: height,
@@ -78,7 +77,7 @@ export const Profile = () => {
               }}
             />
           </Box>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: "10px", height: "100%", mt: "30px" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 1, height: "100%", justifyContent:"center" }}>
             <Typography variant="h3" sx={{ ml: 3 }}>
               {displayName}
             </Typography>
@@ -88,7 +87,7 @@ export const Profile = () => {
           </Box>
         </Box>
         <Box sx={{ height: '100%' }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: '15px' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: 3 }}>
             <Link href="/wewish/wish-list">
               <Button variant="contained" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }}>
                 <Typography variant="h6" sx={{ fontWeight: 400 }}>
@@ -102,6 +101,31 @@ export const Profile = () => {
               </Typography>                </Button>
           </Box>
         </Box>
+      </Box>
+      <Box sx={{ width: '100%', display: {xs : "flex", sm :"none"}, flexDirection: 'row', justifyContent:"center" }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', flexDirection:'column', height: height, gap:2 }}>
+  <Box sx={{ display: 'flex', alignItems: 'center', flexDirection:"column" }}>            
+    <Typography variant="h3" >
+              {displayName}
+            </Typography>
+            <Typography variant="h6" sx={{ fontWeight: 400 }}>
+              <b>0</b> liste •  <b>1</b>  liste suivie • <b>16</b> Envies
+            </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', height: '100%', gap: 2 }}>
+            <Link href="/wewish/wish-list">
+              <Button variant="contained" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }}>
+                <Typography variant="h6" sx={{ fontWeight: 400 }}>
+                  Créer une liste
+                </Typography>
+              </Button>
+            </Link>
+            <Button variant="outlined" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }}>
+              <Typography variant="h6" sx={{ fontWeight: 400 }}>
+                Modifier mon profil
+              </Typography>                </Button>
+          </Box>
+</Box>
       </Box>
     </Box>
   );
