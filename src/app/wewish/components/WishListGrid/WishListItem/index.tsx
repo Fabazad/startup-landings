@@ -1,3 +1,5 @@
+"use client";
+
 import type { CardProps } from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -9,8 +11,9 @@ import { maxLine } from 'src/theme/styles';
 import { AvatarShape } from 'src/assets/illustrations';
 import { Image } from 'src/components/image';
 import { WishList } from 'src/app/wewish/types/WishList';
-import { Fab, Tooltip } from '@mui/material';
-import { Iconify } from 'src/components/iconify';
+import { ShareButton } from './ShareButton';
+import { AddWishButton } from './AddWishButton';
+import { useAuthContext } from 'src/auth/hooks/use-auth-context';
 
 // ----------------------------------------------------------------------
 
@@ -20,6 +23,12 @@ type PostItemProps = CardProps & {
 
 export function WishListItem({ wishList, sx, ...other }: PostItemProps) {
     const linkTo = `/wewish/wish-list/${wishList.id}`;
+
+    const { user } = useAuthContext()
+
+    const isOwner = user?.id === wishList.user.id
+    const isArchived = !!wishList.archivedAt
+
 
     return (
         <Link href={linkTo} style={{ textDecoration: "none" }}>
@@ -47,81 +56,9 @@ export function WishListItem({ wishList, sx, ...other }: PostItemProps) {
                         }}
                     />
 
-                    <Tooltip
-                        title="Partager"
-                        arrow
-                        placement='top'
-                        slotProps={{
-                            tooltip: {
-                                sx: {
-                                    fontSize: '1rem',
-                                    padding: '8px 16px',
-                                }
-                            }
-                        }}
-                    >
-                        <Fab
-                            color="default"
-                            size="medium"
-                            href={`/wewish/wish-list/${wishList.id}/share`}
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                console.log("click");
-                            }}
-                            sx={{
-                                right: 16,
-                                top: 16,
-                                zIndex: 99,
-                                opacity: 0,
-                                position: 'absolute',
-                                transition: (theme) =>
-                                    theme.transitions.create('all', {
-                                        easing: theme.transitions.easing.easeInOut,
-                                        duration: theme.transitions.duration.shorter,
-                                    }),
-                            }}
-                        >
-                            <Iconify icon="solar:share-bold" width={24} />
-                        </Fab>
-                    </Tooltip>
+                    {!isArchived && isOwner && <ShareButton wishListId={wishList.id} />}
 
-                    <Tooltip
-                        title="Ajouter une envie"
-                        arrow
-                        placement='top'
-                        slotProps={{
-                            tooltip: {
-                                sx: {
-                                    fontSize: '1rem',
-                                    padding: '8px 16px',
-                                }
-                            }
-                        }}
-                    >
-                        <Fab
-                            color="warning"
-                            size="medium"
-                            href={`/wewish/wish-list/${wishList.id}/add-wish`}
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                console.log("click");
-                            }}
-                            sx={{
-                                right: 16,
-                                bottom: 16,
-                                zIndex: 99,
-                                opacity: 0,
-                                position: 'absolute',
-                                transition: (theme) =>
-                                    theme.transitions.create('all', {
-                                        easing: theme.transitions.easing.easeInOut,
-                                        duration: theme.transitions.duration.shorter,
-                                    }),
-                            }}
-                        >
-                            <Iconify icon="material-symbols:add" width={24} />
-                        </Fab>
-                    </Tooltip>
+                    {!isArchived && isOwner && <AddWishButton wishListId={wishList.id} />}
 
                     <Image alt={wishList.name} src={"https://api-prod-minimal-v700.pages.dev/assets/images/cover/cover-5.webp"} ratio="4/3" />
                 </Box>
