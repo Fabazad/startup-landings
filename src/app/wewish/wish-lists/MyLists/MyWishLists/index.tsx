@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { useMyWishLists } from "src/app/wewish/hooks/useMyWishLists";
 import { AnimateLogo } from "src/components/animate";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
