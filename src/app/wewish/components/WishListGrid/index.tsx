@@ -1,12 +1,34 @@
-import { Grid } from "@mui/material";
+import { Button, Grid, Link } from "@mui/material";
 import { WishList } from "../../types/WishList";
 import { WishListItem } from "./WishListItem";
+import { WishListItemSkeleton } from "./WishListItem/WishListItemSkeleton";
+import { EmptyContent } from "src/components/empty-content";
+import { Iconify } from "src/components/iconify";
 
-export const WishListGrid = ({ wishLists }: { wishLists: WishList[] }) => {
+export const WishListGrid = ({ wishLists, isLoading, emptyContent }: { wishLists: WishList[]; isLoading: boolean; emptyContent: { button?: { title: string; href: string; }; title: string; } }) => {
+
+    if (!wishLists?.length) return <EmptyContent
+        title={emptyContent.title}
+        action={
+            emptyContent.button && (
+                <Link href={emptyContent.button.href} style={{ marginTop: "1rem" }}>
+                    <Button variant="contained" sx={{ borderRadius: 999, px: 2 }}>
+                        <Iconify icon="material-symbols:add" sx={{ mr: 1 }} />
+                        {emptyContent.button.title}
+                    </Button>
+                </Link>
+            )
+        } filled sx={{ py: 10 }} />
+
     return (
         <Grid container spacing={3} sx={{ py: 3 }}>
+            {isLoading && [...Array(8)].map((_, index) => (
+                <Grid key={index} xs={12} sm={6} md={4} lg={3} sx={{ p: 1 }}>
+                    <WishListItemSkeleton />
+                </Grid>
+            ))}
             {wishLists.map((wishList) => (
-                <Grid key={wishList.id} xs={12} sm={6} md={4} lg={3}>
+                <Grid key={wishList.id} xs={12} sm={6} md={4} lg={3} sx={{ p: 1 }}>
                     <WishListItem wishList={wishList} />
                 </Grid>
             ))}

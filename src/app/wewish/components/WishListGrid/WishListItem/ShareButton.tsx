@@ -20,10 +20,6 @@ export const ShareButton = ({ wishListId }: { wishListId: number }) => {
                 color="default"
                 size="medium"
                 href={`/wewish/wish-list/${wishListId}/share`}
-                onClick={(e) => {
-                    e.stopPropagation()
-                    console.log("click");
-                }}
                 sx={{
                     right: 16,
                     top: 16,

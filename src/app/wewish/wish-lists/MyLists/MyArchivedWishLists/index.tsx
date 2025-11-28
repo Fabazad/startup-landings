@@ -1,10 +1,8 @@
 "use client";
 
-import { Box } from "@mui/material";
 import { useMyWishLists } from "src/app/wewish/hooks/useMyWishLists";
-import { AnimateLogo } from "src/components/animate";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
-import { WishListItem } from "src/app/wewish/components/WishListGrid/WishListItem";
+import { WishListGrid } from "src/app/wewish/components/WishListGrid";
 
 export const MyArchivedWishLists = () => {
 
@@ -12,21 +10,9 @@ export const MyArchivedWishLists = () => {
 
     const { wishLists, isLoading } = useMyWishLists({ archived: true, userId: user?.id });
 
-    if (isLoading) return <AnimateLogo />;
-
     return (
-        <Box gap={3}
-            display="grid"
-            gridTemplateColumns={{
-                xs: 'repeat(1, 1fr)',
-                sm: 'repeat(2, 1fr)',
-                md: 'repeat(3, 1fr)',
-                lg: 'repeat(4, 1fr)',
-            }}>
-            {wishLists?.map((list) => (
-                <Box key={list.id}>
-                    <WishListItem wishList={list} />
-                </Box>
-            ))}
-        </Box>)
+        <WishListGrid wishLists={wishLists} isLoading={isLoading} emptyContent={{
+            title: "Vous avez aucune liste d'envies archivée"
+        }} />
+    )
 }

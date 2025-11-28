@@ -19,10 +19,6 @@ export const AddWishButton = ({ wishListId }: { wishListId: number }) => (
             color="warning"
             size="medium"
             href={`/wewish/wish-list/${wishListId}/add-wish`}
-            onClick={(e) => {
-                e.stopPropagation()
-                console.log("click");
-            }}
             sx={{
                 right: 16,
                 bottom: 16,
