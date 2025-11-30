@@ -13,7 +13,7 @@ export const UnarchiveWishListButton = ({ wishListId }: { wishListId: number }) 
         if (!confirm("Êtes-vous sûr de vouloir désarchiver cette liste ?")) return;
         try {
             await unarchiveWishListQuery(wishListId);
-            router.push('/wewish/wish-lists?tab=my-lists');
+            router.push('/wewish?tab=my-lists');
         } catch (error) {
             toast.error(error.message);
         }

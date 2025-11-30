@@ -13,7 +13,7 @@ export const DeleteWishListButton = ({ wishListId }: { wishListId: number }) => 
         if (!confirm("Êtes-vous sûr de vouloir supprimer cette liste ?")) return;
         try {
             await deleteWishListQuery(wishListId);
-            router.push('/wewish/wish-lists');
+            router.push('/wewish');
         } catch (error) {
             toast.error(error.message);
         }

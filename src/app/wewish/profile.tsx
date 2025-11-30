@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import { User } from '@supabase/supabase-js';
-import { RotatingBackground } from '../components/RotatingBackground';
+import { RotatingBackground } from './components/RotatingBackground';
 
 export const Profile = ({ user, userStats }: { user: User; userStats: { wishListCount: number, wishCount: number, followingCount: number } }) => {
 

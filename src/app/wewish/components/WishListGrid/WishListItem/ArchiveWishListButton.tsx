@@ -13,7 +13,7 @@ export const ArchiveWishListButton = ({ wishListId }: { wishListId: number }) =>
         if (!confirm("Êtes-vous sûr de vouloir archiver cette liste ?")) return;
         try {
             await archiveWishListQuery(wishListId);
-            router.push('/wewish/wish-lists?tab=archived-lists');
+            router.push('/wewish?tab=archived-lists');
         } catch (error) {
             toast.error(error.message);
         }
