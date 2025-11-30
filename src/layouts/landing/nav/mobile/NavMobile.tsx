@@ -16,7 +16,7 @@ import { useTranslate } from 'src/locales';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { SignInButton } from 'src/sections/landing/components/sign-in-button';
 
-export const NavMobile = () => {
+export const NavMobile = ({ showConnection = true }: { showConnection?: boolean }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openFeatures, setOpenFeatures] = useState(false);
 
@@ -92,7 +92,7 @@ export const NavMobile = () => {
                   key={feature.id}
                   sx={{ pl: 4 }}
                   component={Link}
-                  href={`#feature-${feature.id}`}
+                  href={`/#feature-${feature.id}`}
                   onClick={onClose}
                 >
                   <ListItemText primary={feature.title} />
@@ -100,25 +100,25 @@ export const NavMobile = () => {
               ))}
             </List>
           </Collapse>
-          {plans && <ListItemButton component={Link} href="#pricing" onClick={onClose}>
+          {plans && <ListItemButton component={Link} href="/#pricing" onClick={onClose}>
             <ListItemIcon>
               <Iconify icon="mdi:cash-multiple" />
             </ListItemIcon>
             <ListItemText primary={t('landing.nav.pricing')} />
           </ListItemButton>}
-          <ListItemButton component={Link} href="#testimonials" onClick={onClose}>
+          <ListItemButton component={Link} href="/#testimonials" onClick={onClose}>
             <ListItemIcon>
               <Iconify icon="mdi:people" />
             </ListItemIcon>
             <ListItemText primary={t('landing.nav.testimonials')} />
           </ListItemButton>
-          <ListItemButton component={Link} href="#contact" onClick={onClose}>
+          <ListItemButton component={Link} href="/#contact" onClick={onClose}>
             <ListItemIcon>
               <Iconify icon="mdi:email" />
             </ListItemIcon>
             <ListItemText primary={t('landing.nav.contact')} />
           </ListItemButton>
-          {isReady && (
+          {isReady && showConnection && (
             <ListItem>
               <SignInButton />
             </ListItem>

@@ -32,7 +32,7 @@ export const Reviews = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       carousel.arrows.onClickNext();
-    }, 3000);
+    }, 2500);
 
     return () => clearInterval(interval);
   }, [carousel.arrows]);

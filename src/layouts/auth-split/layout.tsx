@@ -11,6 +11,9 @@ import { LayoutSection } from '../core/layout-section';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { ThemeButton } from '../components/theme-button';
 import { getProductIdea } from 'src/app/getProductIdea';
+import { NavDesktop } from '../landing/nav/desktop/NavDesktop';
+import { NavMobile } from '../landing/nav/mobile/NavMobile';
+import Link from 'next/link';
 
 // ----------------------------------------------------------------------
 
@@ -52,17 +55,31 @@ export async function AuthSplitLayout({ sx, section, children, header }: AuthSpl
             leftArea: (
               <>
                 {/* -- Logo -- */}
-                <Logo themeColor={themeColor} logo={logo} />
+                <Link href="/" style={{ textDecoration: "none", display: "flex" }}>
+                  <Logo logo={logo} themeColor={themeColor} />
+                  <Box
+                    component="h4"
+                    typography="h4"
+                    sx={{
+                      fontSize: 24,
+                      fontWeight: 700,
+                      color: 'text.primary',
+                      my: 0,
+                      ml: 1,
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {productName}
+                  </Box>
+                </Link>
               </>
             ),
             rightArea: (
-              <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
-                <ThemeButton />
-
-
-                {/* -- Settings button -- */}
-                <LanguageButton />
-              </Box>
+              <>
+                {/* -- Nav desktop -- */}
+                <NavDesktop showConnection={false} />
+                <NavMobile showConnection={false} />
+              </>
             ),
           }}
         />

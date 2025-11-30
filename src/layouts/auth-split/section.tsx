@@ -36,7 +36,6 @@ export function Section({
   ...other
 }: SectionProps) {
   const theme = useTheme();
-  const { reviews } = useProductIdea();
 
   return (
     <Box

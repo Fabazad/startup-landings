@@ -9,7 +9,7 @@ import { GetStartedButton } from 'src/sections/landing/components/get-started-bu
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { SignInButton } from 'src/sections/landing/components/sign-in-button';
 
-export const NavDesktop = () => {
+export const NavDesktop = ({ showConnection = true }: { showConnection?: boolean }) => {
   const { t } = useTranslate();
 
   const { features, plans, isReady } = useProductIdea();
@@ -25,7 +25,7 @@ export const NavDesktop = () => {
               {
                 items: features.map((feature) => ({
                   title: feature.title,
-                  path: `#feature-${feature.id}`,
+                  path: `/#feature-${feature.id}`,
                 })),
               },
             ],
@@ -50,19 +50,19 @@ export const NavDesktop = () => {
           },
         }}
       />
-      {plans && <Button component={Link} href="#pricing" sx={{ px: 1 }}>
+      {plans && <Button component={Link} href="/#pricing" sx={{ px: 1 }}>
         {t('landing.nav.pricing')}
       </Button>}
-      <Button component={Link} href="#testimonials" sx={{ px: 2 }}>
+      <Button component={Link} href="/#testimonials" sx={{ px: 2 }}>
         {t('landing.nav.testimonials')}
       </Button>
-      <Button component={Link} href="#contact" sx={{ px: 2 }}>
+      <Button component={Link} href="/#contact" sx={{ px: 2 }}>
         {t('landing.nav.contact')}
       </Button>
       {!isReady && <GetStartedButton buttonName="get-started-nav" />}
       <ThemeButton />
       <LanguageButton />
-      {isReady && <SignInButton />}
+      {isReady && showConnection && <SignInButton />}
     </Stack>
   );
 };
