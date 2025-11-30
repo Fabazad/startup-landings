@@ -43,14 +43,6 @@ export const LandingTestimonials = ({ sx, ...other }: BoxProps) => {
 
           <Reviews />
 
-          <Box
-        variants={varFade({ distance: 24 }).inUp}
-        component={m.div}
-        sx={{ textAlign: 'center', mt: 5 }}
-      >
-        {plans ? <TryForFreeButton buttonName="try-for-free-testimonials" /> : <GetStartedButton buttonName="get-started-testimonials" />}
-      </Box>
-
           <TestimonialNumbers />
         </Container>
       </MotionViewport>

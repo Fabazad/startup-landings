@@ -1,6 +1,6 @@
 "use client";
 
-import { Drawer, Link } from '@mui/material';
+import { Box, Drawer, Link, ListItem } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -11,14 +11,17 @@ import { useState } from 'react';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { Iconify } from 'src/components/iconify';
 import { MenuButton } from 'src/layouts/components/menu-button';
+import { ThemeButton } from 'src/layouts/components/theme-button';
 import { useTranslate } from 'src/locales';
+import { LanguageButton } from 'src/sections/landing/components/language-button';
+import { SignInButton } from 'src/sections/landing/components/sign-in-button';
 
 export const NavMobile = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openFeatures, setOpenFeatures] = useState(false);
 
   const { t } = useTranslate();
-  const { features, plans } = useProductIdea();
+  const { features, plans, isReady } = useProductIdea();
 
   const onClose = () => {
     setOpenDrawer(false);
@@ -31,28 +34,35 @@ export const NavMobile = () => {
 
   return (
     <>
-      <MenuButton
-        onClick={openDrawerHandler}
-        sx={{
-          mr: 1,
-          ml: -1,
-          display: { xs: 'block', md: 'none' },
-        }}
-      />
+      <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+        {isReady && <SignInButton />}
+        <MenuButton
+          onClick={openDrawerHandler}
+          sx={{
+            mr: 1,
+            ml: 2,
+          }}
+        />
+      </Box>
 
-      <Drawer open={openDrawer} onClose={onClose}>
+      <Drawer open={openDrawer} onClose={onClose} anchor="right">
         <List
           sx={{ minWidth: '300px', maxWidth: 360, bgcolor: 'background.paper' }}
           component="nav"
           aria-labelledby="nested-list-subheader"
           subheader={
-            <ListSubheader component="div" id="nested-list-subheader">
+            <ListSubheader component="div" id="nested-list-subheader" sx={{ display: 'flex', height: 50 }}>
+              <ThemeButton />
+              <LanguageButton />
+
               <MenuButton
                 onClick={() => setOpenDrawer(false)}
                 sx={{
                   mt: 1,
                   ml: -1,
                   display: { xs: 'block', md: 'none' },
+                  position: 'absolute',
+                  right: 24,
                 }}
               />
             </ListSubheader>
@@ -108,6 +118,11 @@ export const NavMobile = () => {
             </ListItemIcon>
             <ListItemText primary={t('landing.nav.contact')} />
           </ListItemButton>
+          {isReady && (
+            <ListItem>
+              <SignInButton />
+            </ListItem>
+          )}
         </List>
       </Drawer>
     </>

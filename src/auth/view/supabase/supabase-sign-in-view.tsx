@@ -94,7 +94,7 @@ export const SupabaseSignInView = () => {
 
   const renderForm = (
     <Box gap={3} display="flex" flexDirection="column">
-      <Field.Text name="email" label={t("auth.email")} InputLabelProps={{ shrink: true }} />
+      <Field.Text name="email" label={t("auth.email")} InputLabelProps={{ shrink: true }} autoFocus />
 
       <Box gap={1.5} display="flex" flexDirection="column">
 

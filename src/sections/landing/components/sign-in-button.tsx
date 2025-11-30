@@ -15,6 +15,7 @@ export const SignInButton = () => {
                 sx={{
                     display: 'inline-flex',
                     borderRadius: '9999px',
+                    whiteSpace: 'nowrap',
                 }}
             >
                 {t('landing.hero.buttons.signIn')}

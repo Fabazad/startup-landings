@@ -17,7 +17,7 @@ export const GetStartedButton = ({
   buttonName: string;
 }) => {
   const { setOpenModal, subscriptionStep } = useSubscription();
-  const { name: productName } = useProductIdea();
+  const { name: productName, isReady } = useProductIdea();
 
   const handleClick = () => {
     setOpenModal(true);
@@ -35,10 +35,11 @@ export const GetStartedButton = ({
       variant={other.variant || 'contained'}
       {...other}
       rel="noopener"
-      onClick={handleClick}
+      onClick={!isReady ? handleClick : undefined}
+      href={isReady ? "/auth/sign-up" : undefined}
       sx={{
         display: 'inline-flex',
-        borderRadius: '9999px',
+        borderRadius: 999,
       }}
     >
       {subscriptionStep === SubscriptionStep.SUCCESS

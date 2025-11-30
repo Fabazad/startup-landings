@@ -3,12 +3,16 @@
 import { Button, Link, Stack } from '@mui/material';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { MegaMenuHorizontal } from 'src/components/mega-menu';
+import { ThemeButton } from 'src/layouts/components/theme-button';
 import { useTranslate } from 'src/locales';
+import { GetStartedButton } from 'src/sections/landing/components/get-started-button';
+import { LanguageButton } from 'src/sections/landing/components/language-button';
+import { SignInButton } from 'src/sections/landing/components/sign-in-button';
 
 export const NavDesktop = () => {
   const { t } = useTranslate();
 
-  const { features, plans } = useProductIdea();
+  const { features, plans, isReady } = useProductIdea();
 
   return (
     <Stack direction="row" gap={2} sx={{ display: { xs: 'none', md: 'flex' }, mx: 3 }}>
@@ -55,6 +59,10 @@ export const NavDesktop = () => {
       <Button component={Link} href="#contact" sx={{ px: 2 }}>
         {t('landing.nav.contact')}
       </Button>
+      {!isReady && <GetStartedButton buttonName="get-started-nav" />}
+      <ThemeButton />
+      <LanguageButton />
+      {isReady && <SignInButton />}
     </Stack>
   );
 };

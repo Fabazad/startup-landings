@@ -7,7 +7,7 @@ import { SubscriptionStep, useSubscription } from './SubscriptionModal/subscript
 
 export const TryForFreeButton = ({ buttonName }: { buttonName: string }) => {
   const { t } = useTranslation();
-  const { name: productName } = useProductIdea();
+  const { name: productName, isReady } = useProductIdea();
   const { setOpenModal, subscriptionStep } = useSubscription();
 
   const handleClick = () => {
@@ -26,17 +26,14 @@ export const TryForFreeButton = ({ buttonName }: { buttonName: string }) => {
       color="inherit"
       size="large"
       variant="contained"
+      href={isReady ? "/auth/sign-up" : undefined}
       startIcon={<Iconify width={24} icon="ph:rocket-launch-duotone" />}
-      onClick={handleClick}
-      sx={{
-        borderRadius: '9999px',
-      }}
+      onClick={!isReady ? handleClick : undefined}
+      sx={{ borderRadius: 999, display: 'inline-flex' }}
     >
-      <span>
-        {subscriptionStep === SubscriptionStep.SUCCESS
-          ? t('landing.hero.buttons.open-waiting-list')
-          : t('landing.hero.buttons.try-for-free')}
-      </span>
+      {subscriptionStep === SubscriptionStep.SUCCESS
+        ? t('landing.hero.buttons.open-waiting-list')
+        : t('landing.hero.buttons.try-for-free')}
     </Button>
   );
 };

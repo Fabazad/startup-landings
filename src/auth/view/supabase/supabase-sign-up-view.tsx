@@ -102,7 +102,7 @@ export const SupabaseSignUpView = () => {
   const renderForm = (
     <Box gap={3} display="flex" flexDirection="column">
       <Box display="flex" gap={{ xs: 3, sm: 2 }} flexDirection={{ xs: 'column', sm: 'row' }}>
-        <Field.Text name="firstName" label={t("auth.firstName")} InputLabelProps={{ shrink: true }} />
+        <Field.Text name="firstName" label={t("auth.firstName")} InputLabelProps={{ shrink: true }} autoFocus />
         <Field.Text name="lastName" label={t("auth.lastName")} InputLabelProps={{ shrink: true }} />
       </Box>
 

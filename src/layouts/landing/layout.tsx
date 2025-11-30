@@ -49,7 +49,6 @@ export async function LandingLayout({ sx, children, header }: MainLayoutProps) {
             ),
             leftArea: (
               <>
-                <NavMobile />
                 {/* -- Logo -- */}
                 <Link href="/" style={{ textDecoration: "none", display: "flex" }}>
                   <Logo logo={logo} themeColor={themeColor} />
@@ -74,14 +73,7 @@ export async function LandingLayout({ sx, children, header }: MainLayoutProps) {
               <>
                 {/* -- Nav desktop -- */}
                 <NavDesktop />
-
-                <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
-                  <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
-                    {isReady ? <SignInButton /> : <GetStartedButton buttonName="get-started-nav" />}
-                  </Stack>
-                  <ThemeButton />
-                  <LanguageButton />
-                </Box>
+                <NavMobile />
               </>
             ),
           }}
