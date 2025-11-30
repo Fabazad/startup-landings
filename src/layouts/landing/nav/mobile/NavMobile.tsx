@@ -35,7 +35,7 @@ export const NavMobile = ({ showConnection = true }: { showConnection?: boolean 
   return (
     <>
       <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-        {isReady && <SignInButton />}
+        {isReady && showConnection && <SignInButton />}
         <MenuButton
           onClick={openDrawerHandler}
           sx={{
