@@ -11,7 +11,7 @@ export const AddButton = () => {
     return (
         <Button sx={{ display: 'flex', flexDirection: "column" }} onClick={() => setIsOpen(true)}>
             <Iconify icon="mdi:add-circle-outline" width={24} />
-            Add
+            Ajouter
         </Button>
     );
 }
