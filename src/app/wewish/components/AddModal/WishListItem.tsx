@@ -8,7 +8,7 @@ export const WishListItem = ({ wishList }: { wishList: WishList }) => {
     return (
         <Link key={wishList.id} href={`/wewish/wish-list/${wishList.id}/add-wish`} style={{ textDecoration: "none" }}>
             <Box sx={{ position: 'relative', display: 'flex', gap: 2, "&:hover": { opacity: 0.7 } }}>
-                <Box sx={{ width: 100 }}>
+                <Box sx={{ width: 100, minWidth: 100 }}>
                     <Image alt={wishList.name} src={"https://api-prod-minimal-v700.pages.dev/assets/images/cover/cover-5.webp"} ratio="4/3" sx={{ borderRadius: 2 }} />
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', justifyContent: 'center', gap: 1 }}>

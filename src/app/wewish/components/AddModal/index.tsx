@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTitle, Button, Box, Divider, Typography } from "@mui/material";
+import { Dialog, DialogContent, DialogTitle, Button, Box, Divider, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Link from "next/link";
 import { useMyWishLists } from "../../hooks/useMyWishLists";
 import { Iconify } from "src/components/iconify";
@@ -7,12 +7,14 @@ import { WishListItem } from "./WishListItem";
 import { EmptyContent } from "src/components/empty-content";
 
 export const AddModal = ({ open, onClose }: { open: boolean, onClose: () => void }) => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     const { user } = useAuthContext();
     const { wishLists } = useMyWishLists({ archived: false, userId: user?.id })
 
     return (
-        <Dialog fullWidth maxWidth="sm" open={open} onClose={onClose} >
+        <Dialog fullWidth maxWidth="xs" fullScreen={isMobile} open={open} onClose={onClose} >
             <Button onClick={onClose} sx={{ position: 'absolute', right: 16, top: 16 }}><Iconify icon="eva:close-fill" /></Button>
 
             <DialogTitle sx={{ borderBottom: '1px solid', borderColor: 'divider' }}>{wishLists?.length ? "Ajouter une envie" : "Vous n'avez pas de liste d'envie"}</DialogTitle>
