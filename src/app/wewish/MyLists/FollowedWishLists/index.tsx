@@ -2,7 +2,7 @@
 
 import { useFollowedWishLists } from "src/app/wewish/hooks/useFollowedWishLists";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
-import { WishListGrid } from "src/app/wewish/components/WishListGrid";
+import { WishLists } from "src/app/wewish/components/WishLists";
 
 export const FollowedWishLists = () => {
 
@@ -10,7 +10,7 @@ export const FollowedWishLists = () => {
 
     const { wishLists, isLoading } = useFollowedWishLists(user?.id);
 
-    return <WishListGrid wishLists={wishLists} isLoading={isLoading} emptyContent={{
+    return <WishLists wishLists={wishLists} isLoading={isLoading} emptyContent={{
         title: "Vous ne suivez aucune liste d'envies"
     }} />
 }

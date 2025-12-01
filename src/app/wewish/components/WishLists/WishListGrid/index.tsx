@@ -1,11 +1,15 @@
 import { Button, Grid, Link } from "@mui/material";
-import { WishList } from "../../types/WishList";
+import { WishList } from "../../../types/WishList";
 import { WishListItem } from "./WishListItem";
 import { WishListItemSkeleton } from "./WishListItem/WishListItemSkeleton";
 import { EmptyContent } from "src/components/empty-content";
 import { Iconify } from "src/components/iconify";
 
-export const WishListGrid = ({ wishLists, isLoading, emptyContent }: { wishLists: WishList[]; isLoading: boolean; emptyContent: { button?: { title: string; href: string; }; title: string; } }) => {
+export const WishListGrid = ({ wishLists, isLoading, emptyContent }: {
+    wishLists: WishList[];
+    isLoading: boolean;
+    emptyContent: { button?: { title: string; href: string; }; title: string; }
+}) => {
 
     if (!isLoading && wishLists?.length === 0) return <EmptyContent
         title={emptyContent.title}

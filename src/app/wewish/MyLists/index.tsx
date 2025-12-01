@@ -69,9 +69,9 @@ export const MyLists = () => {
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                         <Tab label="Mes listes" />
                         <Tab label="Listes suivies" />
-                        <Tab label="Listes archivées" />
                         <Tab label="Mes réservations" />
                         <Tab label="Toutes mes envies" />
+                        <Tab label="Listes archivées" />
                     </Tabs>
                 </Box>
                 <CustomTabPanel value={value} index={0}>
@@ -81,13 +81,12 @@ export const MyLists = () => {
                     <FollowedWishLists />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={2}>
-                    <MyArchivedWishLists />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={3}>
                     Item Four
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={4}>
-                    Item Five
+                    <MyArchivedWishLists />
                 </CustomTabPanel>
             </Box>
         </Box>

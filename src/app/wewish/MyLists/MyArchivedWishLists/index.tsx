@@ -2,7 +2,7 @@
 
 import { useMyWishLists } from "src/app/wewish/hooks/useMyWishLists";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
-import { WishListGrid } from "src/app/wewish/components/WishListGrid";
+import { WishLists } from "../../components/WishLists";
 
 export const MyArchivedWishLists = () => {
 
@@ -11,7 +11,7 @@ export const MyArchivedWishLists = () => {
     const { wishLists, isLoading } = useMyWishLists({ archived: true, userId: user?.id });
 
     return (
-        <WishListGrid wishLists={wishLists} isLoading={isLoading} emptyContent={{
+        <WishLists wishLists={wishLists} isLoading={isLoading} emptyContent={{
             title: "Vous avez aucune liste d'envies archivée"
         }} />
     )

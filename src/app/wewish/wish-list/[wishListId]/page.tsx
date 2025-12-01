@@ -5,10 +5,10 @@ import { getWishListQuery } from "../../queries/wishList";
 import { View500 } from "src/sections/error";
 import { NotFoundView } from "src/sections/error";
 import { getAuthUser } from "src/auth/getAuthUser";
-import { ArchiveWishListButton } from "../../components/WishListGrid/WishListItem/ArchiveWishListButton";
-import { DeleteWishListButton } from "../../components/WishListGrid/WishListItem/DeleteWishListButton";
-import { FollowWishListButton } from "../../components/WishListGrid/WishListItem/FollowWishListButton";
-import { UnfollowWishListButton } from "../../components/WishListGrid/WishListItem/UnfollowWishListButton";
+import { ArchiveWishListButton } from "../../components/WishLists/WishListGrid/WishListItem/ArchiveWishListButton";
+import { DeleteWishListButton } from "../../components/WishLists/WishListGrid/WishListItem/DeleteWishListButton";
+import { FollowWishListButton } from "../../components/WishLists/WishListGrid/WishListItem/FollowWishListButton";
+import { UnfollowWishListButton } from "../../components/WishLists/WishListGrid/WishListItem/UnfollowWishListButton";
 
 export default async function WishListPage({ params }: { params: { wishListId: number } }) {
     const { wishListId } = params;

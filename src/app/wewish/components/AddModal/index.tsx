@@ -3,15 +3,16 @@ import Link from "next/link";
 import { useMyWishLists } from "../../hooks/useMyWishLists";
 import { Iconify } from "src/components/iconify";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
-import { WishListItem } from "./WishListItem";
+import { WishListItem } from "../WishLists/WishListList/WishListItem";
 import { EmptyContent } from "src/components/empty-content";
+import { WishListList } from "../WishLists/WishListList";
 
 export const AddModal = ({ open, onClose }: { open: boolean, onClose: () => void }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     const { user } = useAuthContext();
-    const { wishLists } = useMyWishLists({ archived: false, userId: user?.id })
+    const { wishLists, isLoading } = useMyWishLists({ archived: false, userId: user?.id })
 
     return (
         <Dialog fullWidth maxWidth="xs" fullScreen={isMobile} open={open} onClose={onClose} >
@@ -20,36 +21,23 @@ export const AddModal = ({ open, onClose }: { open: boolean, onClose: () => void
             <DialogTitle sx={{ borderBottom: '1px solid', borderColor: 'divider' }}>{wishLists?.length ? "Ajouter une envie" : "Vous n'avez pas de liste d'envie"}</DialogTitle>
 
             <DialogContent sx={{ py: 5 }}>
-                {wishLists.length === 0 && <EmptyContent title="Vous n'avez pas de liste d'envie" action={
-                    <Link href={"/wewish/wish-list"} style={{ marginTop: "1rem" }}>
-                        <Button variant="contained" sx={{ borderRadius: 999, px: 2 }} size="large">
-                            <Iconify icon="material-symbols:add" sx={{ mr: 1 }} />
-                            Créer votre première liste d'envie
+                <WishListList wishLists={wishLists} isLoading={isLoading} emptyContent={{
+                    title: "Vous n'avez pas de liste d'envie",
+                    button: { title: "Créer votre première liste d'envie", href: "/wewish/wish-list" }
+                }} href={(listId) => `/wewish/wish-list/${listId}/add-wish`} />
+                {!isLoading && wishLists.length > 0 && (<>
+                    <Divider sx={{ typography: 'body2', my: 2 }}>
+                        <Typography variant="body2" sx={{ textTransform: 'uppercase' }}>OU</Typography>
+                    </Divider>
+
+                    <Link href={"/wewish/wish-list"} style={{ width: '100%' }}>
+                        <Button variant="contained" sx={{ width: '100%', borderRadius: '99999px' }} size="large">
+                            {wishLists?.length ? "Créer une nouvelle liste" : "Créer votre première liste d'envie"}
                         </Button>
                     </Link>
-                } />}
-                {wishLists?.length !== 0 && (
-                    <>
-                        <Box sx={{ mt: 2 }}>
-
-                            <Box sx={{ mb: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
-                                {wishLists?.map((list) => (
-                                    <WishListItem key={list.id} wishList={list} />
-                                ))}
-                            </Box>
-                        </Box>
-
-                        <Divider sx={{ typography: 'body2', my: 2 }}>
-                            <Typography variant="body2" sx={{ textTransform: 'uppercase' }}>OU</Typography>
-                        </Divider>
-
-                        <Link href={"/wewish/wish-list"} style={{ width: '100%' }}>
-                            <Button variant="contained" sx={{ width: '100%', borderRadius: '99999px' }} size="large">
-                                {wishLists?.length ? "Créer une nouvelle liste" : "Créer votre première liste d'envie"}
-                            </Button>
-                        </Link>
-                    </>
+                </>
                 )}
+
             </DialogContent>
         </Dialog>
     );
