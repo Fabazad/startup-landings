@@ -7,7 +7,7 @@ export const MyListsButton = () => {
             href="/wewish"
             sx={{ display: 'flex', flexDirection: "column", textDecoration: 'none', color: 'inherit' }}
         >
-            <Iconify icon="mdi:folder-outline" width={24} />
+            <Iconify icon="line-md:clipboard-list" width={24} />
             Mes listes
         </Button>
     );

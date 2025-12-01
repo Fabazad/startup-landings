@@ -12,9 +12,9 @@ export const WishList = ({ wishes, isLoading, wishListId }: {
     isLoading: boolean,
     wishListId?: number,
 }) => {
-    if (!isLoading && wishes.length === 10) return (
+    if (!isLoading && wishes.length === 0) return (
         <EmptyContent title="Aucune envie" action={
-            <Button href={`/wewish/wish-list/${wishListId}/add-wish`} variant="contained" sx={{ borderRadius: 999, px: 2, mt: 1 }} size="large">
+            <Button href={`/wewish/wish-list/${wishListId}/add-wish`} variant="contained" sx={{ borderRadius: 999, px: 2, mt: 1 }} size="large" color="warning">
                 <Iconify icon="material-symbols:add" sx={{ mr: 1 }} />
                 Ajouter une envie
             </Button>

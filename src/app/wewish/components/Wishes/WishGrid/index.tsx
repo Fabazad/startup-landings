@@ -16,7 +16,7 @@ export const WishGrid = ({ wishes, isLoading, wishListId }: { wishes: Array<Wish
             action={
                 <Box sx={{ mt: 2 }}>
                     <Link href={`/wewish/wish-list/${wishListId}/add-wish`}>
-                        <Button variant="contained" sx={{ borderRadius: 9999 }} size="large">
+                        <Button variant="contained" sx={{ borderRadius: 9999 }} size="large" color="warning">
                             <Iconify icon="material-symbols:add" width={24} sx={{ mr: 1 }} />
                             <Typography variant="body1">Ajouter une envie</Typography>
                         </Button>

@@ -16,7 +16,7 @@ export function AddWishItem({ wishListId }: { wishListId: number }) {
         <Link component={RouterLink} href={linkTo} style={{ textDecoration: "none" }}>
             <Card sx={{
                 "&:hover": { boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)", transition: "all 0.2s ease-in-out", opacity: 1 },
-                "&:hover .icon": { width: { sm: 120, xs: 70 }, height: { sm: 120, xs: 70 }, transition: "all 0.2s ease-in-out" },
+                "&:hover .icon": { width: { sm: 106, xs: 70 }, height: { sm: 106, xs: 70 }, transition: "all 0.2s ease-in-out" },
                 "&:hover > .text": { fontWeight: 800 },
                 display: "flex",
                 flexDirection: { sm: "column", xs: "row" },
@@ -30,7 +30,7 @@ export function AddWishItem({ wishListId }: { wishListId: number }) {
                 p: 2,
                 gap: 2,
             }}>
-                <Iconify icon="solar:add-square-bold" className="icon" sx={{
+                <Iconify icon="line-md:plus-circle-filled" className="icon" sx={{
                     color: "warning.main",
                     transition: "all 0.2s ease-in-out",
                     width: { sm: 90, xs: 60 },
