@@ -7,7 +7,7 @@ import { RouterLink } from 'src/routes/components';
 import { fCurrency } from 'src/utils/format-number';
 import { Image } from 'src/components/image';
 import { Iconify } from 'src/components/iconify';
-import { Wish } from '../../types/Wish';
+import { Wish } from '../../../types/Wish';
 import { Typography } from '@mui/material';
 
 // ----------------------------------------------------------------------
@@ -43,7 +43,7 @@ export function WishItem({ wish }: { wish: Wish }) {
 
             <Image
                 alt={wish.name}
-                src={"https://api-prod-minimal-v700.pages.dev/assets/images/m-product/product-6.webp"}
+                src="https://api-prod-minimal-v700.pages.dev/assets/images/m-product/product-17.webp"
                 ratio="1/1"
                 sx={{ borderRadius: 1.5 }}
             />
