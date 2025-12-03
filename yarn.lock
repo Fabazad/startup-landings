@@ -4034,6 +4034,11 @@
   resolved "https://registry.npmjs.org/@types/geojson/-/geojson-7946.0.14.tgz"
   integrity sha512-WCfD5Ht3ZesJUsONdhvm84dmzWOiOzOAqOncN0++w0lBw1o8OuDNJF2McvvCef/yBqb/HYRahp1BYtODFQ8bRg==
 
+"@types/google-one-tap@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@types/google-one-tap/-/google-one-tap-1.2.6.tgz#854bdf1a51f9bc3d61f3c55d44135b653c523583"
+  integrity sha512-REmJsXVHvKb/sgI8DF+7IesMbDbcsEokHBqxU01ENZ8d98UPWdRLhUCtxEm9bhNFFg6PJGy7PNFdvovp0hK3jA==
+
 "@types/hast@^3.0.0":
   version "3.0.3"
   resolved "https://registry.npmjs.org/@types/hast/-/hast-3.0.3.tgz"
@@ -8607,6 +8612,11 @@ react-floater@^0.7.9:
     popper.js "^1.16.0"
     prop-types "^15.8.1"
     tree-changes "^0.9.1"
+
+react-google-one-tap-login@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-google-one-tap-login/-/react-google-one-tap-login-0.1.1.tgz#12a61e63e19251622cf1575b601d79fd4d07847a"
+  integrity sha512-RCbOfR3Z7VcRae4AzrLoBfY/aqqdN24pkQeNz9CJ0W65C9SY3vAwF0Yp8mwpeFwsugaZ5b1HZsfhUYWtb3IMrw==
 
 react-hook-form@^7.52.2:
   version "7.52.2"
