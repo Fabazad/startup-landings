@@ -11,7 +11,6 @@ import { supabase } from 'src/lib/supabase-client';
 import { AuthContext } from '../auth-context';
 
 import type { AuthState } from '../../types';
-import { googleOneTapLogin } from 'src/auth/view/supabase/google-one-tap';
 
 // ----------------------------------------------------------------------
 
@@ -117,9 +116,6 @@ export function AuthProvider({ children }: Props) {
     }),
     [checkUserSession, state.user, status]
   );
-
-  googleOneTapLogin()
-
 
   return <AuthContext.Provider value={memoizedValue}>{children}</AuthContext.Provider>;
 }

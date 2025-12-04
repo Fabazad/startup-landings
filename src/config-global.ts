@@ -28,7 +28,6 @@ export type ConfigValue = {
   amplify: { userPoolId: string; userPoolWebClientId: string; region: string };
   auth0: { clientId: string; domain: string; callbackUrl: string };
   supabase: { url: string; key: string };
-  google: { clientId: string };
   posthog: { key: string; host: string };
   resend: { apiKey: string };
   amazon: { affiliateTag: string; accessKey: string; secretKey: string };
@@ -89,9 +88,6 @@ export const CONFIG: ConfigValue = {
   supabase: {
     url: process.env.NEXT_PUBLIC_SUPABASE_URL ?? '',
     key: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '',
-  },
-  google: {
-    clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? '',
   },
   /**
    * Posthog
