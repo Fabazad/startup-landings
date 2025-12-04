@@ -4,6 +4,7 @@ import { Image } from 'src/components/image';
 import { Wish } from "src/app/wewish/types/Wish";
 import { SettingsButton } from "./SettingsButton";
 import { Iconify } from "src/components/iconify";
+import { fCurrency } from "src/utils/format-number";
 
 export const WishItem = ({ wish, onFavoriteClick }: { wish: Wish; onFavoriteClick: () => void }) => {
     return (
@@ -17,6 +18,9 @@ export const WishItem = ({ wish, onFavoriteClick }: { wish: Wish; onFavoriteClic
                     <Typography variant="subtitle1" fontWeight={800} color="text.primary">
                         {wish.name}
                     </Typography>
+                    {wish.price && <Typography variant="body2" color="text.secondary">
+                        {fCurrency(wish.price)}
+                    </Typography>}
                 </Box>
                 <Box sx={{ flexShrink: 0 }}>
                     <SettingsButton wish={wish} onFavoriteClick={onFavoriteClick} />

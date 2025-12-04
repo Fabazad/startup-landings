@@ -2,10 +2,14 @@ import { Box, Divider, Drawer, IconButton, List, ListItemButton, ListItemIcon, L
 import { Iconify } from "src/components/iconify";
 import { useState } from "react";
 import { Wish } from "src/app/wewish/types/Wish";
+import { useAuthContext } from "src/auth/hooks/use-auth-context";
 
 export const SettingsButton = ({ wish, onFavoriteClick }: { wish: Wish; onFavoriteClick: () => void }) => {
 
+    const { user } = useAuthContext();
     const [open, setOpen] = useState(false);
+
+    const isUserOwner = user?.id === wish.userId;
 
     return (
         <>
@@ -33,25 +37,40 @@ export const SettingsButton = ({ wish, onFavoriteClick }: { wish: Wish; onFavori
                 </Box>
                 <Divider />
                 <List sx={{ p: 2 }}>
-                    <ListItemButton onClick={onFavoriteClick}
-                    >
-                        <ListItemIcon>
-                            <Iconify icon={wish.isFavorite ? "solar:heart-bold" : "solar:heart-outline"} width={24} color="primary.main" />
-                        </ListItemIcon>
-                        <ListItemText primary={wish.isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"} />
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <Iconify icon="lucide:edit" width={24} />
-                        </ListItemIcon>
-                        <ListItemText primary="Modifier" />
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <Iconify icon="material-symbols:delete-rounded" width={24} />
-                        </ListItemIcon>
-                        <ListItemText primary="Supprimer" />
-                    </ListItemButton>
+
+                    {!isUserOwner && (
+                        <>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <Iconify icon="solar:gift-broken" width={24} color="secondary.main" />
+                                </ListItemIcon>
+                                <ListItemText primary="Réserver l'envie" />
+                            </ListItemButton>
+                        </>
+                    )}
+                    {isUserOwner && (
+                        <>
+                            <ListItemButton onClick={onFavoriteClick}
+                            >
+                                <ListItemIcon>
+                                    <Iconify icon={wish.isFavorite ? "solar:heart-bold" : "solar:heart-outline"} width={24} color="primary.main" />
+                                </ListItemIcon>
+                                <ListItemText primary={wish.isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"} />
+                            </ListItemButton>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <Iconify icon="lucide:edit" width={24} />
+                                </ListItemIcon>
+                                <ListItemText primary="Modifier" />
+                            </ListItemButton>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <Iconify icon="material-symbols:delete-rounded" width={24} />
+                                </ListItemIcon>
+                                <ListItemText primary="Supprimer" />
+                            </ListItemButton>
+                        </>
+                    )}
                 </List>
             </Drawer>
         </>
