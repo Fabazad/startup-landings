@@ -48,7 +48,6 @@ const getTabName = (tabIndex: number) => {
 }
 
 export const MyLists = () => {
-
     const tabName = useSearchParams().get("tab");
 
     const [value, setValue] = useState(getTabIndex(tabName));
@@ -59,7 +58,8 @@ export const MyLists = () => {
     }, [tabName]);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        router.push(`?tab=${getTabName(newValue)}`);
+        setValue(newValue);
+        router.replace(`?tab=${getTabName(newValue)}`, { scroll: false });
     };
 
     return (
