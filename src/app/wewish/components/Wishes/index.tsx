@@ -8,16 +8,16 @@ import { WishList } from "./WishList";
 
 export const Wishes = ({ wishListId }: { wishListId?: number }) => {
 
-    const { wishes, deleteWish, isDeletingWish, isLoading } = useWishes({ wishListId });
+    const { wishes, deleteWish, isDeletingWish, isLoading, setIsFavorite } = useWishes({ wishListId });
 
     return (
         <Container>
             <Typography variant="h1">Wishes</Typography>
             <Box sx={{ display: { xs: "none", md: "block" } }}>
-                <WishGrid wishListId={wishListId} wishes={wishes} isLoading={isLoading} />
+                <WishGrid wishListId={wishListId} wishes={wishes} isLoading={isLoading} onFavoriteClick={(wishId, isFavorite) => setIsFavorite(wishId, isFavorite)} />
             </Box>
             <Box sx={{ display: { xs: "block", md: "none" } }}>
-                <WishList wishes={wishes} isLoading={isLoading} wishListId={wishListId} />
+                <WishList wishes={wishes} isLoading={isLoading} wishListId={wishListId} onFavoriteClick={(wishId, isFavorite) => setIsFavorite(wishId, isFavorite)} />
             </Box>
         </Container >
     )

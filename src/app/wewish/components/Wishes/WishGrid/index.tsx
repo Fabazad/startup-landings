@@ -9,7 +9,7 @@ import { WishItemSkeleton } from "./WishItemSekeleton";
 import { AddWishItem } from "./AddWishItem";
 import { WishItem } from "./WishItem";
 
-export const WishGrid = ({ wishes, isLoading, wishListId }: { wishes: Array<Wish>, isLoading: boolean, wishListId?: number }) => {
+export const WishGrid = ({ wishes, isLoading, wishListId, onFavoriteClick }: { wishes: Array<Wish>, isLoading: boolean, wishListId?: number; onFavoriteClick: (wishId: number, isFavorite: boolean) => void }) => {
 
     if (!isLoading && wishes.length === 0) return (
         <EmptyContent title="Aucune envie" description="Vous n'avez pas mis d'envies dans cette liste"
@@ -42,7 +42,7 @@ export const WishGrid = ({ wishes, isLoading, wishListId }: { wishes: Array<Wish
                 <>
                     {wishListId && <AddWishItem wishListId={wishListId} />}
                     {wishes.map((wish) => (
-                        <WishItem key={wish.id} wish={wish} />
+                        <WishItem key={wish.id} wish={wish} onFavoriteClick={() => onFavoriteClick(wish.id, !wish.isFavorite)} />
                     ))}
                 </>
             )}

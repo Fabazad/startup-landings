@@ -3,8 +3,16 @@ import { supabase } from "src/lib/supabase-client";
 import { useState } from "react";
 import { Wish } from "../types/Wish";
 import { useAuthContext } from "src/auth/hooks";
+import { getWishesQuery, setIsFavoriteQuery } from "../queries/wish";
+import { toast } from "sonner";
 
-export const useWishes = ({ wishListId }: { wishListId?: number }): { wishes: Array<Wish>; isLoading: boolean; deleteWish: (wishId: number) => Promise<void>, isDeletingWish: number | null } => {
+export const useWishes = ({ wishListId }: { wishListId?: number }): {
+    wishes: Array<Wish>;
+    isLoading: boolean;
+    deleteWish: (wishId: number) => Promise<void>,
+    isDeletingWish: number | null,
+    setIsFavorite: (wishId: number, isFavorite: boolean) => void
+} => {
 
     const [isDeletingWish, setIsDeletingWish] = useState<number | null>(null);
     const { user } = useAuthContext();
@@ -12,13 +20,10 @@ export const useWishes = ({ wishListId }: { wishListId?: number }): { wishes: Ar
     const { data: wishes, isLoading, refetch } = useQuery<Array<Wish>>({
         queryKey: ['wishes', wishListId],
         queryFn: async () => {
-            const { data, error } = await supabase
-                .from('wishes')
-                .select('*')
-                .eq(wishListId ? 'listId' : 'userId', wishListId || user?.id);
+            const result = await getWishesQuery(wishListId ? { wishListId } : { userId: user?.id });
 
-            if (error) throw error;
-            return data;
+            if (!result.success) throw result.errorCode;
+            return result.wishes;
         },
     });
 
@@ -30,5 +35,11 @@ export const useWishes = ({ wishListId }: { wishListId?: number }): { wishes: Ar
         if (error) throw error;
     };
 
-    return { wishes: wishes || [], isLoading, deleteWish, isDeletingWish };
+    const setIsFavorite = async (wishId: number, isFavorite: boolean) => {
+        const result = await setIsFavoriteQuery(wishId, isFavorite);
+        if (result.success) refetch();
+        if (!result.success) toast.error("Une erreur est survenue");
+    };
+
+    return { wishes: wishes || [], isLoading, deleteWish, isDeletingWish, setIsFavorite };
 }

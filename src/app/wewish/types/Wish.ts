@@ -11,6 +11,8 @@ export const wishSchema = z.object({
     acceptEquivalent: z.boolean(),
     bookedByUser: z.object({ id: z.number(), full_name: z.string() }).optional(),
     bookedByName: z.string().nullish(),
+    userId: z.number(),
+    listId: z.number().optional(),
 });
 
 export type Wish = z.infer<typeof wishSchema>;

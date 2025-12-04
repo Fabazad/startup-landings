@@ -3,8 +3,6 @@ import Link from "next/link";
 import { useMyWishLists } from "../../hooks/useMyWishLists";
 import { Iconify } from "src/components/iconify";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
-import { WishListItem } from "../WishLists/WishListList/WishListItem";
-import { EmptyContent } from "src/components/empty-content";
 import { WishListList } from "../WishLists/WishListList";
 
 export const AddModal = ({ open, onClose }: { open: boolean, onClose: () => void }) => {
