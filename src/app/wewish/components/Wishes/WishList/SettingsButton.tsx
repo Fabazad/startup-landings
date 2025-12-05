@@ -47,7 +47,7 @@ export const SettingsButton = ({ wish, onFavoriteClick }: { wish: Wish; onFavori
                                 </ListItemIcon>
                                 <ListItemText primary={wish.isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"} />
                             </ListItemButton>
-                            <ListItemButton>
+                            <ListItemButton href={`/wewish/wish/${wish.id}/update`}>
                                 <ListItemIcon>
                                     <Iconify icon="lucide:edit" width={24} />
                                 </ListItemIcon>

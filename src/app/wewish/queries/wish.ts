@@ -47,10 +47,44 @@ export const getWishesQuery = async (params: { wishListId: number } | { userId: 
     const { data, error } = await query;
 
     if (error) return { success: false, errorCode: "unknown" };
-    console.log({ data });
 
     const wishes = data.map((wish: any) => ({ ...wish, listId: wish.list.id, userId: wish.list.user_id }));
-    console.log({ wishes });
-
     return { success: true, wishes };
+}
+
+export const createWishQuery = async (params: {
+    wishListId: number,
+    productUrl?: string,
+    name: string,
+    description?: string,
+    price?: number,
+    isFavorite: boolean,
+    isSecondHand: boolean,
+    acceptEquivalent: boolean
+}): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
+    const { wishListId, ...rest } = params;
+    const { error } = await supabase.from('wishes').insert({
+        ...rest,
+        listId: wishListId,
+    });
+    if (error) return { success: false, errorCode: "unknown" };
+    return { success: true };
+}
+
+export const updateWishQuery = async (params: {
+    wishId: number,
+    productUrl?: string,
+    name: string,
+    description?: string,
+    price?: number,
+    isFavorite: boolean,
+    isSecondHand: boolean,
+    acceptEquivalent: boolean
+}): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
+    const { wishId, ...rest } = params;
+    const { error } = await supabase.from('wishes').update({
+        ...rest,
+    }).eq('id', wishId);
+    if (error) return { success: false, errorCode: "unknown" };
+    return { success: true };
 }

@@ -8,6 +8,7 @@ import { Typography } from '@mui/material';
 import { FavoriteButton } from './FavoriteButton';
 import { useAuthContext } from 'src/auth/hooks/use-auth-context';
 import { BookButton } from './BookButton';
+import { UpdateButton } from './UpdateButton';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,8 @@ export function WishItem({ wish, onFavoriteClick }: { wish: Wish; onFavoriteClic
                 {!isUserOwner && <BookButton wishId={wish.id} />}
 
                 <FavoriteButton isFavorite={wish.isFavorite} onClick={onFavoriteClick} isUserOwner={isUserOwner} />
+
+                {isUserOwner && <UpdateButton wishId={wish.id} />}
 
                 <Image
                     alt={wish.name}

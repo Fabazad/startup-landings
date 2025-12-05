@@ -3,7 +3,7 @@ import Link from "next/link";
 import { NotFoundView, View500 } from "src/sections/error";
 import { getWishQuery } from "../../queries/wish";
 
-export default async function WishPage({ params }: { params: { wishId: string } }) {
+export default async function WishPage({ params }: { params: { wishId: number } }) {
 
     const wishResult = await getWishQuery(params.wishId);
 
