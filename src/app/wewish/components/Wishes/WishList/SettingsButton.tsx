@@ -4,12 +4,16 @@ import { useState } from "react";
 import { Wish } from "src/app/wewish/types/Wish";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
 
-export const SettingsButton = ({ wish, onFavoriteClick }: { wish: Wish; onFavoriteClick: () => void }) => {
+export const SettingsButton = ({ wish, onFavoriteClick, onDelete }: { wish: Wish; onFavoriteClick: () => void; onDelete: () => void }) => {
 
     const { user } = useAuthContext();
     const [open, setOpen] = useState(false);
 
     const isUserOwner = user?.id === wish.userId;
+
+    const handleDelete = () => {
+        confirm("Voulez-vous vraiment supprimer cette envie ?") && onDelete();
+    };
 
     return (
         <>
@@ -53,7 +57,7 @@ export const SettingsButton = ({ wish, onFavoriteClick }: { wish: Wish; onFavori
                                 </ListItemIcon>
                                 <ListItemText primary="Modifier" />
                             </ListItemButton>
-                            <ListItemButton>
+                            <ListItemButton onClick={handleDelete}>
                                 <ListItemIcon>
                                     <Iconify icon="material-symbols:delete-rounded" width={24} />
                                 </ListItemIcon>

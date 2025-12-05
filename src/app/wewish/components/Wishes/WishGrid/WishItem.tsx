@@ -9,11 +9,12 @@ import { FavoriteButton } from './FavoriteButton';
 import { useAuthContext } from 'src/auth/hooks/use-auth-context';
 import { BookButton } from './BookButton';
 import { UpdateButton } from './UpdateButton';
+import { DeleteButton } from './DeleteButton';
 
 // ----------------------------------------------------------------------
 
 
-export function WishItem({ wish, onFavoriteClick }: { wish: Wish; onFavoriteClick: () => void }) {
+export function WishItem({ wish, onFavoriteClick, onDelete }: { wish: Wish; onFavoriteClick: () => void; onDelete: () => void }) {
 
     const { user } = useAuthContext();
     const linkTo = `/wewish/wish/${wish.id}`;
@@ -27,7 +28,11 @@ export function WishItem({ wish, onFavoriteClick }: { wish: Wish; onFavoriteClic
 
                 <FavoriteButton isFavorite={wish.isFavorite} onClick={onFavoriteClick} isUserOwner={isUserOwner} />
 
-                {isUserOwner && <UpdateButton wishId={wish.id} />}
+                {isUserOwner && (<>
+                    <UpdateButton wishId={wish.id} />
+                    <DeleteButton onDelete={onDelete} />
+                </>)
+                }
 
                 <Image
                     alt={wish.name}

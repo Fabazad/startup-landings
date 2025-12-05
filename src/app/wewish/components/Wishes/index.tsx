@@ -8,16 +8,22 @@ import { WishList } from "./WishList";
 
 export const Wishes = ({ wishListId }: { wishListId?: number }) => {
 
-    const { wishes, deleteWish, isDeletingWish, isLoading, setIsFavorite } = useWishes({ wishListId });
+    const { wishes, deleteWish, isLoading, setIsFavorite } = useWishes({ wishListId });
 
     return (
         <Container>
-            <Typography variant="h1">Wishes</Typography>
+            <Typography variant="h1">Envies</Typography>
             <Box sx={{ display: { xs: "none", md: "block" } }}>
-                <WishGrid wishListId={wishListId} wishes={wishes} isLoading={isLoading} onFavoriteClick={(wishId, isFavorite) => setIsFavorite(wishId, isFavorite)} />
+                <WishGrid wishListId={wishListId} wishes={wishes} isLoading={isLoading}
+                    onFavoriteClick={(wishId, isFavorite) => setIsFavorite(wishId, isFavorite)}
+                    onDelete={(wishId) => deleteWish(wishId)}
+                />
             </Box>
             <Box sx={{ display: { xs: "block", md: "none" } }}>
-                <WishList wishes={wishes} isLoading={isLoading} wishListId={wishListId} onFavoriteClick={(wishId, isFavorite) => setIsFavorite(wishId, isFavorite)} />
+                <WishList wishes={wishes} isLoading={isLoading} wishListId={wishListId}
+                    onFavoriteClick={(wishId, isFavorite) => setIsFavorite(wishId, isFavorite)}
+                    onDelete={(wishId) => deleteWish(wishId)}
+                />
             </Box>
         </Container >
     )

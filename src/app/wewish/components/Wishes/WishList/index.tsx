@@ -7,11 +7,12 @@ import { WishItemSkeleton } from "./WishItemSkeleton";
 import { WishItem } from "./WishItem";
 import { AddWishItem } from "../WishGrid/AddWishItem";
 
-export const WishList = ({ wishes, isLoading, wishListId, onFavoriteClick }: {
+export const WishList = ({ wishes, isLoading, wishListId, onFavoriteClick, onDelete }: {
     wishes: Array<Wish>,
     isLoading: boolean,
     wishListId?: number,
     onFavoriteClick: (wishId: number, isFavorite: boolean) => void,
+    onDelete: (wishId: number) => void,
 }) => {
     if (!isLoading && wishes.length === 0) return (
         <EmptyContent title="Aucune envie" action={
@@ -30,7 +31,10 @@ export const WishList = ({ wishes, isLoading, wishListId, onFavoriteClick }: {
                 <>
                     {wishListId && <AddWishItem wishListId={wishListId} />}
                     {wishes.map((wish) => (
-                        <WishItem key={wish.id} wish={wish} onFavoriteClick={() => onFavoriteClick(wish.id, !wish.isFavorite)} />
+                        <WishItem key={wish.id} wish={wish}
+                            onFavoriteClick={() => onFavoriteClick(wish.id, !wish.isFavorite)}
+                            onDelete={() => onDelete(wish.id)}
+                        />
                     ))}
                 </>
             )}

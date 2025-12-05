@@ -6,7 +6,7 @@ import { SettingsButton } from "./SettingsButton";
 import { Iconify } from "src/components/iconify";
 import { fCurrency } from "src/utils/format-number";
 
-export const WishItem = ({ wish, onFavoriteClick }: { wish: Wish; onFavoriteClick: () => void }) => {
+export const WishItem = ({ wish, onFavoriteClick, onDelete }: { wish: Wish; onFavoriteClick: () => void; onDelete: () => void }) => {
     return (
         <Box sx={{ position: 'relative' }}>
             <Link key={wish.id} href={`/wewish/wish/${wish.id}`} style={{ textDecoration: "none" }}>
@@ -27,7 +27,7 @@ export const WishItem = ({ wish, onFavoriteClick }: { wish: Wish; onFavoriteClic
                 </Card>
             </Link >
             <Box sx={{ flexShrink: 0, position: 'absolute', top: 0, right: 16, height: "100%", display: 'flex', alignItems: 'center' }}>
-                <SettingsButton wish={wish} onFavoriteClick={onFavoriteClick} />
+                <SettingsButton wish={wish} onFavoriteClick={onFavoriteClick} onDelete={onDelete} />
             </Box>
         </Box>
     );
