@@ -25,7 +25,8 @@ export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
     const handleBook = (e: React.MouseEvent<HTMLAnchorElement>) => {
         if (isBookedBy && isBookedByAuthUser) {
             e.preventDefault();
-            confirm("Voulez-vous vraiment annuler la réservation ?") && onUnbook() && setOpen(false);
+            confirm("Voulez-vous vraiment annuler la réservation ?") && onUnbook();
+            setOpen(false);
         }
     }
 
