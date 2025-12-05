@@ -15,3 +15,16 @@ export const getUserStatsQuery = async (userId: string): Promise<{ success: true
         }
     };
 }
+
+export const updateUserProfileQuery = async (data: { fullName?: string, avatar?: string, about?: string, birthday?: string }): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
+    const { error } = await supabase.auth.updateUser({
+        data: {
+            full_name: data.fullName,
+            avatar: data.avatar,
+            about: data.about,
+            birthday: data.birthday
+        }
+    })
+    if (error) return { success: false, errorCode: "unknown" };
+    return { success: true };
+}

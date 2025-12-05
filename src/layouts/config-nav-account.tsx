@@ -11,7 +11,7 @@ export const _account = [
     icon: <Iconify icon="solar:home-angle-bold-duotone" />,
   },
   {
-    label: 'Profile',
+    label: 'Profil',
     href: '#',
     icon: (
       <SvgIcon>

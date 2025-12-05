@@ -1,6 +1,5 @@
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import { m } from 'framer-motion';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import Link from 'next/link';
@@ -69,7 +68,7 @@ export const Profile = ({ user, userStats }: { user: User; userStats: { wishList
                 </Typography>
               </Button>
             </Link>
-            <Button variant="outlined" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }}>
+            <Button variant="outlined" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }} href="/wewish/account/profile">
               <Typography variant="h6" sx={{ fontWeight: 400 }}>
                 Modifier mon profil
               </Typography>
@@ -95,7 +94,7 @@ export const Profile = ({ user, userStats }: { user: User; userStats: { wishList
                 </Typography>
               </Button>
             </Link>
-            <Button variant="outlined" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }}>
+            <Button variant="outlined" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }} href="/wewish/account/profile">
               <Typography variant="h6" sx={{ fontWeight: 400 }}>
                 Modifier mon profil
               </Typography>

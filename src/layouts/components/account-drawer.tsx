@@ -11,40 +11,23 @@ import MenuItem from '@mui/material/MenuItem';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-
 import { paths } from 'src/routes/paths';
 import { useRouter, usePathname } from 'src/routes/hooks';
-
-import { _mock } from 'src/_mock';
 import { varAlpha } from 'src/theme/styles';
-
 import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
 import { AnimateAvatar } from 'src/components/animate';
-
 import { useAuthContext } from 'src/auth/hooks';
-
 import { AccountButton } from './account-button';
 import { SignOutButton } from './sign-out-button';
+import Link from 'next/link';
 
-// ----------------------------------------------------------------------
 
-export type AccountDrawerProps = IconButtonProps & {
-  data?: {
-    label: string;
-    href: string;
-    icon?: React.ReactNode;
-    info?: React.ReactNode;
-  }[];
-};
-
-export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
+export function AccountDrawer() {
   const theme = useTheme();
 
   const router = useRouter();
-
-  const pathname = usePathname();
 
   const [open, setOpen] = useState(false);
 
@@ -56,13 +39,6 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
     setOpen(false);
   }, []);
 
-  const handleClickItem = useCallback(
-    (path: string) => {
-      handleCloseDrawer();
-      router.push(path);
-    },
-    [handleCloseDrawer, router]
-  );
 
   const { user } = useAuthContext();
 
@@ -90,8 +66,6 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
         onClick={handleOpenDrawer}
         photoURL={user?.photoURL}
         displayName={displayName}
-        sx={sx}
-        {...other}
       />
 
       <Drawer
@@ -123,42 +97,48 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
 
           <Stack
             sx={{
+              mt: 3,
               py: 3,
               px: 2.5,
               borderTop: `dashed 1px ${theme.vars.palette.divider}`,
               borderBottom: `dashed 1px ${theme.vars.palette.divider}`,
             }}
           >
-            {data.map((option) => {
-              const rootLabel = pathname.includes('/dashboard') ? 'Home' : 'Dashboard';
 
-              const rootHref = pathname.includes('/dashboard') ? '/' : paths.dashboard.root;
+            <MenuItem
+              component={Link}
+              href='/wewish/account/profile'
+              sx={{
+                py: 1,
+                color: 'text.secondary',
+                '&:hover': { color: 'text.primary' },
+              }}
+              onClick={handleCloseDrawer}
+            >
+              <Iconify icon="iconamoon:profile-circle-fill" sx={{ width: 24, height: 24 }} />
+              <Box component="span" sx={{ ml: 2 }}>
+                Modifier mon profil
+              </Box>
+            </MenuItem>
 
-              return (
-                <MenuItem
-                  key={option.label}
-                  onClick={() => handleClickItem(option.label === 'Home' ? rootHref : option.href)}
-                  sx={{
-                    py: 1,
-                    color: 'text.secondary',
-                    '& svg': { width: 24, height: 24 },
-                    '&:hover': { color: 'text.primary' },
-                  }}
-                >
-                  {option.icon}
 
-                  <Box component="span" sx={{ ml: 2 }}>
-                    {option.label === 'Home' ? rootLabel : option.label}
-                  </Box>
+            <MenuItem
+              component={Link}
+              href='/wewish/account/password'
+              sx={{
+                py: 1,
+                color: 'text.secondary',
+                '&:hover': { color: 'text.primary' },
+              }}
+              onClick={handleCloseDrawer}
+            >
+              <Iconify icon="iconamoon:lock-fill" sx={{ width: 24, height: 24 }} />
+              <Box component="span" sx={{ ml: 2 }}>
+                Mot de passe
+              </Box>
+            </MenuItem>
 
-                  {option.info && (
-                    <Label color="error" sx={{ ml: 1 }}>
-                      {option.info}
-                    </Label>
-                  )}
-                </MenuItem>
-              );
-            })}
+
           </Stack>
         </Scrollbar>
 
