@@ -22,7 +22,7 @@ export function WishItem({ wish, onFavoriteClick }: { wish: Wish; onFavoriteClic
     return (
         <Card sx={{ '&:hover .hided-button': { opacity: 1 }, "&:hover": { boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)" } }}>
             <Box sx={{ position: 'relative', p: 1 }}>
-                {!isUserOwner && <BookButton />}
+                {!isUserOwner && <BookButton wishId={wish.id} />}
 
                 <FavoriteButton isFavorite={wish.isFavorite} onClick={onFavoriteClick} isUserOwner={isUserOwner} />
 

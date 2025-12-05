@@ -5,7 +5,7 @@ import { useState } from "react";
 import { getWishQuery } from "../queries/wish";
 
 
-export const useWish = ({ wishId }: { wishId: string }): { wish?: Wish; isLoading: boolean, bookWishByUser: (userId: string) => Promise<void>; bookWishByName: (name: string) => Promise<void>; isBooking: boolean } => {
+export const useWish = ({ wishId }: { wishId: number }): { wish?: Wish; isLoading: boolean, bookWishByUser: (userId: string) => Promise<void>; bookWishByName: (name: string) => Promise<void>; isBooking: boolean } => {
 
     const [isBooking, setIsBooking] = useState(false);
 

@@ -1,7 +1,7 @@
 import { Fab, Tooltip } from "@mui/material";
 import { Iconify } from "src/components/iconify";
 
-export const BookButton = () => {
+export const BookButton = ({ wishId }: { wishId: number }) => {
     return (
         <Tooltip title="Réserver l'envie" placement="top" arrow slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}>
 
@@ -9,6 +9,7 @@ export const BookButton = () => {
                 color="secondary"
                 size="medium"
                 className="hided-button"
+                href={`/wewish/wish/${wishId}/book`}
                 sx={{
                     right: 16,
                     bottom: 16,

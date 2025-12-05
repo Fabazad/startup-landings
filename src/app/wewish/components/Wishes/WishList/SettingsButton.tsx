@@ -13,22 +13,12 @@ export const SettingsButton = ({ wish, onFavoriteClick }: { wish: Wish; onFavori
 
     return (
         <>
-            <Box onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-            }}>
-                <IconButton onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setOpen(true);
-                }}>
+            <Box>
+                <IconButton onClick={() => setOpen(true)}>
                     <Iconify icon="solar:menu-dots-bold" width={24} />
                 </IconButton>
             </Box>
-            <Drawer anchor="bottom" open={open} onClose={() => setOpen(false)} onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-            }}>
+            <Drawer anchor="bottom" open={open} onClose={() => setOpen(false)}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2 }}>
                     <Typography variant="h6">Paramètres</Typography>
                     <IconButton onClick={() => setOpen(false)}>
@@ -40,7 +30,7 @@ export const SettingsButton = ({ wish, onFavoriteClick }: { wish: Wish; onFavori
 
                     {!isUserOwner && (
                         <>
-                            <ListItemButton>
+                            <ListItemButton href={`/wewish/wish/${wish.id}/book`}>
                                 <ListItemIcon>
                                     <Iconify icon="solar:gift-broken" width={24} color="secondary.main" />
                                 </ListItemIcon>

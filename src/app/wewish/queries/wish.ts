@@ -1,7 +1,7 @@
 import { supabase } from "src/lib/supabase-client";
 import { Wish } from "../types/Wish";
 
-export const getWishQuery = async (wishId: string): Promise<{ success: true, wish?: Wish } | { success: false, errorCode: "unknown" }> => {
+export const getWishQuery = async (wishId: number): Promise<{ success: true, wish?: Wish } | { success: false, errorCode: "unknown" }> => {
     const { data, error } = await supabase
         .from('wishes')
         .select('*, bookedByUser:profiles (full_name,avatar_url), list:wish-lists!inner (id, user_id)')
