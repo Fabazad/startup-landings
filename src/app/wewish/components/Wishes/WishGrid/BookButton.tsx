@@ -1,30 +1,64 @@
-import { Fab, Tooltip } from "@mui/material";
+import { Box, Fab, Stack, Tooltip, Typography } from "@mui/material";
 import { Iconify } from "src/components/iconify";
+import { useAuthContext } from "src/auth/hooks/use-auth-context";
+import { Wish } from "src/app/wewish/types/Wish";
 
-export const BookButton = ({ wishId }: { wishId: number }) => {
+export const BookButton = ({ wish, isBookedBy, onUnbook }: { wish: Wish; isBookedBy: string | null, onUnbook: () => void }) => {
+
+    const { user } = useAuthContext();
+
+    const isBookedByAuthUser = !!(user && wish.bookedByUser?.id === user.id);
+
+    const handleBook = (e: React.MouseEvent<HTMLButtonElement>) => {
+        if (isBookedByAuthUser) {
+            e.preventDefault();
+            onUnbook();
+        }
+    }
+
     return (
-        <Tooltip title="Réserver l'envie" placement="top" arrow slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}>
-
-            <Fab
-                color="secondary"
-                size="medium"
-                className="hided-button"
-                href={`/wewish/wish/${wishId}/book`}
-                sx={{
-                    right: 16,
-                    bottom: 16,
-                    zIndex: 9,
-                    position: 'absolute',
-                    opacity: 0,
-                    transition: (theme) =>
-                        theme.transitions.create('all', {
-                            easing: theme.transitions.easing.easeInOut,
-                            duration: theme.transitions.duration.shorter,
-                        }),
-                }}
-            >
-                <Iconify icon="solar:gift-broken" width={24} />
-            </Fab>
-        </Tooltip>
+        <Box>
+            {isBookedBy && (
+                <Tooltip title={`Réservée par ${isBookedBy}`} placement="top" arrow slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}>
+                    <Stack sx={{ position: 'absolute', right: 28, bottom: 28, zIndex: 9, m: 0, flexDirection: 'row', gap: 2 }}>
+                        <Typography variant="body2" color="primary.main" sx={{ cursor: "default" }}>{isBookedBy}</Typography>
+                        <Iconify
+                            icon="solar:gift-bold"
+                            width={24}
+                            color="primary.main"
+                        />
+                    </Stack>
+                </Tooltip>
+            )}
+            {(!isBookedBy || isBookedByAuthUser) && (
+                <Tooltip title={isBookedByAuthUser ? "Annuler la réservation" : "Réserver l'envie"}
+                    placement="top" arrow
+                    slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}
+                >
+                    <Fab
+                        color={isBookedByAuthUser ? "error" : "secondary"}
+                        size="medium"
+                        className="hided-button"
+                        href={`/wewish/wish/${wish.id}/book`}
+                        disabled={!!isBookedBy && !isBookedByAuthUser}
+                        onClick={handleBook}
+                        sx={{
+                            right: 16,
+                            bottom: 16,
+                            zIndex: 10,
+                            position: 'absolute',
+                            opacity: 0,
+                            transition: (theme) =>
+                                theme.transitions.create('all', {
+                                    easing: theme.transitions.easing.easeInOut,
+                                    duration: theme.transitions.duration.shorter,
+                                }),
+                        }}
+                    >
+                        <Iconify icon="solar:gift-bold" width={24} />
+                    </Fab>
+                </Tooltip>
+            )}
+        </Box>
     )
 }

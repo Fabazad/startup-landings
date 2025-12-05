@@ -37,7 +37,7 @@ export function AddWishItem({ wishListId }: { wishListId: number }) {
                     height: { sm: 90, xs: 60 }
                 }}
                 />
-                <Typography variant="subtitle1" noWrap className='text' fontWeight={800} sx={{ transition: "all 0.2s ease-in-out" }}>Ajouter une envie</Typography>
+                <Typography variant="h6" noWrap className='text' fontWeight={800} sx={{ transition: "all 0.2s ease-in-out" }}>Ajouter une envie</Typography>
             </Card>
         </Link >
     );

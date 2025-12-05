@@ -2,14 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "src/lib/supabase-client";
 import { Wish } from "../types/Wish";
 import { useAuthContext } from "src/auth/hooks";
-import { getWishesQuery, setIsFavoriteQuery } from "../queries/wish";
+import { getWishesQuery, setIsFavoriteQuery, unbookWishQuery } from "../queries/wish";
 import { toast } from "sonner";
 
 export const useWishes = ({ wishListId }: { wishListId?: number }): {
     wishes: Array<Wish>;
     isLoading: boolean;
     deleteWish: (wishId: number) => Promise<void>,
-    setIsFavorite: (wishId: number, isFavorite: boolean) => void
+    setIsFavorite: (wishId: number, isFavorite: boolean) => void,
+    unbookWish: (wishId: number) => Promise<void>
 } => {
 
     const { user } = useAuthContext();
@@ -36,5 +37,11 @@ export const useWishes = ({ wishListId }: { wishListId?: number }): {
         if (!result.success) toast.error("Une erreur est survenue");
     };
 
-    return { wishes: wishes || [], isLoading, deleteWish, setIsFavorite };
+    const unbookWish = async (wishId: number) => {
+        const result = await unbookWishQuery(wishId);
+        if (result.success) refetch();
+        if (!result.success) toast.error("Une erreur est survenue");
+    };
+
+    return { wishes: wishes || [], isLoading, deleteWish, setIsFavorite, unbookWish };
 }

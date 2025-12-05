@@ -4,16 +4,30 @@ import { useState } from "react";
 import { Wish } from "src/app/wewish/types/Wish";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
 
-export const SettingsButton = ({ wish, onFavoriteClick, onDelete }: { wish: Wish; onFavoriteClick: () => void; onDelete: () => void }) => {
+export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
+    wish: Wish;
+    onFavoriteClick: () => void;
+    onDelete: () => void;
+    onUnbook: () => void
+}) => {
 
     const { user } = useAuthContext();
     const [open, setOpen] = useState(false);
 
     const isUserOwner = user?.id === wish.userId;
+    const isBookedBy = wish.bookedByName || wish.bookedByUser?.full_name || null;
+    const isBookedByAuthUser = !!(user && wish.bookedByUser?.id === user.id);
 
     const handleDelete = () => {
         confirm("Voulez-vous vraiment supprimer cette envie ?") && onDelete();
     };
+
+    const handleBook = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (isBookedBy && isBookedByAuthUser) {
+            e.preventDefault();
+            confirm("Voulez-vous vraiment annuler la réservation ?") && onUnbook() && setOpen(false);
+        }
+    }
 
     return (
         <>
@@ -31,16 +45,16 @@ export const SettingsButton = ({ wish, onFavoriteClick, onDelete }: { wish: Wish
                 </Box>
                 <Divider />
                 <List sx={{ p: 2 }}>
-
                     {!isUserOwner && (
-                        <>
-                            <ListItemButton href={`/wewish/wish/${wish.id}/book`}>
-                                <ListItemIcon>
-                                    <Iconify icon="solar:gift-broken" width={24} color="secondary.main" />
-                                </ListItemIcon>
-                                <ListItemText primary="Réserver l'envie" />
-                            </ListItemButton>
-                        </>
+                        <ListItemButton href={`/wewish/wish/${wish.id}/book`} onClick={handleBook} disabled={!!isBookedBy && !isBookedByAuthUser}>
+                            <ListItemIcon>
+                                <Iconify icon="solar:gift-bold" width={24} color="secondary.main" />
+                            </ListItemIcon>
+                            <ListItemText primary={isBookedBy ?
+                                (isBookedByAuthUser ? "Annuler la réservation" : `Déjà réservée par ${isBookedBy}`)
+                                : "Réserver l'envie"}
+                            />
+                        </ListItemButton>
                     )}
                     {isUserOwner && (
                         <>

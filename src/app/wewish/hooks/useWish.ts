@@ -1,12 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "src/lib/supabase-client";
 import { Wish } from "../types/Wish";
 import { useState } from "react";
-import { getWishQuery } from "../queries/wish";
+import { bookWishQuery, getWishQuery } from "../queries/wish";
+import { toast } from "sonner";
 
 
-export const useWish = ({ wishId }: { wishId: number }): { wish?: Wish; isLoading: boolean, bookWishByUser: (userId: string) => Promise<void>; bookWishByName: (name: string) => Promise<void>; isBooking: boolean } => {
-
+export const useWish = ({ wishId }: { wishId: number }): {
+    wish?: Wish;
+    isLoading: boolean;
+    bookWish: (params: { userId: string } | { userId?: string; name: string }) => Promise<void>;
+    isBooking: boolean
+} => {
     const [isBooking, setIsBooking] = useState(false);
 
     const { data: wish, isLoading, refetch } = useQuery<Wish | undefined>({
@@ -18,21 +22,13 @@ export const useWish = ({ wishId }: { wishId: number }): { wish?: Wish; isLoadin
         }
     });
 
-    const bookWishByUser = async (userId: string) => {
+    const bookWish = async (params: { userId: string } | { userId?: string; name: string }) => {
         setIsBooking(true);
-        const { error } = await supabase.from('wishes').update({ bookedByUser: userId }).eq('id', wishId);
+        const res = await bookWishQuery({ wishId, ...params });
         setIsBooking(false);
-        if (error) throw error;
+        if (!res.success) toast.error("Une erreur est survenue");
         refetch();
     }
 
-    const bookWishByName = async (name: string) => {
-        setIsBooking(true);
-        const { error } = await supabase.from('wishes').update({ bookedByName: name }).eq('id', wishId);
-        setIsBooking(false);
-        if (error) throw error;
-        refetch();
-    }
-
-    return { wish, isLoading, bookWishByUser, bookWishByName, isBooking };
+    return { wish, isLoading, bookWish, isBooking };
 }

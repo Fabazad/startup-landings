@@ -6,15 +6,27 @@ import { SettingsButton } from "./SettingsButton";
 import { Iconify } from "src/components/iconify";
 import { fCurrency } from "src/utils/format-number";
 import { formatUrl } from "src/utils/format-url";
+import { useAuthContext } from "src/auth/hooks/use-auth-context";
 
-export const WishItem = ({ wish, onFavoriteClick, onDelete }: { wish: Wish; onFavoriteClick: () => void; onDelete: () => void }) => {
+export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
+    wish: Wish;
+    onFavoriteClick: () => void;
+    onDelete: () => void;
+    onUnbook: () => void
+}) => {
+
+    const { user } = useAuthContext();
+    const isUserOwner = user?.id === wish.userId;
+    const isBookedBy = wish.bookedByName || wish.bookedByUser?.full_name || null;
+
     return (
         <Box sx={{ position: 'relative' }}>
             <Link key={wish.id} href={`/wewish/wish/${wish.id}`} style={{ textDecoration: "none" }}>
                 <Card sx={{ position: 'relative', display: 'flex', gap: 2, height: 100, alignItems: 'center', p: 2, pr: 9 }}>
                     <Box sx={{ width: 60, minWidth: 60 }}>
                         {wish.isFavorite && <Iconify icon="solar:heart-bold" width={24} color="primary.main" sx={{ position: 'absolute', top: 10, left: 10, zIndex: 9 }} />}
-                        <Image alt={wish.name} src={"https://api-prod-minimal-v700.pages.dev/assets/images/m-product/product-17.webp"} ratio="1/1" sx={{ borderRadius: 2 }} />
+                        {!isUserOwner && isBookedBy && <Iconify icon="solar:gift-bold" width={24} color="primary.main" sx={{ position: 'absolute', top: 38, left: 35, zIndex: 9 }} />}
+                        <Image alt={wish.name} src={"https://api-prod-minimal-v700.pages.dev/assets/images/m-product/product-17.webp"} ratio="1/1" sx={{ borderRadius: 2, opacity: !isUserOwner && isBookedBy ? 0.3 : 1 }} />
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', justifyContent: 'center', gap: 1, flex: 1 }}>
                         <Typography
@@ -48,7 +60,7 @@ export const WishItem = ({ wish, onFavoriteClick, onDelete }: { wish: Wish; onFa
                 </Card>
             </Link >
             <Box sx={{ flexShrink: 0, position: 'absolute', top: 0, right: 16, height: "100%", display: 'flex', alignItems: 'center' }}>
-                <SettingsButton wish={wish} onFavoriteClick={onFavoriteClick} onDelete={onDelete} />
+                <SettingsButton wish={wish} onFavoriteClick={onFavoriteClick} onDelete={onDelete} onUnbook={onUnbook} />
             </Box>
         </Box>
     );

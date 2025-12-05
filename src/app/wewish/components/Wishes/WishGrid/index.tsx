@@ -9,12 +9,13 @@ import { WishItemSkeleton } from "./WishItemSekeleton";
 import { AddWishItem } from "./AddWishItem";
 import { WishItem } from "./WishItem";
 
-export const WishGrid = ({ wishes, isLoading, wishListId, onFavoriteClick, onDelete }: {
+export const WishGrid = ({ wishes, isLoading, wishListId, onFavoriteClick, onDelete, onUnbook }: {
     wishes: Array<Wish>,
     isLoading: boolean,
     wishListId?: number;
     onFavoriteClick: (wishId: number, isFavorite: boolean) => void
     onDelete: (wishId: number) => void
+    onUnbook: (wishId: number) => void
 }) => {
 
     if (!isLoading && wishes.length === 0) return (
@@ -51,6 +52,7 @@ export const WishGrid = ({ wishes, isLoading, wishListId, onFavoriteClick, onDel
                         <WishItem key={wish.id} wish={wish}
                             onFavoriteClick={() => onFavoriteClick(wish.id, !wish.isFavorite)}
                             onDelete={() => onDelete(wish.id)}
+                            onUnbook={() => onUnbook(wish.id)}
                         />
                     ))}
                 </>

@@ -14,7 +14,7 @@ import { SplashScreen } from "src/components/loading-screen";
 
 export const Book = ({ wishId }: { wishId: number }) => {
 
-    const { wish, bookWishByUser, bookWishByName, isBooking, isLoading } = useWish({ wishId });
+    const { wish, bookWish, isBooking, isLoading } = useWish({ wishId });
     const { user } = useAuthContext();
 
     const bookedByNameFormSchema = z.object({
@@ -36,7 +36,7 @@ export const Book = ({ wishId }: { wishId: number }) => {
 
     const bookyByUser = async (userId: string) => {
         try {
-            await bookWishByUser(userId);
+            await bookWish({ userId });
             toast.success('Envie réservé');
         } catch (error) {
             toast.error(error.message);
@@ -46,7 +46,7 @@ export const Book = ({ wishId }: { wishId: number }) => {
     const onSubmit = async () => {
         const data = methods.getValues();
         try {
-            await bookWishByName(data.bookedByName);
+            await bookWish({ name: data.bookedByName, userId: user?.id });
             toast.success('Envie réservé');
         } catch (error) {
             toast.error(error.message);
