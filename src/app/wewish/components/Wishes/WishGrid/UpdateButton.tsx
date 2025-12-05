@@ -11,7 +11,7 @@ export const UpdateButton = ({ wishId }: { wishId: number }) => {
                 className="hided-button"
                 href={`/wewish/wish/${wishId}/update`}
                 sx={{
-                    right: 16, bottom: 16, zIndex: 10,
+                    left: 80, top: 16, zIndex: 10,
                     position: 'absolute',
                     opacity: 0,
                     transition: (theme) =>

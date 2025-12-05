@@ -20,13 +20,14 @@ export const BookButton = ({ wish, isBookedBy, onUnbook }: { wish: Wish; isBooke
         <Box>
             {isBookedBy && (
                 <Tooltip title={`Réservée par ${isBookedBy}`} placement="top" arrow slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}>
-                    <Stack sx={{ position: 'absolute', right: 28, bottom: 28, zIndex: 9, m: 0, flexDirection: 'row', gap: 2 }}>
-                        <Typography variant="body2" color="primary.main" sx={{ cursor: "default" }}>{isBookedBy}</Typography>
+                    <Stack sx={{ position: 'absolute', left: 28, top: 28, zIndex: 9, m: 0, flexDirection: 'row', gap: 2 }}>
                         <Iconify
                             icon="solar:gift-bold"
                             width={24}
-                            color="primary.main"
+                            color="secondary.main"
                         />
+                        <Typography variant="body2" color="secondary.main" sx={{ cursor: "default" }}>{isBookedBy}</Typography>
+
                     </Stack>
                 </Tooltip>
             )}
@@ -43,8 +44,8 @@ export const BookButton = ({ wish, isBookedBy, onUnbook }: { wish: Wish; isBooke
                         disabled={!!isBookedBy && !isBookedByAuthUser}
                         onClick={handleBook}
                         sx={{
-                            right: 16,
-                            bottom: 16,
+                            left: 16,
+                            top: 16,
                             zIndex: 10,
                             position: 'absolute',
                             opacity: 0,

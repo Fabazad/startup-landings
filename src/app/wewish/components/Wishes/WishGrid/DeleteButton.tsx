@@ -17,7 +17,7 @@ export const DeleteButton = ({ onDelete }: { onDelete: () => void }) => {
                 onClick={handleDelete}
                 sx={{
                     opacity: 0,
-                    right: 80, bottom: 16, zIndex: 10,
+                    left: 16, top: 16, zIndex: 10,
                     position: 'absolute',
                 }}
             >

@@ -22,7 +22,7 @@ export const FavoriteButton = ({ isFavorite, onClick, isUserOwner }: { isFavorit
                         icon={isFavorite ? "solar:heart-bold" : "solar:heart-outline"}
                         width={24}
                         color="primary.main"
-                        sx={{ position: 'absolute', right: 28, top: 28, zIndex: 9, }}
+                        sx={{ position: 'absolute', right: 28, top: 28, zIndex: 19, }}
                     />
                 </Tooltip>
             )}
@@ -32,7 +32,7 @@ export const FavoriteButton = ({ isFavorite, onClick, isUserOwner }: { isFavorit
                         icon={isFavorite ? "solar:heart-bold" : "solar:heart-outline"}
                         width={24}
                         color="primary.main"
-                        sx={{ position: 'absolute', right: 28, top: 28, zIndex: 9, }}
+                        sx={{ position: 'absolute', right: 28, top: 28, zIndex: 19, }}
                     />
                     <Tooltip title={getTooltipText(isFavorite, isUserOwner)} placement="top" arrow
                         slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}>
@@ -41,7 +41,7 @@ export const FavoriteButton = ({ isFavorite, onClick, isUserOwner }: { isFavorit
                             size="medium"
                             className="hided-button"
                             sx={{
-                                right: 16, top: 16, zIndex: 10,
+                                right: 16, top: 16, zIndex: 19,
                                 position: 'absolute',
                                 opacity: 0,
                                 transition: (theme) =>
