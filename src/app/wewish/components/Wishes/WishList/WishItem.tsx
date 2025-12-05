@@ -1,27 +1,48 @@
 import Link from "next/link";
-import { Box, Card, Typography } from "@mui/material";
+import { Box, Card, Stack, Typography } from "@mui/material";
 import { Image } from 'src/components/image';
 import { Wish } from "src/app/wewish/types/Wish";
 import { SettingsButton } from "./SettingsButton";
 import { Iconify } from "src/components/iconify";
 import { fCurrency } from "src/utils/format-number";
+import { formatUrl } from "src/utils/format-url";
 
 export const WishItem = ({ wish, onFavoriteClick, onDelete }: { wish: Wish; onFavoriteClick: () => void; onDelete: () => void }) => {
     return (
         <Box sx={{ position: 'relative' }}>
             <Link key={wish.id} href={`/wewish/wish/${wish.id}`} style={{ textDecoration: "none" }}>
-                <Card sx={{ position: 'relative', display: 'flex', gap: 2, height: 100, alignItems: 'center', p: 2, pr: 4 }}>
+                <Card sx={{ position: 'relative', display: 'flex', gap: 2, height: 100, alignItems: 'center', p: 2, pr: 9 }}>
                     <Box sx={{ width: 60, minWidth: 60 }}>
                         {wish.isFavorite && <Iconify icon="solar:heart-bold" width={24} color="primary.main" sx={{ position: 'absolute', top: 10, left: 10, zIndex: 9 }} />}
                         <Image alt={wish.name} src={"https://api-prod-minimal-v700.pages.dev/assets/images/m-product/product-17.webp"} ratio="1/1" sx={{ borderRadius: 2 }} />
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', justifyContent: 'center', gap: 1, flex: 1 }}>
-                        <Typography variant="subtitle1" fontWeight={800} color="text.primary">
+                        <Typography
+                            variant="subtitle1"
+                            fontWeight={800}
+                            color="text.primary"
+                            sx={{
+                                display: '-webkit-box',
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: 'vertical',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                            }}
+                        >
                             {wish.name}
                         </Typography>
-                        {wish.price && <Typography variant="body2" color="text.secondary">
-                            {fCurrency(wish.price)}
-                        </Typography>}
+                        <Stack direction="row" alignItems="center" justifyContent="space-between">
+                            {wish.price && (
+                                <Typography variant="body2" color="text.secondary">
+                                    {fCurrency(wish.price)}
+                                </Typography>
+                            )}
+                            {wish.productUrl && (
+                                <Typography variant="body2" color="text.secondary">
+                                    {formatUrl(wish.productUrl)}
+                                </Typography>
+                            )}
+                        </Stack>
                     </Box>
 
                 </Card>

@@ -10,6 +10,7 @@ import { useAuthContext } from 'src/auth/hooks/use-auth-context';
 import { BookButton } from './BookButton';
 import { UpdateButton } from './UpdateButton';
 import { DeleteButton } from './DeleteButton';
+import { formatUrl } from 'src/utils/format-url';
 
 // ----------------------------------------------------------------------
 
@@ -44,11 +45,20 @@ export function WishItem({ wish, onFavoriteClick, onDelete }: { wish: Wish; onFa
             <Stack spacing={2.5} sx={{ p: 3, pt: 2 }}>
                 <Typography variant="subtitle1" noWrap>{wish.name}</Typography>
 
-                {wish.price && <Stack direction="row" alignItems="center" justifyContent="space-between">
-                    <Stack direction="row" spacing={0.5} sx={{ typography: 'body2', color: "text.secondary" }}>
-                        <Box component="span">{fCurrency(wish.price)}</Box>
-                    </Stack>
-                </Stack>}
+                <Stack direction="row" alignItems="center" justifyContent="space-between">
+                    {wish.price && (
+                        <Stack direction="row" spacing={0.5} sx={{ typography: 'body2', color: "text.secondary" }}>
+                            <Box component="span">{fCurrency(wish.price)}</Box>
+                        </Stack>
+                    )}
+                    {wish.productUrl && (
+                        <Stack direction="row" spacing={0.5} sx={{ typography: 'body2', color: "text.secondary" }}>
+                            <Box component="span">{formatUrl(wish.productUrl)}</Box>
+                        </Stack>
+                    )}
+                </Stack>
+
+
             </Stack>
         </Card>
     );
