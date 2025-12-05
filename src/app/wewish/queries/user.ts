@@ -20,7 +20,7 @@ export const updateUserProfileQuery = async (data: { fullName?: string, avatar?:
     const { error } = await supabase.auth.updateUser({
         data: {
             full_name: data.fullName,
-            avatar: data.avatar,
+            avatar_url: data.avatar,
             about: data.about,
             birthday: data.birthday
         }

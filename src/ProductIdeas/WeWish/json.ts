@@ -1,7 +1,7 @@
 import { RawProductIdea } from "src/types/ProductIdea";
 
 export const WE_WISH_PRODUCT_IDEA: RawProductIdea = {
-    "id": "we-wish",
+    "id": "wewish",
     "name": "We Wish",
     "isReady": true,
     "themeColor": "lavender",

@@ -29,7 +29,7 @@ export type SimpleLayoutProps = {
 export async function SimpleLayout({ sx, children, header, content, menuButtons }: SimpleLayoutProps) {
   const layoutQuery: Breakpoint = 'md';
 
-  const { logo, themeColor, name: productName } = await getProductIdea();
+  const { logo, themeColor, name: productName, id: productId } = await getProductIdea();
 
   return (
     <LayoutSection
@@ -47,7 +47,7 @@ export async function SimpleLayout({ sx, children, header, content, menuButtons 
               </Alert>
             ),
             leftArea: <>
-              <Link href="/" style={{ textDecoration: "none", display: "flex" }}>
+              <Link href={`/${productId}`} style={{ textDecoration: "none", display: "flex" }}>
                 <Logo logo={logo} themeColor={themeColor} />
                 <Box
                   component="h4"

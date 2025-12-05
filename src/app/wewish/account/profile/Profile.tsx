@@ -14,6 +14,7 @@ import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
 import { User } from '@supabase/supabase-js';
 import { updateUserProfileQuery } from '../../queries/user';
+import { uploadAvatarAndGetUrl } from '../../queries/storage';
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +30,7 @@ export const UpdateUserSchema = zod.object({
 export const Profile = ({ user }: { user: User }) => {
     const defaultValues = {
         displayName: user?.user_metadata?.full_name || '',
-        photoURL: user?.user_metadata?.picture || null,
+        photoURL: user?.user_metadata?.avatar_url || null,
         birthday: user?.user_metadata?.birthday || null,
         about: user?.user_metadata?.about || '',
     };
@@ -47,13 +48,18 @@ export const Profile = ({ user }: { user: User }) => {
 
     const onSubmit = handleSubmit(async (data) => {
         try {
-            console.info('DATA', data);
+            let avatarUrl: string | undefined = undefined;
+            if (data.photoURL && data.photoURL instanceof File) {
+                avatarUrl = await uploadAvatarAndGetUrl(data.photoURL);
+            }
+
             await updateUserProfileQuery({
                 fullName: data.displayName,
-                // avatar: data.photoURL || undefined,
+                avatar: avatarUrl,
                 about: data.about,
                 birthday: data.birthday
             })
+
             toast.success('Profil mis à jour');
         } catch (error) {
             console.error(error);
