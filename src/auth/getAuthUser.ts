@@ -9,8 +9,6 @@ export const getAuthUser = async (): Promise<{ success: true, user: User | null 
         return { success: false, errorCode: "unknown" };
     }
 
-    console.log(data)
-
     return {
         success: true, user: {
             id: data.user.id,

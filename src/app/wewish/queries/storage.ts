@@ -12,7 +12,6 @@ const getPublicUrl = (filePath: string) => {
 export const uploadAvatarAndGetUrl = async (file: File) => {
     const fileName = `${Date.now()}-${file.name}`;
     const { data, error } = await supabase.storage.from(bucketName).upload(fileName, file);
-    console.log(data, error)
 
     if (error) throw error;
     return getPublicUrl(fileName);

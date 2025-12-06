@@ -9,6 +9,5 @@ export default async function ProfilePage() {
     const user = userRes.user;
     if (!user) return <View403 />
 
-    console.log(user);
     return <Profile user={user} />
 }
