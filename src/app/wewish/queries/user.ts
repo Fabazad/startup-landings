@@ -29,3 +29,24 @@ export const updateUserProfileQuery = async (data: { displayName?: string, avata
     if (error) return { success: false, errorCode: "unknown" };
     return { success: true };
 }
+
+export const addPasswordQuery = async (password: string): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
+    const { error } = await supabase.auth.updateUser({
+        password,
+        data: {
+            has_password: true
+        }
+    });
+
+    if (error) return { success: false, errorCode: "unknown" };
+    return { success: true };
+}
+
+export const updatePasswordQuery = async (newPassword: string): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
+    const { error } = await supabase.auth.updateUser({
+        password: newPassword,
+    });
+
+    if (error) return { success: false, errorCode: "unknown" };
+    return { success: true };
+}

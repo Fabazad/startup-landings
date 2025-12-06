@@ -68,7 +68,7 @@ export const SupabaseUpdatePasswordView = () => {
     try {
       await updatePassword({ password: data.password });
 
-      router.push(paths.dashboard.root);
+      router.push(paths.wewish.root);
     } catch (error) {
       console.error(error);
       setErrorMsg(typeof error === 'string' ? error : error.message);

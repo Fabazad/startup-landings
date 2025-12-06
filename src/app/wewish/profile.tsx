@@ -5,6 +5,7 @@ import { Button } from '@mui/material';
 import Link from 'next/link';
 import { RotatingBackground } from './components/RotatingBackground';
 import { User } from './types/User';
+import { paths } from 'src/routes/paths';
 
 export const Profile = ({ user, userStats }: { user: User; userStats: { wishListCount: number, wishCount: number, followingCount: number } }) => {
 
@@ -61,14 +62,14 @@ export const Profile = ({ user, userStats }: { user: User; userStats: { wishList
         </Box>
         <Box sx={{ height: '100%' }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: 3 }}>
-            <Link href="/wewish/wish-list">
+            <Link href={paths.wewish.wishList.create}>
               <Button variant="contained" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }}>
                 <Typography variant="h6" sx={{ fontWeight: 400 }}>
                   Créer une liste
                 </Typography>
               </Button>
             </Link>
-            <Button variant="outlined" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }} href="/wewish/account/profile">
+            <Button variant="outlined" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }} href={paths.wewish.account.profile}>
               <Typography variant="h6" sx={{ fontWeight: 400 }}>
                 Modifier mon profil
               </Typography>
@@ -87,14 +88,14 @@ export const Profile = ({ user, userStats }: { user: User; userStats: { wishList
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', height: '100%', gap: 2 }}>
-            <Link href="/wewish/wish-list">
+            <Link href={paths.wewish.wishList.create}>
               <Button variant="contained" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }}>
                 <Typography variant="h6" sx={{ fontWeight: 400 }}>
                   Créer une liste
                 </Typography>
               </Button>
             </Link>
-            <Button variant="outlined" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }} href="/wewish/account/profile">
+            <Button variant="outlined" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }} href={paths.wewish.account.profile}>
               <Typography variant="h6" sx={{ fontWeight: 400 }}>
                 Modifier mon profil
               </Typography>

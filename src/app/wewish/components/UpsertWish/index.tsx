@@ -14,6 +14,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Wish } from '../../types/Wish';
 import { createWishQuery, updateWishQuery } from '../../queries/wish';
+import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -54,12 +55,12 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
         if (wish) {
             const res = await updateWishQuery({ wishId: wish.id, ...data });
             if (!res.success) toast.error(res.errorCode);
-            else router.push(`/wewish/wish-list/${wishListId}`);
+            else router.push(paths.wewish.wishList.detail(wishListId));
         }
         else {
             const res = await createWishQuery({ wishListId, ...data });
             if (!res.success) toast.error(res.errorCode);
-            else router.push(`/wewish/wish-list/${wishListId}`);
+            else router.push(paths.wewish.wishList.detail(wishListId));
         }
     });
 

@@ -13,6 +13,7 @@ import { WishList } from 'src/app/wewish/types/WishList';
 import { ShareButton } from './ShareButton';
 import { AddWishButton } from './AddWishButton';
 import { useAuthContext } from 'src/auth/hooks/use-auth-context';
+import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -21,7 +22,7 @@ type PostItemProps = {
 };
 
 export function WishListItem({ wishList }: PostItemProps) {
-    const linkTo = `/wewish/wish-list/${wishList.id}`;
+    const linkTo = paths.wewish.wishList.detail(wishList.id);
 
     const { user } = useAuthContext()
 

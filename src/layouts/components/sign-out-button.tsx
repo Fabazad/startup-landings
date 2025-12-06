@@ -42,7 +42,7 @@ export function SignOutButton({ onClose, ...other }: Props) {
       onClick={handleLogout}
       {...other}
     >
-      Logout
+      Déconnexion
     </Button>
   );
 }

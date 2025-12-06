@@ -6,18 +6,19 @@ import { Wish } from "src/app/wewish/types/Wish";
 import { WishItemSkeleton } from "./WishItemSkeleton";
 import { WishItem } from "./WishItem";
 import { AddWishItem } from "../WishGrid/AddWishItem";
+import { paths } from "src/routes/paths";
 
 export const WishList = ({ wishes, isLoading, wishListId, onFavoriteClick, onDelete, onUnbook }: {
     wishes: Array<Wish>,
     isLoading: boolean,
-    wishListId?: number,
+    wishListId: number,
     onFavoriteClick: (wishId: number, isFavorite: boolean) => void,
     onDelete: (wishId: number) => void,
     onUnbook: (wishId: number) => void
 }) => {
     if (!isLoading && wishes.length === 0) return (
         <EmptyContent title="Aucune envie" action={
-            <Button href={`/wewish/wish-list/${wishListId}/add-wish`} variant="contained" sx={{ borderRadius: 999, px: 2, mt: 1 }} size="large" color="warning">
+            <Button href={paths.wewish.wishList.addWish(wishListId)} variant="contained" sx={{ borderRadius: 999, px: 2, mt: 1 }} size="large" color="warning">
                 <Iconify icon="material-symbols:add" sx={{ mr: 1 }} />
                 Ajouter une envie
             </Button>

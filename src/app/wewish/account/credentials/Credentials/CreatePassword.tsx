@@ -12,6 +12,8 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import { toast } from 'src/components/snackbar';
 import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
+import { addPasswordQuery } from 'src/app/wewish/queries/user';
+import { Typography } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -19,11 +21,11 @@ export type ChangePassWordSchemaType = zod.infer<typeof ChangePassWordSchema>;
 
 export const ChangePassWordSchema = zod
     .object({
-        newPassword: zod.string().min(1, { message: 'New password is required!' }).min(6, { message: 'Password must be at least 6 characters!' }),
-        confirmNewPassword: zod.string().min(1, { message: 'Confirm password is required!' }),
+        newPassword: zod.string().min(1, { message: 'Le mot de passe est requis!' }).min(6, { message: 'Le mot de passe doit contenir au moins 6 caractères!' }),
+        confirmNewPassword: zod.string().min(1, { message: 'Confirmer le mot de passe est requis!' }),
     })
     .refine((data) => data.newPassword === data.confirmNewPassword, {
-        message: 'Passwords do not match!',
+        message: 'Les mots de passe ne correspondent pas!',
         path: ['confirmNewPassword'],
     });
 
@@ -48,10 +50,9 @@ export const CreatePassword = () => {
 
     const onSubmit = handleSubmit(async (data) => {
         try {
-            await new Promise((resolve) => setTimeout(resolve, 500));
+            await addPasswordQuery(data.newPassword);
             reset();
-            toast.success('Update success!');
-            console.info('DATA', data);
+            toast.success('Mot de passe ajouté !');
         } catch (error) {
             console.error(error);
         }
@@ -60,6 +61,9 @@ export const CreatePassword = () => {
     return (
         <Form methods={methods} onSubmit={onSubmit}>
             <Card sx={{ p: 3, gap: 3, display: 'flex', flexDirection: 'column' }}>
+                <Typography variant="h6" sx={{ mb: 3 }}>
+                    Créer un mot de passe
+                </Typography>
                 <Field.Text
                     name="newPassword"
                     label="Nouveau mot de passe"

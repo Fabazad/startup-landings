@@ -9,6 +9,7 @@ import { ArchiveWishListButton } from "../../components/WishLists/WishListGrid/W
 import { DeleteWishListButton } from "../../components/WishLists/WishListGrid/WishListItem/DeleteWishListButton";
 import { FollowWishListButton } from "../../components/WishLists/WishListGrid/WishListItem/FollowWishListButton";
 import { UnfollowWishListButton } from "../../components/WishLists/WishListGrid/WishListItem/UnfollowWishListButton";
+import { paths } from "src/routes/paths";
 
 export default async function WishListPage({ params }: { params: { wishListId: number } }) {
     const { wishListId } = params;
@@ -29,7 +30,7 @@ export default async function WishListPage({ params }: { params: { wishListId: n
             <Typography variant="body2">{wishList.description}</Typography>
             {wishList.user.id === user?.id && (
                 <>
-                    <Link href={`/wewish/wish-list/${wishListId}/update`}>
+                    <Link href={paths.wewish.wishList.update(wishListId)}>
                         <Button variant="contained" sx={{ borderRadius: 9999 }}>Modifier</Button>
                     </Link>
                     <ArchiveWishListButton wishListId={wishListId} />

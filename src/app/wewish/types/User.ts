@@ -5,6 +5,7 @@ export type User = {
     about: string;
     birthday: string;
     email: string;
+    hasPassword: boolean;
 }
 
 export type UserStats = {

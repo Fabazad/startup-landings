@@ -4,6 +4,7 @@ import { useMyWishLists } from "../../hooks/useMyWishLists";
 import { Iconify } from "src/components/iconify";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
 import { WishListList } from "../WishLists/WishListList";
+import { paths } from "src/routes/paths";
 
 export const AddModal = ({ open, onClose }: { open: boolean, onClose: () => void }) => {
     const theme = useTheme();
@@ -21,14 +22,14 @@ export const AddModal = ({ open, onClose }: { open: boolean, onClose: () => void
             <DialogContent sx={{ py: 5 }}>
                 <WishListList wishLists={wishLists} isLoading={isLoading} emptyContent={{
                     title: "Vous n'avez pas de liste d'envie",
-                    button: { title: "Créer votre première liste d'envie", href: "/wewish/wish-list" }
-                }} href={(listId) => `/wewish/wish-list/${listId}/add-wish`} />
+                    button: { title: "Créer votre première liste d'envie", href: paths.wewish.wishList.create }
+                }} href={(listId) => paths.wewish.wishList.addWish(listId)} />
                 {!isLoading && wishLists.length > 0 && (<>
                     <Divider sx={{ typography: 'body2', my: 2 }}>
                         <Typography variant="body2" sx={{ textTransform: 'uppercase' }}>OU</Typography>
                     </Divider>
 
-                    <Link href={"/wewish/wish-list"} style={{ width: '100%' }}>
+                    <Link href={paths.wewish.wishList.create} style={{ width: '100%' }}>
                         <Button variant="contained" sx={{ width: '100%', borderRadius: '99999px' }} size="large">
                             {wishLists?.length ? "Créer une nouvelle liste" : "Créer votre première liste d'envie"}
                         </Button>

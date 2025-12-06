@@ -1,5 +1,6 @@
 import { Fab, Tooltip } from "@mui/material";
 import { Iconify } from "src/components/iconify";
+import { paths } from "src/routes/paths";
 
 export const AddWishButton = ({ wishListId }: { wishListId: number }) => (
     <Tooltip
@@ -18,7 +19,7 @@ export const AddWishButton = ({ wishListId }: { wishListId: number }) => (
         <Fab
             color="warning"
             size="medium"
-            href={`/wewish/wish-list/${wishListId}/add-wish`}
+            href={paths.wewish.wishList.addWish(wishListId)}
             sx={{
                 right: 16,
                 top: 184,

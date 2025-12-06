@@ -2,10 +2,11 @@ import Link from "next/link";
 import { Box, Typography } from "@mui/material";
 import { WishList } from "src/app/wewish/types/WishList";
 import { Image } from 'src/components/image';
+import { paths } from "src/routes/paths";
 
 export const WishListItem = ({ wishList, href }: { wishList: WishList, href?: string }) => {
     return (
-        <Link key={wishList.id} href={href || `/wewish/wish-list/${wishList.id}`} style={{ textDecoration: "none" }}>
+        <Link key={wishList.id} href={href || paths.wewish.wishList.detail(wishList.id)} style={{ textDecoration: "none" }}>
             <Box sx={{ position: 'relative', display: 'flex', gap: 2, "&:hover": { opacity: 0.7 } }}>
                 <Box sx={{ width: 100, minWidth: 100 }}>
                     <Image alt={wishList.name} src={"https://api-prod-minimal-v700.pages.dev/assets/images/cover/cover-5.webp"} ratio="4/3" sx={{ borderRadius: 2 }} />

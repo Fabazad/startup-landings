@@ -76,7 +76,7 @@ export const SupabaseSignInView = () => {
       await signInWithPassword({ email: data.email, password: data.password });
       await checkUserSession?.();
 
-      router.push("/wewish");
+      router.push(paths.wewish.root);
     } catch (error) {
       console.error(error);
       setErrorMsg(typeof error === 'string' ? error : error.message);

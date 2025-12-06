@@ -3,6 +3,7 @@
 import { useMyWishLists } from "src/app/wewish/hooks/useMyWishLists";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
 import { WishLists } from "../../components/WishLists";
+import { paths } from "src/routes/paths";
 
 export const MyWishLists = () => {
 
@@ -12,6 +13,6 @@ export const MyWishLists = () => {
 
     return <WishLists wishLists={wishLists} isLoading={isLoading} emptyContent={{
         title: "Vous n'avez aucune liste d'envies",
-        button: { title: "Créer votre première liste d'envies", href: "/wewish/wish-list" }
+        button: { title: "Créer votre première liste d'envies", href: paths.wewish.wishList.create }
     }} />
 }

@@ -16,7 +16,8 @@ export const getAuthUser = async (): Promise<{ success: true, user: User | null 
             avatarUrl: data.user.user_metadata?.avatarUrl || data.user.user_metadata?.avatar_url,
             about: data.user.user_metadata?.about,
             birthday: data.user.user_metadata?.birthday,
-            email: data.user.email!
+            email: data.user.email!,
+            hasPassword: data.user.user_metadata?.has_password === true
         }
     };
 }

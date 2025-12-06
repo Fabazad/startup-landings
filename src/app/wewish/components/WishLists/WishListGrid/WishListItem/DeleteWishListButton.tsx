@@ -4,6 +4,7 @@ import { LoadingButton } from "@mui/lab";
 import { useRouter } from "next/navigation";
 import { deleteWishListQuery } from "src/app/wewish/queries/wishList";
 import { toast } from "src/components/snackbar";
+import { paths } from "src/routes/paths";
 
 export const DeleteWishListButton = ({ wishListId }: { wishListId: number }) => {
 
@@ -13,7 +14,7 @@ export const DeleteWishListButton = ({ wishListId }: { wishListId: number }) => 
         if (!confirm("Êtes-vous sûr de vouloir supprimer cette liste ?")) return;
         try {
             await deleteWishListQuery(wishListId);
-            router.push('/wewish');
+            router.push(paths.wewish.root);
         } catch (error) {
             toast.error(error.message);
         }

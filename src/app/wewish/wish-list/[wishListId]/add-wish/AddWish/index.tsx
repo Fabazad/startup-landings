@@ -14,10 +14,11 @@ import { supabase } from 'src/lib/supabase-client';
 import { toast } from 'sonner';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
-export const AddWish = ({ wishListId }: { wishListId: string }) => {
+export const AddWish = ({ wishListId }: { wishListId: number }) => {
     const { t } = useTranslate();
     const router = useRouter();
 
@@ -57,7 +58,7 @@ export const AddWish = ({ wishListId }: { wishListId: string }) => {
                 ...data,
                 listId: wishListId,
             });
-            router.push(`/wewish/wish-list/${wishListId}`);
+            router.push(paths.wewish.wishList.detail(wishListId));
         } catch (error) {
             toast.error('Une erreur est survenue : ' + error);
         }

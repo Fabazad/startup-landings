@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { hasWishListQuery } from 'src/app/wewish/queries/wishList'
 import { createSupabase } from 'src/lib/supabase-server'
+import { paths } from 'src/routes/paths'
 
 
 export async function GET(request: Request) {
@@ -19,7 +20,7 @@ export async function GET(request: Request) {
             const isLocalEnv = process.env.NODE_ENV === 'development'
 
             const res = await hasWishListQuery(data.user.id)
-            const next = res.success && !res.hasWishList ? '/wewish/wish-list' : '/wewish'
+            const next = res.success && !res.hasWishList ? paths.wewish.wishList.create : paths.wewish.root
 
             if (isLocalEnv) {
                 // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host

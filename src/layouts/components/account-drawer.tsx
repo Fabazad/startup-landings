@@ -19,6 +19,7 @@ import { useAuthContext } from 'src/auth/hooks';
 import { AccountButton } from './account-button';
 import { SignOutButton } from './sign-out-button';
 import Link from 'next/link';
+import { paths } from 'src/routes/paths';
 
 
 export function AccountDrawer() {
@@ -103,7 +104,7 @@ export function AccountDrawer() {
 
             <MenuItem
               component={Link}
-              href='/wewish/account/profile'
+              href={paths.wewish.account.profile}
               sx={{
                 py: 1,
                 color: 'text.secondary',
@@ -120,7 +121,7 @@ export function AccountDrawer() {
 
             <MenuItem
               component={Link}
-              href='/wewish/account/password'
+              href={paths.wewish.account.credentials}
               sx={{
                 py: 1,
                 color: 'text.secondary',

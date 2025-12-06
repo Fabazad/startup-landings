@@ -21,7 +21,8 @@ export function useAuthContext(): { user?: User; authenticated: boolean; checkUs
     avatarUrl: context.user.user_metadata?.avatarUrl || context.user.user_metadata?.avatar_url,
     about: context.user.user_metadata?.about,
     birthday: context.user.user_metadata?.birthday,
-    email: context.user.email!
+    email: context.user.email!,
+    hasPassword: context.user.user_metadata?.has_password === true
   } : undefined;
 
   return {

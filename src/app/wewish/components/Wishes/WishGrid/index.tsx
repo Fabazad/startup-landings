@@ -8,11 +8,12 @@ import { Iconify } from "src/components/iconify";
 import { WishItemSkeleton } from "./WishItemSekeleton";
 import { AddWishItem } from "./AddWishItem";
 import { WishItem } from "./WishItem";
+import { paths } from "src/routes/paths";
 
 export const WishGrid = ({ wishes, isLoading, wishListId, onFavoriteClick, onDelete, onUnbook }: {
     wishes: Array<Wish>,
     isLoading: boolean,
-    wishListId?: number;
+    wishListId: number;
     onFavoriteClick: (wishId: number, isFavorite: boolean) => void
     onDelete: (wishId: number) => void
     onUnbook: (wishId: number) => void
@@ -22,7 +23,7 @@ export const WishGrid = ({ wishes, isLoading, wishListId, onFavoriteClick, onDel
         <EmptyContent title="Aucune envie" description="Vous n'avez pas mis d'envies dans cette liste"
             action={
                 <Box sx={{ mt: 2 }}>
-                    <Link href={`/wewish/wish-list/${wishListId}/add-wish`}>
+                    <Link href={paths.wewish.wishList.addWish(wishListId)}>
                         <Button variant="contained" sx={{ borderRadius: 9999 }} size="large" color="warning">
                             <Iconify icon="material-symbols:add" width={24} sx={{ mr: 1 }} />
                             <Typography variant="body1">Ajouter une envie</Typography>

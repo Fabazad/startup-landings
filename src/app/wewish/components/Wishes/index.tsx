@@ -6,7 +6,7 @@ import { Typography } from "@mui/material";
 import { WishGrid } from "./WishGrid";
 import { WishList } from "./WishList";
 
-export const Wishes = ({ wishListId }: { wishListId?: number }) => {
+export const Wishes = ({ wishListId }: { wishListId: number }) => {
 
     const { wishes, deleteWish, isLoading, setIsFavorite, unbookWish } = useWishes({ wishListId });
 

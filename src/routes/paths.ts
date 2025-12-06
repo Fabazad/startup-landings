@@ -11,7 +11,7 @@ const MOCK_TITLE = _postTitles[2];
 const ROOTS = {
   AUTH: '/auth',
   AUTH_DEMO: '/auth-demo',
-  DASHBOARD: '/dashboard',
+  WEWISH: '/wewish'
 };
 
 // ----------------------------------------------------------------------
@@ -69,93 +69,25 @@ export const paths = {
       verify: `${ROOTS.AUTH_DEMO}/centered/verify`,
     },
   },
-  // DASHBOARD
-  dashboard: {
-    root: ROOTS.DASHBOARD,
-    mail: `${ROOTS.DASHBOARD}/mail`,
-    chat: `${ROOTS.DASHBOARD}/chat`,
-    blank: `${ROOTS.DASHBOARD}/blank`,
-    kanban: `${ROOTS.DASHBOARD}/kanban`,
-    calendar: `${ROOTS.DASHBOARD}/calendar`,
-    fileManager: `${ROOTS.DASHBOARD}/file-manager`,
-    permission: `${ROOTS.DASHBOARD}/permission`,
-    general: {
-      app: `${ROOTS.DASHBOARD}/app`,
-      ecommerce: `${ROOTS.DASHBOARD}/ecommerce`,
-      analytics: `${ROOTS.DASHBOARD}/analytics`,
-      banking: `${ROOTS.DASHBOARD}/banking`,
-      booking: `${ROOTS.DASHBOARD}/booking`,
-      file: `${ROOTS.DASHBOARD}/file`,
-      course: `${ROOTS.DASHBOARD}/course`,
+  wewish: {
+    root: ROOTS.WEWISH,
+    account: {
+      root: `${ROOTS.WEWISH}/account`,
+      profile: `${ROOTS.WEWISH}/account/profile`,
+      credentials: `${ROOTS.WEWISH}/account/credentials`,
+      updatePassword: `${ROOTS.WEWISH}/account/update-password`,
     },
-    user: {
-      root: `${ROOTS.DASHBOARD}/user`,
-      new: `${ROOTS.DASHBOARD}/user/new`,
-      list: `${ROOTS.DASHBOARD}/user/list`,
-      cards: `${ROOTS.DASHBOARD}/user/cards`,
-      profile: `${ROOTS.DASHBOARD}/user/profile`,
-      account: `${ROOTS.DASHBOARD}/user/account`,
-      edit: (id: string) => `${ROOTS.DASHBOARD}/user/${id}/edit`,
-      demo: {
-        edit: `${ROOTS.DASHBOARD}/user/${MOCK_ID}/edit`,
-      },
+    wishList: {
+      create: `${ROOTS.WEWISH}/wish-list`,
+      detail: (id: number) => `${ROOTS.WEWISH}/wish-list/${id}`,
+      addWish: (id: number) => `${ROOTS.WEWISH}/wish-list/${id}/add-wish`,
+      update: (id: number) => `${ROOTS.WEWISH}/wish-list/${id}/update`,
+      share: (id: number) => `${ROOTS.WEWISH}/wish-list/${id}/share`,
     },
-    product: {
-      root: `${ROOTS.DASHBOARD}/product`,
-      new: `${ROOTS.DASHBOARD}/product/new`,
-      details: (id: string) => `${ROOTS.DASHBOARD}/product/${id}`,
-      edit: (id: string) => `${ROOTS.DASHBOARD}/product/${id}/edit`,
-      demo: {
-        details: `${ROOTS.DASHBOARD}/product/${MOCK_ID}`,
-        edit: `${ROOTS.DASHBOARD}/product/${MOCK_ID}/edit`,
-      },
-    },
-    invoice: {
-      root: `${ROOTS.DASHBOARD}/invoice`,
-      new: `${ROOTS.DASHBOARD}/invoice/new`,
-      details: (id: string) => `${ROOTS.DASHBOARD}/invoice/${id}`,
-      edit: (id: string) => `${ROOTS.DASHBOARD}/invoice/${id}/edit`,
-      demo: {
-        details: `${ROOTS.DASHBOARD}/invoice/${MOCK_ID}`,
-        edit: `${ROOTS.DASHBOARD}/invoice/${MOCK_ID}/edit`,
-      },
-    },
-    post: {
-      root: `${ROOTS.DASHBOARD}/post`,
-      new: `${ROOTS.DASHBOARD}/post/new`,
-      details: (title: string) => `${ROOTS.DASHBOARD}/post/${paramCase(title)}`,
-      edit: (title: string) => `${ROOTS.DASHBOARD}/post/${paramCase(title)}/edit`,
-      demo: {
-        details: `${ROOTS.DASHBOARD}/post/${paramCase(MOCK_TITLE)}`,
-        edit: `${ROOTS.DASHBOARD}/post/${paramCase(MOCK_TITLE)}/edit`,
-      },
-    },
-    order: {
-      root: `${ROOTS.DASHBOARD}/order`,
-      details: (id: string) => `${ROOTS.DASHBOARD}/order/${id}`,
-      demo: {
-        details: `${ROOTS.DASHBOARD}/order/${MOCK_ID}`,
-      },
-    },
-    job: {
-      root: `${ROOTS.DASHBOARD}/job`,
-      new: `${ROOTS.DASHBOARD}/job/new`,
-      details: (id: string) => `${ROOTS.DASHBOARD}/job/${id}`,
-      edit: (id: string) => `${ROOTS.DASHBOARD}/job/${id}/edit`,
-      demo: {
-        details: `${ROOTS.DASHBOARD}/job/${MOCK_ID}`,
-        edit: `${ROOTS.DASHBOARD}/job/${MOCK_ID}/edit`,
-      },
-    },
-    tour: {
-      root: `${ROOTS.DASHBOARD}/tour`,
-      new: `${ROOTS.DASHBOARD}/tour/new`,
-      details: (id: string) => `${ROOTS.DASHBOARD}/tour/${id}`,
-      edit: (id: string) => `${ROOTS.DASHBOARD}/tour/${id}/edit`,
-      demo: {
-        details: `${ROOTS.DASHBOARD}/tour/${MOCK_ID}`,
-        edit: `${ROOTS.DASHBOARD}/tour/${MOCK_ID}/edit`,
-      },
-    },
-  },
+    wish: {
+      details: (id: number) => `${ROOTS.WEWISH}/wish/${id}`,
+      book: (id: number) => `${ROOTS.WEWISH}/wish/${id}/book`,
+      update: (id: number) => `${ROOTS.WEWISH}/wish/${id}/update`,
+    }
+  }
 };

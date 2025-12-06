@@ -26,7 +26,7 @@ export const WishListGrid = ({ wishLists, isLoading, emptyContent }: {
 
     return (
         <Grid container spacing={3} sx={{ py: 3, ml: 0, width: "100%" }}>
-            {isLoading && [...Array(8)].map((_, index) => (
+            {isLoading && [...Array(4)].map((_, index) => (
                 <Grid key={index} xs={12} sm={6} md={4} lg={3} sx={{ p: 1 }}>
                     <WishListItemSkeleton />
                 </Grid>

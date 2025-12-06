@@ -1,5 +1,6 @@
 import { Fab, Tooltip } from "@mui/material";
 import { Iconify } from "src/components/iconify";
+import { paths } from "src/routes/paths";
 
 export const ShareButton = ({ wishListId }: { wishListId: number }) => {
     return (
@@ -20,7 +21,7 @@ export const ShareButton = ({ wishListId }: { wishListId: number }) => {
             <Fab
                 color="default"
                 size="medium"
-                href={`/wewish/wish-list/${wishListId}/share`}
+                href={paths.wewish.wishList.share(wishListId)}
                 sx={{
                     display: { xs: 'none', md: 'inline-flex' },
                     right: 16,

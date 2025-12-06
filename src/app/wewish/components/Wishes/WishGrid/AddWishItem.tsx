@@ -1,16 +1,16 @@
 import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
 import { RouterLink } from 'src/routes/components';
 import { Typography } from '@mui/material';
 import { Iconify } from 'src/components/iconify';
+import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
 
 export function AddWishItem({ wishListId }: { wishListId: number }) {
 
-    const linkTo = `/wewish/wish-list/${wishListId}/add-wish`;
+    const linkTo = paths.wewish.wishList.addWish(wishListId);
 
     return (
         <Link component={RouterLink} href={linkTo} style={{ textDecoration: "none" }}>

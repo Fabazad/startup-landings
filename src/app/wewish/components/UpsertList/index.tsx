@@ -13,6 +13,7 @@ import { supabase } from "src/lib/supabase-client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { WishList } from "src/app/wewish/types/WishList";
+import { paths } from "src/routes/paths";
 
 export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
     const { t } = useTranslate();
@@ -52,7 +53,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
             if (error) toast.error(error.message);
             else toast.success('Liste mise à jour');
 
-            router.push(`/wewish/wish-list/${wishList.id}`);
+            router.push(paths.wewish.wishList.detail(wishList.id));
         } else {
             const { data, error } = await supabase.from('wish-lists').insert({
                 name: values.listName,
@@ -64,7 +65,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
 
             if (!data) return;
 
-            router.push(`/wewish/wish-list/${data.id}`);
+            router.push(paths.wewish.wishList.detail(data.id));
         }
     };
 
