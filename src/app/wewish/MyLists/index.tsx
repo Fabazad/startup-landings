@@ -8,6 +8,7 @@ import { MyWishLists } from "./MyWishLists";
 import { MyArchivedWishLists } from "./MyArchivedWishLists";
 import { FollowedWishLists } from "./FollowedWishLists";
 import { AllMyWishes } from "./AllMyWishes";
+import { MyBookedWishes } from "./MyBookedWishes";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -82,6 +83,7 @@ export const MyLists = () => {
                     <FollowedWishLists />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={2}>
+                    <MyBookedWishes />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={3}>
                     <AllMyWishes />

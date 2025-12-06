@@ -26,7 +26,9 @@ export const BookButton = ({ wish, isBookedBy, onUnbook }: { wish: Wish; isBooke
                             width={24}
                             color="secondary.main"
                         />
-                        <Typography variant="body2" color="secondary.main" sx={{ cursor: "default" }}>{isBookedBy}</Typography>
+                        <Typography variant="body2" color="secondary.main" sx={{ cursor: "default" }}>
+                            {isBookedBy}
+                        </Typography>
 
                     </Stack>
                 </Tooltip>

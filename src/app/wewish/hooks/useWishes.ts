@@ -5,7 +5,7 @@ import { useAuthContext } from "src/auth/hooks";
 import { getWishesQuery, setIsFavoriteQuery, unbookWishQuery } from "../queries/wish";
 import { toast } from "sonner";
 
-export const useWishes = ({ wishListId }: { wishListId?: number }): {
+export const useWishes = ({ wishListId, isBookedByUser }: { wishListId?: number, isBookedByUser?: string }): {
     wishes?: Array<Wish>;
     isLoading: boolean;
     deleteWish: (wishId: number) => Promise<void>,
@@ -16,10 +16,15 @@ export const useWishes = ({ wishListId }: { wishListId?: number }): {
     const { user } = useAuthContext();
 
     const { data: wishes, isLoading, refetch } = useQuery<Array<Wish>>({
-        queryKey: ['wishes', wishListId],
+        queryKey: ['wishes', wishListId, isBookedByUser],
         queryFn: async () => {
             if (!user) return [];
-            const result = await getWishesQuery(wishListId ? { wishListId } : { userId: user.id });
+
+            const result = await getWishesQuery(
+                wishListId ?
+                    { wishListId } :
+                    isBookedByUser ? { isBookedByUser } : { userId: user.id }
+            );
 
             if (!result.success) throw result.errorCode;
             return result.wishes;

@@ -32,16 +32,19 @@ export const setIsFavoriteQuery = async (wishId: number, isFavorite: boolean): P
     return { success: true };
 }
 
-export const getWishesQuery = async (params: { wishListId: number } | { userId: string }): Promise<{ success: true, wishes: Wish[] } | { success: false, errorCode: "unknown" }> => {
+export const getWishesQuery = async (params: { wishListId: number } | { userId: string } | { isBookedByUser: string }): Promise<{ success: true, wishes: Wish[] } | { success: false, errorCode: "unknown" }> => {
     const query = supabase
         .from('wishes')
         .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, user_id), listId:wish-lists (id, name)')
         .order('created_at', { ascending: false });
 
+    console.log({ params })
     if ('wishListId' in params) {
         query.eq('listId', params.wishListId);
-    } else {
+    } else if ('userId' in params) {
         query.eq('wish-lists.user_id', params.userId);
+    } else if ('isBookedByUser' in params) {
+        query.eq('bookedByUser', params.isBookedByUser);
     }
 
     const { data, error } = await query;

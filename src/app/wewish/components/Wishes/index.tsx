@@ -2,13 +2,12 @@
 
 import { useWishes } from "../../hooks/useWishes";
 import { Box, Container } from "@mui/material";
-import { Typography } from "@mui/material";
 import { WishGrid } from "./WishGrid";
 import { WishList } from "./WishList";
 
-export const Wishes = ({ wishListId }: { wishListId?: number }) => {
+export const Wishes = ({ wishListId, isBookedByUser }: { wishListId?: number; isBookedByUser?: string }) => {
 
-    const { wishes, deleteWish, isLoading, setIsFavorite, unbookWish } = useWishes({ wishListId });
+    const { wishes, deleteWish, isLoading, setIsFavorite, unbookWish } = useWishes({ wishListId, isBookedByUser });
 
     return (
         <Container>

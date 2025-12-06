@@ -86,11 +86,12 @@ export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook, showList =
 
                 <FavoriteButton isFavorite={wish.isFavorite} onClick={onFavoriteClick} isUserOwner={isUserOwner} />
 
-                {isUserOwner && (<>
-                    <UpdateButton wishId={wish.id} />
-                    <DeleteButton onDelete={onDelete} />
-                </>)
-                }
+                {isUserOwner && (
+                    <>
+                        <UpdateButton wishId={wish.id} />
+                        <DeleteButton onDelete={onDelete} />
+                    </>
+                )}
 
             </Box>
         </Box>
