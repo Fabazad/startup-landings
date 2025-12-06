@@ -1,10 +1,17 @@
-import { User } from "src/app/wewish/types/User";
+"use client";
+
+import { SplashScreen } from "src/components/loading-screen";
 import { CreatePassword } from "./CreatePassword";
 import { UpdatePassword } from "./UpdatePassword";
+import { useAuthContext } from "src/auth/hooks";
 
 
 // ----------------------------------------------------------------------
 
-export const Credentials = ({ user, updatePasswordCode }: { user: User, updatePasswordCode?: string }) => {
-    return !user.hasPassword ? <CreatePassword /> : <UpdatePassword updatePasswordCode={updatePasswordCode} user={user} />
+export const Credentials = () => {
+    const { user, loading } = useAuthContext();
+
+    if (loading) return <SplashScreen />
+
+    return user?.hasPassword ? <UpdatePassword user={user} /> : <CreatePassword />
 }

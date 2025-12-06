@@ -14,6 +14,7 @@ import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
 import { addPasswordQuery } from 'src/app/wewish/queries/user';
 import { Typography } from '@mui/material';
+import { useAuthContext } from 'src/auth/hooks/use-auth-context';
 
 // ----------------------------------------------------------------------
 
@@ -33,6 +34,7 @@ export const ChangePassWordSchema = zod
 
 export const CreatePassword = () => {
     const password = useBoolean();
+    const { checkUserSession } = useAuthContext();
 
     const defaultValues = { newPassword: '', confirmNewPassword: '' };
 
@@ -43,7 +45,6 @@ export const CreatePassword = () => {
     });
 
     const {
-        reset,
         handleSubmit,
         formState: { isSubmitting },
     } = methods;
@@ -51,8 +52,8 @@ export const CreatePassword = () => {
     const onSubmit = handleSubmit(async (data) => {
         try {
             await addPasswordQuery(data.newPassword);
-            reset();
             toast.success('Mot de passe ajouté !');
+            checkUserSession?.();
         } catch (error) {
             console.error(error);
         }
