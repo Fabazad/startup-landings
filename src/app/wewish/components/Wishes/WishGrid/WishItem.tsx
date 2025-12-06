@@ -27,7 +27,7 @@ export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook }: {
     const linkTo = `/wewish/wish/${wish.id}`;
 
     const isUserOwner = user?.id === wish.userId;
-    const isBookedBy = wish.bookedByName || wish.bookedByUser?.full_name || null;
+    const isBookedBy = wish.bookedByName || wish.bookedByUser?.display_name || null;
 
     const handleUnbook = () => {
         confirm("Êtes-vous sûr de vouloir annuler votre réservation ?") && onUnbook();

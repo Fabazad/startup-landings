@@ -17,7 +17,7 @@ export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
 
     const { user } = useAuthContext();
     const isUserOwner = user?.id === wish.userId;
-    const isBookedBy = wish.bookedByName || wish.bookedByUser?.full_name || null;
+    const isBookedBy = wish.bookedByName || wish.bookedByUser?.display_name || null;
 
     return (
         <Box sx={{ position: 'relative' }}>

@@ -1,6 +1,7 @@
 import { supabase } from "src/lib/supabase-client";
+import { UserStats } from "../types/User";
 
-export const getUserStatsQuery = async (userId: string): Promise<{ success: true, stats: { wishListCount: number, wishCount: number, followingCount: number } } | { success: false, errorCode: "unknown" }> => {
+export const getUserStatsQuery = async (userId: string): Promise<{ success: true, stats: UserStats } | { success: false, errorCode: "unknown" }> => {
     const { data, error } = await supabase.rpc('get_user_stats', { p_user_id: userId });
     if (error) return { success: false, errorCode: "unknown" };
 
@@ -16,11 +17,11 @@ export const getUserStatsQuery = async (userId: string): Promise<{ success: true
     };
 }
 
-export const updateUserProfileQuery = async (data: { fullName?: string, avatar?: string, about?: string, birthday?: string }): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
+export const updateUserProfileQuery = async (data: { displayName?: string, avatar?: string, about?: string, birthday?: string }): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
     const { error } = await supabase.auth.updateUser({
         data: {
-            full_name: data.fullName,
-            avatar_url: data.avatar,
+            displayName: data.displayName,
+            avatarUrl: data.avatar,
             about: data.about,
             birthday: data.birthday
         }

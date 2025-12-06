@@ -1,11 +1,10 @@
 import { supabase } from "src/lib/supabase-client";
 import { Wish } from "../types/Wish";
-import { chipProps } from "src/components/filters-result";
 
 export const getWishQuery = async (wishId: number): Promise<{ success: true, wish?: Wish } | { success: false, errorCode: "unknown" }> => {
     const { data, error } = await supabase
         .from('wishes')
-        .select('*, bookedByUser:profiles (full_name,avatar_url,id), list:wish-lists!inner (id, user_id)')
+        .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, user_id)')
         .eq('id', wishId)
         .maybeSingle<any>();
 
@@ -33,10 +32,10 @@ export const setIsFavoriteQuery = async (wishId: number, isFavorite: boolean): P
     return { success: true };
 }
 
-export const getWishesQuery = async (params: { wishListId: number } | { userId: number }): Promise<{ success: true, wishes: Wish[] } | { success: false, errorCode: "unknown" }> => {
+export const getWishesQuery = async (params: { wishListId: number } | { userId: string }): Promise<{ success: true, wishes: Wish[] } | { success: false, errorCode: "unknown" }> => {
     const query = supabase
         .from('wishes')
-        .select('*, bookedByUser:profiles (full_name,avatar_url,id), list:wish-lists!inner (id, user_id)')
+        .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, user_id)')
         .order('created_at', { ascending: false });
 
     if ('wishListId' in params) {

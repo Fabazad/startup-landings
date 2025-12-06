@@ -18,7 +18,8 @@ export const useWishes = ({ wishListId }: { wishListId?: number }): {
     const { data: wishes, isLoading, refetch } = useQuery<Array<Wish>>({
         queryKey: ['wishes', wishListId],
         queryFn: async () => {
-            const result = await getWishesQuery(wishListId ? { wishListId } : { userId: user?.id });
+            if (!user) return [];
+            const result = await getWishesQuery(wishListId ? { wishListId } : { userId: user.id });
 
             if (!result.success) throw result.errorCode;
             return result.wishes;

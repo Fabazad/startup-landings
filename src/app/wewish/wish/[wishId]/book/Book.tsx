@@ -68,7 +68,7 @@ export const Book = ({ wishId }: { wishId: number }) => {
             <Typography variant="h3">{wish.name}</Typography>
             <Typography variant="body2">{wish.description}</Typography>
             <Typography variant="body2">{wish.price}</Typography>
-            {wish.bookedByUser && <Typography variant="body2">Envie déjà réservé par {wish.bookedByUser.full_name}</Typography>}
+            {wish.bookedByUser && <Typography variant="body2">Envie déjà réservé par {wish.bookedByUser.display_name}</Typography>}
             {wish.bookedByName && <Typography variant="body2">Envie déjà réservé par {wish.bookedByName}</Typography>}
             {user ? (
                 <Box>

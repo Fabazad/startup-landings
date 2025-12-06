@@ -7,7 +7,7 @@ export const wishListSchema = z.object({
     archivedAt: z.date().nullable(),
     user: z.object({
         id: z.string(),
-        full_name: z.string(),
+        display_name: z.string(),
         avatar_url: z.string(),
     }),
     isFollowedByMe: z.boolean(),

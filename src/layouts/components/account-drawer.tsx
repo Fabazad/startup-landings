@@ -11,10 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import { paths } from 'src/routes/paths';
-import { useRouter, usePathname } from 'src/routes/hooks';
 import { varAlpha } from 'src/theme/styles';
-import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
 import { AnimateAvatar } from 'src/components/animate';
@@ -26,8 +23,6 @@ import Link from 'next/link';
 
 export function AccountDrawer() {
   const theme = useTheme();
-
-  const router = useRouter();
 
   const [open, setOpen] = useState(false);
 
@@ -42,13 +37,14 @@ export function AccountDrawer() {
 
   const { user } = useAuthContext();
 
-  const displayName = user?.user_metadata?.full_name || user?.displayName;
+  if (!user) return null;
+
 
   const renderAvatar = (
     <AnimateAvatar
       width={96}
       slotProps={{
-        avatar: { src: user?.photoURL, alt: displayName },
+        avatar: { src: user.avatarUrl, alt: user.displayName },
         overlay: {
           border: 2,
           spacing: 3,
@@ -56,7 +52,7 @@ export function AccountDrawer() {
         },
       }}
     >
-      {displayName?.charAt(0).toUpperCase()}
+      {user.displayName?.charAt(0).toUpperCase()}
     </AnimateAvatar>
   );
 
@@ -64,8 +60,8 @@ export function AccountDrawer() {
     <>
       <AccountButton
         onClick={handleOpenDrawer}
-        photoURL={user?.photoURL}
-        displayName={displayName}
+        photoURL={user.avatarUrl}
+        displayName={user.displayName}
       />
 
       <Drawer
@@ -87,7 +83,7 @@ export function AccountDrawer() {
             {renderAvatar}
 
             <Typography variant="subtitle1" noWrap sx={{ mt: 2 }}>
-              {displayName}
+              {user.displayName}
             </Typography>
 
             <Typography variant="body2" sx={{ color: 'text.secondary', mt: 0.5 }} noWrap>
@@ -134,7 +130,7 @@ export function AccountDrawer() {
             >
               <Iconify icon="iconamoon:lock-fill" sx={{ width: 24, height: 24 }} />
               <Box component="span" sx={{ ml: 2 }}>
-                Mot de passe
+                Identifiants
               </Box>
             </MenuItem>
 

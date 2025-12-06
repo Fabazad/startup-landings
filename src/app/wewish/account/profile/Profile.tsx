@@ -12,9 +12,9 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { fData } from 'src/utils/format-number';
 import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
-import { User } from '@supabase/supabase-js';
 import { updateUserProfileQuery } from '../../queries/user';
 import { uploadAvatarAndGetUrl } from '../../queries/storage';
+import { User } from '../../types/User';
 
 // ----------------------------------------------------------------------
 
@@ -22,17 +22,17 @@ export type UpdateUserSchemaType = zod.infer<typeof UpdateUserSchema>;
 
 export const UpdateUserSchema = zod.object({
     displayName: zod.string().min(1, { message: 'Name is required!' }).max(20, { message: 'Name must be at most 20 characters long!' }),
-    photoURL: schemaHelper.file({ message: { required_error: 'Avatar is required!' } }),
+    photoURL: schemaHelper.file({ message: { required_error: 'Avatar is required!' } }).optional(),
     birthday: zod.string().optional(),
-    about: zod.string().min(1, { message: 'About is required!' }).max(300, { message: 'About must be at most 300 characters long!' }),
+    about: zod.string().min(1, { message: 'About is required!' }).max(300, { message: 'About must be at most 300 characters long!' }).optional(),
 });
 
 export const Profile = ({ user }: { user: User }) => {
     const defaultValues = {
-        displayName: user?.user_metadata?.full_name || '',
-        photoURL: user?.user_metadata?.avatar_url || null,
-        birthday: user?.user_metadata?.birthday || null,
-        about: user?.user_metadata?.about || '',
+        displayName: user?.displayName,
+        photoURL: user?.avatarUrl,
+        birthday: user?.birthday,
+        about: user?.about,
     };
 
     const methods = useForm<UpdateUserSchemaType>({
@@ -54,7 +54,7 @@ export const Profile = ({ user }: { user: User }) => {
             }
 
             await updateUserProfileQuery({
-                fullName: data.displayName,
+                displayName: data.displayName,
                 avatar: avatarUrl,
                 about: data.about,
                 birthday: data.birthday

@@ -9,9 +9,9 @@ export const wishSchema = z.object({
     isFavorite: z.boolean(),
     isSecondHand: z.boolean(),
     acceptEquivalent: z.boolean(),
-    bookedByUser: z.object({ id: z.number(), full_name: z.string() }).optional(),
+    bookedByUser: z.object({ id: z.string(), display_name: z.string() }).optional(),
     bookedByName: z.string().nullish(),
-    userId: z.number(),
+    userId: z.string(),
     listId: z.number(),
 });
 

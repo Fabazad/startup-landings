@@ -3,14 +3,14 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import Link from 'next/link';
-import { User } from '@supabase/supabase-js';
 import { RotatingBackground } from './components/RotatingBackground';
+import { User } from './types/User';
 
 export const Profile = ({ user, userStats }: { user: User; userStats: { wishListCount: number, wishCount: number, followingCount: number } }) => {
 
-  const displayName = user.user_metadata?.full_name || 'Invité';
+  const displayName = user.displayName || 'Invité';
 
-  const photoURL = user.user_metadata.avatar_url ?? '';
+  const photoURL = user.avatarUrl ?? '';
 
   const borderWidth = 2;
 

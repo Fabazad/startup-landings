@@ -46,7 +46,7 @@ export function WishListItem({ wishList }: PostItemProps) {
                         />
 
                         <Avatar
-                            alt={wishList.user.full_name}
+                            alt={wishList.user.display_name}
                             src={wishList.user.avatar_url}
                             sx={{
                                 left: 24,
@@ -60,7 +60,7 @@ export function WishListItem({ wishList }: PostItemProps) {
 
                     <CardContent sx={{ pt: 3.5 }}>
                         <Typography variant="caption" component="div" sx={{ mb: 1, color: 'text.disabled' }}>
-                            {wishList.user.full_name}
+                            {wishList.user.display_name}
                         </Typography>
 
                         <Typography

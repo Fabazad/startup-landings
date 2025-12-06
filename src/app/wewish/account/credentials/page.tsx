@@ -1,14 +1,13 @@
-import { getAuthUser } from "src/auth/getAuthUser"
+import { getAuthUser } from "src/auth/getAuthUser";
+import { Credentials } from "./Credentials";
 import { View403, View500 } from "src/sections/error";
-import { Profile } from "./Profile";
 
-export default async function ProfilePage() {
+export default async function PasswordPage() {
     const userRes = await getAuthUser();
 
     if (!userRes.success) return <View500 />
     const user = userRes.user;
     if (!user) return <View403 />
 
-    console.log(user);
-    return <Profile user={user} />
+    return <Credentials user={user} />;
 }

@@ -4,9 +4,9 @@ import { WishList } from "../types/WishList";
 export const getWishListQuery = async (wishListId: number, userId?: string): Promise<{ success: true, wishList?: WishList } | { success: false, errorCode: "unknown" }> => {
     const { data, error } = await supabase
         .from('wish-lists')
-        .select('*, wishes(count), user_id:profiles(id,full_name,avatar_url)')
+        .select('*, wishes(count), user_id:profiles(id,display_name,avatar_url)')
         .eq('id', wishListId)
-        .maybeSingle<Omit<WishList, 'isFollowedByMe' | 'wishCount'> & { wishes: [{ count: number }] } & { user_id: { id: string, full_name: string, avatar_url: string } } | undefined>();
+        .maybeSingle<Omit<WishList, 'isFollowedByMe' | 'wishCount'> & { wishes: [{ count: number }] } & { user_id: { id: string, display_name: string, avatar_url: string } } | undefined>();
 
     if (error) return { success: false, errorCode: "unknown" };
     if (!data) return { success: true, wishList: undefined };
@@ -63,7 +63,7 @@ export const deleteWishListQuery = async (wishListId: number): Promise<{ success
 export const getUserWishLists = async (userId: string): Promise<{ success: true, wishLists: WishList[] } | { success: false, errorCode: "unknown" }> => {
     const { data, error } = await supabase
         .from('wish-lists')
-        .select('*, wishes(count), user_id:profiles(id,full_name,avatar_url)')
+        .select('*, wishes(count), user_id:profiles(id,display_name,avatar_url)')
         .eq('user_id', userId);
 
     if (error) return { success: false, errorCode: "unknown" };
@@ -79,7 +79,7 @@ export const getUserWishLists = async (userId: string): Promise<{ success: true,
 export const getArchivedWishListsQuery = async (userId: string): Promise<{ success: true, wishLists: WishList[] } | { success: false, errorCode: "unknown" }> => {
     const { data, error } = await supabase
         .from('wish-lists')
-        .select('*, wishes(count), user_id:profiles(id,full_name,avatar_url)')
+        .select('*, wishes(count), user_id:profiles(id,display_name,avatar_url)')
         .eq('user_id', userId)
         .not('archivedAt', 'is', null)
         .order('archivedAt', { ascending: false });
@@ -97,7 +97,7 @@ export const getArchivedWishListsQuery = async (userId: string): Promise<{ succe
 export const getUnarchivedWishListsQuery = async (userId: string): Promise<{ success: true, wishLists: WishList[] } | { success: false, errorCode: "unknown" }> => {
     const { data, error } = await supabase
         .from('wish-lists')
-        .select('*, wishes(count), user_id:profiles(id,full_name,avatar_url)')
+        .select('*, wishes(count), user_id:profiles(id,display_name,avatar_url)')
         .eq('user_id', userId)
         .is('archivedAt', 'null')
         .order('created_at', { ascending: false });
@@ -138,7 +138,7 @@ export const unfollowListQuery = async (wishListId: number, userId: string): Pro
 export const getFollowedWishListsQuery = async (userId: string): Promise<{ success: true, wishLists: WishList[] } | { success: false, errorCode: "unknown" }> => {
     const { data, error } = await supabase
         .from('wish-lists')
-        .select('*, wishes(count), list_follows!inner(userId), user_id:profiles(id,full_name,avatar_url)')
+        .select('*, wishes(count), list_follows!inner(userId), user_id:profiles(id,display_name,avatar_url)')
         .eq('list_follows.userId', userId)
         .is('archivedAt', 'null')
         .order('created_at', { ascending: false });

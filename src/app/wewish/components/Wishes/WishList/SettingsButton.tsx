@@ -15,7 +15,7 @@ export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
     const [open, setOpen] = useState(false);
 
     const isUserOwner = user?.id === wish.userId;
-    const isBookedBy = wish.bookedByName || wish.bookedByUser?.full_name || null;
+    const isBookedBy = wish.bookedByName || wish.bookedByUser?.display_name || null;
     const isBookedByAuthUser = !!(user && wish.bookedByUser?.id === user.id);
 
     const handleDelete = () => {
