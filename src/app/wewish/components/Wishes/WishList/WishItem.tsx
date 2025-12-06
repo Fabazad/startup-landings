@@ -7,12 +7,14 @@ import { Iconify } from "src/components/iconify";
 import { fCurrency } from "src/utils/format-number";
 import { formatUrl } from "src/utils/format-url";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
+import { WishListLabel } from "../../WishListLabel";
 
-export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
+export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook, showList = false }: {
     wish: Wish;
     onFavoriteClick: () => void;
     onDelete: () => void;
     onUnbook: () => void
+    showList?: boolean
 }) => {
 
     const { user } = useAuthContext();
@@ -22,13 +24,13 @@ export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
     return (
         <Box sx={{ position: 'relative' }}>
             <Link key={wish.id} href={`/wewish/wish/${wish.id}`} style={{ textDecoration: "none" }}>
-                <Card sx={{ position: 'relative', display: 'flex', gap: 2, height: 100, alignItems: 'center', p: 2, pr: 9 }}>
+                <Card sx={{ position: 'relative', display: 'flex', gap: 2, height: 100, alignItems: 'center', p: 2, pr: 8 }}>
                     <Box sx={{ width: 60, minWidth: 60 }}>
                         {wish.isFavorite && <Iconify icon="solar:heart-bold" width={24} color="primary.main" sx={{ position: 'absolute', top: 10, left: 10, zIndex: 9 }} />}
                         {!isUserOwner && isBookedBy && <Iconify icon="solar:gift-bold" width={24} color="secondary.main" sx={{ position: 'absolute', top: 38, left: 35, zIndex: 9 }} />}
                         <Image alt={wish.name} src={"https://api-prod-minimal-v700.pages.dev/assets/images/m-product/product-17.webp"} ratio="1/1" sx={{ borderRadius: 2, opacity: !isUserOwner && isBookedBy ? 0.5 : 1 }} />
                     </Box>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', justifyContent: 'center', gap: 1, flex: 1 }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', justifyContent: 'center', gap: 1, flex: 1, minWidth: 0 }}>
                         <Typography
                             variant="subtitle1"
                             fontWeight={800}
@@ -43,16 +45,19 @@ export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
                         >
                             {wish.name}
                         </Typography>
-                        <Stack direction="row" alignItems="center" justifyContent="space-between">
-                            {wish.price && (
-                                <Typography variant="body2" color="text.secondary">
-                                    {fCurrency(wish.price)}
-                                </Typography>
-                            )}
-                            {wish.productUrl && (
+                        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ flex: 1, minWidth: 0 }}>
+                            <Typography variant="body2" color="text.secondary">
+                                {wish.price && fCurrency(wish.price)}
+                            </Typography>
+                            {wish.productUrl && !showList && (
                                 <Typography variant="body2" color="text.secondary">
                                     {formatUrl(wish.productUrl)}
                                 </Typography>
+                            )}
+                            {showList && (
+                                <Stack sx={{ flex: 1, alignItems: "end", minWidth: 0, overflow: 'hidden' }}>
+                                    <WishListLabel name={wish.list.name} />
+                                </Stack>
                             )}
                         </Stack>
                     </Box>

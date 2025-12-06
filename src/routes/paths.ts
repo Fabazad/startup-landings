@@ -85,7 +85,7 @@ export const paths = {
       share: (id: number) => `${ROOTS.WEWISH}/wish-list/${id}/share`,
     },
     wish: {
-      details: (id: number) => `${ROOTS.WEWISH}/wish/${id}`,
+      detail: (id: number) => `${ROOTS.WEWISH}/wish/${id}`,
       book: (id: number) => `${ROOTS.WEWISH}/wish/${id}/book`,
       update: (id: number) => `${ROOTS.WEWISH}/wish/${id}/update`,
     }

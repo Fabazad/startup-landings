@@ -4,12 +4,12 @@ import { Wish } from "../types/Wish";
 export const getWishQuery = async (wishId: number): Promise<{ success: true, wish?: Wish } | { success: false, errorCode: "unknown" }> => {
     const { data, error } = await supabase
         .from('wishes')
-        .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, user_id)')
+        .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, user_id), listId:wish-lists (id, name)')
         .eq('id', wishId)
         .maybeSingle<any>();
 
     if (error) return { success: false, errorCode: "unknown" };
-    return { success: true, wish: { ...data, listId: data.list.id, userId: data.list.user_id } };
+    return { success: true, wish: { ...data, list: data.listId, userId: data.list.user_id } };
 }
 
 export const deleteWishQuery = async (wishId: string): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
@@ -35,7 +35,7 @@ export const setIsFavoriteQuery = async (wishId: number, isFavorite: boolean): P
 export const getWishesQuery = async (params: { wishListId: number } | { userId: string }): Promise<{ success: true, wishes: Wish[] } | { success: false, errorCode: "unknown" }> => {
     const query = supabase
         .from('wishes')
-        .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, user_id)')
+        .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, user_id), listId:wish-lists (id, name)')
         .order('created_at', { ascending: false });
 
     if ('wishListId' in params) {
@@ -48,7 +48,7 @@ export const getWishesQuery = async (params: { wishListId: number } | { userId: 
 
     if (error) return { success: false, errorCode: "unknown" };
 
-    const wishes = data.map((wish: any) => ({ ...wish, listId: wish.list.id, userId: wish.list.user_id }));
+    const wishes = data.map((wish: any) => ({ ...wish, userId: wish.list.user_id, list: wish.listId }));
     return { success: true, wishes };
 }
 

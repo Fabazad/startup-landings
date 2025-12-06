@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import { fCurrency } from 'src/utils/format-number';
 import { Image } from 'src/components/image';
 import { Wish } from '../../../types/Wish';
-import { Typography } from '@mui/material';
+import { Chip, Typography } from '@mui/material';
 import { FavoriteButton } from './FavoriteButton';
 import { useAuthContext } from 'src/auth/hooks/use-auth-context';
 import { BookButton } from './BookButton';
@@ -12,19 +12,23 @@ import { UpdateButton } from './UpdateButton';
 import { DeleteButton } from './DeleteButton';
 import { formatUrl } from 'src/utils/format-url';
 import Link from '@mui/material/Link';
+import { Iconify } from 'src/components/iconify';
+import { paths } from 'src/routes/paths';
+import { WishListLabel } from '../../WishListLabel';
 
 // ----------------------------------------------------------------------
 
 
-export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook }: {
+export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook, showList = false }: {
     wish: Wish;
     onFavoriteClick: () => void;
     onDelete: () => void;
     onUnbook: () => void;
+    showList?: boolean
 }) {
 
     const { user } = useAuthContext();
-    const linkTo = `/wewish/wish/${wish.id}`;
+    const linkTo = paths.wewish.wish.detail(wish.id);
 
     const isUserOwner = user?.id === wish.userId;
     const isBookedBy = wish.bookedByName || wish.bookedByUser?.display_name || null;
@@ -38,6 +42,17 @@ export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook }: {
             <Link href={linkTo} style={{ textDecoration: "none", display: "grid" }}>
                 <Card sx={{ "&:hover": { boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)" } }}>
                     <Box sx={{ position: 'relative', p: 1 }}>
+                        {showList && (
+                            <Box sx={{
+                                width: "100%",
+                                position: "absolute",
+                                bottom: 16,
+                                left: 16,
+                                zIndex: 10,
+                            }}>
+                                <WishListLabel name={wish.list.name} />
+                            </Box>
+                        )}
 
                         <Image
                             alt={wish.name}

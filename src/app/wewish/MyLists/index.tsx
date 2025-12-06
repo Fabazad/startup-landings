@@ -7,6 +7,7 @@ import { useSearchParams } from "src/routes/hooks/use-search-params";
 import { MyWishLists } from "./MyWishLists";
 import { MyArchivedWishLists } from "./MyArchivedWishLists";
 import { FollowedWishLists } from "./FollowedWishLists";
+import { AllMyWishes } from "./AllMyWishes";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -83,7 +84,7 @@ export const MyLists = () => {
                 <CustomTabPanel value={value} index={2}>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={3}>
-                    Item Four
+                    <AllMyWishes />
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={4}>
                     <MyArchivedWishLists />

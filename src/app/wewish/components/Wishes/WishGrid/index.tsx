@@ -10,23 +10,26 @@ import { AddWishItem } from "./AddWishItem";
 import { WishItem } from "./WishItem";
 import { paths } from "src/routes/paths";
 
-export const WishGrid = ({ wishes, isLoading, wishListId, onFavoriteClick, onDelete, onUnbook }: {
-    wishes: Array<Wish>,
+export const WishGrid = ({ wishes, isLoading, wishListId, onFavoriteClick, onDelete, onUnbook, showList = false }: {
+    wishes?: Array<Wish>,
     isLoading: boolean,
-    wishListId: number;
+    wishListId?: number;
     onFavoriteClick: (wishId: number, isFavorite: boolean) => void
     onDelete: (wishId: number) => void
     onUnbook: (wishId: number) => void
+    showList?: boolean
 }) => {
 
-    if (!isLoading && wishes.length === 0) return (
+    if (!isLoading && wishes?.length === 0) return (
         <EmptyContent title="Aucune envie" description="Vous n'avez pas mis d'envies dans cette liste"
             action={
                 <Box sx={{ mt: 2 }}>
-                    <Link href={paths.wewish.wishList.addWish(wishListId)}>
+                    <Link href={wishListId ? paths.wewish.wishList.addWish(wishListId) : paths.wewish.wishList.create}>
                         <Button variant="contained" sx={{ borderRadius: 9999 }} size="large" color="warning">
                             <Iconify icon="material-symbols:add" width={24} sx={{ mr: 1 }} />
-                            <Typography variant="body1">Ajouter une envie</Typography>
+                            <Typography variant="body1">
+                                {wishListId ? "Ajouter une envie" : "Créer une liste"}
+                            </Typography>
                         </Button>
                     </Link>
                 </Box>
@@ -45,19 +48,21 @@ export const WishGrid = ({ wishes, isLoading, wishListId, onFavoriteClick, onDel
                 lg: 'repeat(4, 1fr)',
             }}
         >
-            {isLoading && <WishItemSkeleton />}
-            {wishes.length > 0 && (
-                <>
-                    {wishListId && <AddWishItem wishListId={wishListId} />}
-                    {wishes.map((wish) => (
-                        <WishItem key={wish.id} wish={wish}
-                            onFavoriteClick={() => onFavoriteClick(wish.id, !wish.isFavorite)}
-                            onDelete={() => onDelete(wish.id)}
-                            onUnbook={() => onUnbook(wish.id)}
-                        />
-                    ))}
-                </>
-            )}
+            {isLoading || wishes === undefined ?
+                <WishItemSkeleton /> :
+                (
+                    <>
+                        {wishListId && <AddWishItem wishListId={wishListId} />}
+                        {wishes.map((wish) => (
+                            <WishItem key={wish.id} wish={wish}
+                                onFavoriteClick={() => onFavoriteClick(wish.id, !wish.isFavorite)}
+                                onDelete={() => onDelete(wish.id)}
+                                onUnbook={() => onUnbook(wish.id)}
+                                showList={showList}
+                            />
+                        ))}
+                    </>
+                )}
         </Box>
     )
 }

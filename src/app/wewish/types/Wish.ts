@@ -12,7 +12,7 @@ export const wishSchema = z.object({
     bookedByUser: z.object({ id: z.string(), display_name: z.string() }).optional(),
     bookedByName: z.string().nullish(),
     userId: z.string(),
-    listId: z.number(),
+    list: z.object({ id: z.number(), name: z.string() }),
 });
 
 export type Wish = z.infer<typeof wishSchema>;

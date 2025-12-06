@@ -24,7 +24,7 @@ export const AddModal = ({ open, onClose }: { open: boolean, onClose: () => void
                     title: "Vous n'avez pas de liste d'envie",
                     button: { title: "Créer votre première liste d'envie", href: paths.wewish.wishList.create }
                 }} href={(listId) => paths.wewish.wishList.addWish(listId)} />
-                {!isLoading && wishLists.length > 0 && (<>
+                {!isLoading && (wishLists?.length || 0) > 0 && (<>
                     <Divider sx={{ typography: 'body2', my: 2 }}>
                         <Typography variant="body2" sx={{ textTransform: 'uppercase' }}>OU</Typography>
                     </Divider>

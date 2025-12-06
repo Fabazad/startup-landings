@@ -9,5 +9,5 @@ export default async function UpdateWishPage({ params }: { params: { wishId: num
 
     if (!result.wish) return <NotFoundView />;
 
-    return <UpsertWish wish={result.wish} wishListId={result.wish.listId} />;
+    return <UpsertWish wish={result.wish} wishListId={result.wish.list.id} />;
 }

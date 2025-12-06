@@ -4,7 +4,7 @@ import { WishList } from "../../types/WishList"
 import { WishListList } from "./WishListList";
 
 export const WishLists = ({ wishLists, isLoading, emptyContent }: {
-    wishLists: Array<WishList>,
+    wishLists?: Array<WishList>,
     isLoading: boolean;
     emptyContent: { title: string, button?: { title: string, href: string } }
 }) => {

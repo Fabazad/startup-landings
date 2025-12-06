@@ -19,6 +19,7 @@ export const useWishList = ({ wishListId }: { wishListId?: number }): { wishList
             if (!result.success) throw result.errorCode;
             return result.wishList;
         },
+        enabled: !!user,
     });
 
 

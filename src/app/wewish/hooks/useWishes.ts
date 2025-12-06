@@ -6,7 +6,7 @@ import { getWishesQuery, setIsFavoriteQuery, unbookWishQuery } from "../queries/
 import { toast } from "sonner";
 
 export const useWishes = ({ wishListId }: { wishListId?: number }): {
-    wishes: Array<Wish>;
+    wishes?: Array<Wish>;
     isLoading: boolean;
     deleteWish: (wishId: number) => Promise<void>,
     setIsFavorite: (wishId: number, isFavorite: boolean) => void,
@@ -24,6 +24,8 @@ export const useWishes = ({ wishListId }: { wishListId?: number }): {
             if (!result.success) throw result.errorCode;
             return result.wishes;
         },
+        enabled: !!user,
+
     });
 
     const deleteWish = async (wishId: number) => {
@@ -44,5 +46,5 @@ export const useWishes = ({ wishListId }: { wishListId?: number }): {
         if (!result.success) toast.error("Une erreur est survenue");
     };
 
-    return { wishes: wishes || [], isLoading, deleteWish, setIsFavorite, unbookWish };
+    return { wishes: wishes, isLoading, deleteWish, setIsFavorite, unbookWish };
 }

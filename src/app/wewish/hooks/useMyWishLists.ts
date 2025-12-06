@@ -6,9 +6,9 @@ import { WishList } from '../types/WishList';
 
 // ----------------------------------------------------------------------
 
-export function useMyWishLists({ archived, userId }: { archived: boolean, userId?: string }): { wishLists: WishList[]; isLoading: boolean; deleteOne: (id: string) => Promise<void> } {
+export function useMyWishLists({ archived, userId }: { archived: boolean, userId?: string }): { wishLists?: WishList[]; isLoading: boolean; deleteOne: (id: string) => Promise<void> } {
 
-    const { data: wishLists, isLoading, refetch } = useQuery({
+    const { data: wishLists, isLoading, refetch, isRefetching } = useQuery({
         queryKey: ['my-wish-lists', userId, archived],
         queryFn: async () => {
             if (!userId) return [];
@@ -23,6 +23,7 @@ export function useMyWishLists({ archived, userId }: { archived: boolean, userId
                 return res.wishLists;
             }
         },
+        enabled: !!userId,
     });
 
     const deleteOne = async (id: string) => {
@@ -31,5 +32,5 @@ export function useMyWishLists({ archived, userId }: { archived: boolean, userId
         refetch();
     };
 
-    return { wishLists: wishLists || [], isLoading, deleteOne };
+    return { wishLists: wishLists, isLoading, deleteOne };
 }
