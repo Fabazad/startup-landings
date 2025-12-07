@@ -2,7 +2,7 @@ import type { Theme, SxProps, Breakpoint } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import { Logo } from 'src/components/logo';
-import { Main, CompactContent } from './main';
+import { Main } from './main';
 import { LayoutSection } from '../core/layout-section';
 import { HeaderSection } from '../core/header-section';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
