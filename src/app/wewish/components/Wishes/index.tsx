@@ -1,7 +1,7 @@
 "use client"
 
 import { useWishes } from "../../hooks/useWishes";
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import { WishGrid } from "./WishGrid";
 import { WishList } from "./WishList";
 
@@ -10,7 +10,7 @@ export const Wishes = ({ wishListId, isBookedByUser }: { wishListId?: number; is
     const { wishes, deleteWish, isLoading, setIsFavorite, unbookWish } = useWishes({ wishListId, isBookedByUser });
 
     return (
-        <Container>
+        <Box>
             <Box sx={{ display: { xs: "none", md: "block" } }}>
                 <WishGrid wishListId={wishListId} wishes={wishes} isLoading={isLoading}
                     onFavoriteClick={(wishId, isFavorite) => setIsFavorite(wishId, isFavorite)}
@@ -27,6 +27,6 @@ export const Wishes = ({ wishListId, isBookedByUser }: { wishListId?: number; is
                     showList={!wishListId}
                 />
             </Box>
-        </Container >
+        </Box >
     )
 }

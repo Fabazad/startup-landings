@@ -20,7 +20,6 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
     const { user } = useAuthContext();
     const router = useRouter();
 
-
     const defaultValues = {
         listName: wishList?.name || '',
         description: wishList?.description || '',
@@ -72,19 +71,17 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
     return (
         <Box sx={{ mt: 3, p: 10 }}>
             <Form methods={methods} onSubmit={handleSubmit(onSubmit)} >
-                <Typography variant="h5">{t('wewish.addListTitle')}</Typography>
-                <Typography>{t('wewish.addListDescription')}</Typography>
-                <Field.Text name="listName" label="List Name" sx={{ mt: 3 }} autoFocus placeholder={`Ex: John Doe's List`} />
-                <Field.Text name="description" label="Description" sx={{ mt: 3 }} />
+                <Typography variant="h4" sx={{ mb: 2 }}>{wishList ? `Mettre à jour la liste "${wishList.name}"` : "Créer une liste d'envies"}</Typography>
+                <Typography variant="body1">Créez une liste pour regrouper tous vos souhaits et cadeaux.<br />Vos proches pourront la consulter et savoir exactement ce qui vous ferait plaisir.</Typography>
+                <Field.Text name="listName" label="Nom de la liste" sx={{ mt: 3 }} autoFocus placeholder={`Ex: Liste de Noël de Gustave`} />
+                <Field.Text name="description" label="Description" sx={{ mt: 3 }} placeholder="Description de la liste" />
                 <LoadingButton
-                    color="primary"
                     variant="contained"
                     type="submit"
                     loading={isSubmitting}
                     sx={{ borderRadius: '9999px', mt: 3 }}
-
                 >
-                    {wishList ? t('wewish.updateList') : t('wewish.addList')}
+                    {wishList ? "Mettre à jour la liste" : "Créer la liste"}
                 </LoadingButton>
             </Form>
         </Box>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Tabs, Tab, Typography } from "@mui/material";
+import { Tabs, Tab, Typography, Box } from "@mui/material";
 import { Iconify } from "src/components/iconify";
 import { useTabs } from 'src/hooks/use-tabs';
 import { usePathname, useRouter } from 'next/navigation';
@@ -28,7 +28,7 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
     }
 
     return (
-        <Container sx={{ py: 3 }}>
+        <Box sx={{ py: 3 }}>
             <Typography variant="h4" sx={{ mb: { xs: 3, md: 5 } }}>Compte</Typography>
             <Tabs value={tabs.value} onChange={handleTabChange} sx={{ mb: { xs: 3, md: 5 } }}>
                 {TABS.map((tab) => (
@@ -36,6 +36,6 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
                 ))}
             </Tabs>
             {children}
-        </Container>
+        </Box>
     );
 }

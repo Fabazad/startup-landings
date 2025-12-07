@@ -11,6 +11,7 @@ import { ThemeButton } from '../components/theme-button';
 import React from 'react';
 import { getProductIdea } from 'src/app/getProductIdea';
 import Link from 'next/link';
+import { Container } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -20,13 +21,10 @@ export type SimpleLayoutProps = {
   header?: {
     sx?: SxProps<Theme>;
   };
-  content?: {
-    compact?: boolean;
-  };
   menuButtons?: Array<React.ReactNode>;
 };
 
-export async function SimpleLayout({ sx, children, header, content, menuButtons }: SimpleLayoutProps) {
+export async function SimpleLayout({ sx, children, header, menuButtons }: SimpleLayoutProps) {
   const layoutQuery: Breakpoint = 'md';
 
   const { logo, themeColor, name: productName, id: productId } = await getProductIdea();
@@ -93,11 +91,7 @@ export async function SimpleLayout({ sx, children, header, content, menuButtons 
       sx={sx}
     >
       <Main>
-        {content?.compact ? (
-          <CompactContent layoutQuery={layoutQuery}>{children}</CompactContent>
-        ) : (
-          children
-        )}
+        <Container>{children}</Container>
       </Main>
       {menuButtons && (
         <Box bottom={0} left={0} right={0} width="100%" sx={{ bgcolor: 'background.default', position: 'sticky', borderTop: '1px solid', borderColor: 'divider', display: { xs: 'flex', md: 'none' }, alignItems: 'center', justifyContent: 'center', gap: 1, '& > *': { minWidth: '100px' } }} >

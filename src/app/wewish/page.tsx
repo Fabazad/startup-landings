@@ -1,4 +1,3 @@
-import { Container } from "@mui/material";
 import { MyLists } from "./MyLists";
 import { Profile } from "./profile"
 import { getAuthUser } from "src/auth/getAuthUser";
@@ -16,9 +15,9 @@ export default async function ListsPage() {
 
 
     return (
-        <Container>
+        <>
             <Profile user={userRes.user} userStats={statsRes.stats} />
             <MyLists />
-        </Container>
+        </>
     );
 }
