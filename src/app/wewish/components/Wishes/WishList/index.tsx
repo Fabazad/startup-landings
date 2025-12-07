@@ -7,21 +7,28 @@ import { WishItemSkeleton } from "./WishItemSkeleton";
 import { WishItem } from "./WishItem";
 import { AddWishItem } from "../WishGrid/AddWishItem";
 import { paths } from "src/routes/paths";
+import { User } from "src/app/wewish/types/User";
+import { WishList as WishListType } from "src/app/wewish/types/WishList";
 
-export const WishList = ({ wishes, isLoading, wishListId, onFavoriteClick, onDelete, onUnbook, showList = false }: {
+
+export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, user }: {
     wishes?: Array<Wish>,
     isLoading: boolean,
-    wishListId?: number,
+    wishList?: WishListType,
     onFavoriteClick: (wishId: number, isFavorite: boolean) => void,
     onDelete: (wishId: number) => void,
     onUnbook: (wishId: number) => void,
     showList?: boolean
+    user?: User
 }) => {
+
+    const canAddWish = user && wishList && user.id === wishList.user.id;
+
     if (!isLoading && wishes?.length === 0) return (
         <EmptyContent title="Aucune envie" action={
-            <Button href={wishListId ? paths.wewish.wishList.addWish(wishListId) : paths.wewish.wishList.create} variant="contained" sx={{ borderRadius: 999, px: 2, mt: 1 }} size="large" color="warning">
+            <Button href={wishList?.id ? paths.wewish.wishList.addWish(wishList?.id) : paths.wewish.wishList.create} variant="contained" sx={{ borderRadius: 999, px: 2, mt: 1 }} size="large" color="warning">
                 <Iconify icon="material-symbols:add" sx={{ mr: 1 }} />
-                {wishListId ? "Ajouter une envie" : "Créer une liste"}
+                {wishList ? "Ajouter une envie" : "Créer une liste"}
             </Button>
         }
         />
@@ -32,7 +39,7 @@ export const WishList = ({ wishes, isLoading, wishListId, onFavoriteClick, onDel
             {isLoading || wishes === undefined ? <WishItemSkeleton /> :
                 (
                     <>
-                        {wishListId && <AddWishItem wishListId={wishListId} />}
+                        {canAddWish && <AddWishItem wishListId={wishList?.id} />}
                         {wishes.map((wish) => (
                             <WishItem key={wish.id} wish={wish}
                                 onFavoriteClick={() => onFavoriteClick(wish.id, !wish.isFavorite)}

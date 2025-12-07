@@ -4,6 +4,8 @@ import { Wish } from "../types/Wish";
 import { useAuthContext } from "src/auth/hooks";
 import { getWishesQuery, setIsFavoriteQuery, unbookWishQuery } from "../queries/wish";
 import { toast } from "sonner";
+import { WishList } from "../types/WishList";
+import { useWishList } from "./useWishList";
 
 export const useWishes = ({ wishListId, isBookedByUser }: { wishListId?: number, isBookedByUser?: string }): {
     wishes?: Array<Wish>;
@@ -11,9 +13,12 @@ export const useWishes = ({ wishListId, isBookedByUser }: { wishListId?: number,
     deleteWish: (wishId: number) => Promise<void>,
     setIsFavorite: (wishId: number, isFavorite: boolean) => void,
     unbookWish: (wishId: number) => Promise<void>
+    wishList?: WishList;
 } => {
 
     const { user } = useAuthContext();
+
+    const { wishList } = useWishList({ wishListId });
 
     const { data: wishes, isLoading, refetch } = useQuery<Array<Wish>>({
         queryKey: ['wishes', wishListId, isBookedByUser],
@@ -51,5 +56,5 @@ export const useWishes = ({ wishListId, isBookedByUser }: { wishListId?: number,
         if (!result.success) toast.error("Une erreur est survenue");
     };
 
-    return { wishes: wishes, isLoading, deleteWish, setIsFavorite, unbookWish };
+    return { wishes: wishes, isLoading, deleteWish, setIsFavorite, unbookWish, wishList };
 }
