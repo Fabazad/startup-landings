@@ -34,7 +34,7 @@ export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
         <>
             <Box>
                 <IconButton onClick={() => setOpen(true)}>
-                    <Iconify icon="solar:menu-dots-bold" width={24} />
+                    <Iconify icon="iconamoon:menu-kebab-vertical-bold" width={24} color="text.secondary" />
                 </IconButton>
             </Box>
             <Drawer anchor="bottom" open={open} onClose={() => setOpen(false)}>

@@ -8,18 +8,24 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Form, Field } from 'src/components/hook-form';
-import { Box, Divider } from '@mui/material';
+import { Divider, useColorScheme } from '@mui/material';
 import { toast } from 'sonner';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Wish } from '../../types/Wish';
 import { createWishQuery, updateWishQuery } from '../../queries/wish';
 import { paths } from 'src/routes/paths';
+import { Image } from 'src/components/image';
+
 
 // ----------------------------------------------------------------------
 
 export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wish }) => {
     const router = useRouter();
+    const { mode, systemMode } = useColorScheme();
+
+    const isDarkMode = mode === 'dark' || (mode === 'system' && systemMode === 'dark');
+
 
     const WishSchema = z.object({
         productUrl: z.string().optional(),
@@ -78,53 +84,78 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
     };
 
     return (
-        <Box sx={{ p: 3 }}>
-            <Form methods={methods} onSubmit={onSubmit}>
-                <Stack spacing={1} sx={{ mb: 3 }}>
-                    <Typography variant="h3">{wish ? 'Modifier l\'envie' : 'Ajouter une envie'}</Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        {wish ? 'Modifiez les informations de l\'envie' : 'Renseignez le lien du produit souhaité, nous allons collecter pour vous les informations sur le site marchand si celui-ci est compatible.'}
-                    </Typography>
-                </Stack>
-                <Stack spacing={3}>
-                    <Field.Text name="productUrl" label="Lien du produit (optionnel)" onBlur={onProductUrlBlur} />
-
-                    <Divider />
-
-                    <Field.Text name="name" label="Nom de l'envie" />
-
-                    <Field.Text name="description" label="Description (optionnel)" multiline rows={4} />
-
-                    <Field.Text
-                        name="price"
-                        label="Prix indicatif (optionnel)"
-                        placeholder="0.00"
-                        type="number"
-                        InputLabelProps={{ shrink: true }}
-                    />
-
-                    <Divider />
-
-                    <Stack spacing={1}>
-                        <Typography variant="h6">Options supplémentaires</Typography>
-                        <Field.Switch name="isFavorite" label="Envie coup de cœur" />
-                        <Field.Switch name="isSecondHand" label="Je préfère l'occasion si possible" />
-                        <Field.Switch name="acceptEquivalent" label="J'accepte de recevoir un cadeau équivalent" />
+        <Stack gap={2} direction="row" alignItems="flex-start" justifyContent="space-between">
+            <Stack
+                flex={1}
+                sx={{
+                    display: { xs: 'none', md: 'flex' },
+                    position: 'sticky',
+                    top: 'calc(var(--layout-header-desktop-height) + 24px)',
+                }}
+            >
+                <Image
+                    src={
+                        isDarkMode
+                            ? '/assets/illustrations/illustration-wishlist-dark.svg'
+                            : '/assets/illustrations/illustration-wishlist.svg'
+                    }
+                    alt="Wishlist"
+                    sx={{ width: '100%', height: '100%' }}
+                />
+            </Stack>
+            <Stack sx={{ p: { xs: 3, sm: 10 }, flex: 1 }}>
+                <Form methods={methods} onSubmit={onSubmit}>
+                    <Stack spacing={1} sx={{ mb: 3 }}>
+                        <Typography variant="h3">{wish ? 'Modifier l\'envie' : 'Ajouter une envie'}</Typography>
+                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                            {wish ? 'Modifiez les informations de l\'envie' : 'Renseignez le lien du produit souhaité, nous allons collecter pour vous les informations sur le site marchand si celui-ci est compatible.'}
+                        </Typography>
                     </Stack>
+                    <Stack spacing={3}>
+                        <Field.Text name="productUrl" label="Lien du produit (optionnel)" onBlur={onProductUrlBlur} />
 
-                    <LoadingButton
-                        fullWidth
-                        color="inherit"
-                        size="large"
-                        type="submit"
-                        variant="contained"
-                        sx={{ borderRadius: 9999 }}
-                        loading={isSubmitting}
-                    >
-                        {wish ? 'Modifier l\'envie' : 'Ajouter l\'envie'}
-                    </LoadingButton>
-                </Stack>
-            </Form>
-        </Box>
+                        <Divider />
+
+                        <Field.Text name="name" label="Nom de l'envie" />
+
+                        <Field.Text name="description" label="Description (optionnel)" multiline rows={4} />
+
+                        <Field.UploadImage
+                            name="singleUpload"
+                            maxSize={3145728}
+                        />
+
+                        <Field.Text
+                            name="price"
+                            label="Prix indicatif (optionnel)"
+                            placeholder="0.00"
+                            type="number"
+                            InputLabelProps={{ shrink: true }}
+                        />
+
+                        <Divider />
+
+                        <Stack spacing={1}>
+                            <Typography variant="h6">Options supplémentaires</Typography>
+                            <Field.Switch name="isFavorite" label="Envie coup de cœur" />
+                            <Field.Switch name="isSecondHand" label="Je préfère l'occasion si possible" />
+                            <Field.Switch name="acceptEquivalent" label="J'accepte de recevoir un cadeau équivalent" />
+                        </Stack>
+
+                        <LoadingButton
+                            fullWidth
+                            color="inherit"
+                            size="large"
+                            type="submit"
+                            variant="contained"
+                            sx={{ borderRadius: 9999 }}
+                            loading={isSubmitting}
+                        >
+                            {wish ? 'Modifier l\'envie' : 'Ajouter l\'envie'}
+                        </LoadingButton>
+                    </Stack>
+                </Form>
+            </Stack>
+        </Stack>
     );
 };

@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from 'src/components/hook-form';
-import { Box, Typography, useColorScheme } from '@mui/material';
+import { Box, Stack, Typography, useColorScheme } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { Field } from 'src/components/hook-form';
 import { useAuthContext } from 'src/auth/hooks';
@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation';
 import { WishList } from 'src/app/wewish/types/WishList';
 import { paths } from 'src/routes/paths';
 import { Image } from 'src/components/image';
+import { BackButton } from '../BackButton';
 
 export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
   const { t } = useTranslate();
@@ -81,15 +82,11 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        gap: 2,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        mt: { xs: 3, sm: 0 },
-      }}
+    <Stack
+      gap={2}
+      direction="row"
+      alignItems="center"
+      justifyContent="space-between"
     >
       <Box sx={{ flex: 1, display: { xs: 'none', sm: 'block' } }}>
         <Image
@@ -103,7 +100,10 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
         />
       </Box>
 
-      <Box sx={{ mt: 3, p: { xs: 3, sm: 10 }, flex: 1 }}>
+      <Stack flex={1} sx={{ p: { xs: 3, sm: 10 } }}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3 }}>
+          <BackButton />
+        </Stack>
         <Form methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Typography variant="h4" sx={{ mb: 2 }}>
             {wishList ? `Mettre à jour la liste "${wishList.name}"` : "Créer une liste d'envies"}
@@ -147,7 +147,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
             {wishList ? 'Mettre à jour la liste' : 'Créer la liste'}
           </LoadingButton>
         </Form>
-      </Box>
-    </Box>
+      </Stack>
+    </Stack>
   );
 };

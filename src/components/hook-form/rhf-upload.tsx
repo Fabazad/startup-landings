@@ -62,7 +62,7 @@ export function RHFUploadBox({ name, ...other }: Props) {
 
 // ----------------------------------------------------------------------
 
-export function RHFUpload({ name, multiple, helperText, ...other }: Props) {
+export function RHFUploadImage({ name, multiple, helperText, ...other }: Props) {
   const { control, setValue } = useFormContext();
 
   return (
