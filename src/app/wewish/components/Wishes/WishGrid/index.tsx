@@ -22,9 +22,6 @@ export const WishGrid = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
     showList?: boolean
     user?: User
 }) => {
-
-    console.log({ wishList })
-
     const canAddWish = user && wishList && user.id === wishList.user.id;
 
     if (!isLoading && wishes?.length === 0) return (

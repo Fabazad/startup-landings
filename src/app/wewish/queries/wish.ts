@@ -38,7 +38,6 @@ export const getWishesQuery = async (params: { wishListId: number } | { userId: 
         .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, user_id), listId:wish-lists (id, name)')
         .order('created_at', { ascending: false });
 
-    console.log({ params })
     if ('wishListId' in params) {
         query.eq('listId', params.wishListId);
     } else if ('userId' in params) {
