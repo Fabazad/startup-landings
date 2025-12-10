@@ -16,6 +16,7 @@ import { Wish } from '../../types/Wish';
 import { createWishQuery, updateWishQuery } from '../../queries/wish';
 import { paths } from 'src/routes/paths';
 import { Image } from 'src/components/image';
+import { BackButton } from '../BackButton';
 
 
 // ----------------------------------------------------------------------
@@ -103,7 +104,10 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
                     sx={{ width: '100%', height: '100%' }}
                 />
             </Stack>
-            <Stack sx={{ p: { xs: 3, sm: 10 }, flex: 1 }}>
+            <Stack sx={{ px: { xs: 3, sm: 10 }, py: 3, flex: 1 }}>
+                <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3 }}>
+                    <BackButton />
+                </Stack>
                 <Form methods={methods} onSubmit={onSubmit}>
                     <Stack spacing={1} sx={{ mb: 3 }}>
                         <Typography variant="h3">{wish ? 'Modifier l\'envie' : 'Ajouter une envie'}</Typography>
