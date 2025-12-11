@@ -20,6 +20,7 @@ export type ConfigValue = {
   posthog: { key: string; host: string };
   resend: { apiKey: string };
   amazon: { affiliateTag: string; accessKey: string; secretKey: string };
+  openai: { apiKey: string };
 };
 
 // ----------------------------------------------------------------------
@@ -64,5 +65,8 @@ export const CONFIG: ConfigValue = {
     affiliateTag: process.env.AMAZON_AFFILIATION_TAG ?? '',
     accessKey: process.env.AMAZON_ACCESS_KEY ?? '',
     secretKey: process.env.AMAZON_SECRET_KEY ?? '',
-  }
+  },
+  openai: {
+    apiKey: process.env.OPENAI_API_KEY ?? '',
+  },
 };
