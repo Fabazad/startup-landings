@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Form, Field } from 'src/components/hook-form';
-import { Divider, useColorScheme } from '@mui/material';
+import { Divider, useColorScheme, InputAdornment, CircularProgress } from '@mui/material';
 import { toast } from 'sonner';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -17,6 +17,7 @@ import { createWishQuery, updateWishQuery } from '../../queries/wish';
 import { paths } from 'src/routes/paths';
 import { Image } from 'src/components/image';
 import { BackButton } from '../BackButton';
+import { useState } from 'react';
 
 
 // ----------------------------------------------------------------------
@@ -24,6 +25,7 @@ import { BackButton } from '../BackButton';
 export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wish }) => {
     const router = useRouter();
     const { mode, systemMode } = useColorScheme();
+    const [isScraping, setIsScraping] = useState(false);
 
     const isDarkMode = mode === 'dark' || (mode === 'system' && systemMode === 'dark');
 
@@ -73,14 +75,23 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
 
     const onProductUrlBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        const res = await axios.post<{ title?: string; price?: number; imageUrls?: string[] }>("/api/scrap", { url: value });
-        const { title, price } = res.data;
+        if (!value) return;
 
-        if (title) {
-            methods.setValue('name', title);
-        }
-        if (price) {
-            methods.setValue('price', price);
+        setIsScraping(true);
+        try {
+            const res = await axios.post<{ title?: string; price?: number; imageUrls?: string[] }>("/api/scrap", { url: value });
+            const { title, price } = res.data;
+
+            if (title) {
+                methods.setValue('name', title);
+            }
+            if (price) {
+                methods.setValue('price', price);
+            }
+        } catch (error) {
+            toast.error("Une erreur est survenue lors de la collecte des informations");
+        } finally {
+            setIsScraping(false);
         }
     };
 
@@ -116,7 +127,18 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
                         </Typography>
                     </Stack>
                     <Stack spacing={3}>
-                        <Field.Text name="productUrl" label="Lien du produit (optionnel)" onBlur={onProductUrlBlur} />
+                        <Field.Text
+                            name="productUrl"
+                            label="Lien du produit (optionnel)"
+                            onBlur={onProductUrlBlur}
+                            InputProps={{
+                                endAdornment: isScraping ? (
+                                    <InputAdornment position="end">
+                                        <CircularProgress size={20} />
+                                    </InputAdornment>
+                                ) : null,
+                            }}
+                        />
 
                         <Divider />
 
