@@ -26,6 +26,7 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
     const router = useRouter();
     const { mode, systemMode } = useColorScheme();
     const [isScraping, setIsScraping] = useState(false);
+    const [lastScrapedUrl, setLastScrapedUrl] = useState('');
 
     const isDarkMode = mode === 'dark' || (mode === 'system' && systemMode === 'dark');
 
@@ -76,6 +77,10 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
     const onProductUrlBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
         const value = e.target.value;
         if (!value) return;
+        const url = new URL(value);
+        const cleanUrl = `${url.origin}${url.pathname}`;
+        if (lastScrapedUrl === cleanUrl) return;
+        methods.setValue('productUrl', cleanUrl);
 
         setIsScraping(true);
         try {
@@ -91,6 +96,7 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
         } catch (error) {
             toast.error("Une erreur est survenue lors de la collecte des informations");
         } finally {
+            setLastScrapedUrl(cleanUrl);
             setIsScraping(false);
         }
     };
