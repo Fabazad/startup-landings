@@ -9,7 +9,14 @@ export const getWishQuery = async (wishId: number): Promise<{ success: true, wis
         .maybeSingle<any>();
 
     if (error) return { success: false, errorCode: "unknown" };
-    return { success: true, wish: { ...data, list: data.listId, userId: data.list.user_id } };
+    return {
+        success: true, wish: {
+            ...data,
+            list: data.listId,
+            userId: data.list.user_id,
+            imageUrls: data.imageUrls?.split(',')
+        }
+    };
 }
 
 export const deleteWishQuery = async (wishId: string): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
@@ -50,7 +57,12 @@ export const getWishesQuery = async (params: { wishListId: number } | { userId: 
 
     if (error) return { success: false, errorCode: "unknown" };
 
-    const wishes = data.map((wish: any) => ({ ...wish, userId: wish.list.user_id, list: wish.listId }));
+    const wishes = data.map((wish: any) => ({
+        ...wish,
+        userId: wish.list.user_id,
+        list: wish.listId,
+        imageUrls: wish.imageUrls?.split(',')
+    }));
     return { success: true, wishes };
 }
 
@@ -62,12 +74,15 @@ export const createWishQuery = async (params: {
     price?: number,
     isFavorite: boolean,
     isSecondHand: boolean,
-    acceptEquivalent: boolean
+    acceptEquivalent: boolean,
+    imageUrl?: string,
+    imageUrls?: string[]
 }): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
-    const { wishListId, ...rest } = params;
+    const { wishListId, imageUrls, ...rest } = params;
     const { error } = await supabase.from('wishes').insert({
         ...rest,
         listId: wishListId,
+        imageUrls: imageUrls?.join(','),
     });
     if (error) return { success: false, errorCode: "unknown" };
     return { success: true };
@@ -82,11 +97,13 @@ export const updateWishQuery = async (params: {
     isFavorite: boolean,
     imageUrl?: string,
     isSecondHand: boolean,
-    acceptEquivalent: boolean
+    acceptEquivalent: boolean,
+    imageUrls?: string[]
 }): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
-    const { wishId, ...rest } = params;
+    const { wishId, imageUrls, ...rest } = params;
     const { error } = await supabase.from('wishes').update({
         ...rest,
+        imageUrls: imageUrls?.join(','),
     }).eq('id', wishId);
     if (error) return { success: false, errorCode: "unknown" };
     return { success: true };

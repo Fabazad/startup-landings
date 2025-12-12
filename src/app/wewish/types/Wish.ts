@@ -17,6 +17,7 @@ export const wishSchema = z.object({
     userId: z.string(),
     list: z.object({ id: z.number(), name: z.string() }),
     imageUrl: z.string().optional(),
+    imageUrls: z.array(z.string()).optional(),
 });
 
 export type Wish = z.infer<typeof wishSchema>;

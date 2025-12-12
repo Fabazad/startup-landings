@@ -28,7 +28,6 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
     const { mode, systemMode } = useColorScheme();
     const [isScraping, setIsScraping] = useState(false);
     const [lastScrapedUrl, setLastScrapedUrl] = useState('');
-    const [scrappedImagesUrls, setScrappedImagesUrls] = useState<string[]>([]);
 
     const isDarkMode = mode === 'dark' || (mode === 'system' && systemMode === 'dark');
 
@@ -42,6 +41,7 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
         isSecondHand: z.boolean().optional(),
         acceptEquivalent: z.boolean().optional(),
         imageUrl: z.string().optional(),
+        imageUrls: z.array(z.string()).optional(),
     });
 
     const defaultValues = {
@@ -52,7 +52,8 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
         isFavorite: wish?.isFavorite || false,
         isSecondHand: wish?.isSecondHand || false,
         acceptEquivalent: wish?.acceptEquivalent || false,
-        imageUrl: undefined as string | undefined,
+        imageUrl: wish?.imageUrl || undefined,
+        imageUrls: wish?.imageUrls || undefined,
     };
 
     const methods = useForm({
@@ -98,7 +99,7 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
                 methods.setValue('price', price);
             }
             if (imageUrls) {
-                setScrappedImagesUrls(imageUrls.slice(0, 9));
+                methods.setValue('imageUrls', imageUrls.slice(0, 9));
                 methods.setValue('imageUrl', imageUrls[0]);
             }
         } catch (error) {
@@ -108,6 +109,8 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
             setIsScraping(false);
         }
     };
+
+    const scrappedImagesUrls = methods.watch('imageUrls') || [];
 
     return (
         <Stack gap={2} direction="row" alignItems="flex-start" justifyContent="space-between">
