@@ -24,7 +24,7 @@ const cascadeScrappers = async (url: string, scrappers: Array<Scrapper>) => {
 }
 
 export const scrapAll: Scrapper = async (url) => {
-    return cascadeScrappers(url, [amazonScrapper, openaiScrapper, cheerioScrapper, listyScrapper])
+    return cascadeScrappers(url, [listyScrapper, amazonScrapper, openaiScrapper, cheerioScrapper])
 }
 
 

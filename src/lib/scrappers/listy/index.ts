@@ -1,10 +1,14 @@
 import { Scrapper } from "../Scrapper.type";
 import axios from "axios";
+import { CONFIG } from "src/config-global";
 
 export const listyScrapper: Scrapper = async (url) => {
-    console.log("timestamp", Date.now())
     try {
-        const { data } = await axios.get<{ title: string, amount: number, pictures: string[] }>(`https://cerebro.listy.fr/KU-BZq7eO?timestamp=${Date.now()}&url=${encodeURIComponent(url)}`);
+        const { data, status } = await axios.get<{ title: string, amount: number, pictures: string[] }>(`https://www.listy.fr/scraper?url=${encodeURIComponent(url)}`, {
+            headers: {
+                "Cookie": `_listy_project_session=${CONFIG.listy.projectSession}`
+            }
+        });
         return {
             success: true, data: {
                 title: data.title,
