@@ -80,6 +80,7 @@ export const updateWishQuery = async (params: {
     description?: string,
     price?: number,
     isFavorite: boolean,
+    imageUrl?: string,
     isSecondHand: boolean,
     acceptEquivalent: boolean
 }): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {

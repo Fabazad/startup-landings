@@ -1,4 +1,7 @@
+import { CONFIG } from "src/config-global";
 import { z } from "zod";
+
+export const defaultWishImageUrl = `${CONFIG.assetsDir}/assets/images/mock/wish.svg`;
 
 export const wishSchema = z.object({
     id: z.number(),
@@ -13,6 +16,7 @@ export const wishSchema = z.object({
     bookedByName: z.string().nullish(),
     userId: z.string(),
     list: z.object({ id: z.number(), name: z.string() }),
+    imageUrl: z.string().optional(),
 });
 
 export type Wish = z.infer<typeof wishSchema>;

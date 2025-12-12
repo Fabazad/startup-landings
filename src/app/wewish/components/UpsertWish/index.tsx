@@ -18,6 +18,7 @@ import { paths } from 'src/routes/paths';
 import { Image } from 'src/components/image';
 import { BackButton } from '../BackButton';
 import { useState } from 'react';
+import { ImageSelector } from './ImageSelector';
 
 
 // ----------------------------------------------------------------------
@@ -27,6 +28,7 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
     const { mode, systemMode } = useColorScheme();
     const [isScraping, setIsScraping] = useState(false);
     const [lastScrapedUrl, setLastScrapedUrl] = useState('');
+    const [scrappedImagesUrls, setScrappedImagesUrls] = useState<string[]>([]);
 
     const isDarkMode = mode === 'dark' || (mode === 'system' && systemMode === 'dark');
 
@@ -39,6 +41,7 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
         isFavorite: z.boolean().optional(),
         isSecondHand: z.boolean().optional(),
         acceptEquivalent: z.boolean().optional(),
+        imageUrl: z.string().optional(),
     });
 
     const defaultValues = {
@@ -49,6 +52,7 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
         isFavorite: wish?.isFavorite || false,
         isSecondHand: wish?.isSecondHand || false,
         acceptEquivalent: wish?.acceptEquivalent || false,
+        imageUrl: undefined as string | undefined,
     };
 
     const methods = useForm({
@@ -85,13 +89,17 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
         setIsScraping(true);
         try {
             const res = await axios.post<{ title?: string; price?: number; imageUrls?: string[] }>("/api/scrap", { url: value });
-            const { title, price } = res.data;
+            const { title, price, imageUrls } = res.data;
 
             if (title) {
                 methods.setValue('name', title);
             }
             if (price) {
                 methods.setValue('price', price);
+            }
+            if (imageUrls) {
+                setScrappedImagesUrls(imageUrls.slice(0, 9));
+                methods.setValue('imageUrl', imageUrls[0]);
             }
         } catch (error) {
             toast.error("Une erreur est survenue lors de la collecte des informations");
@@ -152,18 +160,29 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
 
                         <Field.Text name="description" label="Description (optionnel)" multiline rows={4} />
 
-                        <Field.UploadImage
-                            name="singleUpload"
-                            maxSize={3145728}
-                        />
-
                         <Field.Text
                             name="price"
                             label="Prix indicatif (optionnel)"
                             placeholder="0.00"
                             type="number"
                             InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                                startAdornment: <InputAdornment position="start">€</InputAdornment>,
+                            }}
                         />
+
+                        {scrappedImagesUrls.length > 0 && (
+                            <Stack spacing={1} direction="column">
+                                <Typography variant="h6" sx={{ color: 'text.secondary' }}>
+                                    Choisissez une image pour votre envie.
+                                </Typography>
+                                <ImageSelector
+                                    imagesUrls={scrappedImagesUrls}
+                                    selectedImage={methods.watch('imageUrl')}
+                                    onSelectImage={(url) => methods.setValue('imageUrl', url)}
+                                />
+                            </Stack>
+                        )}
 
                         <Divider />
 
@@ -172,6 +191,7 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
                             <Field.Switch name="isFavorite" label="Envie coup de cœur" />
                             <Field.Switch name="isSecondHand" label="Je préfère l'occasion si possible" />
                             <Field.Switch name="acceptEquivalent" label="J'accepte de recevoir un cadeau équivalent" />
+
                         </Stack>
 
                         <LoadingButton

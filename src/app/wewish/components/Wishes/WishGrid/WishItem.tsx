@@ -3,8 +3,8 @@ import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import { fCurrency } from 'src/utils/format-number';
 import { Image } from 'src/components/image';
-import { Wish } from '../../../types/Wish';
-import { Chip, Typography } from '@mui/material';
+import { defaultWishImageUrl, Wish } from '../../../types/Wish';
+import { Typography } from '@mui/material';
 import { FavoriteButton } from './FavoriteButton';
 import { useAuthContext } from 'src/auth/hooks/use-auth-context';
 import { BookButton } from './BookButton';
@@ -12,7 +12,6 @@ import { UpdateButton } from './UpdateButton';
 import { DeleteButton } from './DeleteButton';
 import { formatUrl } from 'src/utils/format-url';
 import Link from '@mui/material/Link';
-import { Iconify } from 'src/components/iconify';
 import { paths } from 'src/routes/paths';
 import { WishListLabel } from '../../WishListLabel';
 
@@ -56,7 +55,7 @@ export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook, showList =
 
                         <Image
                             alt={wish.name}
-                            src="https://api-prod-minimal-v700.pages.dev/assets/images/m-product/product-17.webp"
+                            src={wish.imageUrl || defaultWishImageUrl}
                             ratio="1/1"
                             sx={{ borderRadius: 1.5, opacity: !isUserOwner && isBookedBy ? 0.4 : 1 }}
                         />
