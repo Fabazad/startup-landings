@@ -1,6 +1,5 @@
 'use client';
 
-import { useTranslate } from 'src/locales';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -16,26 +15,41 @@ import { WishList } from 'src/app/wewish/types/WishList';
 import { paths } from 'src/routes/paths';
 import { Image } from 'src/components/image';
 import { BackButton } from '../BackButton';
+import { CONFIG } from 'src/config-global';
+import { ImageSelector } from '../ImageSelector';
+
+const images = [
+  `${CONFIG.assetsDir}/assets/images/list/birthday1.svg`,
+  `${CONFIG.assetsDir}/assets/images/list/birthday2.svg`,
+  `${CONFIG.assetsDir}/assets/images/list/birthday3.svg`,
+  `${CONFIG.assetsDir}/assets/images/list/christmas1.svg`,
+  `${CONFIG.assetsDir}/assets/images/list/christmas2.svg`,
+  `${CONFIG.assetsDir}/assets/images/list/christmas3.svg`,
+  `${CONFIG.assetsDir}/assets/images/list/housewarming1.svg`,
+  `${CONFIG.assetsDir}/assets/images/list/wedding1.svg`,
+  `${CONFIG.assetsDir}/assets/images/list/wedding2.svg`,
+]
 
 export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
-  const { t } = useTranslate();
   const { user } = useAuthContext();
   const router = useRouter();
   const { mode, systemMode } = useColorScheme();
 
   const isDarkMode = mode === 'dark' || (mode === 'system' && systemMode === 'dark');
 
-  const defaultValues = {
-    listName: wishList?.name || '',
-    description: wishList?.description || '',
-  };
-
   const createListFormSchema = z.object({
-    listName: z.string().min(1, { message: t('wewish.listNameIsRequired') }),
+    listName: z.string().min(1, { message: "Le nom de la liste est requis" }),
     description: z.string().optional(),
+    imageUrl: z.string().optional(),
   });
 
   type CreateListFormSchemaType = z.infer<typeof createListFormSchema>;
+
+  const defaultValues: CreateListFormSchemaType = {
+    listName: wishList?.name || '',
+    description: wishList?.description || '',
+    imageUrl: wishList?.imageUrl || images[0],
+  };
 
   const methods = useForm<CreateListFormSchemaType>({
     resolver: zodResolver(createListFormSchema),
@@ -56,6 +70,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
         .update({
           name: values.listName,
           description: values.description,
+          imageUrl: values.imageUrl,
         })
         .eq('id', wishList.id);
 
@@ -69,6 +84,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
         .insert({
           name: values.listName,
           description: values.description,
+          imageUrl: values.imageUrl,
           user_id: user?.id,
         })
         .select('id')
@@ -125,13 +141,24 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
 
           <Field.Text
             name="description"
-            label="Description"
+            label="Description (optionnel)"
             sx={{ mt: 3 }}
             placeholder="Description de la liste"
             multiline
             minRows={3}
             maxRows={6}
           />
+
+          <Stack sx={{ mt: 3 }}>
+            <Typography variant="body1" sx={{ mt: 3 }}>
+              Image de la liste
+            </Typography>
+            <ImageSelector
+              imagesUrls={images}
+              selectedImage={methods.watch('imageUrl')}
+              onSelectImage={(image) => methods.setValue('imageUrl', image)}
+            />
+          </Stack>
 
           <LoadingButton
             variant="contained"

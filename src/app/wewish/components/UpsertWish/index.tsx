@@ -18,7 +18,7 @@ import { paths } from 'src/routes/paths';
 import { Image } from 'src/components/image';
 import { BackButton } from '../BackButton';
 import { useState } from 'react';
-import { ImageSelector } from './ImageSelector';
+import { ImageSelector } from '../ImageSelector';
 
 
 // ----------------------------------------------------------------------

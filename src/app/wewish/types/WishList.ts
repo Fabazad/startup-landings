@@ -12,7 +12,7 @@ export const wishListSchema = z.object({
     }),
     isFollowedByMe: z.boolean(),
     wishCount: z.number(),
-    imageUrl: z.string().optional(),
+    imageUrl: z.string(),
     created_at: z.date(),
 });
 

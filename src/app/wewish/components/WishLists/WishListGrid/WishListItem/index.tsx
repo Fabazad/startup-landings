@@ -56,7 +56,7 @@ export function WishListItem({ wishList }: PostItemProps) {
                                 position: 'absolute',
                             }}
                         />
-                        <Image alt={wishList.name} src={"https://api-prod-minimal-v700.pages.dev/assets/images/cover/cover-5.webp"} ratio="4/3" />
+                        <Image alt={wishList.name} src={wishList.imageUrl} ratio="4/3" />
                     </Box>
 
                     <CardContent sx={{ pt: 3.5 }}>
