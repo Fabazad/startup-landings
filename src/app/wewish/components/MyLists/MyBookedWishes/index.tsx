@@ -1,5 +1,5 @@
 import { View403 } from "src/sections/error";
-import { Wishes } from "../../components/Wishes";
+import { Wishes } from "../../Wishes";
 import { useAuthContext } from "src/auth/hooks";
 
 export const MyBookedWishes = () => {

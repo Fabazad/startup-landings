@@ -1,4 +1,4 @@
-import { MyLists } from "./MyLists";
+import { MyLists } from "./components/MyLists";
 import { Profile } from "./profile"
 import { getAuthUser } from "src/auth/getAuthUser";
 import { View403, View500 } from "src/sections/error";

@@ -49,7 +49,7 @@ export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
                     {!isUserOwner && (
                         <ListItemButton href={`/wewish/wish/${wish.id}/book`} onClick={handleBook} disabled={!!isBookedBy && !isBookedByAuthUser}>
                             <ListItemIcon>
-                                <Iconify icon="solar:gift-bold" width={24} color="secondary.main" />
+                                <Iconify icon="material-symbols:lock-open-rounded" width={24} color="secondary.main" />
                             </ListItemIcon>
                             <ListItemText primary={isBookedBy ?
                                 (isBookedByAuthUser ? "Annuler la réservation" : `Déjà réservée par ${isBookedBy}`)

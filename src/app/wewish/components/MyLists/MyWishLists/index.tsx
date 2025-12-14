@@ -2,7 +2,7 @@
 
 import { useMyWishLists } from "src/app/wewish/hooks/useMyWishLists";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
-import { WishLists } from "../../components/WishLists";
+import { WishLists } from "../../WishLists";
 import { paths } from "src/routes/paths";
 
 export const MyWishLists = () => {

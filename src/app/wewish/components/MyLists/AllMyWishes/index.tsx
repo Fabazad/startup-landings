@@ -1,4 +1,4 @@
-import { Wishes } from "../../components/Wishes"
+import { Wishes } from "../../Wishes"
 
 export const AllMyWishes = () => {
     return (

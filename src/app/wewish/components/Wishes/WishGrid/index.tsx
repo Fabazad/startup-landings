@@ -26,18 +26,18 @@ export const WishGrid = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
 
     if (!isLoading && wishes?.length === 0) return (
         <EmptyContent title="Aucune envie" description="Vous n'avez pas mis d'envies dans cette liste"
-            action={
+            action={wishList && (
                 <Box sx={{ mt: 2 }}>
-                    <Link href={wishList ? paths.wewish.wishList.addWish(wishList.id) : paths.wewish.wishList.create}>
+                    <Link href={paths.wewish.wishList.addWish(wishList.id)}>
                         <Button variant="contained" sx={{ borderRadius: 9999 }} size="large" color="warning">
                             <Iconify icon="material-symbols:add" width={24} sx={{ mr: 1 }} />
                             <Typography variant="body1">
-                                {wishList ? "Ajouter une envie" : "Créer une liste"}
+                                Ajouter une envie
                             </Typography>
                         </Button>
                     </Link>
                 </Box>
-            }
+            )}
         />
     )
 

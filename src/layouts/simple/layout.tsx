@@ -12,6 +12,7 @@ import React from 'react';
 import { getProductIdea } from 'src/app/getProductIdea';
 import Link from 'next/link';
 import { Container } from '@mui/material';
+import { HomeFooter } from '../landing/footer';
 
 // ----------------------------------------------------------------------
 
@@ -81,7 +82,7 @@ export async function SimpleLayout({ sx, children, header, menuButtons }: Simple
       /** **************************************
        * Footer
        *************************************** */
-      footerSection={null}
+      footerSection={<HomeFooter />}
       /** **************************************
        * Style
        *************************************** */

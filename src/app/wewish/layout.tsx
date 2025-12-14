@@ -5,6 +5,8 @@ import { NotificationsButton } from 'src/app/wewish/components/nav/Notifications
 import { AddModalProvider } from 'src/app/wewish/components/AddModal/provider';
 import { getAuthUser } from 'src/auth/getAuthUser';
 import { View403, View500 } from 'src/sections/error';
+import { LandingLayout } from 'src/layouts/landing';
+import { Container } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -14,11 +16,17 @@ export default async function Layout({ children }: {
 }) {
 
   const userRes = await getAuthUser();
-  if (!userRes.success) {
-    if (userRes.errorCode === "unknown") return <View500 />;
-    return <View500 />;
-  }
-  if (!userRes.user) return <View403 />;
+  if (!userRes.success) return <View500 />;
+
+  const { user } = userRes;
+
+  if (!user) return (
+    <LandingLayout>
+      <Container sx={{ py: { xs: 0, md: 4 }, position: 'relative' }}>
+        {children}
+      </Container>
+    </LandingLayout>
+  )
 
   return (
     <AddModalProvider>
