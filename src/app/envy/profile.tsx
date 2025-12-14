@@ -56,7 +56,7 @@ export const Profile = ({ user, userStats }: { user: User; userStats: { wishList
               {displayName}
             </Typography>
             <Typography variant="h6" sx={{ ml: 3, fontWeight: 400 }}>
-              <b>0</b> liste •  <b>1</b>  liste suivie • <b>16</b> Envies
+              <b>{userStats.wishListCount}</b> {userStats.wishListCount> 1 ? ' listes' : ' liste'} •  <b>{userStats.followingCount}</b>{userStats.followingCount> 1 ? ' listes suivies' : ' liste suivie'} • <b>{userStats.wishCount}</b> {userStats.wishCount> 1 ?  'Envies' :  'Envie'}
             </Typography>
           </Box>
         </Box>
@@ -84,7 +84,7 @@ export const Profile = ({ user, userStats }: { user: User; userStats: { wishList
               {displayName}
             </Typography>
             <Typography variant="h6" sx={{ fontWeight: 400 }}>
-              <b>1</b> liste •  <b>3</b>  liste suivie • <b>16</b> Envies
+              <b>{userStats.wishListCount}</b> {userStats.wishListCount> 1 ? ' listes' : ' liste'} •  <b>{userStats.followingCount}</b>{userStats.followingCount> 1 ? ' listes suivies' : ' liste suivie'} • <b>{userStats.wishCount}</b> {userStats.wishCount> 1 ?  'Envies' :  'Envie'}
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', height: '100%', gap: 2 }}>
