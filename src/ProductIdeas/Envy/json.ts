@@ -251,7 +251,7 @@ export const WE_WISH_PRODUCT_IDEA: RawProductIdea = {
     "heroTexts": {
         "description": {
             "en": "Create modern online wishlists for every event, add gifts from any website and share them in a few clicks so your loved ones always choose the right present.",
-            "fr": "Créez des wishlists modernes pour tous vos événements, ajoutez des cadeaux depuis n'importe quel site et partagez-les en quelques clics pour que vos proches visent juste à chaque fois."
+            "fr": "Créez des listes d'envies pour tous vos événements,\npartagez-les en un clic pour que vos proches réservent et choisissent juste à chaque fois."
         },
         "headingPart1": {
             "en": "List your wishes,",
