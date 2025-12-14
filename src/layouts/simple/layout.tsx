@@ -47,7 +47,7 @@ export async function SimpleLayout({ sx, children, header, menuButtons }: Simple
             ),
             leftArea: <>
               <Link href={`/${productId}`} style={{ textDecoration: "none", display: "flex" }}>
-                <Logo logo={logo} themeColor={themeColor} />
+                <Logo logo={logo} themeColor={themeColor} productName={productName} />
                 <Box
                   component="h4"
                   typography="h4"

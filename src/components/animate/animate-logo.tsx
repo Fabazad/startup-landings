@@ -44,7 +44,7 @@ export function AnimateLogo({ sx, ...other }: AnimateLogoProps) {
         }}
         sx={{ display: 'inline-flex' }}
       >
-        {logo && <Logo width={64} height={64} themeColor={themeColor} logo={logo} />}
+        {logo && <Logo width={64} height={64} themeColor={themeColor} logo={logo} productName={productName} />}
       </Box>
 
       <Box

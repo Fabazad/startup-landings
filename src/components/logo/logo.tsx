@@ -9,11 +9,12 @@ export type LogoProps = {
   isSingle?: boolean;
   themeColor: PrimaryColor;
   logo: string;
+  productName: string;
   height?: number;
-  width?: number
+  width?: number;
 };
 
-export const Logo = ({ isSingle = true, themeColor, logo, height, width }: LogoProps) => {
+export const Logo = ({ isSingle = true, themeColor, logo, productName, height, width }: LogoProps) => {
 
   const logoUrl = `${CONFIG.assetsDir}/logo/${themeColor}-${logo}.svg`;
 
@@ -28,7 +29,7 @@ export const Logo = ({ isSingle = true, themeColor, logo, height, width }: LogoP
 
   return (
     <Box
-      aria-label="Logo"
+      aria-label={`${productName} Logo`}
       sx={{
         ...baseSize,
         flexShrink: 0,
@@ -43,8 +44,8 @@ export const Logo = ({ isSingle = true, themeColor, logo, height, width }: LogoP
         src={logoUrl}
         width="100%"
         height="100%"
-        aria-label="Insight Feed Logo"
-        alt="Insight Feed Logo"
+        aria-label={`${productName} Logo`}
+        alt={`${productName} Logo`}
       />
     </Box>
   );

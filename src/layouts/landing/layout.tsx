@@ -6,14 +6,9 @@ import { HeaderSection } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
 import { HomeFooter } from './footer';
 import { Main } from './main';
-import { Button, Stack } from '@mui/material';
-import { GetStartedButton } from '../../sections/landing/components/get-started-button';
-import { LanguageButton } from '../../sections/landing/components/language-button';
 import { NavDesktop } from './nav/desktop/NavDesktop';
 import { NavMobile } from './nav/mobile/NavMobile';
-import { ThemeButton } from '../components/theme-button';
 import { getProductIdea } from 'src/app/getProductIdea';
-import { SignInButton } from 'src/sections/landing/components/sign-in-button';
 import Link from 'next/link';
 
 // ----------------------------------------------------------------------
@@ -28,7 +23,7 @@ export type MainLayoutProps = {
 
 export async function LandingLayout({ sx, children, header }: MainLayoutProps) {
 
-  const { logo, themeColor, name: productName, isReady } = await getProductIdea();
+  const { logo, themeColor, name: productName } = await getProductIdea();
 
   const layoutQuery: Breakpoint = 'md';
 
@@ -51,7 +46,7 @@ export async function LandingLayout({ sx, children, header }: MainLayoutProps) {
               <>
                 {/* -- Logo -- */}
                 <Link href="/" style={{ textDecoration: "none", display: "flex" }}>
-                  <Logo logo={logo} themeColor={themeColor} />
+                  <Logo logo={logo} themeColor={themeColor} productName={productName} />
                   <Box
                     component="h4"
                     typography="h4"
