@@ -109,7 +109,9 @@ export const BookingCard = ({ user, wish }: { user?: User, wish: Wish }) => {
     return (
         <Card sx={{ p: 3 }} id="booking-form">
             <Stack spacing={2}>
-                <Typography variant="h6">Réservation</Typography>
+                <Typography variant="h6" fontWeight={700}>Envie d’offrir ce cadeau ?</Typography>
+                <Typography variant="body1">Pensez à le réserver pour prévenir les autres et éviter les doublons.</Typography>
+
 
                 {isBooked && (
                     <Alert severity="info" sx={{ borderRadius: 1, textAlign: 'center' }}>
@@ -143,7 +145,7 @@ export const BookingCard = ({ user, wish }: { user?: User, wish: Wish }) => {
                             loading={isBooking}
                             startIcon={<Iconify icon="material-symbols:lock-open-rounded" />}
                         >
-                            Réserver
+                            Réserver ce cadeau
                         </LoadingButton>
                         <Divider>
                         </Divider>

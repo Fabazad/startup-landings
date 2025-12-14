@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button, Stack, Alert } from "@mui/material";
+import { Button, Stack, Alert, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { Iconify } from "src/components/iconify";
 import { Wish } from "../../../types/Wish";
@@ -51,9 +51,9 @@ export const WishDetailActions = ({ wish, user }: { wish: Wish; user?: User }) =
                 <Button
                     fullWidth
                     size="large"
-                    variant={wish.isFavorite ? "outlined" : "contained"}
+                    variant={wish.isFavorite ? "contained" : "contained"}
                     color="primary"
-                    startIcon={<Iconify icon={wish.isFavorite ? "solar:heart-outline" : "solar:heart-bold"} />}
+                    startIcon={<Iconify icon={wish.isFavorite ? "solar:heart-outline" : "solar:heart-bold"}  />}
                     onClick={handleToggleFavorite}
                     sx={{ borderRadius: 9999, py: 1.5 }}
                 >
@@ -64,7 +64,7 @@ export const WishDetailActions = ({ wish, user }: { wish: Wish; user?: User }) =
                     href={paths.envy.wish.update(wish.id)}
                     fullWidth
                     size="large"
-                    variant="outlined"
+                    variant="contained"
                     startIcon={<Iconify icon="lucide:edit" />}
                     sx={{ borderRadius: 9999, py: 1.5 }}
                 >
@@ -89,21 +89,34 @@ export const WishDetailActions = ({ wish, user }: { wish: Wish; user?: User }) =
 
     // Visitor View
     return (
-        <Stack spacing={2} sx={{ pt: 3 }}>
-            <Stack direction="column" spacing={2}>
+        <Stack spacing={2} >
+            <Stack direction="column" spacing={3}>
+                <Stack direction="row" spacing={3} justifyContent="space-between">
+                {wish.price && (
+                    <Stack direction="column"  alignItems="flex-start">
+                        <Typography variant="h4" color="secondary.main" fontWeight="bold">
+                            {wish.price} €
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                         Prix à titre indicatif
+                        </Typography>
+                    </Stack>
+
+                )}
                 {!isBookedBy && wish.productUrl && (
                     <Button
-                        fullWidth
                         size="large"
                         variant="outlined"
                         target="_blank"
                         href={enrichProductUrl(wish.productUrl)}
                         startIcon={<Iconify icon="fa7-solid:external-link" />}
-                        sx={{ borderRadius: 9999, py: 1.5 }}
+                        sx={{ borderRadius: 9999, py: 2, px: { md : 3, xs : 2} }}
                     >
                         Voir sur le site marchand
                     </Button>
                 )}
+                </Stack>
+                
 
                 <BookingCard user={user} wish={wish} />
 
