@@ -83,7 +83,7 @@ export function WishListItem({ wishList }: PostItemProps) {
                     </CardContent>
                 </Card>
             </Link >
-            {!isArchived && isOwner && <ShareButton wishListId={wishList.id} />}
+            {!isArchived && <ShareButton wishListId={wishList.id} />}
 
             {!isArchived && isOwner && <AddWishButton wishListId={wishList.id} />}
 

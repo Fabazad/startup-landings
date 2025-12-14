@@ -20,6 +20,33 @@ export const WishListButtons = ({ wishList, user }: { wishList: WishList; user?:
     const isOwner = wishList.user.id === user?.id;
     const isFollowed = wishList.isFollowedByMe;
 
+    const ButtonList = () => (
+        <>
+            {!wishList.archivedAt && (
+                <ShareWishListButton wishListId={wishList.id} />
+            )}
+
+            {isOwner && !wishList.archivedAt && (
+                <>
+                    <UpdateWishListButton wishListId={wishList.id} />
+                    <ArchiveWishListButton wishListId={wishList.id} />
+                </>
+            )}
+            {user && !isOwner && !isFollowed && !wishList.archivedAt && (
+                <FollowWishListButton wishListId={wishList.id} userId={user?.id} />
+            )}
+            {user && !isOwner && isFollowed && !wishList.archivedAt && (
+                <UnfollowWishListButton wishListId={wishList.id} userId={user?.id} />
+            )}
+            {isOwner && !!wishList.archivedAt && (
+                <UnarchiveWishListButton wishListId={wishList.id} />
+            )}
+            {isOwner && !!wishList.archivedAt && (
+                <DeleteWishListButton wishListId={wishList.id} />
+            )}
+        </>
+    )
+
     return (
         <>
             <Stack
@@ -30,25 +57,7 @@ export const WishListButtons = ({ wishList, user }: { wishList: WishList; user?:
                 useFlexGap
                 flexDirection="column"
                 sx={{ display: { xs: 'none', md: 'flex' } }}>
-                {isOwner && !wishList.archivedAt && (
-                    <>
-                        <ShareWishListButton wishListId={wishList.id} />
-                        <UpdateWishListButton wishListId={wishList.id} />
-                        <ArchiveWishListButton wishListId={wishList.id} />
-                    </>
-                )}
-                {isOwner && wishList.archivedAt && (
-                    <>
-                        <UnarchiveWishListButton wishListId={wishList.id} />
-                        <DeleteWishListButton wishListId={wishList.id} />
-                    </>
-                )}
-                {!isOwner && !isFollowed && user && (
-                    <FollowWishListButton wishListId={wishList.id} userId={user.id} />
-                )}
-                {!isOwner && isFollowed && user && (
-                    <UnfollowWishListButton wishListId={wishList.id} userId={user.id} />
-                )}
+                <ButtonList />
             </Stack>
             <Box sx={{ display: { xs: 'inline-block', sm: 'none' } }}>
                 <Box>
@@ -70,26 +79,7 @@ export const WishListButtons = ({ wishList, user }: { wishList: WishList; user?:
                     </Box>
                     <Divider />
                     <List sx={{ p: 2 }}>
-
-                        {isOwner && !wishList.archivedAt && (
-                            <>
-                                <ShareWishListButton wishListId={wishList.id} />
-                                <UpdateWishListButton wishListId={wishList.id} />
-                                <ArchiveWishListButton wishListId={wishList.id} />
-                            </>
-                        )}
-                        {user && !isOwner && !isFollowed && (
-                            <FollowWishListButton wishListId={wishList.id} userId={user?.id} />
-                        )}
-                        {user && !isOwner && isFollowed && (
-                            <UnfollowWishListButton wishListId={wishList.id} userId={user?.id} />
-                        )}
-                        {isOwner && !!wishList.archivedAt && (
-                            <UnarchiveWishListButton wishListId={wishList.id} />
-                        )}
-                        {isOwner && !!wishList.archivedAt && (
-                            <DeleteWishListButton wishListId={wishList.id} />
-                        )}
+                        <ButtonList />
                     </List>
                 </Drawer>
             </Box>
