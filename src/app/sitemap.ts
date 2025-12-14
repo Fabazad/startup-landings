@@ -3,6 +3,9 @@ import { headers } from 'next/headers';
 import { RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
 import { languages } from 'src/locales/config-locales';
 
+// Revalidate sitemap daily
+export const revalidate = 86400;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const headersList = await headers();
   const host = headersList.get('x-forwarded-host') || headersList.get('host') || '';

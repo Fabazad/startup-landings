@@ -4,6 +4,8 @@ import { getAuthUser } from 'src/auth/getAuthUser';
 import { redirect } from 'next/navigation';
 import { paths } from 'src/routes/paths';
 
+// Revalidate this page every hour (ISR)
+export const revalidate = 3600;
 
 export default async function Page() {
 

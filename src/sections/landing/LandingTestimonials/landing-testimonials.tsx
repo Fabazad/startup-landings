@@ -1,3 +1,5 @@
+"use client";
+
 import type { BoxProps } from '@mui/material/Box';
 
 import Box from '@mui/material/Box';
@@ -11,17 +13,11 @@ import { SectionTitle } from '../components/section-title';
 import { Lines } from './lines';
 import { Reviews } from './reviews';
 import { TestimonialNumbers } from './testimonial-numbers';
-import { TryForFreeButton } from '../components/try-for-free-button';
-import { GetStartedButton } from '../components/get-started-button';
-import { m } from 'framer-motion';
 
 // ----------------------------------------------------------------------
 
 export const LandingTestimonials = ({ sx, ...other }: BoxProps) => {
-  const {
-    plans,
-    testimonialsTexts: { titlePart1, titlePart2 },
-  } = useProductIdea();
+  const { testimonialsTexts: { titlePart1, titlePart2 }, } = useProductIdea();
   const { t } = useTranslation();
   return (
     <Box

@@ -1,17 +1,14 @@
+"use client";
+
 import type { BoxProps } from '@mui/material/Box';
 import type { MotionValue } from 'framer-motion';
-
 import { m, useTransform } from 'framer-motion';
-
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import { useTheme } from '@mui/material/styles';
-
 import { useResponsive } from 'src/hooks/use-responsive';
-
 import { MotionContainer } from 'src/components/animate';
-
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { HeroBackground } from '../components/hero-background';
 import { Buttons } from './buttons';

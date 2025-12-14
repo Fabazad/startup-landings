@@ -1,5 +1,6 @@
 import { Box, Stack } from '@mui/material';
 import { m } from 'framer-motion';
+import Image from 'next/image';
 import { varFade } from 'src/components/animate';
 import { stylesMode, varAlpha } from 'src/theme/styles';
 import { Feature } from 'src/types/ProductIdea';
@@ -37,11 +38,18 @@ export const FeatureImage = ({
         maxHeight: 600,
       }}
     >
-      <Box
-        component="img"
-        alt={feature.title}
+      <Image
+        alt={feature.title || 'Feature image'}
         src={feature.imgUrl}
-        sx={{ bgcolor: 'transparent', width: '100%', height: '100%' }}
+        width={500}
+        height={600}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 500px"
+        style={{
+          width: '100%',
+          height: 'auto',
+          objectFit: 'cover',
+        }}
+        loading="lazy"
       />
     </Box>
   </Stack>

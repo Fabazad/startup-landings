@@ -1,3 +1,5 @@
+"use client";
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import axios from 'axios';
