@@ -125,8 +125,8 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
                 <Image
                     src={
                         isDarkMode
-                            ? '/assets/illustrations/illustration-wishlist-dark.svg'
-                            : '/assets/illustrations/illustration-wishlist.svg'
+                            ? '/assets/illustrations/illustration-new-wish-dark.svg'
+                            : '/assets/illustrations/illustration-new-wish.svg'
                     }
                     alt="Wishlist"
                     sx={{ width: '100%', height: '100%' }}
