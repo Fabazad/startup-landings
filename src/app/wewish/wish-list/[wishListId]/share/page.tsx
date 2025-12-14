@@ -67,7 +67,6 @@ export default function ShareWishListPage({ params }: Props) {
             try {
                 await navigator.share({
                     title: 'Ma liste de souhaits',
-                    text: 'Découvre ma liste de souhaits sur WeWish',
                     url: shareLink,
                 });
             } catch (error) {
@@ -81,7 +80,6 @@ export default function ShareWishListPage({ params }: Props) {
     const renderHead = (
         <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 3 }}>
             <BackButton path={paths.wewish.wishList.detail(Number(wishListId))} />
-            <Typography variant="h4">Partager ma liste</Typography>
         </Stack>
     );
 
@@ -152,7 +150,10 @@ export default function ShareWishListPage({ params }: Props) {
         <Container maxWidth="sm" sx={{ py: 5 }}>
             {renderHead}
 
-            <Card sx={{ p: 3 }}>
+            <Stack spacing={2}>
+                <Typography variant="h4">Partager ma liste</Typography>
+            </Stack>
+            <Card sx={{ p: 3, mt: 2 }}>
                 <Stack spacing={3}>
                     {renderCopyLink}
 

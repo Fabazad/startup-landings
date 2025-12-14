@@ -10,30 +10,26 @@ export const ShareWishListButton = ({ wishListId }: { wishListId: number }) => {
     const text = "Partager";
     const icon = "lucide:share-2";
 
-    const shareLink = `${window.location.origin}${paths.wewish.wishList.share(wishListId)}?sharedLink=true`;
-
-    const handleCopyLink = async () => {
-        try {
-            await navigator.clipboard.writeText(shareLink);
-            toast.success('Lien copié !');
-        } catch (error) {
-            toast.error('Erreur lors de la copie du lien');
-        }
-    };
 
     const handleNativeShare = async () => {
+        const shareLink = `${window.location.origin}${paths.wewish.wishList.detail(wishListId)}?sharedLink=true`;
+
         if (navigator.share) {
             try {
                 await navigator.share({
-                    title: 'Ma liste de souhaits',
-                    text: 'Découvre ma liste de souhaits sur WeWish',
                     url: shareLink,
+                    title: 'Ma liste de souhaits',
                 });
             } catch (error) {
                 console.error('Error sharing:', error);
             }
         } else {
-            handleCopyLink();
+            try {
+                await navigator.clipboard.writeText(shareLink);
+                toast.success('Lien copié !');
+            } catch (error) {
+                toast.error('Erreur lors de la copie du lien');
+            }
         }
     };
 
@@ -47,7 +43,7 @@ export const ShareWishListButton = ({ wishListId }: { wishListId: number }) => {
             >
                 {text}
             </LoadingButton>
-            <ListItemButton href={paths.wewish.wishList.share(wishListId)} sx={{ display: { xs: 'flex', sm: 'none' } }}>
+            <ListItemButton onClick={handleNativeShare} sx={{ display: { xs: 'flex', sm: 'none' } }}>
                 <ListItemIcon>
                     <Iconify icon={icon} width={24} />
                 </ListItemIcon>
