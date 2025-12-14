@@ -61,7 +61,7 @@ export const getWishesQuery = async (params: { wishListId: number } | { userId: 
         ...wish,
         userId: wish.list.user_id,
         list: wish.listId,
-        imageUrls: wish.imageUrls?.split(',')
+        imageUrls: wish.imageUrls?.split(','),
     }));
     return { success: true, wishes };
 }
@@ -78,12 +78,12 @@ export const createWishQuery = async (params: {
     imageUrl?: string,
     imageUrls?: string[]
 }): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
-    const { wishListId, imageUrls, productUrl, ...rest } = params;
+    const { wishListId, imageUrls, ...rest } = params;
+
     const { error } = await supabase.from('wishes').insert({
         ...rest,
         listId: wishListId,
         imageUrls: imageUrls?.join(','),
-        productUrl
     });
     if (error) return { success: false, errorCode: "unknown" };
     return { success: true };
@@ -102,9 +102,11 @@ export const updateWishQuery = async (params: {
     imageUrls?: string[]
 }): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
     const { wishId, imageUrls, ...rest } = params;
+
+
     const { error } = await supabase.from('wishes').update({
         ...rest,
-        imageUrls: imageUrls?.join(','),
+        imageUrls: imageUrls?.join(',')
     }).eq('id', wishId);
     if (error) return { success: false, errorCode: "unknown" };
     return { success: true };

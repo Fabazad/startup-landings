@@ -63,7 +63,7 @@ export const CONFIG: ConfigValue = {
     apiKey: process.env.RESEND_API_KEY ?? '',
   },
   amazon: {
-    affiliateTag: process.env.AMAZON_AFFILIATION_TAG ?? '',
+    affiliateTag: 'meekoloc04-21',
     accessKey: process.env.AMAZON_ACCESS_KEY ?? '',
     secretKey: process.env.AMAZON_SECRET_KEY ?? '',
   },

@@ -1,0 +1,1 @@
+export type EnrichmentMethod = (url: string) => string | undefined;

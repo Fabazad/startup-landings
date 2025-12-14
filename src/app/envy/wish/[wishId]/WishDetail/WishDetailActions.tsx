@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { paths } from "src/routes/paths";
 import { BookingCard } from "./BookingCard";
 import { User } from "src/app/envy/types/User";
+import { enrichProductUrl } from "src/lib/enrichProductUrl";
 
 export const WishDetailActions = ({ wish, user }: { wish: Wish; user?: User }) => {
     const router = useRouter();
@@ -96,7 +97,7 @@ export const WishDetailActions = ({ wish, user }: { wish: Wish; user?: User }) =
                         size="large"
                         variant="outlined"
                         target="_blank"
-                        href={wish.productUrl}
+                        href={enrichProductUrl(wish.productUrl)}
                         startIcon={<Iconify icon="fa7-solid:external-link" />}
                         sx={{ borderRadius: 9999, py: 1.5 }}
                     >

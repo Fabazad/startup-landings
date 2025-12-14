@@ -1,8 +1,32 @@
 import { Fab, Tooltip } from "@mui/material";
 import { Iconify } from "src/components/iconify";
+import { toast } from "src/components/snackbar";
 import { paths } from "src/routes/paths";
 
 export const ShareButton = ({ wishListId }: { wishListId: number }) => {
+
+    const handleNativeShare = async () => {
+        const shareLink = `${window.location.origin}${paths.envy.wishList.detail(wishListId)}?sharedLink=true`;
+
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    url: shareLink,
+                    title: 'Ma liste de souhaits',
+                });
+            } catch (error) {
+                console.error('Error sharing:', error);
+            }
+        } else {
+            try {
+                await navigator.clipboard.writeText(shareLink);
+                toast.success('Lien copié !');
+            } catch (error) {
+                toast.error('Erreur lors de la copie du lien');
+            }
+        }
+    };
+
     return (
         <Tooltip
 
@@ -21,7 +45,7 @@ export const ShareButton = ({ wishListId }: { wishListId: number }) => {
             <Fab
                 color="default"
                 size="medium"
-                href={paths.envy.wishList.share(wishListId)}
+                onClick={handleNativeShare}
                 sx={{
                     display: { xs: 'none', md: 'inline-flex' },
                     right: 16,

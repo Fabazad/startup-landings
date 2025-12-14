@@ -82,11 +82,9 @@ export const paths = {
       detail: (id: number) => `${ROOTS.ENVY}/wish-list/${id}`,
       addWish: (id: number) => `${ROOTS.ENVY}/wish-list/${id}/add-wish`,
       update: (id: number) => `${ROOTS.ENVY}/wish-list/${id}/update`,
-      share: (id: number) => `${ROOTS.ENVY}/wish-list/${id}/share`,
     },
     wish: {
       detail: (id: number) => `${ROOTS.ENVY}/wish/${id}`,
-      book: (id: number) => `${ROOTS.ENVY}/wish/${id}/book`,
       update: (id: number) => `${ROOTS.ENVY}/wish/${id}/update`,
     }
   }
