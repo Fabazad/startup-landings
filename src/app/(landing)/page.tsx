@@ -9,7 +9,7 @@ export default async function Page() {
 
   const [{ isReady }, userRes] = await Promise.all([getProductIdea(), getAuthUser()])
 
-  if (isReady && userRes.success && userRes.user) return redirect(paths.wewish.root);
+  if (isReady && userRes.success && userRes.user) return redirect(paths.envy.root);
 
 
   return (

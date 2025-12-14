@@ -39,7 +39,7 @@ export const CONFIG: ConfigValue = {
   auth: {
     method: 'supabase',
     skip: false,
-    redirectPath: paths.wewish.root,
+    redirectPath: paths.envy.root,
   },
   /**
    * Mapbox

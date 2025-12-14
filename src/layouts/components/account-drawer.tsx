@@ -104,7 +104,7 @@ export function AccountDrawer() {
 
             <MenuItem
               component={Link}
-              href={paths.wewish.account.profile}
+              href={paths.envy.account.profile}
               sx={{
                 py: 1,
                 color: 'text.secondary',
@@ -121,7 +121,7 @@ export function AccountDrawer() {
 
             <MenuItem
               component={Link}
-              href={paths.wewish.account.credentials}
+              href={paths.envy.account.credentials}
               sx={{
                 py: 1,
                 color: 'text.secondary',

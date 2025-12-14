@@ -11,7 +11,7 @@ const MOCK_TITLE = _postTitles[2];
 const ROOTS = {
   AUTH: '/auth',
   AUTH_DEMO: '/auth-demo',
-  WEWISH: '/wewish'
+  ENVY: '/envy'
 };
 
 // ----------------------------------------------------------------------
@@ -69,25 +69,25 @@ export const paths = {
       verify: `${ROOTS.AUTH_DEMO}/centered/verify`,
     },
   },
-  wewish: {
-    root: ROOTS.WEWISH,
+  envy: {
+    root: ROOTS.ENVY,
     account: {
-      root: `${ROOTS.WEWISH}/account`,
-      profile: `${ROOTS.WEWISH}/account/profile`,
-      credentials: `${ROOTS.WEWISH}/account/credentials`,
-      updatePassword: `${ROOTS.WEWISH}/account/update-password`,
+      root: `${ROOTS.ENVY}/account`,
+      profile: `${ROOTS.ENVY}/account/profile`,
+      credentials: `${ROOTS.ENVY}/account/credentials`,
+      updatePassword: `${ROOTS.ENVY}/account/update-password`,
     },
     wishList: {
-      create: `${ROOTS.WEWISH}/wish-list`,
-      detail: (id: number) => `${ROOTS.WEWISH}/wish-list/${id}`,
-      addWish: (id: number) => `${ROOTS.WEWISH}/wish-list/${id}/add-wish`,
-      update: (id: number) => `${ROOTS.WEWISH}/wish-list/${id}/update`,
-      share: (id: number) => `${ROOTS.WEWISH}/wish-list/${id}/share`,
+      create: `${ROOTS.ENVY}/wish-list`,
+      detail: (id: number) => `${ROOTS.ENVY}/wish-list/${id}`,
+      addWish: (id: number) => `${ROOTS.ENVY}/wish-list/${id}/add-wish`,
+      update: (id: number) => `${ROOTS.ENVY}/wish-list/${id}/update`,
+      share: (id: number) => `${ROOTS.ENVY}/wish-list/${id}/share`,
     },
     wish: {
-      detail: (id: number) => `${ROOTS.WEWISH}/wish/${id}`,
-      book: (id: number) => `${ROOTS.WEWISH}/wish/${id}/book`,
-      update: (id: number) => `${ROOTS.WEWISH}/wish/${id}/update`,
+      detail: (id: number) => `${ROOTS.ENVY}/wish/${id}`,
+      book: (id: number) => `${ROOTS.ENVY}/wish/${id}/book`,
+      update: (id: number) => `${ROOTS.ENVY}/wish/${id}/update`,
     }
   }
 };
