@@ -92,9 +92,11 @@ export async function generateMetadata(): Promise<Metadata> {
     canonical: baseUrl,
   };
 
+  const title = `${rawProductIdea.name} - ${rawProductIdea.heroTexts.headingPart1.fr} ${rawProductIdea.heroTexts.headingPart2.fr}`;
+
   return {
     metadataBase: new URL(baseUrl),
-    title: rawProductIdea.name,
+    title,
     description,
     keywords,
     icons: {
@@ -104,7 +106,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: 'website',
       url: baseUrl,
-      title: rawProductIdea.name,
+      title,
       description,
       siteName: rawProductIdea.name,
       images: [
@@ -120,7 +122,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: rawProductIdea.name,
+      title,
       description,
       images: [imageUrl],
       creator: '@' + rawProductIdea.name.toLowerCase().replace(/\s+/g, ''),

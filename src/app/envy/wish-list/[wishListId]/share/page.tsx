@@ -66,7 +66,7 @@ export default function ShareWishListPage({ params }: Props) {
         if (navigator.share) {
             try {
                 await navigator.share({
-                    title: 'Ma liste de souhaits',
+                    title: 'Ma liste d\'envies',
                     url: shareLink,
                 });
             } catch (error) {

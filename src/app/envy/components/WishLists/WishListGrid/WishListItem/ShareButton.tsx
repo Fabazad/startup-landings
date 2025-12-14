@@ -12,7 +12,7 @@ export const ShareButton = ({ wishListId }: { wishListId: number }) => {
             try {
                 await navigator.share({
                     url: shareLink,
-                    title: 'Ma liste de souhaits',
+                    title: 'Ma liste de d\'envies',
                 });
             } catch (error) {
                 console.error('Error sharing:', error);
