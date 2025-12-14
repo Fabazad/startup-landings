@@ -58,7 +58,7 @@ export const BookingCard = ({ user, wish }: { user?: User, wish: Wish }) => {
         }
     }
 
-    const handleAccordionChange = (_, expanded: boolean) => {
+    const handleAccordionChange = (_: any, expanded: boolean) => {
         if (expanded) setTimeout(() => {
             bookedByNameInputRef.current?.focus();
             scrollTo({
@@ -89,8 +89,8 @@ export const BookingCard = ({ user, wish }: { user?: User, wish: Wish }) => {
 
     const renderBookingForm = () => (
         <Form methods={methods} onSubmit={handleSubmit(onSubmit)}>
-            <Stack spacing={2}>
-                <Field.Text name="bookedByName" label="Nom de la personne qui réserve" inputRef={bookedByNameInputRef} />
+            <Stack spacing={2} sx={{ mt: 2 }}>
+                <Field.Text name="bookedByName" label="Nom de la personne" inputRef={bookedByNameInputRef} />
                 <LoadingButton
                     fullWidth
                     size="large"
