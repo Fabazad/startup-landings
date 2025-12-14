@@ -3,10 +3,10 @@
 import { LoadingButton } from "@mui/lab";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { unarchiveWishListQuery } from "src/app/wewish/queries/wishList";
 import { Iconify } from "src/components/iconify";
 import { toast } from "src/components/snackbar";
 import { useState } from "react";
+import { getClientWishListQuery } from "src/app/wewish/queries/wishList/client";
 
 export const UnarchiveWishListButton = ({ wishListId }: { wishListId: number }) => {
 
@@ -14,12 +14,13 @@ export const UnarchiveWishListButton = ({ wishListId }: { wishListId: number }) 
     const [loading, setLoading] = useState(false);
     const text = "Désarchiver";
     const icon = "lucide:archive";
+    const clientWishListQuery = getClientWishListQuery();
 
     const unarchiveListHandler = async () => {
         if (!confirm("Êtes-vous sûr de vouloir désarchiver cette liste ?")) return;
         try {
             setLoading(true);
-            await unarchiveWishListQuery(wishListId);
+            await clientWishListQuery.unarchiveWishList(wishListId);
             router.refresh();
             toast.success("Liste désarchivée avec succès");
         } catch (error) {

@@ -1,27 +1,37 @@
-import { Box, Divider, Stack, Typography, Container, Avatar } from "@mui/material";
+import { Divider, Stack, Typography, Container, Avatar } from "@mui/material";
 import { Wishes } from "../../components/Wishes";
-import { getWishListQuery } from "../../queries/wishList";
 import { View500 } from "src/sections/error";
 import { NotFoundView } from "src/sections/error";
 import { getAuthUser } from "src/auth/getAuthUser";
 import { paths } from "src/routes/paths";
 import { BackButton } from "src/app/wewish/components/BackButton";
 import { WishListButtons } from "./WishListButtons";
+import { redirect } from "next/navigation";
+import { getServerWishListQuery } from "../../queries/wishList/server";
 
-export default async function WishListPage({ params }: { params: { wishListId: number } }) {
+export default async function WishListPage({ params, searchParams }: {
+    params: { wishListId: number },
+    searchParams?: { sharedLink?: string }
+}) {
     const { wishListId } = params;
 
+    const sharedLink = searchParams?.sharedLink === "true";
     const userRes = await getAuthUser()
     if (!userRes.success) return <View500 />
     const user = userRes.user || undefined;
 
-    const result = await getWishListQuery(wishListId, user?.id);
-
+    const serverWishListQuery = await getServerWishListQuery();
+    const result = await serverWishListQuery.getWishList(wishListId, user?.id);
     if (!result.success) return <View500 />
     const wishList = result.wishList;
     if (!wishList) return <NotFoundView />
 
     const owner = wishList.user;
+
+    if (user && sharedLink && owner.id !== user.id && !wishList.isFollowedByMe) {
+        await serverWishListQuery.followList(wishList.id, user.id);
+        return redirect(paths.wewish.wishList.detail(wishList.id));
+    }
 
     return (
         <Container maxWidth="lg" sx={{ py: 3 }}>

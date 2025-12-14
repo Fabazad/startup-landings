@@ -2,24 +2,25 @@
 
 import { LoadingButton } from "@mui/lab";
 import { useRouter } from "next/navigation";
-import { deleteWishListQuery } from "src/app/wewish/queries/wishList";
 import { toast } from "src/components/snackbar";
 import { paths } from "src/routes/paths";
 import { Iconify } from "src/components/iconify"; // Import Iconify
 import { useState } from "react";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { getClientWishListQuery } from "src/app/wewish/queries/wishList/client";
 
 export const DeleteWishListButton = ({ wishListId }: { wishListId: number }) => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const text = "Supprimer";
     const icon = "solar:trash-bin-trash-bold";
+    const clientWishListQuery = getClientWishListQuery();
 
     const deleteListHandler = async () => {
         if (!confirm("Êtes-vous sûr de vouloir supprimer cette liste ?")) return;
         try {
             setLoading(true);
-            await deleteWishListQuery(wishListId);
+            await clientWishListQuery.deleteWishList(wishListId);
             router.push(paths.wewish.root);
             toast.success("Liste supprimée avec succès");
         } catch (error) {

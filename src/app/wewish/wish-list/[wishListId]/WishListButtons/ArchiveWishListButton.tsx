@@ -2,11 +2,11 @@
 
 import { LoadingButton } from "@mui/lab";
 import { useRouter } from "next/navigation";
-import { archiveWishListQuery } from "src/app/wewish/queries/wishList";
 import { toast } from "src/components/snackbar";
-import { Iconify } from "src/components/iconify"; // Import Iconify
+import { Iconify } from "src/components/iconify";
 import { useState } from "react";
-import { Box, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { getClientWishListQuery } from "src/app/wewish/queries/wishList/client";
 
 export const ArchiveWishListButton = ({ wishListId }: { wishListId: number }) => {
     const router = useRouter();
@@ -14,11 +14,13 @@ export const ArchiveWishListButton = ({ wishListId }: { wishListId: number }) =>
     const text = "Archiver";
     const icon = "solar:archive-bold";
 
+    const clientWishListQuery = getClientWishListQuery();
+
     const archiveListHandler = async () => {
         if (!confirm("Êtes-vous sûr de vouloir archiver cette liste ?")) return;
         try {
             setLoading(true);
-            await archiveWishListQuery(wishListId);
+            await clientWishListQuery.archiveWishList(wishListId);
             router.refresh();
             toast.success("Liste archivée avec succès");
         } catch (error) {

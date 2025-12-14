@@ -3,22 +3,23 @@
 import { LoadingButton } from "@mui/lab";
 import { toast } from "src/components/snackbar";
 import { useRouter } from "next/navigation";
-import { unfollowListQuery } from "src/app/wewish/queries/wishList";
 import { Iconify } from "src/components/iconify";
 import { useState } from "react";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { getClientWishListQuery } from "src/app/wewish/queries/wishList/client";
 
 export const UnfollowWishListButton = ({ wishListId, userId }: { wishListId: number; userId: string }) => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const text = "Ne plus suivre la liste";
     const icon = "weui:eyes-off-filled";
+    const clientWishListQuery = getClientWishListQuery();
 
     const unfollowListHandler = async () => {
         try {
             setLoading(true);
             if (!confirm("Êtes-vous sûr de vouloir ne plus suivre cette liste ?")) return;
-            await unfollowListQuery(wishListId, userId);
+            await clientWishListQuery.unfollowList(wishListId, userId);
             router.refresh();
             toast.success("Vous ne suivez plus cette liste");
         } catch (error) {

@@ -3,22 +3,23 @@
 import { LoadingButton } from "@mui/lab";
 import { toast } from "src/components/snackbar";
 import { useRouter } from "next/navigation";
-import { followListQuery } from "src/app/wewish/queries/wishList";
 import { Iconify } from "src/components/iconify";
 import { useState } from "react";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { getClientWishListQuery } from "src/app/wewish/queries/wishList/client";
 
 export const FollowWishListButton = ({ wishListId, userId }: { wishListId: number; userId: string }) => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const text = "Suivre la liste";
     const icon = "weui:eyes-on-filled";
+    const clientWishListQuery = getClientWishListQuery();
 
 
     const followListHandler = async () => {
         setLoading(true);
         try {
-            await followListQuery(wishListId, userId);
+            await clientWishListQuery.followList(wishListId, userId);
             router.refresh();
             toast.success("Vous suivez maintenant cette liste");
         } catch (error) {

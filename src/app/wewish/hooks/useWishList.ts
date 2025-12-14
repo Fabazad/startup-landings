@@ -2,19 +2,20 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "src/lib/supabase-client";
 import { WishList } from "../types/WishList";
 import { useState } from "react";
-import { getWishListQuery } from "../queries/wishList";
 import { useAuthContext } from "src/auth/hooks";
+import { getClientWishListQuery } from "../queries/wishList/client";
 
 export const useWishList = ({ wishListId }: { wishListId?: number }): { wishList?: WishList; isLoading: boolean; deleteList: () => Promise<void>, isDeleting: boolean } => {
     if (!wishListId) return { wishList: undefined, isLoading: false, deleteList: () => Promise.resolve(), isDeleting: false };
 
+    const clientWishListQuery = getClientWishListQuery();
     const { user } = useAuthContext();
     const [isDeleting, setIsDeleting] = useState(false);
 
     const { data: wishList, isLoading } = useQuery<WishList | undefined>({
         queryKey: ['wish-list', wishListId, user],
         queryFn: async () => {
-            const result = await getWishListQuery(wishListId, user?.id);
+            const result = await clientWishListQuery.getWishList(wishListId, user?.id);
 
             if (!result.success) throw result.errorCode;
             return result.wishList;

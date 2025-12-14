@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { hasWishListQuery } from 'src/app/wewish/queries/wishList'
+import { getServerWishListQuery } from 'src/app/wewish/queries/wishList/server'
 import { createSupabase } from 'src/lib/supabase-server'
 import { paths } from 'src/routes/paths'
 
@@ -19,7 +19,8 @@ export async function GET(request: Request) {
             const forwardedHost = request.headers.get('x-forwarded-host') // Load balancer support
             const isLocalEnv = process.env.NODE_ENV === 'development'
 
-            const res = await hasWishListQuery(data.user.id)
+            const serverClientWishListQuery = await getServerWishListQuery()
+            const res = await serverClientWishListQuery.hasWishList(data.user.id)
             const next = res.success && !res.hasWishList ? paths.wewish.wishList.create : paths.wewish.root
 
             if (isLocalEnv) {
