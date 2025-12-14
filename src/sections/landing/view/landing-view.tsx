@@ -1,9 +1,7 @@
 'use client';
 import Stack from '@mui/material/Stack';
-
 import { BackToTop } from 'src/components/animate/back-to-top';
 import { ScrollProgress, useScrollProgress } from 'src/components/animate/scroll-progress';
-
 import { LandingAdvertisement } from '../landing-advertisement';
 import { LandingContact } from '../landing-contact';
 import { LandingFeatures } from '../LandingFeatures/landing-features';

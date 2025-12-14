@@ -20,7 +20,7 @@ export const WishDetail = ({ wish, user }: { wish: Wish; user?: User }) => {
                         alt={wish.name}
                         src={wish.imageUrl || defaultWishImageUrl}
                         ratio="1/1"
-                        sx={{ borderRadius: 2, cursor: 'pointer' }}
+                        sx={{ borderRadius: 2 }}
                     />
                 </Card>
             </Grid>

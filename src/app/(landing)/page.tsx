@@ -12,9 +12,5 @@ export default async function Page() {
   if (isReady && userRes.success && userRes.user) return redirect(paths.envy.root);
 
 
-  return (
-    <>
-      <LandingView />
-    </>
-  );
+  return <LandingView />;
 }
