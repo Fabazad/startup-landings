@@ -9,7 +9,7 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
   const baseUrl = `${protocol}://${host}`;
 
   // Get subdomain
-  const subdomain = host.split('.')[0];
+  const subdomain = host.replace(/^www\./, '').split('.')[0];
   const productIdea = Object.values(RAW_PRODUCT_IDEAS).find(
     (productIdea) => productIdea.id === subdomain
   );

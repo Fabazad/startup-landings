@@ -82,7 +82,7 @@ export async function SimpleLayout({ sx, children, header, menuButtons }: Simple
       /** **************************************
        * Footer
        *************************************** */
-      footerSection={<HomeFooter />}
+      footerSection={null}
       /** **************************************
        * Style
        *************************************** */

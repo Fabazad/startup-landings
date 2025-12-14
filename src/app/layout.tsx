@@ -60,7 +60,7 @@ const getRawProductIdea = async () => {
   // get url subdomain from url on server
   const headersList = await headers();
   const url = headersList.get('x-forwarded-host') || headersList.get('host') || '';
-  const subdomain = url.split('.')[0];
+  const subdomain = url.replace(/^www\./, '').split('.')[0];
 
   const productIdea = Object.values(RAW_PRODUCT_IDEAS).find(
     (productIdea) => productIdea.id === subdomain
@@ -78,7 +78,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const protocol = headersList.get('x-forwarded-proto') || 'https';
   const baseUrl = `${protocol}://${host}`;
 
-  const imageUrl = `${baseUrl}${CONFIG.assetsDir}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.svg`;
+  const imageUrl = `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.svg`;
   const description = rawProductIdea.heroTexts.description.fr;
 
   // Generate keywords from product features
@@ -93,10 +93,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 
   return {
+    metadataBase: new URL(baseUrl),
     title: rawProductIdea.name,
     description,
     keywords,
-    icons: `${CONFIG.assetsDir}/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.ico`,
+    icons: {
+      icon: `/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.ico`,
+    },
     alternates,
     openGraph: {
       type: 'website',
