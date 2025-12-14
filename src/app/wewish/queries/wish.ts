@@ -79,12 +79,11 @@ export const createWishQuery = async (params: {
     imageUrls?: string[]
 }): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
     const { wishListId, imageUrls, productUrl, ...rest } = params;
-    const enrichedProductUrl = productUrl ? await enrichProductUrl(productUrl) : undefined;
     const { error } = await supabase.from('wishes').insert({
         ...rest,
         listId: wishListId,
         imageUrls: imageUrls?.join(','),
-        productUrl: enrichedProductUrl
+        productUrl
     });
     if (error) return { success: false, errorCode: "unknown" };
     return { success: true };
