@@ -1,6 +1,6 @@
 import { RawProductIdea } from "src/types/ProductIdea";
 
-export const WE_WISH_PRODUCT_IDEA: RawProductIdea = {
+export const ENVY_PRODUCT_IDEA: RawProductIdea = {
     "id": "envy",
     "name": "Envy",
     "isReady": true,

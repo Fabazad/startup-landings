@@ -12,9 +12,9 @@ import { useAuthContext } from "src/auth/hooks";
 import { supabase } from "src/lib/supabase-client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { WishList } from "src/app/wewish/types/WishList";
 import { paths } from "src/routes/paths";
 import { Image } from 'src/components/image';
+import { WishList } from "src/app/envy/types/WishList";
 
 export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
     const { t } = useTranslate();
@@ -57,7 +57,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
             if (error) toast.error(error.message);
             else toast.success('Liste mise à jour');
 
-            router.push(paths.wewish.wishList.detail(wishList.id));
+            router.push(paths.envy.wishList.detail(wishList.id));
         } else {
             const { data, error } = await supabase.from('wish-lists').insert({
                 name: values.listName,
@@ -69,33 +69,33 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
 
             if (!data) return;
 
-            router.push(paths.wewish.wishList.detail(data.id));
+            router.push(paths.envy.wishList.detail(data.id));
         }
     };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', justifyContent: 'space-between', mt : { xs: 3, sm: 0 } }}>
-        <Box sx={{ flex: 1, display : { xs: 'none', sm: 'block' } }}>
-            <Image src={isDarkMode ? "/assets/illustrations/illustration-wishlist-dark.svg" : "/assets/illustrations/illustration-wishlist.svg" }
-          alt="Wishlist"
-          sx={{ width: '100%', height: '100%' }} />
-        </Box>
-        <Box sx={{ mt: 3, p: { xs: 3, sm: 10 }, flex: 1 }}>
-            <Form methods={methods} onSubmit={handleSubmit(onSubmit)} >
-                <Typography variant="h4" sx={{ mb: 2 }}>{wishList ? `Mettre à jour la liste "${wishList.name}"` : "Créer une liste d'envies"}</Typography>
-                <Typography variant="body1">Créez une liste pour regrouper tous vos souhaits et cadeaux.<br />Vos proches pourront la consulter et savoir exactement ce qui vous ferait plaisir.</Typography>
-                <Field.Text name="listName" label="Nom de la liste" sx={{ mt: 3 }} autoFocus placeholder={`Ex: Liste de Noël de Gustave`} />
-                <Field.Text name="description" label="Description" sx={{ mt: 3 }} placeholder="Description de la liste" multiline minRows={3} maxRows={6} />
-                <LoadingButton
-                    variant="contained"
-                    type="submit"
-                    loading={isSubmitting}
-                    sx={{ borderRadius: '9999px', mt: { xs: 4, sm: 3 }, width: { xs: '100%', sm: '40%' }, height: '48px'}}
-                >
-                    {wishList ? "Mettre à jour la liste" : "Créer la liste"}
-                </LoadingButton>
-            </Form>
-        </Box>
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', justifyContent: 'space-between', mt: { xs: 3, sm: 0 } }}>
+            <Box sx={{ flex: 1, display: { xs: 'none', sm: 'block' } }}>
+                <Image src={isDarkMode ? "/assets/illustrations/illustration-wishlist-dark.svg" : "/assets/illustrations/illustration-wishlist.svg"}
+                    alt="Wishlist"
+                    sx={{ width: '100%', height: '100%' }} />
+            </Box>
+            <Box sx={{ mt: 3, p: { xs: 3, sm: 10 }, flex: 1 }}>
+                <Form methods={methods} onSubmit={handleSubmit(onSubmit)} >
+                    <Typography variant="h4" sx={{ mb: 2 }}>{wishList ? `Mettre à jour la liste "${wishList.name}"` : "Créer une liste d'envies"}</Typography>
+                    <Typography variant="body1">Créez une liste pour regrouper tous vos souhaits et cadeaux.<br />Vos proches pourront la consulter et savoir exactement ce qui vous ferait plaisir.</Typography>
+                    <Field.Text name="listName" label="Nom de la liste" sx={{ mt: 3 }} autoFocus placeholder={`Ex: Liste de Noël de Gustave`} />
+                    <Field.Text name="description" label="Description" sx={{ mt: 3 }} placeholder="Description de la liste" multiline minRows={3} maxRows={6} />
+                    <LoadingButton
+                        variant="contained"
+                        type="submit"
+                        loading={isSubmitting}
+                        sx={{ borderRadius: '9999px', mt: { xs: 4, sm: 3 }, width: { xs: '100%', sm: '40%' }, height: '48px' }}
+                    >
+                        {wishList ? "Mettre à jour la liste" : "Créer la liste"}
+                    </LoadingButton>
+                </Form>
+            </Box>
 
         </Box>
     );
