@@ -1,4 +1,5 @@
 import { RawProductIdea } from "src/types/ProductIdea";
+import { CONFIG } from "src/config-global";
 
 export const ENVY_PRODUCT_IDEA: RawProductIdea = {
     "id": "envy",
@@ -53,7 +54,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
                     }
                 }
             ],
-            "imgUrl": "https://example.com/img/features/multi-stores-wishlist.png"
+            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/multi-stores-wishlist.png`
         },
         {
             "id": "easy-sharing",
@@ -101,7 +102,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
                     }
                 }
             ],
-            "imgUrl": "https://example.com/img/features/easy-sharing.png"
+            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/easy-sharing.png`
         },
         {
             "id": "events-and-lists",
@@ -149,7 +150,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
                     }
                 }
             ],
-            "imgUrl": "https://example.com/img/features/events-and-lists.png"
+            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/events-and-lists.png`
         },
         {
             "id": "tracking-payments",
@@ -197,7 +198,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
                     }
                 }
             ],
-            "imgUrl": "https://example.com/img/features/tracking-payments.png"
+            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/tracking-payments.png`
         },
         {
             "id": "simple-free-access",
@@ -245,7 +246,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
                     }
                 }
             ],
-            "imgUrl": "https://example.com/img/features/simple-free-access.png"
+            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/simple-free-access.png`
         }
     ],
     "heroTexts": {
