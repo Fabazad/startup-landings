@@ -7,7 +7,7 @@ import { useProductIdea } from 'src/app/product-idea-provider';
 import {
   SubscriptionStep,
   useSubscription,
-} from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
+} from 'src/sections/landing/components/SubscriptionModal/subscription-context';
 
 export const GetStartedButton = ({
   buttonName,

@@ -3,7 +3,7 @@ import posthog from 'posthog-js';
 import { useTranslation } from 'react-i18next';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { Iconify } from 'src/components/iconify';
-import { SubscriptionStep, useSubscription } from './SubscriptionModal/subscriptionModal';
+import { SubscriptionStep, useSubscription } from './SubscriptionModal/subscription-context';
 
 export const TryForFreeButton = ({ buttonName }: { buttonName: string }) => {
   const { t } = useTranslation();

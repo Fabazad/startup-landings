@@ -1,6 +1,6 @@
 import { Button, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material';
 import { useTranslate } from 'src/locales';
-import { useSubscription } from './subscriptionModal';
+import { useSubscription } from './subscription-context';
 
 export const SubscriptionSuccess = () => {
   const { t } = useTranslate();

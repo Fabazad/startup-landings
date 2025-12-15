@@ -24,4 +24,4 @@ export const RAW_PRODUCT_IDEAS: Record<ProductIdeaName, RawProductIdea> = {
   [PRODUCT_IDEA_NAMES.WE_WISH]: WE_WISH_PRODUCT_IDEA,
 } as const;
 
-export const DEFAULT_PRODUCT_IDEA: RawProductIdea = RAW_PRODUCT_IDEAS.WE_WISH;
+export const DEFAULT_PRODUCT_IDEA: RawProductIdea = RAW_PRODUCT_IDEAS.INSIGHT_FEED;

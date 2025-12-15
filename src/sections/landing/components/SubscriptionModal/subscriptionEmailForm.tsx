@@ -7,7 +7,7 @@ import { Field, Form } from 'src/components/hook-form';
 import { toast } from 'sonner';
 import { useTranslate } from 'src/locales';
 import { z as zod } from 'zod';
-import { useSubscription } from './subscriptionModal';
+import { useSubscription } from './subscription-context';
 
 const defaultValues = {
   email: '',

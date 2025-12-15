@@ -18,14 +18,22 @@ import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { ProgressBar } from 'src/components/progress-bar';
 import {
   defaultSettings,
+} from 'src/components/settings/config-settings';
+import {
   PrimaryColor,
-  SettingsDrawer,
+} from 'src/components/settings/types';
+import {
   SettingsProvider,
-} from 'src/components/settings';
+} from 'src/components/settings/context';
 import { Snackbar } from 'src/components/snackbar';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { headers } from 'next/headers';
+import dynamic from 'next/dynamic';
+
+const SettingsDrawer = dynamic(() => import('src/components/settings/drawer').then(m => m.SettingsDrawer), {
+  ssr: false,
+});
 import { StructuredData } from 'src/components/seo/structured-data';
 import { languages } from 'src/locales/config-locales';
 import { DEFAULT_PRODUCT_IDEA, RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';

@@ -9,6 +9,8 @@ import { useEffect } from "react";
 const TABS = [
     { value: 'profile', label: 'Profil', icon: <Iconify icon="iconamoon:profile-circle-fill" width={24} /> },
     { value: 'credentials', label: 'Identifiants', icon: <Iconify icon="iconamoon:lock-fill" width={24} /> },
+    { value: 'notifications', label: 'Notifications', icon: <Iconify icon="mdi:bell-settings" width={24} /> },
+
 ];
 
 export default function AccountLayout({ children }: { children: React.ReactNode }) {

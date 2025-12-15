@@ -1,52 +1,24 @@
 'use client';
 
-import { Box, CircularProgress, Dialog } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { t } from 'i18next';
-import { createContext, useContext, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import { useEffect, useState, useContext } from 'react';
 import { toast } from 'sonner';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { useCookies } from 'src/hooks/use-cookies';
 import { LanguageValue, useTranslate } from 'src/locales';
 import { useSearchParams } from 'src/routes/hooks';
-import { SubscriptionEmailForm } from './subscriptionEmailForm';
-import { SubscriptionFeaturesForm } from './SubscriptionFeaturesForm/subscriptionFeaturesForm';
-import { SubscriptionSuccess } from './subscriptionSuccess';
+import {
+  SubscriptionStep,
+  subscriptionContext
+} from './subscription-context';
+
+const SubscriptionModalView = dynamic(() => import('./subscription-modal-view'), { ssr: false });
 
 const SUBSCRIBE_MODAL_PARAM = 'subscribeModal';
 const SUBSCRIPTION_ID_COOKIE = 'subscriptionId';
-
-export const SubscriptionStep = {
-  SUBSCRIBE_EMAIL: 'subscribe-email',
-  SUBSCRIBE_FEATURES: 'subscribe-features',
-  SUCCESS: 'success',
-} as const;
-export type SubscriptionStep = (typeof SubscriptionStep)[keyof typeof SubscriptionStep];
-
-type SubscriptionContext = {
-  openModal: boolean;
-  setOpenModal: (open: boolean) => void;
-  subscriptionStep: SubscriptionStep;
-  createSubscription: (
-    subscriptionEmail: string
-  ) => Promise<{ error: 'already-subscribed' | 'failed-to-subscribe' } | null>;
-  updateSubscriptionFeatures: (
-    subscriptionFeatures: string[]
-  ) => Promise<{ error: 'no-subscription-email' | 'failed-to-add-features' } | null>;
-  isLoading: boolean;
-  isFirstFetching: boolean;
-} | null;
-
-const subscriptionContext = createContext<SubscriptionContext>(null);
-
-export const useSubscription = () => {
-  const context = useContext(subscriptionContext);
-  if (!context) {
-    throw new Error('useSubscription must be used within a SubscriptionProvider');
-  }
-  return context;
-};
 
 const api = {
   createSubscription: async (
@@ -93,29 +65,6 @@ const api = {
     });
     return response.data.hasFeatures;
   },
-};
-
-const SubscriptionModal = () => {
-  const { openModal, subscriptionStep, isFirstFetching } = useSubscription();
-
-  return (
-    <Dialog open={openModal} fullWidth maxWidth="md">
-      {isFirstFetching && (
-        <Box
-          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '300px' }}
-        >
-          <CircularProgress />
-        </Box>
-      )}
-      {!isFirstFetching && (
-        <>
-          {subscriptionStep === SubscriptionStep.SUBSCRIBE_EMAIL && <SubscriptionEmailForm />}
-          {subscriptionStep === SubscriptionStep.SUBSCRIBE_FEATURES && <SubscriptionFeaturesForm />}
-          {subscriptionStep === SubscriptionStep.SUCCESS && <SubscriptionSuccess />}
-        </>
-      )}
-    </Dialog>
-  );
 };
 
 export const SubscriptionModalProvider = ({ children }: { children: React.ReactNode }) => {
@@ -226,7 +175,7 @@ export const SubscriptionModalProvider = ({ children }: { children: React.ReactN
         isFirstFetching,
       }}
     >
-      <SubscriptionModal />
+      <SubscriptionModalView />
       {children}
     </subscriptionContext.Provider>
   );

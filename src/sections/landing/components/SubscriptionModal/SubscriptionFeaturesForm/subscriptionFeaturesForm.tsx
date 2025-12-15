@@ -14,7 +14,7 @@ import { toast } from 'sonner';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { Form } from 'src/components/hook-form';
 import { z as zod } from 'zod';
-import { useSubscription } from '../subscriptionModal';
+import { useSubscription } from '../subscription-context';
 import { FeatureOption } from './FeatureOption';
 
 export const SubscriptionFeaturesForm = () => {
