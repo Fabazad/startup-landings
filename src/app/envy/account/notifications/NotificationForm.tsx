@@ -41,7 +41,7 @@ export const NotificationForm = ({ notificationSetting }: { notificationSetting:
 
         <>
             <TableRow sx={{ '& td, & th': { border: 0 }, display: { xs: 'table-row', sm: 'none' } }} >
-                <TableCell component="th" scope="row" colSpan={3} sx={{ pb: 0 }}>
+                <TableCell component="th" scope="row" colSpan={4} sx={{ pb: 0 }}>
                     {notificationTypesLabel[notificationSetting.type]}
                 </TableCell>
             </TableRow>

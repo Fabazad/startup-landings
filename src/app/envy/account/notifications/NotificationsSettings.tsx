@@ -20,7 +20,7 @@ export const NotificationsSettings = ({ notificationSettings }: { notificationSe
                         </TableHead>
                         <TableBody>
                             {notificationSettings.map((setting) => (
-                                <NotificationForm key={setting.id} notificationSetting={setting} />
+                                <NotificationForm key={setting.type} notificationSetting={setting} />
                             ))}
                         </TableBody>
                     </Table>
