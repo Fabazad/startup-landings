@@ -136,6 +136,23 @@ export function AccountDrawer() {
             </MenuItem>
 
 
+            <MenuItem
+              component={Link}
+              href={paths.envy.account.notifications}
+              sx={{
+                py: 1,
+                color: 'text.secondary',
+                '&:hover': { color: 'text.primary' },
+              }}
+              onClick={handleCloseDrawer}
+            >
+              <Iconify icon="mdi:bell-settings" sx={{ width: 24, height: 24 }} />
+              <Box component="span" sx={{ ml: 2 }}>
+                Notifications
+              </Box>
+            </MenuItem>
+
+
           </Stack>
         </Scrollbar>
 

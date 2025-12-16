@@ -75,7 +75,7 @@ export const paths = {
       root: `${ROOTS.ENVY}/account`,
       profile: `${ROOTS.ENVY}/account/profile`,
       credentials: `${ROOTS.ENVY}/account/credentials`,
-      updatePassword: `${ROOTS.ENVY}/account/update-password`,
+      notifications: `${ROOTS.ENVY}/account/notifications`,
     },
     wishList: {
       create: `${ROOTS.ENVY}/wish-list`,

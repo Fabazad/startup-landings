@@ -60,8 +60,8 @@ export const CreatePassword = () => {
     });
 
     return (
-        <Form methods={methods} onSubmit={onSubmit}>
-            <Card sx={{ p: 3, gap: 3, display: 'flex', flexDirection: 'column' }}>
+        <Card sx={{ p: 3, gap: 3, display: 'flex', flexDirection: 'column' }}>
+            <Form methods={methods} onSubmit={onSubmit}>
                 <Typography variant="h6" sx={{ mb: 3 }}>
                     Créer un mot de passe
                 </Typography>
@@ -103,7 +103,7 @@ export const CreatePassword = () => {
                 <LoadingButton type="submit" variant="contained" loading={isSubmitting} sx={{ ml: 'auto' }}>
                     Créer le mot de passe
                 </LoadingButton>
-            </Card>
-        </Form>
+            </Form>
+        </Card>
     );
 }

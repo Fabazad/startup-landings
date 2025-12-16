@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { getServerWishListQuery } from 'src/app/envy/queries/wishList/server'
 import { createSupabase } from 'src/lib/supabase-server'
 import { paths } from 'src/routes/paths'
+import { getServerNotificationSettingsQueries } from 'src/app/envy/queries/notificationSettings/server'
 
 
 export async function GET(request: Request) {
@@ -22,6 +23,9 @@ export async function GET(request: Request) {
             const serverClientWishListQuery = await getServerWishListQuery()
             const res = await serverClientWishListQuery.hasWishList(data.user.id)
             const next = res.success && !res.hasWishList ? paths.envy.wishList.create : paths.envy.root
+
+            const notificationSettingsQueries = await getServerNotificationSettingsQueries()
+            await notificationSettingsQueries.addIfMissing(data.user.id)
 
             if (isLocalEnv) {
                 // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host
