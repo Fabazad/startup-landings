@@ -5,8 +5,8 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
     "id": "envy",
     "name": "Envy",
     "isReady": true,
-    "themeColor": "lavender",
-    "logo": "dandelion",
+    "themeColor": "purple",
+    "logo": "heart",
     "features": [
         {
             "id": "multi-stores-wishlist",
