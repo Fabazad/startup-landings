@@ -1,12 +1,9 @@
-import { Button } from '@mui/material';
-import { Iconify } from 'src/components/iconify';
+'use client';
+import { NotificationsDrawer } from '../NotificationsDrawer';
 
 
 export const NotificationsButton = () => {
     return (
-        <Button sx={{ display: 'flex', flexDirection: "column" }}>
-            <Iconify icon="line-md:bell-loop" width={24} />
-            Notifications
-        </Button>
+        <NotificationsDrawer />
     );
 }

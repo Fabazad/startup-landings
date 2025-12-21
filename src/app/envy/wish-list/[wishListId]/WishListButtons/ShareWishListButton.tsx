@@ -8,7 +8,7 @@ import { paths } from "src/routes/paths";
 
 export const ShareWishListButton = ({ wishListId }: { wishListId: number }) => {
     const text = "Partager";
-    const icon = "lucide:share-2";
+    const icon = "solar:share-line-duotone";
 
 
     const handleNativeShare = async () => {

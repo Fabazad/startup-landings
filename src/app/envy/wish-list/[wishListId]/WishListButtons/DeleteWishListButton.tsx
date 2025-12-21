@@ -13,7 +13,7 @@ export const DeleteWishListButton = ({ wishListId }: { wishListId: number }) => 
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const text = "Supprimer";
-    const icon = "solar:trash-bin-trash-bold";
+    const icon = "solar:trash-bin-trash-bold-duotone";
     const clientWishListQuery = getClientWishListQuery();
 
     const deleteListHandler = async () => {

@@ -60,7 +60,7 @@ export const ShareButton = ({ wishListId }: { wishListId: number }) => {
                         }),
                 }}
             >
-                <Iconify icon="solar:share-bold" width={24} />
+                <Iconify icon="solar:share-line-duotone" width={24} />
             </Fab>
         </Tooltip>
     )

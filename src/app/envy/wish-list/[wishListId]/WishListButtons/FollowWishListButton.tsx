@@ -12,7 +12,7 @@ export const FollowWishListButton = ({ wishListId, userId }: { wishListId: numbe
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const text = "Suivre la liste";
-    const icon = "weui:eyes-on-filled";
+    const icon = "solar:eye-bold-duotone";
     const clientWishListQuery = getClientWishListQuery();
 
 

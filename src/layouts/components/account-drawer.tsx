@@ -112,7 +112,7 @@ export function AccountDrawer() {
               }}
               onClick={handleCloseDrawer}
             >
-              <Iconify icon="iconamoon:profile-circle-fill" sx={{ width: 24, height: 24 }} />
+              <Iconify icon="solar:user-circle-bold-duotone" sx={{ width: 24, height: 24 }} />
               <Box component="span" sx={{ ml: 2 }}>
                 Modifier mon profil
               </Box>
@@ -129,7 +129,7 @@ export function AccountDrawer() {
               }}
               onClick={handleCloseDrawer}
             >
-              <Iconify icon="iconamoon:lock-fill" sx={{ width: 24, height: 24 }} />
+              <Iconify icon="solar:key-bold-duotone" sx={{ width: 24, height: 24 }} />
               <Box component="span" sx={{ ml: 2 }}>
                 Identifiants
               </Box>

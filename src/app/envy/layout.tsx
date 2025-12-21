@@ -4,7 +4,7 @@ import { MyListsButton } from 'src/app/envy/components/nav/MyListsButton';
 import { NotificationsButton } from 'src/app/envy/components/nav/NotificationsButton';
 import { AddModalProvider } from 'src/app/envy/components/AddModal/provider';
 import { getAuthUser } from 'src/auth/getAuthUser';
-import { View403, View500 } from 'src/sections/error';
+import { View500 } from 'src/sections/error';
 import { LandingLayout } from 'src/layouts/landing';
 import { Container } from '@mui/material';
 

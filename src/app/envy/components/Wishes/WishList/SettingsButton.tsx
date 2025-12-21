@@ -49,7 +49,7 @@ export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
                     {!isUserOwner && (
                         <ListItemButton href={`/envy/wish/${wish.id}/book`} onClick={handleBook} disabled={!!isBookedBy && !isBookedByAuthUser}>
                             <ListItemIcon>
-                                <Iconify icon="material-symbols:lock-open-rounded" width={24} color="secondary.main" />
+                                <Iconify icon="solar:lock-keyhole-minimalistic-bold-duotone" width={24} color="secondary.main" />
                             </ListItemIcon>
                             <ListItemText primary={isBookedBy ?
                                 (isBookedByAuthUser ? "Annuler la réservation" : `Déjà réservée par ${isBookedBy}`)
@@ -68,13 +68,13 @@ export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
                             </ListItemButton>
                             <ListItemButton href={`/envy/wish/${wish.id}/update`}>
                                 <ListItemIcon>
-                                    <Iconify icon="lucide:edit" width={24} />
+                                    <Iconify icon="solar:pen-2-bold-duotone" width={24} />
                                 </ListItemIcon>
                                 <ListItemText primary="Modifier" />
                             </ListItemButton>
                             <ListItemButton onClick={handleDelete}>
                                 <ListItemIcon>
-                                    <Iconify icon="material-symbols:delete-rounded" width={24} />
+                                    <Iconify icon="solar:trash-bin-trash-bold-duotone" width={24} />
                                 </ListItemIcon>
                                 <ListItemText primary="Supprimer" />
                             </ListItemButton>

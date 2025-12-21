@@ -21,7 +21,7 @@ export const DeleteButton = ({ onDelete }: { onDelete: () => void }) => {
                     position: 'absolute',
                 }}
             >
-                <Iconify icon="material-symbols:delete-rounded" width={24} />
+                <Iconify icon="solar:trash-bin-trash-bold-duotone" width={24} />
             </Fab>
         </Tooltip>
     );

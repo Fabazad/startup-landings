@@ -21,7 +21,7 @@ export const UpdateButton = ({ wishId }: { wishId: number }) => {
                         }),
                 }}
             >
-                <Iconify icon="lucide:edit" width={24} />
+                <Iconify icon="solar:pen-2-bold-duotone" width={24} />
             </Fab>
         </Tooltip>
     )

@@ -22,7 +22,7 @@ export const BookButton = ({ wish, isBookedBy, onUnbook }: { wish: Wish; isBooke
                 <Tooltip title={`Réservée par ${isBookedBy}`} placement="top" arrow slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}>
                     <Stack sx={{ position: 'absolute', left: 20, top: 20, zIndex: 9, m: 0, flexDirection: 'row', gap: 2, bgcolor: "background.paper", borderRadius: 1, p: 1, pr: 2 }}>
                         <Iconify
-                            icon="material-symbols:lock-open-rounded"
+                            icon="solar:lock-keyhole-minimalistic-bold-duotone"
                             width={24}
                             color="secondary.main"
                         />
@@ -58,7 +58,7 @@ export const BookButton = ({ wish, isBookedBy, onUnbook }: { wish: Wish; isBooke
                                 }),
                         }}
                     >
-                        <Iconify icon="material-symbols:lock-open-rounded" width={24} />
+                        <Iconify icon="solar:lock-keyhole-minimalistic-bold-duotone" width={24} />
                     </Fab>
                 </Tooltip>
             )}

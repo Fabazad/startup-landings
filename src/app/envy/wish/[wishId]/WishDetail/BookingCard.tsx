@@ -98,7 +98,7 @@ export const BookingCard = ({ user, wish }: { user?: User, wish: Wish }) => {
                     sx={{ borderRadius: 9999 }}
                     type="submit"
                     loading={isSubmitting}
-                    startIcon={<Iconify icon="material-symbols:lock-open-rounded" />}
+                    startIcon={<Iconify icon="solar:lock-keyhole-minimalistic-bold-duotone" />}
                 >
                     Réserver
                 </LoadingButton>
@@ -125,7 +125,7 @@ export const BookingCard = ({ user, wish }: { user?: User, wish: Wish }) => {
                         size="large"
                         variant="outlined"
                         color="secondary"
-                        startIcon={<Iconify icon="material-symbols:lock-open-rounded" />}
+                        startIcon={<Iconify icon="solar:lock-keyhole-minimalistic-bold-duotone" />}
                         onClick={handleUnbook}
                         loading={isUnbooking}
                         sx={{ borderRadius: 9999 }}
@@ -143,7 +143,7 @@ export const BookingCard = ({ user, wish }: { user?: User, wish: Wish }) => {
                             sx={{ borderRadius: 9999 }}
                             onClick={() => bookByUser(user.id)}
                             loading={isBooking}
-                            startIcon={<Iconify icon="material-symbols:lock-open-rounded" />}
+                            startIcon={<Iconify icon="solar:lock-keyhole-minimalistic-bold-duotone" />}
                         >
                             Réserver ce cadeau
                         </LoadingButton>

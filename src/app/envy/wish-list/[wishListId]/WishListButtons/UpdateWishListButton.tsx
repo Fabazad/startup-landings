@@ -3,7 +3,7 @@ import { Iconify } from "src/components/iconify"
 import { paths } from "src/routes/paths"
 
 export const UpdateWishListButton = ({ wishListId }: { wishListId: number }) => {
-    const icon = "lucide:edit";
+    const icon = "solar:pen-2-bold-duotone";
     const text = "Modifier";
 
     return (

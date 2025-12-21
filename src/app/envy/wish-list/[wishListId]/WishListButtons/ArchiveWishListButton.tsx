@@ -12,7 +12,7 @@ export const ArchiveWishListButton = ({ wishListId }: { wishListId: number }) =>
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const text = "Archiver";
-    const icon = "solar:archive-bold";
+    const icon = "solar:archive-bold-duotone";
 
     const clientWishListQuery = getClientWishListQuery();
 

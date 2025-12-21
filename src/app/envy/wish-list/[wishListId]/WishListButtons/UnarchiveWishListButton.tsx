@@ -13,7 +13,7 @@ export const UnarchiveWishListButton = ({ wishListId }: { wishListId: number }) 
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const text = "Désarchiver";
-    const icon = "lucide:archive";
+    const icon = "solar:archive-up-bold-duotone";
     const clientWishListQuery = getClientWishListQuery();
 
     const unarchiveListHandler = async () => {

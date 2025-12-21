@@ -24,8 +24,8 @@ export const ThemeButton = () => {
             <Iconify
                 icon={
                     mode === 'dark' || (mode === 'system' && systemMode === 'dark')
-                        ? 'ph:moon'
-                        : 'ph:sun'
+                        ? 'solar:sun-bold-duotone'
+                        : 'solar:moon-bold-duotone'
                 }
             />
         </IconButton>
