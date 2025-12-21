@@ -30,14 +30,14 @@ export function AddWishItem({ wishListId }: { wishListId: number }) {
                 p: 2,
                 gap: 2,
             }}>
-                <Iconify icon="line-md:plus-circle-filled" className="icon" sx={{
+                <Iconify icon="solar:add-circle-bold-duotone" className="icon" sx={{
                     color: "warning.main",
                     transition: "all 0.2s ease-in-out",
                     width: { sm: 90, xs: 60 },
                     height: { sm: 90, xs: 60 }
                 }}
                 />
-                <Typography variant="h6" noWrap className='text' fontWeight={800} sx={{ transition: "all 0.2s ease-in-out" }}>Ajouter une envie</Typography>
+                <Typography variant="h6" noWrap className='text' fontWeight={800}>Ajouter une envie</Typography>
             </Card>
         </Link >
     );

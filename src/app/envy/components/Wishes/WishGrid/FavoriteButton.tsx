@@ -52,7 +52,7 @@ export const FavoriteButton = ({ isFavorite, onClick, isUserOwner }: { isFavorit
                             }}
                             onClick={isUserOwner ? onClick : undefined}
                         >
-                            <Iconify icon={isFavorite ? "solar:heart-bold" : "solar:heart-outline"} width={24} />
+                            <Iconify icon={isFavorite ? "solar:heart-bold" : "solar:heart-outline"} width={24} color={isFavorite ? "default" : "error.main"} />
                         </Fab>
                     </Tooltip>
                 </>

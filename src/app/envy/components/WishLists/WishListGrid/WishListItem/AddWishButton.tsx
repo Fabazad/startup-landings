@@ -34,7 +34,7 @@ export const AddWishButton = ({ wishListId }: { wishListId: number }) => (
                     }),
             }}
         >
-            <Iconify icon="material-symbols:add" width={24} />
+            <Iconify icon="ic:round-add" width={24} />
         </Fab>
     </Tooltip>
 )
