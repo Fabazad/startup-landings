@@ -62,7 +62,7 @@ export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
                             <ListItemButton onClick={onFavoriteClick}
                             >
                                 <ListItemIcon>
-                                    <Iconify icon={wish.isFavorite ? "solar:heart-bold" : "solar:heart-outline"} width={24} color="primary.main" />
+                                    <Iconify icon={wish.isFavorite ? "solar:heart-outline" : "solar:heart-bold"} width={24} color="error.main" />
                                 </ListItemIcon>
                                 <ListItemText primary={wish.isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"} />
                             </ListItemButton>

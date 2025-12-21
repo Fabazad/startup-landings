@@ -1,12 +1,10 @@
 'use client';
 
-import { m } from 'framer-motion';
 import { useState, useCallback } from 'react';
 
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Badge from '@mui/material/Badge';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
@@ -17,11 +15,12 @@ import { useBoolean } from 'src/hooks/use-boolean';
 
 import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
-import { varHover } from 'src/components/animate';
 import { Scrollbar } from 'src/components/scrollbar';
 import { CustomTabs } from 'src/components/custom-tabs';
 import { useNotifications } from '../../hooks/useNotifications';
 import { NotificationItem } from './NotficationItem';
+import { NotificationsButton } from './NotificationsButton';
+import { paths } from 'src/routes/paths';
 
 
 export const NotificationsDrawer = () => {
@@ -64,8 +63,8 @@ export const NotificationsDrawer = () => {
                 <Iconify icon="mingcute:close-line" />
             </IconButton>
 
-            <IconButton>
-                <Iconify icon="solar:settings-bold-duotone" />
+            <IconButton href={paths.envy.account.notifications}>
+                <Iconify icon="mdi:bell-settings" />
             </IconButton>
         </Stack>
     );
@@ -82,7 +81,7 @@ export const NotificationsDrawer = () => {
                         <Label
                             variant={((tab.value === 'all' || tab.value === currentTab) && 'filled') || 'soft'}
                             color={
-                                (tab.value === 'unread' && 'info') ||
+                                (tab.value === 'unread' && 'secondary') ||
                                 (tab.value === 'archived' && 'success') ||
                                 'default'
                             }
@@ -109,27 +108,7 @@ export const NotificationsDrawer = () => {
 
     return (
         <>
-
-            <Stack direction="column" alignItems="center">
-                <Tooltip title="Notifications" placement="bottom"
-                    slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }} arrow>
-                    <IconButton
-                        component={m.button}
-                        whileTap="tap"
-                        whileHover="hover"
-                        variants={varHover(1.05)}
-                        onClick={drawer.onTrue}
-                        sx={{ pb: { xs: 0, sm: 1 } }}
-                    >
-                        <Badge badgeContent={totalUnRead} color="error">
-                            <Iconify icon="solar:bell-bing-bold-duotone" width={24} />
-                        </Badge>
-                    </IconButton>
-                </Tooltip >
-                <Typography variant="subtitle2" sx={{ display: { xs: 'flex', sm: 'none' } }}>
-                    Notifications
-                </Typography>
-            </Stack>
+            <NotificationsButton totalUnRead={totalUnRead} onClick={drawer.onTrue} />
 
             <Drawer
                 open={drawer.value}
@@ -143,12 +122,6 @@ export const NotificationsDrawer = () => {
                 {renderTabs}
 
                 {renderList}
-
-                <Box sx={{ p: 1 }}>
-                    <Button fullWidth size="large">
-                        View all
-                    </Button>
-                </Box>
             </Drawer>
         </>
     );
