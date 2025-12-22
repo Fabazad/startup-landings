@@ -24,11 +24,6 @@ export const createListFollowedNotification = async (
     const targetUserId = list.user.id;
 
     const notificationSettingsQueries = await getServerNotificationSettingsQueries();
-
-    // Ensure settings exist before querying
-    const addSettingsRes = await notificationSettingsQueries.addIfMissing(targetUserId);
-    if (!addSettingsRes.success) throw new Error(addSettingsRes.error);
-
     const userNotificationSetting = await notificationSettingsQueries.getNotificationSetting(targetUserId, notificationData.type);
     if (!userNotificationSetting.success) throw new Error(userNotificationSetting.error);
     const { notificationSetting } = userNotificationSetting;
@@ -58,7 +53,7 @@ export const createListFollowedNotification = async (
             html: ListFollowedNotification({
                 followerName,
                 listName: list.name,
-                listUrl: `https://envy.onama.io/${paths.envy.wishList.detail(list.id)}`,
+                listUrl: `https://envy.onama.io${paths.envy.wishList.detail(list.id)}`,
             }),
         });
         if (error) throw new Error(error.message);

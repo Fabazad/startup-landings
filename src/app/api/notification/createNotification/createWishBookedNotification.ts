@@ -26,11 +26,6 @@ export const createWishBookedNotification = async (
     const targetUserId = wish.userId;
 
     const notificationSettingsQueries = await getServerNotificationSettingsQueries();
-
-    // Ensure settings exist before querying
-    const addSettingsRes = await notificationSettingsQueries.addIfMissing(targetUserId);
-    if (!addSettingsRes.success) throw new Error(addSettingsRes.error);
-
     const userNotificationSetting = await notificationSettingsQueries.getNotificationSetting(targetUserId, notificationData.type);
     if (!userNotificationSetting.success) throw new Error(userNotificationSetting.error);
     const { notificationSetting } = userNotificationSetting;
@@ -56,7 +51,7 @@ export const createWishBookedNotification = async (
         if (!wishListRes.wishList) throw new Error('Wish list not found');
 
         const listName = wishListRes.wishList.name;
-        const listUrl = `https://envy.onama.io/${paths.envy.wishList.detail(wishListRes.wishList.id)}`;
+        const listUrl = `https://envy.onama.io${paths.envy.wishList.detail(wishListRes.wishList.id)}`;
 
         const { error } = await resend.emails.send({
             from: `Envy <no-reply@onama.io>`,
