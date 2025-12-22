@@ -12,7 +12,6 @@ export const listFollowNotificationSchema = baseNotificationSchema.extend({
     type: z.enum([NotificationType.LIST_FOLLOWED]),
     data: z.object({
         listId: z.number(),
-        userId: z.string(),
     })
 });
 export type ListFollowNotification = z.infer<typeof listFollowNotificationSchema>;

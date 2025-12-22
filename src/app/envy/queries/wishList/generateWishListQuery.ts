@@ -125,10 +125,7 @@ export const generateWishListQuery = (supabase: SupabaseClient) => ({
         const notificationQueries = getClientNotificationQueries();
         await notificationQueries.createNotification({
             type: NotificationType.LIST_FOLLOWED,
-            data: {
-                listId: wishListId,
-                userId
-            }
+            data: { listId: wishListId }
         });
 
         return { success: true };
