@@ -1,5 +1,7 @@
 import { supabase } from "src/lib/supabase-client";
 import { Wish } from "../types/Wish";
+import { getClientNotificationQueries } from "./notification/client";
+import { NotificationType } from "../types/NotificationSetting";
 
 export const getWishQuery = async (wishId: number): Promise<{ success: true, wish?: Wish } | { success: false, errorCode: "unknown" }> => {
     const { data, error } = await supabase
@@ -80,12 +82,18 @@ export const createWishQuery = async (params: {
 }): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
     const { wishListId, imageUrls, ...rest } = params;
 
-    const { error } = await supabase.from('wishes').insert({
+    const { data: wish, error } = await supabase.from('wishes').insert({
         ...rest,
         listId: wishListId,
         imageUrls: imageUrls?.join(','),
-    });
+    }).single<Wish>();
     if (error) return { success: false, errorCode: "unknown" };
+
+    const notificationQueries = getClientNotificationQueries();
+    await notificationQueries.createNotification({
+        type: NotificationType.WISH_ADDED,
+        data: { wishId: wish.id }
+    });
     return { success: true };
 }
 
@@ -128,5 +136,11 @@ export const bookWishQuery = async (params: { userId: string; wishId: number } |
         })
         .eq('id', wishId);
     if (error) return { success: false, errorCode: "unknown" };
+
+    const notificationQueries = getClientNotificationQueries();
+    await notificationQueries.createNotification({
+        type: NotificationType.WISH_BOOKED,
+        data: { wishId }
+    });
     return { success: true };
 }

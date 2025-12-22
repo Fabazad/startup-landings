@@ -1,5 +1,7 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { WishList } from "../../types/WishList";
+import { getClientNotificationQueries } from "../notification/client";
+import { NotificationType } from "../../types/NotificationSetting";
 
 export const generateWishListQuery = (supabase: SupabaseClient) => ({
     getWishList: async (wishListId: number, userId?: string): Promise<{ success: true, wishList?: WishList } | { success: false, errorCode: "unknown" }> => {
@@ -37,6 +39,12 @@ export const generateWishListQuery = (supabase: SupabaseClient) => ({
             .eq('id', wishListId);
 
         if (error) return { success: false, errorCode: "unknown" };
+
+        const notificationQueries = getClientNotificationQueries();
+        await notificationQueries.createNotification({
+            type: NotificationType.LIST_ARCHIVED,
+            data: { listId: wishListId }
+        });
         return { success: true };
     },
     unarchiveWishList: async (wishListId: number): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
@@ -113,6 +121,16 @@ export const generateWishListQuery = (supabase: SupabaseClient) => ({
             .order('created_at', { ascending: false });
 
         if (error) return { success: false, errorCode: "unknown" };
+
+        const notificationQueries = getClientNotificationQueries();
+        await notificationQueries.createNotification({
+            type: NotificationType.LIST_FOLLOWED,
+            data: {
+                listId: wishListId,
+                userId
+            }
+        });
+
         return { success: true };
     },
     unfollowList: async (wishListId: number, userId: string): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {

@@ -1,56 +1,63 @@
 import { NotificationType } from "./NotificationSetting";
+import { z } from "zod";
 
-type BaseNotification = {
-    id: number;
-    createdAt: Date;
-}
+export const baseNotificationSchema = z.object({
+    id: z.number(),
+    createdAt: z.date(),
+});
+export type BaseNotification = z.infer<typeof baseNotificationSchema>;
 
-export type ListFollowNotification = BaseNotification & {
-    seen: boolean;
-    type: NotificationType.LIST_FOLLOWED;
-    data: {
-        listId: number;
-        listName: string;
-        userId: string;
-        userName: string;
-    }
-}
+export const listFollowNotificationSchema = baseNotificationSchema.extend({
+    seen: z.boolean(),
+    type: z.enum([NotificationType.LIST_FOLLOWED]),
+    data: z.object({
+        listId: z.number(),
+        userId: z.string(),
+    })
+});
+export type ListFollowNotification = z.infer<typeof listFollowNotificationSchema>;
 
-export type WishBookedNotification = BaseNotification & {
-    seen: boolean;
-    type: NotificationType.WISH_BOOKED;
-    data: {
-        listId: number;
-        listName: string;
-    }
-}
+export const wishBookedNotificationSchema = baseNotificationSchema.extend({
+    seen: z.boolean(),
+    type: z.enum([NotificationType.WISH_BOOKED]),
+    data: z.object({
+        wishId: z.number(),
+    })
+});
+export type WishBookedNotification = z.infer<typeof wishBookedNotificationSchema>;
 
-export type WishAddedNotification = BaseNotification & {
-    seen: boolean;
-    type: NotificationType.WISH_ADDED;
-    data: {
-        wishId: number;
-        wishName: string;
-        listId: number;
-        listName: string;
-        userId: string;
-        userName: string;
-    }
-}
 
-export type ListArchivedNotification = BaseNotification & {
-    seen: boolean;
-    type: NotificationType.LIST_ARCHIVED;
-    data: {
-        listId: number;
-        listName: string;
-        userId: string;
-        userName: string;
-    }
-}
+export const wishAddedNotificationSchema = baseNotificationSchema.extend({
+    seen: z.boolean(),
+    type: z.enum([NotificationType.WISH_ADDED]),
+    data: z.object({
+        wishId: z.number(),
+    })
+});
+export type WishAddedNotification = z.infer<typeof wishAddedNotificationSchema>;
 
-export type Notification =
-    ListFollowNotification |
-    WishBookedNotification |
-    WishAddedNotification |
-    ListArchivedNotification;
+export const listArchivedNotificationSchema = baseNotificationSchema.extend({
+    seen: z.boolean(),
+    type: z.enum([NotificationType.LIST_ARCHIVED]),
+    data: z.object({
+        listId: z.number(),
+    })
+});
+export type ListArchivedNotification = z.infer<typeof listArchivedNotificationSchema>;
+
+export const notificationSchema = z.union([
+    listFollowNotificationSchema,
+    wishBookedNotificationSchema,
+    wishAddedNotificationSchema,
+    listArchivedNotificationSchema,
+]);
+export type Notification = z.infer<typeof notificationSchema>;
+
+
+export const notificationDataSchema = z.union([
+    listFollowNotificationSchema.omit({ id: true, createdAt: true, seen: true }),
+    wishBookedNotificationSchema.omit({ id: true, createdAt: true, seen: true }),
+    wishAddedNotificationSchema.omit({ id: true, createdAt: true, seen: true }),
+    listArchivedNotificationSchema.omit({ id: true, createdAt: true, seen: true }),
+]);
+export type NotificationData = z.infer<typeof notificationDataSchema>;
