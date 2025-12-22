@@ -24,8 +24,6 @@ export const NotificationForm = ({ notificationSetting }: { notificationSetting:
         if (name === "in_app") setInApp(checked);
         if (name === "push") setPush(checked);
 
-        console.log(notificationSetting.userId, notificationSetting.type, email, push, inApp);
-
         const res = await clientNotificationSettingsQueries.update(
             notificationSetting.userId,
             notificationSetting.type,

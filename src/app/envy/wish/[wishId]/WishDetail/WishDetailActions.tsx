@@ -6,12 +6,14 @@ import { Button, Stack, Alert, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { Iconify } from "src/components/iconify";
 import { Wish } from "../../../types/Wish";
-import { deleteWishQuery, setIsFavoriteQuery } from "../../../queries/wish";
 import { toast } from "sonner";
 import { paths } from "src/routes/paths";
 import { BookingCard } from "./BookingCard";
 import { User } from "src/app/envy/types/User";
 import { enrichProductUrl } from "src/lib/enrichProductUrl";
+import { getClientWishQueries } from "src/app/envy/queries/wish/client";
+
+const { deleteWishQuery, setIsFavoriteQuery } = getClientWishQueries();
 
 export const WishDetailActions = ({ wish, user }: { wish: Wish; user?: User }) => {
     const router = useRouter();

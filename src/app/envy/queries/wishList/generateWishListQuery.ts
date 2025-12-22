@@ -4,14 +4,14 @@ import { getClientNotificationQueries } from "../notification/client";
 import { NotificationType } from "../../types/NotificationSetting";
 
 export const generateWishListQuery = (supabase: SupabaseClient) => ({
-    getWishList: async (wishListId: number, userId?: string): Promise<{ success: true, wishList?: WishList } | { success: false, errorCode: "unknown" }> => {
+    getWishList: async (wishListId: number, userId?: string): Promise<{ success: true, wishList?: WishList } | { success: false, error: string }> => {
         const { data, error } = await supabase
             .from('wish-lists')
             .select('*, wishes(count), user_id:profiles(id,display_name,avatar_url)')
             .eq('id', wishListId)
             .maybeSingle<Omit<WishList, 'isFollowedByMe' | 'wishCount'> & { wishes: [{ count: number }] } & { user_id: { id: string, display_name: string, avatar_url: string } } | undefined>();
 
-        if (error) return { success: false, errorCode: "unknown" };
+        if (error) return { success: false, error: error.message };
         if (!data) return { success: true, wishList: undefined };
 
         const wishCount = data.wishes?.[0]?.count ?? 0;
@@ -26,7 +26,7 @@ export const generateWishListQuery = (supabase: SupabaseClient) => ({
             .eq('userId', userId)
             .maybeSingle();
 
-        if (errorListFollows) return { success: false, errorCode: "unknown" };
+        if (errorListFollows) return { success: false, error: errorListFollows.message };
 
         if (!listFollows) return { success: true, wishList: { ...data, isFollowedByMe: false, wishCount, user } };
 
@@ -41,7 +41,7 @@ export const generateWishListQuery = (supabase: SupabaseClient) => ({
         if (error) return { success: false, errorCode: "unknown" };
 
         const notificationQueries = getClientNotificationQueries();
-        await notificationQueries.createNotification({
+        await notificationQueries.sendNotification({
             type: NotificationType.LIST_ARCHIVED,
             data: { listId: wishListId }
         });
@@ -123,9 +123,9 @@ export const generateWishListQuery = (supabase: SupabaseClient) => ({
         if (error) return { success: false, errorCode: "unknown" };
 
         const notificationQueries = getClientNotificationQueries();
-        await notificationQueries.createNotification({
+        await notificationQueries.sendNotification({
             type: NotificationType.LIST_FOLLOWED,
-            data: { listId: wishListId }
+            data: { listId: wishListId, userId }
         });
 
         return { success: true };

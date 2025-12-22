@@ -16,7 +16,7 @@ export type ConfigValue = {
     redirectPath: string;
   };
   mapboxApiKey: string;
-  supabase: { url: string; key: string };
+  supabase: { url: string; key: string, adminKey: string };
   posthog: { key: string; host: string };
   resend: { apiKey: string };
   amazon: { affiliateTag: string; accessKey: string; secretKey: string };
@@ -51,6 +51,7 @@ export const CONFIG: ConfigValue = {
   supabase: {
     url: process.env.NEXT_PUBLIC_SUPABASE_URL ?? '',
     key: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '',
+    adminKey: process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY ?? '',
   },
   /**
    * Posthog

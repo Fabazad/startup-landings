@@ -8,7 +8,8 @@ export const useNotifications = (): { notifications: Notification[], isLoading: 
             createdAt: new Date(),
             seen: false,
             type: NotificationType.LIST_FOLLOWED,
-            data: { listId: 1 }
+            data: { listId: 1, userId: '2' },
+            userId: '1'
         }], isLoading: false
     }
 }

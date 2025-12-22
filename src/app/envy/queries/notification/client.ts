@@ -6,7 +6,8 @@ import { NotificationData } from "../../types/Notification"
 
 export const getClientNotificationQueries = () => {
     return {
-        ...generateNotificationQueries(supabase), createNotification: async (notificationData: NotificationData) => {
+        ...generateNotificationQueries(supabase),
+        sendNotification: async (notificationData: NotificationData) => {
             const res = await axios.post('/api/notification', notificationData);
 
             if (res.status !== 200) {

@@ -2,10 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "src/lib/supabase-client";
 import { Wish } from "../types/Wish";
 import { useAuthContext } from "src/auth/hooks";
-import { getWishesQuery, setIsFavoriteQuery, unbookWishQuery } from "../queries/wish";
+import { getClientWishQueries } from "../queries/wish/client";
 import { toast } from "sonner";
 import { WishList } from "../types/WishList";
 import { useWishList } from "./useWishList";
+
+const { getWishesQuery, setIsFavoriteQuery, unbookWishQuery } = getClientWishQueries();
+
 
 export const useWishes = ({ wishListId, isBookedByUser }: { wishListId?: number, isBookedByUser?: string }): {
     wishes?: Array<Wish>;

@@ -13,12 +13,12 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Wish } from '../../types/Wish';
-import { createWishQuery, updateWishQuery } from '../../queries/wish';
 import { paths } from 'src/routes/paths';
 import { Image } from 'src/components/image';
 import { BackButton } from '../BackButton';
 import { useState } from 'react';
 import { ImageSelector } from '../ImageSelector';
+import { getClientWishQueries } from '../../queries/wish/client';
 
 
 // ----------------------------------------------------------------------
@@ -28,6 +28,8 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
     const { mode, systemMode } = useColorScheme();
     const [isScraping, setIsScraping] = useState(false);
     const [lastScrapedUrl, setLastScrapedUrl] = useState('');
+
+    const { createWishQuery, updateWishQuery } = getClientWishQueries();
 
     const isDarkMode = mode === 'dark' || (mode === 'system' && systemMode === 'dark');
 

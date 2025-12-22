@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getServerNotificationSettingsQueries } from 'src/app/envy/queries/notificationSettings/server';
 import { notificationDataSchema } from 'src/app/envy/types/Notification';
 import { getAuthUser } from 'src/auth/getAuthUser';
-import { z } from 'zod';
+import { createNotifications } from './createNotification/createNotifications';
 
 const createNotificationSchema = notificationDataSchema;
 
@@ -30,28 +30,18 @@ export const POST = async (request: Request) => {
         return NextResponse.json({ error: 'User not found' }, { status: 403 });
     }
 
-    const userNotificationSettings = await notificationSettingsQueries.getNotificationSettings(userRes.user.id);
+    const userNotificationSettings = await notificationSettingsQueries.getNotificationSetting(userRes.user.id, notificationData.type);
 
     if (!userNotificationSettings.success) {
         return NextResponse.json({ error: userNotificationSettings }, { status: 500 });
     }
+    const { notificationSetting } = userNotificationSettings;
 
-    const notificationSettings = userNotificationSettings.notificationSettings.find(setting => setting.type === notificationData.type);
-    if (!notificationSettings) {
-        return NextResponse.json({ error: 'Notification settings not found' }, { status: 500 });
+    try {
+        await createNotifications({ notificationData, userNotificationSetting: notificationSetting });
+    } catch (error) {
+        return NextResponse.json({ error: `Failed to create notification : ${error.message}` }, { status: 500 });
     }
 
-    if (notificationSettings.email) {
-        console.log("Send email")
-    }
-
-    if (notificationSettings.push) {
-        console.log("Send push ?")
-    }
-
-    if (notificationSettings.inApp) {
-        console.log("Create Notification")
-    }
-
-    return NextResponse.json({ data: notificationData }, { status: 200 });
+    return NextResponse.json({}, { status: 200 });
 };

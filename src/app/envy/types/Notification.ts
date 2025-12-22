@@ -4,6 +4,7 @@ import { z } from "zod";
 export const baseNotificationSchema = z.object({
     id: z.number(),
     createdAt: z.date(),
+    userId: z.string(),
 });
 export type BaseNotification = z.infer<typeof baseNotificationSchema>;
 
@@ -12,6 +13,7 @@ export const listFollowNotificationSchema = baseNotificationSchema.extend({
     type: z.enum([NotificationType.LIST_FOLLOWED]),
     data: z.object({
         listId: z.number(),
+        userId: z.string(),
     })
 });
 export type ListFollowNotification = z.infer<typeof listFollowNotificationSchema>;
@@ -54,9 +56,9 @@ export type Notification = z.infer<typeof notificationSchema>;
 
 
 export const notificationDataSchema = z.union([
-    listFollowNotificationSchema.omit({ id: true, createdAt: true, seen: true }),
-    wishBookedNotificationSchema.omit({ id: true, createdAt: true, seen: true }),
-    wishAddedNotificationSchema.omit({ id: true, createdAt: true, seen: true }),
-    listArchivedNotificationSchema.omit({ id: true, createdAt: true, seen: true }),
+    listFollowNotificationSchema.omit({ id: true, createdAt: true, seen: true, userId: true }),
+    wishBookedNotificationSchema.omit({ id: true, createdAt: true, seen: true, userId: true }),
+    wishAddedNotificationSchema.omit({ id: true, createdAt: true, seen: true, userId: true }),
+    listArchivedNotificationSchema.omit({ id: true, createdAt: true, seen: true, userId: true }),
 ]);
 export type NotificationData = z.infer<typeof notificationDataSchema>;

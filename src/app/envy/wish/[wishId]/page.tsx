@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { NotFoundView, View500 } from "src/sections/error";
-import { getWishQuery } from "../../queries/wish";
 import { WishDetail } from "./WishDetail";
 import { getAuthUser } from "src/auth/getAuthUser";
+import { getServerWishQueries } from '../../queries/wish/server';
 
-// ----------------------------------------------------------------------
 
 export async function generateMetadata({ params }: { params: { wishId: number } }): Promise<Metadata> {
+    const { getWishQuery } = await getServerWishQueries()
     const wishResult = await getWishQuery(params.wishId);
 
     if (!wishResult.success || !wishResult.wish) {
@@ -62,6 +62,7 @@ export async function generateMetadata({ params }: { params: { wishId: number } 
 }
 
 export default async function WishPage({ params }: { params: { wishId: number } }) {
+    const { getWishQuery } = await getServerWishQueries()
 
     const [wishResult, userResult] = await Promise.all([
         getWishQuery(params.wishId),

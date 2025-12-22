@@ -1,20 +1,21 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { NotificationData } from "../../types/Notification";
-import axios from "axios";
 
 
 export const generateNotificationQueries = (supabase: SupabaseClient) => ({
-    createNotification: async (notificationData: NotificationData): Promise<
+    createNotification: async (notificationData: NotificationData, userId: string): Promise<
         { success: true } |
         { success: false, error: string }> => {
 
-        const res = await axios.post('/api/notification', notificationData);
-
-        if (res.status !== 200) {
-            return { success: false, error: res.data.error };
+        try {
+            const { data, error } = await supabase.from('notifications').insert({ ...notificationData, seen: false, user_id: userId });
+            if (error) {
+                return { success: false, error: error.message };
+            }
+        } catch (error) {
+            return { success: false, error: error.message };
         }
 
         return { success: true };
-
     },
 })

@@ -1,7 +1,6 @@
 import { EnrichmentMethod } from "./type";
 import { CONFIG } from "src/config-global";
 
-console.log(CONFIG)
 
 export const amazonEnrichment: EnrichmentMethod = (url) => {
     try {

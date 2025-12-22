@@ -8,9 +8,11 @@ import { useForm } from "react-hook-form";
 import { toast } from "src/components/snackbar";
 import { User } from "src/app/envy/types/User";
 import { Wish } from "src/app/envy/types/Wish";
-import { bookWishQuery, unbookWishQuery } from "src/app/envy/queries/wish";
 import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
+import { getClientWishQueries } from "src/app/envy/queries/wish/client";
+
+const { bookWishQuery, unbookWishQuery } = getClientWishQueries();
 
 
 export const BookingCard = ({ user, wish }: { user?: User, wish: Wish }) => {

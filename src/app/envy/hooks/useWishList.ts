@@ -17,7 +17,7 @@ export const useWishList = ({ wishListId }: { wishListId?: number }): { wishList
         queryFn: async () => {
             const result = await clientWishListQuery.getWishList(wishListId, user?.id);
 
-            if (!result.success) throw result.errorCode;
+            if (!result.success) throw result.error;
             return result.wishList;
         },
         enabled: !!user,

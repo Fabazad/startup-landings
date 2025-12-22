@@ -33,9 +33,7 @@ export const updateUserProfileQuery = async (data: { displayName?: string, avata
 export const addPasswordQuery = async (password: string): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
     const { error } = await supabase.auth.updateUser({
         password,
-        data: {
-            has_password: true
-        }
+        data: { has_password: true }
     });
 
     if (error) return { success: false, errorCode: "unknown" };
@@ -49,4 +47,10 @@ export const updatePasswordQuery = async (newPassword: string): Promise<{ succes
 
     if (error) return { success: false, errorCode: "unknown" };
     return { success: true };
+}
+
+export const getUserEmailQuery = async (userId: string): Promise<{ success: true, email: string } | { success: false, error: string }> => {
+    const { data, error } = await supabase.from('users').select('email').eq('id', userId).single();
+    if (error) return { success: false, error: error.message };
+    return { success: true, email: data.email };
 }

@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { Wish } from "../types/Wish";
 import { useState } from "react";
-import { bookWishQuery, getWishQuery } from "../queries/wish";
+import { getClientWishQueries } from "../queries/wish/client";
 import { toast } from "sonner";
 
+const { getWishQuery, bookWishQuery } = getClientWishQueries();
 
 export const useWish = ({ wishId }: { wishId: number }): {
     wish?: Wish;
