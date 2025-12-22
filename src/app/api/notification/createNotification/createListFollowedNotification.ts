@@ -1,16 +1,18 @@
 import { Resend } from "resend";
 import { getServerNotificationQueries } from "src/app/envy/queries/notification/server";
-import { getUserEmailQueryAdmin } from "src/app/envy/queries/user/admin";
+import { getServerNotificationSettingsQueries } from "src/app/envy/queries/notificationSettings/server";
+import { getUserEmailQueryAdmin, getUserName } from "src/app/envy/queries/user/admin";
 import { getServerWishListQuery } from "src/app/envy/queries/wishList/server";
 import { NotificationData } from "src/app/envy/types/Notification";
 import { NotificationSetting, NotificationType } from "src/app/envy/types/NotificationSetting";
 import { CONFIG } from "src/config-global";
+import { ListFollowedNotification } from "src/emails/ListFollowedNotification";
+import { paths } from "src/routes/paths";
 
 const resend = new Resend(CONFIG.resend.apiKey);
 
 export const createListFollowedNotification = async (
     notificationData: NotificationData,
-    userNotificationSetting: NotificationSetting
 ): Promise<void> => {
     if (notificationData.type !== NotificationType.LIST_FOLLOWED) throw new Error('Invalid notification type');
     const wisListQueries = await getServerWishListQuery();
@@ -19,28 +21,45 @@ export const createListFollowedNotification = async (
     if (!listRes.wishList) throw new Error('List not found');
 
     const list = listRes.wishList;
-    const targetUrseId = list.user.id;
+    const targetUserId = list.user.id;
 
-    const userRes = await getUserEmailQueryAdmin(targetUrseId);
-    if (!userRes.success) throw userRes.error;
-    if (!userRes.email) throw new Error('User not found');
+    const notificationSettingsQueries = await getServerNotificationSettingsQueries();
 
-    const targetEmail = userRes.email;
+    // Ensure settings exist before querying
+    const addSettingsRes = await notificationSettingsQueries.addIfMissing(targetUserId);
+    if (!addSettingsRes.success) throw new Error(addSettingsRes.error);
 
-    if (userNotificationSetting.inApp) {
+    const userNotificationSetting = await notificationSettingsQueries.getNotificationSetting(targetUserId, notificationData.type);
+    if (!userNotificationSetting.success) throw new Error(userNotificationSetting.error);
+    const { notificationSetting } = userNotificationSetting;
+
+    if (notificationSetting.inApp) {
         const notificationQueries = await getServerNotificationQueries();
         const res = await notificationQueries.createNotification({
             type: NotificationType.LIST_FOLLOWED,
             data: notificationData.data
-        }, targetUrseId);
+        }, targetUserId);
         if (!res.success) throw new Error(res.error);
     }
-    if (userNotificationSetting.email) {
+    if (notificationSetting.email) {
+        const targetUserRes = await getUserEmailQueryAdmin(targetUserId);
+        if (!targetUserRes.success) throw targetUserRes.error;
+        if (!targetUserRes.email) throw new Error('User not found');
+        const targetEmail = targetUserRes.email;
+
+        const followerRes = await getUserName(notificationData.data.userId);
+        if (!followerRes.success) throw new Error(followerRes.error);
+        const followerName = followerRes.name;
+
         const { error } = await resend.emails.send({
             from: `Envy <no-reply@onama.io>`,
             to: targetEmail,
-            subject: "Quelqu'un a suivi votre liste sur Envy",
-            html: `Quelqu'un a suivi votre liste ${list.name} sur Envy`,
+            subject: "Quelqu'un suit votre liste sur Envy",
+            html: ListFollowedNotification({
+                followerName,
+                listName: list.name,
+                listUrl: `https://envy.onama.io/${paths.envy.wishList.detail(list.id)}`,
+            }),
         });
         if (error) throw new Error(error.message);
     }

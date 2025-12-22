@@ -79,6 +79,7 @@ export const generateNotificationSettingsQueries = (supabase: SupabaseClient) =>
     }, getNotificationSetting: async (userId: string, notificationType: NotificationType): Promise<
         { success: true, notificationSetting: NotificationSetting } |
         { success: false, error: string }> => {
+
         const { data, error } = await supabase
             .from('user_notification_settings')
             .select('*')
@@ -87,7 +88,6 @@ export const generateNotificationSettingsQueries = (supabase: SupabaseClient) =>
             .single();
 
         if (error) return { success: false, error: error.message };
-
         return { success: true, notificationSetting: formatData(data) };
     },
 })

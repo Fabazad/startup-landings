@@ -1,5 +1,5 @@
 import { SupabaseClient } from "@supabase/supabase-js";
-import { NotificationSetting, NotificationType } from "../../types/NotificationSetting";
+import { NotificationType } from "../../types/NotificationSetting";
 import { Wish } from "../../types/Wish";
 import { getClientNotificationQueries } from "../notification/client";
 
@@ -141,7 +141,7 @@ export const generateWishQueries = (supabase: SupabaseClient) => ({
 
         await notificationQueries.sendNotification({
             type: NotificationType.WISH_BOOKED,
-            data: { wishId }
+            data: { wishId, userId }
         });
         return { success: true };
     }

@@ -23,6 +23,7 @@ export const wishBookedNotificationSchema = baseNotificationSchema.extend({
     type: z.enum([NotificationType.WISH_BOOKED]),
     data: z.object({
         wishId: z.number(),
+        userId: z.string().optional()
     })
 });
 export type WishBookedNotification = z.infer<typeof wishBookedNotificationSchema>;

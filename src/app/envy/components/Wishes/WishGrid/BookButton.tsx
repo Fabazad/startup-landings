@@ -2,6 +2,7 @@ import { Box, Fab, Stack, Tooltip, Typography } from "@mui/material";
 import { Iconify } from "src/components/iconify";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
 import { Wish } from "src/app/envy/types/Wish";
+import { paths } from "src/routes/paths";
 
 export const BookButton = ({ wish, isBookedBy, onUnbook }: { wish: Wish; isBookedBy: string | null, onUnbook: () => void }) => {
 
@@ -42,7 +43,7 @@ export const BookButton = ({ wish, isBookedBy, onUnbook }: { wish: Wish; isBooke
                         color={isBookedByAuthUser ? "error" : "secondary"}
                         size="medium"
                         className="hided-button"
-                        href={`/envy/wish/${wish.id}/book`}
+                        href={paths.envy.wish.detail(wish.id)}
                         disabled={!!isBookedBy && !isBookedByAuthUser}
                         onClick={handleBook}
                         sx={{

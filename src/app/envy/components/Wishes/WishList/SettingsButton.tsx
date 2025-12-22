@@ -3,6 +3,7 @@ import { Iconify } from "src/components/iconify";
 import { useState } from "react";
 import { Wish } from "src/app/envy/types/Wish";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
+import { paths } from "src/routes/paths";
 
 export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
     wish: Wish;
@@ -47,7 +48,7 @@ export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
                 <Divider />
                 <List sx={{ p: 2 }}>
                     {!isUserOwner && (
-                        <ListItemButton href={`/envy/wish/${wish.id}/book`} onClick={handleBook} disabled={!!isBookedBy && !isBookedByAuthUser}>
+                        <ListItemButton href={paths.envy.wish.detail(wish.id)} onClick={handleBook} disabled={!!isBookedBy && !isBookedByAuthUser}>
                             <ListItemIcon>
                                 <Iconify icon="solar:lock-keyhole-minimalistic-bold-duotone" width={24} color="secondary.main" />
                             </ListItemIcon>

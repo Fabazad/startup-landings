@@ -8,3 +8,11 @@ export const getUserEmailQueryAdmin = async (userId: string): Promise<{ success:
 
     return { success: true, email: data.user.email };
 }
+
+export const getUserName = async (userId: string): Promise<{ success: true, name: string } | { success: false, error: string }> => {
+    const { data, error } = await supabaseAdmin.auth.admin.getUserById(userId);
+    if (!data.user) return { success: false, error: 'User not found' };
+    if (error) return { success: false, error: error.message };
+    console.log(data)
+    return { success: true, name: data.user.user_metadata.displayName };
+}

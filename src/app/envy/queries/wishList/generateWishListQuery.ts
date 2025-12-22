@@ -2,6 +2,7 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { WishList } from "../../types/WishList";
 import { getClientNotificationQueries } from "../notification/client";
 import { NotificationType } from "../../types/NotificationSetting";
+import { createNotifications } from "src/app/api/notification/createNotification/createNotifications";
 
 export const generateWishListQuery = (supabase: SupabaseClient) => ({
     getWishList: async (wishListId: number, userId?: string): Promise<{ success: true, wishList?: WishList } | { success: false, error: string }> => {
@@ -121,12 +122,6 @@ export const generateWishListQuery = (supabase: SupabaseClient) => ({
             .order('created_at', { ascending: false });
 
         if (error) return { success: false, errorCode: "unknown" };
-
-        const notificationQueries = getClientNotificationQueries();
-        await notificationQueries.sendNotification({
-            type: NotificationType.LIST_FOLLOWED,
-            data: { listId: wishListId, userId }
-        });
 
         return { success: true };
     },

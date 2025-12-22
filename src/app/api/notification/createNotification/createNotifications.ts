@@ -5,16 +5,10 @@ import { createListFollowedNotification } from "./createListFollowedNotification
 import { createWishBookedNotification } from "./createWishBookedNotification";
 import { createWishAddedNotification } from "./createWishAddedNotification";
 
-export const createNotifications = async ({
-    notificationData,
-    userNotificationSetting
-}: {
-    notificationData: NotificationData;
-    userNotificationSetting: NotificationSetting
-}) => {
+export const createNotifications = async ({ notificationData }: { notificationData: NotificationData }) => {
     const notificationRecord: Record<
         NotificationType,
-        ((notificationData: NotificationData, userNotificationSetting: NotificationSetting) => Promise<void>)
+        ((notificationData: NotificationData) => Promise<void>)
     > = {
         [NotificationType.LIST_ARCHIVED]: createListArchivedNotification,
         [NotificationType.LIST_FOLLOWED]: createListFollowedNotification,
@@ -22,5 +16,5 @@ export const createNotifications = async ({
         [NotificationType.WISH_ADDED]: createWishAddedNotification,
     }
 
-    await notificationRecord[notificationData.type](notificationData, userNotificationSetting);
+    await notificationRecord[notificationData.type](notificationData);
 }
