@@ -27,6 +27,7 @@ export default async function WishListPage({ params, searchParams }: {
     if (!wishList) return <NotFoundView />
 
     const owner = wishList.user;
+    const isOwner = owner.id === user?.id;
 
     if (user && sharedLink && owner.id !== user.id && !wishList.isFollowedByMe) {
         await serverWishListQuery.followList(wishList.id, user.id);
@@ -36,7 +37,7 @@ export default async function WishListPage({ params, searchParams }: {
     return (
         <Container maxWidth="lg" sx={{ py: 3 }}>
             <Stack direction="row" sx={{ mb: 2 }} justifyContent="space-between">
-                <BackButton path={paths.envy.root} />
+                <BackButton path={isOwner ? paths.envy.root : paths.envy.root + "?tab=followed-lists"} />
                 <Stack sx={{ display: { xs: 'flex', md: 'none' } }}>
                     <WishListButtons wishList={wishList} user={user} />
                 </Stack>
