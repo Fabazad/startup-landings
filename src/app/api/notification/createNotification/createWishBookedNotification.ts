@@ -5,7 +5,7 @@ import { getUserEmailQueryAdmin } from "src/app/envy/queries/user/admin";
 import { getServerWishQueries } from "src/app/envy/queries/wish/server";
 import { getServerWishListQuery } from "src/app/envy/queries/wishList/server";
 import { NotificationData } from "src/app/envy/types/Notification";
-import { NotificationSetting, NotificationType } from "src/app/envy/types/NotificationSetting";
+import { NotificationType } from "src/app/envy/types/NotificationSetting";
 import { CONFIG } from "src/config-global";
 import { WishBookedNotification } from "src/emails/WishBookedNotification";
 import { paths } from "src/routes/paths";

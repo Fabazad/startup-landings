@@ -196,7 +196,6 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
                             <Field.Switch name="isFavorite" label="Envie coup de cœur" />
                             <Field.Switch name="isSecondHand" label="Je préfère l'occasion si possible" />
                             <Field.Switch name="acceptEquivalent" label="J'accepte de recevoir un cadeau équivalent" />
-
                         </Stack>
 
                         <LoadingButton
