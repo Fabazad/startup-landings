@@ -56,7 +56,7 @@ export const WishBookedNotification = ({ listUrl, listName }: { listUrl: string,
       color: #ffffff !important;
       text-decoration: none;
       padding: 12px 24px;
-      border-radius: 8px;
+      border-radius: 9999px;
       font-weight: 700;
       font-size: 15px;
       transition: background-color 0.2s;
@@ -88,9 +88,7 @@ export const WishBookedNotification = ({ listUrl, listName }: { listUrl: string,
       <h1>Une envie a été réservée !</h1>
       
       <p>
-        Une personne a réservé un des envies de votre liste <span class="highlight">${listName}</span>.
-        <br />
-        Connectez-vous pour voir de qui il s'agit.
+        Une personne a réservé un cadeau dans votre liste <span class="highlight">${listName}</span>.
       </p>
 
       <a href="${listUrl}" class="button" target="_blank">

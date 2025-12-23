@@ -64,13 +64,13 @@ export const ListFollowedNotification = ({
       color: #ffffff !important;
       text-decoration: none;
       padding: 12px 24px;
-      border-radius: 8px;
+      border-radius: 9999px;
       font-weight: 700;
       font-size: 15px;
       transition: background-color 0.2s;
     }
     .button:hover {
-      background-color: #8b3dff;
+      background-color: #007867;
     }
     .footer {
       margin-top: 32px;
