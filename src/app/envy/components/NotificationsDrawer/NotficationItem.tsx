@@ -201,7 +201,6 @@ export const NotificationItem = ({ notification }: { notification: Notification 
                 {renderText}
                 {notification.type === NotificationType.LIST_FOLLOWED && friendAction}
                 {notification.type === NotificationType.WISH_BOOKED && projectAction}
-                {notification.type === NotificationType.WISH_ADDED && fileAction}
                 {notification.type === NotificationType.LIST_ARCHIVED && tagsAction}
             </Stack>
         </ListItemButton>

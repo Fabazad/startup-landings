@@ -8,7 +8,6 @@ import { toast } from 'sonner';
 const notificationTypesLabel: Record<NotificationType, string> = {
     [NotificationType.LIST_ARCHIVED]: "Une liste que vous suivez a été archivée",
     [NotificationType.LIST_FOLLOWED]: "Une personne suit une de vos listes",
-    [NotificationType.WISH_ADDED]: "Une personne a ajouté une envie à une liste que vous suivez",
     [NotificationType.WISH_BOOKED]: "Une personne a réservé une envie d'une de vos listes",
 }
 

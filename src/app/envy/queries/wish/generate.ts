@@ -91,11 +91,6 @@ export const generateWishQueries = (supabase: SupabaseClient) => ({
             imageUrls: imageUrls?.join(','),
         }).select().single<Wish>();
         if (error) return { success: false, errorCode: "unknown" };
-
-        await notificationQueries.sendNotification({
-            type: NotificationType.WISH_ADDED,
-            data: { wishId: wish.id }
-        });
         return { success: true };
     },
 

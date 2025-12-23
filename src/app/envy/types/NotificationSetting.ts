@@ -1,7 +1,6 @@
 export enum NotificationType {
     LIST_FOLLOWED = 'list_follow',
     WISH_BOOKED = 'wish_booking',
-    WISH_ADDED = 'wish_added',
     LIST_ARCHIVED = 'list_archived'
 }
 
