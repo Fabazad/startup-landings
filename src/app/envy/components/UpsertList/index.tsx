@@ -118,7 +118,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
 
       <Stack flex={1} sx={{ p: { xs: 3, sm: 10 } }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3 }}>
-          <BackButton />
+          <BackButton path={wishList ? paths.envy.wishList.detail(wishList.id) : paths.envy.root} />
         </Stack>
         <Form methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Typography variant="h4" sx={{ mb: 2 }}>

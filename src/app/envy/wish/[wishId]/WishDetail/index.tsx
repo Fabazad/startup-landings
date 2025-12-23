@@ -6,13 +6,13 @@ import { defaultWishImageUrl, Wish } from "src/app/envy/types/Wish";
 import { BackButton } from "src/app/envy/components/BackButton";
 import { User } from "src/app/envy/types/User";
 import { formatUrl } from "src/utils/format-url";
-import { ST } from "next/dist/shared/lib/utils";
+import { paths } from "src/routes/paths";
 
 export const WishDetail = ({ wish, user }: { wish: Wish; user?: User }) => {
     return (
         <Box>
             <Box sx={{ mb: 2 }}>
-                <BackButton />
+                <BackButton path={paths.envy.wishList.detail(wish.list.id)} />
             </Box>
             <Grid container spacing={5} sx={{ display: 'flex', alignItems: 'flex-start', pt: 0 }}>
 

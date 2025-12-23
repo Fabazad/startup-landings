@@ -136,7 +136,7 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
             </Stack>
             <Stack sx={{ px: { xs: 3, sm: 10 }, py: 3, flex: 1 }}>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3 }}>
-                    <BackButton />
+                    <BackButton path={paths.envy.wishList.detail(wishListId)} />
                 </Stack>
                 <Form methods={methods} onSubmit={onSubmit}>
                     <Stack spacing={1} sx={{ mb: 3 }}>
