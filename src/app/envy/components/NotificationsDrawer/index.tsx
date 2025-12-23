@@ -26,23 +26,13 @@ import { paths } from 'src/routes/paths';
 export const NotificationsDrawer = () => {
     const drawer = useBoolean();
 
-    const TABS = [
-        { value: 'all', label: 'All', count: 22 },
-        { value: 'unread', label: 'Unread', count: 12 },
-    ];
-
-    const [currentTab, setCurrentTab] = useState('all');
-
-    const handleChangeTab = useCallback((event: React.SyntheticEvent, newValue: string) => {
-        setCurrentTab(newValue);
-    }, []);
-
     const { notifications, isLoading, seeAllNotifications } = useNotifications();
 
     const totalUnRead = notifications?.filter((item) => item.seen === false).length || 0;
 
-    const handleMarkAllAsRead = async () => {
+    const handleCloseNotifications = async () => {
         seeAllNotifications();
+        drawer.onFalse();
     };
 
     const renderHead = (
@@ -51,15 +41,7 @@ export const NotificationsDrawer = () => {
                 Notifications
             </Typography>
 
-            {!!totalUnRead && (
-                <Tooltip title="Mark all as read">
-                    <IconButton color="primary" onClick={handleMarkAllAsRead}>
-                        <Iconify icon="eva:done-all-fill" />
-                    </IconButton>
-                </Tooltip>
-            )}
-
-            <IconButton onClick={drawer.onFalse} sx={{ display: { xs: 'inline-flex', sm: 'none' } }}>
+            <IconButton onClick={handleCloseNotifications}>
                 <Iconify icon="mingcute:close-line" />
             </IconButton>
 
@@ -67,31 +49,6 @@ export const NotificationsDrawer = () => {
                 <Iconify icon="mdi:bell-settings" />
             </IconButton>
         </Stack>
-    );
-
-    const renderTabs = (
-        <CustomTabs variant="fullWidth" value={currentTab} onChange={handleChangeTab}>
-            {TABS.map((tab) => (
-                <Tab
-                    key={tab.value}
-                    iconPosition="end"
-                    value={tab.value}
-                    label={tab.label}
-                    icon={
-                        <Label
-                            variant={((tab.value === 'all' || tab.value === currentTab) && 'filled') || 'soft'}
-                            color={
-                                (tab.value === 'unread' && 'secondary') ||
-                                (tab.value === 'archived' && 'success') ||
-                                'default'
-                            }
-                        >
-                            {tab.count}
-                        </Label>
-                    }
-                />
-            ))}
-        </CustomTabs>
     );
 
     const renderList = (
@@ -112,14 +69,12 @@ export const NotificationsDrawer = () => {
 
             <Drawer
                 open={drawer.value}
-                onClose={drawer.onFalse}
+                onClose={handleCloseNotifications}
                 anchor="right"
                 slotProps={{ backdrop: { invisible: true } }}
                 PaperProps={{ sx: { width: 1, maxWidth: 420 } }}
             >
                 {renderHead}
-
-                {renderTabs}
 
                 {renderList}
             </Drawer>
