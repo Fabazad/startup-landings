@@ -4,6 +4,10 @@ import { getServerWishListQuery } from "src/app/envy/queries/wishList/server";
 import { NotificationData } from "src/app/envy/types/Notification";
 import { NotificationType } from "src/app/envy/types/NotificationSetting";
 import { CONFIG } from "src/config-global";
+import { ListArchivedNotification } from "src/emails/ListArchivedNotification";
+import { paths } from "src/routes/paths";
+import { getUserEmailQueryAdmin } from "src/app/envy/queries/user/admin";
+import { getServerNotificationQueries } from "src/app/envy/queries/notification/server";
 
 const resend = new Resend(CONFIG.resend.apiKey);
 
@@ -21,18 +25,44 @@ export const createListArchivedNotification = async (
 
     const { wishList: archivedWishList } = wishListRes;
 
-    const followersRes = await wishListQueries.getFollowers(archivedWishList.id);
+    const followersRes = await wishListQueries.getFollowersIds(archivedWishList.id);
     if (!followersRes.success) throw new Error(followersRes.error);
-    const followers = followersRes.followers;
+    const followersIds = followersRes.followersIds;
 
-    if (!followers.length) return;
+    if (!followersIds.length) return;
     const { getNotificationSetting } = await getServerNotificationSettingsQueries();
+
     // TO IMPROVE - batch of promise all
-    await Promise.all(followers.map(async (follower) => {
-        const notificationSettingsRes = await getNotificationSetting(follower, NotificationType.LIST_ARCHIVED);
+    await Promise.all(followersIds.map(async (followerId) => {
+        const notificationSettingsRes = await getNotificationSetting(followerId, NotificationType.LIST_ARCHIVED);
         if (!notificationSettingsRes.success) throw new Error(notificationSettingsRes.error);
-        if (!notificationSettingsRes.notificationSetting) throw new Error('Notification setting not found');
         const { notificationSetting } = notificationSettingsRes;
 
+        console.log({ notificationSetting });
+
+        if (notificationSetting.inApp) {
+            const { createNotification } = await getServerNotificationQueries();
+            await createNotification({
+                type: NotificationType.LIST_ARCHIVED,
+                data: { listId: archivedWishList.id }
+            }, followerId);
+        }
+
+        if (notificationSetting.email) {
+            const userRes = await getUserEmailQueryAdmin(followerId);
+            if (!userRes.success) throw new Error(userRes.error);
+            const { email } = userRes;
+            await resend.emails.send({
+                from: 'Envy <envy@resend.dev>',
+                to: email,
+                subject: 'Une liste que vous suivez a été archivée',
+                html: ListArchivedNotification({
+                    listName: archivedWishList.name,
+                    listOwnerName,
+                    followedListUrl: `${CONFIG.serverUrl}${paths.envy.root}?tab=followed-lists`
+                }),
+            })
+        }
     }))
 }
+

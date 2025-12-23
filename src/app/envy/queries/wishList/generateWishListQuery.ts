@@ -163,13 +163,14 @@ export const generateWishListQuery = (supabase: SupabaseClient) => ({
         if (error) return { success: false, errorCode: "unknown" };
         return { success: true, hasWishList: !!data };
     },
-    getFollowers: async (wishListId: number): Promise<{ success: true, followers: string[] } | { success: false, error: string }> => {
+    getFollowersIds: async (wishListId: number): Promise<{ success: true, followersIds: string[] } | { success: false, error: string }> => {
         const { data, error } = await supabase
             .from('list_follows')
             .select('userId')
             .eq('listId', wishListId);
 
         if (error) return { success: false, error: error.message };
-        return { success: true, followers: data.map((follower: any) => follower.userId) };
+
+        return { success: true, followersIds: data.map((follower: any) => follower.userId) };
     },
 })
