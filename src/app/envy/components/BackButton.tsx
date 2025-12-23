@@ -28,7 +28,8 @@ export const BackButton = ({ fallbackPath = '/envy', sx, path }: BackButtonProps
         <Button
             startIcon={<Iconify icon="eva:arrow-ios-back-fill" />}
             sx={{ color: 'text.secondary', ...sx }}
-            onClick={handleBack}
+            onClick={!path ? handleBack : undefined}
+            href={path}
         >
             Retour
         </Button>

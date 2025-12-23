@@ -36,7 +36,7 @@ export default async function WishListPage({ params, searchParams }: {
     return (
         <Container maxWidth="lg" sx={{ py: 3 }}>
             <Stack direction="row" sx={{ mb: 2 }} justifyContent="space-between">
-                <BackButton fallbackPath={paths.envy.root} />
+                <BackButton path={paths.envy.root} />
                 <Stack sx={{ display: { xs: 'flex', md: 'none' } }}>
                     <WishListButtons wishList={wishList} user={user} />
                 </Stack>
