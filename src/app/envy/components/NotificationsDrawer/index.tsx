@@ -37,12 +37,12 @@ export const NotificationsDrawer = () => {
         setCurrentTab(newValue);
     }, []);
 
-    const { notifications, isLoading } = useNotifications();
+    const { notifications, isLoading, seeAllNotifications } = useNotifications();
 
-    const totalUnRead = notifications.filter((item) => item.seen === false).length;
+    const totalUnRead = notifications?.filter((item) => item.seen === false).length || 0;
 
-    const handleMarkAllAsRead = () => {
-        console.log('Mark all as read');
+    const handleMarkAllAsRead = async () => {
+        seeAllNotifications();
     };
 
     const renderHead = (

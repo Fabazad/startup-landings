@@ -1,5 +1,6 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { NotificationData } from "../../types/Notification";
+import { Notification } from "../../types/Notification";
 
 
 export const generateNotificationQueries = (supabase: SupabaseClient) => ({
@@ -18,4 +19,19 @@ export const generateNotificationQueries = (supabase: SupabaseClient) => ({
 
         return { success: true };
     },
+    getNotifications: async (userId: string): Promise<Notification[]> => {
+        const { data, error } = await supabase.from('notifications').select('*').eq('user_id', userId);
+        if (error) return [];
+        return data;
+    },
+    seeAllNotifications: async (userId: string): Promise<{ success: true } | { success: false, error: string }> => {
+        try {
+            const { data, error } = await supabase.from('notifications').update({ seen: true }).eq('user_id', userId).eq('seen', false);
+            if (error) return { success: false, error: error.message };
+        } catch (error) {
+            return { success: false, error: error.message };
+        }
+
+        return { success: true };
+    }
 })
