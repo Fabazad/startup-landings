@@ -92,8 +92,9 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
 
       if (error) toast.error(error.message);
       if (!data) return;
+      toast.success('Liste créée');
 
-      router.push(paths.envy.wishList.detail(data.id));
+      router.push(paths.envy.wishList.addWish(data.id));
     }
   };
 
