@@ -18,7 +18,7 @@ export const createWishBookedNotification = async (
     if (notificationData.type !== NotificationType.WISH_BOOKED) throw new Error('Invalid notification type');
     const wishQueries = await getServerWishQueries();
 
-    const wishRes = await wishQueries.getWishQuery(notificationData.data.wishId);
+    const wishRes = await wishQueries.getWishQuery(notificationData.bookedWishId);
     if (!wishRes.success) throw new Error(wishRes.errorCode);
     if (!wishRes.wish) throw new Error('Wish not found');
 
@@ -32,10 +32,7 @@ export const createWishBookedNotification = async (
 
     if (notificationSetting.inApp) {
         const notificationQueries = await getServerNotificationQueries();
-        const res = await notificationQueries.createNotification({
-            type: NotificationType.WISH_BOOKED,
-            data: notificationData.data
-        }, targetUserId);
+        const res = await notificationQueries.createNotification(notificationData, targetUserId);
         if (!res.success) throw new Error(res.error);
     }
 

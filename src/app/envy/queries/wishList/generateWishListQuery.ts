@@ -44,7 +44,7 @@ export const generateWishListQuery = (supabase: SupabaseClient) => ({
         const notificationQueries = getClientNotificationQueries();
         await notificationQueries.sendNotification({
             type: NotificationType.LIST_ARCHIVED,
-            data: { listId: wishListId }
+            archivedListId: wishListId,
         });
         return { success: true };
     },

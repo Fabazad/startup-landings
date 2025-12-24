@@ -16,7 +16,8 @@ export const getClientWishListQuery = () => {
             const notificationQueries = getClientNotificationQueries();
             await notificationQueries.sendNotification({
                 type: NotificationType.LIST_FOLLOWED,
-                data: { listId: wishListId, userId }
+                followedListId: wishListId,
+                followerId: userId
             });
 
             return { success: true };

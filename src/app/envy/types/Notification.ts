@@ -11,29 +11,23 @@ export type BaseNotification = z.infer<typeof baseNotificationSchema>;
 export const listFollowNotificationSchema = baseNotificationSchema.extend({
     seen: z.boolean(),
     type: z.enum([NotificationType.LIST_FOLLOWED]),
-    data: z.object({
-        listId: z.number(),
-        userId: z.string(),
-    })
+    followedListId: z.number(),
+    followerId: z.string(),
 });
 export type ListFollowNotification = z.infer<typeof listFollowNotificationSchema>;
 
 export const wishBookedNotificationSchema = baseNotificationSchema.extend({
     seen: z.boolean(),
     type: z.enum([NotificationType.WISH_BOOKED]),
-    data: z.object({
-        wishId: z.number(),
-        userId: z.string().optional()
-    })
+    bookedWishId: z.number(),
+    bookerId: z.string().optional()
 });
 export type WishBookedNotification = z.infer<typeof wishBookedNotificationSchema>;
 
 export const listArchivedNotificationSchema = baseNotificationSchema.extend({
     seen: z.boolean(),
     type: z.enum([NotificationType.LIST_ARCHIVED]),
-    data: z.object({
-        listId: z.number(),
-    })
+    archivedListId: z.number(),
 });
 export type ListArchivedNotification = z.infer<typeof listArchivedNotificationSchema>;
 

@@ -16,7 +16,7 @@ export const createListFollowedNotification = async (
 ): Promise<void> => {
     if (notificationData.type !== NotificationType.LIST_FOLLOWED) throw new Error('Invalid notification type');
     const wisListQueries = await getServerWishListQuery();
-    const listRes = await wisListQueries.getWishList(notificationData.data.listId);
+    const listRes = await wisListQueries.getWishList(notificationData.followedListId);
     if (!listRes.success) throw listRes.error;
     if (!listRes.wishList) throw new Error('List not found');
 
@@ -30,10 +30,7 @@ export const createListFollowedNotification = async (
 
     if (notificationSetting.inApp) {
         const notificationQueries = await getServerNotificationQueries();
-        const res = await notificationQueries.createNotification({
-            type: NotificationType.LIST_FOLLOWED,
-            data: notificationData.data
-        }, targetUserId);
+        const res = await notificationQueries.createNotification(notificationData, targetUserId);
         if (!res.success) throw new Error(res.error);
     }
     if (notificationSetting.email) {
@@ -42,7 +39,7 @@ export const createListFollowedNotification = async (
         if (!targetUserRes.email) throw new Error('User not found');
         const targetEmail = targetUserRes.email;
 
-        const followerRes = await getUserName(notificationData.data.userId);
+        const followerRes = await getUserName(notificationData.followerId);
         if (!followerRes.success) throw new Error(followerRes.error);
         const followerName = followerRes.name;
 

@@ -136,7 +136,7 @@ export const generateWishQueries = (supabase: SupabaseClient) => ({
 
         await notificationQueries.sendNotification({
             type: NotificationType.WISH_BOOKED,
-            data: { wishId, userId }
+            bookedWishId: wishId,
         });
         return { success: true };
     }

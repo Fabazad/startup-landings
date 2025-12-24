@@ -16,7 +16,8 @@ export const getServerWishListQuery = async () => {
             await createNotifications({
                 notificationData: {
                     type: NotificationType.LIST_FOLLOWED,
-                    data: { listId: wishListId, userId }
+                    followedListId: wishListId,
+                    followerId: userId
                 }
             })
 

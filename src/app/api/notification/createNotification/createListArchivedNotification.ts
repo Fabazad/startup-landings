@@ -17,7 +17,7 @@ export const createListArchivedNotification = async (
     if (notificationData.type !== NotificationType.LIST_ARCHIVED) throw new Error('Invalid notification type');
     const wishListQueries = await getServerWishListQuery();
 
-    const wishListRes = await wishListQueries.getWishList(notificationData.data.listId);
+    const wishListRes = await wishListQueries.getWishList(notificationData.archivedListId);
     if (!wishListRes.success) throw new Error(wishListRes.error);
     if (!wishListRes.wishList) throw new Error('Wish list not found');
 
@@ -38,14 +38,9 @@ export const createListArchivedNotification = async (
         if (!notificationSettingsRes.success) throw new Error(notificationSettingsRes.error);
         const { notificationSetting } = notificationSettingsRes;
 
-        console.log({ notificationSetting });
-
         if (notificationSetting.inApp) {
             const { createNotification } = await getServerNotificationQueries();
-            await createNotification({
-                type: NotificationType.LIST_ARCHIVED,
-                data: { listId: archivedWishList.id }
-            }, followerId);
+            await createNotification(notificationData, followerId);
         }
 
         if (notificationSetting.email) {
