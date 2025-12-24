@@ -65,45 +65,47 @@ export const CreatePassword = () => {
                 <Typography variant="h6" sx={{ mb: 3 }}>
                     Créer un mot de passe
                 </Typography>
-                <Field.Text
-                    name="newPassword"
-                    label="Nouveau mot de passe"
-                    type={password.value ? 'text' : 'password'}
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton onClick={password.onToggle} edge="end">
-                                    <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-                                </IconButton>
-                            </InputAdornment>
-                        ),
-                    }}
-                    helperText={
-                        <Stack component="span" direction="row" alignItems="center">
-                            <Iconify icon="eva:info-fill" width={16} sx={{ mr: 0.5 }} /> Le mot de passe doit contenir au moins 6 caractères
-                        </Stack>
-                    }
-                />
+                <Stack spacing={2} alignItems="flex-start">
+                    <Field.Text
+                        name="newPassword"
+                        label="Nouveau mot de passe"
+                        type={password.value ? 'text' : 'password'}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton onClick={password.onToggle} edge="end">
+                                        <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
+                        helperText={
+                            <Stack component="span" direction="row" alignItems="center">
+                                <Iconify icon="eva:info-fill" width={16} sx={{ mr: 0.5 }} /> Le mot de passe doit contenir au moins 6 caractères
+                            </Stack>
+                        }
+                    />
 
-                <Field.Text
-                    name="confirmNewPassword"
-                    type={password.value ? 'text' : 'password'}
-                    label="Confirmer le nouveau mot de passe"
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton onClick={password.onToggle} edge="end">
-                                    <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-                                </IconButton>
-                            </InputAdornment>
-                        ),
-                    }}
-                />
+                    <Field.Text
+                        name="confirmNewPassword"
+                        type={password.value ? 'text' : 'password'}
+                        label="Confirmer le nouveau mot de passe"
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton onClick={password.onToggle} edge="end">
+                                        <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
 
-                <LoadingButton type="submit" variant="contained" loading={isSubmitting} sx={{ ml: 'auto' }}>
-                    Créer le mot de passe
-                </LoadingButton>
+                    <LoadingButton type="submit" variant="contained" loading={isSubmitting} sx={{ ml: 'auto', borderRadius: 9999 }}>
+                        Créer le mot de passe
+                    </LoadingButton>
+                </Stack>
             </Form>
-        </Card>
+        </Card >
     );
 }

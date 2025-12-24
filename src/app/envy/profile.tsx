@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { RotatingBackground } from './components/RotatingBackground';
 import { User } from './types/User';
 import { paths } from 'src/routes/paths';
+import { Iconify } from 'src/components/iconify';
 
 export const Profile = ({ user, userStats }: { user: User; userStats: { wishListCount: number, wishCount: number, followingCount: number } }) => {
 
@@ -56,14 +57,14 @@ export const Profile = ({ user, userStats }: { user: User; userStats: { wishList
               {displayName}
             </Typography>
             <Typography variant="h6" sx={{ ml: 3, fontWeight: 400 }}>
-              <b>{userStats.wishListCount}</b> {userStats.wishListCount> 1 ? ' listes' : ' liste'} •  <b>{userStats.followingCount}</b>{userStats.followingCount> 1 ? ' listes suivies' : ' liste suivie'} • <b>{userStats.wishCount}</b> {userStats.wishCount> 1 ?  'Envies' :  'Envie'}
+              <b>{userStats.wishListCount}</b> {userStats.wishListCount > 1 ? ' listes' : ' liste'} •  <b>{userStats.followingCount}</b>{userStats.followingCount > 1 ? ' listes suivies' : ' liste suivie'} • <b>{userStats.wishCount}</b> {userStats.wishCount > 1 ? 'Envies' : 'Envie'}
             </Typography>
           </Box>
         </Box>
         <Box sx={{ height: '100%' }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: 3 }}>
             <Link href={paths.envy.wishList.create}>
-              <Button variant="contained" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }}>
+              <Button startIcon={<Iconify icon="eva:plus-fill" />} variant="contained" sx={{ borderRadius: 999, px: 3, py: 1, width: widthButton }}>
                 <Typography variant="h6" sx={{ fontWeight: 400 }}>
                   Créer une liste
                 </Typography>
@@ -84,12 +85,12 @@ export const Profile = ({ user, userStats }: { user: User; userStats: { wishList
               {displayName}
             </Typography>
             <Typography variant="h6" sx={{ fontWeight: 400 }}>
-              <b>{userStats.wishListCount}</b> {userStats.wishListCount> 1 ? ' listes' : ' liste'} •  <b>{userStats.followingCount}</b>{userStats.followingCount> 1 ? ' listes suivies' : ' liste suivie'} • <b>{userStats.wishCount}</b> {userStats.wishCount> 1 ?  'Envies' :  'Envie'}
+              <b>{userStats.wishListCount}</b> {userStats.wishListCount > 1 ? ' listes' : ' liste'} •  <b>{userStats.followingCount}</b>{userStats.followingCount > 1 ? ' listes suivies' : ' liste suivie'} • <b>{userStats.wishCount}</b> {userStats.wishCount > 1 ? 'Envies' : 'Envie'}
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', height: '100%', gap: 2 }}>
             <Link href={paths.envy.wishList.create}>
-              <Button variant="contained" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }}>
+              <Button startIcon={<Iconify icon="eva:plus-fill" />} variant="contained" sx={{ borderRadius: 999, px: 1, py: 1, width: widthButton }}>
                 <Typography variant="h6" sx={{ fontWeight: 400 }}>
                   Créer une liste
                 </Typography>

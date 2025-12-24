@@ -41,7 +41,20 @@ export function BreadcrumbsLink({ link, activeLast, disabled }: Props) {
         </Box>
       )}
 
-      {link.name}
+      {link.name && (
+        <Box
+          component="span"
+          sx={{
+            maxWidth: 240,
+            display: 'inline-block',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {link.name}
+        </Box>
+      )}
     </>
   );
 

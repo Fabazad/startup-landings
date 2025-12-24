@@ -8,6 +8,7 @@ import { BackButton } from "src/app/envy/components/BackButton";
 import { WishListButtons } from "./WishListButtons";
 import { redirect } from "next/navigation";
 import { getServerWishListQuery } from "../../queries/wishList/server";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 export default async function WishListPage({ params, searchParams }: {
     params: { wishListId: number },
@@ -36,13 +37,6 @@ export default async function WishListPage({ params, searchParams }: {
 
     return (
         <Container maxWidth="lg" sx={{ py: 3 }}>
-            <Stack direction="row" sx={{ mb: 2 }} justifyContent="space-between">
-                <BackButton path={isOwner ? paths.envy.root : paths.envy.root + "?tab=followed-lists"} />
-                <Stack sx={{ display: { xs: 'flex', md: 'none' } }}>
-                    <WishListButtons wishList={wishList} user={user} />
-                </Stack>
-            </Stack>
-
             <Stack
                 direction={{ xs: 'column', md: 'row' }}
                 justifyContent="space-between"
@@ -50,16 +44,32 @@ export default async function WishListPage({ params, searchParams }: {
                 spacing={2}
                 sx={{ mb: 3 }}
             >
-                <Stack direction="column" spacing={1}>
-                    <Typography variant="h3">
-                        {wishList.name}
-                    </Typography>
+                <Stack direction="column" spacing={1} width="100%">
+                    <CustomBreadcrumbs
+                        links={[
+                            isOwner ? { name: 'Mes listes', href: paths.envy.wishList.myLists } : { name: 'Listes suivies', href: paths.envy.wishList.followedLists },
+                            { name: wishList.name },
+                        ]}
+                        sx={{ mb: 2, position: 'relative', zIndex: 1 }}
+                    />
 
-                    <Stack direction="row" spacing={1} alignItems="center">
-                        <Avatar src={owner.avatar_url} alt={owner.display_name} sx={{ width: 24, height: 24 }} />
-                        <Typography variant="subtitle2" color="text.secondary">
-                            par {owner.display_name}
-                        </Typography>
+                    <Stack direction="row" justifyContent="space-between" width="100%">
+                        <Stack direction="column" spacing={1}>
+
+                            <Typography variant="h3">
+                                {wishList.name}
+                            </Typography>
+
+                            <Stack direction="row" spacing={1} alignItems="center">
+                                <Avatar src={owner.avatar_url} alt={owner.display_name} sx={{ width: 24, height: 24 }} />
+                                <Typography variant="subtitle2" color="text.secondary">
+                                    par {owner.display_name}
+                                </Typography>
+                            </Stack>
+                        </Stack>
+                        <Stack sx={{ display: { xs: 'flex', md: 'none' } }}>
+                            <WishListButtons wishList={wishList} user={user} />
+                        </Stack>
                     </Stack>
                 </Stack>
 

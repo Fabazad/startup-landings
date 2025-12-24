@@ -3,17 +3,25 @@ import { Image } from 'src/components/image';
 import { Iconify } from "src/components/iconify";
 import { WishDetailActions } from "./WishDetailActions";
 import { defaultWishImageUrl, Wish } from "src/app/envy/types/Wish";
-import { BackButton } from "src/app/envy/components/BackButton";
 import { User } from "src/app/envy/types/User";
 import { formatUrl } from "src/utils/format-url";
 import { paths } from "src/routes/paths";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 export const WishDetail = ({ wish, user }: { wish: Wish; user?: User }) => {
+
+    const isOwner = user?.id === wish.userId;
+
     return (
         <Box>
-            <Box sx={{ mb: 2 }}>
-                <BackButton path={paths.envy.wishList.detail(wish.list.id)} />
-            </Box>
+            <CustomBreadcrumbs
+                links={[
+                    isOwner ? { name: 'Mes listes', href: paths.envy.wishList.myLists } : { name: 'Listes suivies', href: paths.envy.wishList.followedLists },
+                    { name: wish.list.name, href: paths.envy.wishList.detail(wish.list.id) },
+                    { name: wish.name },
+                ]}
+                sx={{ mb: 2, position: 'relative', zIndex: 1, mt: { xs: 2, md: 0 } }}
+            />
             <Grid container spacing={5} sx={{ display: 'flex', alignItems: 'flex-start', pt: 0 }}>
 
                 <Grid item xs={12} md={6} sx={{ position: { md: 'sticky' }, height: 'fit-content', pt: 0 }} >

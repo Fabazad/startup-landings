@@ -31,7 +31,7 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
 
     return (
         <Box sx={{ py: 3 }}>
-            <Typography variant="h4" sx={{ mb: { xs: 3, md: 5 } }}>Compte</Typography>
+            <Typography variant="h4" sx={{ mb: 3 }}>Paramètres de votre compte</Typography>
             <Tabs value={tabs.value} onChange={handleTabChange} sx={{ mb: { xs: 3, md: 5 } }}>
                 {TABS.map((tab) => (
                     <Tab key={tab.value} label={tab.label} icon={tab.icon} value={tab.value} />

@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Divider, Drawer, IconButton, List, Stack, Typography } from "@mui/material"
+import { Box, Divider, Drawer, IconButton, List, Stack, Typography } from "@mui/material"
 import { ArchiveWishListButton } from "src/app/envy/wish-list/[wishListId]/WishListButtons/ArchiveWishListButton"
 import { DeleteWishListButton } from "src/app/envy/wish-list/[wishListId]/WishListButtons/DeleteWishListButton"
 import { FollowWishListButton } from "src/app/envy/wish-list/[wishListId]/WishListButtons/FollowWishListButton"
@@ -61,18 +61,20 @@ export const WishListButtons = ({ wishList, user }: { wishList: WishList; user?:
             </Stack>
             <Box sx={{ display: { xs: 'inline-block', sm: 'none' } }}>
                 <Box>
-                    <Button
+                    <IconButton
                         onClick={() => setOpen(true)}
                         sx={{ borderRadius: 9999, width: '100%', px: 2 }}
-                        variant="outlined"
                         color="inherit"
                     >
-                        Paramètres
-                    </Button>
+                        <Iconify icon="solar:settings-bold-duotone" width={24} color="action.active" />
+                    </IconButton>
                 </Box>
                 <Drawer anchor="bottom" open={open} onClose={() => setOpen(false)}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2 }}>
-                        <Typography variant="h6">Paramètres</Typography>
+                        <Stack direction="row" alignItems="center" spacing={1}>
+                            <Iconify icon="solar:settings-bold-duotone" width={24} color="action.active" />
+                            <Typography variant="h6">Paramètres de la liste</Typography>
+                        </Stack>
                         <IconButton onClick={() => setOpen(false)}>
                             <Iconify icon="material-symbols:close-rounded" width={24} />
                         </IconButton>
