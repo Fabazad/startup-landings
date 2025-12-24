@@ -10,8 +10,8 @@ export const getUserEmailQueryAdmin = async (userId: string): Promise<{ success:
 }
 
 export const getUserName = async (userId: string): Promise<{ success: true, name: string } | { success: false, error: string }> => {
-    const { data, error } = await supabaseAdmin.auth.admin.getUserById(userId);
+    const { data, error } = await supabaseAdmin.auth.admin.getUserById(userId); // TODO - use profiles table
     if (!data.user) return { success: false, error: 'User not found' };
     if (error) return { success: false, error: error.message };
-    return { success: true, name: data.user.user_metadata.displayName };
+    return { success: true, name: data.user.user_metadata.display_name };
 }
