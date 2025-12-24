@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const baseNotificationSchema = z.object({
     id: z.number(),
-    createdAt: z.date(),
+    created_at: z.date(),
     userId: z.string(),
 });
 export type BaseNotification = z.infer<typeof baseNotificationSchema>;

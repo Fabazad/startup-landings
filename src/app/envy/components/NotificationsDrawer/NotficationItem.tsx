@@ -105,7 +105,7 @@ export const NotificationItem = ({ notification, onClick }: { notification: Noti
                         />
                     }
                 >
-                    {fToNow(notification.createdAt)}
+                    {fToNow(notification.created_at)}
                     {notificationData.text}
                 </Stack>
             }

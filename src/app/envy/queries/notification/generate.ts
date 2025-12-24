@@ -28,7 +28,8 @@ export const generateNotificationQueries = (supabase: SupabaseClient) => ({
 
         const { data, error } = await supabase.from('notifications')
             .select(`*, ${followedListJoin}, ${followerJoin}, ${bookedWishJoin}, ${bookerJoin}, ${archivedListJoin}`)
-            .eq('user_id', userId);
+            .eq('user_id', userId)
+            .order('created_at', { ascending: false });
         if (error) return [];
         console.log(data)
         return data;
