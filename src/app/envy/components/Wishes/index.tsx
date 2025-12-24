@@ -6,9 +6,9 @@ import { WishGrid } from "./WishGrid";
 import { useAuthContext } from "src/auth/hooks";
 import { WishList } from "./WishList";
 
-export const Wishes = ({ wishListId, isBookedByUser }: { wishListId?: number; isBookedByUser?: string }) => {
+export const Wishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?: number; isBookedByUser?: string; isArchived?: boolean }) => {
 
-    const { wishes, deleteWish, isLoading, setIsFavorite, unbookWish, wishList } = useWishes({ wishListId, isBookedByUser });
+    const { wishes, deleteWish, isLoading, setIsFavorite, unbookWish, wishList } = useWishes({ wishListId, isBookedByUser, isArchived });
     const { user } = useAuthContext();
 
     return (

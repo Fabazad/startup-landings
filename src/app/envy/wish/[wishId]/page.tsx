@@ -5,7 +5,6 @@ import { WishDetail } from "./WishDetail";
 import { getAuthUser } from "src/auth/getAuthUser";
 import { getServerWishQueries } from '../../queries/wish/server';
 
-
 export async function generateMetadata({ params }: { params: { wishId: number } }): Promise<Metadata> {
     const { getWishQuery } = await getServerWishQueries()
     const wishResult = await getWishQuery(params.wishId);
@@ -27,7 +26,7 @@ export async function generateMetadata({ params }: { params: { wishId: number } 
     // Use first image or fallback
     const imageUrl = wish.imageUrls?.[0] || wish.imageUrl || `${baseUrl}/assets/images/placeholder.jpg`;
 
-    const title = `${wish.name} - Wish Details`;
+    const title = `Envy | ${wish.name} - Wish Details`;
     const description = wish.description
         ? wish.description.substring(0, 160)
         : `View details for ${wish.name}${wish.price ? ` - €${wish.price}` : ''}`;

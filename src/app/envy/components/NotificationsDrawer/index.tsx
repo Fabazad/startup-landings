@@ -21,6 +21,7 @@ import { useNotifications } from '../../hooks/useNotifications';
 import { NotificationItem } from './NotficationItem';
 import { NotificationsButton } from './NotificationsButton';
 import { paths } from 'src/routes/paths';
+import { Divider } from '@mui/material';
 
 
 export const NotificationsDrawer = () => {
@@ -56,7 +57,7 @@ export const NotificationsDrawer = () => {
             <Box component="ul">
                 {notifications?.map((notification) => (
                     <Box component="li" key={notification.id} sx={{ display: 'flex' }}>
-                        <NotificationItem notification={notification} />
+                        <NotificationItem notification={notification} onClick={handleCloseNotifications} />
                     </Box>
                 ))}
             </Box>
@@ -75,7 +76,7 @@ export const NotificationsDrawer = () => {
                 PaperProps={{ sx: { width: 1, maxWidth: 420 } }}
             >
                 {renderHead}
-
+                <Divider />
                 {renderList}
             </Drawer>
         </>

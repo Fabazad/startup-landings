@@ -10,7 +10,7 @@ import { useWishList } from "./useWishList";
 const { getWishesQuery, setIsFavoriteQuery, unbookWishQuery } = getClientWishQueries();
 
 
-export const useWishes = ({ wishListId, isBookedByUser }: { wishListId?: number, isBookedByUser?: string }): {
+export const useWishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?: number, isBookedByUser?: string, isArchived?: boolean }): {
     wishes?: Array<Wish>;
     isLoading: boolean;
     deleteWish: (wishId: number) => Promise<void>,
@@ -24,14 +24,15 @@ export const useWishes = ({ wishListId, isBookedByUser }: { wishListId?: number,
     const { wishList } = useWishList({ wishListId });
 
     const { data: wishes, isLoading, refetch } = useQuery<Array<Wish>>({
-        queryKey: ['wishes', wishListId, isBookedByUser],
+        queryKey: ['wishes', wishListId, isBookedByUser, isArchived],
         queryFn: async () => {
             if (!user) return [];
 
             const result = await getWishesQuery(
                 wishListId ?
                     { wishListId } :
-                    isBookedByUser ? { isBookedByUser } : { userId: user.id }
+                    isBookedByUser ? { isBookedByUser } : { userId: user.id },
+                isArchived
             );
 
             if (!result.success) throw result.errorCode;

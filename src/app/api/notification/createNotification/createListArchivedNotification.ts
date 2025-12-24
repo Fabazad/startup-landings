@@ -40,7 +40,8 @@ export const createListArchivedNotification = async (
 
         if (notificationSetting.inApp) {
             const { createNotification } = await getServerNotificationQueries();
-            await createNotification(notificationData, followerId);
+            const createNotificationRes = await createNotification(notificationData, followerId);
+            if (!createNotificationRes.success) throw new Error(createNotificationRes.error);
         }
 
         if (notificationSetting.email) {

@@ -44,10 +44,10 @@ export const generateWishQueries = (supabase: SupabaseClient) => ({
         return { success: true };
     },
 
-    getWishesQuery: async (params: { wishListId: number } | { userId: string } | { isBookedByUser: string }): Promise<{ success: true, wishes: Wish[] } | { success: false, errorCode: "unknown" }> => {
+    getWishesQuery: async (params: { wishListId: number } | { userId: string } | { isBookedByUser: string }, isArchived?: boolean): Promise<{ success: true, wishes: Wish[] } | { success: false, errorCode: "unknown" }> => {
         const query = supabase
             .from('wishes')
-            .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, user_id), listId:wish-lists (id, name)')
+            .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, user_id, archivedAt), listId:wish-lists (id, name)')
             .order('created_at', { ascending: false });
 
         if ('wishListId' in params) {
@@ -56,6 +56,14 @@ export const generateWishQueries = (supabase: SupabaseClient) => ({
             query.eq('wish-lists.user_id', params.userId);
         } else if ('isBookedByUser' in params) {
             query.eq('bookedByUser', params.isBookedByUser);
+        }
+
+        if (isArchived !== undefined) {
+            if (isArchived) {
+                query.not('list.archivedAt', 'is', null);
+            } else {
+                query.is('list.archivedAt', null);
+            }
         }
 
         const { data, error } = await query;
@@ -137,6 +145,7 @@ export const generateWishQueries = (supabase: SupabaseClient) => ({
         await notificationQueries.sendNotification({
             type: NotificationType.WISH_BOOKED,
             bookedWishId: wishId,
+            bookerId: userId,
         });
         return { success: true };
     }

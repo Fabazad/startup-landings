@@ -2,6 +2,6 @@ import { Wishes } from "../../Wishes"
 
 export const AllMyWishes = () => {
     return (
-        <Wishes />
+        <Wishes isArchived={false} />
     );
 };  
