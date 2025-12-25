@@ -134,7 +134,7 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
                     sx={{ width: '100%', height: '100%' }}
                 />
             </Stack>
-            <Stack sx={{ px: { xs: 3, sm: 10 }, py: 3, flex: 1 }}>
+            <Stack sx={{ px: { xs: 3, sm: 10 }, py: { xs: 3, sm: 7 }, flex: 1 }}>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3 }}>
                     <BackButton path={paths.envy.wishList.detail(wishListId)} />
                 </Stack>
@@ -204,7 +204,7 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
                             size="large"
                             type="submit"
                             variant="contained"
-                            sx={{ borderRadius: 9999 }}
+                            sx={{ borderRadius: 9999, position: 'sticky', bottom: 100, zIndex: 1000, mt: 2 }}
                             loading={isSubmitting}
                         >
                             {wish ? 'Modifier l\'envie' : 'Ajouter l\'envie'}
