@@ -21,7 +21,8 @@ import { useNotifications } from '../../hooks/useNotifications';
 import { NotificationItem } from './NotficationItem';
 import { NotificationsButton } from './NotificationsButton';
 import { paths } from 'src/routes/paths';
-import { Divider } from '@mui/material';
+import { CircularProgress, Divider } from '@mui/material';
+import { EmptyContent } from 'src/components/empty-content';
 
 
 export const NotificationsDrawer = () => {
@@ -52,17 +53,23 @@ export const NotificationsDrawer = () => {
         </Stack>
     );
 
-    const renderList = (
-        <Scrollbar>
-            <Box component="ul">
-                {notifications?.map((notification) => (
-                    <Box component="li" key={notification.id} sx={{ display: 'flex' }}>
-                        <NotificationItem notification={notification} onClick={handleCloseNotifications} />
-                    </Box>
-                ))}
-            </Box>
-        </Scrollbar>
-    );
+    const renderList = () => {
+        if (!notifications?.length) return <EmptyContent
+            title="Aucune notification"
+            description="Vous n'avez pas de notification"
+        />;
+        return (
+            <Scrollbar>
+                <Box component="ul">
+                    {notifications?.map((notification) => (
+                        <Box component="li" key={notification.id} sx={{ display: 'flex' }}>
+                            <NotificationItem notification={notification} onClick={handleCloseNotifications} />
+                        </Box>
+                    ))}
+                </Box>
+            </Scrollbar>
+        )
+    };
 
     return (
         <>
@@ -77,7 +84,7 @@ export const NotificationsDrawer = () => {
             >
                 {renderHead}
                 <Divider />
-                {renderList}
+                {renderList()}
             </Drawer>
         </>
     );

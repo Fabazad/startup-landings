@@ -15,15 +15,16 @@ import { useRouter } from 'next/navigation';
 import { Wish } from '../../types/Wish';
 import { paths } from 'src/routes/paths';
 import { Image } from 'src/components/image';
-import { BackButton } from '../BackButton';
 import { useState } from 'react';
 import { ImageSelector } from '../ImageSelector';
 import { getClientWishQueries } from '../../queries/wish/client';
+import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { WishList } from '../../types/WishList';
 
 
 // ----------------------------------------------------------------------
 
-export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wish }) => {
+export const UpsertWish = ({ wishList, wish }: { wishList: { id: number, name: string }, wish?: Wish }) => {
     const router = useRouter();
     const { mode, systemMode } = useColorScheme();
     const [isScraping, setIsScraping] = useState(false);
@@ -72,12 +73,12 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
         if (wish) {
             const res = await updateWishQuery({ wishId: wish.id, ...data });
             if (!res.success) toast.error(res.errorCode);
-            else router.push(paths.envy.wishList.detail(wishListId));
+            else router.push(paths.envy.wishList.detail(wishList.id));
         }
         else {
-            const res = await createWishQuery({ wishListId, ...data });
+            const res = await createWishQuery({ wishListId: wishList.id, ...data });
             if (!res.success) toast.error(res.errorCode);
-            else router.push(paths.envy.wishList.detail(wishListId));
+            else router.push(paths.envy.wishList.detail(wishList.id));
         }
     });
 
@@ -114,12 +115,14 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
 
     const scrappedImagesUrls = methods.watch('imageUrls') || [];
 
+    const title = wish ? `Modifier l'envie ${wish.name}` : 'Ajouter une envie';
+
     return (
         <Stack gap={2} direction="row" alignItems="flex-start" justifyContent="space-between">
             <Stack
                 flex={1}
                 sx={{
-                    display: { xs: 'none', md: 'flex' },
+                    display: { xs: 'none', sm: 'flex' },
                     position: 'sticky',
                     top: 'calc(var(--layout-header-desktop-height) + 24px)',
                 }}
@@ -135,12 +138,17 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
                 />
             </Stack>
             <Stack sx={{ px: { xs: 3, sm: 10 }, py: { xs: 3, sm: 7 }, flex: 1 }}>
-                <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3 }}>
-                    <BackButton path={paths.envy.wishList.detail(wishListId)} />
-                </Stack>
+                <CustomBreadcrumbs
+                    links={[
+                        { name: 'Mes listes', href: paths.envy.wishList.myLists },
+                        wishList ? { name: wishList.name, href: paths.envy.wishList.detail(wishList.id) } : { name: 'Mes listes', href: paths.envy.wishList.myLists },
+                        { name: title },
+                    ]}
+                    sx={{ mb: 2, position: 'relative', zIndex: 1 }}
+                />
                 <Form methods={methods} onSubmit={onSubmit}>
                     <Stack spacing={1} sx={{ mb: 3 }}>
-                        <Typography variant="h3">{wish ? 'Modifier l\'envie' : 'Ajouter une envie'}</Typography>
+                        <Typography variant="h3">{title}</Typography>
                         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                             {wish ? 'Modifiez les informations de l\'envie' : 'Renseignez le lien du produit souhaité, nous allons collecter pour vous les informations sur le site marchand si celui-ci est compatible.'}
                         </Typography>
@@ -199,12 +207,12 @@ export const UpsertWish = ({ wishListId, wish }: { wishListId: number, wish?: Wi
                         </Stack>
 
                         <LoadingButton
-                            fullWidth
                             color="inherit"
                             size="large"
                             type="submit"
                             variant="contained"
-                            sx={{ borderRadius: 9999, position: 'sticky', bottom: 100, zIndex: 1000, mt: 2 }}
+
+                            sx={{ borderRadius: 9999, position: 'sticky', bottom: 100, zIndex: 1000, mt: 2, mx: 2 }}
                             loading={isSubmitting}
                         >
                             {wish ? 'Modifier l\'envie' : 'Ajouter l\'envie'}

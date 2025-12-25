@@ -1,5 +1,15 @@
 import { z } from "zod";
 
+export enum ListType {
+    WISH_LIST = 'wish_list',
+    CHRISTMAS = 'christmas',
+    BIRTHDAY = 'birthday',
+    BIRTH = 'birth',
+    WEDDING = 'wedding',
+    HOUSEWARMING = 'housewarming',
+    BAPTISM = 'baptism',
+}
+
 export const wishListSchema = z.object({
     id: z.number(),
     name: z.string(),
@@ -14,6 +24,7 @@ export const wishListSchema = z.object({
     wishCount: z.number(),
     imageUrl: z.string(),
     created_at: z.date(),
+    type: z.nativeEnum(ListType),
 });
 
 export type WishList = z.infer<typeof wishListSchema>;
