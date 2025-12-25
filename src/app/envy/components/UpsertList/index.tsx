@@ -168,8 +168,11 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
             sx={{
               borderRadius: '9999px',
               mt: { xs: 4, sm: 3 },
-              width: { xs: '100%', sm: '40%' },
+              width: '100%',
               height: '48px',
+              position: { xs: "sticky", sm: "relative" },
+              bottom: { xs: 100, sm: 0 },
+              zIndex: 1000,
             }}
           >
             {wishList ? 'Mettre à jour la liste' : 'Créer la liste'}

@@ -14,18 +14,14 @@ import Image from 'next/image';
 
 const notificationDataRecord: Record<
     NotificationType,
-    (notification: Notification) => { avatarUrl: string, title: string, text: React.ReactNode, url: string }
+    (notification: Notification) => { avatarUrl: string, title: string, text: string, url: string }
 > = {
     [NotificationType.LIST_FOLLOWED]: (notification) => {
         if (notification.type !== NotificationType.LIST_FOLLOWED) throw new Error("Invalid notification type");
         return {
             avatarUrl: notification.follower.avatarUrl || `${CONFIG.assetsDir}/assets/icons/notification/ic-delivery.svg`,
             title: "Liste suivie",
-            text: (
-                <span>
-                    <b>{notification.follower.displayName}</b> suit votre liste <b>{notification.followedList.name}</b>
-                </span>
-            ),
+            text: `<b>${notification.follower.displayName}</b> suit votre liste <b>${notification.followedList.name}</b>`,
             url: paths.envy.wishList.detail(notification.followedList.id)
         }
     },
@@ -34,11 +30,7 @@ const notificationDataRecord: Record<
         return {
             avatarUrl: notification.booker?.avatarUrl || `${CONFIG.assetsDir}/assets/icons/notification/ic-delivery.svg`,
             title: "Envie réservée",
-            text: (
-                <span>
-                    <b>{notification.booker?.displayName || 'Un utilisateur'}</b> a réservé une envie sur votre liste <b>{notification.bookedWish.wishList.name}</b>
-                </span>
-            ),
+            text: `<b>${notification.booker?.displayName || 'Un utilisateur'}</b> a réservé une envie sur votre liste <b>${notification.bookedWish.wishList.name}</b>`,
             url: paths.envy.wishList.detail(notification.bookedWish.wishList.id)
         }
     },
@@ -47,24 +39,18 @@ const notificationDataRecord: Record<
         return {
             avatarUrl: notification.archivedList.user.avatarUrl || `${CONFIG.assetsDir}/assets/icons/notification/ic-delivery.svg`,
             title: "Liste archivée",
-            text: (
-                <span>
-                    <b>{notification.archivedList.user.displayName}</b> a archivé sa liste que vous suiviez : <b>{notification.archivedList.name}</b>
-                </span>
-            ),
+            text: "<b>{notification.archivedList.user.displayName}</b> a archivé sa liste que vous suiviez : <b>{notification.archivedList.name}</b>",
             url: paths.envy.root + "?tab=followed-lists"
         }
     },
 }
-const getNotificationData: (notification: Notification) => { avatarUrl: string, title: string, text: React.ReactNode, url: string } = (notification) => {
+const getNotificationData: (notification: Notification) => { avatarUrl: string, title: string, text: string, url: string } = (notification) => {
     return notificationDataRecord[notification.type](notification);
 }
 
 export const NotificationItem = ({ notification, onClick }: { notification: Notification, onClick: () => void }) => {
 
     const notificationData = getNotificationData(notification);
-
-    console.log(notificationData);
 
     const renderAvatar = (
         <ListItemAvatar>
@@ -87,7 +73,7 @@ export const NotificationItem = ({ notification, onClick }: { notification: Noti
     const renderText = (
         <ListItemText
             disableTypography
-            primary={reader(notificationData.title)}
+            primary={reader(notificationData.text)}
             secondary={
                 <Stack
                     direction="row"
@@ -106,7 +92,6 @@ export const NotificationItem = ({ notification, onClick }: { notification: Noti
                     }
                 >
                     {fToNow(notification.created_at)}
-                    {notificationData.text}
                 </Stack>
             }
         />
