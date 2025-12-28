@@ -81,21 +81,6 @@ export const Profile = ({ user }: { user: User }) => {
                         <Field.UploadAvatar
                             name="photoURL"
                             maxSize={3145728}
-                            helperText={
-                                <Typography
-                                    variant="caption"
-                                    sx={{
-                                        mt: 3,
-                                        mx: 'auto',
-                                        display: 'block',
-                                        textAlign: 'center',
-                                        color: 'text.disabled',
-                                    }}
-                                >
-                                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                                    <br /> max size of {fData(3145728)}
-                                </Typography>
-                            }
                         />
                     </Card>
                 </Grid>

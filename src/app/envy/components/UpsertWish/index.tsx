@@ -191,8 +191,8 @@ export const UpsertWish = ({ wishList, wish }: { wishList: { id: number, name: s
                                 </Typography>
                                 <ImageSelector
                                     imagesUrls={scrappedImagesUrls}
-                                    selectedImage={methods.watch('imageUrl')}
-                                    onSelectImage={(url) => methods.setValue('imageUrl', url)}
+                                    selectedImage={methods.watch('imageUrl') || scrappedImagesUrls[0]}
+                                    onSelectImage={(url) => methods.setValue('imageUrl', url as string)}
                                 />
                             </Stack>
                         )}

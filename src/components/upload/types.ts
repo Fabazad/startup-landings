@@ -35,6 +35,6 @@ export type UploadProps = DropzoneOptions & {
   onRemoveAll?: () => void;
   helperText?: React.ReactNode;
   placeholder?: React.ReactNode;
-  value?: FileUploadType | FilesUploadType;
+  value?: FileUploadType;
   onRemove?: (file: File | string) => void;
 };

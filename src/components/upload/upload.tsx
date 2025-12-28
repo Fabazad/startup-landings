@@ -1,8 +1,9 @@
+"use client";
+
 import { useDropzone } from 'react-dropzone';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import FormHelperText from '@mui/material/FormHelperText';
 
 import { varAlpha } from 'src/theme/styles';
 
@@ -14,6 +15,8 @@ import { MultiFilePreview } from './components/preview-multi-file';
 import { DeleteButton, SingleFilePreview } from './components/preview-single-file';
 
 import type { UploadProps } from './types';
+import { useTranslate } from 'src/locales';
+import { FormHelperText } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -38,6 +41,9 @@ export function Upload({
     ...other,
   });
 
+
+  const { t } = useTranslate();
+
   const isArray = Array.isArray(value) && multiple;
 
   const hasFile = !isArray && !!value;
@@ -54,7 +60,7 @@ export function Upload({
         <Box gap={1.5} display="flex" justifyContent="flex-end">
           {onRemoveAll && (
             <Button color="inherit" variant="outlined" size="small" onClick={onRemoveAll}>
-              Remove all
+              {t('upload.remove-all')}
             </Button>
           )}
 
@@ -65,7 +71,7 @@ export function Upload({
               onClick={onUpload}
               startIcon={<Iconify icon="eva:cloud-upload-fill" />}
             >
-              Upload
+              {t('upload.upload')}
             </Button>
           )}
         </Box>
@@ -98,13 +104,13 @@ export function Upload({
             borderColor: 'error.main',
             bgcolor: (theme) => varAlpha(theme.vars.palette.error.mainChannel, 0.08),
           }),
-          ...(hasFile && { padding: '28% 0' }),
+          ...(hasFile && { padding: '40% 0' }),
         }}
       >
         <input {...getInputProps()} />
 
         {/* Single file */}
-        {hasFile ? <SingleFilePreview file={value as File} /> : <UploadPlaceholder />}
+        {hasFile ? <SingleFilePreview file={value} /> : <UploadPlaceholder />}
       </Box>
 
       {/* Single file */}

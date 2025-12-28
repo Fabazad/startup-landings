@@ -14,11 +14,20 @@ import { useRouter } from 'next/navigation';
 import { ListType, WishList } from 'src/app/envy/types/WishList';
 import { paths } from 'src/routes/paths';
 import { Image } from 'src/components/image';
-import { BackButton } from '../BackButton';
 import { CONFIG } from 'src/config-global';
 import { ImageSelector } from '../ImageSelector';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 import { useState } from 'react';
+import { uploadListImageAndGetUrl } from '../../queries/storage';
+
+const getImageUrl = async (image: string | File): Promise<string> => {
+  if (image instanceof File) {
+    const url = await uploadListImageAndGetUrl(image);
+    return url;
+  } else {
+    return image;
+  }
+}
 
 const images: Record<ListType, string[]> = {
   [ListType.WISH_LIST]: [
@@ -66,7 +75,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
 
   const listTypeNameRecord: Record<ListType, string> = {
     [ListType.WISH_LIST]: 'Liste d\'envies (classique)',
-    [ListType.CHRISTMAS]: 'Liste de Noël',
+    [ListType.CHRISTMAS]: 'Liste de noël',
     [ListType.BIRTHDAY]: 'Liste d\'anniversaire',
     [ListType.BIRTH]: 'Liste de naissance',
     [ListType.WEDDING]: 'Liste de mariage',
@@ -77,8 +86,8 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
   const createListFormSchema = z.object({
     listName: z.string().min(1, { message: "Le nom de la liste est requis" }),
     description: z.string().optional(),
-    imageUrl: z.string().optional(),
     type: z.nativeEnum(ListType),
+    image: z.union([z.instanceof(File), z.string()])
   });
 
   type CreateListFormSchemaType = z.infer<typeof createListFormSchema>;
@@ -87,9 +96,9 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
     resolver: zodResolver(createListFormSchema),
     defaultValues: {
       listName: wishList?.name,
-      description: wishList?.description,
-      imageUrl: wishList?.imageUrl || images[ListType.WISH_LIST][0],
+      description: wishList?.description || undefined,
       type: wishList?.type || ListType.WISH_LIST,
+      image: wishList?.imageUrl || images[ListType.WISH_LIST][0],
     }
   });
 
@@ -101,13 +110,15 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
   const onSubmit = async () => {
     const values = methods.getValues();
 
+    const imageUrl = await getImageUrl(values.image);
+
     if (wishList) {
       const { error } = await supabase
         .from('wish-lists')
         .update({
           name: values.listName,
           description: values.description,
-          imageUrl: values.imageUrl,
+          imageUrl,
           type: values.type,
         })
         .eq('id', wishList.id);
@@ -122,7 +133,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
         .insert({
           name: values.listName,
           description: values.description,
-          imageUrl: values.imageUrl,
+          imageUrl,
           user_id: user?.id,
           type: values.type,
         })
@@ -140,7 +151,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
   const handleListTypeChange = (type: ListType) => {
     methods.setValue('type', type);
     setSelectableImages(images[type]);
-    methods.setValue('imageUrl', images[type][0]);
+    methods.setValue('image', images[type][0]);
   };
 
   const title = wishList ? `Mettre à jour la liste "${wishList.name}"` : 'Créer une liste d\'envies';
@@ -195,7 +206,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
 
             <Field.Text
               name="listName"
-              label="Nom de la liste"
+              label="Nom de votre liste"
               autoFocus
               placeholder="Ex: Liste de Noël de Gustave"
             />
@@ -214,8 +225,8 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
 
             <Field.Text
               name="description"
-              label="Description (optionnel)"
-              placeholder="Description de la liste"
+              label="Texte d'introduction (optionnel)"
+              placeholder="Ecrivez en quelques mots votre texte d'introduction"
               multiline
               minRows={3}
               maxRows={6}
@@ -227,8 +238,11 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
               </Typography>
               <ImageSelector
                 imagesUrls={selectableImages}
-                selectedImage={methods.watch('imageUrl')}
-                onSelectImage={(image) => methods.setValue('imageUrl', image)}
+                selectedImage={methods.watch('image')}
+                onSelectImage={(image) => {
+                  methods.setValue('image', image);
+                }}
+                canUpload
               />
             </Stack>
 

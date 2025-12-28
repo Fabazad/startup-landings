@@ -110,5 +110,17 @@
     "updatePasswordSuccess": "Mot de passe mis à jour avec succès",
     "returnToSignIn": "Retour à la connexion",
     "dontHaveAnAccount": "Vous n'avez pas de compte ?"
-  }
+  },
+  "upload": {
+    "placeholder": {
+      "title": "Déposez ou sélectionnez un fichier",
+      "description": "Déposez les fichiers ici ou cliquez pour parcourir vos fichiers.",
+      "browse": "Parcourir"
+    },
+    "remove-all": "Tout supprimer",
+    "upload": "Télécharger",
+    "accepted": "Accepté *.jpeg, *.jpg, *.png, *.gif",
+    "max-size": "Taille maximum"
+  },
+  "or": "ou"
 }

@@ -20,10 +20,10 @@ export const generateNotificationQueries = (supabase: SupabaseClient) => ({
         return { success: true };
     },
     getNotifications: async (userId: string): Promise<Notification[]> => {
-        const followerJoin = 'follower:profiles!notifications_followerId_fkey1(id,displayName:display_name,avatarUrl:avatar_url)';
+        const followerJoin = 'follower:profiles!notifications_followerId_fkey(id,displayName:display_name,avatarUrl:avatar_url)';
         const followedListJoin = 'followedList:"wish-lists"!notifications_followedListId_fkey(id,name)';
         const bookedWishJoin = 'bookedWish:"wishes"(id,name,wishList:"wish-lists"(id,name))';
-        const bookerJoin = 'booker:profiles!notifications_bookerId_fkey1(id,displayName:display_name,avatarUrl:avatar_url)';
+        const bookerJoin = 'booker:profiles!notifications_bookerId_fkey(id,displayName:display_name,avatarUrl:avatar_url)';
         const archivedListJoin = 'archivedList:"wish-lists"!notifications_archivedListId_fkey(id,name,user:"profiles"(id,displayName:display_name,avatarUrl:avatar_url))';
 
         const { data, error } = await supabase.from('notifications')

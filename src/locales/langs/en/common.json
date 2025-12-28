@@ -111,5 +111,17 @@
     "updatePasswordSuccess": "Password updated successfully",
     "returnToSignIn": "Return to sign in",
     "dontHaveAnAccount": "Don’t have an account?"
-  }
+  },
+  "upload": {
+    "placeholder": {
+      "title": "Drop or select file",
+      "description": "Drop files here or click to browse through your machine.",
+      "browse": "Browse"
+    },
+    "remove-all": "Remove all",
+    "upload": "Upload",
+    "accepted": "Accepted *.jpeg, *.jpg, *.png, *.gif",
+    "max-size": "Max size"
+  },
+  "or": "OR"
 }

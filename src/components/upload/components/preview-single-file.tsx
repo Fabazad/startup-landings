@@ -40,6 +40,7 @@ export function SingleFilePreview({ file, sx, className, ...other }: SingleFileP
           height: 1,
           borderRadius: 1,
           objectFit: 'cover',
+          overflow: 'hidden',
         }}
       />
     </Box>
