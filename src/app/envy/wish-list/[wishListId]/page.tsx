@@ -4,11 +4,12 @@ import { View500 } from "src/sections/error";
 import { NotFoundView } from "src/sections/error";
 import { getAuthUser } from "src/auth/getAuthUser";
 import { paths } from "src/routes/paths";
-import { BackButton } from "src/app/envy/components/BackButton";
 import { WishListButtons } from "./WishListButtons";
 import { redirect } from "next/navigation";
 import { getServerWishListQuery } from "../../queries/wishList/server";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
+import { Image } from "src/components/image";
+import { ST } from "next/dist/shared/lib/utils";
 
 export default async function WishListPage({ params, searchParams }: {
     params: { wishListId: number },
@@ -38,24 +39,33 @@ export default async function WishListPage({ params, searchParams }: {
     return (
         <Container maxWidth="lg" sx={{ py: 3 }}>
             <Stack
-                direction={{ xs: 'column', md: 'row' }}
+                direction="column"
                 justifyContent="space-between"
-                alignItems={{ xs: 'flex-start', md: 'center' }}
+                alignItems="flex-start"
                 spacing={2}
                 sx={{ mb: 3 }}
+
             >
-                <Stack direction="column" spacing={1} width="100%">
-                    <CustomBreadcrumbs
-                        links={[
-                            isOwner ? { name: 'Mes listes', href: paths.envy.wishList.myLists } : { name: 'Listes suivies', href: paths.envy.wishList.followedLists },
-                            { name: wishList.name },
-                        ]}
-                        sx={{ mb: 2, position: 'relative', zIndex: 1 }}
-                    />
+                <CustomBreadcrumbs
+                    links={[
+                        isOwner ? { name: 'Mes listes', href: paths.envy.wishList.myLists } : { name: 'Listes suivies', href: paths.envy.wishList.followedLists },
+                        { name: wishList.name },
+                    ]}
+                    sx={{ position: 'relative', zIndex: 1 }}
+                />
+
+                <Image
+                    src={wishList.imageUrl}
+                    alt={wishList.name}
+                    width="100%"
+                    sx={{ borderRadius: 2, height: { xs: 128, sm: 256 } }}
+                />
+
+                <Stack direction="row" spacing={1} width="100%" sx={{ position: "relative" }}>
 
                     <Stack direction="row" justifyContent="space-between" width="100%">
-                        <Stack direction="column" spacing={1}>
 
+                        <Stack direction="column" spacing={1}>
                             <Typography variant="h3">
                                 {wishList.name}
                             </Typography>
@@ -71,12 +81,13 @@ export default async function WishListPage({ params, searchParams }: {
                             <WishListButtons wishList={wishList} user={user} />
                         </Stack>
                     </Stack>
+
+                    <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
+                        <WishListButtons wishList={wishList} user={user} />
+                    </Stack>
+
                 </Stack>
 
-
-                <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
-                    <WishListButtons wishList={wishList} user={user} />
-                </Stack>
             </Stack>
 
             {
