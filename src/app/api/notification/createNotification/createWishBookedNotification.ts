@@ -25,13 +25,14 @@ export const createWishBookedNotification = async (
     const { wish } = wishRes;
     const targetUserId = wish.userId;
 
+    console.log({ targetUserId, bookerId: notificationData.bookerId });
+    if (targetUserId === notificationData.bookerId) return;
+
     const notificationSettingsQueries = await getServerNotificationSettingsQueries();
-    console.log("Notification settings queries", targetUserId, notificationData.type);
     const userNotificationSetting = await notificationSettingsQueries.getNotificationSetting(targetUserId, notificationData.type);
     if (!userNotificationSetting.success) throw new Error(userNotificationSetting.error);
     const { notificationSetting } = userNotificationSetting;
 
-    console.log("Notification setting", notificationSetting);
     if (notificationSetting.inApp) {
         const notificationQueries = await getServerNotificationQueries();
         const res = await notificationQueries.createNotification(notificationData, targetUserId);

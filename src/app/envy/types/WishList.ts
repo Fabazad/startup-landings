@@ -25,6 +25,8 @@ export const wishListSchema = z.object({
     imageUrl: z.string(),
     created_at: z.date(),
     type: z.nativeEnum(ListType),
+    isCollaborative: z.boolean(),
+    fundraising: z.string().optional(),
 });
 
 export type WishList = z.infer<typeof wishListSchema>;

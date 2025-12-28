@@ -9,10 +9,9 @@ import { WishItemSkeleton } from "./WishItemSekeleton";
 import { AddWishItem } from "./AddWishItem";
 import { WishItem } from "./WishItem";
 import { paths } from "src/routes/paths";
-import { User } from "src/app/envy/types/User";
 import { WishList } from "src/app/envy/types/WishList";
 
-export const WishGrid = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, user }: {
+export const WishGrid = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, canAddWish }: {
     wishes?: Array<Wish>,
     isLoading: boolean,
     wishList?: WishList;
@@ -20,10 +19,8 @@ export const WishGrid = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
     onDelete: (wishId: number) => void
     onUnbook: (wishId: number) => void
     showList?: boolean
-    user?: User
+    canAddWish: boolean
 }) => {
-    const canAddWish = user && wishList && user.id === wishList.user.id;
-
     if (!isLoading && wishes?.length === 0) return (
         <EmptyContent title="Aucune envie" description="Vous n'avez pas mis d'envies dans cette liste"
             action={wishList && (
@@ -56,7 +53,7 @@ export const WishGrid = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
                 <WishItemSkeleton /> :
                 (
                     <>
-                        {canAddWish && <AddWishItem wishListId={wishList.id} />}
+                        {wishList && canAddWish && <AddWishItem wishListId={wishList.id} />}
                         {wishes.map((wish) => (
                             <WishItem key={wish.id} wish={wish}
                                 onFavoriteClick={() => onFavoriteClick(wish.id, !wish.isFavorite)}

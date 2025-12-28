@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from 'src/components/hook-form';
-import { Box, MenuItem, Stack, Typography, useColorScheme } from '@mui/material';
+import { Box, ClickAwayListener, Divider, IconButton, MenuItem, Stack, Tooltip, Typography, useColorScheme } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { Field } from 'src/components/hook-form';
 import { useAuthContext } from 'src/auth/hooks';
@@ -19,6 +19,7 @@ import { ImageSelector } from '../ImageSelector';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 import { useState } from 'react';
 import { uploadListImageAndGetUrl } from '../../queries/storage';
+import { Iconify } from 'src/components/iconify';
 
 const getImageUrl = async (image: string | File): Promise<string> => {
   if (image instanceof File) {
@@ -34,34 +35,44 @@ const images: Record<ListType, string[]> = {
     `${CONFIG.assetsDir}/assets/images/list/birthday1.svg`,
     `${CONFIG.assetsDir}/assets/images/list/birthday2.svg`,
     `${CONFIG.assetsDir}/assets/images/list/birthday3.svg`,
+    `${CONFIG.assetsDir}/assets/images/list/birthday4.svg`,
   ],
   [ListType.CHRISTMAS]: [
     `${CONFIG.assetsDir}/assets/images/list/christmas1.svg`,
     `${CONFIG.assetsDir}/assets/images/list/christmas2.svg`,
     `${CONFIG.assetsDir}/assets/images/list/christmas3.svg`,
-    `${CONFIG.assetsDir}/assets/images/list/housewarming1.svg`,
-    `${CONFIG.assetsDir}/assets/images/list/wedding1.svg`,
-    `${CONFIG.assetsDir}/assets/images/list/wedding2.svg`,
+    `${CONFIG.assetsDir}/assets/images/list/christmas4.svg`,
+    `${CONFIG.assetsDir}/assets/images/list/christmas5.svg`,
   ],
   [ListType.BIRTHDAY]: [
     `${CONFIG.assetsDir}/assets/images/list/birthday1.svg`,
     `${CONFIG.assetsDir}/assets/images/list/birthday2.svg`,
     `${CONFIG.assetsDir}/assets/images/list/birthday3.svg`,
+    `${CONFIG.assetsDir}/assets/images/list/birthday4.svg`,
+    `${CONFIG.assetsDir}/assets/images/list/birthday5.svg`,
   ],
   [ListType.BIRTH]: [
-    `${CONFIG.assetsDir}/assets/images/list/birthday1.svg`,
-    `${CONFIG.assetsDir}/assets/images/list/birthday2.svg`,
-    `${CONFIG.assetsDir}/assets/images/list/birthday3.svg`,
+    `${CONFIG.assetsDir}/assets/images/list/birth1.svg`,
+    `${CONFIG.assetsDir}/assets/images/list/birth2.svg`,
+
   ],
   [ListType.WEDDING]: [
     `${CONFIG.assetsDir}/assets/images/list/wedding1.svg`,
     `${CONFIG.assetsDir}/assets/images/list/wedding2.svg`,
+    `${CONFIG.assetsDir}/assets/images/list/wedding3.svg`,
+    `${CONFIG.assetsDir}/assets/images/list/wedding4.svg`,
+
   ],
   [ListType.HOUSEWARMING]: [
     `${CONFIG.assetsDir}/assets/images/list/housewarming1.svg`,
+    `${CONFIG.assetsDir}/assets/images/list/housewarming2.svg`,
+    `${CONFIG.assetsDir}/assets/images/list/housewarming3.svg`,
+
   ],
   [ListType.BAPTISM]: [
     `${CONFIG.assetsDir}/assets/images/list/baptism1.svg`,
+    `${CONFIG.assetsDir}/assets/images/list/baptism2.svg`,
+
   ],
 };
 
@@ -70,6 +81,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
   const router = useRouter();
   const { mode, systemMode } = useColorScheme();
   const [selectableImages, setSelectableImages] = useState<string[]>(images[wishList?.type || ListType.WISH_LIST]);
+  const [isCollaborativeTooltipOpen, setIsCollaborativeTooltipOpen] = useState(false);
 
   const isDarkMode = mode === 'dark' || (mode === 'system' && systemMode === 'dark');
 
@@ -87,7 +99,9 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
     listName: z.string().min(1, { message: "Le nom de la liste est requis" }),
     description: z.string().optional(),
     type: z.nativeEnum(ListType),
-    image: z.union([z.instanceof(File), z.string()])
+    image: z.union([z.instanceof(File), z.string()]),
+    fundraising: z.string().optional(),
+    isCollaborative: z.boolean().default(false),
   });
 
   type CreateListFormSchemaType = z.infer<typeof createListFormSchema>;
@@ -99,6 +113,8 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
       description: wishList?.description || undefined,
       type: wishList?.type || ListType.WISH_LIST,
       image: wishList?.imageUrl || images[ListType.WISH_LIST][0],
+      isCollaborative: wishList?.isCollaborative || false,
+      fundraising: wishList?.fundraising || undefined,
     }
   });
 
@@ -120,6 +136,8 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
           description: values.description,
           imageUrl,
           type: values.type,
+          isCollaborative: values.isCollaborative,
+          fundraising: values.fundraising,
         })
         .eq('id', wishList.id);
 
@@ -136,6 +154,8 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
           imageUrl,
           user_id: user?.id,
           type: values.type,
+          isCollaborative: values.isCollaborative,
+          fundraising: values.fundraising,
         })
         .select('id')
         .single<{ id: number }>();
@@ -232,9 +252,10 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
               maxRows={6}
             />
 
+            <Divider />
             <Stack spacing={1}>
-              <Typography variant="subtitle1" color="text.secondary">
-                Image de la liste
+              <Typography variant="h6">
+                Choisir une image pour illustrer votre liste
               </Typography>
               <ImageSelector
                 imagesUrls={selectableImages}
@@ -245,6 +266,45 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
                 canUpload
               />
             </Stack>
+
+            <Divider />
+
+            <Typography variant="h6">
+              Paramètres de votre liste
+            </Typography>
+            <Field.Text
+              name="fundraising"
+              label="Lien de votre cagnotte en ligne"
+              placeholder="Ex : https://www.leetchi.com/fr/c/ma-cagnotte"
+            />
+            <Field.Switch
+              name="isCollaborative"
+              label={
+                <Typography variant="subtitle2">
+                  Liste collaborative ?
+                  <ClickAwayListener onClickAway={() => setIsCollaborativeTooltipOpen(false)}>
+                    <Tooltip
+                      disableFocusListener
+                      disableHoverListener
+                      disableTouchListener
+                      open={isCollaborativeTooltipOpen}
+                      arrow
+                      title={
+                        <Typography variant="body2">
+                          Permet aux autres utilisateurs de <b>rajouter des envies à votre liste</b> et de <b>voter pour leurs envies préférées</b>.<br />
+                          Vous pourrez aussi <b>réserver des envies sur votre propre liste</b>.
+                        </Typography>
+                      }
+                      slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}
+                    >
+                      <IconButton color="inherit" onClick={() => setIsCollaborativeTooltipOpen(!isCollaborativeTooltipOpen)}>
+                        <Iconify icon="eva:question-mark-circle-outline" />
+                      </IconButton>
+                    </Tooltip>
+                  </ClickAwayListener>
+                </Typography>
+              }
+            />
 
             <LoadingButton
               variant="contained"

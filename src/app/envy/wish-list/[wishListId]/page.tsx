@@ -9,7 +9,6 @@ import { redirect } from "next/navigation";
 import { getServerWishListQuery } from "../../queries/wishList/server";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 import { Image } from "src/components/image";
-import { ST } from "next/dist/shared/lib/utils";
 
 export default async function WishListPage({ params, searchParams }: {
     params: { wishListId: number },
@@ -85,7 +84,7 @@ export default async function WishListPage({ params, searchParams }: {
                 </Stack>
             </Stack>
 
-            <Divider sx={{ mb: 5 }} />
+            <Divider sx={{ mb: 5, mt: 2 }} />
 
             <Box sx={{ width: "100%", mb: 10 }}>
                 <Wishes wishListId={wishListId} />

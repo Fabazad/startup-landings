@@ -11,7 +11,7 @@ import { User } from "src/app/envy/types/User";
 import { WishList as WishListType } from "src/app/envy/types/WishList";
 
 
-export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, user }: {
+export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, canAddWish }: {
     wishes?: Array<Wish>,
     isLoading: boolean,
     wishList?: WishListType,
@@ -19,11 +19,8 @@ export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
     onDelete: (wishId: number) => void,
     onUnbook: (wishId: number) => void,
     showList?: boolean
-    user?: User
+    canAddWish: boolean
 }) => {
-
-    const canAddWish = user && wishList && user.id === wishList.user.id;
-
     if (!isLoading && wishes?.length === 0) return (
         <EmptyContent title="Aucune envie" action={
             <Button href={wishList?.id ? paths.envy.wishList.addWish(wishList?.id) : paths.envy.wishList.create} variant="contained" sx={{ borderRadius: 999, px: 2, mt: 1 }} size="large" color="warning">
@@ -39,7 +36,7 @@ export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
             {isLoading || wishes === undefined ? <WishItemSkeleton /> :
                 (
                     <>
-                        {canAddWish && <AddWishItem wishListId={wishList?.id} />}
+                        {wishList && canAddWish && <AddWishItem wishListId={wishList?.id} />}
                         {wishes.map((wish) => (
                             <WishItem key={wish.id} wish={wish}
                                 onFavoriteClick={() => onFavoriteClick(wish.id, !wish.isFavorite)}

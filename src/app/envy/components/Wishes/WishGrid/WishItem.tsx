@@ -81,8 +81,6 @@ export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook, showList =
                 </Card>
             </Link>
             <Box sx={{ position: "absolute", top: 0, right: 0, width: "100%" }}>
-                {!isUserOwner && <BookButton wish={wish} isBookedBy={isBookedBy} onUnbook={handleUnbook} />}
-
                 <FavoriteButton isFavorite={wish.isFavorite} onClick={onFavoriteClick} isUserOwner={isUserOwner} />
 
                 {isUserOwner && (

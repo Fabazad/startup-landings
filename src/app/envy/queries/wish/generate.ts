@@ -9,7 +9,7 @@ export const generateWishQueries = (supabase: SupabaseClient) => ({
     getWishQuery: async (wishId: number): Promise<{ success: true, wish?: Wish } | { success: false, errorCode: "unknown" }> => {
         const { data, error } = await supabase
             .from('wishes')
-            .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, user_id), listId:wish-lists (id, name)')
+            .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, name, userId:user_id, isCollaborative)')
             .eq('id', wishId)
             .maybeSingle<any>();
 
@@ -17,8 +17,7 @@ export const generateWishQueries = (supabase: SupabaseClient) => ({
         return {
             success: true, wish: {
                 ...data,
-                list: data.listId,
-                userId: data.list.user_id,
+                userId: data.list.userId,
                 imageUrls: data.imageUrls?.split(',')
             }
         };
@@ -47,7 +46,7 @@ export const generateWishQueries = (supabase: SupabaseClient) => ({
     getWishesQuery: async (params: { wishListId: number } | { userId: string } | { isBookedByUser: string }, isArchived?: boolean): Promise<{ success: true, wishes: Wish[] } | { success: false, errorCode: "unknown" }> => {
         const query = supabase
             .from('wishes')
-            .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, user_id, archivedAt), listId:wish-lists (id, name)')
+            .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, name, userId:user_id, archivedAt, isCollaborative)')
             .order('created_at', { ascending: false });
 
         if ('wishListId' in params) {
@@ -72,8 +71,7 @@ export const generateWishQueries = (supabase: SupabaseClient) => ({
 
         const wishes = data.map((wish: any) => ({
             ...wish,
-            userId: wish.list.user_id,
-            list: wish.listId,
+            userId: wish.list.userId,
             imageUrls: wish.imageUrls?.split(','),
         }));
         return { success: true, wishes };
@@ -141,6 +139,8 @@ export const generateWishQueries = (supabase: SupabaseClient) => ({
             })
             .eq('id', wishId);
         if (error) return { success: false, errorCode: "unknown" };
+
+
 
         await notificationQueries.sendNotification({
             type: NotificationType.WISH_BOOKED,

@@ -31,7 +31,6 @@ export const generateNotificationQueries = (supabase: SupabaseClient) => ({
             .eq('user_id', userId)
             .order('created_at', { ascending: false });
         if (error) return [];
-        console.log(data)
         return data;
     },
     seeAllNotifications: async (userId: string): Promise<{ success: true } | { success: false, error: string }> => {
