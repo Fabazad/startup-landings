@@ -12,6 +12,7 @@ import { Iconify } from "src/components/iconify"
 import { UpdateWishListButton } from "./UpdateWishListButton"
 import { useState } from "react"
 import { ShareWishListButton } from "./ShareWishListButton";
+import { FundraisingWishListButton } from "./FundraisingWishListButton";
 
 export const WishListButtons = ({ wishList, user }: { wishList: WishList; user?: User }) => {
 
@@ -24,6 +25,10 @@ export const WishListButtons = ({ wishList, user }: { wishList: WishList; user?:
         <>
             {!wishList.archivedAt && (
                 <ShareWishListButton wishListId={wishList.id} />
+            )}
+
+            {wishList.fundraising && (
+                <FundraisingWishListButton fundraisingUrl={wishList.fundraising} />
             )}
 
             {isOwner && !wishList.archivedAt && (
