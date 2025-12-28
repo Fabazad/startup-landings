@@ -1,7 +1,6 @@
 "use client";
 
-import { LoadingButton } from "@mui/lab"
-import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
+import { ListItemButton, ListItemIcon, ListItemText, Button } from "@mui/material"
 import { Iconify } from "src/components/iconify"
 import { toast } from "src/components/snackbar";
 import { paths } from "src/routes/paths";
@@ -35,14 +34,14 @@ export const ShareWishListButton = ({ wishListId }: { wishListId: number }) => {
 
     return (
         <>
-            <LoadingButton
+            <Button
                 variant="contained"
                 sx={{ borderRadius: 9999, width: '100%', px: 5, display: { xs: 'none', sm: 'flex' } }}
                 startIcon={<Iconify icon={icon} />}
                 onClick={handleNativeShare}
             >
                 {text}
-            </LoadingButton>
+            </Button>
             <ListItemButton onClick={handleNativeShare} sx={{ display: { xs: 'flex', sm: 'none' } }}>
                 <ListItemIcon>
                     <Iconify icon={icon} width={24} />

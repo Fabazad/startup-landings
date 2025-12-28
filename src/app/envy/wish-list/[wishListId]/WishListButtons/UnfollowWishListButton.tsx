@@ -33,7 +33,15 @@ export const UnfollowWishListButton = ({ wishListId, userId }: { wishListId: num
         <>
             <LoadingButton
                 variant="outlined"
-                sx={{ borderRadius: 9999, width: '100%', px: 5, display: { xs: 'none', sm: 'flex' } }}
+                sx={{
+                    borderRadius: 9999,
+                    width: '100%',
+                    px: 5,
+                    display: { xs: 'none', sm: 'flex' },
+                    bgcolor: 'background.paper',
+                    "&:hover": { bgcolor: 'background.neutral' },
+                    whiteSpace: 'nowrap'
+                }}
                 onClick={unfollowListHandler}
                 startIcon={<Iconify icon={icon} />}
                 loading={loading}

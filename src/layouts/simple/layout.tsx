@@ -92,7 +92,7 @@ export async function SimpleLayout({ sx, children, header, menuButtons }: Simple
       sx={sx}
     >
       <Main>
-        <Container sx={{ py: { xs: 0, md: 4 }, position: 'relative' }}>{children}</Container>
+        <Container sx={{ py: { xs: 2, sm: 4 }, position: 'relative' }}>{children}</Container>
       </Main>
       {menuButtons && (
         <Box bottom={0} left={0} right={0} width="100%" sx={{

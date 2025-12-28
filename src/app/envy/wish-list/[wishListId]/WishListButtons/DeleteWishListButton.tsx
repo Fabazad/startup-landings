@@ -34,7 +34,14 @@ export const DeleteWishListButton = ({ wishListId }: { wishListId: number }) => 
         <>
             <LoadingButton
                 variant="outlined"
-                sx={{ borderRadius: 9999, width: '100%', px: 5, display: { xs: 'none', sm: 'flex' } }}
+                sx={{
+                    borderRadius: 9999,
+                    width: '100%',
+                    px: 5,
+                    display: { xs: 'none', sm: 'flex' },
+                    bgcolor: 'background.paper',
+                    "&:hover": { bgcolor: 'background.neutral' }
+                }}
                 onClick={deleteListHandler}
                 startIcon={<Iconify icon={icon} />}
                 color="error"

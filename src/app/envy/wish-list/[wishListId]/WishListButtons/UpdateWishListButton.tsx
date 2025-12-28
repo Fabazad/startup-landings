@@ -12,7 +12,15 @@ export const UpdateWishListButton = ({ wishListId }: { wishListId: number }) => 
                 href={paths.envy.wishList.update(wishListId)}
                 variant="outlined"
                 startIcon={<Iconify icon={icon} />}
-                sx={{ borderRadius: 9999, width: '100%', px: 5, display: { xs: 'none', sm: 'flex' } }}
+                sx={{
+                    borderRadius: 9999,
+                    width: '100%',
+                    px: 5,
+                    display: { xs: 'none', sm: 'flex' },
+                    bgcolor: 'background.paper',
+                    "&:hover": { bgcolor: 'background.neutral' },
+                    whiteSpace: 'nowrap'
+                }}
             >
                 {text}
             </Button>

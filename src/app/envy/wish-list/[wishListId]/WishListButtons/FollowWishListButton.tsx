@@ -33,7 +33,7 @@ export const FollowWishListButton = ({ wishListId, userId }: { wishListId: numbe
         <>
             <LoadingButton
                 variant="contained"
-                sx={{ borderRadius: 9999, width: '100%', px: 5, display: { xs: 'none', sm: 'flex' } }}
+                sx={{ borderRadius: 9999, width: '100%', px: 5, display: { xs: 'none', sm: 'flex' }, whiteSpace: 'nowrap' }}
                 onClick={followListHandler}
                 startIcon={<Iconify icon={icon} />}
                 loading={loading}

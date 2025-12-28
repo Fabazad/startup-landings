@@ -1,4 +1,4 @@
-import { Divider, Stack, Typography, Container, Avatar } from "@mui/material";
+import { Divider, Stack, Typography, Container, Avatar, Box } from "@mui/material";
 import { Wishes } from "../../components/Wishes";
 import { View500 } from "src/sections/error";
 import { NotFoundView } from "src/sections/error";
@@ -37,14 +37,12 @@ export default async function WishListPage({ params, searchParams }: {
     }
 
     return (
-        <Container maxWidth="lg" sx={{ py: 3 }}>
+        <Box >
             <Stack
                 direction="column"
                 justifyContent="space-between"
                 alignItems="flex-start"
                 spacing={2}
-                sx={{ mb: 3 }}
-
             >
                 <CustomBreadcrumbs
                     links={[
@@ -54,54 +52,45 @@ export default async function WishListPage({ params, searchParams }: {
                     sx={{ position: 'relative', zIndex: 1 }}
                 />
 
-                <Image
-                    src={wishList.imageUrl}
-                    alt={wishList.name}
-                    width="100%"
-                    sx={{ borderRadius: 2, height: { xs: 128, sm: 256 } }}
-                />
-
-                <Stack direction="row" spacing={1} width="100%" sx={{ position: "relative" }}>
-
-                    <Stack direction="row" justifyContent="space-between" width="100%">
-
-                        <Stack direction="column" spacing={1}>
-                            <Typography variant="h3">
-                                {wishList.name}
-                            </Typography>
-
-                            <Stack direction="row" spacing={1} alignItems="center">
-                                <Avatar src={owner.avatar_url} alt={owner.display_name} sx={{ width: 24, height: 24 }} />
-                                <Typography variant="subtitle2" color="text.secondary">
-                                    par {owner.display_name}
-                                </Typography>
-                            </Stack>
-                        </Stack>
-                        <Stack sx={{ display: { xs: 'flex', md: 'none' } }}>
-                            <WishListButtons wishList={wishList} user={user} />
-                        </Stack>
-                    </Stack>
-
-                    <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
+                <Stack direction="row" spacing={1} width="100%" sx={{ position: "relative", p: 3, height: { xs: 128, sm: 256 } }}>
+                    <Image
+                        src={wishList.imageUrl}
+                        alt={wishList.name}
+                        width="100%"
+                        sx={{ borderRadius: 2, height: { xs: 128, sm: 256 }, position: "absolute", top: 0, left: 0, right: 0 }}
+                    />
+                    <Stack sx={{ position: 'absolute', top: { xs: 12, sm: 24 }, right: { xs: 12, sm: 24 } }}>
                         <WishListButtons wishList={wishList} user={user} />
                     </Stack>
-
                 </Stack>
 
-            </Stack>
-
-            {
-                wishList.description && (
-                    <Typography variant="body1" sx={{ color: 'text.secondary', mb: 5, whiteSpace: 'pre-wrap' }}>
-                        {wishList.description}
+                <Stack direction="column" justifyContent="space-between" width="100%" alignItems="center">
+                    <Box sx={{ p: 0.5, bgcolor: "background.paper", borderRadius: 999, mt: { xs: -7, sm: -10 }, zIndex: 1 }}>
+                        <Avatar src={owner.avatar_url} alt={owner.display_name} sx={{
+                            width: { xs: 56, sm: 100 },
+                            height: { xs: 56, sm: 100 }
+                        }} />
+                    </Box>
+                    <Typography variant="subtitle2" color="text.secondary">
+                        {owner.display_name}
                     </Typography>
-                )
-            }
+                    <Typography variant="h3">
+                        {wishList.name}
+                    </Typography>
+                    {wishList.description && (
+                        <Typography variant="body1" sx={{ color: 'text.secondary', mb: 5, whiteSpace: 'pre-wrap', textAlign: 'center' }}>
+                            {wishList.description}
+                        </Typography>
+                    )}
+                </Stack>
+            </Stack>
 
             <Divider sx={{ mb: 5 }} />
 
-            <Wishes wishListId={wishListId} />
+            <Box sx={{ width: "100%", mb: 10 }}>
+                <Wishes wishListId={wishListId} />
+            </Box>
 
-        </Container >
+        </Box >
     )
 }

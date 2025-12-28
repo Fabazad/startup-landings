@@ -63,8 +63,14 @@ export const WishListButtons = ({ wishList, user }: { wishList: WishList; user?:
                 <Box>
                     <IconButton
                         onClick={() => setOpen(true)}
-                        sx={{ borderRadius: 9999, width: '100%', px: 2 }}
-                        color="inherit"
+                        sx={{
+                            borderRadius: 9999,
+                            width: '100%',
+                            p: 1,
+                            bgcolor: 'background.paper',
+                            "&:active": { bgcolor: 'background.default' },
+                            "&:hover": { bgcolor: 'background.default' }
+                        }}
                     >
                         <Iconify icon="solar:settings-bold-duotone" width={24} color="action.active" />
                     </IconButton>

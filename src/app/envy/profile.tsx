@@ -24,7 +24,7 @@ export const Profile = ({ user, userStats }: { user: User; userStats: { wishList
   // Chloé, utilises les userStats pour afficher les données
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', my: { sm: 4, xs: 3 } }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
       <Box sx={{ width: '100%', display: { sm: "flex", xs: "none" }, flexDirection: 'row', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', height: height }}>
           <Box
