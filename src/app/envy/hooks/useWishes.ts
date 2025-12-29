@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { WishList } from "../types/WishList";
 import { useWishList } from "./useWishList";
 
-const { getWishesQuery, setIsFavoriteQuery, unbookWishQuery } = getClientWishQueries();
+const { getWishesQuery, setIsFavoriteQuery, unbookWishQuery, voteWishQuery, removeVoteWishQuery } = getClientWishQueries();
 
 
 export const useWishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?: number, isBookedByUser?: string, isArchived?: boolean }): {
@@ -17,6 +17,8 @@ export const useWishes = ({ wishListId, isBookedByUser, isArchived }: { wishList
     setIsFavorite: (wishId: number, isFavorite: boolean) => void,
     unbookWish: (wishId: number) => Promise<void>
     wishList?: WishList;
+    voteWish: (wishId: number) => Promise<void>,
+    removeVoteWish: (wishId: number) => Promise<void>
 } => {
 
     const { user } = useAuthContext();
@@ -60,5 +62,19 @@ export const useWishes = ({ wishListId, isBookedByUser, isArchived }: { wishList
         if (!result.success) toast.error("Une erreur est survenue");
     };
 
-    return { wishes: wishes, isLoading, deleteWish, setIsFavorite, unbookWish, wishList };
+    const voteWish = async (wishId: number) => {
+        if (!user) return;
+        const result = await voteWishQuery(wishId, user.id);
+        if (result.success) refetch();
+        if (!result.success) toast.error("Une erreur est survenue");
+    };
+
+    const removeVoteWish = async (wishId: number) => {
+        if (!user) return;
+        const result = await removeVoteWishQuery(wishId, user.id);
+        if (result.success) refetch();
+        if (!result.success) toast.error("Une erreur est survenue");
+    };
+
+    return { wishes: wishes, isLoading, deleteWish, setIsFavorite, unbookWish, wishList, voteWish, removeVoteWish };
 }

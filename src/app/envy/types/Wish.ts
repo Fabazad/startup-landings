@@ -18,6 +18,7 @@ export const wishSchema = z.object({
     list: z.object({ id: z.number(), name: z.string(), isCollaborative: z.boolean() }),
     imageUrl: z.string().optional(),
     imageUrls: z.array(z.string()).optional(),
+    votes: z.array(z.string()).optional(),
 });
 
 export type Wish = z.infer<typeof wishSchema>;

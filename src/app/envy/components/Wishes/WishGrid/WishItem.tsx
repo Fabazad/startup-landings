@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import { fCurrency } from 'src/utils/format-number';
 import { Image } from 'src/components/image';
 import { defaultWishImageUrl, Wish } from '../../../types/Wish';
-import { IconButton, Tooltip, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { FavoriteButton } from './FavoriteButton';
 import { useAuthContext } from 'src/auth/hooks/use-auth-context';
 import { BookButton } from './BookButton';
@@ -14,18 +14,19 @@ import { formatUrl } from 'src/utils/format-url';
 import Link from '@mui/material/Link';
 import { paths } from 'src/routes/paths';
 import { WishListLabel } from '../../WishListLabel';
-import { Iconify } from 'src/components/iconify';
+import { VoteButton } from './VoteButton';
 
 // ----------------------------------------------------------------------
 
 
-export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook, showList = false, canBook }: {
+export function WishItem({ wish, onFavoriteClick, onDelete, showList = false, canBook, onVote, onRemoveVote }: {
     wish: Wish;
     onFavoriteClick: () => void;
     onDelete: () => void;
-    onUnbook: () => void;
     showList?: boolean
     canBook: boolean
+    onVote: () => void;
+    onRemoveVote: () => void;
 }) {
 
     const { user } = useAuthContext();
@@ -33,6 +34,9 @@ export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook, showList =
 
     const isUserOwner = user?.id === wish.userId;
     const isBookedBy = wish.bookedByName || wish.bookedByUser?.display_name || null;
+
+    const isVotedByUser = wish.votes?.includes(user?.id || "") || false;
+    const voteCount = wish.votes?.length || 0;
 
     return (
         <Box sx={{ display: "grid", '&:hover .hided-button': { opacity: 1 }, position: "relative" }}>
@@ -93,12 +97,12 @@ export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook, showList =
             </Box>
             {wish.list.isCollaborative && (
                 <Stack spacing={1} direction="row" sx={{ position: "absolute", bottom: -16, right: 12 }}>
-                    <Tooltip title="Voter pour l'envie" placement="top" arrow slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}>
-                        <IconButton size="small" color='warning' sx={{ p: 1, bgcolor: 'warning.lighter', "&:hover": { bgcolor: 'warning.light' } }}>
-                            <Typography variant="body2">3</Typography>
-                            <Iconify sx={{ ml: 0.5 }} icon="solar:alt-arrow-up-bold-duotone" />
-                        </IconButton>
-                    </Tooltip>
+                    <VoteButton
+                        isVotedByUser={isVotedByUser}
+                        voteCount={voteCount}
+                        onVote={onVote}
+                        onRemoveVote={onRemoveVote}
+                    />
                 </Stack>
             )}
         </Box>

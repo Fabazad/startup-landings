@@ -5,11 +5,14 @@ import { getClientNotificationQueries } from "../notification/client";
 
 const notificationQueries = getClientNotificationQueries();
 
+const bookedByUserJoin = "bookedByUser:profiles (display_name,avatar_url,id)";
+const listJoin = "list:wish-lists!inner (id, name, userId:user_id, isCollaborative)"
+
 export const generateWishQueries = (supabase: SupabaseClient) => ({
     getWishQuery: async (wishId: number): Promise<{ success: true, wish?: Wish } | { success: false, errorCode: "unknown" }> => {
         const { data, error } = await supabase
             .from('wishes')
-            .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, name, userId:user_id, isCollaborative)')
+            .select(`*, ${bookedByUserJoin}, ${listJoin}`)
             .eq('id', wishId)
             .maybeSingle<any>();
 
@@ -46,7 +49,7 @@ export const generateWishQueries = (supabase: SupabaseClient) => ({
     getWishesQuery: async (params: { wishListId: number } | { userId: string } | { isBookedByUser: string }, isArchived?: boolean): Promise<{ success: true, wishes: Wish[] } | { success: false, errorCode: "unknown" }> => {
         const query = supabase
             .from('wishes')
-            .select('*, bookedByUser:profiles (display_name,avatar_url,id), list:wish-lists!inner (id, name, userId:user_id, archivedAt, isCollaborative)')
+            .select(`*, ${bookedByUserJoin}, ${listJoin}`)
             .order('created_at', { ascending: false });
 
         if ('wishListId' in params) {
@@ -147,6 +150,50 @@ export const generateWishQueries = (supabase: SupabaseClient) => ({
             bookedWishId: wishId,
             bookerId: userId,
         });
+        return { success: true };
+    },
+    voteWishQuery: async (wishId: number, userId: string): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
+        const { data: wish, error: fetchError } = await supabase
+            .from('wishes')
+            .select('votes')
+            .eq('id', wishId)
+            .single();
+
+        if (fetchError) return { success: false, errorCode: "unknown" };
+
+        const currentVotes = (wish?.votes as string[]) || [];
+
+        if (!currentVotes.includes(userId)) {
+            const { error: updateError } = await supabase
+                .from('wishes')
+                .update({ votes: [...currentVotes, userId] })
+                .eq('id', wishId);
+
+            if (updateError) return { success: false, errorCode: "unknown" };
+        }
+
+        return { success: true };
+    },
+    removeVoteWishQuery: async (wishId: number, userId: string): Promise<{ success: true } | { success: false, errorCode: "unknown" }> => {
+        const { data: wish, error: fetchError } = await supabase
+            .from('wishes')
+            .select('votes')
+            .eq('id', wishId)
+            .single();
+
+        if (fetchError) return { success: false, errorCode: "unknown" };
+
+        const currentVotes = (wish?.votes as string[]) || [];
+
+        if (currentVotes.includes(userId)) {
+            const { error: updateError } = await supabase
+                .from('wishes')
+                .update({ votes: currentVotes.filter(id => id !== userId) })
+                .eq('id', wishId);
+
+            if (updateError) return { success: false, errorCode: "unknown" };
+        }
+
         return { success: true };
     }
 })

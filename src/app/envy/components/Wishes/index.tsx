@@ -8,7 +8,7 @@ import { WishList } from "./WishList";
 
 export const Wishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?: number; isBookedByUser?: string; isArchived?: boolean }) => {
 
-    const { wishes, deleteWish, isLoading, setIsFavorite, unbookWish, wishList } = useWishes({ wishListId, isBookedByUser, isArchived });
+    const { wishes, deleteWish, isLoading, setIsFavorite, unbookWish, wishList, voteWish, removeVoteWish } = useWishes({ wishListId, isBookedByUser, isArchived });
     const { user } = useAuthContext();
 
     const isUserOwner = user && wishList && user.id === wishList.user.id;
@@ -21,10 +21,11 @@ export const Wishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?
                 <WishGrid wishList={wishList} wishes={wishes} isLoading={isLoading}
                     onFavoriteClick={(wishId, isFavorite) => setIsFavorite(wishId, isFavorite)}
                     onDelete={(wishId) => deleteWish(wishId)}
-                    onUnbook={(wishId) => unbookWish(wishId)}
                     showList={!wishList}
                     canAddWish={canAddWish}
                     canBook={canBook}
+                    onVote={(wishId) => voteWish(wishId)}
+                    onRemoveVote={(wishId) => removeVoteWish(wishId)}
                 />
             </Box>
             <Box sx={{ display: { xs: "block", md: "none" } }}>
