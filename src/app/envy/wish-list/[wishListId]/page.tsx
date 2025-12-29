@@ -1,4 +1,4 @@
-import { Divider, Stack, Typography, Container, Avatar, Box } from "@mui/material";
+import { Divider, Stack, Typography, Avatar, Box, Chip, Tooltip } from "@mui/material";
 import { Wishes } from "../../components/Wishes";
 import { View500 } from "src/sections/error";
 import { NotFoundView } from "src/sections/error";
@@ -9,6 +9,8 @@ import { redirect } from "next/navigation";
 import { getServerWishListQuery } from "../../queries/wishList/server";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 import { Image } from "src/components/image";
+import { Iconify } from "src/components/iconify";
+import { Label } from "src/components/label";
 
 export default async function WishListPage({ params, searchParams }: {
     params: { wishListId: number },
@@ -61,6 +63,25 @@ export default async function WishListPage({ params, searchParams }: {
                     <Stack sx={{ position: 'absolute', top: { xs: 12, sm: 24 }, right: { xs: 12, sm: 24 } }}>
                         <WishListButtons wishList={wishList} user={user} />
                     </Stack>
+                    {wishList.isCollaborative && (
+                        <Tooltip slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }} arrow placement="bottom" title={
+                            <Typography variant="body2">
+                                Permet aux autres utilisateurs de <b>rajouter des envies à votre liste</b> et de <b>voter pour leurs envies préférées</b>.<br />
+                                Vous pourrez aussi <b>réserver des envies sur votre propre liste</b>.
+                            </Typography>
+                        } >
+                            <Stack sx={{ position: 'absolute', top: { xs: 12, sm: 24 }, left: { xs: 12, sm: 24 } }}>
+                                <Label
+                                    startIcon={<Iconify icon="solar:users-group-two-rounded-bold-duotone" />}
+                                    color="secondary"
+                                    variant="filled"
+                                    sx={{ p: 2, borderRadius: 2, fontSize: '0.9rem' }}
+                                >
+                                    Liste Collaborative
+                                </Label>
+                            </Stack>
+                        </Tooltip>
+                    )}
                 </Stack>
 
                 <Stack direction="column" justifyContent="space-between" width="100%" alignItems="center">

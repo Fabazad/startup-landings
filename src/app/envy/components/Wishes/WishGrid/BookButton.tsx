@@ -7,7 +7,7 @@ export const BookButton = ({ isBookedBy }: { isBookedBy: string | null }) => {
         <Box>
             {isBookedBy && (
                 <Tooltip title={`Réservée par ${isBookedBy}`} placement="top" arrow slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}>
-                    <Stack sx={{ position: 'absolute', left: 20, top: 20, zIndex: 9, m: 0, flexDirection: 'row', gap: 2, bgcolor: "background.paper", borderRadius: 1, p: 1, pr: 2 }}>
+                    <Stack sx={{ position: 'absolute', left: 20, top: 20, zIndex: 9, m: 0, flexDirection: 'row', gap: 1, bgcolor: "background.paper", borderRadius: 999, p: 1, px: 2 }}>
                         <Iconify
                             icon="solar:lock-keyhole-minimalistic-bold-duotone"
                             width={24}
