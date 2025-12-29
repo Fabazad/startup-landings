@@ -28,12 +28,6 @@ export const FeatureImage = ({
         position: 'relative',
         bgcolor: 'transparent',
         overflow: 'hidden',
-        boxShadow: (theme) =>
-          `-40px 40px 80px 0px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
-        [stylesMode.dark]: {
-          boxShadow: (theme) =>
-            `-40px 40px 80px 0px ${varAlpha(theme.vars.palette.common.blackChannel, 0.16)}`,
-        },
         maxWidth: 500,
         maxHeight: 600,
       }}

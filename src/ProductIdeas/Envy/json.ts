@@ -58,7 +58,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
                     }
                 }
             ],
-            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/multi-stores-wishlist.png`
+            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/multi-stores-wishlist.svg`
         },
         {
             "id": "easy-sharing",
@@ -106,7 +106,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
                     }
                 }
             ],
-            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/easy-sharing.png`
+            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/easy-sharing.svg`
         },
         {
             "id": "events-and-lists",
@@ -154,55 +154,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
                     }
                 }
             ],
-            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/events-and-lists.png`
-        },
-        {
-            "id": "tracking-payments",
-            "icon": "mdi:gift-open-outline",
-            "pain": {
-                "en": "You never know who bought what, and guests are afraid to choose the same gift.",
-                "fr": "Vous ne savez jamais qui a acheté quoi, et vos proches ont peur de choisir le même cadeau."
-            },
-            "title": {
-                "en": "Reservations & cash pot",
-                "fr": "Réservations & cagnotte"
-            },
-            "items": [
-                {
-                    "icon": "mdi:bell-outline",
-                    "title": {
-                        "en": "Smart reservations",
-                        "fr": "Réservations intelligentes"
-                    },
-                    "description": {
-                        "en": "Guests reserve gifts anonymously or not, and you’re notified when a gift is taken.",
-                        "fr": "Les invités réservent les cadeaux, en anonyme ou non, et vous êtes averti quand un cadeau est pris."
-                    }
-                },
-                {
-                    "icon": "mdi:piggy-bank-outline",
-                    "title": {
-                        "en": "Add a money pot",
-                        "fr": "Ajoutez une cagnotte"
-                    },
-                    "description": {
-                        "en": "Connect a digital cash pot so friends can contribute when a gift is too expensive.",
-                        "fr": "Reliez une cagnotte en ligne pour que vos proches participent aux cadeaux plus chers."
-                    }
-                },
-                {
-                    "icon": "mdi:shield-check",
-                    "title": {
-                        "en": "Clear view for everyone",
-                        "fr": "Visibilité pour tous"
-                    },
-                    "description": {
-                        "en": "Guests see prices, links and notes, so they can choose calmly within their budget.",
-                        "fr": "Les invités voient prix, liens et notes pour choisir sereinement selon leur budget."
-                    }
-                }
-            ],
-            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/tracking-payments.png`
+            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/events-and-lists.svg`
         },
         {
             "id": "simple-free-access",
@@ -228,17 +180,6 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
                     }
                 },
                 {
-                    "icon": "mdi:extension-puzzle",
-                    "title": {
-                        "en": "Browser extension",
-                        "fr": "Extension navigateur"
-                    },
-                    "description": {
-                        "en": "Save a product to your wishlist directly while browsing your favourite shops.",
-                        "fr": "Enregistrez un produit dans votre wishlist directement en naviguant sur vos boutiques préférées."
-                    }
-                },
-                {
                     "icon": "mdi:currency-eur-off",
                     "title": {
                         "en": "100% free service",
@@ -250,7 +191,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
                     }
                 }
             ],
-            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/simple-free-access.png`
+            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/simple-free-access.svg`
         }
     ],
     "heroTexts": {
