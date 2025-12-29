@@ -14,10 +14,11 @@ export const FundraisingWishListButton = ({ fundraisingUrl }: { fundraisingUrl: 
                 sx={{ borderRadius: 9999, width: '100%', px: 5, display: { xs: 'none', sm: 'flex' } }}
                 startIcon={<Iconify icon={icon} />}
                 href={fundraisingUrl}
+                target="_blank"
             >
                 {text}
             </Button>
-            <ListItemButton href={fundraisingUrl} sx={{ display: { xs: 'flex', sm: 'none' } }}>
+            <ListItemButton href={fundraisingUrl} target="_blank" sx={{ display: { xs: 'flex', sm: 'none' } }}>
                 <ListItemIcon>
                     <Iconify icon={icon} width={24} />
                 </ListItemIcon>
