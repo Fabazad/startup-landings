@@ -395,21 +395,21 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
                 "en": "Wish Lists",
                 "fr": "Listes d'envies"
             },
-            "value": 1200
+            "value": 840
         },
         {
             "label": {
                 "en": "Wishes",
                 "fr": "Envies"
             },
-            "value": 7500
+            "value": 6400
         },
         {
             "label": {
                 "en": "Gifts Reserved",
                 "fr": "Cadeaux réservés"
             },
-            "value": 5100
+            "value": 3600
         }
     ]
 }
