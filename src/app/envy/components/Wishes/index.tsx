@@ -34,6 +34,7 @@ export const Wishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?
                     onUnbook={(wishId) => unbookWish(wishId)}
                     showList={!wishList}
                     canAddWish={canAddWish}
+                    canBook={canBook}
                 />
             </Box>
         </Box >

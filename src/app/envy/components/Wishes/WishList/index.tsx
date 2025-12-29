@@ -11,7 +11,7 @@ import { User } from "src/app/envy/types/User";
 import { WishList as WishListType } from "src/app/envy/types/WishList";
 
 
-export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, canAddWish }: {
+export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, canAddWish, canBook }: {
     wishes?: Array<Wish>,
     isLoading: boolean,
     wishList?: WishListType,
@@ -20,6 +20,7 @@ export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
     onUnbook: (wishId: number) => void,
     showList?: boolean
     canAddWish: boolean
+    canBook: boolean
 }) => {
     if (!isLoading && wishes?.length === 0) return (
         <EmptyContent title="Aucune envie" action={
@@ -43,6 +44,7 @@ export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
                                 onDelete={() => onDelete(wish.id)}
                                 onUnbook={() => onUnbook(wish.id)}
                                 showList={showList}
+                                canBook={canBook}
                             />
                         ))}
                     </>

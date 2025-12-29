@@ -5,11 +5,12 @@ import { Wish } from "src/app/envy/types/Wish";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
 import { paths } from "src/routes/paths";
 
-export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
+export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook, canBook }: {
     wish: Wish;
     onFavoriteClick: () => void;
     onDelete: () => void;
     onUnbook: () => void
+    canBook: boolean
 }) => {
 
     const { user } = useAuthContext();
@@ -47,7 +48,7 @@ export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook }: {
                 </Box>
                 <Divider />
                 <List sx={{ p: 2 }}>
-                    {!isUserOwner && (
+                    {canBook && (
                         <ListItemButton href={paths.envy.wish.detail(wish.id)} onClick={handleBook} disabled={!!isBookedBy && !isBookedByAuthUser}>
                             <ListItemIcon>
                                 <Iconify icon="solar:lock-keyhole-minimalistic-bold-duotone" width={24} color="secondary.main" />

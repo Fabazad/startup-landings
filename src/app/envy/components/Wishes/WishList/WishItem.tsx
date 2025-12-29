@@ -9,12 +9,13 @@ import { formatUrl } from "src/utils/format-url";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
 import { WishListLabel } from "../../WishListLabel";
 
-export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook, showList = false }: {
+export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook, showList = false, canBook }: {
     wish: Wish;
     onFavoriteClick: () => void;
     onDelete: () => void;
     onUnbook: () => void
     showList?: boolean
+    canBook: boolean
 }) => {
 
     const { user } = useAuthContext();
@@ -27,7 +28,7 @@ export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook, showList =
                 <Card sx={{ position: 'relative', display: 'flex', gap: 2, height: 100, alignItems: 'center', p: 2, pr: 8 }}>
                     <Box sx={{ width: 60, minWidth: 60 }}>
                         {wish.isFavorite && <Iconify icon="solar:heart-bold" width={24} color="error.main" sx={{ position: 'absolute', top: 10, left: 10, zIndex: 9 }} />}
-                        {!isUserOwner && isBookedBy && <Iconify icon="solar:lock-keyhole-minimalistic-bold-duotone" width={24} color="secondary.main" sx={{ position: 'absolute', top: 38, left: 35, zIndex: 9 }} />}
+                        {canBook && <Iconify icon="solar:lock-keyhole-minimalistic-bold-duotone" width={24} color="secondary.main" sx={{ position: 'absolute', top: 38, left: 35, zIndex: 9 }} />}
                         <Image alt={wish.name} src={wish.imageUrl || defaultWishImageUrl} ratio="1/1" sx={{ borderRadius: 2, opacity: !isUserOwner && isBookedBy ? 0.5 : 1 }} />
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', justifyContent: 'center', gap: 1, flex: 1, minWidth: 0 }}>
@@ -65,7 +66,7 @@ export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook, showList =
                 </Card>
             </Link >
             <Box sx={{ flexShrink: 0, position: 'absolute', top: 0, right: 16, height: "100%", display: 'flex', alignItems: 'center' }}>
-                <SettingsButton wish={wish} onFavoriteClick={onFavoriteClick} onDelete={onDelete} onUnbook={onUnbook} />
+                <SettingsButton wish={wish} onFavoriteClick={onFavoriteClick} onDelete={onDelete} onUnbook={onUnbook} canBook={canBook} />
             </Box>
         </Box>
     );
