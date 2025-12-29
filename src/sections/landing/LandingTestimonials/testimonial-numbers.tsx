@@ -4,24 +4,24 @@ import { AnimateCountUp, varFade } from 'src/components/animate';
 import { TextGradient } from '../components/text-gradient';
 import { HorizontalDivider } from './horizontal-divider';
 import { VerticalDivider } from './vertical-divider';
+import { useProductIdea } from 'src/app/product-idea-provider';
 
 export const TestimonialNumbers = () => {
+
+  const { testimonialNumbers } = useProductIdea()
+
   return (
     <Stack sx={{ py: { xs: 5, md: 8 }, position: 'relative' }}>
       <HorizontalDivider position="top" />
 
       <Stack spacing={5} direction={{ xs: 'column', md: 'row' }} divider={<VerticalDivider />}>
-        {[
-          { label: 'Inscriptions', value: 1500 },
-          { label: 'Reviews', value: 50 },
-          { label: 'Review rate', value: 4.7 },
-        ].map((item) => (
+        {testimonialNumbers.map((item) => (
           <Stack key={item.label} spacing={2} sx={{ textAlign: 'center', width: 1 }}>
             <m.div variants={varFade({ distance: 24 }).inUp}>
               <AnimateCountUp
                 to={item.value}
-                unit={item.label === 'Inscriptions' ? 'k+' : '+'}
-                toFixed={item.label === 'Reviews' ? 0 : 1}
+                toFixed={1}
+                unit={item.unit}
                 sx={{
                   fontWeight: 'fontWeightBold',
                   fontSize: { xs: 40, md: 64 },
@@ -32,13 +32,7 @@ export const TestimonialNumbers = () => {
             </m.div>
 
             <m.div variants={varFade({ distance: 24 }).inUp}>
-              <Box
-                component="span"
-                sx={(theme) => ({
-                  opacity: 0.8,
-                  typography: 'h5',
-                })}
-              >
+              <Box component="span" sx={{ opacity: 0.8, typography: 'h5' }}>
                 <TextGradient>{item.label}</TextGradient>
               </Box>
             </m.div>

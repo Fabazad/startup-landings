@@ -7,6 +7,7 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
   isReady: false,
   themeColor: 'orange',
   logo: 'panda',
+  ctaName: { en: 'Plan your first trip', fr: 'Planifie ton premier voyage' },
   features: [
     {
       id: 'f1',
@@ -397,4 +398,8 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
       ],
     },
   },
+  testimonialNumbers: [
+    { label: { en: 'Events', fr: 'Événements' }, value: 1500 },
+    { label: { en: 'Participants', fr: 'Participants' }, value: 6000 },
+  ],
 };

@@ -6,6 +6,7 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
   isReady: false,
   themeColor: 'purple',
   logo: 'octopus',
+  ctaName: { en: 'Monitor your first competitor', fr: 'Surveille ton premier concurrent' },
   heroTexts: {
     description: {
       en: 'Identify competitors. Track pricing, features, ads, user feedback and more.\nGet real-time insights to act fast and stay ahead.',
@@ -443,4 +444,8 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       ],
     },
   },
+  testimonialNumbers: [
+    { label: { en: 'Monitored Competitors', fr: 'Competiteurs surveillés' }, value: 1500 },
+    { label: { en: 'Insights Generated', fr: 'Insights générés' }, value: 570000 },
+  ],
 };

@@ -527,4 +527,8 @@ export const VIBY_PRODUCT_IDEA: RawProductIdea = {
       ],
     },
   },
+  testimonialNumbers: [
+    { label: { en: 'Events', fr: 'Événements' }, value: 1500 },
+    { label: { en: 'Participants', fr: 'Participants' }, value: 6000 },
+  ],
 };

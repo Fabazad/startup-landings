@@ -70,6 +70,7 @@ type GenericProductIdea<Text extends Translated | string> = {
   themeColor: PrimaryColor;
   /** The logo should be either 'panda' => cute logo, 'octopus' => more professional logo or 'heart' => more modern logo. */
   logo: 'panda' | 'octopus' | 'heart' | 'gift';
+  ctaName?: Text;
   /** Minimum 3 features, maximum 5 features. */
   features: GenericFeature<Text>[];
   heroTexts: {
@@ -85,6 +86,7 @@ type GenericProductIdea<Text extends Translated | string> = {
     titlePart1: Text;
     titlePart2: Text;
   };
+  testimonialNumbers: Array<{ label: Text; value: number; unit?: string }>
   plans: GenericPlans<Text> | null;
 };
 
@@ -97,6 +99,7 @@ export const translateProductIdea = (
 ): ProductIdea => {
   return {
     ...productIdea,
+    ctaName: productIdea.ctaName?.[lang],
     heroTexts: {
       ...productIdea.heroTexts,
       description: productIdea.heroTexts.description[lang],
@@ -140,5 +143,9 @@ export const translateProductIdea = (
         included: productIdea.plans.ultimate.included.map((included) => included[lang]),
       },
     },
+    testimonialNumbers: productIdea.testimonialNumbers.map((item) => ({
+      ...item,
+      label: item.label[lang],
+    })),
   };
 };

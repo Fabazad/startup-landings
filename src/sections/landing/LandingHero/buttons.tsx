@@ -5,7 +5,7 @@ import { useProductIdea } from 'src/app/product-idea-provider';
 import { GetStartedButton } from '../components/get-started-button';
 
 export const Buttons = () => {
-  const { plans, isReady } = useProductIdea();
+  const { plans } = useProductIdea();
   return (
     <Box display="flex" flexWrap="wrap" justifyContent="center" gap={{ xs: 1.5, sm: 2 }}>
       <AnimatedDiv>

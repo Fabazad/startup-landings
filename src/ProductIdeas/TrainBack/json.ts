@@ -6,6 +6,7 @@ export const TRAIN_BACK_PRODUCT_IDEA: RawProductIdea = {
   isReady: false,
   themeColor: 'blue',
   logo: 'octopus',
+  ctaName: { en: 'Get your first refund', fr: 'Obtiens ton premier remboursement' },
   heroTexts: {
     description: {
       en: 'Train Back scans your SNCF trips, spots every eligible delay, files the claim for you and sends you the money. No forms, no stress, just refunds you should never have missed.',
@@ -527,4 +528,9 @@ export const TRAIN_BACK_PRODUCT_IDEA: RawProductIdea = {
       ],
     },
   },
+  testimonialNumbers: [
+    { label: { en: 'Refunds', fr: 'Remboursements' }, value: 750 },
+    { label: { en: 'Refund amount', fr: 'Montant des remboursements' }, value: 120000, unit: '€' },
+    { label: { en: 'Trains with delays', fr: 'Trajets avec retards' }, value: 2500 },
+  ],
 };

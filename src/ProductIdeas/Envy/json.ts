@@ -7,6 +7,10 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
     "isReady": true,
     "themeColor": "purple",
     "logo": "gift",
+    "ctaName": {
+        "en": "Create your first list",
+        "fr": "Créer votre première liste"
+    },
     "features": [
         {
             "id": "multi-stores-wishlist",
@@ -443,5 +447,28 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
             "fr": "les amis et les organisateurs"
         }
     },
-    "plans": null
+    "plans": null,
+    "testimonialNumbers": [
+        {
+            "label": {
+                "en": "Wish Lists",
+                "fr": "Listes d'envies"
+            },
+            "value": 1200
+        },
+        {
+            "label": {
+                "en": "Wishes",
+                "fr": "Envies"
+            },
+            "value": 7500
+        },
+        {
+            "label": {
+                "en": "Gifts Reserved",
+                "fr": "Cadeaux réservés"
+            },
+            "value": 5100
+        }
+    ]
 }

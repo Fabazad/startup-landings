@@ -17,7 +17,7 @@ export const GetStartedButton = ({
   buttonName: string;
 }) => {
   const { setOpenModal, subscriptionStep } = useSubscription();
-  const { name: productName, isReady } = useProductIdea();
+  const { name: productName, isReady, ctaName } = useProductIdea();
 
   const handleClick = () => {
     setOpenModal(true);
@@ -40,11 +40,12 @@ export const GetStartedButton = ({
       sx={{
         display: 'inline-flex',
         borderRadius: 999,
+        px: 3
       }}
     >
       {subscriptionStep === SubscriptionStep.SUCCESS
         ? t('landing.hero.buttons.open-waiting-list')
-        : t('landing.hero.buttons.get-started')}
+        : ctaName || t('landing.hero.buttons.get-started')}
     </Button>
   );
 };
