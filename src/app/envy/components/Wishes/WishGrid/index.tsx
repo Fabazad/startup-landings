@@ -11,7 +11,7 @@ import { WishItem } from "./WishItem";
 import { paths } from "src/routes/paths";
 import { WishList } from "src/app/envy/types/WishList";
 
-export const WishGrid = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, canAddWish }: {
+export const WishGrid = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, canAddWish, canBook }: {
     wishes?: Array<Wish>,
     isLoading: boolean,
     wishList?: WishList;
@@ -20,6 +20,7 @@ export const WishGrid = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
     onUnbook: (wishId: number) => void
     showList?: boolean
     canAddWish: boolean
+    canBook: boolean
 }) => {
     if (!isLoading && wishes?.length === 0) return (
         <EmptyContent title="Aucune envie" description="Vous n'avez pas mis d'envies dans cette liste"
@@ -60,6 +61,7 @@ export const WishGrid = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
                                 onDelete={() => onDelete(wish.id)}
                                 onUnbook={() => onUnbook(wish.id)}
                                 showList={showList}
+                                canBook={canBook}
                             />
                         ))}
                     </>

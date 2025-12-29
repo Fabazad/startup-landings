@@ -13,6 +13,7 @@ export const Wishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?
 
     const isUserOwner = user && wishList && user.id === wishList.user.id;
     const canAddWish = !!(user && wishList && (wishList.isCollaborative || isUserOwner));
+    const canBook = !!(user && wishList && (wishList.isCollaborative || !isUserOwner));
 
     return (
         <Box>
@@ -23,6 +24,7 @@ export const Wishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?
                     onUnbook={(wishId) => unbookWish(wishId)}
                     showList={!wishList}
                     canAddWish={canAddWish}
+                    canBook={canBook}
                 />
             </Box>
             <Box sx={{ display: { xs: "block", md: "none" } }}>

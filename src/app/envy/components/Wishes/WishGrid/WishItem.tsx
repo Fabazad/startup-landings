@@ -18,12 +18,13 @@ import { WishListLabel } from '../../WishListLabel';
 // ----------------------------------------------------------------------
 
 
-export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook, showList = false }: {
+export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook, showList = false, canBook }: {
     wish: Wish;
     onFavoriteClick: () => void;
     onDelete: () => void;
     onUnbook: () => void;
     showList?: boolean
+    canBook: boolean
 }) {
 
     const { user } = useAuthContext();
@@ -31,10 +32,6 @@ export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook, showList =
 
     const isUserOwner = user?.id === wish.userId;
     const isBookedBy = wish.bookedByName || wish.bookedByUser?.display_name || null;
-
-    const handleUnbook = () => {
-        confirm("Êtes-vous sûr de vouloir annuler votre réservation ?") && onUnbook();
-    }
 
     return (
         <Box sx={{ display: "grid", '&:hover .hided-button': { opacity: 1 }, position: "relative" }}>
@@ -81,6 +78,8 @@ export function WishItem({ wish, onFavoriteClick, onDelete, onUnbook, showList =
                 </Card>
             </Link>
             <Box sx={{ position: "absolute", top: 0, right: 0, width: "100%" }}>
+                {canBook && <BookButton isBookedBy={isBookedBy} />}
+
                 <FavoriteButton isFavorite={wish.isFavorite} onClick={onFavoriteClick} isUserOwner={isUserOwner} />
 
                 {isUserOwner && (

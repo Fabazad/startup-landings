@@ -3,7 +3,7 @@ import { Iconify } from "src/components/iconify"
 
 export const UpdateButton = ({ wishId }: { wishId: number }) => {
     return (
-        <Tooltip title="Modifier" placement="top" arrow
+        <Tooltip title="Modifier" placement="right" arrow
             slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}>
             <Fab
                 color="default"
@@ -11,7 +11,7 @@ export const UpdateButton = ({ wishId }: { wishId: number }) => {
                 className="hided-button"
                 href={`/envy/wish/${wishId}/update`}
                 sx={{
-                    left: 80, top: 16, zIndex: 10,
+                    right: 16, top: 74, zIndex: 10,
                     position: 'absolute',
                     opacity: 0,
                     transition: (theme) =>

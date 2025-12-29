@@ -1,21 +1,7 @@
-import { Box, Fab, Stack, Tooltip, Typography } from "@mui/material";
+import { Box, Stack, Tooltip, Typography } from "@mui/material";
 import { Iconify } from "src/components/iconify";
-import { useAuthContext } from "src/auth/hooks/use-auth-context";
-import { Wish } from "src/app/envy/types/Wish";
-import { paths } from "src/routes/paths";
 
-export const BookButton = ({ wish, isBookedBy, onUnbook }: { wish: Wish; isBookedBy: string | null, onUnbook: () => void }) => {
-
-    const { user } = useAuthContext();
-
-    const isBookedByAuthUser = !!(user && wish.bookedByUser?.id === user.id);
-
-    const handleBook = (e: React.MouseEvent<HTMLButtonElement>) => {
-        if (isBookedByAuthUser) {
-            e.preventDefault();
-            onUnbook();
-        }
-    }
+export const BookButton = ({ isBookedBy }: { isBookedBy: string | null }) => {
 
     return (
         <Box>
@@ -32,35 +18,6 @@ export const BookButton = ({ wish, isBookedBy, onUnbook }: { wish: Wish; isBooke
                         </Typography>
 
                     </Stack>
-                </Tooltip>
-            )}
-            {(!isBookedBy || isBookedByAuthUser) && (
-                <Tooltip title={isBookedByAuthUser ? "Annuler la réservation" : "Réserver l'envie"}
-                    placement="top" arrow
-                    slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}
-                >
-                    <Fab
-                        color={isBookedByAuthUser ? "error" : "secondary"}
-                        size="medium"
-                        className="hided-button"
-                        href={paths.envy.wish.detail(wish.id)}
-                        disabled={!!isBookedBy && !isBookedByAuthUser}
-                        onClick={handleBook}
-                        sx={{
-                            left: 16,
-                            top: 16,
-                            zIndex: 10,
-                            position: 'absolute',
-                            opacity: 0,
-                            transition: (theme) =>
-                                theme.transitions.create('all', {
-                                    easing: theme.transitions.easing.easeInOut,
-                                    duration: theme.transitions.duration.shorter,
-                                }),
-                        }}
-                    >
-                        <Iconify icon="solar:lock-keyhole-minimalistic-bold-duotone" width={24} />
-                    </Fab>
                 </Tooltip>
             )}
         </Box>

@@ -8,7 +8,7 @@ export const DeleteButton = ({ onDelete }: { onDelete: () => void }) => {
     };
 
     return (
-        <Tooltip title="Supprimer" placement="top" arrow
+        <Tooltip title="Supprimer" placement="right" arrow
             slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}>
             <Fab
                 color="default"
@@ -17,7 +17,7 @@ export const DeleteButton = ({ onDelete }: { onDelete: () => void }) => {
                 onClick={handleDelete}
                 sx={{
                     opacity: 0,
-                    left: 16, top: 16, zIndex: 10,
+                    right: 16, top: 132, zIndex: 10,
                     position: 'absolute',
                 }}
             >
