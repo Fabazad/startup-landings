@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Box, Card, Stack, Typography } from "@mui/material";
+import { Box, Button, Card, Stack, Typography } from "@mui/material";
 import { Image } from 'src/components/image';
 import { defaultWishImageUrl, Wish } from "src/app/envy/types/Wish";
 import { SettingsButton } from "./SettingsButton";
@@ -8,19 +8,23 @@ import { fCurrency } from "src/utils/format-number";
 import { formatUrl } from "src/utils/format-url";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
 import { WishListLabel } from "../../WishListLabel";
+import { VoteButton } from "./VoteButton";
 
-export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook, showList = false, canBook }: {
+export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook, showList = false, canBook, voteWish, removeVoteWish }: {
     wish: Wish;
     onFavoriteClick: () => void;
     onDelete: () => void;
     onUnbook: () => void
     showList?: boolean
     canBook: boolean
+    voteWish: () => void
+    removeVoteWish: () => void
 }) => {
 
     const { user } = useAuthContext();
-    const isUserOwner = user?.id === wish.userId;
     const isBookedBy = wish.bookedByName || wish.bookedByUser?.display_name || null;
+    const isVotedByUser = wish.votes?.includes(user?.id || "") || false;
+    const voteCount = wish.votes?.length || 0;
 
     return (
         <Box sx={{ position: 'relative' }}>
@@ -65,8 +69,26 @@ export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook, showList =
 
                 </Card>
             </Link >
+            {wish.list.isCollaborative && (
+                <Box sx={{ position: 'absolute', bottom: -12, right: 6, zIndex: 9 }}>
+                    <VoteButton
+                        isVotedByUser={isVotedByUser}
+                        voteCount={voteCount}
+                        onVote={voteWish}
+                        onRemoveVote={removeVoteWish}
+                    />
+                </Box>
+            )}
             <Box sx={{ flexShrink: 0, position: 'absolute', top: 0, right: 16, height: "100%", display: 'flex', alignItems: 'center' }}>
-                <SettingsButton wish={wish} onFavoriteClick={onFavoriteClick} onDelete={onDelete} onUnbook={onUnbook} canBook={canBook} />
+                <SettingsButton
+                    wish={wish}
+                    onFavoriteClick={onFavoriteClick}
+                    onDelete={onDelete}
+                    onUnbook={onUnbook}
+                    canBook={canBook}
+                    voteWish={voteWish}
+                    removeVoteWish={removeVoteWish}
+                />
             </Box>
         </Box>
     );

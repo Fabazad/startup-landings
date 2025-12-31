@@ -5,12 +5,14 @@ import { Wish } from "src/app/envy/types/Wish";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
 import { paths } from "src/routes/paths";
 
-export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook, canBook }: {
+export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook, canBook, voteWish, removeVoteWish }: {
     wish: Wish;
     onFavoriteClick: () => void;
     onDelete: () => void;
     onUnbook: () => void
     canBook: boolean
+    voteWish: () => void
+    removeVoteWish: () => void
 }) => {
 
     const { user } = useAuthContext();
@@ -19,6 +21,7 @@ export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook, canB
     const isUserOwner = user?.id === wish.userId;
     const isBookedBy = wish.bookedByName || wish.bookedByUser?.display_name || null;
     const isBookedByAuthUser = !!(user && wish.bookedByUser?.id === user.id);
+    const isVotedByUser = !!(user && wish.list.isCollaborative && wish.votes?.includes(user.id))
 
     const handleDelete = () => {
         confirm("Voulez-vous vraiment supprimer cette envie ?") && onDelete();
@@ -49,7 +52,7 @@ export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook, canB
                 <Divider />
                 <List sx={{ p: 2 }}>
                     {canBook && (
-                        <ListItemButton href={paths.envy.wish.detail(wish.id)} onClick={handleBook} disabled={!!isBookedBy && !isBookedByAuthUser}>
+                        <ListItemButton href={paths.envy.wish.detail(wish.id)} disabled={!!isBookedBy && !isBookedByAuthUser}>
                             <ListItemIcon>
                                 <Iconify icon="solar:lock-keyhole-minimalistic-bold-duotone" width={24} color="secondary.main" />
                             </ListItemIcon>
@@ -59,7 +62,16 @@ export const SettingsButton = ({ wish, onFavoriteClick, onDelete, onUnbook, canB
                             />
                         </ListItemButton>
                     )}
-                    {isUserOwner && (
+                    {wish.list.isCollaborative && (
+                        <ListItemButton onClick={isVotedByUser ? removeVoteWish : voteWish}>
+                            <ListItemIcon>
+                                <Iconify icon={isVotedByUser ? "solar:alt-arrow-down-bold-duotone" : "solar:alt-arrow-up-bold-duotone"} width={24} color="warning.main" />
+                            </ListItemIcon>
+                            <ListItemText primary={isVotedByUser ? "Retirer le vote" : "Voter pour l'envie"}
+                            />
+                        </ListItemButton>
+                    )}
+                    {isUserOwner || wish.list.isCollaborative && (
                         <>
                             <ListItemButton onClick={onFavoriteClick}
                             >

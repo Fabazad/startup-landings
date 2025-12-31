@@ -7,11 +7,10 @@ import { WishItemSkeleton } from "./WishItemSkeleton";
 import { WishItem } from "./WishItem";
 import { AddWishItem } from "../WishGrid/AddWishItem";
 import { paths } from "src/routes/paths";
-import { User } from "src/app/envy/types/User";
 import { WishList as WishListType } from "src/app/envy/types/WishList";
 
 
-export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, canAddWish, canBook }: {
+export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, canAddWish, canBook, voteWish, removeVoteWish }: {
     wishes?: Array<Wish>,
     isLoading: boolean,
     wishList?: WishListType,
@@ -21,6 +20,8 @@ export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
     showList?: boolean
     canAddWish: boolean
     canBook: boolean
+    voteWish: (wishId: number) => void
+    removeVoteWish: (wishId: number) => void
 }) => {
     if (!isLoading && wishes?.length === 0) return (
         <EmptyContent title="Aucune envie" action={
@@ -45,6 +46,8 @@ export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
                                 onUnbook={() => onUnbook(wish.id)}
                                 showList={showList}
                                 canBook={canBook}
+                                voteWish={() => voteWish(wish.id)}
+                                removeVoteWish={() => removeVoteWish(wish.id)}
                             />
                         ))}
                     </>

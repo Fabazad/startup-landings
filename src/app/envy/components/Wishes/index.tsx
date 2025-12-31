@@ -36,6 +36,8 @@ export const Wishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?
                     showList={!wishList}
                     canAddWish={canAddWish}
                     canBook={canBook}
+                    voteWish={(wishId) => voteWish(wishId)}
+                    removeVoteWish={(wishId) => removeVoteWish(wishId)}
                 />
             </Box>
         </Box >
