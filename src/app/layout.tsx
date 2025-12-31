@@ -207,7 +207,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             id="crisp-chat"
             strategy="afterInteractive"
             dangerouslySetInnerHTML={{
-              __html: `window.$crisp=[];window.CRISP_WEBSITE_ID="58dbd684-000f-45ec-99c8-932b871cf9fc";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`,
+              __html: `window.CRISP_RUNTIME_CONFIG = { locale: "${lang ?? 'en'}" };window.$crisp=[];window.CRISP_WEBSITE_ID="58dbd684-000f-45ec-99c8-932b871cf9fc";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`,
             }}
           />
         )}
