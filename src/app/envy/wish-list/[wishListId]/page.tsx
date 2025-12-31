@@ -98,16 +98,16 @@ export default async function WishListPage({ params, searchParams }: {
                         {wishList.name}
                     </Typography>
                     {wishList.description && (
-                        <Typography variant="body1" sx={{ color: 'text.secondary', mb: 5, whiteSpace: 'pre-wrap', textAlign: 'center' }}>
+                        <Typography variant="body1" sx={{ color: 'text.secondary', mb: 3, whiteSpace: 'pre-wrap', textAlign: 'center' }}>
                             {wishList.description}
                         </Typography>
                     )}
                 </Stack>
             </Stack>
 
-            <Divider sx={{ mb: 5, mt: 2 }} />
+            <Divider sx={{ my: 2 }} />
 
-            <Box sx={{ width: "100%", mb: 10 }}>
+            <Box sx={{ width: "100%", mb: 10, mt: 3 }}>
                 <Wishes wishListId={wishListId} />
             </Box>
 

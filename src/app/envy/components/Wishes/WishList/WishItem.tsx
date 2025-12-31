@@ -70,7 +70,7 @@ export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook, showList =
                 </Card>
             </Link >
             {wish.list.isCollaborative && (
-                <Box sx={{ position: 'absolute', bottom: -12, right: 6, zIndex: 9 }}>
+                <Box sx={{ position: 'absolute', bottom: -12, right: 6, zIndex: 1 }}>
                     <VoteButton
                         isVotedByUser={isVotedByUser}
                         voteCount={voteCount}

@@ -12,7 +12,6 @@ import React from 'react';
 import { getProductIdea } from 'src/app/getProductIdea';
 import Link from 'next/link';
 import { Container } from '@mui/material';
-import { HomeFooter } from '../landing/footer';
 
 // ----------------------------------------------------------------------
 
@@ -105,7 +104,8 @@ export async function SimpleLayout({ sx, children, header, menuButtons }: Simple
           justifyContent: 'center',
           gap: 1,
           '& > *': { minWidth: '100px' },
-          py: 1
+          py: 1,
+          zIndex: 10
         }} >
           {
             menuButtons.map((button, index) => (

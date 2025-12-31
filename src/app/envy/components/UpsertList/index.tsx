@@ -203,7 +203,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
         />
       </Box>
 
-      <Stack flex={1} sx={{ px: { xs: 3, sm: 10 }, mt: { xs: 2, sm: 0 } }}>
+      <Stack flex={1} sx={{ px: { xs: 3, sm: 10 }, mt: { xs: 2, sm: 0 }, mb: { xs: 0, sm: 10 } }}>
         <Form methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Stack direction="column" spacing={3}>
 
@@ -316,7 +316,7 @@ export const UpsertList = ({ wishList }: { wishList?: WishList }) => {
                 mx: 3,
                 height: '48px',
                 position: "sticky",
-                bottom: { xs: 100, sm: 0 },
+                bottom: { xs: 100, sm: 50 },
                 zIndex: 1000,
               }}
             >

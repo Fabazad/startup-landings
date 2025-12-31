@@ -34,7 +34,7 @@ export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
     )
 
     return (
-        <Box sx={{ my: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <Box sx={{ mb: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
             {isLoading || wishes === undefined ? <WishItemSkeleton /> :
                 (
                     <>
