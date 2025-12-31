@@ -212,7 +212,7 @@ export const UpsertWish = ({ wishList, wish }: { wishList: { id: number, name: s
                             type="submit"
                             variant="contained"
 
-                            sx={{ borderRadius: 9999, position: 'sticky', bottom: 100, zIndex: 1000, mt: 2, mx: 2 }}
+                            sx={{ borderRadius: 9999, position: 'sticky', bottom: 100, zIndex: 1000, mt: { xs: 3, sm: 5 }, mx: 2 }}
                             loading={isSubmitting}
                         >
                             {wish ? 'Modifier l\'envie' : 'Ajouter l\'envie'}

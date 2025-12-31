@@ -30,6 +30,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { headers } from 'next/headers';
 import dynamic from 'next/dynamic';
+import Script from 'next/script';
 
 const SettingsDrawer = dynamic(() => import('src/components/settings/drawer').then(m => m.SettingsDrawer), {
   ssr: false,
@@ -201,6 +202,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </I18nProvider>
         <Analytics />
         <SpeedInsights />
+        {rawProductIdea.id === 'envy' && (
+          <Script
+            id="crisp-chat"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `window.$crisp=[];window.CRISP_WEBSITE_ID="58dbd684-000f-45ec-99c8-932b871cf9fc";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`,
+            }}
+          />
+        )}
       </body>
     </html>
   );
