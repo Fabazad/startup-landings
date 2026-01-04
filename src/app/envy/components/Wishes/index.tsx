@@ -10,12 +10,11 @@ export const Wishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?
 
     const { wishes, deleteWish, isLoading, setIsFavorite, unbookWish, wishList, voteWish, removeVoteWish } = useWishes({ wishListId, isBookedByUser, isArchived });
     const { user } = useAuthContext();
-    
 
     const isUserOwner = user && wishList && user.id === wishList.user.id;
     const canAddWish = !!(user && wishList && (wishList.isCollaborative || isUserOwner));
     const canBook = !!(user && wishList && (wishList.isCollaborative || !isUserOwner));
-
+    const canVote = !!(user && wishList && wishList.isCollaborative);
     return (
         <Box>
             <Box sx={{ display: { xs: "none", md: "block" } }}>
@@ -27,6 +26,7 @@ export const Wishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?
                     canBook={canBook}
                     onVote={(wishId) => voteWish(wishId)}
                     onRemoveVote={(wishId) => removeVoteWish(wishId)}
+                    canVote={canVote}
                 />
             </Box>
             <Box sx={{ display: { xs: "block", md: "none" } }}>
@@ -39,6 +39,7 @@ export const Wishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?
                     canBook={canBook}
                     voteWish={(wishId) => voteWish(wishId)}
                     removeVoteWish={(wishId) => removeVoteWish(wishId)}
+                    canVote={canVote}
                 />
             </Box>
         </Box >

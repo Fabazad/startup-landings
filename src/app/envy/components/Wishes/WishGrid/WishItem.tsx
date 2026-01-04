@@ -19,7 +19,7 @@ import { VoteButton } from './VoteButton';
 // ----------------------------------------------------------------------
 
 
-export function WishItem({ wish, onFavoriteClick, onDelete, showList = false, canBook, onVote, onRemoveVote }: {
+export function WishItem({ wish, onFavoriteClick, onDelete, showList = false, canBook, onVote, onRemoveVote, canVote }: {
     wish: Wish;
     onFavoriteClick: () => void;
     onDelete: () => void;
@@ -27,6 +27,7 @@ export function WishItem({ wish, onFavoriteClick, onDelete, showList = false, ca
     canBook: boolean
     onVote: () => void;
     onRemoveVote: () => void;
+    canVote: boolean
 }) {
 
     const { user } = useAuthContext();
@@ -102,6 +103,7 @@ export function WishItem({ wish, onFavoriteClick, onDelete, showList = false, ca
                         voteCount={voteCount}
                         onVote={onVote}
                         onRemoveVote={onRemoveVote}
+                        disabled={!canVote}
                     />
                 </Stack>
             )}

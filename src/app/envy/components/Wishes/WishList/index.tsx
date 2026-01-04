@@ -10,7 +10,7 @@ import { paths } from "src/routes/paths";
 import { WishList as WishListType } from "src/app/envy/types/WishList";
 
 
-export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, canAddWish, canBook, voteWish, removeVoteWish }: {
+export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, canAddWish, canBook, voteWish, removeVoteWish, canVote }: {
     wishes?: Array<Wish>,
     isLoading: boolean,
     wishList?: WishListType,
@@ -22,6 +22,7 @@ export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
     canBook: boolean
     voteWish: (wishId: number) => void
     removeVoteWish: (wishId: number) => void
+    canVote: boolean
 }) => {
     if (!isLoading && wishes?.length === 0) return (
         <EmptyContent title="Aucune envie" action={
@@ -48,6 +49,7 @@ export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
                                 canBook={canBook}
                                 voteWish={() => voteWish(wish.id)}
                                 removeVoteWish={() => removeVoteWish(wish.id)}
+                                canVote={canVote}
                             />
                         ))}
                     </>

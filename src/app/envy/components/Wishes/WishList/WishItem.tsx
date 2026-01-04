@@ -10,7 +10,7 @@ import { useAuthContext } from "src/auth/hooks/use-auth-context";
 import { WishListLabel } from "../../WishListLabel";
 import { VoteButton } from "./VoteButton";
 
-export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook, showList = false, canBook, voteWish, removeVoteWish }: {
+export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook, showList = false, canBook, voteWish, removeVoteWish, canVote }: {
     wish: Wish;
     onFavoriteClick: () => void;
     onDelete: () => void;
@@ -19,6 +19,7 @@ export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook, showList =
     canBook: boolean
     voteWish: () => void
     removeVoteWish: () => void
+    canVote: boolean
 }) => {
 
     const { user } = useAuthContext();
@@ -76,6 +77,7 @@ export const WishItem = ({ wish, onFavoriteClick, onDelete, onUnbook, showList =
                         voteCount={voteCount}
                         onVote={voteWish}
                         onRemoveVote={removeVoteWish}
+                        disabled={!canVote}
                     />
                 </Box>
             )}

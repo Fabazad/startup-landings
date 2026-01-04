@@ -5,12 +5,14 @@ export const VoteButton = ({
     isVotedByUser,
     voteCount,
     onVote,
-    onRemoveVote
+    onRemoveVote,
+    disabled
 }: {
     isVotedByUser: boolean,
     voteCount: number;
     onVote: () => void;
     onRemoveVote: () => void;
+    disabled: boolean;
 }) => {
     return (
         <Button
@@ -26,6 +28,7 @@ export const VoteButton = ({
             }}
             endIcon={<Iconify icon="solar:alt-arrow-up-bold-duotone" />}
             onClick={isVotedByUser ? onRemoveVote : onVote}
+            disabled={disabled}
         >
             {voteCount}
         </Button>
