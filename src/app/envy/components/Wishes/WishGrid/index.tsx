@@ -26,7 +26,7 @@ export const WishGrid = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
 }) => {
     if (!isLoading && wishes?.length === 0) return (
         <EmptyContent title="Aucune envie" description="Vous n'avez pas mis d'envies dans cette liste"
-            action={wishList && (
+            action={wishList && canAddWish && (
                 <Box sx={{ mt: 2 }}>
                     <Link href={paths.envy.wishList.addWish(wishList.id)}>
                         <Button variant="contained" sx={{ borderRadius: 9999 }} size="large" color="warning">

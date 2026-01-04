@@ -15,6 +15,9 @@ export const Wishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?
     const canAddWish = !!(user && wishList && (wishList.isCollaborative || isUserOwner));
     const canBook = !!(user && wishList && (wishList.isCollaborative || !isUserOwner));
     const canVote = !!(user && wishList && wishList.isCollaborative);
+
+    console.log({ canAddWish})
+
     return (
         <Box>
             <Box sx={{ display: { xs: "none", md: "block" } }}>

@@ -25,12 +25,12 @@ export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelet
     canVote: boolean
 }) => {
     if (!isLoading && wishes?.length === 0) return (
-        <EmptyContent title="Aucune envie" action={
+        <EmptyContent title="Aucune envie" action={ canAddWish && (
             <Button href={wishList?.id ? paths.envy.wishList.addWish(wishList?.id) : paths.envy.wishList.create} variant="contained" sx={{ borderRadius: 999, px: 2, mt: 1 }} size="large" color="warning">
                 <Iconify icon="material-symbols:add" sx={{ mr: 1 }} />
                 {wishList ? "Ajouter une envie" : "Créer une liste"}
             </Button>
-        }
+        )}
         />
     )
 
