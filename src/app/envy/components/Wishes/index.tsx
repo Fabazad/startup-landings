@@ -10,6 +10,7 @@ export const Wishes = ({ wishListId, isBookedByUser, isArchived }: { wishListId?
 
     const { wishes, deleteWish, isLoading, setIsFavorite, unbookWish, wishList, voteWish, removeVoteWish } = useWishes({ wishListId, isBookedByUser, isArchived });
     const { user } = useAuthContext();
+    
 
     const isUserOwner = user && wishList && user.id === wishList.user.id;
     const canAddWish = !!(user && wishList && (wishList.isCollaborative || isUserOwner));

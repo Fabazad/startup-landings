@@ -8,8 +8,6 @@ import { Section } from './section';
 import { Main, Content } from './main';
 import { HeaderSection } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
-import { LanguageButton } from 'src/sections/landing/components/language-button';
-import { ThemeButton } from '../components/theme-button';
 import { getProductIdea } from 'src/app/getProductIdea';
 import { NavDesktop } from '../landing/nav/desktop/NavDesktop';
 import { NavMobile } from '../landing/nav/mobile/NavMobile';

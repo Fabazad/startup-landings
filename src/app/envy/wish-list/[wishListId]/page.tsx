@@ -110,7 +110,6 @@ export default async function WishListPage({ params, searchParams }: {
             <Box sx={{ width: "100%", mb: 10, mt: 3 }}>
                 <Wishes wishListId={wishListId} />
             </Box>
-
         </Box >
     )
 }

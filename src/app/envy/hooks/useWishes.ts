@@ -28,19 +28,16 @@ export const useWishes = ({ wishListId, isBookedByUser, isArchived }: { wishList
     const { data: wishes, isLoading, refetch } = useQuery<Array<Wish>>({
         queryKey: ['wishes', wishListId, isBookedByUser, isArchived],
         queryFn: async () => {
-            if (!user) return [];
-
             const result = await getWishesQuery(
                 wishListId ?
                     { wishListId } :
-                    isBookedByUser ? { isBookedByUser } : { userId: user.id },
+                    isBookedByUser ? { isBookedByUser } : { userId: user!.id },
                 isArchived
             );
 
             if (!result.success) throw result.errorCode;
             return result.wishes;
         },
-        enabled: !!user,
 
     });
 
