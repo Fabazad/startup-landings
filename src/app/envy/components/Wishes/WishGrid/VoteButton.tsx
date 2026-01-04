@@ -1,4 +1,4 @@
-import { Button, Tooltip } from "@mui/material"
+import { Button, Tooltip, Box } from "@mui/material"
 import { Iconify } from "src/components/iconify"
 
 export const VoteButton = ({
@@ -18,20 +18,22 @@ export const VoteButton = ({
     const title = disabled ? "Vous devez être connecté pour voter" : isVotedByUser ? "Enlever votre vote" : "Voter pour l'envie";
     return (
         <Tooltip title={title} placement="top" arrow slotProps={{ tooltip: { sx: { fontSize: '1rem', padding: '8px 16px' } } }}>
-            <Button
-                variant={isVotedByUser ? 'contained' : 'outlined'}
-                color='warning'
-                sx={{
-                    borderRadius: 999,
-                    bgcolor: !isVotedByUser ? "background.paper" : undefined,
-                    '&:hover': { bgcolor: !isVotedByUser ? "background.paper" : undefined, }
-                }}
-                endIcon={<Iconify icon="solar:alt-arrow-up-bold-duotone" />}
-                onClick={isVotedByUser ? onRemoveVote : onVote}
-                disabled={disabled}
-            >
-                {voteCount}
-            </Button>
+            <Box component="span">
+                <Button
+                    variant={isVotedByUser ? 'contained' : 'outlined'}
+                    color='warning'
+                    sx={{
+                        borderRadius: 999,
+                        bgcolor: !isVotedByUser ? "background.paper" : undefined,
+                        '&:hover': { bgcolor: !isVotedByUser ? "background.paper" : undefined, }
+                    }}
+                    endIcon={<Iconify icon="solar:alt-arrow-up-bold-duotone" />}
+                    onClick={isVotedByUser ? onRemoveVote : onVote}
+                    disabled={disabled}
+                >
+                    {voteCount}
+                </Button>
+            </Box>
         </Tooltip>
     )
 }
