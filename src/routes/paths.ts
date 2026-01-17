@@ -9,7 +9,7 @@ const MOCK_ID = _id[1];
 const MOCK_TITLE = _postTitles[2];
 
 const ROOTS = {
-  AUTH: '/auth',
+  AUTH: '/envy/auth',
   AUTH_DEMO: '/auth-demo',
   ENVY: '/envy'
 };

@@ -42,7 +42,6 @@ import { SubscriptionModalProvider } from 'src/sections/landing/components/Subsc
 import { ProductIdeaProvider } from './product-idea-provider';
 import { PostHogProvider } from './providers/posthog-provider';
 import ReactQueryProvider from './providers/react-query-provider';
-import { AuthProvider } from 'src/auth/context/supabase';
 
 // ----------------------------------------------------------------------
 
@@ -172,7 +171,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
         <I18nProvider lang={CONFIG.isStaticExport ? undefined : lang}>
           <LocalizationProvider>
-            <AuthProvider>
               <SettingsProvider
                 settings={{
                   ...defaultSettings,
@@ -197,7 +195,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   </MotionLazy>
                 </ThemeProvider>
               </SettingsProvider>
-            </AuthProvider>
           </LocalizationProvider>
         </I18nProvider>
         <Analytics />

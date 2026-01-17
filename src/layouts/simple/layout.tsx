@@ -6,7 +6,6 @@ import { Main } from './main';
 import { LayoutSection } from '../core/layout-section';
 import { HeaderSection } from '../core/header-section';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
-import { AccountDrawer } from '../components/account-drawer';
 import { ThemeButton } from '../components/theme-button';
 import React from 'react';
 import { getProductIdea } from 'src/app/getProductIdea';
@@ -72,7 +71,6 @@ export async function SimpleLayout({ sx, children, header, menuButtons }: Simple
                 </Box>
                 <ThemeButton />
                 <LanguageButton />
-                <AccountDrawer />
               </Box>
             )
           }}
