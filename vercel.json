@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/envy",
+      "destination": "https://envy2.onama.io/envy"
+    },
+    {
+      "source": "/envy/:path*",
+      "destination": "https://envy2.onama.io/envy/:path*"
+    }
+  ]
+}
