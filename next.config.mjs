@@ -52,11 +52,11 @@ const nextConfig = {
       beforeFiles: [
         {
           source: '/envy',
-          destination: 'https://envy-front-8wn9um9xw-fabien-turguts-projects.vercel.app/envy',
+          destination: 'https://envy2.onama.io/envy',
         },
         {
           source: '/envy/:path*',
-          destination: 'https://envy-front-8wn9um9xw-fabien-turguts-projects.vercel.app/envy/:path*',
+          destination: 'https://envy2.onama.io/envy/:path*',
         },
       ],
     }
