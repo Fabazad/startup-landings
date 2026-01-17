@@ -1,4 +1,4 @@
-import { Notification } from "src/app/envy/types/Notification";
+import { Notification } from "src/app/envy-old/types/Notification";
 import { useQuery } from "@tanstack/react-query";
 import { getClientNotificationQueries } from "../queries/notification/client";
 import { useAuthContext } from "src/auth/hooks";

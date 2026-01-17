@@ -2,7 +2,7 @@
 
 import { Button, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import { Iconify } from 'src/components/iconify';
-import { useAddModal } from 'src/app/envy/components/AddModal/provider';
+import { useAddModal } from 'src/app/envy-old/components/AddModal/provider';
 import { varHover } from 'src/components/animate';
 import { m } from 'framer-motion';
 

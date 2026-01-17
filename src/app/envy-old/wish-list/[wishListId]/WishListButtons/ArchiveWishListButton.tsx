@@ -6,7 +6,7 @@ import { toast } from "src/components/snackbar";
 import { Iconify } from "src/components/iconify";
 import { useState } from "react";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import { getClientWishListQuery } from "src/app/envy/queries/wishList/client";
+import { getClientWishListQuery } from "src/app/envy-old/queries/wishList/client";
 
 export const ArchiveWishListButton = ({ wishListId }: { wishListId: number }) => {
     const router = useRouter();

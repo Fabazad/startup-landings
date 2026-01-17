@@ -1,5 +1,5 @@
-import { UpsertList } from "src/app/envy/components/UpsertList";
-import { getServerWishListQuery } from "src/app/envy/queries/wishList/server";
+import { UpsertList } from "src/app/envy-old/components/UpsertList";
+import { getServerWishListQuery } from "src/app/envy-old/queries/wishList/server";
 import { View500 } from "src/sections/error";
 
 export default async function UpdateListPage({ params }: { params: { wishListId: number } }) {

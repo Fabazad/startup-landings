@@ -9,7 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import { maxLine } from 'src/theme/styles';
 import { AvatarShape } from 'src/assets/illustrations';
 import { Image } from 'src/components/image';
-import { WishList } from 'src/app/envy/types/WishList';
+import { WishList } from 'src/app/envy-old/types/WishList';
 import { ShareButton } from './ShareButton';
 import { AddWishButton } from './AddWishButton';
 import { useAuthContext } from 'src/auth/hooks/use-auth-context';

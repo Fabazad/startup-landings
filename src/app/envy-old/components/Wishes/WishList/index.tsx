@@ -2,12 +2,12 @@ import { Box } from "@mui/material"
 import { EmptyContent } from "src/components/empty-content";
 import { Button } from "@mui/material";
 import { Iconify } from "src/components/iconify";
-import { Wish } from "src/app/envy/types/Wish";
+import { Wish } from "src/app/envy-old/types/Wish";
 import { WishItemSkeleton } from "./WishItemSkeleton";
 import { WishItem } from "./WishItem";
 import { AddWishItem } from "../WishGrid/AddWishItem";
 import { paths } from "src/routes/paths";
-import { WishList as WishListType } from "src/app/envy/types/WishList";
+import { WishList as WishListType } from "src/app/envy-old/types/WishList";
 
 
 export const WishList = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, onUnbook, showList = false, canAddWish, canBook, voteWish, removeVoteWish, canVote }: {

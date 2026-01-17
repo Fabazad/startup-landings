@@ -3,7 +3,7 @@
 import { useContext } from 'react';
 
 import { AuthContext } from '../context/auth-context';
-import { User } from 'src/app/envy/types/User';
+import { User } from 'src/app/envy-old/types/User';
 import { AuthContextValue } from '../types';
 
 // ----------------------------------------------------------------------

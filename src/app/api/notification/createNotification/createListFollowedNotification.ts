@@ -1,10 +1,10 @@
 import { Resend } from "resend";
-import { getServerNotificationQueries } from "src/app/envy/queries/notification/server";
-import { getServerNotificationSettingsQueries } from "src/app/envy/queries/notificationSettings/server";
-import { getUserEmailQueryAdmin, getUserName } from "src/app/envy/queries/user/admin";
-import { getServerWishListQuery } from "src/app/envy/queries/wishList/server";
-import { NotificationData } from "src/app/envy/types/Notification";
-import { NotificationSetting, NotificationType } from "src/app/envy/types/NotificationSetting";
+import { getServerNotificationQueries } from "src/app/envy-old/queries/notification/server";
+import { getServerNotificationSettingsQueries } from "src/app/envy-old/queries/notificationSettings/server";
+import { getUserEmailQueryAdmin, getUserName } from "src/app/envy-old/queries/user/admin";
+import { getServerWishListQuery } from "src/app/envy-old/queries/wishList/server";
+import { NotificationData } from "src/app/envy-old/types/Notification";
+import { NotificationSetting, NotificationType } from "src/app/envy-old/types/NotificationSetting";
 import { CONFIG } from "src/config-global";
 import { ListFollowedNotification } from "src/emails/ListFollowedNotification";
 import { paths } from "src/routes/paths";

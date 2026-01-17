@@ -5,7 +5,7 @@ import { toast } from 'src/components/snackbar';
 import { Button, Typography } from '@mui/material';
 import { supabase } from 'src/lib/supabase-client';
 import { paths } from 'src/routes/paths';
-import { User } from 'src/app/envy/types/User';
+import { User } from 'src/app/envy-old/types/User';
 
 export const UpdatePassword = ({ user }: { user: User }) => {
 

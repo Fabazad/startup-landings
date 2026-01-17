@@ -1,6 +1,6 @@
 "use client";
 
-import { useMyWishLists } from "src/app/envy/hooks/useMyWishLists";
+import { useMyWishLists } from "src/app/envy-old/hooks/useMyWishLists";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
 import { WishLists } from "../../WishLists";
 

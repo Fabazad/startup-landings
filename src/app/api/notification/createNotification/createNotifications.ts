@@ -1,5 +1,5 @@
-import { NotificationData } from "src/app/envy/types/Notification";
-import { NotificationType } from "src/app/envy/types/NotificationSetting";
+import { NotificationData } from "src/app/envy-old/types/Notification";
+import { NotificationType } from "src/app/envy-old/types/NotificationSetting";
 import { createListArchivedNotification } from "./createListArchivedNotification";
 import { createListFollowedNotification } from "./createListFollowedNotification";
 import { createWishBookedNotification } from "./createWishBookedNotification";

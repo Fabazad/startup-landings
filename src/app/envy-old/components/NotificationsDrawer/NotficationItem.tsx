@@ -5,7 +5,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemButton from '@mui/material/ListItemButton';
 import { fToNow } from 'src/utils/format-time';
 import { CONFIG } from 'src/config-global';
-import { Notification } from 'src/app/envy/types/Notification';
+import { Notification } from 'src/app/envy-old/types/Notification';
 import { NotificationType } from '../../types/NotificationSetting';
 import { paths } from 'src/routes/paths';
 import Image from 'next/image';

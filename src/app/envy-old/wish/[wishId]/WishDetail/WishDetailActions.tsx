@@ -9,9 +9,9 @@ import { Wish } from "../../../types/Wish";
 import { toast } from "sonner";
 import { paths } from "src/routes/paths";
 import { BookingCard } from "./BookingCard";
-import { User } from "src/app/envy/types/User";
+import { User } from "src/app/envy-old/types/User";
 import { enrichProductUrl } from "src/lib/enrichProductUrl";
-import { getClientWishQueries } from "src/app/envy/queries/wish/client";
+import { getClientWishQueries } from "src/app/envy-old/queries/wish/client";
 
 const { deleteWishQuery, setIsFavoriteQuery } = getClientWishQueries();
 

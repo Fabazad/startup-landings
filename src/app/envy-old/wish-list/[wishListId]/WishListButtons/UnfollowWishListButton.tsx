@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Iconify } from "src/components/iconify";
 import { useState } from "react";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import { getClientWishListQuery } from "src/app/envy/queries/wishList/client";
+import { getClientWishListQuery } from "src/app/envy-old/queries/wishList/client";
 
 export const UnfollowWishListButton = ({ wishListId, userId }: { wishListId: number; userId: string }) => {
     const router = useRouter();

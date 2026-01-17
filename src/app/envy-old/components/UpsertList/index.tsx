@@ -11,7 +11,7 @@ import { useAuthContext } from 'src/auth/hooks';
 import { supabase } from 'src/lib/supabase-client';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { ListType, WishList } from 'src/app/envy/types/WishList';
+import { ListType, WishList } from 'src/app/envy-old/types/WishList';
 import { paths } from 'src/routes/paths';
 import { Image } from 'src/components/image';
 import { CONFIG } from 'src/config-global';

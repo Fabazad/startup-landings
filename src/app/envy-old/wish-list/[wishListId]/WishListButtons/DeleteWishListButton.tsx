@@ -7,7 +7,7 @@ import { paths } from "src/routes/paths";
 import { Iconify } from "src/components/iconify"; // Import Iconify
 import { useState } from "react";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import { getClientWishListQuery } from "src/app/envy/queries/wishList/client";
+import { getClientWishListQuery } from "src/app/envy-old/queries/wishList/client";
 
 export const DeleteWishListButton = ({ wishListId }: { wishListId: number }) => {
     const router = useRouter();

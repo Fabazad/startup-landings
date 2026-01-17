@@ -2,14 +2,14 @@
 
 import { Box, Button, Link } from "@mui/material";
 import { Typography } from "@mui/material";
-import { Wish } from "src/app/envy/types/Wish";
+import { Wish } from "src/app/envy-old/types/Wish";
 import { EmptyContent } from "src/components/empty-content";
 import { Iconify } from "src/components/iconify";
 import { WishItemSkeleton } from "./WishItemSekeleton";
 import { AddWishItem } from "./AddWishItem";
 import { WishItem } from "./WishItem";
 import { paths } from "src/routes/paths";
-import { WishList } from "src/app/envy/types/WishList";
+import { WishList } from "src/app/envy-old/types/WishList";
 
 export const WishGrid = ({ wishes, isLoading, wishList, onFavoriteClick, onDelete, showList = false, canAddWish, canBook, onVote, onRemoveVote, canVote }: {
     wishes?: Array<Wish>,

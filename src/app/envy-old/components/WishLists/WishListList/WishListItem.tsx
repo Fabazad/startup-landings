@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Box, Typography } from "@mui/material";
-import { WishList } from "src/app/envy/types/WishList";
+import { WishList } from "src/app/envy-old/types/WishList";
 import { Image } from 'src/components/image';
 import { paths } from "src/routes/paths";
 

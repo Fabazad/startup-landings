@@ -1,4 +1,4 @@
-import { User } from "src/app/envy/types/User";
+import { User } from "src/app/envy-old/types/User";
 import { createSupabase } from "src/lib/supabase-server";
 
 export const getAuthUser = async (): Promise<{ success: true, user: User | null } | { success: false, errorCode: "unknown" }> => {

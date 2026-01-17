@@ -1,5 +1,5 @@
-import { UpsertWish } from "src/app/envy/components/UpsertWish";
-import { getServerWishListQuery } from "src/app/envy/queries/wishList/server";
+import { UpsertWish } from "src/app/envy-old/components/UpsertWish";
+import { getServerWishListQuery } from "src/app/envy-old/queries/wishList/server";
 import { NotFoundView, View500 } from "src/sections/error";
 
 export default async function AddWishPage({ params }: { params: { wishListId: number } }) {

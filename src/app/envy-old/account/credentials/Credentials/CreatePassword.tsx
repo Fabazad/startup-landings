@@ -12,7 +12,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import { toast } from 'src/components/snackbar';
 import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
-import { addPasswordQuery } from 'src/app/envy/queries/user';
+import { addPasswordQuery } from 'src/app/envy-old/queries/user';
 import { Typography } from '@mui/material';
 import { useAuthContext } from 'src/auth/hooks/use-auth-context';
 

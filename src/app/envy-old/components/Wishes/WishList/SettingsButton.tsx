@@ -1,7 +1,7 @@
 import { Box, Divider, Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import { Iconify } from "src/components/iconify";
 import { useState } from "react";
-import { Wish } from "src/app/envy/types/Wish";
+import { Wish } from "src/app/envy-old/types/Wish";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
 import { paths } from "src/routes/paths";
 

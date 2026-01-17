@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { notificationDataSchema } from 'src/app/envy/types/Notification';
+import { notificationDataSchema } from 'src/app/envy-old/types/Notification';
 import { createNotifications } from './createNotification/createNotifications';
 
 const createNotificationSchema = notificationDataSchema;

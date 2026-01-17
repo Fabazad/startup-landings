@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Box, Button, Card, Stack, Typography } from "@mui/material";
 import { Image } from 'src/components/image';
-import { defaultWishImageUrl, Wish } from "src/app/envy/types/Wish";
+import { defaultWishImageUrl, Wish } from "src/app/envy-old/types/Wish";
 import { SettingsButton } from "./SettingsButton";
 import { Iconify } from "src/components/iconify";
 import { fCurrency } from "src/utils/format-number";

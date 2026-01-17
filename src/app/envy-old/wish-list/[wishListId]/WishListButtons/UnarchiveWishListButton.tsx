@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Iconify } from "src/components/iconify";
 import { toast } from "src/components/snackbar";
 import { useState } from "react";
-import { getClientWishListQuery } from "src/app/envy/queries/wishList/client";
+import { getClientWishListQuery } from "src/app/envy-old/queries/wishList/client";
 
 export const UnarchiveWishListButton = ({ wishListId }: { wishListId: number }) => {
 

@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
-import { getServerWishListQuery } from 'src/app/envy/queries/wishList/server'
+import { getServerWishListQuery } from 'src/app/envy-old/queries/wishList/server'
 import { createSupabase } from 'src/lib/supabase-server'
 import { paths } from 'src/routes/paths'
-import { getServerNotificationSettingsQueries } from 'src/app/envy/queries/notificationSettings/server'
+import { getServerNotificationSettingsQueries } from 'src/app/envy-old/queries/notificationSettings/server'
 
 
 export async function GET(request: Request) {

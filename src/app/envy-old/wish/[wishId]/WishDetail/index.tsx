@@ -2,8 +2,8 @@ import { Box, Typography, Grid, Stack, Chip, Divider, Card } from "@mui/material
 import { Image } from 'src/components/image';
 import { Iconify } from "src/components/iconify";
 import { WishDetailActions } from "./WishDetailActions";
-import { defaultWishImageUrl, Wish } from "src/app/envy/types/Wish";
-import { User } from "src/app/envy/types/User";
+import { defaultWishImageUrl, Wish } from "src/app/envy-old/types/Wish";
+import { User } from "src/app/envy-old/types/User";
 import { formatUrl } from "src/utils/format-url";
 import { paths } from "src/routes/paths";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";

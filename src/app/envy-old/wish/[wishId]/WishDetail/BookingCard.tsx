@@ -6,11 +6,11 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "src/components/snackbar";
-import { User } from "src/app/envy/types/User";
-import { Wish } from "src/app/envy/types/Wish";
+import { User } from "src/app/envy-old/types/User";
+import { Wish } from "src/app/envy-old/types/Wish";
 import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
-import { getClientWishQueries } from "src/app/envy/queries/wish/client";
+import { getClientWishQueries } from "src/app/envy-old/queries/wish/client";
 
 const { bookWishQuery, unbookWishQuery } = getClientWishQueries();
 

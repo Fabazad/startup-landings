@@ -1,8 +1,8 @@
 "use client";
 
-import { useFollowedWishLists } from "src/app/envy/hooks/useFollowedWishLists";
+import { useFollowedWishLists } from "src/app/envy-old/hooks/useFollowedWishLists";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
-import { WishLists } from "src/app/envy/components/WishLists";
+import { WishLists } from "src/app/envy-old/components/WishLists";
 
 export const FollowedWishLists = () => {
 
