@@ -47,6 +47,20 @@ const nextConfig = {
   ...(isStaticExport === 'true' && {
     output: 'export',
   }),
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/envy',
+          destination: 'https://envy-front-8wn9um9xw-fabien-turguts-projects.vercel.app/envy',
+        },
+        {
+          source: '/envy/:path*',
+          destination: 'https://envy-front-8wn9um9xw-fabien-turguts-projects.vercel.app/envy/:path*',
+        },
+      ],
+    }
+  },
 };
 
 export default nextConfig;
