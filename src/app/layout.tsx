@@ -3,17 +3,14 @@ import 'src/global.css';
 // ----------------------------------------------------------------------
 
 import type { Metadata, Viewport } from 'next';
-
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
 import { error, info, primary, secondary, warning } from 'src/theme/core/palette';
-
 import { CONFIG } from 'src/config-global';
 import { LocalizationProvider } from 'src/locales';
 import { I18nProvider } from 'src/locales/i18n-provider';
 import { detectLanguage } from 'src/locales/server';
 import { schemeConfig } from 'src/theme/scheme-config';
 import { ThemeProvider } from 'src/theme/theme-provider';
-
 import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { ProgressBar } from 'src/components/progress-bar';
 import {
@@ -42,6 +39,7 @@ import { SubscriptionModalProvider } from 'src/sections/landing/components/Subsc
 import { ProductIdeaProvider } from './product-idea-provider';
 import { PostHogProvider } from './providers/posthog-provider';
 import ReactQueryProvider from './providers/react-query-provider';
+import { AuthProvider } from './providers/auth-provider';
 
 // ----------------------------------------------------------------------
 
@@ -168,6 +166,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           defaultMode={schemeConfig.defaultMode}
           modeStorageKey={schemeConfig.modeStorageKey}
         />
+        <AuthProvider>
 
         <I18nProvider lang={CONFIG.isStaticExport ? undefined : lang}>
           <LocalizationProvider>
@@ -197,6 +196,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               </SettingsProvider>
           </LocalizationProvider>
         </I18nProvider>
+        </AuthProvider>
         <Analytics />
         <SpeedInsights />
         {rawProductIdea.id === 'envy' && (
