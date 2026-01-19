@@ -5,13 +5,13 @@ import { useEffect } from "react";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
+    const router = useRouter();
+
     useEffect(() => {
         const item = localStorage?.getItem('sb-snompcrhhpnorquapudz-auth-token');
 
-        const router = useRouter()
-
         if (item) router.replace('/envy');
-    }, [localStorage])
+    }, [router, localStorage]);
     
     return <>{children}</>;
 };
