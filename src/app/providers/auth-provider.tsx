@@ -11,7 +11,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const item = localStorage?.getItem('sb-snompcrhhpnorquapudz-auth-token');
 
         if (item) router.replace('/envy');
-    }, [router, localStorage]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [router]);
     
     return <>{children}</>;
 };
