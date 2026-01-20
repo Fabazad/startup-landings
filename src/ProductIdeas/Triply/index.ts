@@ -8,6 +8,7 @@ export const TRIPLY_PRODUCT_IDEA: RawProductIdea = {
   themeColor: 'orange',
   logo: 'panda',
   ctaName: { en: 'Plan your first trip', fr: 'Planifie ton premier voyage' },
+  keywords: ["triply", "trip", "travel", "plan", "event", "hub", "dashboard", "modular", "sections", "itinerary", "stays", "transport", "activities", "meals", "checklists", "communication", "structured", "topic", "channels", "smart", "mentions", "collaboration", "decisions", "assignable", "tasks", "polls", "fast", "expenses", "shared", "auto", "balances", "easy", "reimbursements", "integrated", "paypal", "revolut", "photos", "memories", "collaborative", "wall", "auto-tag", "export", "album", "triply", "voyage", "plan", "événement", "hub", "tableau", "de", "bord", "modulable", "sections", "itinéraire", "logements", "transports", "activités", "repas", "checklists", "communication", "structurée", "canaux", "thématiques", "intelligent", "mentions", "collaboration", "décisions", "assignables", "tâches", "sondages", "rapides", "dépenses", "partagées", "soldes", "automatiques", "faciles", "remboursements", "intégrés", "paypal", "revolut", "photos", "souvenirs", "mur", "collaboratif", "auto-tag", "export", "album"],
   features: [
     {
       id: 'f1',

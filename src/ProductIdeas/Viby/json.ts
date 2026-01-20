@@ -6,6 +6,7 @@ export const VIBY_PRODUCT_IDEA: RawProductIdea = {
   isReady: false,
   themeColor: 'purple',
   logo: 'panda',
+  keywords: ["viby", "local", "news", "events", "feed", "loyalty", "program", "offers", "push", "social", "events", "reviews", "viby", "local", "actualités", "événements", "fil", "fidélité", "programme", "offres", "push", "social", "événements", "avis"],
   features: [
     {
       id: 'local-news-feed',

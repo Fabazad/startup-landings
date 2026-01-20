@@ -88,9 +88,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = rawProductIdea.heroTexts.description.fr;
 
   // Generate keywords from product features
-  const keywords = [rawProductIdea.name, ...rawProductIdea.features.map((f) => f.title.fr)].join(
-    ', '
-  );
+  const keywords = rawProductIdea.keywords.join(', ');
 
   // Generate alternate languages
   const alternates = {

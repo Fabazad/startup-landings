@@ -7,6 +7,7 @@ export const TRAIN_BACK_PRODUCT_IDEA: RawProductIdea = {
   themeColor: 'blue',
   logo: 'octopus',
   ctaName: { en: 'Get your first refund', fr: 'Obtiens ton premier remboursement' },
+  keywords: ["train back", "train", "back", "refund", "compensation", "delay", "sncf", "trainback", "train", "back", "remboursement", "indemnisation", "retard", "sncf"],
   heroTexts: {
     description: {
       en: 'Train Back scans your SNCF trips, spots every eligible delay, files the claim for you and sends you the money. No forms, no stress, just refunds you should never have missed.',

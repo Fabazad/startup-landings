@@ -12,6 +12,7 @@ export const INSIGHTFEED_PRODUCT_IDEA: RawProductIdea = {
   themeColor: 'purple',
   logo: 'octopus',
   ctaName: { en: 'Monitor your first competitor', fr: 'Surveille ton premier concurrent' },
+  keywords: ["insightfeed", "insight", "feed", "ai", "analytics", "dashboard", "monitoring", "competitor", "tracking", "market", "trends", "data", "visualization", "reporting", "automation", "business", "intelligence", "insightfeed", "insight", "feed", "ia", "analytique", "tableau", "de", "bord", "surveillance", "concurrent", "suivi", "marché", "tendances", "données", "visualisation", "rapport", "automatisation", "intelligence", "affaires"],
   features: FEATURES_SAMPLE,
   heroTexts: HERO_TEXTS_SAMPLE,
   reviews: REVIEWS_SAMPLE,

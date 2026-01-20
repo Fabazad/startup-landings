@@ -73,6 +73,8 @@ type GenericProductIdea<Text extends Translated | string> = {
   ctaName?: Text;
   /** Minimum 3 features, maximum 5 features. */
   features: GenericFeature<Text>[];
+  /** Keywords to use for SEO. */
+  keywords: string[];
   heroTexts: {
     /** The description should describe best the value proposition of the product. It has to be punchy, can use multiple lines. Max 300 characters.*/
     description: Text;

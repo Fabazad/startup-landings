@@ -11,6 +11,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
         "en": "Create your first list",
         "fr": "Créer votre première liste"
     },
+    "keywords": ["envy", "wishlist", "gift", "list", "liste d'envies", "envie", "cadeau", "cadeaux", "liste de cadeaux", "partagé"],
     "features": [
         {
             "id": "multi-stores-wishlist",

@@ -21,6 +21,7 @@ export const INSIGHTFEED_JSON: RawProductIdea = {
       fr: 'de vos concurrents',
     },
   },
+  keywords: ["insightfeed", "insight", "feed", "competitor", "monitoring", "tracking", "alerts", "discovery", "benchmarking", "reporting", "saas", "startup", "entrepreneur", "business", "growth", "marketing", "product", "management", "strategy", "analytics", "data", "insights", "trends", "market", "research", "analysis", "competitive", "intelligence", "monitoring", "tracking", "alerts", "discovery", "benchmarking", "reporting", "saas", "startup", "entrepreneur", "business", "growth", "marketing", "product", "management", "strategy", "analytics", "data", "insights", "trends", "market", "research", "analysis", "competitive", "intelligence"],
   features: [
     {
       id: 'deep-comparison',
