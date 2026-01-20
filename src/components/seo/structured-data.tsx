@@ -79,10 +79,7 @@ export function StructuredData({ rawProductIdea, baseUrl }: StructuredDataProps)
   const reviewSchemas = rawProductIdea.reviews.slice(0, 5).map((review) => ({
     '@context': 'https://schema.org',
     '@type': 'Review',
-    itemReviewed: {
-      '@type': 'SoftwareApplication',
-      name: rawProductIdea.name,
-    },
+    itemReviewed: softwareApplicationSchema,
     author: {
       '@type': 'Person',
       name: review.name,
