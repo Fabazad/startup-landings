@@ -3,8 +3,8 @@ import { headers } from 'next/headers';
 import { RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
 import { languages } from 'src/locales/config-locales';
 
-// Revalidate sitemap daily
-export const revalidate = 86400;
+// Force dynamic generation to ensure correct domain in URLs
+export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const headersList = await headers();
