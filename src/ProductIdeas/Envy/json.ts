@@ -13,60 +13,60 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
     },
     "keywords": ["envy", "wishlist", "gift", "list", "liste d'envies", "envie", "cadeau", "cadeaux", "liste de cadeaux", "partagé"],
     "features": [
-        {
-            "id": "multi-stores-wishlist",
-            "icon": "mdi:cart-heart",
+         {
+            "id": "events-and-lists",
+            "icon": "mdi:calendar-heart",
             "pain": {
-                "en": "Stop sending dozens of links, keep all your gift ideas in one simple list.",
-                "fr": "Fini les dizaines de liens envoyés, regroupez toutes vos envies dans une seule liste."
+                "en": "Stop rebuilding a new list from scratch for every birthday, Christmas or big event.",
+                "fr": "Arrêtez de recréer une nouvelle liste à chaque anniversaire, Noël ou grand événement."
             },
             "title": {
-                "en": "One wishlist for all shops",
-                "fr": "Une wishlist pour tous les sites"
+                "en": "Wishlists for every moment",
+                "fr": "Des listes d'envies pour chaque moment"
             },
             "items": [
                 {
-                    "icon": "mdi:web",
+                    "icon": "mdi:calendar-star",
                     "title": {
-                        "en": "From any website",
-                        "fr": "Depuis n'importe quel site"
+                        "en": "All your big events",
+                        "fr": "Tous vos grands événements"
                     },
                     "description": {
-                        "en": "Add a gift from any online store with a simple copy–paste or browser extension.",
-                        "fr": "Ajoutez un cadeau depuis n'importe quelle boutique avec un simple copier–coller ou l’extension."
+                        "en": "Create lists for birthdays, Christmas, baby showers, weddings, housewarmings and more.",
+                        "fr": "Créez des listes pour anniversaires, Noël, naissance, mariage, crémaillère et bien plus."
                     }
                 },
                 {
-                    "icon": "mdi:gift-outline",
+                    "icon": "mdi:account-multiple-outline",
                     "title": {
-                        "en": "All wishes in one place",
-                        "fr": "Toutes vos envies au même endroit"
+                        "en": "Collaborative lists",
+                        "fr": "Listes collaboratives"
                     },
                     "description": {
-                        "en": "Centralize books, toys, décor, experiences and more in a single wishlist.",
-                        "fr": "Centralisez livres, jouets, déco, expériences et plus encore dans une seule wishlist."
+                        "en": "Invite your partner or friends to build and manage a wishlist together. Perfect to collaborate on your friend's birthday gift.",
+                        "fr": "Invitez votre partenaire ou vos amis pour créer et gérer une wishlist à plusieurs. Parfait pour collaborer sur le cadeau d'anniversaire de vos amis."
                     }
                 },
                 {
-                    "icon": "mdi:update",
+                    "icon": "mdi:infinity",
                     "title": {
-                        "en": "Always up to date",
-                        "fr": "Toujours à jour"
+                        "en": "Unlimited wishlists",
+                        "fr": "Wishlists illimitées"
                     },
                     "description": {
-                        "en": "Edit, reorder or remove ideas in seconds without resending everything to your friends.",
-                        "fr": "Modifiez, réorganisez ou supprimez vos idées en quelques secondes sans tout renvoyer à vos proches."
+                        "en": "Organize as many lists as you need: family, kids, couple or just for yourself.",
+                        "fr": "Organisez autant de listes que vous voulez : famille, enfants, couple ou juste pour vous."
                     }
-                }
+                },
             ],
-            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/multi-stores-wishlist.svg`
+            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/events-and-lists.svg`
         },
         {
             "id": "easy-sharing",
             "icon": "mdi:share-variant",
             "pain": {
-                "en": "Make it easy for loved ones to choose a gift without asking you a hundred questions.",
-                "fr": "Aidez vos proches à choisir un cadeau sans qu'ils vous posent mille questions."
+                "en": "Stop answering the same questions and avoid duplicate gifts.",
+                "fr": "Évitez les questions sans fin, les cadeaux ratés ou en doubles."
             },
             "title": {
                 "en": "Share in two clicks",
@@ -110,53 +110,54 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
             "imgUrl": `${CONFIG.assetsDir}/assets/images/features/easy-sharing.svg`
         },
         {
-            "id": "events-and-lists",
-            "icon": "mdi:calendar-heart",
+            "id": "multi-stores-wishlist",
+            "icon": "mdi:cart-heart",
             "pain": {
-                "en": "Stop rebuilding a new list from scratch for every birthday, Christmas or big event.",
-                "fr": "Arrêtez de recréer une nouvelle liste à chaque anniversaire, Noël ou grand événement."
+                "en": "Stop sending dozens of links, keep all your gift ideas in one simple list.",
+                "fr": "Fini les dizaines de liens envoyés, regroupez toutes vos envies dans une seule liste."
             },
             "title": {
-                "en": "Lists for every moment",
-                "fr": "Des listes pour chaque moment"
+                "en": "One wishlist for all shops",
+                "fr": "Une wishlist pour tous les sites"
             },
             "items": [
                 {
-                    "icon": "mdi:calendar-star",
+                    "icon": "mdi:web",
                     "title": {
-                        "en": "All your big events",
-                        "fr": "Tous vos grands événements"
+                        "en": "From any website",
+                        "fr": "Depuis n'importe quel site"
                     },
                     "description": {
-                        "en": "Create lists for birthdays, Christmas, baby showers, weddings, housewarmings and more.",
-                        "fr": "Créez des listes pour anniversaires, Noël, naissance, mariage, crémaillère et bien plus."
+                        "en": "Add a gift from any online store with a simple copy–paste.",
+                        "fr": "Ajoutez un cadeau depuis n'importe quelle boutique avec un simple copier–coller."
                     }
                 },
                 {
-                    "icon": "mdi:infinity",
+                    "icon": "mdi:gift-outline",
                     "title": {
-                        "en": "Unlimited wishlists",
-                        "fr": "Wishlists illimitées"
+                        "en": "All wishes in one place",
+                        "fr": "Toutes vos envies au même endroit"
                     },
                     "description": {
-                        "en": "Organize as many lists as you need: family, kids, couple or just for yourself.",
-                        "fr": "Organisez autant de listes que vous voulez : famille, enfants, couple ou juste pour vous."
+                        "en": "Centralize books, toys, décor, experiences and more in a single wishlist.",
+                        "fr": "Centralisez livres, jouets, déco, expériences et plus encore dans une seule wishlist."
                     }
                 },
                 {
-                    "icon": "mdi:account-multiple-outline",
+                    "icon": "mdi:update",
                     "title": {
-                        "en": "Collaborative lists",
-                        "fr": "Listes collaboratives"
+                        "en": "Always up to date",
+                        "fr": "Toujours à jour"
                     },
                     "description": {
-                        "en": "Invite your partner or friends to build and manage a wishlist together.",
-                        "fr": "Invitez votre partenaire ou vos amis pour créer et gérer une wishlist à plusieurs."
+                        "en": "Edit, reorder or remove ideas in seconds without resending everything to your friends.",
+                        "fr": "Modifiez, réorganisez ou supprimez vos idées en quelques secondes sans tout renvoyer à vos proches."
                     }
                 }
             ],
-            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/events-and-lists.svg`
+            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/multi-stores-wishlist.svg`
         },
+        
         {
             "id": "simple-free-access",
             "icon": "mdi:cellphone-link",
