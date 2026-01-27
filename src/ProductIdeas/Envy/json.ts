@@ -198,8 +198,8 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
     ],
     "heroTexts": {
         "description": {
-            "en": "Create modern online wishlists for every event, add gifts from any website and share them in a few clicks so your loved ones always choose the right present.",
-            "fr": "Créez des listes d'envies pour tous vos événements,\npartagez-les en un clic pour que vos proches réservent et choisissent juste à chaque fois."
+            "en": "The free app to list and share your wishes.\nAvoid duplicate gifts and simplify your celebrations.\nList, share, and celebrate today!",
+            "fr": "L'app gratuite pour lister et partager vos envies.\nÉvitez les cadeaux en double et simplifiez vos fêtes.\nListez, partagez et célébrez dès maintenant !"
         },
         "headingPart1": {
             "en": "List your wishes,",
