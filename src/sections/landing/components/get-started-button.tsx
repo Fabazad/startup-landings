@@ -36,7 +36,7 @@ export const GetStartedButton = ({
       {...other}
       rel="noopener"
       onClick={!isReady ? handleClick : undefined}
-      href={isReady ? "/auth/sign-up" : undefined}
+      href={isReady ? `/${productName.toLowerCase()}/auth/sign-up` : undefined}
       sx={{
         display: 'inline-flex',
         borderRadius: 999,
