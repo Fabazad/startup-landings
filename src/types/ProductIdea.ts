@@ -61,6 +61,51 @@ export type GenericPlans<Text extends Translated | string> = {
 export type RawPlans = GenericPlans<Translated>;
 export type Plans = GenericPlans<string>;
 
+export type GenericFAQItem<Text extends Translated | string> = {
+    id: string;
+    question: Text;
+    answer: Text;
+    // Optionnel : permet de lier une question à une feature spécifique par son ID
+    relatedFeatureId?: string; 
+}
+
+export type RawFAQItem = GenericFAQItem<Translated>;
+export type FAQItem = GenericFAQItem<string>;
+
+export type GenericFAQPage<Text extends Translated | string> = {
+    id: string; // ex: 'general', 'birthday', 'baby-shower'
+    slug: {
+        en: string; // ex: 'birthday-wishlist-faq'
+        fr: string; // ex: 'faq-liste-anniversaire'
+    };
+    seo: {
+        title: Text;
+        description: Text;
+        keywords: Text;
+    };
+    hero: {
+        title: Text;
+        subtitle: Text;
+    };
+    // Les questions regroupées par sections (ex: "Général", "Partage", "Sécurité")
+    sections: {
+        title: Text;
+        items: GenericFAQItem<Text>[];
+    }[];
+    // CTA spécifique à la fin de la page FAQ
+    cta?: {
+        text: Text;
+        link: string;
+    };
+}
+
+export type GenericFAQ<Text extends Translated | string> = {
+    pages: GenericFAQPage<Text>[];
+}
+
+export type RawFAQ = GenericFAQ<Translated>;
+export type FAQ = GenericFAQ<string>;
+
 type GenericProductIdea<Text extends Translated | string> = {
   id: string;
   /** By default false. */
@@ -90,6 +135,8 @@ type GenericProductIdea<Text extends Translated | string> = {
   };
   testimonialNumbers: Array<{ label: Text; value: number; unit?: string }>
   plans: GenericPlans<Text> | null;
+
+  faq?: GenericFAQ<Text>;
 };
 
 export type ProductIdea = GenericProductIdea<string>;
@@ -149,5 +196,32 @@ export const translateProductIdea = (
       ...item,
       label: item.label[lang],
     })),
+    // --- Traitement de la FAQ ---
+    faq: productIdea.faq ? {
+      pages: productIdea.faq.pages.map((page) => ({
+        ...page,
+        seo: {
+          title: page.seo.title[lang],
+          description: page.seo.description[lang],
+          keywords: page.seo.keywords[lang],
+        },
+        hero: {
+          title: page.hero.title[lang],
+          subtitle: page.hero.subtitle[lang],
+        },
+        sections: page.sections.map((section) => ({
+          title: section.title[lang],
+          items: section.items.map((item) => ({
+            ...item,
+            question: item.question[lang],
+            answer: item.answer[lang],
+          })),
+        })),
+        cta: page.cta ? {
+          ...page.cta,
+          text: page.cta.text[lang],
+        } : undefined,
+      })),
+    } : undefined,
   };
 };

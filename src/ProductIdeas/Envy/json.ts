@@ -1,417 +1,642 @@
-import { RawProductIdea } from "src/types/ProductIdea";
-import { CONFIG } from "src/config-global";
+import { RawProductIdea } from 'src/types/ProductIdea';
+import { CONFIG } from 'src/config-global';
 
 export const ENVY_PRODUCT_IDEA: RawProductIdea = {
-    "id": "envy",
-    "name": "Envy",
-    "isReady": true,
-    "themeColor": "purple",
-    "logo": "gift",
-    "ctaName": {
-        "en": "Create your first list",
-        "fr": "Créer votre première liste"
+  id: 'envy',
+  name: 'Envy',
+  isReady: true,
+  themeColor: 'purple',
+  logo: 'gift',
+  ctaName: {
+    en: 'Create your first list',
+    fr: 'Créer votre première liste',
+  },
+  keywords: [
+    'envy',
+    'wishlist',
+    'gift',
+    'list',
+    "liste d'envies",
+    'envie',
+    'cadeau',
+    'cadeaux',
+    'liste de cadeaux',
+    'partagé',
+  ],
+  features: [
+    {
+      id: 'events-and-lists',
+      icon: 'mdi:calendar-heart',
+      pain: {
+        en: 'Stop rebuilding a new list from scratch for every birthday, Christmas or big event.',
+        fr: 'Arrêtez de recréer une nouvelle liste à chaque anniversaire, Noël ou grand événement.',
+      },
+      title: {
+        en: 'Wishlists for every moment',
+        fr: "Des listes d'envies pour chaque moment",
+      },
+      items: [
+        {
+          icon: 'mdi:calendar-star',
+          title: {
+            en: 'All your big events',
+            fr: 'Tous vos grands événements',
+          },
+          description: {
+            en: 'Create lists for birthdays, Christmas, baby showers, weddings, housewarmings and more.',
+            fr: 'Créez des listes pour anniversaires, Noël, naissance, mariage, crémaillère et bien plus.',
+          },
+        },
+        {
+          icon: 'mdi:account-multiple-outline',
+          title: {
+            en: 'Collaborative lists',
+            fr: 'Listes collaboratives',
+          },
+          description: {
+            en: "Invite your partner or friends to build and manage a wishlist together. Perfect to collaborate on your friend's birthday gift.",
+            fr: "Invitez votre partenaire ou vos amis pour créer et gérer une wishlist à plusieurs. Parfait pour collaborer sur le cadeau d'anniversaire de vos amis.",
+          },
+        },
+        {
+          icon: 'mdi:infinity',
+          title: {
+            en: 'Unlimited wishlists',
+            fr: 'Wishlists illimitées',
+          },
+          description: {
+            en: 'Organize as many lists as you need: family, kids, couple or just for yourself.',
+            fr: 'Organisez autant de listes que vous voulez : famille, enfants, couple ou juste pour vous.',
+          },
+        },
+      ],
+      imgUrl: `${CONFIG.assetsDir}/assets/images/features/events-and-lists.svg`,
     },
-    "keywords": ["envy", "wishlist", "gift", "list", "liste d'envies", "envie", "cadeau", "cadeaux", "liste de cadeaux", "partagé"],
-    "features": [
-         {
-            "id": "events-and-lists",
-            "icon": "mdi:calendar-heart",
-            "pain": {
-                "en": "Stop rebuilding a new list from scratch for every birthday, Christmas or big event.",
-                "fr": "Arrêtez de recréer une nouvelle liste à chaque anniversaire, Noël ou grand événement."
-            },
-            "title": {
-                "en": "Wishlists for every moment",
-                "fr": "Des listes d'envies pour chaque moment"
-            },
-            "items": [
-                {
-                    "icon": "mdi:calendar-star",
-                    "title": {
-                        "en": "All your big events",
-                        "fr": "Tous vos grands événements"
-                    },
-                    "description": {
-                        "en": "Create lists for birthdays, Christmas, baby showers, weddings, housewarmings and more.",
-                        "fr": "Créez des listes pour anniversaires, Noël, naissance, mariage, crémaillère et bien plus."
-                    }
-                },
-                {
-                    "icon": "mdi:account-multiple-outline",
-                    "title": {
-                        "en": "Collaborative lists",
-                        "fr": "Listes collaboratives"
-                    },
-                    "description": {
-                        "en": "Invite your partner or friends to build and manage a wishlist together. Perfect to collaborate on your friend's birthday gift.",
-                        "fr": "Invitez votre partenaire ou vos amis pour créer et gérer une wishlist à plusieurs. Parfait pour collaborer sur le cadeau d'anniversaire de vos amis."
-                    }
-                },
-                {
-                    "icon": "mdi:infinity",
-                    "title": {
-                        "en": "Unlimited wishlists",
-                        "fr": "Wishlists illimitées"
-                    },
-                    "description": {
-                        "en": "Organize as many lists as you need: family, kids, couple or just for yourself.",
-                        "fr": "Organisez autant de listes que vous voulez : famille, enfants, couple ou juste pour vous."
-                    }
-                },
-            ],
-            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/events-and-lists.svg`
+    {
+      id: 'easy-sharing',
+      icon: 'mdi:share-variant',
+      pain: {
+        en: 'Stop answering the same questions and avoid duplicate gifts.',
+        fr: 'Évitez les questions sans fin, les cadeaux ratés ou en doubles.',
+      },
+      title: {
+        en: 'Share in two clicks',
+        fr: 'Partage en deux clics',
+      },
+      items: [
+        {
+          icon: 'mdi:link-variant',
+          title: {
+            en: 'A simple share link',
+            fr: 'Un simple lien à partager',
+          },
+          description: {
+            en: 'Send your wishlist by link, email or messaging apps in a few seconds.',
+            fr: 'Envoyez votre wishlist par lien, e-mail ou messagerie en quelques secondes.',
+          },
         },
         {
-            "id": "easy-sharing",
-            "icon": "mdi:share-variant",
-            "pain": {
-                "en": "Stop answering the same questions and avoid duplicate gifts.",
-                "fr": "Évitez les questions sans fin, les cadeaux ratés ou en doubles."
-            },
-            "title": {
-                "en": "Share in two clicks",
-                "fr": "Partage en deux clics"
-            },
-            "items": [
-                {
-                    "icon": "mdi:link-variant",
-                    "title": {
-                        "en": "A simple share link",
-                        "fr": "Un simple lien à partager"
-                    },
-                    "description": {
-                        "en": "Send your wishlist by link, email or messaging apps in a few seconds.",
-                        "fr": "Envoyez votre wishlist par lien, e-mail ou messagerie en quelques secondes."
-                    }
-                },
-                {
-                    "icon": "mdi:account-off-outline",
-                    "title": {
-                        "en": "No account for guests",
-                        "fr": "Pas de compte pour les invités"
-                    },
-                    "description": {
-                        "en": "Your friends can see and reserve gifts without creating an account.",
-                        "fr": "Vos proches peuvent voir et réserver les cadeaux sans créer de compte."
-                    }
-                },
-                {
-                    "icon": "mdi:checkbox-marked-circle-outline",
-                    "title": {
-                        "en": "No more duplicate gifts",
-                        "fr": "Fini les cadeaux en double"
-                    },
-                    "description": {
-                        "en": "Everyone sees what is already reserved so you avoid awkward duplicates.",
-                        "fr": "Tout le monde voit ce qui est déjà réservé pour éviter les doublons gênants."
-                    }
-                }
-            ],
-            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/easy-sharing.svg`
+          icon: 'mdi:account-off-outline',
+          title: {
+            en: 'No account for guests',
+            fr: 'Pas de compte pour les invités',
+          },
+          description: {
+            en: 'Your friends can see and reserve gifts without creating an account.',
+            fr: 'Vos proches peuvent voir et réserver les cadeaux sans créer de compte.',
+          },
         },
         {
-            "id": "multi-stores-wishlist",
-            "icon": "mdi:cart-heart",
-            "pain": {
-                "en": "Stop sending dozens of links, keep all your gift ideas in one simple list.",
-                "fr": "Fini les dizaines de liens envoyés, regroupez toutes vos envies dans une seule liste."
-            },
-            "title": {
-                "en": "One wishlist for all shops",
-                "fr": "Une wishlist pour tous les sites"
-            },
-            "items": [
-                {
-                    "icon": "mdi:web",
-                    "title": {
-                        "en": "From any website",
-                        "fr": "Depuis n'importe quel site"
-                    },
-                    "description": {
-                        "en": "Add a gift from any online store with a simple copy–paste.",
-                        "fr": "Ajoutez un cadeau depuis n'importe quelle boutique avec un simple copier–coller."
-                    }
-                },
-                {
-                    "icon": "mdi:gift-outline",
-                    "title": {
-                        "en": "All wishes in one place",
-                        "fr": "Toutes vos envies au même endroit"
-                    },
-                    "description": {
-                        "en": "Centralize books, toys, décor, experiences and more in a single wishlist.",
-                        "fr": "Centralisez livres, jouets, déco, expériences et plus encore dans une seule wishlist."
-                    }
-                },
-                {
-                    "icon": "mdi:update",
-                    "title": {
-                        "en": "Always up to date",
-                        "fr": "Toujours à jour"
-                    },
-                    "description": {
-                        "en": "Edit, reorder or remove ideas in seconds without resending everything to your friends.",
-                        "fr": "Modifiez, réorganisez ou supprimez vos idées en quelques secondes sans tout renvoyer à vos proches."
-                    }
-                }
-            ],
-            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/multi-stores-wishlist.svg`
+          icon: 'mdi:checkbox-marked-circle-outline',
+          title: {
+            en: 'No more duplicate gifts',
+            fr: 'Fini les cadeaux en double',
+          },
+          description: {
+            en: 'Everyone sees what is already reserved so you avoid awkward duplicates.',
+            fr: 'Tout le monde voit ce qui est déjà réservé pour éviter les doublons gênants.',
+          },
         },
-        
+      ],
+      imgUrl: `${CONFIG.assetsDir}/assets/images/features/easy-sharing.svg`,
+    },
+    {
+      id: 'multi-stores-wishlist',
+      icon: 'mdi:cart-heart',
+      pain: {
+        en: 'Stop sending dozens of links, keep all your gift ideas in one simple list.',
+        fr: 'Fini les dizaines de liens envoyés, regroupez toutes vos envies dans une seule liste.',
+      },
+      title: {
+        en: 'One wishlist for all shops',
+        fr: 'Une wishlist pour tous les sites',
+      },
+      items: [
         {
-            "id": "simple-free-access",
-            "icon": "mdi:cellphone-link",
-            "pain": {
-                "en": "Managing gift ideas across devices and apps quickly becomes a mess.",
-                "fr": "Gérer ses idées cadeaux sur plusieurs appareils et applis devient vite un bazar."
-            },
-            "title": {
-                "en": "Simple, mobile & free",
-                "fr": "Simple, mobile et gratuit"
-            },
-            "items": [
-                {
-                    "icon": "mdi:cellphone",
-                    "title": {
-                        "en": "Works everywhere",
-                        "fr": "Fonctionne partout"
-                    },
-                    "description": {
-                        "en": "Use Envy on your phone, tablet or computer with a clean, modern interface.",
-                        "fr": "Utilisez Envy sur téléphone, tablette ou ordinateur avec une interface claire et moderne."
-                    }
+          icon: 'mdi:web',
+          title: {
+            en: 'From any website',
+            fr: "Depuis n'importe quel site",
+          },
+          description: {
+            en: 'Add a gift from any online store with a simple copy–paste.',
+            fr: "Ajoutez un cadeau depuis n'importe quelle boutique avec un simple copier–coller.",
+          },
+        },
+        {
+          icon: 'mdi:gift-outline',
+          title: {
+            en: 'All wishes in one place',
+            fr: 'Toutes vos envies au même endroit',
+          },
+          description: {
+            en: 'Centralize books, toys, décor, experiences and more in a single wishlist.',
+            fr: 'Centralisez livres, jouets, déco, expériences et plus encore dans une seule wishlist.',
+          },
+        },
+        {
+          icon: 'mdi:update',
+          title: {
+            en: 'Always up to date',
+            fr: 'Toujours à jour',
+          },
+          description: {
+            en: 'Edit, reorder or remove ideas in seconds without resending everything to your friends.',
+            fr: 'Modifiez, réorganisez ou supprimez vos idées en quelques secondes sans tout renvoyer à vos proches.',
+          },
+        },
+      ],
+      imgUrl: `${CONFIG.assetsDir}/assets/images/features/multi-stores-wishlist.svg`,
+    },
+
+    {
+      id: 'simple-free-access',
+      icon: 'mdi:cellphone-link',
+      pain: {
+        en: 'Managing gift ideas across devices and apps quickly becomes a mess.',
+        fr: 'Gérer ses idées cadeaux sur plusieurs appareils et applis devient vite un bazar.',
+      },
+      title: {
+        en: 'Simple, mobile & free',
+        fr: 'Simple, mobile et gratuit',
+      },
+      items: [
+        {
+          icon: 'mdi:cellphone',
+          title: {
+            en: 'Works everywhere',
+            fr: 'Fonctionne partout',
+          },
+          description: {
+            en: 'Use Envy on your phone, tablet or computer with a clean, modern interface.',
+            fr: 'Utilisez Envy sur téléphone, tablette ou ordinateur avec une interface claire et moderne.',
+          },
+        },
+        {
+          icon: 'mdi:currency-eur-off',
+          title: {
+            en: '100% free service',
+            fr: 'Service 100 % gratuit',
+          },
+          description: {
+            en: 'Create and share as many lists as you want, without fees for you or your guests.',
+            fr: 'Créez et partagez autant de listes que vous voulez, sans frais pour vous ni pour vos proches.',
+          },
+        },
+      ],
+      imgUrl: `${CONFIG.assetsDir}/assets/images/features/simple-free-access.svg`,
+    },
+  ],
+  heroTexts: {
+    description: {
+      en: 'The free app to list and share your wishes.\nAvoid duplicate gifts and simplify your celebrations.\nList, share, and celebrate today!',
+      fr: "L'app gratuite pour lister et partager vos envies.\nÉvitez les cadeaux en double et simplifiez vos fêtes.\nListez, partagez et célébrez dès maintenant !",
+    },
+    headingPart1: {
+      en: 'List your wishes,',
+      fr: 'Listez vos envies,',
+    },
+    headingPart2: {
+      en: 'share and celebrate',
+      fr: 'partagez et célébrez',
+    },
+  },
+  reviews: [
+    {
+      id: 'rev-1',
+      name: 'Alex G.',
+      rating: 5,
+      jobTitle: {
+        en: 'Busy parent',
+        fr: 'Parent débordé',
+      },
+      content: {
+        en: 'For birthdays and Christmas, I just send my Envy link. No more stress or duplicate toys.',
+        fr: "Pour les anniversaires et Noël, j'envoie juste mon lien Envy. Plus de stress ni de jouets en doublon.",
+      },
+      postedAt: new Date('2025-01-10T09:15:00.000Z'),
+    },
+    {
+      id: 'rev-2',
+      name: 'Marie L.',
+      rating: 5,
+      jobTitle: {
+        en: 'Future bride',
+        fr: 'Future mariée',
+      },
+      content: {
+        en: 'Our wedding gifts were perfectly managed. Guests loved how easy the list was to use.',
+        fr: 'Nos cadeaux de mariage ont été parfaitement gérés. Les invités ont adoré la simplicité de la liste.',
+      },
+      postedAt: new Date('2025-02-02T18:30:00.000Z'),
+    },
+    {
+      id: 'rev-3',
+      name: 'Tom D.',
+      rating: 5,
+      jobTitle: {
+        en: 'Student',
+        fr: 'Étudiant',
+      },
+      content: {
+        en: 'I keep one wishlist all year, so my family always knows what I really need.',
+        fr: "Je garde une wishlist toute l'année, comme ça ma famille sait toujours ce dont j'ai vraiment besoin.",
+      },
+      postedAt: new Date('2025-03-12T14:05:00.000Z'),
+    },
+    {
+      id: 'rev-4',
+      name: 'Emma P.',
+      rating: 4,
+      jobTitle: {
+        en: 'New parent',
+        fr: 'Jeune parent',
+      },
+      content: {
+        en: 'Perfect for our baby registry, even with gifts from different shops and second-hand items.',
+        fr: "Parfait pour notre liste de naissance, même avec des cadeaux de différents sites et d'occasion.",
+      },
+      postedAt: new Date('2025-03-28T11:20:00.000Z'),
+    },
+    {
+      id: 'rev-5',
+      name: 'Lucas R.',
+      rating: 5,
+      jobTitle: {
+        en: 'Gift organiser',
+        fr: 'Organisateur de cadeaux',
+      },
+      content: {
+        en: 'No one in the family buys the same gift anymore. Reservations make everything simple.',
+        fr: "Plus personne n'achète le même cadeau dans la famille. Les réservations simplifient tout.",
+      },
+      postedAt: new Date('2025-04-05T16:45:00.000Z'),
+    },
+    {
+      id: 'rev-6',
+      name: 'Sofia M.',
+      rating: 5,
+      jobTitle: {
+        en: 'Friend group planner',
+        fr: "Organisatrice de groupe d'amis",
+      },
+      content: {
+        en: 'We use Envy for Secret Santa. Everyone adds ideas and the surprise stays intact.',
+        fr: 'On utilise Envy pour le Secret Santa. Chacun ajoute ses idées et la surprise reste intacte.',
+      },
+      postedAt: new Date('2025-04-20T20:10:00.000Z'),
+    },
+    {
+      id: 'rev-7',
+      name: 'Nina K.',
+      rating: 5,
+      jobTitle: {
+        en: 'Tech-savvy aunt',
+        fr: 'Tata connectée',
+      },
+      content: {
+        en: 'Even my parents can open the link and reserve a gift without creating an account.',
+        fr: 'Même mes parents ouvrent le lien et réservent un cadeau sans créer de compte.',
+      },
+      postedAt: new Date('2025-05-01T08:55:00.000Z'),
+    },
+    {
+      id: 'rev-8',
+      name: 'Hugo V.',
+      rating: 4,
+      jobTitle: {
+        en: 'Housewarming host',
+        fr: 'Hôte de crémaillère',
+      },
+      content: {
+        en: 'Great for our housewarming. Guests picked exactly what we needed for the new home.',
+        fr: 'Génial pour notre crémaillère. Les invités ont choisi exactement ce dont on avait besoin.',
+      },
+      postedAt: new Date('2025-05-14T19:25:00.000Z'),
+    },
+    {
+      id: 'rev-9',
+      name: 'Claire B.',
+      rating: 5,
+      jobTitle: {
+        en: 'HR manager',
+        fr: 'Responsable RH',
+      },
+      content: {
+        en: 'We used Envy for a team baby shower at work. It saved us a lot of time.',
+        fr: "On a utilisé Envy pour une baby shower d'équipe au boulot. Ça nous a fait gagner du temps.",
+      },
+      postedAt: new Date('2025-06-03T13:40:00.000Z'),
+    },
+    {
+      id: 'rev-10',
+      name: 'Jade C.',
+      rating: 5,
+      jobTitle: {
+        en: 'Lifestyle blogger',
+        fr: 'Blogueuse lifestyle',
+      },
+      content: {
+        en: 'The interface is clean and modern. I recommend it in all my gift guides.',
+        fr: "L'interface est claire et moderne. Je le recommande dans tous mes guides cadeaux.",
+      },
+      postedAt: new Date('2025-06-21T10:00:00.000Z'),
+    },
+    {
+      id: 'rev-11',
+      name: 'Omar S.',
+      rating: 5,
+      jobTitle: {
+        en: 'Godfather',
+        fr: 'Parrain',
+      },
+      content: {
+        en: 'I finally know what to buy for my godchildren without asking their parents every time.',
+        fr: 'Je sais enfin quoi acheter à mes filleuls sans demander aux parents à chaque fois.',
+      },
+      postedAt: new Date('2025-07-02T17:35:00.000Z'),
+    },
+    {
+      id: 'rev-12',
+      name: 'Léa F.',
+      rating: 5,
+      jobTitle: {
+        en: 'Young professional',
+        fr: 'Jeune active',
+      },
+      content: {
+        en: 'I use one list for my own shopping and another for gifts. It keeps everything clear.',
+        fr: "J'utilise une liste pour mon shopping et une autre pour les cadeaux. Tout est plus clair.",
+      },
+      postedAt: new Date('2025-07-15T12:05:00.000Z'),
+    },
+  ],
+  testimonialsTexts: {
+    titlePart1: {
+      en: 'Loved by families,',
+      fr: 'Adopté par les familles,',
+    },
+    titlePart2: {
+      en: 'friends and organisers',
+      fr: 'les amis et les organisateurs',
+    },
+  },
+  plans: null,
+  testimonialNumbers: [
+    {
+      label: {
+        en: 'Wish Lists',
+        fr: "Listes d'envies",
+      },
+      value: 840,
+    },
+    {
+      label: {
+        en: 'Wishes',
+        fr: 'Envies',
+      },
+      value: 6400,
+    },
+    {
+      label: {
+        en: 'Gifts Reserved',
+        fr: 'Cadeaux réservés',
+      },
+      value: 3600,
+    },
+  ],
+  faq: {
+    pages: [
+      {
+        id: 'general',
+        slug: {
+          en: 'faq',
+          fr: 'faq',
+        },
+        seo: {
+          title: {
+            en: 'Envy FAQ - Everything about our free wishlist',
+            fr: "FAQ Envy - Tout savoir sur la liste d'envies gratuite",
+          },
+          description: {
+            en: 'Find answers to all your questions about Envy, the universal wishlist app.',
+            fr: "Trouvez les réponses à vos questions sur Envy, l'application de liste d'envies universelle.",
+          },
+          keywords: {
+            en: 'faq, help, wishlist, free, universal list',
+            fr: "faq, aide, liste d'envies, gratuit, liste universelle",
+          },
+        },
+        hero: {
+          title: { en: 'How can we help?', fr: 'Comment pouvons-nous vous aider ?' },
+          subtitle: {
+            en: 'The essentials to master your Envy lists.',
+            fr: "L'essentiel pour maîtriser vos listes Envy.",
+          },
+        },
+        sections: [
+          {
+            title: { en: 'The Basics', fr: 'Les bases' },
+            items: [
+              {
+                id: 'what-is-envy',
+                question: { en: 'What is Envy?', fr: "C'est quoi Envy ?" },
+                answer: {
+                  en: 'Envy is a free platform to create and share wishlists for any occasion. No more duplicate gifts!',
+                  fr: "Envy est une plateforme gratuite pour créer et partager des listes d'envies. Fini les cadeaux en double !",
                 },
-                {
-                    "icon": "mdi:currency-eur-off",
-                    "title": {
-                        "en": "100% free service",
-                        "fr": "Service 100 % gratuit"
-                    },
-                    "description": {
-                        "en": "Create and share as many lists as you want, without fees for you or your guests.",
-                        "fr": "Créez et partagez autant de listes que vous voulez, sans frais pour vous ni pour vos proches."
-                    }
-                }
+              },
+              {
+                id: 'is-it-free',
+                question: { en: 'Is it really free?', fr: 'Est-ce vraiment gratuit ?' },
+                answer: {
+                  en: 'Yes, 100%. Creating and sharing lists is free for you and your guests.',
+                  fr: 'Oui, à 100%. La création et le partage de listes sont gratuits pour vous et vos invités.',
+                },
+              },
             ],
-            "imgUrl": `${CONFIG.assetsDir}/assets/images/features/simple-free-access.svg`
-        }
+          },
+          {
+            title: { en: 'How it works', fr: 'Fonctionnement' },
+            items: [
+              {
+                id: 'add-from-anywhere',
+                question: {
+                  en: 'Can I add items from any site?',
+                  fr: "Puis-je ajouter des objets de n'importe quel site ?",
+                },
+                answer: {
+                  en: 'Yes! Just copy the link from any online store and paste it into your Envy list.',
+                  fr: "Oui ! Copiez simplement le lien de n'importe quelle boutique et collez-le dans votre liste.",
+                },
+                relatedFeatureId: 'multi-stores-wishlist',
+              },
+              {
+                id: 'guest-account',
+                question: {
+                  en: 'Do guests need an account?',
+                  fr: "Les invités ont-ils besoin d'un compte ?",
+                },
+                answer: {
+                  en: 'No, your loved ones can see and reserve gifts without creating an account.',
+                  fr: 'Non, vos proches peuvent voir et réserver des cadeaux sans avoir à créer de compte.',
+                },
+                relatedFeatureId: 'easy-sharing',
+              },
+            ],
+          },
+        ],
+        cta: {
+          text: { en: 'Create my first list', fr: 'Créer ma première liste' },
+          link: '/app/create',
+        },
+      },
+      {
+        id: 'birthday',
+        slug: {
+          en: 'birthday-wishlist-faq',
+          fr: 'faq-liste-anniversaire',
+        },
+        seo: {
+          title: { en: 'Birthday Wishlist FAQ | Envy', fr: "FAQ Liste d'Anniversaire | Envy" },
+          description: {
+            en: 'Tips for the perfect birthday gift list.',
+            fr: "Conseils pour une liste d'anniversaire parfaite.",
+          },
+          keywords: {
+            en: 'birthday, gift list, kids, family',
+            fr: 'anniversaire, liste cadeaux, enfants, famille',
+          },
+        },
+        hero: {
+          title: { en: 'Birthday Lists', fr: "Listes d'Anniversaire" },
+          subtitle: {
+            en: "Manage everyone's wishes in one place.",
+            fr: 'Gérez les envies de chacun au même endroit.',
+          },
+        },
+        sections: [
+          {
+            title: { en: 'Family Management', fr: 'Gestion Famille' },
+            items: [
+              {
+                id: 'multiple-kids',
+                question: {
+                  en: 'Can I manage multiple children?',
+                  fr: 'Puis-je gérer plusieurs enfants ?',
+                },
+                answer: {
+                  en: 'Yes, create unlimited lists under your single account for the whole family.',
+                  fr: 'Oui, créez des listes illimitées pour toute la famille sous un seul compte.',
+                },
+                relatedFeatureId: 'events-and-lists',
+              },
+              {
+                id: 'collaboration',
+                question: { en: 'Can I co-manage a list?', fr: 'Puis-je co-gérer une liste ?' },
+                answer: {
+                  en: 'Invite a partner to add and edit items with you on a shared list.',
+                  fr: 'Invitez un partenaire pour ajouter et modifier des articles avec vous sur une liste partagée.',
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'christmas',
+        slug: {
+          en: 'christmas-wishlist-faq',
+          fr: 'faq-liste-noel',
+        },
+        seo: {
+          title: {
+            en: 'Christmas List FAQ | Secret Santa',
+            fr: 'FAQ Liste de Noël | Secret Santa',
+          },
+          description: {
+            en: 'Simplify your holiday gifting.',
+            fr: "Simplifiez vos cadeaux de fin d'année.",
+          },
+          keywords: { en: 'christmas, holidays, secret santa', fr: 'noël, fêtes, secret santa' },
+        },
+        hero: {
+          title: { en: 'Christmas & Holidays', fr: 'Noël & Fêtes' },
+          subtitle: { en: 'Avoid the holiday stress.', fr: 'Évitez le stress des fêtes.' },
+        },
+        sections: [
+          {
+            title: { en: 'Gifting', fr: 'Cadeaux' },
+            items: [
+              {
+                id: 'surprise-mode',
+                question: { en: 'Can I keep the surprise?', fr: 'Puis-je garder la surprise ?' },
+                answer: {
+                  en: 'Yes, reservations are visible to guests but hidden from you to keep it a secret.',
+                  fr: 'Oui, les réservations sont visibles pour les invités mais cachées pour vous.',
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'registries',
+        slug: {
+          en: 'wedding-baby-registry-faq',
+          fr: 'faq-liste-naissance-mariage',
+        },
+        seo: {
+          title: { en: 'Registry FAQ | Wedding & Baby', fr: 'FAQ Listes de Naissance & Mariage' },
+          description: {
+            en: 'Professional registries made simple.',
+            fr: 'Des listes officielles en toute simplicité.',
+          },
+          keywords: { en: 'wedding, baby shower, registry', fr: 'mariage, naissance, liste' },
+        },
+        hero: {
+          title: { en: 'Registries', fr: 'Listes Officielles' },
+          subtitle: { en: "For life's big moments.", fr: 'Pour les grands moments de la vie.' },
+        },
+        sections: [
+          {
+            title: { en: 'Registry Features', fr: 'Fonctionnalités' },
+            items: [
+              {
+                id: 'second-hand',
+                question: {
+                  en: 'Can I add second-hand items?',
+                  fr: "Puis-je ajouter de l'occasion ?",
+                },
+                answer: {
+                  en: 'Absolutely! Add a link to the ad or a note to let guests know.',
+                  fr: "Absolument ! Ajoutez un lien vers l'annonce ou une note pour prévenir vos invités.",
+                },
+              },
+            ],
+          },
+        ],
+      },
     ],
-    "heroTexts": {
-        "description": {
-            "en": "The free app to list and share your wishes.\nAvoid duplicate gifts and simplify your celebrations.\nList, share, and celebrate today!",
-            "fr": "L'app gratuite pour lister et partager vos envies.\nÉvitez les cadeaux en double et simplifiez vos fêtes.\nListez, partagez et célébrez dès maintenant !"
-        },
-        "headingPart1": {
-            "en": "List your wishes,",
-            "fr": "Listez vos envies,"
-        },
-        "headingPart2": {
-            "en": "share and celebrate",
-            "fr": "partagez et célébrez"
-        }
-    },
-    "reviews": [
-        {
-            "id": "rev-1",
-            "name": "Alex G.",
-            "rating": 5,
-            "jobTitle": {
-                "en": "Busy parent",
-                "fr": "Parent débordé"
-            },
-            "content": {
-                "en": "For birthdays and Christmas, I just send my Envy link. No more stress or duplicate toys.",
-                "fr": "Pour les anniversaires et Noël, j'envoie juste mon lien Envy. Plus de stress ni de jouets en doublon."
-            },
-            "postedAt": new Date("2025-01-10T09:15:00.000Z")
-        },
-        {
-            "id": "rev-2",
-            "name": "Marie L.",
-            "rating": 5,
-            "jobTitle": {
-                "en": "Future bride",
-                "fr": "Future mariée"
-            },
-            "content": {
-                "en": "Our wedding gifts were perfectly managed. Guests loved how easy the list was to use.",
-                "fr": "Nos cadeaux de mariage ont été parfaitement gérés. Les invités ont adoré la simplicité de la liste."
-            },
-            "postedAt": new Date("2025-02-02T18:30:00.000Z")
-        },
-        {
-            "id": "rev-3",
-            "name": "Tom D.",
-            "rating": 5,
-            "jobTitle": {
-                "en": "Student",
-                "fr": "Étudiant"
-            },
-            "content": {
-                "en": "I keep one wishlist all year, so my family always knows what I really need.",
-                "fr": "Je garde une wishlist toute l'année, comme ça ma famille sait toujours ce dont j'ai vraiment besoin."
-            },
-            "postedAt": new Date("2025-03-12T14:05:00.000Z")
-        },
-        {
-            "id": "rev-4",
-            "name": "Emma P.",
-            "rating": 4,
-            "jobTitle": {
-                "en": "New parent",
-                "fr": "Jeune parent"
-            },
-            "content": {
-                "en": "Perfect for our baby registry, even with gifts from different shops and second-hand items.",
-                "fr": "Parfait pour notre liste de naissance, même avec des cadeaux de différents sites et d'occasion."
-            },
-            "postedAt": new Date("2025-03-28T11:20:00.000Z")
-        },
-        {
-            "id": "rev-5",
-            "name": "Lucas R.",
-            "rating": 5,
-            "jobTitle": {
-                "en": "Gift organiser",
-                "fr": "Organisateur de cadeaux"
-            },
-            "content": {
-                "en": "No one in the family buys the same gift anymore. Reservations make everything simple.",
-                "fr": "Plus personne n'achète le même cadeau dans la famille. Les réservations simplifient tout."
-            },
-            "postedAt": new Date("2025-04-05T16:45:00.000Z")
-        },
-        {
-            "id": "rev-6",
-            "name": "Sofia M.",
-            "rating": 5,
-            "jobTitle": {
-                "en": "Friend group planner",
-                "fr": "Organisatrice de groupe d'amis"
-            },
-            "content": {
-                "en": "We use Envy for Secret Santa. Everyone adds ideas and the surprise stays intact.",
-                "fr": "On utilise Envy pour le Secret Santa. Chacun ajoute ses idées et la surprise reste intacte."
-            },
-            "postedAt": new Date("2025-04-20T20:10:00.000Z")
-        },
-        {
-            "id": "rev-7",
-            "name": "Nina K.",
-            "rating": 5,
-            "jobTitle": {
-                "en": "Tech-savvy aunt",
-                "fr": "Tata connectée"
-            },
-            "content": {
-                "en": "Even my parents can open the link and reserve a gift without creating an account.",
-                "fr": "Même mes parents ouvrent le lien et réservent un cadeau sans créer de compte."
-            },
-            "postedAt": new Date("2025-05-01T08:55:00.000Z")
-        },
-        {
-            "id": "rev-8",
-            "name": "Hugo V.",
-            "rating": 4,
-            "jobTitle": {
-                "en": "Housewarming host",
-                "fr": "Hôte de crémaillère"
-            },
-            "content": {
-                "en": "Great for our housewarming. Guests picked exactly what we needed for the new home.",
-                "fr": "Génial pour notre crémaillère. Les invités ont choisi exactement ce dont on avait besoin."
-            },
-            "postedAt": new Date("2025-05-14T19:25:00.000Z")
-        },
-        {
-            "id": "rev-9",
-            "name": "Claire B.",
-            "rating": 5,
-            "jobTitle": {
-                "en": "HR manager",
-                "fr": "Responsable RH"
-            },
-            "content": {
-                "en": "We used Envy for a team baby shower at work. It saved us a lot of time.",
-                "fr": "On a utilisé Envy pour une baby shower d'équipe au boulot. Ça nous a fait gagner du temps."
-            },
-            "postedAt": new Date("2025-06-03T13:40:00.000Z")
-        },
-        {
-            "id": "rev-10",
-            "name": "Jade C.",
-            "rating": 5,
-            "jobTitle": {
-                "en": "Lifestyle blogger",
-                "fr": "Blogueuse lifestyle"
-            },
-            "content": {
-                "en": "The interface is clean and modern. I recommend it in all my gift guides.",
-                "fr": "L'interface est claire et moderne. Je le recommande dans tous mes guides cadeaux."
-            },
-            "postedAt": new Date("2025-06-21T10:00:00.000Z")
-        },
-        {
-            "id": "rev-11",
-            "name": "Omar S.",
-            "rating": 5,
-            "jobTitle": {
-                "en": "Godfather",
-                "fr": "Parrain"
-            },
-            "content": {
-                "en": "I finally know what to buy for my godchildren without asking their parents every time.",
-                "fr": "Je sais enfin quoi acheter à mes filleuls sans demander aux parents à chaque fois."
-            },
-            "postedAt": new Date("2025-07-02T17:35:00.000Z")
-        },
-        {
-            "id": "rev-12",
-            "name": "Léa F.",
-            "rating": 5,
-            "jobTitle": {
-                "en": "Young professional",
-                "fr": "Jeune active"
-            },
-            "content": {
-                "en": "I use one list for my own shopping and another for gifts. It keeps everything clear.",
-                "fr": "J'utilise une liste pour mon shopping et une autre pour les cadeaux. Tout est plus clair."
-            },
-            "postedAt": new Date("2025-07-15T12:05:00.000Z")
-        }
-    ],
-    "testimonialsTexts": {
-        "titlePart1": {
-            "en": "Loved by families,",
-            "fr": "Adopté par les familles,"
-        },
-        "titlePart2": {
-            "en": "friends and organisers",
-            "fr": "les amis et les organisateurs"
-        }
-    },
-    "plans": null,
-    "testimonialNumbers": [
-        {
-            "label": {
-                "en": "Wish Lists",
-                "fr": "Listes d'envies"
-            },
-            "value": 840
-        },
-        {
-            "label": {
-                "en": "Wishes",
-                "fr": "Envies"
-            },
-            "value": 6400
-        },
-        {
-            "label": {
-                "en": "Gifts Reserved",
-                "fr": "Cadeaux réservés"
-            },
-            "value": 3600
-        }
-    ]
-}
+  },
+};
