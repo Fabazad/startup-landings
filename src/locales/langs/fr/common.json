@@ -66,6 +66,10 @@
     "advertisement": {
       "get-started-with": "Commencez avec",
       "today": ""
+    },
+    "faq": {
+      "title": "Foire Aux Questions",
+      "description": "Une question ? Nous avons probablement la réponse."
     }
   },
   "common": {

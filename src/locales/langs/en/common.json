@@ -66,6 +66,10 @@
     "advertisement": {
       "get-started-with": "Get started with",
       "today": "today"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "description": "Have a question? We probably have an answer."
     }
   },
   "common": {

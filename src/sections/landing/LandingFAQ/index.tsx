@@ -50,15 +50,13 @@ export const LandingFAQ = ({ sx, ...other }: BoxProps) => {
 
             <m.div variants={varFade().inUp}>
               <Typography variant="h2" sx={{ my: 3 }}>
-                {t('landing.faq.title', { defaultValue: 'Frequently Asked Questions' })}
+                {t('landing.faq.title')}
               </Typography>
             </m.div>
 
             <m.div variants={varFade().inUp}>
               <Typography sx={{ color: 'text.secondary' }}>
-                {t('landing.faq.description', {
-                  defaultValue: 'Have a question? We probably have an answer.',
-                })}
+                {t('landing.faq.description')}
               </Typography>
             </m.div>
           </Box>
