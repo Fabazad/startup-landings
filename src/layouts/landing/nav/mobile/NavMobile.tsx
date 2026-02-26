@@ -21,7 +21,7 @@ export const NavMobile = ({ showConnection = true }: { showConnection?: boolean 
   const [openFeatures, setOpenFeatures] = useState(false);
 
   const { t } = useTranslate();
-  const { features, plans, isReady } = useProductIdea();
+  const { features, plans, isReady, faq } = useProductIdea();
 
   const onClose = () => {
     setOpenDrawer(false);
@@ -118,6 +118,12 @@ export const NavMobile = ({ showConnection = true }: { showConnection?: boolean 
             </ListItemIcon>
             <ListItemText primary={t('landing.nav.contact')} />
           </ListItemButton>
+          {faq && <ListItemButton component={Link} href="/#faq" onClick={onClose}>
+            <ListItemIcon>
+              <Iconify icon="mdi:help-circle" />
+            </ListItemIcon>
+            <ListItemText primary={t('landing.nav.faq')} />
+          </ListItemButton>}
           {isReady && showConnection && (
             <ListItem>
               <SignInButton />

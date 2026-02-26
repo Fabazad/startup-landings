@@ -6,6 +6,7 @@ import { LandingHero } from '../LandingHero/landing-hero';
 import { LandingPricing } from '../LandingPricing/landing-pricing';
 import { LandingTestimonials } from '../LandingTestimonials/landing-testimonials';
 import { LandingScrollUI } from './landing-scroll-ui';
+import { LandingFAQ } from '../LandingFAQ/index';
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +28,8 @@ export const LandingView = () => {
         <LandingPricing />
 
         <LandingContact />
+
+        <LandingFAQ />
 
         <LandingAdvertisement />
       </Stack>

@@ -1,5 +1,6 @@
 import { PrimaryColor } from 'src/components/settings';
 import { LanguageValue, Translated } from 'src/locales';
+import { ProductIdeaName } from 'src/ProductIdeas';
 
 type GenericItem<Text extends Translated | string> = {
   icon: string;
@@ -62,46 +63,47 @@ export type RawPlans = GenericPlans<Translated>;
 export type Plans = GenericPlans<string>;
 
 export type GenericFAQItem<Text extends Translated | string> = {
-    id: string;
-    question: Text;
-    answer: Text;
-    // Optionnel : permet de lier une question à une feature spécifique par son ID
-    relatedFeatureId?: string; 
-}
+  id: string;
+  question: Text;
+  answer: Text;
+  // Optionnel : permet de lier une question à une feature spécifique par son ID
+  relatedFeatureId?: string;
+};
 
 export type RawFAQItem = GenericFAQItem<Translated>;
 export type FAQItem = GenericFAQItem<string>;
 
 export type GenericFAQPage<Text extends Translated | string> = {
-    id: string; // ex: 'general', 'birthday', 'baby-shower'
-    slug: {
-        en: string; // ex: 'birthday-wishlist-faq'
-        fr: string; // ex: 'faq-liste-anniversaire'
-    };
-    seo: {
-        title: Text;
-        description: Text;
-        keywords: Text;
-    };
-    hero: {
-        title: Text;
-        subtitle: Text;
-    };
-    // Les questions regroupées par sections (ex: "Général", "Partage", "Sécurité")
-    sections: {
-        title: Text;
-        items: GenericFAQItem<Text>[];
-    }[];
-    // CTA spécifique à la fin de la page FAQ
-    cta?: {
-        text: Text;
-        link: string;
-    };
-}
+  id: string; // ex: 'general', 'birthday', 'baby-shower'
+  icon: string; // A solar duotone icon name. ex: 'solar:notebook-bold-duotone'
+  slug: {
+    en: string; // ex: 'birthday-wishlist'
+    fr: string; // ex: 'liste-anniversaire'
+  };
+  seo: {
+    title: Text;
+    description: Text;
+    keywords: Text;
+  };
+  hero: {
+    title: Text;
+    subtitle: Text;
+  };
+  // Les questions regroupées par sections (ex: "Général", "Partage", "Sécurité")
+  sections: {
+    title: Text;
+    items: GenericFAQItem<Text>[];
+  }[];
+  // CTA spécifique à la fin de la page FAQ
+  cta?: {
+    text: Text;
+    link: string;
+  };
+};
 
 export type GenericFAQ<Text extends Translated | string> = {
-    pages: GenericFAQPage<Text>[];
-}
+  pages: GenericFAQPage<Text>[];
+};
 
 export type RawFAQ = GenericFAQ<Translated>;
 export type FAQ = GenericFAQ<string>;
@@ -110,7 +112,7 @@ type GenericProductIdea<Text extends Translated | string> = {
   id: string;
   /** By default false. */
   isReady: boolean;
-  name: string;
+  name: ProductIdeaName;
   /** 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red' | 'lavender' **/
   themeColor: PrimaryColor;
   /** The logo should be either 'panda' => cute logo, 'octopus' => more professional logo or 'heart' => more modern logo. */
@@ -133,7 +135,7 @@ type GenericProductIdea<Text extends Translated | string> = {
     titlePart1: Text;
     titlePart2: Text;
   };
-  testimonialNumbers: Array<{ label: Text; value: number; unit?: string }>
+  testimonialNumbers: Array<{ label: Text; value: number; unit?: string }>;
   plans: GenericPlans<Text> | null;
 
   faq?: GenericFAQ<Text>;
@@ -175,53 +177,60 @@ export const translateProductIdea = (
         description: item.description?.[lang],
       })),
     })),
-    plans: productIdea.plans === null ? null : {
-      basic: {
-        ...productIdea.plans.basic,
-        target: productIdea.plans.basic.target[lang],
-        included: productIdea.plans.basic.included.map((included) => included[lang]),
-      },
-      premium: {
-        ...productIdea.plans.premium,
-        target: productIdea.plans.premium.target[lang],
-        included: productIdea.plans.premium.included.map((included) => included[lang]),
-      },
-      ultimate: {
-        ...productIdea.plans.ultimate,
-        target: productIdea.plans.ultimate.target[lang],
-        included: productIdea.plans.ultimate.included.map((included) => included[lang]),
-      },
-    },
+    plans:
+      productIdea.plans === null
+        ? null
+        : {
+            basic: {
+              ...productIdea.plans.basic,
+              target: productIdea.plans.basic.target[lang],
+              included: productIdea.plans.basic.included.map((included) => included[lang]),
+            },
+            premium: {
+              ...productIdea.plans.premium,
+              target: productIdea.plans.premium.target[lang],
+              included: productIdea.plans.premium.included.map((included) => included[lang]),
+            },
+            ultimate: {
+              ...productIdea.plans.ultimate,
+              target: productIdea.plans.ultimate.target[lang],
+              included: productIdea.plans.ultimate.included.map((included) => included[lang]),
+            },
+          },
     testimonialNumbers: productIdea.testimonialNumbers.map((item) => ({
       ...item,
       label: item.label[lang],
     })),
     // --- Traitement de la FAQ ---
-    faq: productIdea.faq ? {
-      pages: productIdea.faq.pages.map((page) => ({
-        ...page,
-        seo: {
-          title: page.seo.title[lang],
-          description: page.seo.description[lang],
-          keywords: page.seo.keywords[lang],
-        },
-        hero: {
-          title: page.hero.title[lang],
-          subtitle: page.hero.subtitle[lang],
-        },
-        sections: page.sections.map((section) => ({
-          title: section.title[lang],
-          items: section.items.map((item) => ({
-            ...item,
-            question: item.question[lang],
-            answer: item.answer[lang],
+    faq: productIdea.faq
+      ? {
+          pages: productIdea.faq.pages.map((page) => ({
+            ...page,
+            seo: {
+              title: page.seo.title[lang],
+              description: page.seo.description[lang],
+              keywords: page.seo.keywords[lang],
+            },
+            hero: {
+              title: page.hero.title[lang],
+              subtitle: page.hero.subtitle[lang],
+            },
+            sections: page.sections.map((section) => ({
+              title: section.title[lang],
+              items: section.items.map((item) => ({
+                ...item,
+                question: item.question[lang],
+                answer: item.answer[lang],
+              })),
+            })),
+            cta: page.cta
+              ? {
+                  ...page.cta,
+                  text: page.cta.text[lang],
+                }
+              : undefined,
           })),
-        })),
-        cta: page.cta ? {
-          ...page.cta,
-          text: page.cta.text[lang],
-        } : undefined,
-      })),
-    } : undefined,
+        }
+      : undefined,
   };
 };

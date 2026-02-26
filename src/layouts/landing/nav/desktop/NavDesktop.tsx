@@ -12,7 +12,7 @@ import { SignInButton } from 'src/sections/landing/components/sign-in-button';
 export const NavDesktop = ({ showConnection = true }: { showConnection?: boolean }) => {
   const { t } = useTranslate();
 
-  const { features, plans, isReady } = useProductIdea();
+  const { features, plans, isReady, faq } = useProductIdea();
 
   return (
     <Stack direction="row" gap={2} sx={{ display: { xs: 'none', md: 'flex' }, mx: 3 }}>
@@ -59,6 +59,9 @@ export const NavDesktop = ({ showConnection = true }: { showConnection?: boolean
       <Button component={Link} href="/#contact" sx={{ px: 2 }}>
         {t('landing.nav.contact')}
       </Button>
+      {faq && <Button component={Link} href="/#faq" sx={{ px: 2 }}>
+        {t('landing.nav.faq')}
+      </Button>}
       {!isReady && <GetStartedButton buttonName="get-started-nav" />}
       <ThemeButton />
       <LanguageButton />

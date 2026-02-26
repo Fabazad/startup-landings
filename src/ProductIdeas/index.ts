@@ -5,13 +5,12 @@ import { TRIPLY_PRODUCT_IDEA } from './Triply';
 import { VIBY_PRODUCT_IDEA } from './Viby/json';
 import { ENVY_PRODUCT_IDEA } from './Envy/json';
 
-
 export const PRODUCT_IDEA_NAMES = {
-  INSIGHT_FEED: 'INSIGHT_FEED',
-  TRIPLY: 'TRIPLY',
-  TRAIN_BACK: 'TRAIN_BACK',
-  VIBY: 'VIBY',
-  ENVY: 'ENVY',
+  INSIGHT_FEED: 'Insight Feed',
+  TRIPLY: 'Triply',
+  TRAIN_BACK: 'Train Back',
+  VIBY: 'Viby',
+  ENVY: 'Envy',
 } as const;
 
 export type ProductIdeaName = (typeof PRODUCT_IDEA_NAMES)[keyof typeof PRODUCT_IDEA_NAMES];
@@ -24,4 +23,4 @@ export const RAW_PRODUCT_IDEAS: Record<ProductIdeaName, RawProductIdea> = {
   [PRODUCT_IDEA_NAMES.ENVY]: ENVY_PRODUCT_IDEA,
 } as const;
 
-export const DEFAULT_PRODUCT_IDEA: RawProductIdea = RAW_PRODUCT_IDEAS.INSIGHT_FEED;
+export const DEFAULT_PRODUCT_IDEA: RawProductIdea = RAW_PRODUCT_IDEAS['Insight Feed'];

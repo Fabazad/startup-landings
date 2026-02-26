@@ -40,6 +40,7 @@ import { ProductIdeaProvider } from './product-idea-provider';
 import { PostHogProvider } from './providers/posthog-provider';
 import ReactQueryProvider from './providers/react-query-provider';
 import { AuthProvider } from './providers/auth-provider';
+import { RawProductIdea } from 'src/types/ProductIdea';
 
 // ----------------------------------------------------------------------
 
@@ -62,7 +63,7 @@ export const generateViewport: () => Promise<Viewport> = async () => {
   };
 };
 
-const getRawProductIdea = async () => {
+const getRawProductIdea = async (): Promise<RawProductIdea> => {
   // get url subdomain from url on server
   const headersList = await headers();
   const url = headersList.get('x-forwarded-host') || headersList.get('host') || '';
@@ -164,7 +165,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           defaultMode={schemeConfig.defaultMode}
           modeStorageKey={schemeConfig.modeStorageKey}
         />
-        <AuthProvider>
+        <AuthProvider productName={rawProductIdea.name}>
 
         <I18nProvider lang={CONFIG.isStaticExport ? undefined : lang}>
           <LocalizationProvider>

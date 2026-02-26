@@ -2,15 +2,17 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { ProductIdeaName, PRODUCT_IDEA_NAMES } from "src/ProductIdeas";
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider = ({ children, productName }: { children: React.ReactNode, productName: ProductIdeaName }) => {
 
     const router = useRouter();
 
     useEffect(() => {
         const item = localStorage?.getItem('sb-snompcrhhpnorquapudz-auth-token');
 
-        if (item) router.replace('/envy');
+        console.log({productName, acutal: PRODUCT_IDEA_NAMES.ENVY});
+        if (item && productName === PRODUCT_IDEA_NAMES.ENVY) router.replace('/envy');
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router]);
     
