@@ -16,7 +16,7 @@ export type LogoProps = {
 
 export const Logo = ({ isSingle = true, themeColor, logo, productName, height, width }: LogoProps) => {
 
-  const logoUrl = `${CONFIG.assetsDir}/logo/${themeColor}-${logo}.svg`;
+  const logoUrl = `${CONFIG.assetsDir}/logo/${themeColor}-${logo}.png`;
 
   const baseSize = {
     width: width || 40,

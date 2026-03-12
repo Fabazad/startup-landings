@@ -1,8 +1,7 @@
 /** **************************************
 * Fonts: app
 *************************************** */
-@import '@fontsource-variable/public-sans';
-
+/* Barlow: used for h1-h3 headings (fontSecondaryFamily) */
 @import '@fontsource/barlow/400.css';
 @import '@fontsource/barlow/500.css';
 @import '@fontsource/barlow/600.css';
@@ -12,8 +11,7 @@
 /** **************************************
 * Fonts: options
 *************************************** */
-@import '@fontsource-variable/dm-sans';
-@import '@fontsource-variable/inter';
+/* Nunito Sans: primary font for Envy */
 @import '@fontsource-variable/nunito-sans';
 
 /** **************************************
@@ -30,7 +28,6 @@
 
 /* lightbox */
 @import './components/lightbox/styles.css';
-
 
 /** **************************************
 * Baseline

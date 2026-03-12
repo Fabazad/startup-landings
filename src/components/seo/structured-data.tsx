@@ -41,7 +41,7 @@ export function StructuredData({ rawProductIdea, baseUrl }: StructuredDataProps)
     '@type': 'Organization',
     name: rawProductIdea.name,
     url: baseUrl,
-    logo: `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.svg`,
+    logo: `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`,
     description: rawProductIdea.heroTexts.description.en,
   };
 

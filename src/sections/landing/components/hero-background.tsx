@@ -99,9 +99,6 @@ export function HeroBackground({ sx, ...other }: BoxProps) {
       </Box>
 
       <Box
-        component={m.div}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
         sx={{
           top: 0,
           left: 0,

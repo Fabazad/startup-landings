@@ -85,7 +85,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const protocol = headersList.get('x-forwarded-proto') || 'https';
   const baseUrl = `${protocol}://${host}`;
 
-  const imageUrl = `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.svg`;
+  const imageUrl = `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`;
   const description = rawProductIdea.heroTexts.description.fr;
 
   // Generate keywords from product features
@@ -104,7 +104,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     keywords,
     icons: {
-      icon: `/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.ico`,
+      icon: `/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`,
     },
     alternates,
     openGraph: {
@@ -158,6 +158,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang={lang ?? 'en'} suppressHydrationWarning>
+      <head>
+        {/* Preconnect to third-party origins for faster resource loading */}
+        <link rel="preconnect" href="https://eu.i.posthog.com" />
+        <link rel="preconnect" href="https://eu-assets.i.posthog.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://api.iconify.design" crossOrigin="anonymous" />
+        {rawProductIdea.id === 'envy' && (
+          <link rel="preconnect" href="https://client.crisp.chat" crossOrigin="anonymous" />
+        )}
+      </head>
       <body>
         <StructuredData rawProductIdea={rawProductIdea} baseUrl={baseUrl} />
         <InitColorSchemeScript
@@ -200,7 +209,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {rawProductIdea.id === 'envy' && (
           <Script
             id="crisp-chat"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
             dangerouslySetInnerHTML={{
               __html: `window.CRISP_RUNTIME_CONFIG = { locale: "${lang ?? 'en'}" };window.$crisp=[];window.CRISP_WEBSITE_ID="58dbd684-000f-45ec-99c8-932b871cf9fc";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`,
             }}

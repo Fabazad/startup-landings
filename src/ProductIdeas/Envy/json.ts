@@ -71,7 +71,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
           },
         },
       ],
-      imgUrl: `${CONFIG.assetsDir}/assets/images/features/events-and-lists.svg`,
+      imgUrl: `${CONFIG.assetsDir}/assets/images/features/events-and-lists.webp`,
     },
     {
       id: 'easy-sharing',
@@ -119,7 +119,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
           },
         },
       ],
-      imgUrl: `${CONFIG.assetsDir}/assets/images/features/easy-sharing.svg`,
+      imgUrl: `${CONFIG.assetsDir}/assets/images/features/easy-sharing.webp`,
     },
     {
       id: 'multi-stores-wishlist',
@@ -167,7 +167,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
           },
         },
       ],
-      imgUrl: `${CONFIG.assetsDir}/assets/images/features/multi-stores-wishlist.svg`,
+      imgUrl: `${CONFIG.assetsDir}/assets/images/features/multi-stores-wishlist.webp`,
     },
 
     {
@@ -205,7 +205,7 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
           },
         },
       ],
-      imgUrl: `${CONFIG.assetsDir}/assets/images/features/simple-free-access.svg`,
+      imgUrl: `${CONFIG.assetsDir}/assets/images/features/simple-free-access.webp`,
     },
   ],
   heroTexts: {
