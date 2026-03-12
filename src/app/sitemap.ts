@@ -19,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   // Base pages for each language
-  const pages = [
+  const pages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -43,6 +43,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       },
     });
   });
+
+  // Add FAQ pages if the product idea has them
+  if (productIdea?.faq?.pages) {
+    productIdea.faq.pages.forEach((faqPage) => {
+      // Add each language variant of the FAQ page
+      languages.forEach((lang) => {
+        const slug = faqPage.slug[lang as 'en' | 'fr'] || faqPage.slug.en;
+        const faqUrl = `${baseUrl}/faq/${slug}/`;
+
+        // Build alternate language URLs for this FAQ page
+        const faqAlternates: Record<string, string> = {};
+        languages.forEach((l) => {
+          const altSlug = faqPage.slug[l as 'en' | 'fr'] || faqPage.slug.en;
+          faqAlternates[l] = `${baseUrl}/faq/${altSlug}/`;
+        });
+
+        pages.push({
+          url: faqUrl,
+          lastModified: new Date(),
+          changeFrequency: 'monthly' as const,
+          priority: 0.6,
+          alternates: {
+            languages: faqAlternates,
+          },
+        });
+      });
+    });
+  }
 
   return pages;
 }

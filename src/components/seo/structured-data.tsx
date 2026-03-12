@@ -61,20 +61,6 @@ export function StructuredData({ rawProductIdea, baseUrl }: StructuredDataProps)
     },
   };
 
-  // FAQ schema - generated from features
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: rawProductIdea.features.map((feature) => ({
-      '@type': 'Question',
-      name: feature.pain.en,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: `${feature.title.en}. ${feature.items.map(item => item.title.en).join('. ')}.`,
-      },
-    })),
-  };
-
   // Individual Review schemas
   const reviewSchemas = rawProductIdea.reviews.slice(0, 5).map((review) => ({
     '@context': 'https://schema.org',
@@ -107,10 +93,6 @@ export function StructuredData({ rawProductIdea, baseUrl }: StructuredDataProps)
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {reviewSchemas.map((schema, index) => (
         <script

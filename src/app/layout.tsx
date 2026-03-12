@@ -94,7 +94,6 @@ export async function generateMetadata(): Promise<Metadata> {
   // Generate alternate languages
   const alternates = {
     languages: Object.fromEntries(languages.map((lang) => [lang, `${baseUrl}?lang=${lang}`])),
-    canonical: baseUrl,
   };
 
   const title = `${rawProductIdea.name} - ${rawProductIdea.heroTexts.headingPart1.fr} ${rawProductIdea.heroTexts.headingPart2.fr}`;
