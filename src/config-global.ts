@@ -21,7 +21,8 @@ export type ConfigValue = {
   resend: { apiKey: string };
   amazon: { affiliateTag: string; accessKey: string; secretKey: string };
   openai: { apiKey: string };
-  listy: { projectSession: string }
+  listy: { projectSession: string };
+  blog: { aiSecret: string };
 };
 
 // ----------------------------------------------------------------------
@@ -73,5 +74,8 @@ export const CONFIG: ConfigValue = {
   },
   listy: {
     projectSession: process.env.LISTY_PROJECT_SESSION ?? '',
+  },
+  blog: {
+    aiSecret: process.env.AI_BLOG_SECRET ?? '',
   }
 };

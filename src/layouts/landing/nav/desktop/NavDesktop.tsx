@@ -9,7 +9,7 @@ import { GetStartedButton } from 'src/sections/landing/components/get-started-bu
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { SignInButton } from 'src/sections/landing/components/sign-in-button';
 
-export const NavDesktop = ({ showConnection = true }: { showConnection?: boolean }) => {
+export const NavDesktop = ({ showConnection = true, hasBlog = false }: { showConnection?: boolean, hasBlog?: boolean }) => {
   const { t } = useTranslate();
 
   const { features, plans, isReady, faq } = useProductIdea();
@@ -53,6 +53,11 @@ export const NavDesktop = ({ showConnection = true }: { showConnection?: boolean
       {plans && <Button component={Link} href="/#pricing" sx={{ px: 1 }}>
         {t('landing.nav.pricing')}
       </Button>}
+      {hasBlog && (
+        <Button component={Link} href="/blog" sx={{ px: 2 }}>
+          Blog
+        </Button>
+      )}
       <Button component={Link} href="/#testimonials" sx={{ px: 2 }}>
         {t('landing.nav.testimonials')}
       </Button>

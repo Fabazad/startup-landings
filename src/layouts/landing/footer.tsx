@@ -31,6 +31,7 @@ const LINKS = [
       { name: 'About us', href: paths.about },
       { name: 'Contact us', href: paths.contact },
       { name: 'FAQs', href: paths.faqs },
+      { name: 'Blog', href: '/blog' },
     ],
   },
   {
@@ -48,12 +49,18 @@ const LINKS = [
 export type FooterProps = {
   layoutQuery: Breakpoint;
   sx?: SxProps<Theme>;
+  hasBlog?: boolean;
 };
 
-export function Footer({ layoutQuery, sx }: FooterProps) {
+export function Footer({ layoutQuery, sx, hasBlog = false }: FooterProps) {
   const theme = useTheme();
 
   const { name: productName, themeColor, logo } = useProductIdea()
+  
+  const filteredLinks = LINKS.map(list => ({
+    ...list,
+    children: list.children.filter(link => link.name !== 'Blog' || hasBlog)
+  }));
 
   return (
     <Box component="footer" sx={{ position: 'relative', bgcolor: 'background.default', ...sx }}>
@@ -118,7 +125,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
                 [theme.breakpoints.up(layoutQuery)]: { flexDirection: 'row' },
               }}
             >
-              {LINKS.map((list) => (
+              {filteredLinks.map((list) => (
                 <Stack
                   key={list.headline}
                   spacing={2}

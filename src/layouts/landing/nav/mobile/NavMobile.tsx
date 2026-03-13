@@ -16,7 +16,7 @@ import { useTranslate } from 'src/locales';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { SignInButton } from 'src/sections/landing/components/sign-in-button';
 
-export const NavMobile = ({ showConnection = true }: { showConnection?: boolean }) => {
+export const NavMobile = ({ showConnection = true, hasBlog = false }: { showConnection?: boolean, hasBlog?: boolean }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openFeatures, setOpenFeatures] = useState(false);
 
@@ -115,6 +115,15 @@ export const NavMobile = ({ showConnection = true }: { showConnection?: boolean 
                 <Iconify icon="mdi:cash-multiple" width={24} />
               </ListItemIcon>
               <ListItemText primary={t('landing.nav.pricing')} primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
+            </ListItemButton>
+          )}
+
+          {hasBlog && (
+            <ListItemButton component={Link} href="/blog" onClick={onClose} sx={{ py: 1.5, mb: 1, borderRadius: 1 }}>
+              <ListItemIcon sx={{ minWidth: 40 }}>
+                <Iconify icon="mdi:post" width={24} />
+              </ListItemIcon>
+              <ListItemText primary="Blog" primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
             </ListItemButton>
           )}
           

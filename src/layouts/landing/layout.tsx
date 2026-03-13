@@ -10,6 +10,9 @@ import { NavDesktop } from './nav/desktop/NavDesktop';
 import { NavMobile } from './nav/mobile/NavMobile';
 import { getProductIdea } from 'src/app/getProductIdea';
 import Link from 'next/link';
+import { detectLanguage } from 'src/locales/server';
+import { CONFIG } from 'src/config-global';
+import { createClient } from '@supabase/supabase-js';
 
 // ----------------------------------------------------------------------
 
@@ -23,7 +26,19 @@ export type MainLayoutProps = {
 
 export async function LandingLayout({ sx, children, header }: MainLayoutProps) {
 
-  const { logo, themeColor, name: productName } = await getProductIdea();
+  const { logo, themeColor, name: productName, id: productIdeaId } = await getProductIdea();
+
+  const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
+  const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
+  
+  const { count } = await supabase
+    .from('blogs')
+    .select('*', { count: 'exact', head: true })
+    .eq('product_idea_id', productIdeaId)
+    .eq('language', lang ?? 'fr')
+    .eq('published', true);
+
+  const hasBlog = count ? count > 0 : false;
 
   const layoutQuery: Breakpoint = 'md';
 
@@ -67,8 +82,8 @@ export async function LandingLayout({ sx, children, header }: MainLayoutProps) {
             rightArea: (
               <>
                 {/* -- Nav desktop -- */}
-                <NavDesktop />
-                <NavMobile />
+                <NavDesktop hasBlog={hasBlog} />
+                <NavMobile hasBlog={hasBlog} />
               </>
             ),
           }}
