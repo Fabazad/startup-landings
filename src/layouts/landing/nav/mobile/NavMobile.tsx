@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Drawer, Link, ListItem } from '@mui/material';
+import { Box, Drawer, Link, ListItem, IconButton } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -45,87 +45,104 @@ export const NavMobile = ({ showConnection = true }: { showConnection?: boolean 
         />
       </Box>
 
-      <Drawer open={openDrawer} onClose={onClose} anchor="right">
+      <Drawer 
+        open={openDrawer} 
+        onClose={onClose} 
+        anchor="right"
+        PaperProps={{
+          sx: { width: '100vw', maxWidth: 'none' }
+        }}
+      >
         <List
-          sx={{ minWidth: '300px', maxWidth: 360, bgcolor: 'background.paper' }}
+          sx={{ width: '100%', bgcolor: 'background.paper', px: { xs: 2, sm: 4 }, py: 2 }}
           component="nav"
           aria-labelledby="nested-list-subheader"
           subheader={
-            <ListSubheader component="div" id="nested-list-subheader" sx={{ display: 'flex', height: 50 }}>
+            <ListSubheader component="div" id="nested-list-subheader" sx={{ display: 'flex', alignItems: 'center', height: 60, mb: 2, bgcolor: 'background.paper', px: 0 }}>
               <ThemeButton />
               <LanguageButton />
 
-              <MenuButton
-                onClick={() => setOpenDrawer(false)}
-                sx={{
-                  mt: 1,
-                  ml: -1,
-                  display: { xs: 'block', md: 'none' },
-                  position: 'absolute',
-                  right: 24,
-                }}
-              />
+              <IconButton
+                onClick={onClose}
+                sx={{ ml: 'auto' }}
+              >
+                <Iconify icon="mdi:close" width={28} />
+              </IconButton>
             </ListSubheader>
           }
         >
-          <ListItemButton component={Link} href="#home" onClick={onClose}>
-            <ListItemIcon>
-              <Iconify icon="mdi:home" />
+          <ListItemButton component={Link} href="#home" onClick={onClose} sx={{ py: 1.5, mb: 1, borderRadius: 1 }}>
+            <ListItemIcon sx={{ minWidth: 40 }}>
+              <Iconify icon="mdi:home" width={24} />
             </ListItemIcon>
-            <ListItemText primary={t('landing.nav.home')} />
+            <ListItemText primary={t('landing.nav.home')} primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
           </ListItemButton>
-          <ListItemButton onClick={() => setOpenFeatures(!openFeatures)}>
-            <ListItemIcon>
-              <Iconify icon="mdi:star-outline" />
+          
+          <ListItemButton onClick={() => setOpenFeatures(!openFeatures)} sx={{ py: 1.5, mb: 1, borderRadius: 1 }}>
+            <ListItemIcon sx={{ minWidth: 40 }}>
+              <Iconify icon="mdi:star-outline" width={24} />
             </ListItemIcon>
-            <ListItemText primary={t('landing.nav.features')} />
+            <ListItemText primary={t('landing.nav.features')} primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
             {openFeatures ? (
-              <Iconify icon="mdi:chevron-down" />
+              <Iconify icon="mdi:chevron-down" width={24} />
             ) : (
-              <Iconify icon="mdi:chevron-right" />
+              <Iconify icon="mdi:chevron-right" width={24} />
             )}
           </ListItemButton>
+          
           <Collapse in={openFeatures} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
+            <List component="div" disablePadding sx={{ pl: 2, mb: 1 }}>
               {features.map((feature) => (
                 <ListItemButton
                   key={feature.id}
-                  sx={{ pl: 4 }}
+                  sx={{ py: 1.5, mb: 0.5, borderRadius: 1 }}
                   component={Link}
                   href={`/#feature-${feature.id}`}
                   onClick={onClose}
                 >
-                  <ListItemText primary={feature.title} />
+                  <ListItemIcon sx={{ minWidth: 40 }}>
+                    <Iconify icon="solar:round-alt-arrow-right-bold" width={16} sx={{ color: 'text.secondary', opacity: 0.5 }} />
+                  </ListItemIcon>
+                  <ListItemText primary={feature.title} primaryTypographyProps={{ typography: 'body1', fontWeight: 500 }} />
                 </ListItemButton>
               ))}
             </List>
           </Collapse>
-          {plans && <ListItemButton component={Link} href="/#pricing" onClick={onClose}>
-            <ListItemIcon>
-              <Iconify icon="mdi:cash-multiple" />
+          
+          {plans && (
+            <ListItemButton component={Link} href="/#pricing" onClick={onClose} sx={{ py: 1.5, mb: 1, borderRadius: 1 }}>
+              <ListItemIcon sx={{ minWidth: 40 }}>
+                <Iconify icon="mdi:cash-multiple" width={24} />
+              </ListItemIcon>
+              <ListItemText primary={t('landing.nav.pricing')} primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
+            </ListItemButton>
+          )}
+          
+          <ListItemButton component={Link} href="/#testimonials" onClick={onClose} sx={{ py: 1.5, mb: 1, borderRadius: 1 }}>
+            <ListItemIcon sx={{ minWidth: 40 }}>
+              <Iconify icon="mdi:people" width={24} />
             </ListItemIcon>
-            <ListItemText primary={t('landing.nav.pricing')} />
-          </ListItemButton>}
-          <ListItemButton component={Link} href="/#testimonials" onClick={onClose}>
-            <ListItemIcon>
-              <Iconify icon="mdi:people" />
-            </ListItemIcon>
-            <ListItemText primary={t('landing.nav.testimonials')} />
+            <ListItemText primary={t('landing.nav.testimonials')} primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
           </ListItemButton>
-          <ListItemButton component={Link} href="/#contact" onClick={onClose}>
-            <ListItemIcon>
-              <Iconify icon="mdi:email" />
+          
+          <ListItemButton component={Link} href="/#contact" onClick={onClose} sx={{ py: 1.5, mb: 1, borderRadius: 1 }}>
+            <ListItemIcon sx={{ minWidth: 40 }}>
+              <Iconify icon="mdi:email" width={24} />
             </ListItemIcon>
-            <ListItemText primary={t('landing.nav.contact')} />
+            <ListItemText primary={t('landing.nav.contact')} primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
           </ListItemButton>
-          {faq && <ListItemButton component={Link} href="/#faq" onClick={onClose}>
-            <ListItemIcon>
-              <Iconify icon="mdi:help-circle" />
-            </ListItemIcon>
-            <ListItemText primary={t('landing.nav.faq')} />
-          </ListItemButton>}
+          
+          {faq && (
+            <ListItemButton component={Link} href="/#faq" onClick={onClose} sx={{ py: 1.5, mb: 2, borderRadius: 1 }}>
+              <ListItemIcon sx={{ minWidth: 40 }}>
+                <Iconify icon="mdi:help-circle" width={24} />
+              </ListItemIcon>
+              <ListItemText primary={t('landing.nav.faq')} primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
+            </ListItemButton>
+          )}
+          
           {isReady && showConnection && (
-            <ListItem>
+            <ListItem sx={{ pt: 2, px: 0, justifyContent: 'center' }}>
               <SignInButton />
             </ListItem>
           )}
