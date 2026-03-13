@@ -11,7 +11,7 @@ const MOCK_TITLE = _postTitles[2];
 const ROOTS = {
   AUTH: '/envy/auth',
   AUTH_DEMO: '/auth-demo',
-  ENVY: '/envy'
+  ENVY: '/envy',
 };
 
 // ----------------------------------------------------------------------
@@ -42,7 +42,7 @@ export const paths = {
   },
   post: {
     root: `/post`,
-    details: (title: string) => `/post/${paramCase(title)}`,
+    details: (title: string) => `/blog/${paramCase(title)}`,
     demo: { details: `/post/${paramCase(MOCK_TITLE)}` },
   },
   // AUTH
@@ -89,6 +89,6 @@ export const paths = {
     wish: {
       detail: (id: number) => `${ROOTS.ENVY}/wish/${id}`,
       update: (id: number) => `${ROOTS.ENVY}/wish/${id}/update`,
-    }
-  }
+    },
+  },
 };

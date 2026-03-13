@@ -23,4 +23,4 @@ export const RAW_PRODUCT_IDEAS: Record<ProductIdeaName, RawProductIdea> = {
   [PRODUCT_IDEA_NAMES.ENVY]: ENVY_PRODUCT_IDEA,
 } as const;
 
-export const DEFAULT_PRODUCT_IDEA: RawProductIdea = RAW_PRODUCT_IDEAS['Insight Feed'];
+export const DEFAULT_PRODUCT_IDEA: RawProductIdea = RAW_PRODUCT_IDEAS[PRODUCT_IDEA_NAMES.ENVY];
