@@ -8,5 +8,6 @@ import { CONFIG } from 'src/config-global';
 // ----------------------------------------------------------------------
 
 export const Map = forwardRef<MapRef, MapProps>(({ ...other }, ref) => (
+  // @ts-ignore
   <MapGL ref={ref} mapboxAccessToken={CONFIG.mapboxApiKey} {...other} />
 ));

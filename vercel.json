@@ -8,5 +8,15 @@
       "source": "/envy/:path*",
       "destination": "https://envy2.onama.io/envy/:path*"
     }
+  ],
+  "headers": [
+    {
+      "source": "/logo/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/favicon/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
   ]
 }

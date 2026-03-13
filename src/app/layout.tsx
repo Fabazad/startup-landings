@@ -159,6 +159,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang={lang ?? 'en'} suppressHydrationWarning>
       <head>
+        <link 
+          rel="preload" 
+          as="image" 
+          href={`${CONFIG.assetsDir}/assets/background/background-3.webp`}
+          type="image/webp"
+        />
         {/* Preconnect to third-party origins for faster resource loading */}
         <link rel="preconnect" href="https://eu.i.posthog.com" />
         <link rel="preconnect" href="https://eu-assets.i.posthog.com" crossOrigin="anonymous" />

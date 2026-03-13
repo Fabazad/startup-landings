@@ -16,34 +16,28 @@ export function ProgressBar() {
     NProgress.configure({ showSpinner: false });
 
     const handleAnchorClick = (event: MouseEvent) => {
-      const targetUrl = (event.currentTarget as HTMLAnchorElement).href;
+      const target = event.target as HTMLElement;
+      const anchor = target.closest('a[href]') as HTMLAnchorElement | null;
+      
+      if (!anchor) return;
 
+      const targetUrl = anchor.href;
       const currentUrl = window.location.href;
+      const rel = anchor.getAttribute('rel');
+      const href = anchor.getAttribute('href');
+      const eventTarget = anchor.getAttribute('target');
 
-      if (targetUrl !== currentUrl) {
+      if (
+        href?.startsWith('/') && 
+        eventTarget !== '_blank' && 
+        rel !== 'noopener' && 
+        targetUrl !== currentUrl
+      ) {
         NProgress.start();
       }
     };
 
-    const handleMutation = () => {
-      const anchorElements: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a[href]');
-
-      const filteredAnchors = Array.from(anchorElements).filter((element) => {
-        const rel = element.getAttribute('rel');
-
-        const href = element.getAttribute('href');
-
-        const target = element.getAttribute('target');
-
-        return href?.startsWith('/') && target !== '_blank' && rel !== 'noopener';
-      });
-
-      filteredAnchors.forEach((anchor) => anchor.addEventListener('click', handleAnchorClick));
-    };
-
-    const mutationObserver = new MutationObserver(handleMutation);
-
-    mutationObserver.observe(document, { childList: true, subtree: true });
+    document.addEventListener('click', handleAnchorClick);
 
     window.history.pushState = new Proxy(window.history.pushState, {
       apply: (target, thisArg, argArray: PushStateInput) => {
