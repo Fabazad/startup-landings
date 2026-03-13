@@ -1,7 +1,7 @@
 'use client';
 
 import { forwardRef } from 'react';
-import { Icon, disableCache } from '@iconify/react';
+import { Icon, disableCache, addCollection } from '@iconify/react';
 
 import Box from '@mui/material/Box';
 import NoSsr from '@mui/material/NoSsr';
@@ -46,3 +46,12 @@ export const Iconify = forwardRef<SVGElement, IconifyProps>(
 
 // https://iconify.design/docs/iconify-icon/disable-cache.html
 disableCache('local');
+
+// Prebundle icons for landing page to avoid network waterfalls
+import bundle from './bundle.json';
+if (Array.isArray(bundle)) {
+  bundle.forEach((collection) => {
+    // @ts-ignore
+    addCollection(collection);
+  });
+}
