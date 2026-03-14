@@ -4,6 +4,7 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
+import { getServerTranslations } from 'src/locales/server';
 import { PostList } from './post-list';
 
 // ----------------------------------------------------------------------
@@ -12,10 +13,12 @@ type Props = {
   posts: BlogPost[];
 };
 
-export function PostListHomeView({ posts }: Props) {
+export async function PostListHomeView({ posts }: Props) {
+  const { t } = await getServerTranslations();
+
   return (
     <Container>
-      <Typography variant="h3">Blog Envy</Typography>
+      <Typography variant="h3">{t('blog.title')}</Typography>
 
       <Stack
         spacing={3}

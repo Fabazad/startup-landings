@@ -73,7 +73,13 @@
     }
   },
   "common": {
-    "allRightsReserved": "Tous droits réservés."
+    "allRightsReserved": "Tous droits réservés.",
+    "search": {
+      "notFound": "Non trouvé",
+      "noResults": "Aucun résultat trouvé pour",
+      "tryAgain": "Essayez de vérifier les fautes de frappe ou d'utiliser des mots complets.",
+      "enterKeywords": "Veuillez entrer des mots-clés"
+    }
   },
   "auth": {
     "signIn": "Se connecter",
@@ -127,5 +133,20 @@
     "accepted": "Accepté *.jpeg, *.jpg, *.png, *.gif",
     "max-size": "Taille maximum"
   },
-  "or": "ou"
+  "or": "ou",
+  "blog": {
+    "title": "Blog",
+    "recentPosts": "Articles récents",
+    "loadMore": "Charger plus",
+    "search": "Rechercher...",
+    "sortBy": "Trier par :",
+    "sharePost": "Partager l'article",
+    "meta": {
+      "title": "Blog | {{name}}",
+      "description": "Derniers articles et nouvelles de {{name}}",
+      "notFound": "Non trouvé",
+      "notFoundDescription": "La page que vous recherchez n'existe pas.",
+      "readOn": "Lire cet article sur {{name}}"
+    }
+  }
 }

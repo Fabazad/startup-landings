@@ -7,6 +7,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import { Iconify } from 'src/components/iconify';
 
+import { getServerTranslations } from 'src/locales/server';
 import { PostItem } from './post-item';
 import { PostItemSkeleton } from './post-skeleton';
 
@@ -17,7 +18,9 @@ type Props = {
   loading?: boolean;
 };
 
-export function PostList({ posts, loading = false }: Props) {
+export async function PostList({ posts, loading = false }: Props) {
+  const { t } = await getServerTranslations();
+
   const renderLoading = (
     <Box
       gap={3}
@@ -55,7 +58,7 @@ export function PostList({ posts, loading = false }: Props) {
             variant="outlined"
             startIcon={<Iconify icon="svg-spinners:12-dots-scale-rotate" width={24} />}
           >
-            Load More
+            {t('blog.loadMore')}
           </Button>
         </Stack>
       )}

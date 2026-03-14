@@ -73,7 +73,13 @@
     }
   },
   "common": {
-    "allRightsReserved": "All rights reserved."
+    "allRightsReserved": "All rights reserved.",
+    "search": {
+      "notFound": "Not found",
+      "noResults": "No results found for",
+      "tryAgain": "Try checking for typos or using complete words.",
+      "enterKeywords": "Please enter keywords"
+    }
   },
   "auth": {
     "signIn": "Sign in",
@@ -128,5 +134,20 @@
     "accepted": "Accepted *.jpeg, *.jpg, *.png, *.gif",
     "max-size": "Max size"
   },
-  "or": "OR"
+  "or": "OR",
+  "blog": {
+    "title": "Blog",
+    "recentPosts": "Recent Posts",
+    "loadMore": "Load More",
+    "search": "Search...",
+    "sortBy": "Sort by:",
+    "sharePost": "Share post",
+    "meta": {
+      "title": "Blog | {{name}}",
+      "description": "Latest articles and news from {{name}}",
+      "notFound": "Not Found",
+      "notFoundDescription": "The page you are looking for does not exist.",
+      "readOn": "Read this article on {{name}}"
+    }
+  }
 }

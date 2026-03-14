@@ -1,6 +1,6 @@
 'use client';
 
-import type { IPostHero } from 'src/types/blog';
+import { DEFAULT_AUTHOR, type IPostHero } from 'src/types/blog';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -10,24 +10,43 @@ import SpeedDial from '@mui/material/SpeedDial';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
-import SpeedDialAction from '@mui/material/SpeedDialAction';
-
-import { useResponsive } from 'src/hooks/use-responsive';
 
 import { fDate } from 'src/utils/format-time';
 
-import { _socials } from 'src/_mock';
 import { varAlpha, bgGradient } from 'src/theme/styles';
-import { TwitterIcon, FacebookIcon, LinkedinIcon, InstagramIcon } from 'src/assets/icons';
+
+import { useTranslation } from 'react-i18next';
 
 import { Iconify } from 'src/components/iconify';
+import { Tooltip } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
 export function PostDetailsHero({ title, author, coverUrl, createdAt }: IPostHero) {
+  const { t } = useTranslation();
+
   const theme = useTheme();
 
-  const smUp = useResponsive('up', 'sm');
+  const handleClick = async () => {
+    const shareLink = `${window.location.href}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          url: shareLink,
+          title,
+        });
+      } catch (error) {
+        console.error('Error sharing:', error);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(shareLink);
+      } catch (error) {
+        console.error('Error copying link:', error);
+      }
+    }
+  };
 
   return (
     <Box
@@ -71,7 +90,7 @@ export function PostDetailsHero({ title, author, coverUrl, createdAt }: IPostHer
             >
               <Avatar
                 alt={author.name}
-                src={author.avatarUrl}
+                src={DEFAULT_AUTHOR.avatarUrl}
                 sx={{ width: 64, height: 64, mr: 2 }}
               />
 
@@ -85,34 +104,19 @@ export function PostDetailsHero({ title, author, coverUrl, createdAt }: IPostHer
             </Stack>
           )}
 
-          <SpeedDial
-            direction={smUp ? 'left' : 'up'}
-            ariaLabel="Share post"
-            icon={<Iconify icon="solar:share-bold" />}
-            FabProps={{ size: 'medium' }}
-            sx={{
-              position: 'absolute',
-              bottom: { xs: 32, md: 64 },
-              right: { xs: 16, md: 24 },
-            }}
-          >
-            {_socials.map((social) => (
-              <SpeedDialAction
-                key={social.label}
-                icon={
-                  <>
-                    {social.value === 'facebook' && <FacebookIcon />}
-                    {social.value === 'instagram' && <InstagramIcon />}
-                    {social.value === 'linkedin' && <LinkedinIcon />}
-                    {social.value === 'twitter' && <TwitterIcon sx={{ color: 'text.primary' }} />}
-                  </>
-                }
-                tooltipTitle={social.label}
-                tooltipPlacement="top"
-                FabProps={{ color: 'default' }}
-              />
-            ))}
-          </SpeedDial>
+          <Tooltip title={t('blog.sharePost')} placement="top" arrow>
+            <SpeedDial
+              ariaLabel={t('blog.sharePost')}
+              icon={<Iconify icon="solar:share-bold" />}
+              FabProps={{ size: 'medium' }}
+              sx={{
+                position: 'absolute',
+                bottom: { xs: 32, md: 64 },
+                right: { xs: 16, md: 24 },
+              }}
+              onClick={handleClick}
+            />
+          </Tooltip>
         </Stack>
       </Container>
     </Box>

@@ -78,3 +78,8 @@ export type BlogPost = Pick<
   Blog,
   'id' | 'title' | 'slug' | 'excerpt' | 'cover_image' | 'created_at' | 'author'
 >;
+
+export const DEFAULT_AUTHOR = {
+  name: 'Fabien Turgut',
+  avatarUrl: '/assets/images/mock/avatar/avatar-12.webp',
+};

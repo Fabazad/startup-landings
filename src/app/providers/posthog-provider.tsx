@@ -5,6 +5,7 @@
 import { useEffect, useState } from 'react';
 import { PostHogProvider as PHProvider } from 'posthog-js/react';
 import { CONFIG } from 'src/config-global';
+import PostHogPageView from './posthog-page-view';
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   const [client, setClient] = useState<any>(null);
@@ -17,7 +18,7 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
           api_host: CONFIG.posthog.host,
           person_profiles: 'identified_only',
           defaults: '2025-05-24',
-          capture_pageview: false, // Reduce initial network activity
+          capture_pageview: false, // We handle pageview manually with PostHogPageView
         });
         setClient(posthog);
       } catch (error) {
@@ -34,8 +35,13 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   if (client) {
-    return <PHProvider client={client}>{children}</PHProvider>;
+    return (
+      <PHProvider client={client}>
+        <PostHogPageView />
+        {children}
+      </PHProvider>
+    );
   }
 
-  return <>{children}</>;
+  return children;
 }

@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getProductIdea } from 'src/app/getProductIdea';
 import { createClient } from '@supabase/supabase-js';
 import { CONFIG } from 'src/config-global';
-import { detectLanguage } from 'src/locales/server';
+import { detectLanguage, getServerTranslations } from 'src/locales/server';
 import Container from '@mui/material/Container';
 import { BlogPost } from 'src/types/blog';
 import { PostListHomeView } from './post-list-home-view';
@@ -12,9 +12,11 @@ export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const { name } = await getProductIdea();
+  const { t } = await getServerTranslations();
+
   return {
-    title: `Blog | ${name}`,
-    description: `Latest articles and news from ${name}`,
+    title: t('blog.meta.title', { name }),
+    description: t('blog.meta.description', { name }),
   };
 }
 

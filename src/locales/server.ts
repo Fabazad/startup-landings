@@ -26,6 +26,17 @@ export async function detectLanguage() {
   return language as LanguageValue;
 }
 
+async function initServerI18next(language: LanguageValue, namespace: string) {
+  const i18nInstance = createInstance();
+
+  await i18nInstance
+    .use(initReactI18next)
+    .use(resourcesToBackend((lang: string, ns: string) => import(`./langs/${lang}/${ns}.json`)))
+    .init(i18nOptions(language, namespace));
+
+  return i18nInstance;
+}
+
 // ----------------------------------------------------------------------
 
 export const getServerTranslations = cache(async (ns = defaultNS, options = {}) => {
@@ -44,14 +55,3 @@ export const getServerTranslations = cache(async (ns = defaultNS, options = {}) 
 });
 
 // ----------------------------------------------------------------------
-
-const initServerI18next = async (language: LanguageValue, namespace: string) => {
-  const i18nInstance = createInstance();
-
-  await i18nInstance
-    .use(initReactI18next)
-    .use(resourcesToBackend((lang: string, ns: string) => import(`./langs/${lang}/${ns}.json`)))
-    .init(i18nOptions(language, namespace));
-
-  return i18nInstance;
-};

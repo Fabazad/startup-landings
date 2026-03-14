@@ -10,7 +10,11 @@ import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
 
+import { useTranslation } from 'react-i18next';
+
 import { useRouter } from 'src/routes/hooks';
+
+import { RouterLink } from 'src/routes/components';
 
 import { Iconify } from 'src/components/iconify';
 import { SearchNotFound } from 'src/components/search-not-found';
@@ -25,7 +29,9 @@ type Props = {
   loading?: boolean;
 };
 
-export function PostSearch({ query, results, onSearch, hrefItem, loading }: Props) {
+export function PostSearch({ query, results, onSearch, hrefItem, loading = false }: Props) {
+  const { t } = useTranslation();
+
   const router = useRouter();
 
   const handleClick = (title: string) => {
@@ -58,7 +64,7 @@ export function PostSearch({ query, results, onSearch, hrefItem, loading }: Prop
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="Search..."
+          placeholder={t('blog.search')}
           onKeyUp={handleKeyUp}
           InputProps={{
             ...params.InputProps,
@@ -83,7 +89,6 @@ export function PostSearch({ query, results, onSearch, hrefItem, loading }: Prop
         return (
           <li {...props} key={post.id}>
             <Avatar
-              key={post.id}
               alt={post.title}
               src={post.coverUrl}
               variant="rounded"
@@ -96,7 +101,12 @@ export function PostSearch({ query, results, onSearch, hrefItem, loading }: Prop
               }}
             />
 
-            <Link key={inputValue} underline="none" onClick={() => handleClick(post.title)}>
+            <Link
+              component={RouterLink}
+              href={hrefItem(post.title)}
+              underline="none"
+              sx={{ color: 'inherit' }}
+            >
               {parts.map((part, index) => (
                 <Typography
                   key={index}

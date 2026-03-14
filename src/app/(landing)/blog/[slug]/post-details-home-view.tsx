@@ -9,8 +9,10 @@ import { paths } from 'src/routes/paths';
 
 import { Markdown } from 'src/components/markdown';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { getServerTranslations } from 'src/locales/server';
 import { PostItem } from '../post-item';
 import { PostDetailsHero } from './post-details-hero';
+import { PostHogPostViewed } from './posthog-post-viewed';
 
 // ----------------------------------------------------------------------
 
@@ -19,9 +21,12 @@ type Props = {
   latestPosts: BlogPost[];
 };
 
-export function PostDetailsHomeView({ post, latestPosts }: Props) {
+export async function PostDetailsHomeView({ post, latestPosts }: Props) {
+  const { t } = await getServerTranslations();
+
   return (
     <>
+      <PostHogPostViewed post={post} />
       <PostDetailsHero
         title={post.title}
         author={{ name: post.author, avatarUrl: '' }}
@@ -32,8 +37,8 @@ export function PostDetailsHomeView({ post, latestPosts }: Props) {
       <Container maxWidth={false} sx={{ py: 3, mb: 5, borderBottom: 'solid 1px divider' }}>
         <CustomBreadcrumbs
           links={[
-            { name: 'Home', href: '/' },
-            { name: 'Blog', href: paths.post.root },
+            { name: t('landing.nav.home'), href: '/' },
+            { name: t('blog.title'), href: paths.post.root },
             { name: post?.title },
           ]}
           sx={{ maxWidth: 720, mx: 'auto' }}
@@ -43,7 +48,6 @@ export function PostDetailsHomeView({ post, latestPosts }: Props) {
       <Container maxWidth={false}>
         <Stack sx={{ maxWidth: 720, mx: 'auto' }}>
           <Typography variant="subtitle1">{post.excerpt}</Typography>
-
           <Markdown>{post.content}</Markdown>
         </Stack>
       </Container>
@@ -51,7 +55,7 @@ export function PostDetailsHomeView({ post, latestPosts }: Props) {
       {!!latestPosts?.length && (
         <Container sx={{ pb: 15 }}>
           <Typography variant="h4" sx={{ mb: 5 }}>
-            Recent Posts
+            {t('blog.recentPosts')}
           </Typography>
 
           <Grid container spacing={3}>

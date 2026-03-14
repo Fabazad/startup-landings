@@ -1,6 +1,7 @@
 'use client';
 
-import type { BlogPost, IPostItem } from 'src/types/blog';
+import { DEFAULT_AUTHOR, type BlogPost, type IPostItem } from 'src/types/blog';
+import { usePostHog } from 'posthog-js/react';
 import type { BoxProps } from '@mui/material/Box';
 import type { CardProps } from '@mui/material/Card';
 
@@ -30,10 +31,25 @@ type PostItemProps = CardProps & {
 };
 
 export function PostItem({ post, sx, ...other }: PostItemProps) {
+  const posthog = usePostHog();
   const linkTo = paths.post.details(post.slug);
 
+  const handleClick = () => {
+    posthog.capture('blog_post_clicked', {
+      title: post.title,
+      slug: post.slug,
+      source: 'blog_list',
+    });
+  };
+
   return (
-    <Link underline="none" component={RouterLink} href={linkTo} color="inherit">
+    <Link
+      underline="none"
+      component={RouterLink}
+      href={linkTo}
+      color="inherit"
+      onClick={handleClick}
+    >
       <Card
         sx={{
           ...sx,
@@ -63,6 +79,7 @@ export function PostItem({ post, sx, ...other }: PostItemProps) {
 
           <Avatar
             alt={post.author}
+            src={DEFAULT_AUTHOR.avatarUrl}
             sx={{
               left: 24,
               zIndex: 9,
@@ -102,12 +119,27 @@ type PostItemLatestProps = {
 };
 
 export function PostItemLatest({ post, index }: PostItemLatestProps) {
+  const posthog = usePostHog();
   const linkTo = paths.post.details(post.slug);
+
+  const handleClick = () => {
+    posthog.capture('blog_post_clicked', {
+      title: post.title,
+      slug: post.slug,
+      source: 'latest_posts',
+    });
+  };
 
   const postSmall = index === 1 || index === 2;
 
   return (
-    <Link underline="none" component={RouterLink} href={linkTo} color="inherit">
+    <Link
+      underline="none"
+      component={RouterLink}
+      href={linkTo}
+      color="inherit"
+      onClick={handleClick}
+    >
       <Card>
         <Avatar
           alt={post.author}

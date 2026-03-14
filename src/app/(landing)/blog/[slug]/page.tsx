@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getProductIdea } from 'src/app/getProductIdea';
 import { createClient } from '@supabase/supabase-js';
 import { CONFIG } from 'src/config-global';
-import { detectLanguage } from 'src/locales/server';
+import { detectLanguage, getServerTranslations } from 'src/locales/server';
 import { PostDetailsHomeView } from './post-details-home-view';
 
 export const revalidate = 3600;
@@ -17,6 +17,8 @@ export async function generateMetadata({
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
 
+  const { t } = await getServerTranslations();
+
   const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
 
   const { data: blog } = await supabase
@@ -29,14 +31,15 @@ export async function generateMetadata({
 
   if (!blog) {
     return {
-      title: 'Not Found',
-      description: 'The page you are looking for does not exist.',
+      title: t('blog.meta.notFound'),
+      description: t('blog.meta.notFoundDescription'),
     };
   }
 
   return {
     title: blog.seo_title || `${blog.title} | ${productName}`,
-    description: blog.seo_description || blog.excerpt || `Read this article on ${productName}`,
+    description:
+      blog.seo_description || blog.excerpt || t('blog.meta.readOn', { name: productName }),
     keywords: blog.seo_keywords || [],
     openGraph: {
       title: blog.seo_title || blog.title,
