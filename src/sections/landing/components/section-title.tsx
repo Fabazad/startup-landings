@@ -33,7 +33,7 @@ type Props = StackProps & {
 
 // ----------------------------------------------------------------------
 
-export function SectionCaption({ title, variants = null, sx = {} }: TextProps) {
+export function SectionCaption({ title, variants = undefined, sx = {} }: TextProps) {
   return (
     <Stack
       component={m.span}
@@ -49,10 +49,10 @@ export function SectionCaption({ title, variants = null, sx = {} }: TextProps) {
 
 export function SectionTitle({
   title,
-  caption = null,
+  caption = undefined,
   slotProps = {},
   txtGradient = '',
-  description = null,
+  description = undefined,
   isFullGradient = false,
   ...other
 }: Props) {

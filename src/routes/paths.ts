@@ -41,6 +41,9 @@ export const paths = {
   post: {
     root: `/blog`,
     details: (title: string) => `/blog/${paramCase(title)}`,
+    demo: {
+      details: `/blog/${paramCase('The Future of Renewable Energy: Innovations and Challenges Ahead')}`,
+    },
   },
   // AUTH
   auth: {

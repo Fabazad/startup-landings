@@ -22,7 +22,6 @@ import { useTransformY } from './useTransformY';
 
 // ----------------------------------------------------------------------
 
-const smKey = 'sm';
 const mdKey = 'md';
 const lgKey = 'lg';
 
@@ -117,9 +116,7 @@ export function LandingHero({ sx, ...other }: BoxProps) {
               <Heading lgKey={lgKey} headingPart1={headingPart1} headingPart2={headingPart2} />
             </m.div>
             <m.div style={{ y: y2, whiteSpace: 'normal' }}>
-              <HeroDescription smKey={smKey} lgKey={lgKey}>
-                {description}
-              </HeroDescription>
+              <HeroDescription lgKey={lgKey}>{description}</HeroDescription>
             </m.div>
           </Stack>
           <m.div style={{ y: y3 }}>
