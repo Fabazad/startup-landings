@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import type { BoxProps } from '@mui/material/Box';
 
@@ -8,17 +8,15 @@ import Box from '@mui/material/Box';
 
 import { varAlpha } from 'src/theme/styles';
 
-import { Logo } from '../logo';
 import { useProductIdea } from 'src/app/product-idea-provider';
+import { Logo } from '../logo';
 
 // ----------------------------------------------------------------------
 
-export type AnimateLogoProps = BoxProps
+export type AnimateLogoProps = BoxProps;
 
 export function AnimateLogo({ sx, ...other }: AnimateLogoProps) {
-
-
-  const { themeColor, logo, name: productName } = useProductIdea()
+  const { themeColor, logo, name: productName } = useProductIdea();
 
   return (
     <Box
@@ -44,7 +42,15 @@ export function AnimateLogo({ sx, ...other }: AnimateLogoProps) {
         }}
         sx={{ display: 'inline-flex' }}
       >
-        {logo && <Logo width={64} height={64} themeColor={themeColor} logo={logo} productName={productName} />}
+        {logo && (
+          <Logo
+            width={64}
+            height={64}
+            themeColor={themeColor}
+            logo={logo}
+            productName={productName}
+          />
+        )}
       </Box>
 
       <Box

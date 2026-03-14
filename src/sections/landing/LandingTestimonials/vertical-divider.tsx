@@ -1,7 +1,7 @@
 import { Divider } from '@mui/material';
 import { varAlpha } from 'src/theme/styles';
 
-export const VerticalDivider = () => {
+export function VerticalDivider() {
   return (
     <Divider
       component="div"
@@ -17,4 +17,4 @@ export const VerticalDivider = () => {
       }}
     />
   );
-};
+}

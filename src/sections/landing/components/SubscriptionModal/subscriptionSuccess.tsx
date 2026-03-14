@@ -2,7 +2,7 @@ import { Button, DialogActions, DialogContent, DialogTitle, Typography } from '@
 import { useTranslate } from 'src/locales';
 import { useSubscription } from './subscription-context';
 
-export const SubscriptionSuccess = () => {
+export function SubscriptionSuccess() {
   const { t } = useTranslate();
   const { setOpenModal } = useSubscription();
   return (
@@ -21,4 +21,4 @@ export const SubscriptionSuccess = () => {
       </DialogActions>
     </>
   );
-};
+}

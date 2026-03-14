@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Box, Drawer, Link, ListItem, IconButton } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
@@ -16,7 +16,13 @@ import { useTranslate } from 'src/locales';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { SignInButton } from 'src/sections/landing/components/sign-in-button';
 
-export const NavMobile = ({ showConnection = true, hasBlog = false }: { showConnection?: boolean, hasBlog?: boolean }) => {
+export function NavMobile({
+  showConnection = true,
+  hasBlog = false,
+}: {
+  showConnection?: boolean;
+  hasBlog?: boolean;
+}) {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openFeatures, setOpenFeatures] = useState(false);
 
@@ -45,12 +51,12 @@ export const NavMobile = ({ showConnection = true, hasBlog = false }: { showConn
         />
       </Box>
 
-      <Drawer 
-        open={openDrawer} 
-        onClose={onClose} 
+      <Drawer
+        open={openDrawer}
+        onClose={onClose}
         anchor="right"
         PaperProps={{
-          sx: { width: '100vw', maxWidth: 'none' }
+          sx: { width: '100vw', maxWidth: 'none' },
         }}
       >
         <List
@@ -58,38 +64,60 @@ export const NavMobile = ({ showConnection = true, hasBlog = false }: { showConn
           component="nav"
           aria-labelledby="nested-list-subheader"
           subheader={
-            <ListSubheader component="div" id="nested-list-subheader" sx={{ display: 'flex', alignItems: 'center', height: 60, mb: 2, bgcolor: 'background.paper', px: 0 }}>
+            <ListSubheader
+              component="div"
+              id="nested-list-subheader"
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                height: 60,
+                mb: 2,
+                bgcolor: 'background.paper',
+                px: 0,
+              }}
+            >
               <ThemeButton />
               <LanguageButton />
 
-              <IconButton
-                onClick={onClose}
-                sx={{ ml: 'auto' }}
-              >
+              <IconButton onClick={onClose} sx={{ ml: 'auto' }}>
                 <Iconify icon="mdi:close" width={28} />
               </IconButton>
             </ListSubheader>
           }
         >
-          <ListItemButton component={Link} href="#home" onClick={onClose} sx={{ py: 1.5, mb: 1, borderRadius: 1 }}>
+          <ListItemButton
+            component={Link}
+            href="#home"
+            onClick={onClose}
+            sx={{ py: 1.5, mb: 1, borderRadius: 1 }}
+          >
             <ListItemIcon sx={{ minWidth: 40 }}>
               <Iconify icon="mdi:home" width={24} />
             </ListItemIcon>
-            <ListItemText primary={t('landing.nav.home')} primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
+            <ListItemText
+              primary={t('landing.nav.home')}
+              primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }}
+            />
           </ListItemButton>
-          
-          <ListItemButton onClick={() => setOpenFeatures(!openFeatures)} sx={{ py: 1.5, mb: 1, borderRadius: 1 }}>
+
+          <ListItemButton
+            onClick={() => setOpenFeatures(!openFeatures)}
+            sx={{ py: 1.5, mb: 1, borderRadius: 1 }}
+          >
             <ListItemIcon sx={{ minWidth: 40 }}>
               <Iconify icon="mdi:star-outline" width={24} />
             </ListItemIcon>
-            <ListItemText primary={t('landing.nav.features')} primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
+            <ListItemText
+              primary={t('landing.nav.features')}
+              primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }}
+            />
             {openFeatures ? (
               <Iconify icon="mdi:chevron-down" width={24} />
             ) : (
               <Iconify icon="mdi:chevron-right" width={24} />
             )}
           </ListItemButton>
-          
+
           <Collapse in={openFeatures} timeout="auto" unmountOnExit>
             <List component="div" disablePadding sx={{ pl: 2, mb: 1 }}>
               {features.map((feature) => (
@@ -101,55 +129,102 @@ export const NavMobile = ({ showConnection = true, hasBlog = false }: { showConn
                   onClick={onClose}
                 >
                   <ListItemIcon sx={{ minWidth: 40 }}>
-                    <Iconify icon="solar:round-alt-arrow-right-bold" width={16} sx={{ color: 'text.secondary', opacity: 0.5 }} />
+                    <Iconify
+                      icon="solar:round-alt-arrow-right-bold"
+                      width={16}
+                      sx={{ color: 'text.secondary', opacity: 0.5 }}
+                    />
                   </ListItemIcon>
-                  <ListItemText primary={feature.title} primaryTypographyProps={{ typography: 'body1', fontWeight: 500 }} />
+                  <ListItemText
+                    primary={feature.title}
+                    primaryTypographyProps={{ typography: 'body1', fontWeight: 500 }}
+                  />
                 </ListItemButton>
               ))}
             </List>
           </Collapse>
-          
+
           {plans && (
-            <ListItemButton component={Link} href="/#pricing" onClick={onClose} sx={{ py: 1.5, mb: 1, borderRadius: 1 }}>
+            <ListItemButton
+              component={Link}
+              href="/#pricing"
+              onClick={onClose}
+              sx={{ py: 1.5, mb: 1, borderRadius: 1 }}
+            >
               <ListItemIcon sx={{ minWidth: 40 }}>
                 <Iconify icon="mdi:cash-multiple" width={24} />
               </ListItemIcon>
-              <ListItemText primary={t('landing.nav.pricing')} primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
+              <ListItemText
+                primary={t('landing.nav.pricing')}
+                primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }}
+              />
             </ListItemButton>
           )}
 
           {hasBlog && (
-            <ListItemButton component={Link} href="/blog" onClick={onClose} sx={{ py: 1.5, mb: 1, borderRadius: 1 }}>
+            <ListItemButton
+              component={Link}
+              href="/blog"
+              onClick={onClose}
+              sx={{ py: 1.5, mb: 1, borderRadius: 1 }}
+            >
               <ListItemIcon sx={{ minWidth: 40 }}>
                 <Iconify icon="mdi:post" width={24} />
               </ListItemIcon>
-              <ListItemText primary="Blog" primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
+              <ListItemText
+                primary="Blog"
+                primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }}
+              />
             </ListItemButton>
           )}
-          
-          <ListItemButton component={Link} href="/#testimonials" onClick={onClose} sx={{ py: 1.5, mb: 1, borderRadius: 1 }}>
+
+          <ListItemButton
+            component={Link}
+            href="/#testimonials"
+            onClick={onClose}
+            sx={{ py: 1.5, mb: 1, borderRadius: 1 }}
+          >
             <ListItemIcon sx={{ minWidth: 40 }}>
               <Iconify icon="mdi:people" width={24} />
             </ListItemIcon>
-            <ListItemText primary={t('landing.nav.testimonials')} primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
+            <ListItemText
+              primary={t('landing.nav.testimonials')}
+              primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }}
+            />
           </ListItemButton>
-          
-          <ListItemButton component={Link} href="/#contact" onClick={onClose} sx={{ py: 1.5, mb: 1, borderRadius: 1 }}>
+
+          <ListItemButton
+            component={Link}
+            href="/#contact"
+            onClick={onClose}
+            sx={{ py: 1.5, mb: 1, borderRadius: 1 }}
+          >
             <ListItemIcon sx={{ minWidth: 40 }}>
               <Iconify icon="mdi:email" width={24} />
             </ListItemIcon>
-            <ListItemText primary={t('landing.nav.contact')} primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
+            <ListItemText
+              primary={t('landing.nav.contact')}
+              primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }}
+            />
           </ListItemButton>
-          
+
           {faq && (
-            <ListItemButton component={Link} href="/#faq" onClick={onClose} sx={{ py: 1.5, mb: 2, borderRadius: 1 }}>
+            <ListItemButton
+              component={Link}
+              href="/#faq"
+              onClick={onClose}
+              sx={{ py: 1.5, mb: 2, borderRadius: 1 }}
+            >
               <ListItemIcon sx={{ minWidth: 40 }}>
                 <Iconify icon="mdi:help-circle" width={24} />
               </ListItemIcon>
-              <ListItemText primary={t('landing.nav.faq')} primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }} />
+              <ListItemText
+                primary={t('landing.nav.faq')}
+                primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }}
+              />
             </ListItemButton>
           )}
-          
+
           {isReady && showConnection && (
             <ListItem sx={{ pt: 2, px: 0, justifyContent: 'center' }}>
               <SignInButton />
@@ -159,4 +234,4 @@ export const NavMobile = ({ showConnection = true, hasBlog = false }: { showConn
       </Drawer>
     </>
   );
-};
+}

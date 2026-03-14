@@ -1,4 +1,3 @@
-
 import Box from '@mui/material/Box';
 import { CONFIG } from 'src/config-global';
 import { PrimaryColor } from '../settings';
@@ -14,8 +13,7 @@ export type LogoProps = {
   width?: number;
 };
 
-export const Logo = ({ isSingle = true, themeColor, logo, productName, height, width }: LogoProps) => {
-
+export function Logo({ isSingle = true, themeColor, logo, productName, height, width }: LogoProps) {
   const logoUrl = `${CONFIG.assetsDir}/logo/${themeColor}-${logo}.png`;
 
   const baseSize = {
@@ -50,4 +48,3 @@ export const Logo = ({ isSingle = true, themeColor, logo, productName, height, w
     </Box>
   );
 }
-

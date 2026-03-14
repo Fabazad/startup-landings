@@ -7,7 +7,7 @@ import { Plan } from 'src/types/ProductIdea';
 import { GetStartedButton } from '../components/get-started-button';
 import { FloatLine, FloatXIcon } from '../components/svg-elements';
 
-export const PlanCard = ({
+export function PlanCard({
   plan,
   planName,
   sx,
@@ -15,7 +15,7 @@ export const PlanCard = ({
 }: StackProps & {
   plan: Plan;
   planName: 'basic' | 'premium' | 'ultimate';
-}) => {
+}) {
   const { t, currentLang } = useTranslate();
   const isBasicPlan = planName === 'basic';
   const isPremiumPlan = planName === 'premium';
@@ -91,7 +91,7 @@ export const PlanCard = ({
             alignItems="center"
             sx={{ typography: 'body2' }}
           >
-            <Iconify width={16} icon={'eva:checkmark-fill'} />
+            <Iconify width={16} icon="eva:checkmark-fill" />
             {option}
           </Stack>
         ))}
@@ -107,4 +107,4 @@ export const PlanCard = ({
       </Stack>
     </Stack>
   );
-};
+}

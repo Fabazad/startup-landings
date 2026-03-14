@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack, Typography } from '@mui/material';
@@ -21,7 +21,7 @@ const contactFormSchema = z.object({
 });
 type ContactFormSchemaType = z.infer<typeof contactFormSchema>;
 
-export const LandingContact = () => {
+export function LandingContact() {
   const { t } = useTranslate();
 
   const { name: productName } = useProductIdea();
@@ -77,4 +77,4 @@ export const LandingContact = () => {
       </Form>
     </Stack>
   );
-};
+}

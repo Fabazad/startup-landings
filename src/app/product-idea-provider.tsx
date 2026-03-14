@@ -12,13 +12,13 @@ export const useProductIdea = () => {
   return productIdea;
 };
 
-export const ProductIdeaProvider = ({
+export function ProductIdeaProvider({
   rawProductIdea,
   children,
 }: {
   rawProductIdea: RawProductIdea;
   children: React.ReactNode;
-}) => {
+}) {
   const { currentLang } = useTranslate();
   const [productIdea, setProductIdea] = useState<ProductIdea>(
     translateProductIdea(rawProductIdea, currentLang.value as LanguageValue)
@@ -27,4 +27,4 @@ export const ProductIdeaProvider = ({
     setProductIdea(translateProductIdea(rawProductIdea, currentLang.value as LanguageValue));
   }, [currentLang]);
   return <Ctx.Provider value={productIdea}>{children}</Ctx.Provider>;
-};
+}

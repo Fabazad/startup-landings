@@ -5,9 +5,8 @@ import { createClient } from '@supabase/supabase-js';
 import { CONFIG } from 'src/config-global';
 import { detectLanguage } from 'src/locales/server';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import { PostListHomeView } from './post-list-home-view';
 import { BlogPost } from 'src/types/blog';
+import { PostListHomeView } from './post-list-home-view';
 
 export const revalidate = 3600;
 
@@ -21,9 +20,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function BlogPage() {
   const { id: productIdeaId } = await getProductIdea();
-  
+
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
-  
+
   const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
 
   const { data: blogs, error } = await supabase
@@ -41,10 +40,6 @@ export default async function BlogPage() {
 
   return (
     <Container sx={{ py: 10 }}>
-      <Typography variant="h3" sx={{ mb: 5, textAlign: 'center' }}>
-        Blog
-      </Typography>
-
       <PostListHomeView posts={blogs} />
     </Container>
   );

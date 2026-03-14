@@ -16,7 +16,7 @@ export type ConfigValue = {
     redirectPath: string;
   };
   mapboxApiKey: string;
-  supabase: { url: string; key: string, adminKey: string };
+  supabase: { url: string; key: string; adminKey: string };
   posthog: { key: string; host: string };
   resend: { apiKey: string };
   amazon: { affiliateTag: string; accessKey: string; secretKey: string };
@@ -77,5 +77,5 @@ export const CONFIG: ConfigValue = {
   },
   blog: {
     aiSecret: process.env.AI_BLOG_SECRET ?? '',
-  }
+  },
 };

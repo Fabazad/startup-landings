@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import type { Breakpoint, SxProps, Theme } from '@mui/material/styles';
 
@@ -55,11 +55,11 @@ export type FooterProps = {
 export function Footer({ layoutQuery, sx, hasBlog = false }: FooterProps) {
   const theme = useTheme();
 
-  const { name: productName, themeColor, logo } = useProductIdea()
-  
-  const filteredLinks = LINKS.map(list => ({
+  const { name: productName, themeColor, logo } = useProductIdea();
+
+  const filteredLinks = LINKS.map((list) => ({
     ...list,
-    children: list.children.filter(link => link.name !== 'Blog' || hasBlog)
+    children: list.children.filter((link) => link.name !== 'Blog' || hasBlog),
   }));
 
   return (
@@ -173,7 +173,7 @@ export type HomeFooterProps = {
 export function HomeFooter({ sx }: HomeFooterProps) {
   const { t } = useTranslate();
 
-  const { name: productName, themeColor, logo } = useProductIdea()
+  const { name: productName, themeColor, logo } = useProductIdea();
 
   return (
     <Box

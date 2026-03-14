@@ -5,7 +5,7 @@ import { m } from 'framer-motion';
 import { textGradient } from 'src/theme/styles';
 import { AnimatedDiv } from './animated-div';
 
-export const Heading = ({
+export function Heading({
   lgKey,
   headingPart1,
   headingPart2,
@@ -13,7 +13,7 @@ export const Heading = ({
   lgKey: number | Breakpoint;
   headingPart1: string;
   headingPart2: string;
-}) => {
+}) {
   const theme = useTheme();
   return (
     <AnimatedDiv>
@@ -57,4 +57,4 @@ export const Heading = ({
       </Box>
     </AnimatedDiv>
   );
-};
+}

@@ -2,15 +2,15 @@ import type { Theme, SxProps, Breakpoint } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import { Logo } from 'src/components/logo';
-import { Main } from './main';
-import { LayoutSection } from '../core/layout-section';
-import { HeaderSection } from '../core/header-section';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
-import { ThemeButton } from '../components/theme-button';
 import React from 'react';
 import { getProductIdea } from 'src/app/getProductIdea';
 import Link from 'next/link';
 import { Container } from '@mui/material';
+import { ThemeButton } from '../components/theme-button';
+import { HeaderSection } from '../core/header-section';
+import { LayoutSection } from '../core/layout-section';
+import { Main } from './main';
 
 // ----------------------------------------------------------------------
 
@@ -43,8 +43,8 @@ export async function SimpleLayout({ sx, children, header, menuButtons }: Simple
                 This is an info Alert.
               </Alert>
             ),
-            leftArea: <>
-              <Link href={`/${productId}`} style={{ textDecoration: "none", display: "flex" }}>
+            leftArea: (
+              <Link href={`/${productId}`} style={{ textDecoration: 'none', display: 'flex' }}>
                 <Logo logo={logo} themeColor={themeColor} productName={productName} />
                 <Box
                   component="h4"
@@ -61,10 +61,15 @@ export async function SimpleLayout({ sx, children, header, menuButtons }: Simple
                   {productName}
                 </Box>
               </Link>
-            </>,
+            ),
             rightArea: (
               <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
-                <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }} sx={{ display: { xs: 'none', md: 'flex' } }}>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  gap={{ xs: 1, sm: 1.5 }}
+                  sx={{ display: { xs: 'none', md: 'flex' } }}
+                >
                   {menuButtons?.map((button, index) => (
                     <React.Fragment key={index}>{button}</React.Fragment>
                   ))}
@@ -72,7 +77,7 @@ export async function SimpleLayout({ sx, children, header, menuButtons }: Simple
                 <ThemeButton />
                 <LanguageButton />
               </Box>
-            )
+            ),
           }}
         />
       }
@@ -92,26 +97,30 @@ export async function SimpleLayout({ sx, children, header, menuButtons }: Simple
         <Container sx={{ py: { xs: 2, sm: 4 }, position: 'relative' }}>{children}</Container>
       </Main>
       {menuButtons && (
-        <Box bottom={0} left={0} right={0} width="100%" sx={{
-          bgcolor: 'background.default',
-          position: 'sticky',
-          borderTop: '1px solid',
-          borderColor: 'divider',
-          display: { xs: 'flex', md: 'none' },
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 1,
-          '& > *': { minWidth: '100px' },
-          py: 1,
-          zIndex: 10
-        }} >
-          {
-            menuButtons.map((button, index) => (
-              <React.Fragment key={index}>{button}</React.Fragment>
-            ))
-          }
-        </Box>)
-      }
-    </LayoutSection >
+        <Box
+          bottom={0}
+          left={0}
+          right={0}
+          width="100%"
+          sx={{
+            bgcolor: 'background.default',
+            position: 'sticky',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+            display: { xs: 'flex', md: 'none' },
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 1,
+            '& > *': { minWidth: '100px' },
+            py: 1,
+            zIndex: 10,
+          }}
+        >
+          {menuButtons.map((button, index) => (
+            <React.Fragment key={index}>{button}</React.Fragment>
+          ))}
+        </Box>
+      )}
+    </LayoutSection>
   );
 }

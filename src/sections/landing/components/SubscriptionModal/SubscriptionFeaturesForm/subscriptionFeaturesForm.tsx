@@ -17,7 +17,7 @@ import { z as zod } from 'zod';
 import { useSubscription } from '../subscription-context';
 import { FeatureOption } from './FeatureOption';
 
-export const SubscriptionFeaturesForm = () => {
+export function SubscriptionFeaturesForm() {
   const { setOpenModal, updateSubscriptionFeatures } = useSubscription();
 
   const { features } = useProductIdea();
@@ -50,7 +50,6 @@ export const SubscriptionFeaturesForm = () => {
         return;
       }
       toast.error(t('landing.subscription.failed-to-update-subscription-features'));
-      return;
     }
   };
 
@@ -87,4 +86,4 @@ export const SubscriptionFeaturesForm = () => {
       </DialogActions>
     </Form>
   );
-};
+}

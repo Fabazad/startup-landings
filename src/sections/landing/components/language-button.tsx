@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
 import { Button, Menu, MenuItem, SxProps, Theme } from '@mui/material';
 import React from 'react';
 import { FlagIcon } from 'src/components/iconify';
 import { LanguageValue, useTranslate } from 'src/locales';
 
-export const LanguageButton = ({ sx }: { sx?: SxProps<Theme> }) => {
+export function LanguageButton({ sx }: { sx?: SxProps<Theme> }) {
   const { currentLang, onChangeLang, t } = useTranslate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -55,4 +55,4 @@ export const LanguageButton = ({ sx }: { sx?: SxProps<Theme> }) => {
       </Menu>
     </>
   );
-};
+}

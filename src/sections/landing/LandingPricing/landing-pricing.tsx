@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import type { BoxProps } from '@mui/material/Box';
 
@@ -29,7 +29,7 @@ export function LandingPricing({ sx, ...other }: BoxProps) {
 
   const tabs = useTabs('basic');
 
-  const plans = useProductIdea().plans;
+  const { plans } = useProductIdea();
 
   if (!plans) {
     return null;

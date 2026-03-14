@@ -10,16 +10,16 @@ import { ScrollProgress, useScrollProgress } from 'src/components/animate/scroll
  * Handles scroll progress bar and back-to-top button
  */
 export function LandingScrollUI() {
-    const pageProgress = useScrollProgress();
+  const pageProgress = useScrollProgress();
 
-    return (
-        <>
-            <ScrollProgress
-                variant="linear"
-                progress={pageProgress.scrollYProgress}
-                sx={{ position: 'fixed' }}
-            />
-            <BackToTop />
-        </>
-    );
+  return (
+    <>
+      <ScrollProgress
+        variant="linear"
+        progress={pageProgress.scrollYProgress}
+        sx={{ position: 'fixed' }}
+      />
+      <BackToTop />
+    </>
+  );
 }

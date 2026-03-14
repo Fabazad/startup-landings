@@ -1,16 +1,16 @@
 export const ListArchivedNotification = ({
-    listName,
-    listOwnerName,
-    followedListUrl
+  listName,
+  listOwnerName,
+  followedListUrl,
 }: {
-    listName: string;
-    listOwnerName: string;
-    followedListUrl: string;
+  listName: string;
+  listOwnerName: string;
+  followedListUrl: string;
 }) => {
-    const primaryColor = '#8b3dff';
-    const backgroundColor = '#F4F6F8';
+  const primaryColor = '#8b3dff';
+  const backgroundColor = '#F4F6F8';
 
-    return `
+  return `
 <!DOCTYPE html>
 <html>
 <head>

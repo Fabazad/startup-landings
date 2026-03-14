@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material';
 import { FloatLine, FloatTriangleDownIcon } from '../components/svg-elements';
 
-export const Lines = () => {
+export function Lines() {
   return (
     <>
       <Stack
@@ -15,4 +15,4 @@ export const Lines = () => {
       <FloatLine vertical sx={{ top: 0, left: 80 }} />
     </>
   );
-};
+}

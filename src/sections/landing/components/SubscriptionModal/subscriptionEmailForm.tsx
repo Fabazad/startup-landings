@@ -20,7 +20,7 @@ const subscribeFormSchema = zod.object({
 });
 type SubscribeFormSchemaType = zod.infer<typeof subscribeFormSchema>;
 
-export const SubscriptionEmailForm = () => {
+export function SubscriptionEmailForm() {
   const { t } = useTranslate();
 
   const methods = useForm<SubscribeFormSchemaType>({
@@ -40,7 +40,6 @@ export const SubscriptionEmailForm = () => {
         return;
       }
       toast.error(t('landing.subscription.failed-to-subscribe'));
-      return;
     }
   };
 
@@ -66,4 +65,4 @@ export const SubscriptionEmailForm = () => {
       </DialogActions>
     </Form>
   );
-};
+}

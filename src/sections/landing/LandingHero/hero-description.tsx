@@ -2,7 +2,7 @@ import { Breakpoint, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { AnimatedDiv } from './animated-div';
 
-export const HeroDescription = ({
+export function HeroDescription({
   smKey,
   lgKey,
   children,
@@ -10,7 +10,7 @@ export const HeroDescription = ({
   smKey: number | Breakpoint;
   lgKey: number | Breakpoint;
   children: React.ReactNode;
-}) => {
+}) {
   const theme = useTheme();
   return (
     <AnimatedDiv>
@@ -26,4 +26,4 @@ export const HeroDescription = ({
       </Typography>
     </AnimatedDiv>
   );
-};
+}

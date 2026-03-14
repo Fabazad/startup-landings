@@ -10,6 +10,9 @@ import { iconifyClasses } from './classes';
 
 import type { IconifyProps } from './types';
 
+// Prebundle icons for landing page to avoid network waterfalls
+import bundle from './bundle.json';
+
 // ----------------------------------------------------------------------
 
 export const Iconify = forwardRef<SVGElement, IconifyProps>(
@@ -46,9 +49,6 @@ export const Iconify = forwardRef<SVGElement, IconifyProps>(
 
 // https://iconify.design/docs/iconify-icon/disable-cache.html
 disableCache('local');
-
-// Prebundle icons for landing page to avoid network waterfalls
-import bundle from './bundle.json';
 if (Array.isArray(bundle)) {
   bundle.forEach((collection) => {
     // @ts-ignore

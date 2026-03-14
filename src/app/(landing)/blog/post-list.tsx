@@ -1,4 +1,4 @@
-import type { BlogPost, IPostItem } from 'src/types/blog';
+import type { BlogPost } from 'src/types/blog';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -7,7 +7,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import { Iconify } from 'src/components/iconify';
 
-import { PostItem, PostItemLatest } from './post-item';
+import { PostItem } from './post-item';
 import { PostItemSkeleton } from './post-skeleton';
 
 // ----------------------------------------------------------------------
@@ -17,7 +17,7 @@ type Props = {
   loading?: boolean;
 };
 
-export function PostList({ posts, loading }: Props) {
+export function PostList({ posts, loading = false }: Props) {
   const renderLoading = (
     <Box
       gap={3}
@@ -30,7 +30,6 @@ export function PostList({ posts, loading }: Props) {
 
   const renderList = (
     <Grid container spacing={3}>
-
       {posts.slice(0, 3).map((post) => (
         <Grid key={post.id} xs={12} sm={6} md={4} lg={3} sx={{ display: { lg: 'none' } }}>
           <PostItem post={post} />

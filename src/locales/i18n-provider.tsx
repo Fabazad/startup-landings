@@ -30,14 +30,14 @@ if (CONFIG.isStaticExport) {
 const init = CONFIG.isStaticExport
   ? { ...i18nOptions(lng), detection: { caches: ['localStorage'] } }
   : {
-    ...i18nOptions(),
-    detection: {
-      order: ['cookie', 'localStorage', 'navigator'],
-      caches: ['localStorage', 'cookie'],
-      lookupCookie: cookieName,
-      cookieOptions: { path: '/', sameSite: 'strict' as const },
-    },
-  };
+      ...i18nOptions(),
+      detection: {
+        order: ['cookie', 'localStorage', 'navigator'],
+        caches: ['localStorage', 'cookie'],
+        lookupCookie: cookieName,
+        cookieOptions: { path: '/', sameSite: 'strict' as const },
+      },
+    };
 
 i18next
   .use(LanguageDetector)

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import type { BoxProps } from '@mui/material/Box';
 
@@ -19,7 +19,7 @@ import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export const LandingFAQ = ({ sx, ...other }: BoxProps) => {
+export function LandingFAQ({ sx, ...other }: BoxProps) {
   const { faq } = useProductIdea();
   const { t, i18n } = useTranslation();
 
@@ -63,8 +63,8 @@ export const LandingFAQ = ({ sx, ...other }: BoxProps) => {
 
           <Grid container spacing={3} justifyContent="center">
             {faq.pages.map((page) => {
-              const icon = page.icon;
-              const title = page.hero.title;
+              const { icon } = page;
+              const { title } = page.hero;
               const slug = page.slug[currentLang];
 
               return (
@@ -104,4 +104,4 @@ export const LandingFAQ = ({ sx, ...other }: BoxProps) => {
       </MotionViewport>
     </Box>
   );
-};
+}

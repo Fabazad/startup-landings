@@ -4,16 +4,13 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { t } from 'i18next';
 import dynamic from 'next/dynamic';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { useCookies } from 'src/hooks/use-cookies';
 import { LanguageValue, useTranslate } from 'src/locales';
 import { useSearchParams } from 'src/routes/hooks';
-import {
-  SubscriptionStep,
-  subscriptionContext
-} from './subscription-context';
+import { SubscriptionStep, subscriptionContext } from './subscription-context';
 
 const SubscriptionModalView = dynamic(() => import('./subscription-modal-view'), { ssr: false });
 
@@ -31,7 +28,7 @@ const api = {
     const response = await axios.post<{ subscriptionId: number; isNewSubscription: boolean }>(
       '/api/subscriptions',
       {
-        email: email,
+        email,
         product: productName,
         language,
       },
@@ -67,7 +64,7 @@ const api = {
   },
 };
 
-export const SubscriptionModalProvider = ({ children }: { children: React.ReactNode }) => {
+export function SubscriptionModalProvider({ children }: { children: React.ReactNode }) {
   const [openModal, setOpenModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstFetching, setIsFirstFetching] = useState(true);
@@ -179,4 +176,4 @@ export const SubscriptionModalProvider = ({ children }: { children: React.ReactN
       {children}
     </subscriptionContext.Provider>
   );
-};
+}

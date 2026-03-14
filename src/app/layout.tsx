@@ -13,37 +13,33 @@ import { schemeConfig } from 'src/theme/scheme-config';
 import { ThemeProvider } from 'src/theme/theme-provider';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { ProgressBar } from 'src/components/progress-bar';
-import {
-  defaultSettings,
-} from 'src/components/settings/config-settings';
-import {
-  PrimaryColor,
-} from 'src/components/settings/types';
-import {
-  SettingsProvider,
-} from 'src/components/settings/context';
+import { defaultSettings } from 'src/components/settings/config-settings';
+import { PrimaryColor } from 'src/components/settings/types';
+import { SettingsProvider } from 'src/components/settings/context';
 import { Snackbar } from 'src/components/snackbar';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { headers } from 'next/headers';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
-
-const SettingsDrawer = dynamic(() => import('src/components/settings/drawer').then(m => m.SettingsDrawer), {
-  ssr: false,
-});
 import { StructuredData } from 'src/components/seo/structured-data';
 import { languages } from 'src/locales/config-locales';
 import { DEFAULT_PRODUCT_IDEA, RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
 import { SubscriptionModalProvider } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
+import { RawProductIdea } from 'src/types/ProductIdea';
 import { ProductIdeaProvider } from './product-idea-provider';
 import { PostHogProvider } from './providers/posthog-provider';
 import ReactQueryProvider from './providers/react-query-provider';
 import { AuthProvider } from './providers/auth-provider';
-import { RawProductIdea } from 'src/types/ProductIdea';
+
+const SettingsDrawer = dynamic(
+  () => import('src/components/settings/drawer').then((m) => m.SettingsDrawer),
+  {
+    ssr: false,
+  }
+);
 
 // ----------------------------------------------------------------------
-
 
 function getThemeColorValue(themeColor: PrimaryColor): string {
   if (themeColor === 'blue') return info.main;
@@ -129,7 +125,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       images: [imageUrl],
-      creator: '@' + rawProductIdea.name.toLowerCase().replace(/\s+/g, ''),
+      creator: `@${rawProductIdea.name.toLowerCase().replace(/\s+/g, '')}`,
     },
     robots: {
       index: true,
@@ -159,9 +155,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang={lang ?? 'en'} suppressHydrationWarning>
       <head>
-        <link 
-          rel="preload" 
-          as="image" 
+        <link
+          rel="preload"
+          as="image"
           href={`${CONFIG.assetsDir}/assets/background/background-3.webp`}
           type="image/webp"
         />
@@ -180,9 +176,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           modeStorageKey={schemeConfig.modeStorageKey}
         />
         <AuthProvider productName={rawProductIdea.name}>
-
-        <I18nProvider lang={CONFIG.isStaticExport ? undefined : lang}>
-          <LocalizationProvider>
+          <I18nProvider lang={CONFIG.isStaticExport ? undefined : lang}>
+            <LocalizationProvider>
               <SettingsProvider
                 settings={{
                   ...defaultSettings,
@@ -207,8 +202,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   </MotionLazy>
                 </ThemeProvider>
               </SettingsProvider>
-          </LocalizationProvider>
-        </I18nProvider>
+            </LocalizationProvider>
+          </I18nProvider>
         </AuthProvider>
         <Analytics />
         <SpeedInsights />

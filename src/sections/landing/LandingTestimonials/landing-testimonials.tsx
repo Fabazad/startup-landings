@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
 import type { BoxProps } from '@mui/material/Box';
 
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-import { MotionViewport, varFade } from 'src/components/animate';
+import { MotionViewport } from 'src/components/animate';
 
 import { useTranslation } from 'react-i18next';
 import { useProductIdea } from 'src/app/product-idea-provider';
@@ -16,8 +16,10 @@ import { TestimonialNumbers } from './testimonial-numbers';
 
 // ----------------------------------------------------------------------
 
-export const LandingTestimonials = ({ sx, ...other }: BoxProps) => {
-  const { testimonialsTexts: { titlePart1, titlePart2 }, } = useProductIdea();
+export function LandingTestimonials({ sx, ...other }: BoxProps) {
+  const {
+    testimonialsTexts: { titlePart1, titlePart2 },
+  } = useProductIdea();
   const { t } = useTranslation();
   return (
     <Box
@@ -44,4 +46,4 @@ export const LandingTestimonials = ({ sx, ...other }: BoxProps) => {
       </MotionViewport>
     </Box>
   );
-};
+}

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import type { BoxProps } from '@mui/material/Box';
 
@@ -21,7 +21,12 @@ export function UploadPlaceholder({ sx, ...other }: BoxProps) {
       sx={sx}
       {...other}
     >
-      <Image src={`${CONFIG.assetsDir}/assets/illustrations/upload-image.svg`} width={200} height={200} alt="upload-illustration" />
+      <Image
+        src={`${CONFIG.assetsDir}/assets/illustrations/upload-image.svg`}
+        width={200}
+        height={200}
+        alt="upload-illustration"
+      />
 
       <Stack spacing={1} sx={{ textAlign: 'center' }}>
         <Box sx={{ typography: 'h6' }}>{t('upload.placeholder.title')}</Box>

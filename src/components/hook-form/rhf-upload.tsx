@@ -1,15 +1,14 @@
-"use client";
+'use client';
 
 import { Controller, useFormContext } from 'react-hook-form';
 
 import FormHelperText from '@mui/material/FormHelperText';
 
-import { Upload, UploadBox, UploadAvatar } from '../upload';
-
-import type { UploadProps } from '../upload';
 import { Typography } from '@mui/material';
 import { fData } from 'src/utils/format-number';
 import { useTranslate } from 'src/locales';
+import type { UploadProps } from '../upload';
+import { Upload, UploadBox, UploadAvatar } from '../upload';
 
 // ----------------------------------------------------------------------
 
@@ -35,10 +34,10 @@ export function RHFUploadAvatar({ name, ...other }: Props) {
         color: 'text.disabled',
       }}
     >
-      {t("upload.accepted")}
-      <br /> {t("upload.max-size")} {fData(3145728)}
+      {t('upload.accepted')}
+      <br /> {t('upload.max-size')} {fData(3145728)}
     </Typography>
-  )
+  );
 
   return (
     <Controller
@@ -53,7 +52,13 @@ export function RHFUploadAvatar({ name, ...other }: Props) {
 
         return (
           <div>
-            <UploadAvatar value={field.value} error={!!error} onDrop={onDrop} {...other} helperText={helperText} />
+            <UploadAvatar
+              value={field.value}
+              error={!!error}
+              onDrop={onDrop}
+              {...other}
+              helperText={helperText}
+            />
 
             {!!error && (
               <FormHelperText error sx={{ px: 2, textAlign: 'center' }}>
@@ -85,7 +90,13 @@ export function RHFUploadBox({ name, ...other }: Props) {
 
 // ----------------------------------------------------------------------
 
-export function RHFUploadImage({ name, multiple, helperText, onChange, ...other }: Props & { onChange?: (file?: File) => void }) {
+export function RHFUploadImage({
+  name,
+  multiple,
+  helperText,
+  onChange,
+  ...other
+}: Props & { onChange?: (file?: File) => void }) {
   const { control, setValue } = useFormContext();
   const { t } = useTranslate();
 
@@ -122,12 +133,21 @@ export function RHFUploadImage({ name, multiple, helperText, onChange, ...other 
               color: 'text.disabled',
             }}
           >
-            {t("upload.accepted")}
-            <br /> {t("upload.max-size")} {fData(3145728)}
+            {t('upload.accepted')}
+            <br /> {t('upload.max-size')} {fData(3145728)}
           </Typography>
-        )
+        );
 
-        return <Upload {...uploadProps} helperText={helperText} value={field.value} onDrop={onDrop} onDelete={onDelete} {...other} />;
+        return (
+          <Upload
+            {...uploadProps}
+            helperText={helperText}
+            value={field.value}
+            onDrop={onDrop}
+            onDelete={onDelete}
+            {...other}
+          />
+        );
       }}
     />
   );

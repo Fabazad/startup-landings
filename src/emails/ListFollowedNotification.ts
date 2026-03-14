@@ -1,16 +1,16 @@
 export const ListFollowedNotification = ({
-    followerName,
-    listName,
-    listUrl
+  followerName,
+  listName,
+  listUrl,
 }: {
-    followerName: string;
-    listName: string;
-    listUrl: string;
+  followerName: string;
+  listName: string;
+  listUrl: string;
 }) => {
-    const primaryColor = '#8b3dff';
-    const backgroundColor = '#F4F6F8';
+  const primaryColor = '#8b3dff';
+  const backgroundColor = '#F4F6F8';
 
-    return `
+  return `
 <!DOCTYPE html>
 <html>
 <head>

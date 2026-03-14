@@ -28,7 +28,7 @@ export const POST = async (request: Request) => {
   const emailHtml = await resend.emails.send({
     from: 'Onama <contact@onama.io>',
     to: 'fabien.turgut@gmail.com',
-    subject: 'Contact message for ' + product,
+    subject: `Contact message for ${product}`,
     html: `<div><p>From: ${email} for ${product}</p><p>Message: ${message}</p></div>`,
   });
 

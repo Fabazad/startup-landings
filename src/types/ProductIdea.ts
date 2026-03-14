@@ -113,7 +113,7 @@ type GenericProductIdea<Text extends Translated | string> = {
   /** By default false. */
   isReady: boolean;
   name: ProductIdeaName;
-  /** 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red' | 'lavender' **/
+  /** 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red' | 'lavender' * */
   themeColor: PrimaryColor;
   /** The logo should be either 'panda' => cute logo, 'octopus' => more professional logo or 'heart' => more modern logo. */
   logo: 'panda' | 'octopus' | 'heart' | 'gift';
@@ -123,7 +123,7 @@ type GenericProductIdea<Text extends Translated | string> = {
   /** Keywords to use for SEO. */
   keywords: string[];
   heroTexts: {
-    /** The description should describe best the value proposition of the product. It has to be punchy, can use multiple lines. Max 300 characters.*/
+    /** The description should describe best the value proposition of the product. It has to be punchy, can use multiple lines. Max 300 characters. */
     description: Text;
     /** The headings should be punchy, short (each heading should be max 20 characters) and should clearly describe what the product does. */
     headingPart1: Text;
@@ -147,90 +147,88 @@ export type RawProductIdea = GenericProductIdea<Translated>;
 export const translateProductIdea = (
   productIdea: RawProductIdea,
   lang: LanguageValue
-): ProductIdea => {
-  return {
-    ...productIdea,
-    ctaName: productIdea.ctaName?.[lang],
-    heroTexts: {
-      ...productIdea.heroTexts,
-      description: productIdea.heroTexts.description[lang],
-      headingPart1: productIdea.heroTexts.headingPart1[lang],
-      headingPart2: productIdea.heroTexts.headingPart2[lang],
-    },
-    testimonialsTexts: {
-      ...productIdea.testimonialsTexts,
-      titlePart1: productIdea.testimonialsTexts.titlePart1[lang],
-      titlePart2: productIdea.testimonialsTexts.titlePart2[lang],
-    },
-    reviews: productIdea.reviews.map((review) => ({
-      ...review,
-      content: review.content[lang],
-      jobTitle: review.jobTitle[lang],
-    })),
-    features: productIdea.features.map((feature) => ({
-      ...feature,
-      title: feature.title[lang],
-      pain: feature.pain[lang],
-      items: feature.items.map((item) => ({
-        ...item,
-        title: item.title[lang],
-        description: item.description?.[lang],
-      })),
-    })),
-    plans:
-      productIdea.plans === null
-        ? null
-        : {
-            basic: {
-              ...productIdea.plans.basic,
-              target: productIdea.plans.basic.target[lang],
-              included: productIdea.plans.basic.included.map((included) => included[lang]),
-            },
-            premium: {
-              ...productIdea.plans.premium,
-              target: productIdea.plans.premium.target[lang],
-              included: productIdea.plans.premium.included.map((included) => included[lang]),
-            },
-            ultimate: {
-              ...productIdea.plans.ultimate,
-              target: productIdea.plans.ultimate.target[lang],
-              included: productIdea.plans.ultimate.included.map((included) => included[lang]),
-            },
-          },
-    testimonialNumbers: productIdea.testimonialNumbers.map((item) => ({
+): ProductIdea => ({
+  ...productIdea,
+  ctaName: productIdea.ctaName?.[lang],
+  heroTexts: {
+    ...productIdea.heroTexts,
+    description: productIdea.heroTexts.description[lang],
+    headingPart1: productIdea.heroTexts.headingPart1[lang],
+    headingPart2: productIdea.heroTexts.headingPart2[lang],
+  },
+  testimonialsTexts: {
+    ...productIdea.testimonialsTexts,
+    titlePart1: productIdea.testimonialsTexts.titlePart1[lang],
+    titlePart2: productIdea.testimonialsTexts.titlePart2[lang],
+  },
+  reviews: productIdea.reviews.map((review) => ({
+    ...review,
+    content: review.content[lang],
+    jobTitle: review.jobTitle[lang],
+  })),
+  features: productIdea.features.map((feature) => ({
+    ...feature,
+    title: feature.title[lang],
+    pain: feature.pain[lang],
+    items: feature.items.map((item) => ({
       ...item,
-      label: item.label[lang],
+      title: item.title[lang],
+      description: item.description?.[lang],
     })),
-    // --- Traitement de la FAQ ---
-    faq: productIdea.faq
-      ? {
-          pages: productIdea.faq.pages.map((page) => ({
-            ...page,
-            seo: {
-              title: page.seo.title[lang],
-              description: page.seo.description[lang],
-              keywords: page.seo.keywords[lang],
-            },
-            hero: {
-              title: page.hero.title[lang],
-              subtitle: page.hero.subtitle[lang],
-            },
-            sections: page.sections.map((section) => ({
-              title: section.title[lang],
-              items: section.items.map((item) => ({
-                ...item,
-                question: item.question[lang],
-                answer: item.answer[lang],
-              })),
+  })),
+  plans:
+    productIdea.plans === null
+      ? null
+      : {
+          basic: {
+            ...productIdea.plans.basic,
+            target: productIdea.plans.basic.target[lang],
+            included: productIdea.plans.basic.included.map((included) => included[lang]),
+          },
+          premium: {
+            ...productIdea.plans.premium,
+            target: productIdea.plans.premium.target[lang],
+            included: productIdea.plans.premium.included.map((included) => included[lang]),
+          },
+          ultimate: {
+            ...productIdea.plans.ultimate,
+            target: productIdea.plans.ultimate.target[lang],
+            included: productIdea.plans.ultimate.included.map((included) => included[lang]),
+          },
+        },
+  testimonialNumbers: productIdea.testimonialNumbers.map((item) => ({
+    ...item,
+    label: item.label[lang],
+  })),
+  // --- Traitement de la FAQ ---
+  faq: productIdea.faq
+    ? {
+        pages: productIdea.faq.pages.map((page) => ({
+          ...page,
+          seo: {
+            title: page.seo.title[lang],
+            description: page.seo.description[lang],
+            keywords: page.seo.keywords[lang],
+          },
+          hero: {
+            title: page.hero.title[lang],
+            subtitle: page.hero.subtitle[lang],
+          },
+          sections: page.sections.map((section) => ({
+            title: section.title[lang],
+            items: section.items.map((item) => ({
+              ...item,
+              question: item.question[lang],
+              answer: item.answer[lang],
             })),
-            cta: page.cta
-              ? {
-                  ...page.cta,
-                  text: page.cta.text[lang],
-                }
-              : undefined,
           })),
-        }
-      : undefined,
-  };
-};
+          cta: page.cta
+            ? {
+                ...page.cta,
+                text: page.cta.text[lang],
+              }
+            : undefined,
+        })),
+      }
+    : undefined,
+});

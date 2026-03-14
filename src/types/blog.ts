@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import type { IDateValue } from './common';
 import { PRODUCT_IDEA_NAMES } from 'src/ProductIdeas';
+import type { IDateValue } from './common';
 
 // ----------------------------------------------------------------------
 

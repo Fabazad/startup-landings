@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import type { BoxProps } from '@mui/material/Box';
 
@@ -17,27 +17,31 @@ import { Lines } from './lines';
 
 export function LandingFeatures({ sx, ...other }: BoxProps) {
   const { features } = useProductIdea();
-  const LeftDescriptionFeature = ({ feature }: { feature: Feature }) => (
-    <>
-      <Grid xs={12} md={6} lg={7}>
-        <Description feature={feature} />
-      </Grid>
-      <Grid md={6} lg={5}>
-        <FeatureImage feature={feature} isDescriptionRight={false} />
-      </Grid>
-    </>
-  );
+  function LeftDescriptionFeature({ feature }: { feature: Feature }) {
+    return (
+      <>
+        <Grid xs={12} md={6} lg={7}>
+          <Description feature={feature} />
+        </Grid>
+        <Grid md={6} lg={5}>
+          <FeatureImage feature={feature} isDescriptionRight={false} />
+        </Grid>
+      </>
+    );
+  }
 
-  const RightDescriptionFeature = ({ feature }: { feature: Feature }) => (
-    <>
-      <Grid xs={12} md={6} lg={6} order={{ xs: 2, md: 1 }}>
-        <FeatureImage feature={feature} isDescriptionRight={true} />
-      </Grid>
-      <Grid xs={12} md={6} lg={6} order={{ xs: 1, md: 2 }}>
-        <Description feature={feature} />
-      </Grid>
-    </>
-  );
+  function RightDescriptionFeature({ feature }: { feature: Feature }) {
+    return (
+      <>
+        <Grid xs={12} md={6} lg={6} order={{ xs: 2, md: 1 }}>
+          <FeatureImage feature={feature} isDescriptionRight />
+        </Grid>
+        <Grid xs={12} md={6} lg={6} order={{ xs: 1, md: 2 }}>
+          <Description feature={feature} />
+        </Grid>
+      </>
+    );
+  }
 
   return (
     <>

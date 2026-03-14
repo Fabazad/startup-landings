@@ -1,4 +1,5 @@
-"use client"
+'use client';
+
 import type { Breakpoint } from '@mui/material/styles';
 import type { AppBarProps } from '@mui/material/AppBar';
 import type { ToolbarProps } from '@mui/material/Toolbar';

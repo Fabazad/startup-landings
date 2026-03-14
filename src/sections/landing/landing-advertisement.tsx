@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import type { BoxProps } from '@mui/material/Box';
 
@@ -7,7 +7,6 @@ import { m } from 'framer-motion';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-import Image from 'next/image';
 
 import { CONFIG } from 'src/config-global';
 import { textGradient, varAlpha } from 'src/theme/styles';

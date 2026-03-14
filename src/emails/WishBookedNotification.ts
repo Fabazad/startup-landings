@@ -1,8 +1,14 @@
-export const WishBookedNotification = ({ listUrl, listName }: { listUrl: string, listName: string }) => {
-    const primaryColor = '#8b3dff';
-    const backgroundColor = '#F4F6F8';
+export const WishBookedNotification = ({
+  listUrl,
+  listName,
+}: {
+  listUrl: string;
+  listName: string;
+}) => {
+  const primaryColor = '#8b3dff';
+  const backgroundColor = '#F4F6F8';
 
-    return `
+  return `
 <!DOCTYPE html>
 <html>
 <head>

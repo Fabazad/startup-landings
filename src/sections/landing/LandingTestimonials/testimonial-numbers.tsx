@@ -1,14 +1,13 @@
 import { Box, Stack } from '@mui/material';
 import { m } from 'framer-motion';
 import { AnimateCountUp, varFade } from 'src/components/animate';
+import { useProductIdea } from 'src/app/product-idea-provider';
 import { TextGradient } from '../components/text-gradient';
 import { HorizontalDivider } from './horizontal-divider';
 import { VerticalDivider } from './vertical-divider';
-import { useProductIdea } from 'src/app/product-idea-provider';
 
-export const TestimonialNumbers = () => {
-
-  const { testimonialNumbers } = useProductIdea()
+export function TestimonialNumbers() {
+  const { testimonialNumbers } = useProductIdea();
 
   return (
     <Stack sx={{ py: { xs: 5, md: 8 }, position: 'relative' }}>
@@ -43,4 +42,4 @@ export const TestimonialNumbers = () => {
       <HorizontalDivider position="bottom" />
     </Stack>
   );
-};
+}

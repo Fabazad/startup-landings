@@ -2,17 +2,17 @@ import type { Breakpoint, SxProps, Theme } from '@mui/material/styles';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import { Logo } from 'src/components/logo';
+import { getProductIdea } from 'src/app/getProductIdea';
+import Link from 'next/link';
+import { detectLanguage } from 'src/locales/server';
+import { CONFIG } from 'src/config-global';
+import { createClient } from '@supabase/supabase-js';
 import { HeaderSection } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
 import { HomeFooter } from './footer';
 import { Main } from './main';
 import { NavDesktop } from './nav/desktop/NavDesktop';
 import { NavMobile } from './nav/mobile/NavMobile';
-import { getProductIdea } from 'src/app/getProductIdea';
-import Link from 'next/link';
-import { detectLanguage } from 'src/locales/server';
-import { CONFIG } from 'src/config-global';
-import { createClient } from '@supabase/supabase-js';
 
 // ----------------------------------------------------------------------
 
@@ -25,12 +25,11 @@ export type MainLayoutProps = {
 };
 
 export async function LandingLayout({ sx, children, header }: MainLayoutProps) {
-
   const { logo, themeColor, name: productName, id: productIdeaId } = await getProductIdea();
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
   const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
-  
+
   const { count } = await supabase
     .from('blogs')
     .select('*', { count: 'exact', head: true })
@@ -60,7 +59,7 @@ export async function LandingLayout({ sx, children, header }: MainLayoutProps) {
             leftArea: (
               <>
                 {/* -- Logo -- */}
-                <Link href="/" style={{ textDecoration: "none", display: "flex" }}>
+                <Link href="/" style={{ textDecoration: 'none', display: 'flex' }}>
                   <Logo logo={logo} themeColor={themeColor} productName={productName} />
                   <Box
                     component="h4"

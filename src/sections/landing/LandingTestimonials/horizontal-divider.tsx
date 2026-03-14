@@ -1,7 +1,7 @@
 import { Divider } from '@mui/material';
 import { varAlpha } from 'src/theme/styles';
 
-export const HorizontalDivider = ({ position }: { position: 'top' | 'bottom' }) => {
+export function HorizontalDivider({ position }: { position: 'top' | 'bottom' }) {
   return (
     <Divider
       component="div"
@@ -18,4 +18,4 @@ export const HorizontalDivider = ({ position }: { position: 'top' | 'bottom' }) 
       }}
     />
   );
-};
+}

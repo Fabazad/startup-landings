@@ -28,20 +28,20 @@ const lgKey = 'lg';
 
 /**
  * Landing Hero Component
- * 
+ *
  * SSR OPTIMIZATION NOTES:
  * - This component uses 'use client' due to framer-motion animations
  * - However, the content (headings, description, ratings, buttons) is still rendered on the server
  * - Only the animation logic runs on the client
  * - Search engines can still crawl and index all text content
- * 
+ *
  * FURTHER SSR IMPROVEMENTS (if needed):
  * 1. Extract Heading, HeroDescription, Ratings, Buttons into a separate server component
  * 2. Create a client wrapper that only handles animations
  * 3. Use CSS-based animations instead of framer-motion for critical content
  * 4. Implement progressive enhancement: show static content first, add animations after hydration
  */
-export const LandingHero = ({ sx, ...other }: BoxProps) => {
+export function LandingHero({ sx, ...other }: BoxProps) {
   const {
     heroTexts: { description, headingPart1, headingPart2 },
   } = useProductIdea();
@@ -134,4 +134,4 @@ export const LandingHero = ({ sx, ...other }: BoxProps) => {
       </Box>
     </Box>
   );
-};
+}

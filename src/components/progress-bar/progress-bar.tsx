@@ -18,7 +18,7 @@ export function ProgressBar() {
     const handleAnchorClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       const anchor = target.closest('a[href]') as HTMLAnchorElement | null;
-      
+
       if (!anchor) return;
 
       const targetUrl = anchor.href;
@@ -28,9 +28,9 @@ export function ProgressBar() {
       const eventTarget = anchor.getAttribute('target');
 
       if (
-        href?.startsWith('/') && 
-        eventTarget !== '_blank' && 
-        rel !== 'noopener' && 
+        href?.startsWith('/') &&
+        eventTarget !== '_blank' &&
+        rel !== 'noopener' &&
         targetUrl !== currentUrl
       ) {
         NProgress.start();

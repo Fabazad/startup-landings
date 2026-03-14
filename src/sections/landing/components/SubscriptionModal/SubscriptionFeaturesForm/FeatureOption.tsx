@@ -5,7 +5,7 @@ import { Field } from 'src/components/hook-form';
 import { varAlpha } from 'src/theme/styles';
 import { Feature } from 'src/types/ProductIdea';
 
-export const FeatureOption = ({ feature }: { feature: Feature }) => {
+export function FeatureOption({ feature }: { feature: Feature }) {
   const theme = useTheme();
   const { mode } = useColorScheme();
 
@@ -54,4 +54,4 @@ export const FeatureOption = ({ feature }: { feature: Feature }) => {
       </Box>
     </Card>
   );
-};
+}

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { _mock } from 'src/_mock';
 import { AnimatedDiv } from './animated-div';
 
-export const Ratings = () => {
+export function Ratings() {
   const { t } = useTranslation();
   return (
     <AnimatedDiv>
@@ -28,4 +28,4 @@ export const Ratings = () => {
       </Box>
     </AnimatedDiv>
   );
-};
+}

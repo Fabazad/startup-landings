@@ -14,7 +14,7 @@ import { LandingFAQ } from '../LandingFAQ/index';
  * Main landing page view - Server Component
  * Content is server-rendered for better SEO and initial page load
  */
-export const LandingView = () => {
+export function LandingView() {
   return (
     <>
       <LandingScrollUI />
@@ -35,4 +35,4 @@ export const LandingView = () => {
       </Stack>
     </>
   );
-};
+}

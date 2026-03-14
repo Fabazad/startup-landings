@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Button, Link, Stack } from '@mui/material';
 import { useProductIdea } from 'src/app/product-idea-provider';
@@ -9,7 +9,13 @@ import { GetStartedButton } from 'src/sections/landing/components/get-started-bu
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { SignInButton } from 'src/sections/landing/components/sign-in-button';
 
-export const NavDesktop = ({ showConnection = true, hasBlog = false }: { showConnection?: boolean, hasBlog?: boolean }) => {
+export function NavDesktop({
+  showConnection = true,
+  hasBlog = false,
+}: {
+  showConnection?: boolean;
+  hasBlog?: boolean;
+}) {
   const { t } = useTranslate();
 
   const { features, plans, isReady, faq } = useProductIdea();
@@ -50,9 +56,11 @@ export const NavDesktop = ({ showConnection = true, hasBlog = false }: { showCon
           },
         }}
       />
-      {plans && <Button component={Link} href="/#pricing" sx={{ px: 1 }}>
-        {t('landing.nav.pricing')}
-      </Button>}
+      {plans && (
+        <Button component={Link} href="/#pricing" sx={{ px: 1 }}>
+          {t('landing.nav.pricing')}
+        </Button>
+      )}
       {hasBlog && (
         <Button component={Link} href="/blog" sx={{ px: 2 }}>
           Blog
@@ -64,13 +72,15 @@ export const NavDesktop = ({ showConnection = true, hasBlog = false }: { showCon
       <Button component={Link} href="/#contact" sx={{ px: 2 }}>
         {t('landing.nav.contact')}
       </Button>
-      {faq && <Button component={Link} href="/#faq" sx={{ px: 2 }}>
-        {t('landing.nav.faq')}
-      </Button>}
+      {faq && (
+        <Button component={Link} href="/#faq" sx={{ px: 2 }}>
+          {t('landing.nav.faq')}
+        </Button>
+      )}
       {!isReady && <GetStartedButton buttonName="get-started-nav" />}
       <ThemeButton />
       <LanguageButton />
       {isReady && showConnection && <SignInButton />}
     </Stack>
   );
-};
+}

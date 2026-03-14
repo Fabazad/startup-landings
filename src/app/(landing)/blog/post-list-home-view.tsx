@@ -1,4 +1,4 @@
-import type { BlogPost, IPostItem } from 'src/types/blog';
+import type { BlogPost } from 'src/types/blog';
 
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
@@ -13,12 +13,9 @@ type Props = {
 };
 
 export function PostListHomeView({ posts }: Props) {
-
   return (
     <Container>
-      <Typography variant="h4" sx={{ my: { xs: 3, md: 5 } }}>
-        Blog
-      </Typography>
+      <Typography variant="h3">Blog Envy</Typography>
 
       <Stack
         spacing={3}
@@ -26,18 +23,9 @@ export function PostListHomeView({ posts }: Props) {
         alignItems={{ xs: 'flex-end', sm: 'center' }}
         direction={{ xs: 'column', sm: 'row' }}
         sx={{ mb: { xs: 3, md: 5 } }}
-      >
-       
-      </Stack>
+      />
 
       <PostList posts={posts} />
     </Container>
   );
 }
-
-// ----------------------------------------------------------------------
-
-type ApplyFilterProps = {
-  inputData: IPostItem[];
-  sortBy: string;
-};

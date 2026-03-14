@@ -1,20 +1,25 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { ProductIdeaName, PRODUCT_IDEA_NAMES } from "src/ProductIdeas";
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { ProductIdeaName, PRODUCT_IDEA_NAMES } from 'src/ProductIdeas';
 
-export const AuthProvider = ({ children, productName }: { children: React.ReactNode, productName: ProductIdeaName }) => {
+export function AuthProvider({
+  children,
+  productName,
+}: {
+  children: React.ReactNode;
+  productName: ProductIdeaName;
+}) {
+  const router = useRouter();
 
-    const router = useRouter();
+  useEffect(() => {
+    const item = localStorage?.getItem('sb-snompcrhhpnorquapudz-auth-token');
 
-    useEffect(() => {
-        const item = localStorage?.getItem('sb-snompcrhhpnorquapudz-auth-token');
+    console.log({ productName, acutal: PRODUCT_IDEA_NAMES.ENVY });
+    if (item && productName === PRODUCT_IDEA_NAMES.ENVY) router.replace('/envy');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router]);
 
-        console.log({productName, acutal: PRODUCT_IDEA_NAMES.ENVY});
-        if (item && productName === PRODUCT_IDEA_NAMES.ENVY) router.replace('/envy');
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [router]);
-    
-    return <>{children}</>;
-};
+  return <>{children}</>;
+}

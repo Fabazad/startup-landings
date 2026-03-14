@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Button, ButtonProps } from '@mui/material';
 import { t } from 'i18next';
@@ -9,13 +9,13 @@ import {
   useSubscription,
 } from 'src/sections/landing/components/SubscriptionModal/subscription-context';
 
-export const GetStartedButton = ({
+export function GetStartedButton({
   buttonName,
   ...other
 }: ButtonProps & {
   outlined?: boolean;
   buttonName: string;
-}) => {
+}) {
   const { setOpenModal, subscriptionStep } = useSubscription();
   const { name: productName, isReady, ctaName } = useProductIdea();
 
@@ -40,7 +40,7 @@ export const GetStartedButton = ({
       sx={{
         display: 'inline-flex',
         borderRadius: 999,
-        px: 3
+        px: 3,
       }}
     >
       {subscriptionStep === SubscriptionStep.SUCCESS
@@ -48,4 +48,4 @@ export const GetStartedButton = ({
         : ctaName || t('landing.hero.buttons.get-started')}
     </Button>
   );
-};
+}

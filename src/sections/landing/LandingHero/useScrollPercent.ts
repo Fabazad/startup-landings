@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useMotionValueEvent, useScroll } from 'framer-motion';
 import { useRef, useState } from 'react';

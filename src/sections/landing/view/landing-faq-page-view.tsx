@@ -1,6 +1,5 @@
 'use client';
 
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Accordion from '@mui/material/Accordion';
@@ -28,7 +27,10 @@ export function LandingFaqPageView({ faqPage }: Props) {
       <Container sx={{ py: 7 }}>
         <MotionViewport>
           <Container>
-            <Stack spacing={3} sx={{ mb: { xs: 5, md: 8 }, textAlign: 'center', alignItems: 'center' }}>
+            <Stack
+              spacing={3}
+              sx={{ mb: { xs: 5, md: 8 }, textAlign: 'center', alignItems: 'center' }}
+            >
               <m.div variants={varFade().inUp}>
                 <Iconify icon={faqPage.icon} width={80} sx={{ color: 'primary.main', mb: 3 }} />
                 <Typography variant="h2">{faqPage.hero.title}</Typography>
@@ -53,19 +55,13 @@ export function LandingFaqPageView({ faqPage }: Props) {
                       <m.div key={item.id} variants={varFade().inUp}>
                         <Accordion>
                           <AccordionSummary
-                            expandIcon={
-                              <Iconify icon="eva:arrow-ios-downward-fill" />
-                            }
+                            expandIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
                           >
-                            <Typography variant="subtitle1">
-                              {item.question}
-                            </Typography>
+                            <Typography variant="subtitle1">{item.question}</Typography>
                           </AccordionSummary>
 
                           <AccordionDetails>
-                            <Typography sx={{ color: 'text.secondary' }}>
-                              {item.answer}
-                            </Typography>
+                            <Typography sx={{ color: 'text.secondary' }}>{item.answer}</Typography>
                           </AccordionDetails>
                         </Accordion>
                       </m.div>

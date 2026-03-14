@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useDropzone } from 'react-dropzone';
 
@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 
 import { varAlpha } from 'src/theme/styles';
 
+import { useTranslate } from 'src/locales';
+import { FormHelperText } from '@mui/material';
 import { Iconify } from '../iconify';
 import { uploadClasses } from './classes';
 import { UploadPlaceholder } from './components/placeholder';
@@ -15,8 +17,6 @@ import { MultiFilePreview } from './components/preview-multi-file';
 import { DeleteButton, SingleFilePreview } from './components/preview-single-file';
 
 import type { UploadProps } from './types';
-import { useTranslate } from 'src/locales';
-import { FormHelperText } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -40,7 +40,6 @@ export function Upload({
     disabled,
     ...other,
   });
-
 
   const { t } = useTranslate();
 

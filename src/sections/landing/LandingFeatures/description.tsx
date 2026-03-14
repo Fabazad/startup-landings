@@ -3,19 +3,19 @@ import { m } from 'framer-motion';
 import { varFade } from 'src/components/animate';
 import { Iconify } from 'src/components/iconify';
 import { Feature } from 'src/types/ProductIdea';
+import { useProductIdea } from 'src/app/product-idea-provider';
 import { SectionTitle } from '../components/section-title';
 import { TryForFreeButton } from '../components/try-for-free-button';
 import { GetStartedButton } from '../components/get-started-button';
-import { useProductIdea } from 'src/app/product-idea-provider';
 
-export const Description = ({ feature }: { feature: Feature }) => {
+export function Description({ feature }: { feature: Feature }) {
   const { plans } = useProductIdea();
 
   return (
     <>
       <SectionTitle
         title={feature.title}
-        isFullGradient={true}
+        isFullGradient
         sx={{ mb: { xs: 2, md: 3 }, textAlign: { xs: 'center', md: 'left' } }}
       />
 
@@ -63,8 +63,12 @@ export const Description = ({ feature }: { feature: Feature }) => {
         component={m.div}
         sx={{ mt: 8, textAlign: { xs: 'center', md: 'left' } }}
       >
-        {plans ? <TryForFreeButton buttonName={`try-for-free-feature-${feature.title}`} /> : <GetStartedButton buttonName={`get-started-feature-${feature.title}`} />}
+        {plans ? (
+          <TryForFreeButton buttonName={`try-for-free-feature-${feature.title}`} />
+        ) : (
+          <GetStartedButton buttonName={`get-started-feature-${feature.title}`} />
+        )}
       </Box>
     </>
-  )
+  );
 }

@@ -1,3 +1,5 @@
+'use client';
+
 import './code-highlight-block.css';
 
 import type { Options } from 'react-markdown';

@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import type { BlogPost, IPostItem } from 'src/types/blog';
 import type { BoxProps } from '@mui/material/Box';
 import type { CardProps } from '@mui/material/Card';
@@ -32,50 +33,64 @@ export function PostItem({ post, sx, ...other }: PostItemProps) {
   const linkTo = paths.post.details(post.slug);
 
   return (
-    <Card sx={sx} {...other}>
-      <Box sx={{ position: 'relative' }}>
-        <AvatarShape
-          sx={{
-            left: 0,
-            zIndex: 9,
-            width: 88,
-            height: 36,
-            bottom: -16,
-            position: 'absolute',
-          }}
-        />
+    <Link underline="none" component={RouterLink} href={linkTo} color="inherit">
+      <Card
+        sx={{
+          ...sx,
+          '&:hover': {
+            boxShadow: '0 4px 12px 0 rgba(0,0,0,0.2)',
+            transition: 'all 0.1s ease-in-out',
+          },
+        }}
+        {...other}
+      >
+        <Box sx={{ position: 'relative' }}>
+          <AvatarShape
+            sx={{
+              left: 0,
+              zIndex: 9,
+              width: 88,
+              height: 36,
+              bottom: -16,
+              position: 'absolute',
+              '&:hover': {
+                boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2)',
+                transform: 'translateY(-2px)',
+                transition: 'all 0.3s ease-in-out',
+              },
+            }}
+          />
 
-        <Avatar
-          alt={post.author}
-          sx={{
-            left: 24,
-            zIndex: 9,
-            bottom: -24,
-            position: 'absolute',
-          }}
-        />
+          <Avatar
+            alt={post.author}
+            sx={{
+              left: 24,
+              zIndex: 9,
+              bottom: -24,
+              position: 'absolute',
+            }}
+          />
 
-        <Image alt={post.title} src={post.cover_image} ratio="4/3" />
-      </Box>
+          <Image alt={post.title} src={post.cover_image} ratio="4/3" />
+        </Box>
 
-      <CardContent sx={{ pt: 6 }}>
-        <Typography variant="caption" component="div" sx={{ mb: 1, color: 'text.disabled' }}>
-          {fDate(post.created_at)}
-        </Typography>
+        <CardContent sx={{ pt: 6 }}>
+          <Typography variant="caption" component="div" sx={{ mb: 1, color: 'text.disabled' }}>
+            {fDate(post.created_at)}
+          </Typography>
 
-        <Link
-          component={RouterLink}
-          href={linkTo}
-          color="inherit"
-          variant="subtitle2"
-          sx={(theme) => ({
-            ...maxLine({ line: 2, persistent: theme.typography.subtitle2 }),
-          })}
-        >
-          {post.title}
-        </Link>
-      </CardContent>
-    </Card>
+          <Typography
+            color="inherit"
+            variant="subtitle2"
+            sx={(theme) => ({
+              ...maxLine({ line: 2, persistent: theme.typography.subtitle2 }),
+            })}
+          >
+            {post.title}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }
 
@@ -92,56 +107,55 @@ export function PostItemLatest({ post, index }: PostItemLatestProps) {
   const postSmall = index === 1 || index === 2;
 
   return (
-    <Card>
-      <Avatar
-        alt={post.author}
-        sx={{
-          top: 24,
-          left: 24,
-          zIndex: 9,
-          position: 'absolute',
-        }}
-      />
+    <Link underline="none" component={RouterLink} href={linkTo} color="inherit">
+      <Card>
+        <Avatar
+          alt={post.author}
+          sx={{
+            top: 24,
+            left: 24,
+            zIndex: 9,
+            position: 'absolute',
+          }}
+        />
 
-      <Image
-        alt={post.title}
-        src={post.cover_image}
-        ratio="4/3"
-        sx={{ height: 360 }}
-        slotProps={{
-          overlay: { bgcolor: (theme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.64) },
-        }}
-      />
+        <Image
+          alt={post.title}
+          src={post.cover_image}
+          ratio="4/3"
+          sx={{ height: 360 }}
+          slotProps={{
+            overlay: { bgcolor: (theme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.64) },
+          }}
+        />
 
-      <CardContent
-        sx={{
-          width: 1,
-          zIndex: 9,
-          bottom: 0,
-          position: 'absolute',
-          color: 'common.white',
-        }}
-      >
-        <Typography variant="caption" component="div" sx={{ mb: 1, opacity: 0.64 }}>
-          {fDate(post.created_at)}
-        </Typography>
-
-        <Link
-          component={RouterLink}
-          href={linkTo}
-          color="inherit"
-          variant={postSmall ? 'subtitle2' : 'h5'}
-          sx={(theme) => ({
-            ...maxLine({
-              line: 2,
-              persistent: postSmall ? theme.typography.subtitle2 : theme.typography.h5,
-            }),
-          })}
+        <CardContent
+          sx={{
+            width: 1,
+            zIndex: 9,
+            bottom: 0,
+            position: 'absolute',
+            color: 'common.white',
+          }}
         >
-          {post.title}
-        </Link>
-      </CardContent>
-    </Card>
+          <Typography variant="caption" component="div" sx={{ mb: 1, opacity: 0.64 }}>
+            {fDate(post.created_at)}
+          </Typography>
+
+          <Typography
+            variant={postSmall ? 'subtitle2' : 'h5'}
+            sx={(theme) => ({
+              ...maxLine({
+                line: 2,
+                persistent: postSmall ? theme.typography.subtitle2 : theme.typography.h5,
+              }),
+            })}
+          >
+            {post.title}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }
 

@@ -5,7 +5,7 @@ import { useProductIdea } from 'src/app/product-idea-provider';
 import { Iconify } from 'src/components/iconify';
 import { SubscriptionStep, useSubscription } from './SubscriptionModal/subscription-context';
 
-export const TryForFreeButton = ({ buttonName }: { buttonName: string }) => {
+export function TryForFreeButton({ buttonName }: { buttonName: string }) {
   const { t } = useTranslation();
   const { name: productName, isReady } = useProductIdea();
   const { setOpenModal, subscriptionStep } = useSubscription();
@@ -26,7 +26,7 @@ export const TryForFreeButton = ({ buttonName }: { buttonName: string }) => {
       color="inherit"
       size="large"
       variant="contained"
-      href={isReady ? "/auth/sign-up" : undefined}
+      href={isReady ? '/auth/sign-up' : undefined}
       startIcon={<Iconify width={24} icon="ph:rocket-launch-duotone" />}
       onClick={!isReady ? handleClick : undefined}
       sx={{ borderRadius: 999, display: 'inline-flex' }}
@@ -36,4 +36,4 @@ export const TryForFreeButton = ({ buttonName }: { buttonName: string }) => {
         : t('landing.hero.buttons.try-for-free')}
     </Button>
   );
-};
+}
