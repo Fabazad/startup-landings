@@ -44,7 +44,7 @@ type ColorType = (typeof COLORS)[number];
 function styleColors(ownerState: ChipProps, styles: (val: ColorType) => CSSObject) {
   const outputStyle = COLORS.reduce((acc, color) => {
     if (!ownerState.disabled && ownerState.color === color) {
-      acc = styles(color);
+      return styles(color);
     }
     return acc;
   }, {});

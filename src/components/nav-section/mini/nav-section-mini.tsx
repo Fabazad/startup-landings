@@ -10,6 +10,30 @@ import type { NavGroupProps, NavSectionProps } from '../types';
 
 // ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+
+function Group({ items, render, slotProps, enabledRootRedirect, cssVars }: NavGroupProps) {
+  return (
+    <NavLi>
+      <NavUl sx={{ gap: 'var(--nav-item-gap)' }}>
+        {items.map((list) => (
+          <NavList
+            key={list.title}
+            depth={1}
+            data={list}
+            render={render}
+            cssVars={cssVars}
+            slotProps={slotProps}
+            enabledRootRedirect={enabledRootRedirect}
+          />
+        ))}
+      </NavUl>
+    </NavLi>
+  );
+}
+
+// ----------------------------------------------------------------------
+
 export function NavSectionMini({
   sx,
   data,
@@ -40,27 +64,5 @@ export function NavSectionMini({
         ))}
       </NavUl>
     </Stack>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-function Group({ items, render, slotProps, enabledRootRedirect, cssVars }: NavGroupProps) {
-  return (
-    <NavLi>
-      <NavUl sx={{ gap: 'var(--nav-item-gap)' }}>
-        {items.map((list) => (
-          <NavList
-            key={list.title}
-            depth={1}
-            data={list}
-            render={render}
-            cssVars={cssVars}
-            slotProps={slotProps}
-            enabledRootRedirect={enabledRootRedirect}
-          />
-        ))}
-      </NavUl>
-    </NavLi>
   );
 }

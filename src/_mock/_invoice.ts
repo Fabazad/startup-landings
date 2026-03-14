@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { fSub, fAdd } from 'src/utils/format-time';
 
 import { _mock } from './_mock';

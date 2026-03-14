@@ -30,61 +30,6 @@ type Props = {
   hideNavLayout?: boolean;
 };
 
-export function NavOptions({ options, value, onClickOption, hideNavColor, hideNavLayout }: Props) {
-  const theme = useTheme();
-
-  const labelStyles: React.CSSProperties = {
-    display: 'block',
-    lineHeight: '14px',
-    color: 'text.secondary',
-    fontWeight: 'fontWeightSemiBold',
-    fontSize: theme.typography.pxToRem(11),
-  };
-
-  const renderLayout = (
-    <Box gap={1.5} display="flex" flexDirection="column">
-      <Box component="span" sx={labelStyles}>
-        Layout
-      </Box>
-      <Box gap={1.5} display="flex">
-        {options.layouts.map((option) => (
-          <LayoutOption
-            key={option}
-            option={option}
-            selected={value.layout === option}
-            onClick={() => onClickOption.layout(option)}
-          />
-        ))}
-      </Box>
-    </Box>
-  );
-
-  const renderColor = (
-    <Box gap={1.5} display="flex" flexDirection="column">
-      <Box component="span" sx={labelStyles}>
-        Color
-      </Box>
-      <Box gap={1.5} display="flex">
-        {options.colors.map((option) => (
-          <ColorOption
-            key={option}
-            option={option}
-            selected={value.color === option}
-            onClick={() => onClickOption.color(option)}
-          />
-        ))}
-      </Box>
-    </Box>
-  );
-
-  return (
-    <Block title="Nav" tooltip="Dashboard only" sx={{ gap: 2.5 }}>
-      {!hideNavLayout && renderLayout}
-      {!hideNavColor && renderColor}
-    </Block>
-  );
-}
-
 // ----------------------------------------------------------------------
 
 type OptionProps = ButtonBaseProps & {
@@ -228,5 +173,68 @@ export function ColorOption({ option, selected, sx, ...other }: OptionProps) {
       }}
       {...other}
     />
+  );
+}
+
+// ----------------------------------------------------------------------
+
+export function NavOptions({
+  options,
+  value,
+  onClickOption,
+  hideNavColor = false,
+  hideNavLayout = false,
+}: Props) {
+  const theme = useTheme();
+
+  const labelStyles: React.CSSProperties = {
+    display: 'block',
+    lineHeight: '14px',
+    color: 'text.secondary',
+    fontWeight: 'fontWeightSemiBold',
+    fontSize: theme.typography.pxToRem(11),
+  };
+
+  const renderLayout = (
+    <Box gap={1.5} display="flex" flexDirection="column">
+      <Box component="span" sx={labelStyles}>
+        Layout
+      </Box>
+      <Box gap={1.5} display="flex">
+        {options.layouts.map((option) => (
+          <LayoutOption
+            key={option}
+            option={option}
+            selected={value.layout === option}
+            onClick={() => onClickOption.layout(option)}
+          />
+        ))}
+      </Box>
+    </Box>
+  );
+
+  const renderColor = (
+    <Box gap={1.5} display="flex" flexDirection="column">
+      <Box component="span" sx={labelStyles}>
+        Color
+      </Box>
+      <Box gap={1.5} display="flex">
+        {options.colors.map((option) => (
+          <ColorOption
+            key={option}
+            option={option}
+            selected={value.color === option}
+            onClick={() => onClickOption.color(option)}
+          />
+        ))}
+      </Box>
+    </Box>
+  );
+
+  return (
+    <Block title="Nav" tooltip="Dashboard only" sx={{ gap: 2.5 }}>
+      {!hideNavLayout && renderLayout}
+      {!hideNavColor && renderColor}
+    </Block>
   );
 }

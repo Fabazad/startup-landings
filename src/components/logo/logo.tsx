@@ -13,15 +13,22 @@ export type LogoProps = {
   width?: number;
 };
 
-export function Logo({ isSingle = true, themeColor, logo, productName, height, width }: LogoProps) {
+export function Logo({
+  isSingle = true,
+  themeColor,
+  logo,
+  productName,
+  height = 40,
+  width = 40,
+}: LogoProps) {
   const logoUrl = `${CONFIG.assetsDir}/logo/${themeColor}-${logo}.png`;
 
   const baseSize = {
-    width: width || 40,
-    height: height || 40,
+    width,
+    height,
     ...(!isSingle && {
-      width: width || 102,
-      height: height || 36,
+      width: width === 40 ? 102 : width,
+      height: height === 40 ? 36 : height,
     }),
   };
 

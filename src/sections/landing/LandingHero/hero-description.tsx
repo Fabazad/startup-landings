@@ -3,11 +3,9 @@ import { useTheme } from '@mui/material/styles';
 import { AnimatedDiv } from './animated-div';
 
 export function HeroDescription({
-  smKey,
   lgKey,
   children,
 }: {
-  smKey: number | Breakpoint;
   lgKey: number | Breakpoint;
   children: React.ReactNode;
 }) {

@@ -88,8 +88,8 @@ export function Searchbar({ data: navItems = [], sx, ...other }: SearchbarProps)
 
     return Object.keys(dataGroups)
       .sort((a, b) => -b.localeCompare(a))
-      .map((group, index) => (
-        <Box component="ul" key={`${group}-${index}`}>
+      .map((group) => (
+        <Box component="ul" key={group}>
           {dataGroups[group].map((item) => {
             const { title, path } = item;
 

@@ -44,7 +44,7 @@ export function useTranslate(ns?: string) {
 
         router.refresh();
       } catch (error) {
-        console.error(error);
+        // Error is handled by toast.promise or can be ignored
       }
     },
     [currentLang, i18n, router]

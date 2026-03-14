@@ -9,6 +9,24 @@ import type { CustomBreadcrumbsProps } from './types';
 
 // ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+
+function Separator() {
+  return (
+    <Box
+      component="span"
+      sx={{
+        width: 4,
+        height: 4,
+        borderRadius: '50%',
+        bgcolor: 'text.disabled',
+      }}
+    />
+  );
+}
+
+// ----------------------------------------------------------------------
+
 export function CustomBreadcrumbs({
   links,
   action,
@@ -29,9 +47,10 @@ export function CustomBreadcrumbs({
 
   const renderLinks = (
     <Breadcrumbs separator={<Separator />} sx={slotProps?.breadcrumbs} {...other}>
-      {links.map((link, index) => (
+      {links.map((link, i) => (
         <BreadcrumbsLink
-          key={link.name ?? index}
+          /* eslint-disable react/no-array-index-key */
+          key={`${link.name}-${i}`}
           link={link}
           activeLast={activeLast}
           disabled={link.name === lastLink}
@@ -68,21 +87,5 @@ export function CustomBreadcrumbs({
 
       {!!moreLink && renderMoreLink}
     </Box>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-function Separator() {
-  return (
-    <Box
-      component="span"
-      sx={{
-        width: 4,
-        height: 4,
-        borderRadius: '50%',
-        bgcolor: 'text.disabled',
-      }}
-    />
   );
 }

@@ -5,6 +5,39 @@ import { localStorageGetItem } from 'src/utils/storage-available';
 
 // ----------------------------------------------------------------------
 
+export function getStorage(key: string) {
+  try {
+    const result = localStorageGetItem(key);
+
+    if (result) {
+      return JSON.parse(result);
+    }
+  } catch (error) {
+    // Error while getting from storage
+  }
+
+  return null;
+}
+
+export function setStorage<T>(key: string, value: T) {
+  try {
+    const serializedValue = JSON.stringify(value);
+    window.localStorage.setItem(key, serializedValue);
+  } catch (error) {
+    // Error while setting storage
+  }
+}
+
+export function removeStorage(key: string) {
+  try {
+    window.localStorage.removeItem(key);
+  } catch (error) {
+    // Error while removing from storage
+  }
+}
+
+// ----------------------------------------------------------------------
+
 export type UseLocalStorageReturn<T> = {
   state: T;
   canReset: boolean;
@@ -73,37 +106,4 @@ export function useLocalStorage<T>(key: string, initialState: T): UseLocalStorag
   );
 
   return memoizedValue;
-}
-
-// ----------------------------------------------------------------------
-
-export function getStorage(key: string) {
-  try {
-    const result = localStorageGetItem(key);
-
-    if (result) {
-      return JSON.parse(result);
-    }
-  } catch (error) {
-    console.error('Error while getting from storage:', error);
-  }
-
-  return null;
-}
-
-export function setStorage<T>(key: string, value: T) {
-  try {
-    const serializedValue = JSON.stringify(value);
-    window.localStorage.setItem(key, serializedValue);
-  } catch (error) {
-    console.error('Error while setting storage:', error);
-  }
-}
-
-export function removeStorage(key: string) {
-  try {
-    window.localStorage.removeItem(key);
-  } catch (error) {
-    console.error('Error while removing from storage:', error);
-  }
 }

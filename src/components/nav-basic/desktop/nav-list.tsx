@@ -35,13 +35,6 @@ export function NavList({
 
   const [openMenu, setOpenMenu] = useState(false);
 
-  useEffect(() => {
-    if (openMenu) {
-      handleCloseMenu();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
-
   const handleOpenMenu = useCallback(() => {
     if (data.children) {
       setOpenMenu(true);
@@ -51,6 +44,13 @@ export function NavList({
   const handleCloseMenu = useCallback(() => {
     setOpenMenu(false);
   }, []);
+
+  useEffect(() => {
+    if (openMenu) {
+      handleCloseMenu();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   const renderNavItem = (
     <NavItem
@@ -118,6 +118,7 @@ export function NavList({
             className={navSectionClasses.paper}
             sx={{ minWidth: 180, ...paper({ theme, dropdown: true }), ...slotProps?.paper }}
           >
+            {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
             <NavSubList
               data={data.children}
               depth={depth}

@@ -34,7 +34,7 @@ export type AnimateTextProps = TypographyProps & {
 
 export function AnimateText({
   text,
-  variants,
+  variants = undefined,
   once = true,
   amount = 1 / 3,
   component = 'p',
@@ -115,6 +115,7 @@ export function AnimateText({
         {textArray.map((line, lineIndex) => (
           <Box
             component="span"
+            /* eslint-disable react/no-array-index-key */
             key={`${line}-${lineIndex}`}
             data-index={lineIndex}
             className={animateTextClasses.line}
@@ -126,6 +127,7 @@ export function AnimateText({
               return (
                 <Box
                   component="span"
+                  /* eslint-disable react/no-array-index-key */
                   key={`${word}-${wordIndex}`}
                   data-index={wordIndex}
                   className={animateTextClasses.word}
@@ -134,6 +136,7 @@ export function AnimateText({
                   {word.split('').map((char, charIndex) => (
                     <Box
                       component={m.span}
+                      /* eslint-disable react/no-array-index-key */
                       key={`${char}-${charIndex}`}
                       variants={variants ?? varFade().in}
                       data-index={charIndex}

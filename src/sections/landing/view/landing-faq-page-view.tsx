@@ -45,7 +45,8 @@ export function LandingFaqPageView({ faqPage }: Props) {
 
             <Stack spacing={8}>
               {faqPage.sections.map((section, idx) => (
-                <Stack key={idx} spacing={3}>
+                // eslint-disable-next-line react/no-array-index-key
+                <Stack key={`section-${idx}`} spacing={3}>
                   <m.div variants={varFade().inUp}>
                     <Typography variant="h4">{section.title}</Typography>
                   </m.div>

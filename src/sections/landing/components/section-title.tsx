@@ -31,12 +31,28 @@ type Props = StackProps & {
   isFullGradient?: boolean;
 };
 
+// ----------------------------------------------------------------------
+
+export function SectionCaption({ title, variants = null, sx = {} }: TextProps) {
+  return (
+    <Stack
+      component={m.span}
+      variants={variants ?? varFade({ distance: 24 }).inUp}
+      sx={{ typography: 'overline', color: 'text.disabled', fontSize: '1.2rem', ...sx }}
+    >
+      {title}
+    </Stack>
+  );
+}
+
+// ----------------------------------------------------------------------
+
 export function SectionTitle({
   title,
-  caption,
-  slotProps,
-  txtGradient,
-  description,
+  caption = null,
+  slotProps = {},
+  txtGradient = '',
+  description = null,
   isFullGradient = false,
   ...other
 }: Props) {
@@ -69,20 +85,6 @@ export function SectionTitle({
           {description}
         </Typography>
       )}
-    </Stack>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-export function SectionCaption({ title, variants, sx }: TextProps) {
-  return (
-    <Stack
-      component={m.span}
-      variants={variants ?? varFade({ distance: 24 }).inUp}
-      sx={{ typography: 'overline', color: 'text.disabled', fontSize: '1.2rem', ...sx }}
-    >
-      {title}
     </Stack>
   );
 }

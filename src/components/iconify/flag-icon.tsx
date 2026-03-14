@@ -14,7 +14,7 @@ export type FlagIconProps = BoxProps & {
 };
 
 export const FlagIcon = forwardRef<HTMLSpanElement, FlagIconProps>(
-  ({ code, className, sx, ...other }, ref) => {
+  ({ code = undefined, className, sx, ...other }, ref) => {
     const baseStyles: SxProps<Theme> = {
       width: 26,
       height: 20,
@@ -55,3 +55,7 @@ export const FlagIcon = forwardRef<HTMLSpanElement, FlagIconProps>(
     );
   }
 );
+
+FlagIcon.defaultProps = {
+  code: undefined,
+};

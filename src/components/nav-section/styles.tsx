@@ -77,7 +77,7 @@ export const sharedStyles = {
 
 export function Subheader({
   sx,
-  open,
+  open = false,
   children,
   ...other
 }: ListSubheaderProps & {
@@ -177,7 +177,7 @@ export function NavCollapse({
 export function NavLi({
   sx,
   children,
-  disabled,
+  disabled = false,
   ...other
 }: BoxProps & {
   disabled?: boolean;

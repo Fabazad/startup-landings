@@ -50,7 +50,7 @@ export async function generateMetadata({
 }
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const { id: productIdeaId } = await getProductIdea();
+  const { name: productIdeaName } = await getProductIdea();
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
 
@@ -59,7 +59,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   const { data: blog, error } = await supabase
     .from('blogs')
     .select('*')
-    .eq('product_idea_id', productIdeaId)
+    .eq('product_idea_id', productIdeaName)
     .eq('language', lang ?? 'fr')
     .eq('slug', params.slug)
     .eq('published', true)

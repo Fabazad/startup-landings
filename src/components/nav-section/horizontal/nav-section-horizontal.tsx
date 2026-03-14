@@ -11,6 +11,30 @@ import type { NavGroupProps, NavSectionProps } from '../types';
 
 // ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+
+function Group({ items, render, slotProps, enabledRootRedirect, cssVars }: NavGroupProps) {
+  return (
+    <NavLi>
+      <NavUl sx={{ flexDirection: 'row', gap: 'var(--nav-item-gap)' }}>
+        {items.map((list) => (
+          <NavList
+            key={list.title}
+            depth={1}
+            data={list}
+            render={render}
+            cssVars={cssVars}
+            slotProps={slotProps}
+            enabledRootRedirect={enabledRootRedirect}
+          />
+        ))}
+      </NavUl>
+    </NavLi>
+  );
+}
+
+// ----------------------------------------------------------------------
+
 export function NavSectionHorizontal({
   sx,
   data,
@@ -60,27 +84,5 @@ export function NavSectionHorizontal({
         </NavUl>
       </Stack>
     </Scrollbar>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-function Group({ items, render, slotProps, enabledRootRedirect, cssVars }: NavGroupProps) {
-  return (
-    <NavLi>
-      <NavUl sx={{ flexDirection: 'row', gap: 'var(--nav-item-gap)' }}>
-        {items.map((list) => (
-          <NavList
-            key={list.title}
-            depth={1}
-            data={list}
-            render={render}
-            cssVars={cssVars}
-            slotProps={slotProps}
-            enabledRootRedirect={enabledRootRedirect}
-          />
-        ))}
-      </NavUl>
-    </NavLi>
   );
 }

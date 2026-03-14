@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { t } from 'i18next';
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import { toast } from 'sonner';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { useCookies } from 'src/hooks/use-cookies';
@@ -117,39 +117,45 @@ export function SubscriptionModalProvider({ children }: { children: React.ReactN
     setSubscriptionId(subscriptionIdCookie);
   }, [subscriptionIdCookie]);
 
-  const createSubscription = async (subscriptionEmail: string) => {
-    setIsLoading(true);
-    const response = await api.createSubscription(
-      subscriptionEmail,
-      productName,
-      currentLang.value as LanguageValue
-    );
-    if (response !== null && 'error' in response) return { error: response.error };
+  const createSubscription = useCallback(
+    async (subscriptionEmail: string) => {
+      setIsLoading(true);
+      const response = await api.createSubscription(
+        subscriptionEmail,
+        productName,
+        currentLang.value as LanguageValue
+      );
+      if (response !== null && 'error' in response) return { error: response.error };
 
-    setSubscriptionIdCookie(response.subscriptionId);
-    if (!response.isNewSubscription) {
-      toast.info(t('landing.subscription.already-subscribed'));
-    }
-    setIsLoading(false);
-    return null;
-  };
+      setSubscriptionIdCookie(response.subscriptionId);
+      if (!response.isNewSubscription) {
+        toast.info(t('landing.subscription.already-subscribed'));
+      }
+      setIsLoading(false);
+      return null;
+    },
+    [productName, currentLang.value, setSubscriptionIdCookie]
+  );
 
-  const updateSubscriptionFeatures = async (
-    subscriptionFeatures: string[]
-  ): Promise<{ error: 'no-subscription-email' | 'failed-to-add-features' } | null> => {
-    if (!subscriptionId) return { error: 'no-subscription-email' };
-    setIsLoading(true);
-    const response = await api.updateSubscriptionFeatures({
-      subscriptionId,
-      features: subscriptionFeatures,
-    });
-    if (response !== null && 'error' in response) return { error: response.error };
-    refetchSubscriptionFeatures();
-    setIsLoading(false);
-    return null;
-  };
+  const updateSubscriptionFeatures = useCallback(
+    async (
+      subscriptionFeatures: string[]
+    ): Promise<{ error: 'no-subscription-email' | 'failed-to-add-features' } | null> => {
+      if (!subscriptionId) return { error: 'no-subscription-email' };
+      setIsLoading(true);
+      const response = await api.updateSubscriptionFeatures({
+        subscriptionId,
+        features: subscriptionFeatures,
+      });
+      if (response !== null && 'error' in response) return { error: response.error };
+      refetchSubscriptionFeatures();
+      setIsLoading(false);
+      return null;
+    },
+    [subscriptionId, refetchSubscriptionFeatures]
+  );
 
-  const handleSetOpenModal = (isOpen: boolean) => {
+  const handleSetOpenModal = useCallback((isOpen: boolean) => {
     if (typeof window === 'undefined') return;
     const url = new URL(window.location.href);
     if (isOpen) {
@@ -158,20 +164,31 @@ export function SubscriptionModalProvider({ children }: { children: React.ReactN
       url.searchParams.delete(SUBSCRIBE_MODAL_PARAM);
     }
     window.history.pushState({}, '', url.toString());
-  };
+  }, []);
+
+  const memoizedValue = useMemo(
+    () => ({
+      openModal,
+      setOpenModal: handleSetOpenModal,
+      subscriptionStep: step,
+      createSubscription,
+      updateSubscriptionFeatures,
+      isLoading,
+      isFirstFetching,
+    }),
+    [
+      openModal,
+      handleSetOpenModal,
+      step,
+      createSubscription,
+      updateSubscriptionFeatures,
+      isLoading,
+      isFirstFetching,
+    ]
+  );
 
   return (
-    <subscriptionContext.Provider
-      value={{
-        openModal,
-        setOpenModal: handleSetOpenModal,
-        subscriptionStep: step,
-        createSubscription,
-        updateSubscriptionFeatures,
-        isLoading,
-        isFirstFetching,
-      }}
-    >
+    <subscriptionContext.Provider value={memoizedValue}>
       <SubscriptionModalView />
       {children}
     </subscriptionContext.Provider>

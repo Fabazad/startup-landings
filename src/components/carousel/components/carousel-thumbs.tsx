@@ -18,6 +18,58 @@ import type { CarouselOptions, CarouselThumbProps, CarouselThumbsProps } from '.
 
 // ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+
+function useMaskStyle(axis: CarouselOptions['axis']): CSSObject {
+  const theme = useTheme();
+
+  const baseStyles = {
+    zIndex: 9,
+    content: '""',
+    position: 'absolute',
+  };
+
+  const bgcolor = `${theme.vars.palette.background.paper} 20%, ${varAlpha(theme.vars.palette.background.paperChannel, 0)} 100%)`;
+
+  if (axis === 'y') {
+    return {
+      '&::before, &::after': {
+        ...baseStyles,
+        left: 0,
+        height: 40,
+        width: '100%',
+      },
+      '&::before': {
+        top: -8,
+        background: `linear-gradient(to bottom, ${bgcolor}`,
+      },
+      '&::after': {
+        bottom: -8,
+        background: `linear-gradient(to top, ${bgcolor}`,
+      },
+    };
+  }
+
+  return {
+    '&::before, &::after': {
+      ...baseStyles,
+      top: 0,
+      width: 40,
+      height: '100%',
+    },
+    '&::before': {
+      left: -8,
+      background: `linear-gradient(to right, ${bgcolor}`,
+    },
+    '&::after': {
+      right: -8,
+      background: `linear-gradient(to left, ${bgcolor}`,
+    },
+  };
+}
+
+// ----------------------------------------------------------------------
+
 export const CarouselThumbs = forwardRef<HTMLDivElement, BoxProps & CarouselThumbsProps>(
   ({ children, slotProps, options, sx, className, ...other }, ref) => {
     const axis = options?.axis ?? 'x';
@@ -120,54 +172,4 @@ export function CarouselThumb({
       />
     </ButtonBase>
   );
-}
-
-// ----------------------------------------------------------------------
-
-function useMaskStyle(axis: CarouselOptions['axis']): CSSObject {
-  const theme = useTheme();
-
-  const baseStyles = {
-    zIndex: 9,
-    content: '""',
-    position: 'absolute',
-  };
-
-  const bgcolor = `${theme.vars.palette.background.paper} 20%, ${varAlpha(theme.vars.palette.background.paperChannel, 0)} 100%)`;
-
-  if (axis === 'y') {
-    return {
-      '&::before, &::after': {
-        ...baseStyles,
-        left: 0,
-        height: 40,
-        width: '100%',
-      },
-      '&::before': {
-        top: -8,
-        background: `linear-gradient(to bottom, ${bgcolor}`,
-      },
-      '&::after': {
-        bottom: -8,
-        background: `linear-gradient(to top, ${bgcolor}`,
-      },
-    };
-  }
-
-  return {
-    '&::before, &::after': {
-      ...baseStyles,
-      top: 0,
-      width: 40,
-      height: '100%',
-    },
-    '&::before': {
-      left: -8,
-      background: `linear-gradient(to right, ${bgcolor}`,
-    },
-    '&::after': {
-      right: -8,
-      background: `linear-gradient(to left, ${bgcolor}`,
-    },
-  };
 }

@@ -23,7 +23,7 @@ export const MotionContainer = forwardRef<HTMLDivElement, MotionContainerProps>(
       component: m.div,
       variants: varContainer(),
       initial: action ? false : 'initial',
-      animate: action ? (animate ? 'animate' : 'exit') : 'animate',
+      animate: action && !animate ? 'exit' : 'animate',
       exit: action ? undefined : 'exit',
       ...other,
     };
@@ -31,3 +31,8 @@ export const MotionContainer = forwardRef<HTMLDivElement, MotionContainerProps>(
     return <Box {...commonProps}>{children}</Box>;
   }
 );
+
+MotionContainer.defaultProps = {
+  animate: true,
+  action: false,
+};

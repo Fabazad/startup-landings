@@ -22,51 +22,51 @@ export function NavContent({
     return null;
   }
 
+  if (singleList) {
+    return (
+      <NavUl>
+        <NavSubList data={data.children} slotProps={slotProps} />
+      </NavUl>
+    );
+  }
+
   return (
     <>
-      {singleList ? (
-        <NavUl>
-          <NavSubList data={data.children} slotProps={slotProps} />
-        </NavUl>
-      ) : (
+      <Masonry
+        component="ul"
+        className={navSectionClasses.ul}
+        columns={4}
+        defaultColumns={4}
+        spacing={3}
+        defaultSpacing={3}
+        sx={{ p: 0 }}
+      >
+        <NavSubList data={data.children} slotProps={slotProps} />
+      </Masonry>
+
+      {!!data.moreLink && (
+        <MenuMoreLink
+          path={data.moreLink.path}
+          title={data.moreLink.title}
+          sx={slotProps?.moreLink}
+        />
+      )}
+
+      {!!data.slides && (
         <>
-          <Masonry
-            component="ul"
-            className={navSectionClasses.ul}
-            columns={4}
-            defaultColumns={4}
-            spacing={3}
-            defaultSpacing={3}
-            sx={{ p: 0 }}
-          >
-            <NavSubList data={data.children} slotProps={slotProps} />
-          </Masonry>
+          <Divider sx={{ borderStyle: 'dashed', my: 3 }} />
+          <MenuCarousel
+            slides={data.slides}
+            displayCount={slotProps?.carousel?.displayCount}
+            sx={slotProps?.carousel?.sx}
+          />
+        </>
+      )}
 
-          {!!data.moreLink && (
-            <MenuMoreLink
-              path={data.moreLink.path}
-              title={data.moreLink.title}
-              sx={slotProps?.moreLink}
-            />
-          )}
-
-          {!!data.slides && (
-            <>
-              <Divider sx={{ borderStyle: 'dashed', my: 3 }} />
-              <MenuCarousel
-                slides={data.slides}
-                displayCount={slotProps?.carousel?.displayCount}
-                sx={slotProps?.carousel?.sx}
-              />
-            </>
-          )}
-
-          {!!data.tags && (
-            <>
-              <Divider sx={{ borderStyle: 'dashed', my: 3 }} />
-              <MenuTags tags={data.tags} sx={slotProps?.tags} />
-            </>
-          )}
+      {!!data.tags && (
+        <>
+          <Divider sx={{ borderStyle: 'dashed', my: 3 }} />
+          <MenuTags tags={data.tags} sx={slotProps?.tags} />
         </>
       )}
     </>

@@ -30,6 +30,7 @@ export const ColorPreview = forwardRef<HTMLDivElement, BoxProps & ColorPreviewPr
       >
         {colorsRange.map((color, index) => (
           <Box
+            /* eslint-disable react/no-array-index-key */
             key={color + index}
             sx={{
               ml: -0.75,

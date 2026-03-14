@@ -105,6 +105,7 @@ export function CarouselDotButtons({
         const selected = index === selectedIndex;
 
         return (
+          /* eslint-disable react/no-array-index-key */
           <Box component="li" key={index} sx={{ display: 'inline-flex' }}>
             <ButtonBase
               disableRipple

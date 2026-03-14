@@ -24,6 +24,22 @@ const PRIMARY_COLORS = {
 
 // ----------------------------------------------------------------------
 
+function getPalette(
+  name: SettingsState['primaryColor'],
+  initialPalette: typeof corePrimary,
+  updatedPalette: typeof corePrimary
+) {
+  /** [1] */
+  return name === 'default' ? initialPalette : createPaletteChannel(updatedPalette);
+}
+
+function getBackgroundDefault(contrast: SettingsState['contrast']) {
+  /** [2] */
+  return contrast === 'default' ? '#FFFFFF' : coreGreyPalette[200];
+}
+
+// ----------------------------------------------------------------------
+
 /**
  * [1] settings @primaryColor
  * [2] settings @contrast
@@ -83,13 +99,14 @@ export function updateComponentsWithSettings(settings: SettingsState) {
   const components: ThemeComponents = {};
 
   /** [2] */
-  if (settings.contrast === 'hight') {
+  if (settings.contrast === 'high') {
     const MuiCard: Components<Theme>['MuiCard'] = {
       styleOverrides: {
         root: ({ theme, ownerState }) => {
           let rootStyles = {};
           if (typeof coreComponents?.MuiCard?.styleOverrides?.root === 'function') {
-            rootStyles = coreComponents.MuiCard.styleOverrides.root({ ownerState, theme }) ?? {};
+            rootStyles =
+              (coreComponents.MuiCard.styleOverrides.root as any)({ ownerState, theme }) ?? {};
           }
 
           return {
@@ -104,20 +121,4 @@ export function updateComponentsWithSettings(settings: SettingsState) {
   }
 
   return { components };
-}
-
-// ----------------------------------------------------------------------
-
-function getPalette(
-  name: SettingsState['primaryColor'],
-  initialPalette: typeof corePrimary,
-  updatedPalette: typeof corePrimary
-) {
-  /** [1] */
-  return name === 'default' ? initialPalette : createPaletteChannel(updatedPalette);
-}
-
-function getBackgroundDefault(contrast: SettingsState['contrast']) {
-  /** [2] */
-  return contrast === 'default' ? '#FFFFFF' : coreGreyPalette[200];
 }

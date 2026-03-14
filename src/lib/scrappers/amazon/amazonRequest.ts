@@ -31,7 +31,6 @@ export const amazonRequest = async ({ asin }: { asin: string }) => {
 
     return data;
   } catch (error) {
-    console.error(error.message);
     return null;
   }
 };

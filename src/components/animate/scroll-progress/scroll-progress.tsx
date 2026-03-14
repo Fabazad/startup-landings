@@ -16,7 +16,7 @@ export interface ScrollProgressProps extends BoxProps {
 }
 
 export function ScrollProgress({
-  size,
+  size = undefined,
   variant,
   progress,
   thickness = 3.6,

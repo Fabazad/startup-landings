@@ -14,6 +14,39 @@ import type { NavSubListProps, NavSubItemProps } from '../types';
 
 // ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+
+export const NavSubItem = forwardRef<HTMLAnchorElement, NavSubItemProps>(
+  ({ title, path, active, slotProps }, ref) => (
+    <NavLi key={title}>
+      <Link
+        ref={ref}
+        component={RouterLink}
+        href={path}
+        noWrap
+        sx={{
+          position: 'relative',
+          color: 'text.secondary',
+          fontSize: (theme) => theme.typography.pxToRem(13),
+          lineHeight: (theme) => theme.typography.body2.lineHeight,
+          transition: (theme) => theme.transitions.create('color'),
+          '&:hover': { color: 'text.primary' },
+          ...(active && {
+            color: 'text.primary',
+            textDecoration: 'underline',
+            fontWeight: 'fontWeightSemiBold',
+          }),
+          ...slotProps,
+        }}
+      >
+        {title}
+      </Link>
+    </NavLi>
+  )
+);
+
+// ----------------------------------------------------------------------
+
 export function NavSubList({ data, slotProps, ...other }: NavSubListProps) {
   const pathname = usePathname();
 
@@ -48,34 +81,3 @@ export function NavSubList({ data, slotProps, ...other }: NavSubListProps) {
     </>
   );
 }
-
-// ----------------------------------------------------------------------
-
-export const NavSubItem = forwardRef<HTMLAnchorElement, NavSubItemProps>(
-  ({ title, path, active, slotProps }, ref) => (
-    <NavLi key={title}>
-      <Link
-        ref={ref}
-        component={RouterLink}
-        href={path}
-        noWrap
-        sx={{
-          position: 'relative',
-          color: 'text.secondary',
-          fontSize: (theme) => theme.typography.pxToRem(13),
-          lineHeight: (theme) => theme.typography.body2.lineHeight,
-          transition: (theme) => theme.transitions.create('color'),
-          '&:hover': { color: 'text.primary' },
-          ...(active && {
-            color: 'text.primary',
-            textDecoration: 'underline',
-            fontWeight: 'fontWeightSemiBold',
-          }),
-          ...slotProps,
-        }}
-      >
-        {title}
-      </Link>
-    </NavLi>
-  )
-);

@@ -12,7 +12,7 @@ type Props = SliderProps & {
   helperText?: React.ReactNode;
 };
 
-export function RHFSlider({ name, helperText, ...other }: Props) {
+export function RHFSlider({ name, helperText = undefined, ...other }: Props) {
   const { control } = useFormContext();
 
   return (

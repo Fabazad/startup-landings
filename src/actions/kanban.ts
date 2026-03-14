@@ -189,12 +189,9 @@ export async function deleteColumn(columnId: UniqueIdentifier) {
       const columns = board.columns.filter((column) => column.id !== columnId);
 
       // delete tasks by column deleted
-      const tasks = Object.keys(board.tasks)
-        .filter((key) => key !== columnId)
-        .reduce((obj: IKanban['tasks'], key) => {
-          obj[key] = board.tasks[key];
-          return obj;
-        }, {});
+      const tasks = Object.fromEntries(
+        Object.entries(board.tasks).filter(([key]) => key !== columnId)
+      );
 
       return { ...currentData, board: { ...board, columns, tasks } };
     },

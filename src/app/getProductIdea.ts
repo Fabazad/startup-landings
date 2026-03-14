@@ -9,9 +9,7 @@ const getRawProductIdea = async () => {
   const url = headersList.get('x-forwarded-host') || headersList.get('host') || '';
   const subdomain = url.split('.')[0];
 
-  const productIdea = Object.values(RAW_PRODUCT_IDEAS).find(
-    (productIdea) => productIdea.id === subdomain
-  );
+  const productIdea = Object.values(RAW_PRODUCT_IDEAS).find((idea) => idea.id === subdomain);
   if (productIdea) return productIdea;
   return DEFAULT_PRODUCT_IDEA;
 };

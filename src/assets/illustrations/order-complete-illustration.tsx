@@ -15,7 +15,7 @@ type Props = BoxProps & {
   hideBackground?: boolean;
 };
 
-function OrderCompleteIllustration({ hideBackground, sx, ...other }: Props) {
+function OrderCompleteIllustration({ hideBackground = false, sx, ...other }: Props) {
   const theme = useTheme();
 
   const PRIMARY_LIGHT = theme.vars.palette.primary.light;

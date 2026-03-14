@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import Stack from '@mui/material/Stack';
 import { useTheme } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
@@ -39,6 +40,7 @@ export function WalktourProgressBar({
         const stepIndex = index + 1;
 
         return (
+          // eslint-disable-next-line react/no-array-index-key
           <ButtonBase
             disableRipple
             key={index}

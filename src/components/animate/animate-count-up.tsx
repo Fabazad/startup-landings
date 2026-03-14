@@ -20,6 +20,27 @@ export type AnimateCountUpProps = TypographyProps & {
   amount?: UseInViewOptions['amount'];
 };
 
+// ----------------------------------------------------------------------
+
+function isFloat(n: number | string) {
+  return typeof n === 'number' && !Number.isInteger(n);
+}
+
+function shortenNumber(num: number): { unit: string; value: number } | undefined {
+  if (num >= 1e9) {
+    return { unit: 'b', value: num / 1e9 };
+  }
+  if (num >= 1e6) {
+    return { unit: 'm', value: num / 1e6 };
+  }
+  if (num >= 1e3) {
+    return { unit: 'k', value: num / 1e3 };
+  }
+  return undefined;
+}
+
+// ----------------------------------------------------------------------
+
 export function AnimateCountUp({
   to,
   sx,
@@ -28,7 +49,7 @@ export function AnimateCountUp({
   once = true,
   duration = 2,
   amount = 0.5,
-  unit: unitProp,
+  unit: unitProp = undefined,
   component = 'p',
   ...other
 }: AnimateCountUpProps) {
@@ -69,23 +90,4 @@ export function AnimateCountUp({
       {unit}
     </Typography>
   );
-}
-
-// ----------------------------------------------------------------------
-
-function isFloat(n: number | string) {
-  return typeof n === 'number' && !Number.isInteger(n);
-}
-
-function shortenNumber(num: number): { unit: string; value: number } | undefined {
-  if (num >= 1e9) {
-    return { unit: 'b', value: num / 1e9 };
-  }
-  if (num >= 1e6) {
-    return { unit: 'm', value: num / 1e6 };
-  }
-  if (num >= 1e3) {
-    return { unit: 'k', value: num / 1e3 };
-  }
-  return undefined;
 }

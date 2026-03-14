@@ -52,7 +52,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export function I18nProvider({ lang, children }: Props) {
+export function I18nProvider({ lang = undefined, children }: Props) {
   useMemo(() => {
     if (lang) {
       i18next.changeLanguage(lang);

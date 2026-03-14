@@ -1,6 +1,7 @@
 // ----------------------------------------------------------------------
 
 export const LanguageValue = { EN: 'en', FR: 'fr' } as const;
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export type LanguageValue = (typeof LanguageValue)[keyof typeof LanguageValue];
 export type Translated = Record<LanguageValue, string>;
 

@@ -27,7 +27,13 @@ export type RHFSwitchProps = Omit<FormControlLabelProps, 'control'> & {
   };
 };
 
-export function RHFSwitch({ name, helperText, label, slotProps, ...other }: RHFSwitchProps) {
+export function RHFSwitch({
+  name,
+  helperText = undefined,
+  label,
+  slotProps = undefined,
+  ...other
+}: RHFSwitchProps) {
   const { control } = useFormContext();
 
   const ariaLabel = `Switch ${name}`;
@@ -89,10 +95,10 @@ type RHFMultiSwitchProps = FormGroupProps & {
 
 export function RHFMultiSwitch({
   name,
-  label,
+  label = undefined,
   options,
-  helperText,
-  slotProps,
+  helperText = undefined,
+  slotProps = undefined,
   ...other
 }: RHFMultiSwitchProps) {
   const { control } = useFormContext();

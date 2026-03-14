@@ -31,7 +31,14 @@ type Props = RadioGroupProps & {
   }[];
 };
 
-export function RHFRadioGroup({ name, label, options, helperText, slotProps, ...other }: Props) {
+export function RHFRadioGroup({
+  name,
+  label = undefined,
+  options,
+  helperText = undefined,
+  slotProps = undefined,
+  ...other
+}: Props) {
   const { control } = useFormContext();
 
   const labelledby = `${name}-radio-buttons-group-label`;

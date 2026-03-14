@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getProductIdea } from 'src/app/getProductIdea';
@@ -21,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BlogPage() {
-  const { id: productIdeaId } = await getProductIdea();
+  const { name: productIdeaName } = await getProductIdea();
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
 
@@ -30,7 +31,7 @@ export default async function BlogPage() {
   const { data: blogs, error } = await supabase
     .from('blogs')
     .select<any, BlogPost>('id, title, slug, excerpt, cover_image, created_at')
-    .eq('product_idea_id', productIdeaId)
+    .eq('product_idea_id', productIdeaName)
     .eq('language', lang ?? 'fr')
     .eq('published', true)
     .order('created_at', { ascending: false });

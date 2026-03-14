@@ -20,13 +20,6 @@ export function NavList({ data, render, depth, slotProps, enabledRootRedirect }:
 
   const [openMenu, setOpenMenu] = useState(active);
 
-  useEffect(() => {
-    if (!active) {
-      handleCloseMenu();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
-
   const handleToggleMenu = useCallback(() => {
     if (data.children) {
       setOpenMenu((prev) => !prev);
@@ -36,6 +29,13 @@ export function NavList({ data, render, depth, slotProps, enabledRootRedirect }:
   const handleCloseMenu = useCallback(() => {
     setOpenMenu(false);
   }, []);
+
+  useEffect(() => {
+    if (!active) {
+      handleCloseMenu();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   const renderNavItem = (
     <NavItem
@@ -93,6 +93,7 @@ export function NavList({ data, render, depth, slotProps, enabledRootRedirect }:
             }),
           }}
         >
+          {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
           <NavSubList
             data={data.children}
             render={render}

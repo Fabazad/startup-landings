@@ -13,7 +13,7 @@ type Props = {
   link: BreadcrumbsLinkProps;
 };
 
-export function BreadcrumbsLink({ link, activeLast, disabled }: Props) {
+export function BreadcrumbsLink({ link, activeLast = false, disabled }: Props) {
   const styles = {
     typography: 'body2',
     alignItems: 'center',

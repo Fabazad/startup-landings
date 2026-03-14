@@ -15,7 +15,7 @@ type Props = BoxProps & {
   hideBackground?: boolean;
 };
 
-function ComingSoonIllustration({ hideBackground, sx, ...other }: Props) {
+function ComingSoonIllustration({ hideBackground = false, sx, ...other }: Props) {
   const theme = useTheme();
 
   const PRIMARY_LIGHT = theme.vars.palette.primary.light;

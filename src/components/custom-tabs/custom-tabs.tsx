@@ -20,7 +20,7 @@ export type CustomTabsProps = TabsProps & {
   };
 };
 
-export function CustomTabs({ children, slotProps, sx, ...other }: CustomTabsProps) {
+export function CustomTabs({ children, slotProps = undefined, sx, ...other }: CustomTabsProps) {
   return (
     <Tabs
       sx={{

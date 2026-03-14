@@ -52,7 +52,7 @@ export type FooterProps = {
   hasBlog?: boolean;
 };
 
-export function Footer({ layoutQuery, sx, hasBlog = false }: FooterProps) {
+export function Footer({ layoutQuery, sx = {}, hasBlog = false }: FooterProps) {
   const theme = useTheme();
 
   const { name: productName, themeColor, logo } = useProductIdea();
@@ -170,7 +170,7 @@ export type HomeFooterProps = {
   sx?: SxProps<Theme>;
 };
 
-export function HomeFooter({ sx }: HomeFooterProps) {
+export function HomeFooter({ sx = {} }: HomeFooterProps) {
   const { t } = useTranslate();
 
   const { name: productName, themeColor, logo } = useProductIdea();

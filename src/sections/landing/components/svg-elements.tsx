@@ -26,8 +26,8 @@ const transition = { duration: 0.64, ease: [0.43, 0.13, 0.23, 0.96] };
 // ----------------------------------------------------------------------
 
 export function FloatLine({
-  sx,
-  vertical,
+  sx = {},
+  vertical = false,
   ...other
 }: BoxProps & {
   vertical?: boolean;
@@ -75,7 +75,7 @@ export function FloatLine({
 
 // ----------------------------------------------------------------------
 
-export function FloatPlusIcon({ sx, ...other }: BoxProps) {
+export function FloatPlusIcon({ sx = {}, ...other }: BoxProps) {
   return (
     <Box
       component={m.svg}
@@ -100,7 +100,7 @@ export function FloatPlusIcon({ sx, ...other }: BoxProps) {
 
 // ----------------------------------------------------------------------
 
-export function FloatXIcon({ sx, ...other }: BoxProps) {
+export function FloatXIcon({ sx = {}, ...other }: BoxProps) {
   return (
     <Box
       component={m.svg}
@@ -125,7 +125,7 @@ export function FloatXIcon({ sx, ...other }: BoxProps) {
 
 // ----------------------------------------------------------------------
 
-export function FloatTriangleLeftIcon({ sx, ...other }: BoxProps) {
+export function FloatTriangleLeftIcon({ sx = {}, ...other }: BoxProps) {
   return (
     <Box
       component={m.svg}
@@ -148,7 +148,7 @@ export function FloatTriangleLeftIcon({ sx, ...other }: BoxProps) {
   );
 }
 
-export function FloatTriangleDownIcon({ sx, ...other }: BoxProps) {
+export function FloatTriangleDownIcon({ sx = {}, ...other }: BoxProps) {
   return (
     <Box
       component={m.svg}
@@ -173,7 +173,7 @@ export function FloatTriangleDownIcon({ sx, ...other }: BoxProps) {
 
 // ----------------------------------------------------------------------
 
-export function FloatDotIcon({ sx, ...other }: BoxProps) {
+export function FloatDotIcon({ sx = {}, ...other }: BoxProps) {
   return (
     <Box
       component={m.span}
@@ -198,7 +198,7 @@ export type Props = {
   variants?: MotionProps['variants'];
 };
 
-export function CircleSvg({ sx, variants }: Props) {
+export function CircleSvg({ sx = {}, variants = undefined }: Props) {
   const maskId = useId();
   const clipPathId = useId();
   const gradientId = useId();

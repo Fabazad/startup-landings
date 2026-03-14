@@ -19,7 +19,12 @@ type Props = RatingProps & {
   };
 };
 
-export function RHFRating({ name, helperText, slotProps, ...other }: Props) {
+export function RHFRating({
+  name,
+  helperText = undefined,
+  slotProps = undefined,
+  ...other
+}: Props) {
   const { control } = useFormContext();
 
   return (

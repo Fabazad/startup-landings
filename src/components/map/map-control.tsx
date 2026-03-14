@@ -9,7 +9,12 @@ type Props = {
   hideNavigation?: boolean;
 };
 
-export function MapControl({ hideScale, hideGeolocate, hideFullscreen, hideNavigation }: Props) {
+export function MapControl({
+  hideScale = false,
+  hideGeolocate = false,
+  hideFullscreen = false,
+  hideNavigation = false,
+}: Props) {
   return (
     <>
       {!hideGeolocate && (

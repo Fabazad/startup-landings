@@ -27,13 +27,6 @@ export function NavList({ data, render, cssVars, slotProps }: NavListProps) {
 
   const [openMenu, setOpenMenu] = useState(false);
 
-  useEffect(() => {
-    if (openMenu) {
-      handleCloseMenu();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
-
   const handleOpenMenu = useCallback(() => {
     if (data.children) {
       setOpenMenu(true);
@@ -43,6 +36,13 @@ export function NavList({ data, render, cssVars, slotProps }: NavListProps) {
   const handleCloseMenu = useCallback(() => {
     setOpenMenu(false);
   }, []);
+
+  useEffect(() => {
+    if (openMenu) {
+      handleCloseMenu();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   const renderNavItem = (
     <NavItem

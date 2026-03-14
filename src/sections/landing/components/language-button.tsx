@@ -5,7 +5,7 @@ import React from 'react';
 import { FlagIcon } from 'src/components/iconify';
 import { LanguageValue, useTranslate } from 'src/locales';
 
-export function LanguageButton({ sx }: { sx?: SxProps<Theme> }) {
+export function LanguageButton({ sx = {} }: { sx?: SxProps<Theme> }) {
   const { currentLang, onChangeLang, t } = useTranslate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);

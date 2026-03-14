@@ -40,12 +40,15 @@ export function NavList({ data, render, slotProps, cssVars, enabledRootRedirect 
 
   const multiList = !singleList;
 
-  useEffect(() => {
-    if (openMenu) {
-      handleCloseMenu();
+  const handleOpenMenu = useCallback(() => {
+    if (data.children) {
+      setOpenMenu(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  }, [data.children]);
+
+  const handleCloseMenu = useCallback(() => {
+    setOpenMenu(false);
+  }, []);
 
   const handleGetClientRect = useCallback(() => {
     const element = document.getElementsByClassName(megaMenuClasses.vertical.root);
@@ -71,15 +74,12 @@ export function NavList({ data, render, slotProps, cssVars, enabledRootRedirect 
     };
   }, [handleGetClientRect]);
 
-  const handleOpenMenu = useCallback(() => {
-    if (data.children) {
-      setOpenMenu(true);
+  useEffect(() => {
+    if (openMenu) {
+      handleCloseMenu();
     }
-  }, [data.children]);
-
-  const handleCloseMenu = useCallback(() => {
-    setOpenMenu(false);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   const renderNavItem = (
     <NavItem

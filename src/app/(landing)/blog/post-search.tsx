@@ -109,6 +109,7 @@ export function PostSearch({ query, results, onSearch, hrefItem, loading = false
             >
               {parts.map((part, index) => (
                 <Typography
+                  /* eslint-disable react/no-array-index-key */
                   key={index}
                   component="span"
                   color={part.highlight ? 'primary' : 'textPrimary'}

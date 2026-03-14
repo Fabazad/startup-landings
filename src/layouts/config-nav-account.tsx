@@ -4,7 +4,7 @@ import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export const _account = [
+export const navAccount = [
   {
     label: 'Home',
     href: '/',

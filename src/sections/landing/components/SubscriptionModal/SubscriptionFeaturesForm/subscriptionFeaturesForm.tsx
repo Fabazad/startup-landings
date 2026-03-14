@@ -40,9 +40,9 @@ export function SubscriptionFeaturesForm() {
 
   const onSubmit = async () => {
     const data = methods.getValues();
-    const features = Object.keys(data).filter((key) => data[key]);
+    const selectedFeatures = Object.keys(data).filter((key) => data[key]);
 
-    const response = await updateSubscriptionFeatures(features);
+    const response = await updateSubscriptionFeatures(selectedFeatures);
 
     if (response !== null && 'error' in response) {
       if (response.error === 'no-subscription-email') {

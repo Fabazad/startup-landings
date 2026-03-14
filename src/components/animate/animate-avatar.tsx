@@ -23,7 +23,7 @@ export type AnimateAvatarProps = BoxProps & {
 
 export function AnimateAvatar({
   sx,
-  slotProps,
+  slotProps = undefined,
   children,
   width = 40,
   ...other

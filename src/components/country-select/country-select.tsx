@@ -39,13 +39,13 @@ export type CountrySelectProps = AutocompleteBaseProps & {
 
 export function CountrySelect({
   id,
-  label,
-  error,
-  variant,
+  label = undefined,
+  error = false,
+  variant = 'outlined',
   multiple,
-  helperText,
-  hiddenLabel,
-  placeholder,
+  helperText = undefined,
+  hiddenLabel = false,
+  placeholder = undefined,
   getValue = 'label',
   ...other
 }: CountrySelectProps) {

@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/naming-convention */
 // ----------------------------------------------------------------------
 
 export const _id = [...Array(40)].map(

@@ -27,7 +27,13 @@ type RHFCheckboxProps = Omit<FormControlLabelProps, 'control'> & {
   };
 };
 
-export function RHFCheckbox({ name, helperText, label, slotProps, ...other }: RHFCheckboxProps) {
+export function RHFCheckbox({
+  name,
+  helperText = undefined,
+  label,
+  slotProps = undefined,
+  ...other
+}: RHFCheckboxProps) {
   const { control } = useFormContext();
 
   const ariaLabel = `Checkbox ${name}`;
@@ -85,10 +91,10 @@ type RHFMultiCheckboxProps = FormGroupProps & {
 
 export function RHFMultiCheckbox({
   name,
-  label,
+  label = undefined,
   options,
-  slotProps,
-  helperText,
+  slotProps = undefined,
+  helperText = undefined,
   ...other
 }: RHFMultiCheckboxProps) {
   const { control } = useFormContext();

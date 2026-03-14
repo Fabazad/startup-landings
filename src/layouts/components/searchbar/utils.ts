@@ -1,6 +1,43 @@
-import type { NavSectionProps, NavItemBaseProps } from 'src/components/nav-section';
+import type { NavSectionProps } from 'src/components/nav-section';
 
 import { flattenArray } from 'src/utils/helper';
+
+// ----------------------------------------------------------------------
+
+export function handleLoop(array: any, subheader?: string) {
+  return array?.map((list: any) => ({
+    subheader,
+    ...list,
+    ...(list.children && { children: handleLoop(list.children, subheader) }),
+  }));
+}
+
+// ----------------------------------------------------------------------
+
+export function splitPath(array: any[], key: string) {
+  let stack = array.map((item) => ({ path: [item.title], currItem: item }));
+
+  while (stack.length) {
+    const { path, currItem } = stack.pop() as {
+      path: string[];
+      currItem: any;
+    };
+
+    if (currItem.path === key) {
+      return path;
+    }
+
+    if (currItem.children?.length) {
+      stack = stack.concat(
+        currItem.children.map((item: any) => ({
+          path: path.concat(item.title),
+          currItem: item,
+        }))
+      );
+    }
+  }
+  return null;
+}
 
 // ----------------------------------------------------------------------
 
@@ -35,7 +72,7 @@ type ApplyFilterProps = {
 
 export function applyFilter({ inputData, query }: ApplyFilterProps) {
   if (query) {
-    inputData = inputData.filter(
+    return inputData.filter(
       (item) =>
         item.title.toLowerCase().indexOf(query.toLowerCase()) !== -1 ||
         item.path.toLowerCase().indexOf(query.toLowerCase()) !== -1
@@ -47,54 +84,16 @@ export function applyFilter({ inputData, query }: ApplyFilterProps) {
 
 // ----------------------------------------------------------------------
 
-export function splitPath(array: NavItemBaseProps[], key: string) {
-  let stack = array.map((item) => ({ path: [item.title], currItem: item }));
-
-  while (stack.length) {
-    const { path, currItem } = stack.pop() as {
-      path: string[];
-      currItem: NavItemBaseProps;
-    };
-
-    if (currItem.path === key) {
-      return path;
-    }
-
-    if (currItem.children?.length) {
-      stack = stack.concat(
-        currItem.children.map((item: NavItemBaseProps) => ({
-          path: path.concat(item.title),
-          currItem: item,
-        }))
-      );
-    }
-  }
-  return null;
-}
-
-// ----------------------------------------------------------------------
-
-export function handleLoop(array: any, subheader?: string) {
-  return array?.map((list: any) => ({
-    subheader,
-    ...list,
-    ...(list.children && { children: handleLoop(list.children, subheader) }),
-  }));
-}
-
-// ----------------------------------------------------------------------
-
 type GroupsProps = {
   [key: string]: ItemProps[];
 };
 
 export function groupItems(array: ItemProps[]) {
   const group = array.reduce((groups: GroupsProps, item) => {
-    groups[item.group] = groups[item.group] || [];
-
-    groups[item.group].push(item);
-
-    return groups;
+    const nextGroups = { ...groups };
+    nextGroups[item.group] = nextGroups[item.group] || [];
+    nextGroups[item.group].push(item);
+    return nextGroups;
   }, {});
 
   return group;

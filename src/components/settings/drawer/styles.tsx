@@ -19,7 +19,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export function Block({ title, tooltip, children, sx }: Props) {
+export function Block({ title, tooltip = undefined, children, sx = {} }: Props) {
   return (
     <Box
       sx={{
@@ -77,7 +77,13 @@ type BlockOptionProps = ButtonBaseProps & {
   label?: React.ReactNode;
 };
 
-export function BlockOption({ icon, label, selected, sx, ...other }: BlockOptionProps) {
+export function BlockOption({
+  icon = undefined,
+  label = undefined,
+  selected = false,
+  sx = {},
+  ...other
+}: BlockOptionProps) {
   return (
     <ButtonBase
       disableRipple

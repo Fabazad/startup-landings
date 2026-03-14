@@ -23,6 +23,7 @@ export function PostItemSkeleton({
   if (variant === 'horizontal') {
     return [...Array(amount)].map((_, index) => (
       <Stack
+        /* eslint-disable react/no-array-index-key */
         key={index}
         direction="row"
         sx={{
@@ -55,6 +56,7 @@ export function PostItemSkeleton({
 
   return [...Array(amount)].map((_, index) => (
     <Stack
+      /* eslint-disable react/no-array-index-key */
       key={index}
       sx={{
         borderRadius: 2,

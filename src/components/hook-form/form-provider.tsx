@@ -10,7 +10,7 @@ export type FormProps = {
   methods: UseFormReturn<any>;
 };
 
-export function Form({ children, onSubmit, methods }: FormProps) {
+export function Form({ children, onSubmit = undefined, methods }: FormProps) {
   return (
     <RHFForm {...methods}>
       <form onSubmit={onSubmit} noValidate autoComplete="off">

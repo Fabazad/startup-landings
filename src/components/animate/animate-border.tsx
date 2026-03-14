@@ -35,7 +35,7 @@ export type AnimateBorderProps = BoxProps & {
   };
 };
 
-export function AnimateBorder({ animate, sx }: AnimateBorderProps) {
+export function AnimateBorder({ animate = undefined, sx }: AnimateBorderProps) {
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   const animateRef = useRef<HTMLDivElement | null>(null);

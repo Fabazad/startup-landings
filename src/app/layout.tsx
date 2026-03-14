@@ -41,6 +41,19 @@ const SettingsDrawer = dynamic(
 
 // ----------------------------------------------------------------------
 
+const getRawProductIdea = async (): Promise<RawProductIdea> => {
+  // get url subdomain from url on server
+  const headersList = await headers();
+  const url = headersList.get('x-forwarded-host') || headersList.get('host') || '';
+  const subdomain = url.replace(/^www\./, '').split('.')[0];
+
+  const productIdea = Object.values(RAW_PRODUCT_IDEAS).find((idea) => idea.id === subdomain);
+  if (productIdea) return productIdea;
+  return DEFAULT_PRODUCT_IDEA;
+};
+
+// ----------------------------------------------------------------------
+
 function getThemeColorValue(themeColor: PrimaryColor): string {
   if (themeColor === 'blue') return info.main;
   if (themeColor === 'purple') return secondary.main;
@@ -59,18 +72,7 @@ export const generateViewport: () => Promise<Viewport> = async () => {
   };
 };
 
-const getRawProductIdea = async (): Promise<RawProductIdea> => {
-  // get url subdomain from url on server
-  const headersList = await headers();
-  const url = headersList.get('x-forwarded-host') || headersList.get('host') || '';
-  const subdomain = url.replace(/^www\./, '').split('.')[0];
-
-  const productIdea = Object.values(RAW_PRODUCT_IDEAS).find(
-    (productIdea) => productIdea.id === subdomain
-  );
-  if (productIdea) return productIdea;
-  return DEFAULT_PRODUCT_IDEA;
-};
+// ----------------------------------------------------------------------
 
 export async function generateMetadata(): Promise<Metadata> {
   const rawProductIdea = await getRawProductIdea();

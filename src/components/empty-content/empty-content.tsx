@@ -25,11 +25,11 @@ export type EmptyContentProps = StackProps & {
 
 export function EmptyContent({
   sx,
-  imgUrl,
-  action,
-  filled,
-  slotProps,
-  description,
+  imgUrl = undefined,
+  action = undefined,
+  filled = false,
+  slotProps = undefined,
+  description = undefined,
   title = 'No data',
   ...other
 }: EmptyContentProps) {

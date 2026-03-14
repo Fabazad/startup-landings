@@ -15,6 +15,72 @@ import type { LightBoxProps } from './types';
 
 // ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+
+export function getPlugins({
+  disableZoom,
+  disableVideo,
+  disableCaptions,
+  disableSlideshow,
+  disableThumbnails,
+  disableFullscreen,
+}: Partial<LightBoxProps>) {
+  let plugins = [Captions, Fullscreen, Slideshow, Thumbnails, Video, Zoom];
+
+  if (disableThumbnails) {
+    plugins = plugins.filter((plugin) => plugin !== Thumbnails);
+  }
+  if (disableCaptions) {
+    plugins = plugins.filter((plugin) => plugin !== Captions);
+  }
+  if (disableFullscreen) {
+    plugins = plugins.filter((plugin) => plugin !== Fullscreen);
+  }
+  if (disableSlideshow) {
+    plugins = plugins.filter((plugin) => plugin !== Slideshow);
+  }
+  if (disableZoom) {
+    plugins = plugins.filter((plugin) => plugin !== Zoom);
+  }
+  if (disableVideo) {
+    plugins = plugins.filter((plugin) => plugin !== Video);
+  }
+
+  return plugins;
+}
+
+// ----------------------------------------------------------------------
+
+type DisplayTotalProps = {
+  totalItems: number;
+  disableTotal?: boolean;
+};
+
+export function DisplayTotal({ totalItems, disableTotal = false }: DisplayTotalProps) {
+  const { currentIndex } = useLightboxState();
+
+  if (disableTotal) {
+    return null;
+  }
+
+  return (
+    <Box
+      component="span"
+      className="yarl__button"
+      sx={{
+        typography: 'body2',
+        alignItems: 'center',
+        display: 'inline-flex',
+        justifyContent: 'center',
+      }}
+    >
+      <strong> {currentIndex + 1} </strong> / {totalItems}
+    </Box>
+  );
+}
+
+// ----------------------------------------------------------------------
+
 export function Lightbox({
   slides,
   disableZoom,
@@ -71,69 +137,5 @@ export function Lightbox({
       className={lightboxClasses.root.concat(className ? ` ${className}` : '')}
       {...other}
     />
-  );
-}
-
-// ----------------------------------------------------------------------
-
-export function getPlugins({
-  disableZoom,
-  disableVideo,
-  disableCaptions,
-  disableSlideshow,
-  disableThumbnails,
-  disableFullscreen,
-}: Partial<LightBoxProps>) {
-  let plugins = [Captions, Fullscreen, Slideshow, Thumbnails, Video, Zoom];
-
-  if (disableThumbnails) {
-    plugins = plugins.filter((plugin) => plugin !== Thumbnails);
-  }
-  if (disableCaptions) {
-    plugins = plugins.filter((plugin) => plugin !== Captions);
-  }
-  if (disableFullscreen) {
-    plugins = plugins.filter((plugin) => plugin !== Fullscreen);
-  }
-  if (disableSlideshow) {
-    plugins = plugins.filter((plugin) => plugin !== Slideshow);
-  }
-  if (disableZoom) {
-    plugins = plugins.filter((plugin) => plugin !== Zoom);
-  }
-  if (disableVideo) {
-    plugins = plugins.filter((plugin) => plugin !== Video);
-  }
-
-  return plugins;
-}
-
-// ----------------------------------------------------------------------
-
-type DisplayTotalProps = {
-  totalItems: number;
-  disableTotal?: boolean;
-};
-
-export function DisplayTotal({ totalItems, disableTotal }: DisplayTotalProps) {
-  const { currentIndex } = useLightboxState();
-
-  if (disableTotal) {
-    return null;
-  }
-
-  return (
-    <Box
-      component="span"
-      className="yarl__button"
-      sx={{
-        typography: 'body2',
-        alignItems: 'center',
-        display: 'inline-flex',
-        justifyContent: 'center',
-      }}
-    >
-      <strong> {currentIndex + 1} </strong> / {totalItems}
-    </Box>
   );
 }

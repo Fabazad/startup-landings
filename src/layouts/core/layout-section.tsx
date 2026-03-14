@@ -19,12 +19,12 @@ export type LayoutSectionProps = {
 };
 
 export function LayoutSection({
-  sx,
-  cssVars,
-  children,
-  footerSection,
-  headerSection,
-  sidebarSection,
+  sx = {},
+  cssVars = {},
+  children = null,
+  footerSection = null,
+  headerSection = null,
+  sidebarSection = null,
 }: LayoutSectionProps) {
   const inputGlobalStyles = (
     <GlobalStyles

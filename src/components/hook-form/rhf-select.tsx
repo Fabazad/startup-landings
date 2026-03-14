@@ -32,12 +32,12 @@ type RHFSelectProps = TextFieldProps & {
 
 export function RHFSelect({
   name,
-  native,
+  native = false,
   children,
-  slotProps,
-  helperText,
-  inputProps,
-  InputLabelProps,
+  slotProps = undefined,
+  helperText = undefined,
+  inputProps = undefined,
+  InputLabelProps = undefined,
   ...other
 }: RHFSelectProps) {
   const { control } = useFormContext();
@@ -94,13 +94,13 @@ type RHFMultiSelectProps = FormControlProps & {
 
 export function RHFMultiSelect({
   name,
-  chip,
-  label,
+  chip = false,
+  label = undefined,
   options,
-  checkbox,
-  placeholder,
-  slotProps,
-  helperText,
+  checkbox = false,
+  placeholder = undefined,
+  slotProps = undefined,
+  helperText = undefined,
   ...other
 }: RHFMultiSelectProps) {
   const { control } = useFormContext();

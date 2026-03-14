@@ -12,7 +12,7 @@ type Props = BoxProps & {
   portal?: boolean;
 };
 
-export function LoadingScreen({ portal, sx, ...other }: Props) {
+export function LoadingScreen({ portal = false, sx, ...other }: Props) {
   const content = (
     <Box
       sx={{

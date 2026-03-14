@@ -24,7 +24,7 @@ export type MainLayoutProps = {
   };
 };
 
-export async function LandingLayout({ sx, children, header }: MainLayoutProps) {
+export async function LandingLayout({ sx = {}, children, header = {} }: MainLayoutProps) {
   const { logo, themeColor, name: productName, id: productIdeaId } = await getProductIdea();
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();

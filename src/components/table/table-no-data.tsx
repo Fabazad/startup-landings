@@ -12,7 +12,7 @@ export type TableNoDataProps = {
   sx?: SxProps<Theme>;
 };
 
-export function TableNoData({ notFound, sx }: TableNoDataProps) {
+export function TableNoData({ notFound, sx = {} }: TableNoDataProps) {
   return (
     <TableRow>
       {notFound ? (

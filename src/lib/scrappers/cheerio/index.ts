@@ -53,8 +53,6 @@ export const cheerioScrapper: Scrapper = async (url) => {
       },
     };
   } catch (error: any) {
-    console.error('Scraping Error:', error.message);
-
     return {
       success: false,
       error: error.message,

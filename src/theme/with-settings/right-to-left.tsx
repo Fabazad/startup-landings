@@ -27,5 +27,5 @@ export function RTL({ children, direction }: RTLProps) {
     return <CacheProvider value={cacheRtl}>{children}</CacheProvider>;
   }
 
-  return <>{children}</>;
+  return children;
 }

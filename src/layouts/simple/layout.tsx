@@ -23,7 +23,12 @@ export type SimpleLayoutProps = {
   menuButtons?: Array<React.ReactNode>;
 };
 
-export async function SimpleLayout({ sx, children, header, menuButtons }: SimpleLayoutProps) {
+export async function SimpleLayout({
+  sx = {},
+  children,
+  header = {},
+  menuButtons = [],
+}: SimpleLayoutProps) {
   const layoutQuery: Breakpoint = 'md';
 
   const { logo, themeColor, name: productName, id: productId } = await getProductIdea();
@@ -71,6 +76,7 @@ export async function SimpleLayout({ sx, children, header, menuButtons }: Simple
                   sx={{ display: { xs: 'none', md: 'flex' } }}
                 >
                   {menuButtons?.map((button, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
                     <React.Fragment key={index}>{button}</React.Fragment>
                   ))}
                 </Box>
@@ -117,6 +123,7 @@ export async function SimpleLayout({ sx, children, header, menuButtons }: Simple
           }}
         >
           {menuButtons.map((button, index) => (
+            // eslint-disable-next-line react/no-array-index-key
             <React.Fragment key={index}>{button}</React.Fragment>
           ))}
         </Box>

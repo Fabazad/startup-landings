@@ -93,8 +93,8 @@ export function RHFUploadBox({ name, ...other }: Props) {
 export function RHFUploadImage({
   name,
   multiple,
-  helperText,
-  onChange,
+  helperText: helperTextProp,
+  onChange = undefined,
   ...other
 }: Props & { onChange?: (file?: File) => void }) {
   const { control, setValue } = useFormContext();
@@ -122,7 +122,7 @@ export function RHFUploadImage({
           onChange?.(undefined);
         };
 
-        const helperText = (
+        const helperText = helperTextProp || (
           <Typography
             variant="caption"
             sx={{

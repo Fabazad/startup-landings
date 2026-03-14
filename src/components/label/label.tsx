@@ -12,6 +12,14 @@ import type { LabelProps } from './types';
 
 // ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+
+function sentenceCase(string: string): string {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// ----------------------------------------------------------------------
+
 export const Label = forwardRef<HTMLSpanElement, LabelProps>(
   (
     { children, color = 'default', variant = 'soft', startIcon, endIcon, sx, className, ...other },
@@ -56,9 +64,3 @@ export const Label = forwardRef<HTMLSpanElement, LabelProps>(
     );
   }
 );
-
-// ----------------------------------------------------------------------
-
-function sentenceCase(string: string): string {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}

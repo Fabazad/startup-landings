@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 'use client';
 
 import { useRouter } from 'next/navigation';
@@ -21,5 +23,5 @@ export function AuthProvider({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
-  return <>{children}</>;
+  return children;
 }

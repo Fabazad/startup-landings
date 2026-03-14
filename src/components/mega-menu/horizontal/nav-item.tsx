@@ -11,6 +11,45 @@ import type { NavItemProps, NavItemStateProps } from '../types';
 
 // ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+
+const StyledNavItem = styled(ButtonBase, {
+  shouldForwardProp: (prop) => prop !== 'active' && prop !== 'open' && prop !== 'disabled',
+})<NavItemStateProps>(({ active, open, disabled, theme }) => ({
+  minHeight: 'var(--nav-item-height)',
+  padding: 'var(--nav-item-padding)',
+  borderRadius: 'var(--nav-item-radius)',
+  transition: theme.transitions.create(['background-color'], {
+    duration: theme.transitions.duration.standard,
+  }),
+  '&:hover': {
+    backgroundColor: 'var(--nav-item-hover-bg)',
+  },
+  [`& .${navSectionClasses.item.title}`]: {
+    ...theme.typography.body2,
+    flexShrink: 0,
+    fontWeight: active ? theme.typography.fontWeightSemiBold : theme.typography.fontWeightMedium,
+  },
+  [`& .${navSectionClasses.item.icon}`]: {
+    ...sharedStyles.icon,
+    width: 'var(--nav-icon-size)',
+    height: 'var(--nav-icon-size)',
+    margin: 'var(--nav-icon-margin)',
+  },
+  [`& .${navSectionClasses.item.arrow}`]: { ...sharedStyles.arrow },
+  [`& .${navSectionClasses.item.info}`]: { ...sharedStyles.info },
+  // State
+  ...(active && {
+    color: 'var(--nav-item-active-color)',
+  }),
+  ...(open && {
+    backgroundColor: 'var(--nav-item-open-bg)',
+  }),
+  ...(disabled && sharedStyles.disabled),
+}));
+
+// ----------------------------------------------------------------------
+
 export const NavItem = forwardRef<HTMLButtonElement, NavItemProps>(
   (
     {
@@ -85,40 +124,3 @@ export const NavItem = forwardRef<HTMLButtonElement, NavItemProps>(
     );
   }
 );
-
-// ----------------------------------------------------------------------
-
-const StyledNavItem = styled(ButtonBase, {
-  shouldForwardProp: (prop) => prop !== 'active' && prop !== 'open' && prop !== 'disabled',
-})<NavItemStateProps>(({ active, open, disabled, theme }) => ({
-  minHeight: 'var(--nav-item-height)',
-  padding: 'var(--nav-item-padding)',
-  borderRadius: 'var(--nav-item-radius)',
-  transition: theme.transitions.create(['background-color'], {
-    duration: theme.transitions.duration.standard,
-  }),
-  '&:hover': {
-    backgroundColor: 'var(--nav-item-hover-bg)',
-  },
-  [`& .${navSectionClasses.item.title}`]: {
-    ...theme.typography.body2,
-    flexShrink: 0,
-    fontWeight: active ? theme.typography.fontWeightSemiBold : theme.typography.fontWeightMedium,
-  },
-  [`& .${navSectionClasses.item.icon}`]: {
-    ...sharedStyles.icon,
-    width: 'var(--nav-icon-size)',
-    height: 'var(--nav-icon-size)',
-    margin: 'var(--nav-icon-margin)',
-  },
-  [`& .${navSectionClasses.item.arrow}`]: { ...sharedStyles.arrow },
-  [`& .${navSectionClasses.item.info}`]: { ...sharedStyles.info },
-  // State
-  ...(active && {
-    color: 'var(--nav-item-active-color)',
-  }),
-  ...(open && {
-    backgroundColor: 'var(--nav-item-open-bg)',
-  }),
-  ...(disabled && sharedStyles.disabled),
-}));

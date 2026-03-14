@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import Box from '@mui/material/Box';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';

@@ -53,12 +53,12 @@ export type HeaderSectionProps = AppBarProps & {
 };
 
 export function HeaderSection({
-  sx,
-  slots,
-  slotProps,
-  disableOffset,
-  disableElevation,
-  layoutQuery = 'md',
+  sx = {},
+  slots = {},
+  slotProps = {},
+  disableOffset = false,
+  disableElevation = false,
+  layoutQuery,
   ...other
 }: HeaderSectionProps) {
   const theme = useTheme();

@@ -7,7 +7,7 @@ import { useSettingsContext } from 'src/components/settings';
 
 export function ThemeButton() {
   const { mode, setMode, systemMode } = useColorScheme();
-  const { onUpdateField, colorScheme } = useSettingsContext();
+  const { onUpdateField } = useSettingsContext();
 
   const handleToggleTheme = () => {
     const newMode =

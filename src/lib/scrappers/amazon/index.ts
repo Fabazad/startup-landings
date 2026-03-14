@@ -13,7 +13,7 @@ export const getAmazonProductDetails = async ({
 
   if (!data) return { success: false, error: 'Unknown error' };
 
-  if (data.Errors?.length || 0 > 0) {
+  if ((data.Errors?.length ?? 0) > 0) {
     return {
       success: false,
       error: data.Errors.map((e) => e.Message).join(', '),

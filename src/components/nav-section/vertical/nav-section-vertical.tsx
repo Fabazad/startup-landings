@@ -13,39 +13,6 @@ import type { NavGroupProps, NavSectionProps } from '../types';
 
 // ----------------------------------------------------------------------
 
-export function NavSectionVertical({
-  sx,
-  data,
-  render,
-  slotProps,
-  enabledRootRedirect,
-  cssVars: overridesVars,
-}: NavSectionProps) {
-  const theme = useTheme();
-
-  const cssVars = {
-    ...navSectionCssVars.vertical(theme),
-    ...overridesVars,
-  };
-
-  return (
-    <Stack component="nav" className={navSectionClasses.vertical.root} sx={{ ...cssVars, ...sx }}>
-      <NavUl sx={{ flex: '1 1 auto', gap: 'var(--nav-item-gap)' }}>
-        {data.map((group) => (
-          <Group
-            key={group.subheader ?? group.items[0].title}
-            subheader={group.subheader}
-            items={group.items}
-            render={render}
-            slotProps={slotProps}
-            enabledRootRedirect={enabledRootRedirect}
-          />
-        ))}
-      </NavUl>
-    </Stack>
-  );
-}
-
 // ----------------------------------------------------------------------
 
 function Group({ items, render, subheader, slotProps, enabledRootRedirect }: NavGroupProps) {
@@ -89,5 +56,40 @@ function Group({ items, render, subheader, slotProps, enabledRootRedirect }: Nav
         renderContent
       )}
     </NavLi>
+  );
+}
+
+// ----------------------------------------------------------------------
+
+export function NavSectionVertical({
+  sx,
+  data,
+  render,
+  slotProps,
+  enabledRootRedirect,
+  cssVars: overridesVars,
+}: NavSectionProps) {
+  const theme = useTheme();
+
+  const cssVars = {
+    ...navSectionCssVars.vertical(theme),
+    ...overridesVars,
+  };
+
+  return (
+    <Stack component="nav" className={navSectionClasses.vertical.root} sx={{ ...cssVars, ...sx }}>
+      <NavUl sx={{ flex: '1 1 auto', gap: 'var(--nav-item-gap)' }}>
+        {data.map((group) => (
+          <Group
+            key={group.subheader ?? group.items[0].title}
+            subheader={group.subheader}
+            items={group.items}
+            render={render}
+            slotProps={slotProps}
+            enabledRootRedirect={enabledRootRedirect}
+          />
+        ))}
+      </NavUl>
+    </Stack>
   );
 }

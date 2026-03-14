@@ -11,6 +11,24 @@ import { useRouter, usePathname, useSearchParams } from 'src/routes/hooks';
 
 type PushStateInput = [data: any, unused: string, url?: string | URL | null | undefined];
 
+// ----------------------------------------------------------------------
+
+function NProgressDone() {
+  const pathname = usePathname();
+
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    NProgress.done();
+  }, [pathname, router, searchParams]);
+
+  return null;
+}
+
+// ----------------------------------------------------------------------
+
 export function ProgressBar() {
   useEffect(() => {
     NProgress.configure({ showSpinner: false });
@@ -52,20 +70,4 @@ export function ProgressBar() {
       <NProgressDone />
     </Suspense>
   );
-}
-
-// ----------------------------------------------------------------------
-
-function NProgressDone() {
-  const pathname = usePathname();
-
-  const router = useRouter();
-
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    NProgress.done();
-  }, [pathname, router, searchParams]);
-
-  return null;
 }

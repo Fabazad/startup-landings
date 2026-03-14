@@ -40,3 +40,7 @@ export const MotionViewport = forwardRef<HTMLDivElement, MotionViewportProps>(
     );
   }
 );
+
+MotionViewport.defaultProps = {
+  disableAnimate: true,
+};

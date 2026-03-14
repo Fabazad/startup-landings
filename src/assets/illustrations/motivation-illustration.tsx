@@ -15,7 +15,7 @@ type Props = BoxProps & {
   hideBackground?: boolean;
 };
 
-function MotivationIllustration({ hideBackground, sx, ...other }: Props) {
+function MotivationIllustration({ hideBackground = false, sx, ...other }: Props) {
   const theme = useTheme();
 
   const PRIMARY_LIGHTER = theme.vars.palette.primary.lighter;

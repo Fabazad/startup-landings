@@ -65,7 +65,8 @@ export function Lines({ strokeCount }: { strokeCount: number }) {
     <>
       {[...Array(strokeCount)].map((_, index) => (
         <m.line
-          key={index}
+          // eslint-disable-next-line react/no-array-index-key
+          key={`line-x-${index}`}
           x1="0"
           x2="100%"
           y1="50%"
@@ -91,7 +92,8 @@ export function Lines({ strokeCount }: { strokeCount: number }) {
     <>
       {[...Array(strokeCount)].map((_, index) => (
         <m.line
-          key={index}
+          // eslint-disable-next-line react/no-array-index-key
+          key={`line-y-${index}`}
           x1="50%"
           x2="50%"
           y1="0%"
@@ -207,7 +209,7 @@ export function PlusIcon() {
 
 // ----------------------------------------------------------------------
 
-export function Texts({ sx, ...other }: BoxProps) {
+export function Texts({ sx = {}, ...other }: BoxProps = {}) {
   const { name: productName } = useProductIdea();
   return (
     <Box
@@ -264,7 +266,7 @@ type DotProps = {
   transition?: MotionProps['transition'];
 };
 
-function Dot({ color = 'primary', animate, transition, sx, ...other }: DotProps) {
+function Dot({ color = 'primary', animate, transition = undefined, sx = {}, ...other }: DotProps) {
   return (
     <Box
       component={m.div}

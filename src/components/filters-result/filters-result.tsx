@@ -20,7 +20,12 @@ type FiltersResultProps = {
   children: React.ReactNode;
 };
 
-export function FiltersResult({ totalResults, onReset, sx, children }: FiltersResultProps) {
+export function FiltersResult({
+  totalResults,
+  onReset,
+  sx = undefined,
+  children,
+}: FiltersResultProps) {
   return (
     <Box sx={sx}>
       <Box sx={{ mb: 1.5, typography: 'body2' }}>

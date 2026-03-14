@@ -3,7 +3,13 @@ import { useTheme, type SxProps, type Theme } from '@mui/material/styles';
 import { m } from 'framer-motion';
 import { textGradient } from 'src/theme/styles';
 
-export function TextGradient({ children, sx }: { children: React.ReactNode; sx?: SxProps<Theme> }) {
+export function TextGradient({
+  children,
+  sx = {},
+}: {
+  children: React.ReactNode;
+  sx?: SxProps<Theme>;
+}) {
   const theme = useTheme();
   return (
     <Box

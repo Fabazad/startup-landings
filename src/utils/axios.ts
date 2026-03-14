@@ -13,16 +13,11 @@ export default axiosInstance;
 // ----------------------------------------------------------------------
 
 export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
-  try {
-    const [url, config] = Array.isArray(args) ? args : [args];
+  const [url, config] = Array.isArray(args) ? args : [args];
 
-    const res = await axiosInstance.get(url, { ...config });
+  const res = await axiosInstance.get(url, { ...config });
 
-    return res.data;
-  } catch (error) {
-    console.error('Failed to fetch:', error);
-    throw error;
-  }
+  return res.data;
 };
 
 // ----------------------------------------------------------------------

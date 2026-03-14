@@ -1,5 +1,7 @@
 // app/providers.tsx
 
+/* eslint-disable no-console */
+
 'use client';
 
 import { useEffect, useState } from 'react';

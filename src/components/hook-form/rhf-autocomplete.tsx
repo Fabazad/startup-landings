@@ -23,10 +23,10 @@ export type RHFAutocompleteProps = AutocompleteBaseProps & {
 
 export function RHFAutocomplete({
   name,
-  label,
-  variant,
-  helperText,
-  placeholder,
+  label = undefined,
+  variant = 'outlined',
+  helperText = undefined,
+  placeholder = undefined,
   ...other
 }: RHFAutocompleteProps) {
   const { control, setValue } = useFormContext();

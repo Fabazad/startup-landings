@@ -8,7 +8,7 @@ export type TableEmptyRowsProps = {
   emptyRows: number;
 };
 
-export function TableEmptyRows({ emptyRows, height }: TableEmptyRowsProps) {
+export function TableEmptyRows({ emptyRows, height = 0 }: TableEmptyRowsProps) {
   if (!emptyRows) {
     return null;
   }

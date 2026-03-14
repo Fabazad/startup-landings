@@ -16,6 +16,22 @@ import { FileThumbnail } from 'src/components/file-thumbnail';
 
 // ----------------------------------------------------------------------
 
+function reader(data: string) {
+  return (
+    <Box
+      dangerouslySetInnerHTML={{ __html: data }}
+      sx={{
+        mb: 0.5,
+        '& p': { typography: 'body2', m: 0 },
+        '& a': { color: 'inherit', textDecoration: 'none' },
+        '& strong': { typography: 'subtitle2' },
+      }}
+    />
+  );
+}
+
+// ----------------------------------------------------------------------
+
 export type NotificationItemProps = {
   id: string;
   type: string;
@@ -219,21 +235,5 @@ export function NotificationItem({ notification }: { notification: NotificationI
         {notification.type === 'payment' && paymentAction}
       </Stack>
     </ListItemButton>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-function reader(data: string) {
-  return (
-    <Box
-      dangerouslySetInnerHTML={{ __html: data }}
-      sx={{
-        mb: 0.5,
-        '& p': { typography: 'body2', m: 0 },
-        '& a': { color: 'inherit', textDecoration: 'none' },
-        '& strong': { typography: 'subtitle2' },
-      }}
-    />
   );
 }

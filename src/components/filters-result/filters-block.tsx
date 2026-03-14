@@ -11,7 +11,7 @@ export type FilterBlockProps = {
   children: React.ReactNode;
 };
 
-export function FiltersBlock({ label, children, isShow, sx }: FilterBlockProps) {
+export function FiltersBlock({ label, children, isShow, sx = undefined }: FilterBlockProps) {
   if (!isShow) {
     return null;
   }

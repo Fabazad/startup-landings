@@ -4,6 +4,56 @@ import { isEqual } from 'src/utils/helper';
 
 // ----------------------------------------------------------------------
 
+function getStorage(key: string) {
+  try {
+    const keyName = `${key}=`;
+
+    const cDecoded = decodeURIComponent(document.cookie);
+
+    const cArr = cDecoded.split('; ');
+
+    let res;
+
+    cArr.forEach((val) => {
+      if (val.indexOf(keyName) === 0) res = val.substring(keyName.length);
+    });
+
+    if (res) {
+      return JSON.parse(res);
+    }
+  } catch (error) {
+    // Error while getting from cookies
+  }
+
+  return null;
+}
+
+function setStorage<T>(key: string, value: T, daysUntilExpiration: number = 0) {
+  try {
+    const serializedValue = encodeURIComponent(JSON.stringify(value));
+    let cookieOptions = `${key}=${serializedValue}; path=/`;
+
+    if (daysUntilExpiration > 0) {
+      const expirationDate = new Date(Date.now() + daysUntilExpiration * 24 * 60 * 60 * 1000);
+      cookieOptions += `; expires=${expirationDate.toUTCString()}`;
+    }
+
+    document.cookie = cookieOptions;
+  } catch (error) {
+    // Error while setting cookie
+  }
+}
+
+function removeStorage(key: string) {
+  try {
+    document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  } catch (error) {
+    // Error while removing cookie
+  }
+}
+
+// ----------------------------------------------------------------------
+
 export type UseCookiesReturn<T> = {
   state: T;
   canReset: boolean;
@@ -80,58 +130,4 @@ export function useCookies<T>(
   );
 
   return memoizedValue;
-}
-
-// ----------------------------------------------------------------------
-
-function getStorage(key: string) {
-  try {
-    const keyName = `${key}=`;
-
-    const cDecoded = decodeURIComponent(document.cookie);
-
-    const cArr = cDecoded.split('; ');
-
-    let res;
-
-    cArr.forEach((val) => {
-      if (val.indexOf(keyName) === 0) res = val.substring(keyName.length);
-    });
-
-    if (res) {
-      return JSON.parse(res);
-    }
-  } catch (error) {
-    console.error('Error while getting from cookies:', error);
-  }
-
-  return null;
-}
-
-// ----------------------------------------------------------------------
-
-function setStorage<T>(key: string, value: T, daysUntilExpiration: number = 0) {
-  try {
-    const serializedValue = encodeURIComponent(JSON.stringify(value));
-    let cookieOptions = `${key}=${serializedValue}; path=/`;
-
-    if (daysUntilExpiration > 0) {
-      const expirationDate = new Date(Date.now() + daysUntilExpiration * 24 * 60 * 60 * 1000);
-      cookieOptions += `; expires=${expirationDate.toUTCString()}`;
-    }
-
-    document.cookie = cookieOptions;
-  } catch (error) {
-    console.error('Error while setting cookie:', error);
-  }
-}
-
-// ----------------------------------------------------------------------
-
-function removeStorage(key: string) {
-  try {
-    document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-  } catch (error) {
-    console.error('Error while removing cookie:', error);
-  }
 }

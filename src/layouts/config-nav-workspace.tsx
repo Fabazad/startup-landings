@@ -2,7 +2,7 @@ import { CONFIG } from 'src/config-global';
 
 // ----------------------------------------------------------------------
 
-export const _workspaces = [
+export const navWorkspaces = [
   {
     id: 'team-1',
     name: 'Team 1',

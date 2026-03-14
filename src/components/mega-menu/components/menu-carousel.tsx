@@ -18,32 +18,6 @@ import type { SlideProps, MenuCarouselProps } from '../types';
 
 // ----------------------------------------------------------------------
 
-export function MenuCarousel({ slides, displayCount = 8, sx }: MenuCarouselProps) {
-  const carousel = useCarousel({ slidesToShow: displayCount, slidesToScroll: displayCount });
-
-  return (
-    <Stack sx={{ position: 'relative', pt: 2, ...sx }}>
-      <Carousel carousel={carousel}>
-        {slides.map((item) => (
-          <CarouselItem key={item.name} item={item} />
-        ))}
-      </Carousel>
-
-      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mt: 2 }}>
-        <CarouselArrowBasicButtons {...carousel.arrows} options={carousel.options} />
-        <CarouselDotButtons
-          scrollSnaps={carousel.dots.scrollSnaps}
-          selectedIndex={carousel.dots.selectedIndex}
-          onClickDot={carousel.dots.onClickDot}
-          sx={{ color: 'primary.main' }}
-        />
-      </Stack>
-    </Stack>
-  );
-}
-
-// ----------------------------------------------------------------------
-
 type CarouselItemProps = {
   item: SlideProps;
 };
@@ -74,5 +48,31 @@ function CarouselItem({ item }: CarouselItemProps) {
         {item.name}
       </Typography>
     </Link>
+  );
+}
+
+// ----------------------------------------------------------------------
+
+export function MenuCarousel({ slides, displayCount = 8, sx }: MenuCarouselProps) {
+  const carousel = useCarousel({ slidesToShow: displayCount, slidesToScroll: displayCount });
+
+  return (
+    <Stack sx={{ position: 'relative', pt: 2, ...sx }}>
+      <Carousel carousel={carousel}>
+        {slides.map((item) => (
+          <CarouselItem key={item.name} item={item} />
+        ))}
+      </Carousel>
+
+      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mt: 2 }}>
+        <CarouselArrowBasicButtons {...carousel.arrows} options={carousel.options} />
+        <CarouselDotButtons
+          scrollSnaps={carousel.dots.scrollSnaps}
+          selectedIndex={carousel.dots.selectedIndex}
+          onClickDot={carousel.dots.onClickDot}
+          sx={{ color: 'primary.main' }}
+        />
+      </Stack>
+    </Stack>
   );
 }

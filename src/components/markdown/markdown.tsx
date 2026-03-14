@@ -23,30 +23,6 @@ import type { MarkdownProps } from './types';
 
 // ----------------------------------------------------------------------
 
-export function Markdown({ children, sx, ...other }: MarkdownProps) {
-  const content = useMemo(() => {
-    if (isMarkdownContent(`${children}`)) {
-      return children;
-    }
-    return htmlToMarkdown(`${children}`.trim());
-  }, [children]);
-
-  return (
-    <StyledRoot
-      children={content}
-      components={components as Options['components']}
-      rehypePlugins={rehypePlugins as Options['rehypePlugins']}
-      /* base64-encoded images
-       * https://github.com/remarkjs/react-markdown/issues/774
-       * urlTransform={(value: string) => value}
-       */
-      className={markdownClasses.root}
-      sx={sx}
-      {...other}
-    />
-  );
-}
-
 // ----------------------------------------------------------------------
 
 type ComponentTag = {
@@ -94,3 +70,30 @@ const components = {
     );
   },
 };
+
+// ----------------------------------------------------------------------
+
+export function Markdown({ children, sx, ...other }: MarkdownProps) {
+  const content = useMemo(() => {
+    if (isMarkdownContent(`${children}`)) {
+      return children;
+    }
+    return htmlToMarkdown(`${children}`.trim());
+  }, [children]);
+
+  return (
+    <StyledRoot
+      components={components as Options['components']}
+      rehypePlugins={rehypePlugins as Options['rehypePlugins']}
+      /* base64-encoded images
+       * https://github.com/remarkjs/react-markdown/issues/774
+       * urlTransform={(value: string) => value}
+       */
+      className={markdownClasses.root}
+      sx={sx}
+      {...other}
+    >
+      {content}
+    </StyledRoot>
+  );
+}

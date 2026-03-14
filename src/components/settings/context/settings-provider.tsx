@@ -22,19 +22,13 @@ export function SettingsProvider({
   settings,
   caches = 'localStorage',
 }: SettingsProviderProps) {
-  const { colorScheme, ...restSettings } = settings;
-  const { colorScheme: defaultColorScheme, ...defaultRestSettings } = defaultSettings;
-
   const cookies = useCookies<Omit<SettingsState, 'colorScheme'>>(
     STORAGE_KEY,
-    restSettings,
-    defaultRestSettings
+    settings,
+    defaultSettings
   );
 
-  const localStorage = useLocalStorage<Omit<SettingsState, 'colorScheme'>>(
-    STORAGE_KEY,
-    restSettings
-  );
+  const localStorage = useLocalStorage<Omit<SettingsState, 'colorScheme'>>(STORAGE_KEY, settings);
 
   const values = caches === 'cookie' ? cookies : localStorage;
 

@@ -8,6 +8,7 @@ export const SubscriptionStep = {
   SUCCESS: 'success',
 } as const;
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export type SubscriptionStep = (typeof SubscriptionStep)[keyof typeof SubscriptionStep];
 
 type SubscriptionContext = {

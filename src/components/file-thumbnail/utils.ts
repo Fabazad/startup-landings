@@ -21,6 +21,14 @@ const iconUrl = (icon: string) => `${CONFIG.assetsDir}/assets/icons/files/${icon
 
 // ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+
+export function fileTypeByUrl(fileUrl: string) {
+  return (fileUrl && fileUrl.split('.').pop()) || '';
+}
+
+// ----------------------------------------------------------------------
+
 export function fileFormat(fileUrl: string) {
   let format;
 
@@ -113,12 +121,6 @@ export function fileThumb(fileUrl: string) {
       thumb = iconUrl('ic-file');
   }
   return thumb;
-}
-
-// ----------------------------------------------------------------------
-
-export function fileTypeByUrl(fileUrl: string) {
-  return (fileUrl && fileUrl.split('.').pop()) || '';
 }
 
 // ----------------------------------------------------------------------

@@ -19,6 +19,46 @@ const TreeNode = dynamic(() => import('react-organizational-chart').then((mod) =
 
 // ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+
+export function TreeList<T>({ data, depth, nodeItem }: OrgChartListProps<T>) {
+  const childs = (data as any).children;
+
+  const cloneNode = (props: T) => cloneElement(nodeItem(props));
+
+  const totalChildren = childs ? flattenArray(childs)?.length : 0;
+
+  const label = cloneNode({ ...data, depth, totalChildren } as T);
+
+  return (
+    <TreeNode label={label}>
+      {childs && (
+        /* eslint-disable-next-line @typescript-eslint/no-use-before-define */
+        <TreeSubList data={childs} depth={depth} nodeItem={nodeItem} />
+      )}
+    </TreeNode>
+  );
+}
+
+// ----------------------------------------------------------------------
+
+function TreeSubList<T>({ data, depth, nodeItem }: OrgChartSubListProps<T>) {
+  return (
+    <>
+      {data.map((list) => (
+        <TreeList
+          key={(list as any).name || (list as any).title || (list as any).id}
+          data={list}
+          depth={depth + 1}
+          nodeItem={nodeItem}
+        />
+      ))}
+    </>
+  );
+}
+
+// ----------------------------------------------------------------------
+
 export function OrganizationalChart<T>({ data, nodeItem, ...other }: OrgChartProps<T>) {
   const theme = useTheme();
 
@@ -35,39 +75,14 @@ export function OrganizationalChart<T>({ data, nodeItem, ...other }: OrgChartPro
       label={label}
       {...other}
     >
-      {data.children.map((list, index) => (
-        <TreeList key={index} depth={1} data={list} nodeItem={nodeItem} />
+      {data.children.map((list) => (
+        <TreeList
+          key={(list as any).name || (list as any).title || (list as any).id}
+          depth={1}
+          data={list}
+          nodeItem={nodeItem}
+        />
       ))}
     </Tree>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-export function TreeList<T>({ data, depth, nodeItem }: OrgChartListProps<T>) {
-  const childs = (data as any).children;
-
-  const cloneNode = (props: T) => cloneElement(nodeItem(props));
-
-  const totalChildren = childs ? flattenArray(childs)?.length : 0;
-
-  const label = cloneNode({ ...data, depth, totalChildren } as T);
-
-  return (
-    <TreeNode label={label}>
-      {childs && <TreeSubList data={childs} depth={depth} nodeItem={nodeItem} />}
-    </TreeNode>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-function TreeSubList<T>({ data, depth, nodeItem }: OrgChartSubListProps<T>) {
-  return (
-    <>
-      {data.map((list, index) => (
-        <TreeList key={index} data={list} depth={depth + 1} nodeItem={nodeItem} />
-      ))}
-    </>
   );
 }

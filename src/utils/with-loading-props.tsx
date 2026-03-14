@@ -11,11 +11,13 @@ export function withLoadingProps<T extends {}>(
 
   const DynamicComponent = loader(useLoadingProps);
 
-  const WithLoadingPropsComponent: React.FC<T> = (props) => (
-    <LoadingPropsContext.Provider value={props}>
-      <DynamicComponent {...props} />
-    </LoadingPropsContext.Provider>
-  );
+  function WithLoadingPropsComponent(props: T) {
+    return (
+      <LoadingPropsContext.Provider value={props}>
+        <DynamicComponent {...props} />
+      </LoadingPropsContext.Provider>
+    );
+  }
 
   return WithLoadingPropsComponent;
 }

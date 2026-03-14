@@ -15,12 +15,12 @@ export type TableSelectedActionProps = StackProps & {
 };
 
 export function TableSelectedAction({
-  dense,
-  action,
+  dense = false,
+  action = undefined,
   rowCount,
   numSelected,
   onSelectAllRows,
-  sx,
+  sx = {},
   ...other
 }: TableSelectedActionProps) {
   if (!numSelected) {

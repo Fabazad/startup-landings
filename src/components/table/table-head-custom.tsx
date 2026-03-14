@@ -35,14 +35,14 @@ export type TableHeadCustomProps = {
 };
 
 export function TableHeadCustom({
-  sx,
-  order,
-  onSort,
-  orderBy,
+  sx = {},
+  order = 'asc',
+  onSort = undefined,
+  orderBy = undefined,
   headLabel,
   rowCount = 0,
   numSelected = 0,
-  onSelectAllRows,
+  onSelectAllRows = undefined,
 }: TableHeadCustomProps) {
   return (
     <TableHead sx={sx}>

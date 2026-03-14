@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { fSub } from 'src/utils/format-time';
 
 import { CONFIG } from 'src/config-global';

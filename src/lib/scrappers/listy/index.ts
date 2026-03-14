@@ -4,7 +4,7 @@ import { Scrapper } from '../Scrapper.type';
 
 export const listyScrapper: Scrapper = async (url) => {
   try {
-    const { data, status } = await axios.get<{
+    const { data } = await axios.get<{
       title: string;
       amount: number;
       product_pictures: string[];

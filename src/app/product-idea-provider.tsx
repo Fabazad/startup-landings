@@ -25,6 +25,6 @@ export function ProductIdeaProvider({
   );
   useEffect(() => {
     setProductIdea(translateProductIdea(rawProductIdea, currentLang.value as LanguageValue));
-  }, [currentLang]);
+  }, [currentLang, rawProductIdea]);
   return <Ctx.Provider value={productIdea}>{children}</Ctx.Provider>;
 }

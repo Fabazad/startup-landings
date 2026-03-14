@@ -21,7 +21,7 @@ type Props = ButtonBaseProps & {
   tooltip?: string;
 };
 
-export function BaseOption({ icon, label, tooltip, selected, ...other }: Props) {
+export function BaseOption({ icon, label, selected, tooltip = undefined, ...other }: Props) {
   return (
     <ButtonBase
       disableRipple
