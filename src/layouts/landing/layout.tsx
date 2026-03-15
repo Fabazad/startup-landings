@@ -25,7 +25,7 @@ export type MainLayoutProps = {
 };
 
 export async function LandingLayout({ sx = {}, children, header = {} }: MainLayoutProps) {
-  const { logo, themeColor, name: productName, id: productIdeaId } = await getProductIdea();
+  const { logo, themeColor, name: productName } = await getProductIdea();
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
   const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
@@ -33,7 +33,7 @@ export async function LandingLayout({ sx = {}, children, header = {} }: MainLayo
   const { count } = await supabase
     .from('blogs')
     .select('*', { count: 'exact', head: true })
-    .eq('product_idea_id', productIdeaId)
+    .eq('product_idea_id', productName)
     .eq('language', lang ?? 'fr')
     .eq('published', true);
 

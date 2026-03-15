@@ -13,7 +13,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const { id: productIdeaId, name: productName } = await getProductIdea();
+  const { name: productName } = await getProductIdea();
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
 
@@ -24,7 +24,7 @@ export async function generateMetadata({
   const { data: blog } = await supabase
     .from('blogs')
     .select('seo_title, seo_description, seo_keywords, title, excerpt, cover_image')
-    .eq('product_idea_id', productIdeaId)
+    .eq('product_idea_id', productName)
     .eq('language', lang ?? 'fr')
     .eq('slug', params.slug)
     .single();
