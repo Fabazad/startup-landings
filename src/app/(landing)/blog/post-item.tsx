@@ -143,6 +143,7 @@ export function PostItemLatest({ post, index }: PostItemLatestProps) {
       <Card>
         <Avatar
           alt={post.author}
+          src={DEFAULT_AUTHOR.avatarUrl}
           sx={{
             top: 24,
             left: 24,
