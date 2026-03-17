@@ -55,7 +55,8 @@ export function PostItem({ post, sx, ...other }: PostItemProps) {
           ...sx,
           '&:hover': {
             boxShadow: '0 4px 12px 0 rgba(0,0,0,0.2)',
-            transition: 'all 0.1s ease-in-out',
+            transform: 'translateY(-1px)',
+            transition: 'all 0.3s ease-in-out',
           },
         }}
         {...other}
@@ -69,11 +70,6 @@ export function PostItem({ post, sx, ...other }: PostItemProps) {
               height: 36,
               bottom: -16,
               position: 'absolute',
-              '&:hover': {
-                boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2)',
-                transform: 'translateY(-2px)',
-                transition: 'all 0.3s ease-in-out',
-              },
             }}
           />
 
@@ -140,7 +136,15 @@ export function PostItemLatest({ post, index }: PostItemLatestProps) {
       color="inherit"
       onClick={handleClick}
     >
-      <Card>
+      <Card
+        sx={{
+          '&:hover': {
+            boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2)',
+            transform: 'translateY(-2px)',
+            transition: 'all 0.3s ease-in-out',
+          },
+        }}
+      >
         <Avatar
           alt={post.author}
           src={DEFAULT_AUTHOR.avatarUrl}
