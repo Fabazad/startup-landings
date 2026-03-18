@@ -2,6 +2,8 @@ import { MetadataRoute } from 'next';
 import { headers } from 'next/headers';
 import { RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
 import { languages } from 'src/locales/config-locales';
+import { createClient } from '@supabase/supabase-js';
+import { CONFIG } from 'src/config-global';
 
 // Force dynamic generation to ensure correct domain in URLs
 export const dynamic = 'force-dynamic';
@@ -68,6 +70,54 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         });
       });
     });
+  }
+
+  // Add blog pages if the product idea has them
+  if (productIdea?.name) {
+    const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
+    const { data: blogs } = await supabase
+      .from('blogs')
+      .select('slug, language, updated_at')
+      .eq('product_idea_id', productIdea.name)
+      .eq('published', true);
+
+    if (blogs) {
+      // Group blogs by slug to organize alternates
+      const blogGroupBySlug: Record<
+        string,
+        { slug: string; language: string; updated_at: string }[]
+      > = {};
+      blogs.forEach((blog) => {
+        if (!blogGroupBySlug[blog.slug]) {
+          blogGroupBySlug[blog.slug] = [];
+        }
+        blogGroupBySlug[blog.slug].push(blog);
+      });
+
+      // For each slug, output one page entry per language
+      Object.entries(blogGroupBySlug).forEach(([slug, blogGroup]) => {
+        // Build alternates record for this blog slug
+        const blogAlternates: Record<string, string> = {};
+        blogGroup.forEach((blog) => {
+          blogAlternates[blog.language] =
+            `${baseUrl}/blog/${slug}/${blog.language && blog.language !== 'fr' ? `?lang=${blog.language}` : ''}`;
+        });
+
+        // Push each language version of the blog to sitemap
+        blogGroup.forEach((blog) => {
+          const blogUrl = `${baseUrl}/blog/${slug}/${blog.language && blog.language !== 'fr' ? `?lang=${blog.language}` : ''}`;
+          pages.push({
+            url: blogUrl,
+            lastModified: new Date(blog.updated_at || new Date()),
+            changeFrequency: 'weekly' as const,
+            priority: 0.7,
+            alternates: {
+              languages: blogAlternates,
+            },
+          });
+        });
+      });
+    }
   }
 
   return pages;

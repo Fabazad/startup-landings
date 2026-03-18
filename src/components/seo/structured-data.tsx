@@ -53,14 +53,6 @@ export function StructuredData({ rawProductIdea, baseUrl }: StructuredDataProps)
     '@type': 'WebSite',
     name: rawProductIdea.name,
     url: baseUrl,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${baseUrl}/?q={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
   };
 
   // Individual Review schemas
