@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { languages } from 'src/locales/config-locales';
 import { LandingView } from 'src/sections/landing/view';
+import { AuthProvider } from '../providers/auth-provider';
+import { getRawProductIdea } from '../getProductIdea';
 
 // Revalidate this page every hour (ISR)
 export const revalidate = 3600;
@@ -21,5 +23,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  return <LandingView />;
+  const { name: productName } = await getRawProductIdea();
+
+  return (
+    <AuthProvider productName={productName}>
+      <LandingView />
+    </AuthProvider>
+  );
 }

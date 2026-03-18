@@ -24,13 +24,11 @@ import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import { StructuredData } from 'src/components/seo/structured-data';
 import { languages } from 'src/locales/config-locales';
-import { DEFAULT_PRODUCT_IDEA, RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
 import { SubscriptionModalProvider } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
-import { RawProductIdea } from 'src/types/ProductIdea';
 import { ProductIdeaProvider } from './product-idea-provider';
 import { PostHogProvider } from './providers/posthog-provider';
 import ReactQueryProvider from './providers/react-query-provider';
-import { AuthProvider } from './providers/auth-provider';
+import { getRawProductIdea } from './getProductIdea';
 
 const SettingsDrawer = dynamic(
   () => import('src/components/settings/drawer').then((m) => m.SettingsDrawer),
@@ -38,19 +36,6 @@ const SettingsDrawer = dynamic(
     ssr: false,
   }
 );
-
-// ----------------------------------------------------------------------
-
-const getRawProductIdea = async (): Promise<RawProductIdea> => {
-  // get url subdomain from url on server
-  const headersList = await headers();
-  const url = headersList.get('x-forwarded-host') || headersList.get('host') || '';
-  const subdomain = url.replace(/^www\./, '').split('.')[0];
-
-  const productIdea = Object.values(RAW_PRODUCT_IDEAS).find((idea) => idea.id === subdomain);
-  if (productIdea) return productIdea;
-  return DEFAULT_PRODUCT_IDEA;
-};
 
 // ----------------------------------------------------------------------
 
@@ -177,36 +162,34 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           defaultMode={schemeConfig.defaultMode}
           modeStorageKey={schemeConfig.modeStorageKey}
         />
-        <AuthProvider productName={rawProductIdea.name}>
-          <I18nProvider lang={CONFIG.isStaticExport ? undefined : lang}>
-            <LocalizationProvider>
-              <SettingsProvider
-                settings={{
-                  ...defaultSettings,
-                  primaryColor: rawProductIdea.themeColor,
-                  fontFamily: 'Nunito Sans Variable',
-                }}
-              >
-                <ThemeProvider>
-                  <MotionLazy>
-                    <PostHogProvider>
-                      <ReactQueryProvider>
-                        <ProductIdeaProvider rawProductIdea={rawProductIdea}>
-                          <SubscriptionModalProvider>
-                            <Snackbar />
-                            <ProgressBar />
-                            <SettingsDrawer />
-                            {children}
-                          </SubscriptionModalProvider>
-                        </ProductIdeaProvider>
-                      </ReactQueryProvider>
-                    </PostHogProvider>
-                  </MotionLazy>
-                </ThemeProvider>
-              </SettingsProvider>
-            </LocalizationProvider>
-          </I18nProvider>
-        </AuthProvider>
+        <I18nProvider lang={CONFIG.isStaticExport ? undefined : lang}>
+          <LocalizationProvider>
+            <SettingsProvider
+              settings={{
+                ...defaultSettings,
+                primaryColor: rawProductIdea.themeColor,
+                fontFamily: 'Nunito Sans Variable',
+              }}
+            >
+              <ThemeProvider>
+                <MotionLazy>
+                  <PostHogProvider>
+                    <ReactQueryProvider>
+                      <ProductIdeaProvider rawProductIdea={rawProductIdea}>
+                        <SubscriptionModalProvider>
+                          <Snackbar />
+                          <ProgressBar />
+                          <SettingsDrawer />
+                          {children}
+                        </SubscriptionModalProvider>
+                      </ProductIdeaProvider>
+                    </ReactQueryProvider>
+                  </PostHogProvider>
+                </MotionLazy>
+              </ThemeProvider>
+            </SettingsProvider>
+          </LocalizationProvider>
+        </I18nProvider>
         <Analytics />
         <SpeedInsights />
         {rawProductIdea.id === 'envy' && (

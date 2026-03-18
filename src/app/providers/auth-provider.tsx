@@ -18,7 +18,6 @@ export function AuthProvider({
   useEffect(() => {
     const item = localStorage?.getItem('sb-snompcrhhpnorquapudz-auth-token');
 
-    console.log({ productName, acutal: PRODUCT_IDEA_NAMES.ENVY });
     if (item && productName === PRODUCT_IDEA_NAMES.ENVY) router.replace('/envy');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);

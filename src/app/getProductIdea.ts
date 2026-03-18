@@ -3,7 +3,7 @@ import { detectLanguage } from 'src/locales/server';
 import { DEFAULT_PRODUCT_IDEA, RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
 import { ProductIdea, translateProductIdea } from 'src/types/ProductIdea';
 
-const getRawProductIdea = async () => {
+export const getRawProductIdea = async () => {
   // get url subdomain from url on server
   const headersList = await headers();
   const url = headersList.get('x-forwarded-host') || headersList.get('host') || '';
