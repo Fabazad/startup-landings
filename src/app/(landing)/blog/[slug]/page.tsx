@@ -1,9 +1,11 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { headers } from 'next/headers';
 import { getProductIdea } from 'src/app/getProductIdea';
 import { createClient } from '@supabase/supabase-js';
 import { CONFIG } from 'src/config-global';
 import { detectLanguage, getServerTranslations } from 'src/locales/server';
+import { BlogStructuredData } from 'src/components/seo/blog-structured-data';
 import { PostDetailsHomeView } from './post-details-home-view';
 
 export const revalidate = 3600;
@@ -54,6 +56,11 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
 
+  const headersList = await headers();
+  const host = headersList.get('x-forwarded-host') || headersList.get('host') || '';
+  const protocol = headersList.get('x-forwarded-proto') || 'https';
+  const baseUrl = `${protocol}://${host}`;
+
   const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
 
   const { data: blog, error } = await supabase
@@ -69,5 +76,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     notFound();
   }
 
-  return <PostDetailsHomeView post={blog} latestPosts={[]} />;
+  return (
+    <>
+      <BlogStructuredData post={blog} baseUrl={baseUrl} productName={productIdeaName} />
+      <PostDetailsHomeView post={blog} latestPosts={[]} />
+    </>
+  );
 }

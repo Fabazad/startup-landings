@@ -1,11 +1,50 @@
 import { RawProductIdea } from 'src/types/ProductIdea';
 
-type StructuredDataProps = {
+type GlobalStructuredDataProps = {
   rawProductIdea: RawProductIdea;
   baseUrl: string;
 };
 
-export function StructuredData({ rawProductIdea, baseUrl }: StructuredDataProps) {
+export function GlobalStructuredData({ rawProductIdea, baseUrl }: GlobalStructuredDataProps) {
+  // Organization schema
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: rawProductIdea.name,
+    url: baseUrl,
+    logo: `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`,
+    description: rawProductIdea.heroTexts.description.en,
+  };
+
+  // WebSite schema
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: rawProductIdea.name,
+    url: baseUrl,
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+    </>
+  );
+}
+
+type SoftwareStructuredDataProps = {
+  rawProductIdea: RawProductIdea;
+};
+
+export function SoftwareStructuredData({ rawProductIdea }: SoftwareStructuredDataProps) {
   // SoftwareApplication schema
   const softwareApplicationSchema = {
     '@context': 'https://schema.org',
@@ -37,24 +76,6 @@ export function StructuredData({ rawProductIdea, baseUrl }: StructuredDataProps)
     featureList: rawProductIdea.features.map((feature) => feature.title.en),
   };
 
-  // Organization schema
-  const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: rawProductIdea.name,
-    url: baseUrl,
-    logo: `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`,
-    description: rawProductIdea.heroTexts.description.en,
-  };
-
-  // WebSite schema
-  const websiteSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: rawProductIdea.name,
-    url: baseUrl,
-  };
-
   // Individual Review schemas
   const reviewSchemas = rawProductIdea.reviews.slice(0, 5).map((review) => ({
     '@context': 'https://schema.org',
@@ -80,16 +101,6 @@ export function StructuredData({ rawProductIdea, baseUrl }: StructuredDataProps)
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
       {reviewSchemas.map((schema) => (
         <script

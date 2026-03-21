@@ -22,7 +22,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { headers } from 'next/headers';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
-import { StructuredData } from 'src/components/seo/structured-data';
+import { GlobalStructuredData } from 'src/components/seo/structured-data';
 import { languages } from 'src/locales/config-locales';
 import { SubscriptionModalProvider } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
 import { ProductIdeaProvider } from './product-idea-provider';
@@ -157,7 +157,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         )}
       </head>
       <body>
-        <StructuredData rawProductIdea={rawProductIdea} baseUrl={baseUrl} />
+        <GlobalStructuredData rawProductIdea={rawProductIdea} baseUrl={baseUrl} />
         <InitColorSchemeScript
           defaultMode={schemeConfig.defaultMode}
           modeStorageKey={schemeConfig.modeStorageKey}

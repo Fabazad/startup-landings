@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { languages } from 'src/locales/config-locales';
+import { SoftwareStructuredData } from 'src/components/seo/structured-data';
 import { LandingView } from 'src/sections/landing/view';
 import { AuthProvider } from '../providers/auth-provider';
 import { getRawProductIdea } from '../getProductIdea';
@@ -23,10 +24,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const { name: productName } = await getRawProductIdea();
+  const rawProductIdea = await getRawProductIdea();
 
   return (
-    <AuthProvider productName={productName}>
+    <AuthProvider productName={rawProductIdea.name}>
+      <SoftwareStructuredData rawProductIdea={rawProductIdea} />
       <LandingView />
     </AuthProvider>
   );
