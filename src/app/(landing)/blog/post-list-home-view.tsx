@@ -11,9 +11,11 @@ import { PostList } from './post-list';
 
 type Props = {
   posts: BlogPost[];
+  totalCount: number;
+  language: string;
 };
 
-export async function PostListHomeView({ posts }: Props) {
+export async function PostListHomeView({ posts, totalCount, language }: Props) {
   const { t } = await getServerTranslations();
 
   return (
@@ -28,7 +30,7 @@ export async function PostListHomeView({ posts }: Props) {
         sx={{ mb: { xs: 3, md: 5 } }}
       />
 
-      <PostList posts={posts} />
+      <PostList posts={posts} totalCount={totalCount} language={language} />
     </Container>
   );
 }

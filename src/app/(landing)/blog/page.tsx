@@ -28,13 +28,18 @@ export default async function BlogPage() {
 
   const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
 
-  const { data: blogs, error } = await supabase
+  const {
+    data: blogs,
+    error,
+    count,
+  } = await supabase
     .from('blogs')
-    .select<any, BlogPost>('id, title, slug, excerpt, cover_image, created_at')
+    .select<any, BlogPost>('id, title, slug, excerpt, cover_image, created_at', { count: 'exact' })
     .eq('product_idea_id', productIdeaName)
     .eq('language', lang ?? 'fr')
     .eq('published', true)
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .range(0, 6);
 
   if (error) {
     console.error('Error fetching blogs:', error);
@@ -43,7 +48,7 @@ export default async function BlogPage() {
 
   return (
     <Container sx={{ py: 10 }}>
-      <PostListHomeView posts={blogs} />
+      {blogs && <PostListHomeView posts={blogs} totalCount={count ?? 0} language={lang ?? 'fr'} />}
     </Container>
   );
 }

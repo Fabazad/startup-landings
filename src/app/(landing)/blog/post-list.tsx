@@ -1,24 +1,23 @@
 import type { BlogPost } from 'src/types/blog';
 
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Unstable_Grid2';
-
-import { Iconify } from 'src/components/iconify';
 
 import { getServerTranslations } from 'src/locales/server';
 import { PostItem, PostItemLatest } from './post-item';
 import { PostItemSkeleton } from './post-skeleton';
+import { PostListLoadMore } from './post-list-load-more';
 
 // ----------------------------------------------------------------------
 
 type Props = {
   posts: BlogPost[];
+  totalCount: number;
+  language: string;
   loading?: boolean;
 };
 
-export async function PostList({ posts, loading = false }: Props) {
+export async function PostList({ posts, totalCount, language, loading = false }: Props) {
   const { t } = await getServerTranslations();
 
   const renderLoading = (
@@ -64,16 +63,13 @@ export async function PostList({ posts, loading = false }: Props) {
     <>
       {loading ? renderLoading : renderList}
 
-      {posts.length > 8 && (
-        <Stack alignItems="center" sx={{ mt: 8, mb: { xs: 10, md: 15 } }}>
-          <Button
-            size="large"
-            variant="outlined"
-            startIcon={<Iconify icon="svg-spinners:12-dots-scale-rotate" width={24} />}
-          >
-            {t('blog.loadMore')}
-          </Button>
-        </Stack>
+      {totalCount > 7 && (
+        <PostListLoadMore
+          initialOffset={7}
+          totalCount={totalCount}
+          language={language}
+          loadMoreText={t('blog.loadMore')}
+        />
       )}
     </>
   );
