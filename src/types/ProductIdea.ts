@@ -139,6 +139,7 @@ type GenericProductIdea<Text extends Translated | string> = {
   plans: GenericPlans<Text> | null;
 
   faq?: GenericFAQ<Text>;
+  privacyPolicy?: Text;
 };
 
 export type ProductIdea = GenericProductIdea<string>;
@@ -231,4 +232,5 @@ export const translateProductIdea = (
         })),
       }
     : undefined,
+  privacyPolicy: productIdea.privacyPolicy?.[lang],
 });

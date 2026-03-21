@@ -25,7 +25,8 @@ export type MainLayoutProps = {
 };
 
 export async function LandingLayout({ sx = {}, children, header = {} }: MainLayoutProps) {
-  const { logo, themeColor, name: productName } = await getProductIdea();
+  const productIdea = await getProductIdea();
+  const { logo, themeColor, name: productName } = productIdea;
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
   const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
@@ -91,7 +92,7 @@ export async function LandingLayout({ sx = {}, children, header = {} }: MainLayo
       /** **************************************
        * Footer
        *************************************** */
-      footerSection={<HomeFooter />}
+      footerSection={<HomeFooter hasPrivacyPolicy={!!productIdea.privacyPolicy} />}
       /** **************************************
        * Style
        *************************************** */

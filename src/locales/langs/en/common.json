@@ -74,6 +74,7 @@
   },
   "common": {
     "allRightsReserved": "All rights reserved.",
+    "privacyPolicy": "Privacy policy",
     "search": {
       "notFound": "Not found",
       "noResults": "No results found for",

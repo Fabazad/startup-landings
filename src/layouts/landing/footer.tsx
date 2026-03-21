@@ -168,9 +168,10 @@ export function Footer({ layoutQuery, sx = {}, hasBlog = false }: FooterProps) {
 
 export type HomeFooterProps = {
   sx?: SxProps<Theme>;
+  hasPrivacyPolicy?: boolean;
 };
 
-export function HomeFooter({ sx = {} }: HomeFooterProps) {
+export function HomeFooter({ sx = {}, hasPrivacyPolicy = false }: HomeFooterProps) {
   const { t } = useTranslate();
 
   const { name: productName, themeColor, logo } = useProductIdea();
@@ -193,6 +194,14 @@ export function HomeFooter({ sx = {} }: HomeFooterProps) {
           <br /> made by
           <Link href="https://onama.io/"> onama.io </Link>
         </Box>
+
+        {hasPrivacyPolicy && (
+          <Box sx={{ mt: 1 }}>
+            <Link component={RouterLink} href="/privacy-policy" color="inherit" variant="caption">
+              {t('common.privacyPolicy')}
+            </Link>
+          </Box>
+        )}
       </Container>
     </Box>
   );

@@ -42,6 +42,11 @@ const nextConfig = {
       use: ['@svgr/webpack'],
     });
 
+    config.module.rules.push({
+      test: /\.md$/,
+      type: 'asset/source',
+    });
+
     return config;
   },
   ...(isStaticExport === 'true' && {

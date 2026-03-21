@@ -1,6 +1,7 @@
 import { RawProductIdea } from 'src/types/ProductIdea';
 import { CONFIG } from 'src/config-global';
 import { faq } from './faq';
+import { privacyPolicy } from './privacyPolicy/privacyPolicy';
 
 export const ENVY_PRODUCT_IDEA: RawProductIdea = {
   id: 'envy',
@@ -427,4 +428,5 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
     },
   ],
   faq,
+  privacyPolicy,
 };

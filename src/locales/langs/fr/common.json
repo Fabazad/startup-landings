@@ -65,7 +65,7 @@
     },
     "advertisement": {
       "get-started-with": "Commencez avec",
-      "today": ""
+      "today": "aujourd'hui"
     },
     "faq": {
       "title": "Foire Aux Questions",
@@ -74,6 +74,7 @@
   },
   "common": {
     "allRightsReserved": "Tous droits réservés.",
+    "privacyPolicy": "Politique de confidentialité",
     "search": {
       "notFound": "Non trouvé",
       "noResults": "Aucun résultat trouvé pour",
@@ -97,6 +98,7 @@
     "email": "Email",
     "password": "Mot de passe",
     "passwordPlaceholder": "6+ caractères",
+    "confirmPassword": "Confirmer le mot de passe",
     "bySigningUpIAgreeTo": "En m'inscrivant, j'accepte",
     "termsOfService": "Les conditions d'utilisation",
     "privacyPolicy": "La politique de confidentialité",
