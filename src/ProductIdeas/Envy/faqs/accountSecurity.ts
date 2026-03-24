@@ -96,8 +96,8 @@ export const accountSecurityFAQPage: GenericFAQPage<Translated> = {
             fr: 'Comment supprimer définitivement mon compte et mes données ?',
           },
           answer: {
-            en: 'If you wish to leave us, you can permanently delete your account by going to "Account Settings" > "Security" and selecting "Delete my account". This action is irreversible and will erase all your personal data, wishlists, and saved items from our servers.',
-            fr: 'Si vous souhaitez nous quitter, vous pouvez supprimer définitivement votre compte en allant dans "Paramètres du compte" > "Sécurité" et en sélectionnant "Supprimer mon compte". Cette action est irréversible et effacera toutes vos données personnelles, listes de souhaits et articles sauvegardés de nos serveurs.',
+            en: 'If you wish to leave us, you can permanently delete your account by going to "Update my profile" > "Profile" and selecting "Delete my account". This action is irreversible and will erase all your personal data, wishlists, and saved items from our servers.',
+            fr: 'Si vous souhaitez nous quitter, vous pouvez supprimer définitivement votre compte en allant dans "Modifier mon profil" > "Profil" et en sélectionnant "Supprimer mon compte". Cette action est irréversible et effacera toutes vos données personnelles, listes de souhaits et articles sauvegardés de nos serveurs.',
           },
         },
       ],
