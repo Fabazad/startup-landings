@@ -5,6 +5,10 @@
       "destination": "https://envy2.onama.io/envy"
     },
     {
+      "source": "/.well-known/assetlinks.json",
+      "destination": "https://envy2.onama.io/.well-known/assetlinks.json"
+    },
+    {
       "source": "/envy/:path*",
       "destination": "https://envy2.onama.io/envy/:path*"
     }
