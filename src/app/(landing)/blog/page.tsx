@@ -34,7 +34,9 @@ export default async function BlogPage() {
     count,
   } = await supabase
     .from('blogs')
-    .select<any, BlogPost>('id, title, slug, excerpt, cover_image, created_at', { count: 'exact' })
+    .select<any, BlogPost>('id, title, slug, excerpt, cover_image, created_at, author_avatar', {
+      count: 'exact',
+    })
     .eq('product_idea_id', productIdeaName)
     .eq('language', lang ?? 'fr')
     .eq('published', true)
