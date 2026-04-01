@@ -15,13 +15,16 @@ import { ThemeButton } from 'src/layouts/components/theme-button';
 import { useTranslate } from 'src/locales';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { SignInButton } from 'src/sections/landing/components/sign-in-button';
+import { ExtraLink } from 'src/types/ProductIdea';
 
 export function NavMobile({
   showConnection = true,
   hasBlog = false,
+  extraLinks = [],
 }: {
   showConnection?: boolean;
   hasBlog?: boolean;
+  extraLinks?: Array<ExtraLink>;
 }) {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openFeatures, setOpenFeatures] = useState(false);
@@ -224,6 +227,23 @@ export function NavMobile({
               />
             </ListItemButton>
           )}
+
+          {extraLinks.map((link) => (
+            <ListItemButton
+              component={Link}
+              href={link.link}
+              onClick={onClose}
+              sx={{ py: 1.5, mb: 1, borderRadius: 1 }}
+            >
+              <ListItemIcon sx={{ minWidth: 40 }}>
+                <Iconify icon={link.icon} width={24} />
+              </ListItemIcon>
+              <ListItemText
+                primary={link.label}
+                primaryTypographyProps={{ typography: 'subtitle1', fontWeight: 600 }}
+              />
+            </ListItemButton>
+          ))}
 
           {isReady && showConnection && (
             <ListItem sx={{ pt: 2, px: 0, justifyContent: 'center' }}>

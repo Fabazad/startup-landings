@@ -8,13 +8,16 @@ import { useTranslate } from 'src/locales';
 import { GetStartedButton } from 'src/sections/landing/components/get-started-button';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { SignInButton } from 'src/sections/landing/components/sign-in-button';
+import { ExtraLink } from 'src/types/ProductIdea';
 
 export function NavDesktop({
   showConnection = true,
   hasBlog = false,
+  extraLinks = [],
 }: {
   showConnection?: boolean;
   hasBlog?: boolean;
+  extraLinks?: Array<ExtraLink>;
 }) {
   const { t } = useTranslate();
 
@@ -22,6 +25,11 @@ export function NavDesktop({
 
   return (
     <Stack direction="row" gap={2} sx={{ display: { xs: 'none', md: 'flex' }, mx: 3 }}>
+      {extraLinks.map((link) => (
+        <Button component={Link} href={link.link} sx={{ px: 1 }}>
+          {link.label}
+        </Button>
+      ))}
       <MegaMenuHorizontal
         data={[
           {

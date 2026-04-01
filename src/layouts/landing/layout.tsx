@@ -26,7 +26,7 @@ export type MainLayoutProps = {
 
 export async function LandingLayout({ sx = {}, children, header = {} }: MainLayoutProps) {
   const productIdea = await getProductIdea();
-  const { logo, themeColor, name: productName } = productIdea;
+  const { logo, themeColor, name: productName, extraLinks } = productIdea;
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
   const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
@@ -82,8 +82,8 @@ export async function LandingLayout({ sx = {}, children, header = {} }: MainLayo
             rightArea: (
               <>
                 {/* -- Nav desktop -- */}
-                <NavDesktop hasBlog={hasBlog} />
-                <NavMobile hasBlog={hasBlog} />
+                <NavDesktop hasBlog={hasBlog} extraLinks={extraLinks} />
+                <NavMobile hasBlog={hasBlog} extraLinks={extraLinks} />
               </>
             ),
           }}

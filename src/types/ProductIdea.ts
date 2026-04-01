@@ -108,6 +108,14 @@ export type GenericFAQ<Text extends Translated | string> = {
 export type RawFAQ = GenericFAQ<Translated>;
 export type FAQ = GenericFAQ<string>;
 
+export type RawExtraLink<Text extends Translated | string> = {
+  label: Text;
+  icon: string;
+  link: string;
+};
+
+export type ExtraLink = RawExtraLink<string>;
+
 type GenericProductIdea<Text extends Translated | string> = {
   id: string;
   /** By default false. */
@@ -140,6 +148,7 @@ type GenericProductIdea<Text extends Translated | string> = {
 
   faq?: GenericFAQ<Text>;
   privacyPolicy?: Text;
+  extraLinks?: Array<RawExtraLink<Text>>;
 };
 
 export type ProductIdea = GenericProductIdea<string>;
@@ -233,4 +242,8 @@ export const translateProductIdea = (
       }
     : undefined,
   privacyPolicy: productIdea.privacyPolicy?.[lang],
+  extraLinks: productIdea.extraLinks?.map((link) => ({
+    ...link,
+    label: link.label[lang],
+  })),
 });

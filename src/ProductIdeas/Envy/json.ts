@@ -429,4 +429,14 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
   ],
   faq,
   privacyPolicy,
+  extraLinks: [
+    {
+      label: {
+        en: 'Gift ideas',
+        fr: 'Idées cadeaux',
+      },
+      icon: 'solar:lightbulb-bolt-bold-duotone',
+      link: 'https://envy.onama.io/envy/public-lists',
+    },
+  ],
 };
