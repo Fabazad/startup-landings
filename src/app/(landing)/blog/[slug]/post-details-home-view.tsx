@@ -1,4 +1,4 @@
-import type { Blog, BlogPost } from 'src/types/blog';
+import { DEFAULT_AUTHOR, type Blog, type BlogPost } from 'src/types/blog';
 
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
@@ -29,7 +29,7 @@ export async function PostDetailsHomeView({ post, latestPosts }: Props) {
       <PostHogPostViewed post={post} />
       <PostDetailsHero
         title={post.title}
-        author={{ name: post.author, avatarUrl: '' }}
+        author={{ name: post.author, avatarUrl: post.author_avatar || DEFAULT_AUTHOR.avatarUrl }}
         coverUrl={post.cover_image || ''}
         createdAt={post.created_at}
       />

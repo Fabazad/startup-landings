@@ -75,7 +75,7 @@ export function PostItem({ post, sx, ...other }: PostItemProps) {
 
           <Avatar
             alt={post.author}
-            src={DEFAULT_AUTHOR.avatarUrl}
+            src={post.author_avatar || DEFAULT_AUTHOR.avatarUrl}
             sx={{
               left: 24,
               zIndex: 9,
@@ -147,7 +147,7 @@ export function PostItemLatest({ post, index }: PostItemLatestProps) {
       >
         <Avatar
           alt={post.author}
-          src={DEFAULT_AUTHOR.avatarUrl}
+          src={post.author_avatar || DEFAULT_AUTHOR.avatarUrl}
           sx={{
             top: 24,
             left: 24,

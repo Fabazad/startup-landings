@@ -2,7 +2,7 @@
 
 'use client';
 
-import { DEFAULT_AUTHOR, type IPostHero } from 'src/types/blog';
+import { type IPostHero } from 'src/types/blog';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -92,7 +92,7 @@ export function PostDetailsHero({ title, author, coverUrl, createdAt }: IPostHer
             >
               <Avatar
                 alt={author.name}
-                src={DEFAULT_AUTHOR.avatarUrl}
+                src={author.avatarUrl}
                 sx={{ width: 64, height: 64, mr: 2 }}
               />
 

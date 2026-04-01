@@ -65,6 +65,7 @@ export const blogDataSchema = z.object({
   language: z.string().default('fr'),
   published: z.boolean().default(true),
   author: z.string().default('AI'),
+  author_avatar: z.string().optional(),
 });
 
 export const blogSchema = blogDataSchema.extend({
@@ -76,7 +77,7 @@ export const blogSchema = blogDataSchema.extend({
 export type Blog = z.infer<typeof blogSchema>;
 export type BlogPost = Pick<
   Blog,
-  'id' | 'title' | 'slug' | 'excerpt' | 'cover_image' | 'created_at' | 'author'
+  'id' | 'title' | 'slug' | 'excerpt' | 'cover_image' | 'created_at' | 'author' | 'author_avatar'
 >;
 
 export const DEFAULT_AUTHOR = {
