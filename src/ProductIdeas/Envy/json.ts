@@ -209,6 +209,41 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
       imgUrl: `${CONFIG.assetsDir}/assets/images/features/simple-free-access.webp`,
     },
   ],
+  flow: [
+    {
+      icon: 'mdi:format-list-checks',
+      title: {
+        en: 'Create a List',
+        fr: 'Créer une liste',
+      },
+      description: {
+        en: 'Start by creating a wishlist for your next event or just for yourself.',
+        fr: "Commencez par créer une liste d'envies pour votre prochain événement ou pour vous-même.",
+      },
+    },
+    {
+      icon: 'mdi:gift-outline',
+      title: {
+        en: 'Add wishes',
+        fr: 'Ajouter des envies',
+      },
+      description: {
+        en: 'Add gifts from any online store with a simple copy-paste.',
+        fr: "Ajoutez des cadeaux depuis n'importe quelle boutique avec un simple copier-coller.",
+      },
+    },
+    {
+      icon: 'mdi:share-variant-outline',
+      title: {
+        en: 'Share',
+        fr: 'Partager',
+      },
+      description: {
+        en: 'Send the link to your friends and family so they can access your list and reserve gifts.',
+        fr: "Envoyez le lien à vos proches pour qu'ils puissent accéder à votre liste et réserver des cadeaux.",
+      },
+    },
+  ],
   heroTexts: {
     description: {
       en: 'The free app to list and share your wishes.\nAvoid duplicate gifts and simplify your celebrations.\nList, share, and celebrate today!',

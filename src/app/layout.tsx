@@ -158,6 +158,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <link rel="preconnect" href="https://client.crisp.chat" crossOrigin="anonymous" />
             {/* @ts-expect-error: impact specifically requests 'value' attribute */}
             <meta name="impact-site-verification" value="264b8bdb-8b2d-424f-bec6-5c55a7306a39" />
+            <meta name="fo-verify" content="f3a44355-3cf6-4dd8-a9ae-4cc39d425637" />
           </>
         )}
       </head>

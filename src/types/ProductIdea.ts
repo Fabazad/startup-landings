@@ -11,6 +11,15 @@ type GenericItem<Text extends Translated | string> = {
 export type Item = GenericItem<string>;
 export type RawItem = GenericItem<Translated>;
 
+export type GenericFlowStep<Text extends Translated | string> = {
+  title: Text;
+  icon: string;
+  description: Text;
+};
+
+export type FlowStep = GenericFlowStep<string>;
+export type RawFlowStep = GenericFlowStep<Translated>;
+
 type GenericFeature<Text extends Translated | string> = {
   id: string;
   /** Use names from Material Design Icons ones. ex: mdi:account-sync */
@@ -128,6 +137,8 @@ type GenericProductIdea<Text extends Translated | string> = {
   ctaName?: Text;
   /** Minimum 3 features, maximum 5 features. */
   features: GenericFeature<Text>[];
+  /** The flow of the app. Maximum 5 steps. */
+  flow?: GenericFlowStep<Text>[];
   /** Keywords to use for SEO. */
   keywords: string[];
   heroTexts: {
@@ -185,6 +196,11 @@ export const translateProductIdea = (
       title: item.title[lang],
       description: item.description?.[lang],
     })),
+  })),
+  flow: productIdea.flow?.map((step) => ({
+    ...step,
+    title: step.title[lang],
+    description: step.description[lang],
   })),
   plans:
     productIdea.plans === null

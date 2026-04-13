@@ -2,6 +2,7 @@ import Stack from '@mui/material/Stack';
 import { LandingAdvertisement } from '../landing-advertisement';
 import { LandingContact } from '../landing-contact';
 import { LandingFeatures } from '../LandingFeatures/landing-features';
+import { LandingFlow } from '../LandingFlow/landing-flow';
 import { LandingHero } from '../LandingHero/landing-hero';
 import { LandingPricing } from '../LandingPricing/landing-pricing';
 import { LandingTestimonials } from '../LandingTestimonials/landing-testimonials';
@@ -21,6 +22,8 @@ export function LandingView() {
       <LandingHero />
 
       <Stack sx={{ position: 'relative', bgcolor: 'background.default' }}>
+        <LandingFlow />
+
         <LandingFeatures />
 
         <LandingTestimonials />

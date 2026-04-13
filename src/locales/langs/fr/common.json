@@ -70,6 +70,10 @@
     "faq": {
       "title": "Foire Aux Questions",
       "description": "Une question ? Nous avons probablement la réponse."
+    },
+    "flow": {
+      "caption": "Comment ça marche",
+      "title": "Simple et rapide"
     }
   },
   "common": {
