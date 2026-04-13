@@ -25,6 +25,7 @@ import Script from 'next/script';
 import { GlobalStructuredData } from 'src/components/seo/structured-data';
 import { languages } from 'src/locales/config-locales';
 import { SubscriptionModalProvider } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
+import { PRODUCT_IDEA_NAMES } from 'src/ProductIdeas';
 import { ProductIdeaProvider } from './product-idea-provider';
 import { PostHogProvider } from './providers/posthog-provider';
 import ReactQueryProvider from './providers/react-query-provider';
@@ -152,8 +153,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="preconnect" href="https://eu.i.posthog.com" />
         <link rel="preconnect" href="https://eu-assets.i.posthog.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://api.iconify.design" crossOrigin="anonymous" />
-        {rawProductIdea.id === 'envy' && (
-          <link rel="preconnect" href="https://client.crisp.chat" crossOrigin="anonymous" />
+        {rawProductIdea.name === PRODUCT_IDEA_NAMES.ENVY && (
+          <>
+            <link rel="preconnect" href="https://client.crisp.chat" crossOrigin="anonymous" />
+            {/* @ts-expect-error: impact specifically requests 'value' attribute */}
+            <meta name="impact-site-verification" value="264b8bdb-8b2d-424f-bec6-5c55a7306a39" />
+          </>
         )}
       </head>
       <body>
