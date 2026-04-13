@@ -139,6 +139,8 @@ type GenericProductIdea<Text extends Translated | string> = {
   features: GenericFeature<Text>[];
   /** The flow of the app. Maximum 5 steps. */
   flow?: GenericFlowStep<Text>[];
+  /** Key benefits of the app. Maximum 10 items. Each item has an icon, a title and a very short description. */
+  benefits?: GenericItem<Text>[];
   /** Keywords to use for SEO. */
   keywords: string[];
   heroTexts: {
@@ -201,6 +203,11 @@ export const translateProductIdea = (
     ...step,
     title: step.title[lang],
     description: step.description[lang],
+  })),
+  benefits: productIdea.benefits?.map((benefit) => ({
+    ...benefit,
+    title: benefit.title[lang],
+    description: benefit.description?.[lang],
   })),
   plans:
     productIdea.plans === null

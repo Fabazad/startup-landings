@@ -26,7 +26,7 @@ export function NavDesktop({
   return (
     <Stack direction="row" gap={2} sx={{ display: { xs: 'none', md: 'flex' }, mx: 3 }}>
       {extraLinks.map((link) => (
-        <Button component={Link} href={link.link} sx={{ px: 1 }}>
+        <Button key={link.label} component={Link} href={link.link} sx={{ px: 1 }}>
           {link.label}
         </Button>
       ))}

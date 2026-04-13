@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-import { MotionViewport, varFade } from 'src/components/animate';
+import { MotionViewport, varFade, varContainer } from 'src/components/animate';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { Iconify } from 'src/components/iconify';
 import { varAlpha } from 'src/theme/styles';
@@ -37,7 +37,7 @@ export function LandingFlow({ sx, ...other }: BoxProps) {
       {...other}
       id="flow"
     >
-      <MotionViewport>
+      <MotionViewport disableAnimate={false}>
         <Container>
           <SectionTitle
             caption={t('landing.flow.caption', { defaultValue: 'How it works' })}
@@ -46,6 +46,8 @@ export function LandingFlow({ sx, ...other }: BoxProps) {
           />
 
           <Stack
+            component={m.div}
+            variants={varContainer({ staggerIn: 0.1 })}
             direction={{ xs: 'column', md: 'row' }}
             spacing={{ xs: 4, md: 2, lg: 4 }}
             alignItems="stretch"
@@ -70,6 +72,14 @@ export function LandingFlow({ sx, ...other }: BoxProps) {
                       alignItems: 'center',
                       width: '100%',
                       position: 'relative',
+                      transition: (theme) =>
+                        theme.transitions.create(['transform', 'box-shadow'], {
+                          duration: theme.transitions.duration.shorter,
+                        }),
+                      '&:hover': {
+                        transform: 'translateY(-4px)',
+                        boxShadow: (theme) => theme.customShadows.z20,
+                      },
                     }}
                   >
                     <Box
@@ -129,7 +139,7 @@ export function LandingFlow({ sx, ...other }: BoxProps) {
                 {index < flow.length - 1 && (
                   <Box
                     component={m.div}
-                    variants={varFade({ distance: 24 }).in}
+                    variants={varFade().in}
                     sx={{
                       display: 'flex',
                       alignItems: 'center',

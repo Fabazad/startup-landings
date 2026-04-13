@@ -74,6 +74,10 @@
     "flow": {
       "caption": "Comment ça marche",
       "title": "Simple et rapide"
+    },
+    "benefits": {
+      "caption": "Pourquoi nous choisir",
+      "title": "Tout ce qu'il vous faut"
     }
   },
   "common": {

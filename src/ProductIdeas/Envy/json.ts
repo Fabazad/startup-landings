@@ -244,6 +244,118 @@ export const ENVY_PRODUCT_IDEA: RawProductIdea = {
       },
     },
   ],
+  benefits: [
+    {
+      icon: 'mdi:currency-eur-off',
+      title: {
+        en: '100% free',
+        fr: '100 % gratuit',
+      },
+      description: {
+        en: 'No subscription, no hidden fees.',
+        fr: "Pas d'abonnement, pas de frais cachés.",
+      },
+    },
+    {
+      icon: 'mdi:web',
+      title: {
+        en: 'Multi-store',
+        fr: 'Multi-enseigne',
+      },
+      description: {
+        en: 'Add items from any website.',
+        fr: "Ajoutez des articles depuis n'importe quel site.",
+      },
+    },
+    {
+      icon: 'mdi:checkbox-marked-circle-outline',
+      title: {
+        en: 'No duplicate gifts',
+        fr: 'Réservation anti-doublon',
+      },
+      description: {
+        en: 'Guests see what is already reserved.',
+        fr: 'Les invités voient ce qui est déjà réservé.',
+      },
+    },
+    {
+      icon: 'mdi:account-off-outline',
+      title: {
+        en: 'No account needed',
+        fr: 'Sans inscription',
+      },
+      description: {
+        en: 'Guests reserve without signing up.',
+        fr: 'Les invités réservent sans créer de compte.',
+      },
+    },
+    {
+      icon: 'mdi:eye-off-outline',
+      title: {
+        en: 'Surprise preserved',
+        fr: 'Surprise préservée',
+      },
+      description: {
+        en: 'The list owner never sees who reserved what.',
+        fr: 'Le propriétaire ne sait pas qui réserve quoi.',
+      },
+    },
+    {
+      icon: 'mdi:lightbulb-outline',
+      title: {
+        en: 'Public idea lists',
+        fr: "Listes d'idées publiques",
+      },
+      description: {
+        en: 'Browse curated gift ideas for inspiration.',
+        fr: 'Parcourez des idées cadeaux pour vous inspirer.',
+      },
+    },
+    {
+      icon: 'mdi:puzzle-outline',
+      title: {
+        en: 'Chrome extension',
+        fr: 'Extension Chrome',
+      },
+      description: {
+        en: 'Save items in one click while browsing.',
+        fr: 'Sauvegardez des articles en un clic en naviguant.',
+      },
+    },
+    {
+      icon: 'mdi:cellphone',
+      title: {
+        en: 'Mobile app',
+        fr: 'Application mobile',
+      },
+      description: {
+        en: 'Share directly from any app on your phone.',
+        fr: "Partagez directement depuis n'importe quelle app.",
+      },
+    },
+    {
+      icon: 'mdi:account-multiple-outline',
+      title: {
+        en: 'Collaborative lists',
+        fr: 'Listes collaboratives',
+      },
+      description: {
+        en: 'Build a wishlist with your partner or friends.',
+        fr: 'Créez une wishlist à plusieurs.',
+      },
+    },
+    {
+      icon: 'mdi:infinity',
+      title: {
+        en: 'Unlimited lists',
+        fr: 'Listes illimitées',
+      },
+      description: {
+        en: 'Create as many lists as you need.',
+        fr: 'Créez autant de listes que vous voulez.',
+      },
+    },
+  ],
   heroTexts: {
     description: {
       en: 'The free app to list and share your wishes.\nAvoid duplicate gifts and simplify your celebrations.\nList, share, and celebrate today!',

@@ -230,6 +230,7 @@ export function NavMobile({
 
           {extraLinks.map((link) => (
             <ListItemButton
+              key={link.label}
               component={Link}
               href={link.link}
               onClick={onClose}
