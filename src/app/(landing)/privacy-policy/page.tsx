@@ -1,14 +1,14 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { headers } from 'next/headers';
-import { getProductIdea } from 'src/app/getProductIdea';
+import { getLandingProductIdea } from 'src/app/getProductIdea';
 import { detectLanguage } from 'src/locales/server';
 import { LandingPrivacyPolicyView } from 'src/sections/landing/landing-privacy-policy-view';
 
 // ----------------------------------------------------------------------
 
 export async function generateMetadata(): Promise<Metadata> {
-  const productIdea = await getProductIdea();
+  const productIdea = await getLandingProductIdea();
   const lang = await detectLanguage();
 
   if (!productIdea.privacyPolicy) {
@@ -50,7 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
 // ----------------------------------------------------------------------
 
 export default async function PrivacyPolicyPage() {
-  const productIdea = await getProductIdea();
+  const productIdea = await getLandingProductIdea();
 
   if (!productIdea.privacyPolicy) {
     notFound();

@@ -6,7 +6,7 @@ import { t } from 'i18next';
 import dynamic from 'next/dynamic';
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import { toast } from 'sonner';
-import { useProductIdea } from 'src/app/product-idea-provider';
+import { useOptionalProductIdea } from 'src/app/product-idea-provider';
 import { useCookies } from 'src/hooks/use-cookies';
 import { LanguageValue, useTranslate } from 'src/locales';
 import { useSearchParams } from 'src/routes/hooks';
@@ -69,7 +69,7 @@ export function SubscriptionModalProvider({ children }: { children: React.ReactN
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstFetching, setIsFirstFetching] = useState(true);
   const searchParams = useSearchParams();
-  const { name: productName } = useProductIdea();
+  const { name: productName } = useOptionalProductIdea() ?? { name: '' };
 
   const { state: subscriptionIdCookie, setState: setSubscriptionIdCookie } = useCookies<
     number | null

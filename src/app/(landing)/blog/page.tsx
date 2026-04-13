@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getProductIdea } from 'src/app/getProductIdea';
+import { getLandingProductIdea } from 'src/app/getProductIdea';
 import { createClient } from '@supabase/supabase-js';
 import { CONFIG } from 'src/config-global';
 import { detectLanguage, getServerTranslations } from 'src/locales/server';
@@ -12,7 +12,8 @@ import { PostListHomeView } from './post-list-home-view';
 export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { name } = await getProductIdea();
+  const productIdea = await getLandingProductIdea();
+  const { name } = productIdea;
   const { t } = await getServerTranslations();
 
   return {
@@ -22,7 +23,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BlogPage() {
-  const { name: productIdeaName } = await getProductIdea();
+  const productIdea = await getLandingProductIdea();
+  const { name: productIdeaName } = productIdea;
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
 

@@ -54,7 +54,7 @@ export const generateViewport: () => Promise<Viewport> = async () => {
   return {
     width: 'device-width',
     initialScale: 1,
-    themeColor: getThemeColorValue(rawProductIdea.themeColor),
+    themeColor: getThemeColorValue(rawProductIdea?.themeColor || 'blue'),
   };
 };
 
@@ -69,18 +69,28 @@ export async function generateMetadata(): Promise<Metadata> {
   const protocol = headersList.get('x-forwarded-proto') || 'https';
   const baseUrl = `${protocol}://${host}`;
 
-  const imageUrl = `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`;
-  const description = rawProductIdea.heroTexts.description.fr;
+  const imageUrl = rawProductIdea
+    ? `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`
+    : `${baseUrl}/logo/blue-octopus.png`;
+  const description = rawProductIdea
+    ? rawProductIdea.heroTexts.description.fr
+    : "Un portfolio d'applications innovantes.";
 
   // Generate keywords from product features
-  const keywords = rawProductIdea.keywords.join(', ');
+  const keywords = rawProductIdea
+    ? rawProductIdea.keywords.join(', ')
+    : 'onama, apps, startups, portfolio';
 
   // Generate alternate languages
   const alternates = {
     languages: Object.fromEntries(languages.map((lang) => [lang, `${baseUrl}?lang=${lang}`])),
   };
 
-  const title = `${rawProductIdea.name} - ${rawProductIdea.heroTexts.headingPart1.fr} ${rawProductIdea.heroTexts.headingPart2.fr}`;
+  const title = rawProductIdea
+    ? `${rawProductIdea.name} - ${rawProductIdea.heroTexts.headingPart1.fr} ${rawProductIdea.heroTexts.headingPart2.fr}`
+    : `Onama - Bienvenue sur Onama`;
+
+  const siteName = rawProductIdea?.name || 'Onama';
 
   return {
     metadataBase: new URL(baseUrl),
@@ -88,7 +98,9 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     keywords,
     icons: {
-      icon: `/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`,
+      icon: rawProductIdea
+        ? `/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`
+        : '/favicon/blue-octopus.png',
     },
     alternates,
     openGraph: {
@@ -96,13 +108,13 @@ export async function generateMetadata(): Promise<Metadata> {
       url: baseUrl,
       title,
       description,
-      siteName: rawProductIdea.name,
+      siteName,
       images: [
         {
           url: imageUrl,
           width: 1200,
           height: 630,
-          alt: rawProductIdea.name,
+          alt: siteName,
         },
       ],
       locale: 'fr_FR',
@@ -113,7 +125,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       images: [imageUrl],
-      creator: `@${rawProductIdea.name.toLowerCase().replace(/\s+/g, '')}`,
+      creator: `@${siteName.toLowerCase().replace(/\s+/g, '')}`,
     },
     robots: {
       index: true,
@@ -153,17 +165,20 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="preconnect" href="https://eu.i.posthog.com" />
         <link rel="preconnect" href="https://eu-assets.i.posthog.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://api.iconify.design" crossOrigin="anonymous" />
-        {rawProductIdea.name === PRODUCT_IDEA_NAMES.ENVY && (
+        {rawProductIdea?.name === PRODUCT_IDEA_NAMES.ENVY && (
           <>
             <link rel="preconnect" href="https://client.crisp.chat" crossOrigin="anonymous" />
             {/* @ts-expect-error: impact specifically requests 'value' attribute */}
             <meta name="impact-site-verification" value="264b8bdb-8b2d-424f-bec6-5c55a7306a39" />
             <meta name="fo-verify" content="f3a44355-3cf6-4dd8-a9ae-4cc39d425637" />
+            <meta name="mylead-verification" content="b29df0cc12dd544d785a848089b958d2" />
           </>
         )}
       </head>
       <body>
-        <GlobalStructuredData rawProductIdea={rawProductIdea} baseUrl={baseUrl} />
+        {rawProductIdea && (
+          <GlobalStructuredData rawProductIdea={rawProductIdea} baseUrl={baseUrl} />
+        )}
         <InitColorSchemeScript
           defaultMode={schemeConfig.defaultMode}
           modeStorageKey={schemeConfig.modeStorageKey}
@@ -173,7 +188,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <SettingsProvider
               settings={{
                 ...defaultSettings,
-                primaryColor: rawProductIdea.themeColor,
+                primaryColor: rawProductIdea?.themeColor || 'blue',
                 fontFamily: 'Nunito Sans Variable',
               }}
             >
@@ -181,14 +196,23 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <MotionLazy>
                   <PostHogProvider>
                     <ReactQueryProvider>
-                      <ProductIdeaProvider rawProductIdea={rawProductIdea}>
+                      {rawProductIdea ? (
+                        <ProductIdeaProvider rawProductIdea={rawProductIdea}>
+                          <SubscriptionModalProvider>
+                            <Snackbar />
+                            <ProgressBar />
+                            <SettingsDrawer />
+                            {children}
+                          </SubscriptionModalProvider>
+                        </ProductIdeaProvider>
+                      ) : (
                         <SubscriptionModalProvider>
                           <Snackbar />
                           <ProgressBar />
                           <SettingsDrawer />
                           {children}
                         </SubscriptionModalProvider>
-                      </ProductIdeaProvider>
+                      )}
                     </ReactQueryProvider>
                   </PostHogProvider>
                 </MotionLazy>
@@ -198,7 +222,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </I18nProvider>
         <Analytics />
         <SpeedInsights />
-        {rawProductIdea.id === 'envy' && (
+        {rawProductIdea?.name === PRODUCT_IDEA_NAMES.ENVY && (
           <Script
             id="crisp-chat"
             strategy="lazyOnload"

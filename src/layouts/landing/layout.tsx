@@ -26,6 +26,10 @@ export type MainLayoutProps = {
 
 export async function LandingLayout({ sx = {}, children, header = {} }: MainLayoutProps) {
   const productIdea = await getProductIdea();
+  if (!productIdea) {
+    return <Main>{children}</Main>;
+  }
+
   const { logo, themeColor, name: productName, extraLinks } = productIdea;
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();

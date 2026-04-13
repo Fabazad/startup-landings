@@ -12,6 +12,8 @@ export const useProductIdea = () => {
   return productIdea;
 };
 
+export const useOptionalProductIdea = () => useContext(Ctx);
+
 export function ProductIdeaProvider({
   rawProductIdea,
   children,

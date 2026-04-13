@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
 import { CONFIG } from 'src/config-global';
-import { getProductIdea } from 'src/app/getProductIdea';
+import { getLandingProductIdea } from 'src/app/getProductIdea';
 
 export async function GET(request: Request) {
   try {
@@ -11,7 +11,8 @@ export async function GET(request: Request) {
     const limit = parseInt(searchParams.get('limit') || '8', 10);
     const lang = searchParams.get('lang') || 'fr';
 
-    const { name: productIdeaName } = await getProductIdea();
+    const productIdea = await getLandingProductIdea();
+    const { name: productIdeaName } = productIdea;
     const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
 
     const { data: blogs, error } = await supabase

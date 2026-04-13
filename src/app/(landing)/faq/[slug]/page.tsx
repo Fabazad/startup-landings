@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { headers } from 'next/headers';
-import { getProductIdea } from 'src/app/getProductIdea';
+import { getLandingProductIdea } from 'src/app/getProductIdea';
 import { detectLanguage } from 'src/locales/server';
 import { languages } from 'src/locales/config-locales';
 import { LandingFaqPageView } from 'src/sections/landing/view';
@@ -15,7 +15,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const lang = await detectLanguage();
-  const productIdea = await getProductIdea();
+  const productIdea = await getLandingProductIdea();
 
   if (!productIdea.faq || !productIdea.faq.pages) {
     return {};
@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function FaqPage({ params }: Props) {
   const lang = await detectLanguage();
-  const productIdea = await getProductIdea();
+  const productIdea = await getLandingProductIdea();
 
   if (!productIdea.faq || !productIdea.faq.pages) {
     notFound();

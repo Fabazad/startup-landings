@@ -4,7 +4,7 @@ import Alert from '@mui/material/Alert';
 import { Logo } from 'src/components/logo';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import React from 'react';
-import { getProductIdea } from 'src/app/getProductIdea';
+import { getLandingProductIdea } from 'src/app/getProductIdea';
 import Link from 'next/link';
 import { Container } from '@mui/material';
 import { ThemeButton } from '../components/theme-button';
@@ -31,7 +31,9 @@ export async function SimpleLayout({
 }: SimpleLayoutProps) {
   const layoutQuery: Breakpoint = 'md';
 
-  const { logo, themeColor, name: productName, id: productId } = await getProductIdea();
+  const productIdea = await getLandingProductIdea();
+
+  const { logo, themeColor, name: productName, id: productId } = productIdea;
 
   return (
     <LayoutSection

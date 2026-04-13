@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { headers } from 'next/headers';
-import { getProductIdea } from 'src/app/getProductIdea';
+import { getLandingProductIdea } from 'src/app/getProductIdea';
 import { createClient } from '@supabase/supabase-js';
 import { CONFIG } from 'src/config-global';
 import { detectLanguage, getServerTranslations } from 'src/locales/server';
@@ -15,7 +15,8 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const { name: productName } = await getProductIdea();
+  const productIdea = await getLandingProductIdea();
+  const { name: productName } = productIdea;
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
 
@@ -52,7 +53,8 @@ export async function generateMetadata({
 }
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const { name: productIdeaName } = await getProductIdea();
+  const productIdea = await getLandingProductIdea();
+  const { name: productIdeaName } = productIdea;
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
 
