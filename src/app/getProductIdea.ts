@@ -6,8 +6,11 @@ import { ProductIdea, RawProductIdea, translateProductIdea } from 'src/types/Pro
 export const getRawProductIdea = async (): Promise<RawProductIdea | null> => {
   // get url subdomain from url on server
   const headersList = await headers();
-  const url = headersList.get('x-forwarded-host') || headersList.get('host') || '';
-  const subdomain = url.split('.')[0];
+  const host = headersList.get('x-forwarded-host') || headersList.get('host') || '';
+
+  const subdomain = host.split('.')[0];
+
+  if (host === 'envynest.fr') return RAW_PRODUCT_IDEAS.Envy;
 
   const productIdea = Object.values(RAW_PRODUCT_IDEAS).find((idea) => idea.id === subdomain);
   if (productIdea) return productIdea;
