@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next';
 import { headers } from 'next/headers';
-import { RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
 import { languages } from 'src/locales/config-locales';
 import { createClient } from '@supabase/supabase-js';
 import { CONFIG } from 'src/config-global';
+import { getRawProductIdea } from './getProductIdea';
 
 // Force dynamic generation to ensure correct domain in URLs
 export const dynamic = 'force-dynamic';
@@ -14,9 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const protocol = headersList.get('x-forwarded-proto') || 'https';
   const baseUrl = `${protocol}://${host}`;
 
-  // Get subdomain
-  const subdomain = host.replace(/^www\./, '').split('.')[0];
-  const productIdea = Object.values(RAW_PRODUCT_IDEAS).find((idea) => idea.id === subdomain);
+  const productIdea = await getRawProductIdea();
 
   // Base pages for each language
   const pages: MetadataRoute.Sitemap = [
