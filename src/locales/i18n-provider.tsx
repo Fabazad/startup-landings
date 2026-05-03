@@ -32,7 +32,8 @@ const init = CONFIG.isStaticExport
   : {
       ...i18nOptions(),
       detection: {
-        order: ['cookie', 'localStorage', 'navigator'],
+        order: ['querystring', 'cookie', 'localStorage', 'navigator'],
+        lookupQuerystring: 'lang',
         caches: ['localStorage', 'cookie'],
         lookupCookie: cookieName,
         cookieOptions: { path: '/', sameSite: 'strict' as const },
