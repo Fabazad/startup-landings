@@ -73,11 +73,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Add blog pages if the product idea has them
   if (productIdea?.name) {
-    const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
+    const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.adminKey);
     const { data: blogs } = await supabase
       .from('blogs')
       .select('slug, language, updated_at')
-      .or(`product_idea_id.eq."${productIdea.name}",product_idea_id.eq."${productIdea.id}"`)
+      .or(`product_idea_id.eq.${productIdea.name},product_idea_id.eq.${productIdea.id}`)
       .eq('published', true);
 
     if (blogs) {
@@ -98,13 +98,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         // Build alternates record for this blog slug
         const blogAlternates: Record<string, string> = {};
         blogGroup.forEach((blog) => {
-          blogAlternates[blog.language] =
-            `${baseUrl}/blog/${slug}/${blog.language && blog.language !== 'fr' ? `?lang=${blog.language}` : ''}`;
+          const langQuery =
+            blog.language && blog.language !== 'fr' ? `?lang=${blog.language}` : '';
+          blogAlternates[blog.language] = `${baseUrl}/blog/${slug}${langQuery}`;
         });
 
         // Push each language version of the blog to sitemap
         blogGroup.forEach((blog) => {
-          const blogUrl = `${baseUrl}/blog/${slug}/${blog.language && blog.language !== 'fr' ? `?lang=${blog.language}` : ''}`;
+          const langQuery =
+            blog.language && blog.language !== 'fr' ? `?lang=${blog.language}` : '';
+          const blogUrl = `${baseUrl}/blog/${slug}${langQuery}`;
           pages.push({
             url: blogUrl,
             lastModified: new Date(blog.updated_at || new Date()),

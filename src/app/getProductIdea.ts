@@ -7,10 +7,11 @@ export const getRawProductIdea = async (): Promise<RawProductIdea | null> => {
   // get url subdomain from url on server
   const headersList = await headers();
   const host = headersList.get('x-forwarded-host') || headersList.get('host') || '';
+  const normalizedHost = host.replace(/^www\./, '');
 
-  const subdomain = host.split('.')[0];
+  if (normalizedHost === 'envynest.fr') return RAW_PRODUCT_IDEAS.Envy;
 
-  if (host === 'envynest.fr') return RAW_PRODUCT_IDEAS.Envy;
+  const subdomain = normalizedHost.split('.')[0];
 
   const productIdea = Object.values(RAW_PRODUCT_IDEAS).find((idea) => idea.id === subdomain);
   if (productIdea) return productIdea;
