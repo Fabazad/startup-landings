@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { cookieName, languages } from './src/locales/config-locales';
+import { cookieName, languages } from './locales/config-locales';
 
 export function middleware(request: NextRequest) {
   const { searchParams } = request.nextUrl;
