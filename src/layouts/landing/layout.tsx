@@ -1,4 +1,5 @@
 import type { Breakpoint, SxProps, Theme } from '@mui/material/styles';
+import { cache } from 'react';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import { Logo } from 'src/components/logo';
@@ -13,6 +14,18 @@ import { HomeFooter } from './footer';
 import { Main } from './main';
 import { NavDesktop } from './nav/desktop/NavDesktop';
 import { NavMobile } from './nav/mobile/NavMobile';
+
+// Cache the blog count per render to dedupe within a request.
+const getBlogCount = cache(async (productName: string, lang: string) => {
+  const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
+  const { count } = await supabase
+    .from('blogs')
+    .select('*', { count: 'exact', head: true })
+    .eq('product_idea_id', productName)
+    .eq('language', lang)
+    .eq('published', true);
+  return count ?? 0;
+});
 
 // ----------------------------------------------------------------------
 
@@ -33,16 +46,7 @@ export async function LandingLayout({ sx = {}, children, header = {} }: MainLayo
   const { logo, themeColor, name: productName, extraLinks } = productIdea;
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
-  const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.key);
-
-  const { count } = await supabase
-    .from('blogs')
-    .select('*', { count: 'exact', head: true })
-    .eq('product_idea_id', productName)
-    .eq('language', lang ?? 'fr')
-    .eq('published', true);
-
-  const hasBlog = count ? count > 0 : false;
+  const hasBlog = (await getBlogCount(productName, lang ?? 'fr')) > 0;
 
   const layoutQuery: Breakpoint = 'md';
 
@@ -65,7 +69,7 @@ export async function LandingLayout({ sx = {}, children, header = {} }: MainLayo
               <>
                 {/* -- Logo -- */}
                 <Link href="/" style={{ textDecoration: 'none', display: 'flex' }}>
-                  <Logo logo={logo} themeColor={themeColor} productName={productName} />
+                  <Logo logo={logo} themeColor={themeColor} productName={productName} priority />
                   <Box
                     component="h4"
                     typography="h4"

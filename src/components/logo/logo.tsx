@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import Image from 'next/image';
 import { CONFIG } from 'src/config-global';
 import { PrimaryColor } from '../settings';
 
@@ -11,6 +12,7 @@ export type LogoProps = {
   productName: string;
   height?: number;
   width?: number;
+  priority?: boolean;
 };
 
 export function Logo({
@@ -20,23 +22,19 @@ export function Logo({
   productName,
   height = 40,
   width = 40,
+  priority = false,
 }: LogoProps) {
   const logoUrl = `${CONFIG.assetsDir}/logo/${themeColor}-${logo}.png`;
 
-  const baseSize = {
-    width,
-    height,
-    ...(!isSingle && {
-      width: width === 40 ? 102 : width,
-      height: height === 40 ? 36 : height,
-    }),
-  };
+  const resolvedWidth = !isSingle && width === 40 ? 102 : width;
+  const resolvedHeight = !isSingle && height === 40 ? 36 : height;
 
   return (
     <Box
       aria-label={`${productName} Logo`}
       sx={{
-        ...baseSize,
+        width: resolvedWidth,
+        height: resolvedHeight,
         flexShrink: 0,
         display: 'inline-flex',
         verticalAlign: 'middle',
@@ -44,13 +42,15 @@ export function Logo({
         textDecoration: 'none',
       }}
     >
-      <Box
-        component="img"
+      <Image
         src={logoUrl}
-        width="100%"
-        height="100%"
-        aria-label={`${productName} Logo`}
+        width={resolvedWidth}
+        height={resolvedHeight}
         alt={`${productName} Logo`}
+        priority={priority}
+        loading={priority ? undefined : 'lazy'}
+        sizes={`${resolvedWidth}px`}
+        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
       />
     </Box>
   );
