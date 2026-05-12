@@ -11,12 +11,22 @@ const nextConfig = {
   },
   experimental: {
     serverComponentsExternalPackages: ['re2', 'url-regex-safe'],
+    optimizePackageImports: [
+      '@mui/material',
+      '@mui/lab',
+      '@mui/icons-material',
+      '@mui/x-data-grid',
+      '@mui/x-date-pickers',
+      '@mui/x-tree-view',
+      'framer-motion',
+      '@iconify/react',
+    ],
   },
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         protocol: 'https',
