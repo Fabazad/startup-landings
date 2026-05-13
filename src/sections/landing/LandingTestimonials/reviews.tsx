@@ -70,7 +70,7 @@ export function Reviews() {
               />
               <Stack sx={{ typography: 'subtitle1' }}>
                 <Box component="span">{item.name}</Box>
-                <Box component="span" sx={{ typography: 'body2', color: 'text.disabled' }}>
+                <Box component="span" sx={{ typography: 'body2', color: 'text.secondary' }}>
                   {fToNow(dayjs(item.postedAt).toDate())}
                 </Box>
               </Stack>

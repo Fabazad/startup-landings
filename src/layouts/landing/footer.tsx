@@ -146,6 +146,7 @@ export function Footer({ layoutQuery, sx = {}, hasBlog = false }: FooterProps) {
                       href={link.href}
                       color="inherit"
                       variant="body2"
+                      underline="always"
                     >
                       {link.name}
                     </Link>
@@ -192,12 +193,21 @@ export function HomeFooter({ sx = {}, hasPrivacyPolicy = false }: HomeFooterProp
         <Box sx={{ mt: 1, typography: 'caption' }}>
           © {t('common.allRightsReserved')}
           <br /> made by
-          <Link href="https://onama.io/"> onama.io </Link>
+          <Link href="https://onama.io/" underline="always">
+            {' '}
+            onama.io{' '}
+          </Link>
         </Box>
 
         {hasPrivacyPolicy && (
           <Box sx={{ mt: 1 }}>
-            <Link component={RouterLink} href="/privacy-policy" color="inherit" variant="caption">
+            <Link
+              component={RouterLink}
+              href="/privacy-policy"
+              color="inherit"
+              variant="caption"
+              underline="always"
+            >
               {t('common.privacyPolicy')}
             </Link>
           </Box>

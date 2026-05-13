@@ -152,6 +152,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       className={`${barlow.variable} ${nunitoSans.variable}`}
     >
       <head>
+        {/* Discover the LCP hero background before React hydrates so the
+            browser starts fetching during HTML parsing. */}
+        <link
+          rel="preload"
+          as="image"
+          href="/assets/background/background-3.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
         {/* Keep critical connections focused on first paint; analytics/chat load after intent. */}
         <link rel="preconnect" href="https://api.iconify.design" crossOrigin="anonymous" />
         {rawProductIdea?.name === PRODUCT_IDEA_NAMES.ENVY && (

@@ -16,6 +16,9 @@ const nextConfig = {
   env: {
     BUILD_STATIC_EXPORT: isStaticExport,
   },
+  compiler: {
+    emotion: true,
+  },
   experimental: {
     serverComponentsExternalPackages: ['re2', 'url-regex-safe'],
     optimizePackageImports: [

@@ -38,7 +38,7 @@ export function SectionCaption({ title, variants = undefined, sx = {} }: TextPro
     <Stack
       component={m.span}
       variants={variants ?? varFade({ distance: 24 }).inUp}
-      sx={{ typography: 'overline', color: 'text.disabled', fontSize: '1.2rem', ...sx }}
+      sx={{ typography: 'overline', color: 'text.secondary', fontSize: '1.2rem', ...sx }}
     >
       {title}
     </Stack>
