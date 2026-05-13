@@ -2,18 +2,20 @@
 
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
-import Image from 'next/image';
 
 import { CONFIG } from 'src/config-global';
 import { varAlpha, stylesMode } from 'src/theme/styles';
 
 /**
- * Lightweight image layer for the hero. This uses an actual high-priority
- * image instead of a CSS background so the browser discovers the LCP resource
- * from HTML and can fetch it before the generated CSS is parsed.
+ * Hero background layer. Uses a plain <img> (not next/image) so the asset URL
+ * matches the explicit <link rel="preload"> declared in the root layout head,
+ * letting the browser fetch the LCP resource the moment HTML parsing reaches
+ * it — without waiting for React hydration or the Next/Image optimization
+ * route.
  */
 export function HeroBackgroundImage() {
   const theme = useTheme();
+  const src = `${CONFIG.assetsDir}/assets/background/background-3.webp`;
 
   return (
     <Box
@@ -34,15 +36,20 @@ export function HeroBackgroundImage() {
         },
       }}
     >
-      <Image
-        src={`${CONFIG.assetsDir}/assets/background/background-3.webp`}
+      <Box
+        component="img"
+        src={src}
         alt=""
         aria-hidden
-        fill
-        priority
         fetchPriority="high"
-        sizes="100vw"
-        style={{ objectFit: 'cover' }}
+        decoding="async"
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+        }}
       />
       <Box
         aria-hidden

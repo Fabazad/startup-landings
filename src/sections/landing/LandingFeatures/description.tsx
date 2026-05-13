@@ -25,7 +25,7 @@ export function Description({ feature }: { feature: Feature }) {
         variant="h6"
         sx={{
           typography: 'overline',
-          color: 'text.disabled',
+          color: 'text.secondary',
           mb: { xs: 6, md: 8 },
           textAlign: { xs: 'center', md: 'left' },
         }}

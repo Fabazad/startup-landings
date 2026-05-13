@@ -43,7 +43,7 @@ export function LandingFAQ({ sx, ...other }: BoxProps) {
         <Container>
           <Box sx={{ mb: { xs: 5, md: 10 }, textAlign: 'center' }}>
             <m.div variants={varFade().inUp}>
-              <Typography variant="overline" sx={{ color: 'text.disabled' }}>
+              <Typography variant="overline" sx={{ color: 'text.secondary' }}>
                 FAQ
               </Typography>
             </m.div>
