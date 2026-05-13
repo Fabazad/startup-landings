@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { t } from 'i18next';
 import dynamic from 'next/dynamic';
-import { useEffect, useState, useMemo, useCallback } from 'react';
+import { Suspense, useEffect, useState, useMemo, useCallback } from 'react';
 import { toast } from 'sonner';
 import { useOptionalProductIdea } from 'src/app/product-idea-provider';
 import { useCookies } from 'src/hooks/use-cookies';
@@ -64,7 +64,7 @@ const api = {
   },
 };
 
-export function SubscriptionModalProvider({ children }: { children: React.ReactNode }) {
+function SubscriptionModalProviderInner({ children }: { children: React.ReactNode }) {
   const [openModal, setOpenModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstFetching, setIsFirstFetching] = useState(true);
@@ -192,5 +192,13 @@ export function SubscriptionModalProvider({ children }: { children: React.ReactN
       <SubscriptionModalView />
       {children}
     </subscriptionContext.Provider>
+  );
+}
+
+export function SubscriptionModalProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense fallback={children}>
+      <SubscriptionModalProviderInner>{children}</SubscriptionModalProviderInner>
+    </Suspense>
   );
 }
