@@ -1,9 +1,10 @@
 import { headers } from 'next/headers';
+import { cache } from 'react';
 import { detectLanguage } from 'src/locales/server';
 import { DEFAULT_PRODUCT_IDEA, RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
 import { ProductIdea, RawProductIdea, translateProductIdea } from 'src/types/ProductIdea';
 
-export const getRawProductIdea = async (): Promise<RawProductIdea | null> => {
+export const getRawProductIdea = cache(async (): Promise<RawProductIdea | null> => {
   // get url subdomain from url on server
   const headersList = await headers();
   const host = headersList.get('x-forwarded-host') || headersList.get('host') || '';
@@ -17,14 +18,14 @@ export const getRawProductIdea = async (): Promise<RawProductIdea | null> => {
   if (productIdea) return productIdea;
 
   return DEFAULT_PRODUCT_IDEA;
-};
+});
 
-export const getProductIdea = async (): Promise<ProductIdea | null> => {
+export const getProductIdea = cache(async (): Promise<ProductIdea | null> => {
   const [lang, rawProductIdea] = await Promise.all([detectLanguage(), getRawProductIdea()]);
   if (!rawProductIdea) return null;
   const productIdea = translateProductIdea(rawProductIdea, lang);
   return productIdea;
-};
+});
 
 /**
  * Use this in pages/layouts that are always under a product subdomain.

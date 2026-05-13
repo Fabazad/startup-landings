@@ -12,7 +12,7 @@ export function GlobalStructuredData({ rawProductIdea, baseUrl }: GlobalStructur
     '@type': 'Organization',
     name: rawProductIdea.name,
     url: baseUrl,
-    logo: `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`,
+    logo: `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.webp`,
     description: rawProductIdea.heroTexts.description.en,
   };
 

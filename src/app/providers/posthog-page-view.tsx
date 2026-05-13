@@ -2,7 +2,7 @@
 
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, Suspense } from 'react';
-import { capturePostHog } from './posthog-client';
+import { capturePostHogAfterIntent } from './posthog-client';
 
 function PostHogPageViewInner() {
   const pathname = usePathname();
@@ -15,10 +15,12 @@ function PostHogPageViewInner() {
       if (searchParams.toString()) {
         url += `?${searchParams.toString()}`;
       }
-      capturePostHog('$pageview', {
+      return capturePostHogAfterIntent('$pageview', {
         $current_url: url,
       });
     }
+
+    return undefined;
   }, [pathname, searchParams]);
 
   return null;

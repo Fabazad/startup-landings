@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
-import posthog from 'posthog-js';
 import { useTranslation } from 'react-i18next';
 import { useProductIdea } from 'src/app/product-idea-provider';
+import { capturePostHog } from 'src/app/providers/posthog-client';
 import { Iconify } from 'src/components/iconify';
 import { SubscriptionStep, useSubscription } from './SubscriptionModal/subscription-context';
 
@@ -14,7 +14,7 @@ export function TryForFreeButton({ buttonName }: { buttonName: string }) {
     setOpenModal(true);
     if (subscriptionStep === SubscriptionStep.SUBSCRIBE_EMAIL) {
       setOpenModal(true);
-      posthog.capture('try_for_free_button_click', {
+      capturePostHog('try_for_free_button_click', {
         event_button: buttonName,
         event_product: productName,
       });

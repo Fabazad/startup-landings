@@ -24,7 +24,7 @@ export function Logo({
   width = 40,
   priority = false,
 }: LogoProps) {
-  const logoUrl = `${CONFIG.assetsDir}/logo/${themeColor}-${logo}.png`;
+  const logoUrl = `${CONFIG.assetsDir}/logo/${themeColor}-${logo}.webp`;
 
   const resolvedWidth = !isSingle && width === 40 ? 102 : width;
   const resolvedHeight = !isSingle && height === 40 ? 36 : height;

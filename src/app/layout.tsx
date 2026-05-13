@@ -14,11 +14,11 @@ import { ThemeProvider } from 'src/theme/theme-provider';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { ProgressBar } from 'src/components/progress-bar';
 import { defaultSettings } from 'src/components/settings/config-settings';
+import { DeferredSettingsDrawer } from 'src/components/settings/deferred-settings-drawer';
 import { PrimaryColor } from 'src/components/settings/types';
 import { SettingsProvider } from 'src/components/settings/context';
 import { Snackbar } from 'src/components/snackbar';
 import { headers } from 'next/headers';
-import dynamic from 'next/dynamic';
 import { GlobalStructuredData } from 'src/components/seo/structured-data';
 import { languages } from 'src/locales/config-locales';
 import { SubscriptionModalProvider } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
@@ -30,13 +30,6 @@ import { DeferredCrisp } from './providers/deferred-crisp';
 import ReactQueryProvider from './providers/react-query-provider';
 import { getRawProductIdea } from './getProductIdea';
 import { barlow, nunitoSans } from './fonts';
-
-const SettingsDrawer = dynamic(
-  () => import('src/components/settings/drawer').then((m) => m.SettingsDrawer),
-  {
-    ssr: false,
-  }
-);
 
 // ----------------------------------------------------------------------
 
@@ -70,8 +63,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = `${protocol}://${host}`;
 
   const imageUrl = rawProductIdea
-    ? `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`
-    : `${baseUrl}/logo/blue-octopus.png`;
+    ? `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.webp`
+    : `${baseUrl}/logo/blue-octopus.webp`;
   const description = rawProductIdea
     ? rawProductIdea.heroTexts.description.fr
     : "Un portfolio d'applications innovantes.";
@@ -99,8 +92,8 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords,
     icons: {
       icon: rawProductIdea
-        ? `/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`
-        : '/favicon/blue-octopus.png',
+        ? `/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.webp`
+        : '/favicon/blue-octopus.webp',
     },
     alternates,
     openGraph: {
@@ -196,7 +189,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                           <SubscriptionModalProvider>
                             <Snackbar />
                             <ProgressBar />
-                            <SettingsDrawer />
+                            <DeferredSettingsDrawer />
                             {children}
                           </SubscriptionModalProvider>
                         </ProductIdeaProvider>
@@ -204,7 +197,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                         <SubscriptionModalProvider>
                           <Snackbar />
                           <ProgressBar />
-                          <SettingsDrawer />
+                          <DeferredSettingsDrawer />
                           {children}
                         </SubscriptionModalProvider>
                       )}

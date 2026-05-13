@@ -32,6 +32,7 @@ function NProgressDone() {
 export function ProgressBar() {
   useEffect(() => {
     NProgress.configure({ showSpinner: false });
+    const originalPushState = window.history.pushState;
 
     const handleAnchorClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -63,7 +64,12 @@ export function ProgressBar() {
         return target.apply(thisArg, argArray);
       },
     });
-  });
+
+    return () => {
+      document.removeEventListener('click', handleAnchorClick);
+      window.history.pushState = originalPushState;
+    };
+  }, []);
 
   return (
     <Suspense fallback={null}>

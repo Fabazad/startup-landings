@@ -2,8 +2,8 @@
 
 import { Button, ButtonProps } from '@mui/material';
 import { t } from 'i18next';
-import posthog from 'posthog-js';
 import { useProductIdea } from 'src/app/product-idea-provider';
+import { capturePostHog } from 'src/app/providers/posthog-client';
 import {
   SubscriptionStep,
   useSubscription,
@@ -23,7 +23,7 @@ export function GetStartedButton({
     setOpenModal(true);
     if (subscriptionStep === SubscriptionStep.SUBSCRIBE_EMAIL) {
       setOpenModal(true);
-      posthog.capture('get_started_button_click', {
+      capturePostHog('get_started_button_click', {
         event_button: buttonName,
         event_product: productName,
       });
