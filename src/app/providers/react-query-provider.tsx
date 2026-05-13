@@ -6,10 +6,9 @@ import { useState } from 'react';
 
 const ReactQueryDevtools =
   process.env.NODE_ENV === 'development'
-    ? dynamic(
-        () => import('@tanstack/react-query-devtools').then((m) => m.ReactQueryDevtools),
-        { ssr: false }
-      )
+    ? dynamic(() => import('@tanstack/react-query-devtools').then((m) => m.ReactQueryDevtools), {
+        ssr: false,
+      })
     : () => null;
 
 export default function ReactQueryProvider({ children }: { children: React.ReactNode }) {
