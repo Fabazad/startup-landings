@@ -67,17 +67,25 @@ export function NotificationsDrawer({ data = [], sx, ...other }: NotificationsDr
 
       {!!totalUnRead && (
         <Tooltip title="Mark all as read">
-          <IconButton color="primary" onClick={handleMarkAllAsRead}>
+          <IconButton
+            color="primary"
+            onClick={handleMarkAllAsRead}
+            aria-label="Mark all notifications as read"
+          >
             <Iconify icon="eva:done-all-fill" />
           </IconButton>
         </Tooltip>
       )}
 
-      <IconButton onClick={drawer.onFalse} sx={{ display: { xs: 'inline-flex', sm: 'none' } }}>
+      <IconButton
+        onClick={drawer.onFalse}
+        sx={{ display: { xs: 'inline-flex', sm: 'none' } }}
+        aria-label="Close notifications"
+      >
         <Iconify icon="mingcute:close-line" />
       </IconButton>
 
-      <IconButton>
+      <IconButton aria-label="Notification settings">
         <Iconify icon="solar:settings-bold-duotone" />
       </IconButton>
     </Stack>

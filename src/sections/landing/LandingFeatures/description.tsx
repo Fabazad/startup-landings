@@ -21,7 +21,7 @@ export function Description({ feature }: { feature: Feature }) {
 
       <Typography
         variants={varFade({ distance: 24 }).inLeft}
-        component={m.h6}
+        component={m.p}
         variant="h6"
         sx={{
           typography: 'overline',
@@ -50,7 +50,7 @@ export function Description({ feature }: { feature: Feature }) {
           >
             <Iconify icon={item.icon} sx={{ width: 40, height: 40 }} />
             <Stack spacing={1}>
-              <Typography variant="h5" component="h6">
+              <Typography variant="h5" component="h3">
                 {item.title}
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>{item.description}</Typography>

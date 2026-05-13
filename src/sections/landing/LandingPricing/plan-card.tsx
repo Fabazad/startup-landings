@@ -46,7 +46,7 @@ export function PlanCard({
       <Stack direction="row" alignItems="center">
         <Stack flexGrow={1}>
           <m.div variants={varFade({ distance: 24 }).inLeft}>
-            <Typography variant="h4" component="h6">
+            <Typography variant="h4" component="h3">
               {capitalize(planName)}
             </Typography>
           </m.div>
