@@ -20,6 +20,12 @@ const nextConfig = {
       '@mui/x-tree-view',
       'framer-motion',
       '@iconify/react',
+      '@tanstack/react-query',
+      'embla-carousel-react',
+      'sonner',
+      'react-i18next',
+      'lodash',
+      'date-fns',
     ],
   },
   images: {
