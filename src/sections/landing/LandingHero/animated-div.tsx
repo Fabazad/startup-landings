@@ -1,12 +1,28 @@
-import { Box, BoxProps } from '@mui/material';
+import { Box, BoxProps, keyframes } from '@mui/material';
+
+const fadeInUp = keyframes`
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+`;
 
 /**
- * Wrapper for hero text blocks. Previously used framer-motion to fade in on
- * mount, but that rendered children with `opacity: 0` server-side, leaving the
- * hero visually empty until React hydration + animation completed. That hurt
- * Speed Index significantly. We now render plain markup so the SSR'd hero
- * content paints as soon as the browser receives the HTML and CSS.
+ * Lightweight CSS-driven replacement for the framer-motion fade-in used
+ * across the hero. Each hero AnimatedDiv previously hydrated a framer-motion
+ * component with variants — multiplied by 4 (Heading, HeroDescription,
+ * Ratings, Buttons) that work happened during the Total Blocking Time
+ * window. A CSS animation runs entirely off the main JS thread.
  */
-export function AnimatedDiv({ children, ...other }: BoxProps & { children: React.ReactNode }) {
-  return <Box {...other}>{children}</Box>;
+export function AnimatedDiv({ children, sx, ...other }: BoxProps & { children: React.ReactNode }) {
+  return (
+    <Box
+      {...other}
+      sx={{
+        animation: `${fadeInUp} 640ms cubic-bezier(0.43, 0.13, 0.23, 0.96) both`,
+        '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
+        ...sx,
+      }}
+    >
+      {children}
+    </Box>
+  );
 }
