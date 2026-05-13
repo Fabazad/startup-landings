@@ -12,7 +12,7 @@ import { t } from 'i18next';
 import { useForm, useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useProductIdea } from 'src/app/product-idea-provider';
-import { Form } from 'src/components/hook-form';
+import { Form } from 'src/components/hook-form/form-provider';
 import { z as zod } from 'zod';
 import { useSubscription } from '../subscription-context';
 import { FeatureOption } from './FeatureOption';

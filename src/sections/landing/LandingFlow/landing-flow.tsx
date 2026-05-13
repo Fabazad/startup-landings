@@ -11,8 +11,6 @@ import Typography from '@mui/material/Typography';
 
 import { m } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 
 import { MotionViewport, varFade, varContainer } from 'src/components/animate';
 import { useProductIdea } from 'src/app/product-idea-provider';
@@ -131,7 +129,7 @@ export function LandingFlow({ sx, ...other }: BoxProps) {
                         '& p': { m: 0 },
                       }}
                     >
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{step.description}</ReactMarkdown>
+                      {step.description}
                     </Box>
                   </Box>
                 </Box>

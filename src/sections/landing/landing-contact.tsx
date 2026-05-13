@@ -6,7 +6,8 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useProductIdea } from 'src/app/product-idea-provider';
-import { Field, Form } from 'src/components/hook-form';
+import { RHFTextField } from 'src/components/hook-form/rhf-text-field';
+import { Form } from 'src/components/hook-form/form-provider';
 import { useTranslate } from 'src/locales';
 import { varAlpha } from 'src/theme/styles';
 import { z } from 'zod';
@@ -60,8 +61,8 @@ export function LandingContact() {
         </Typography>
 
         <Box gap={3} display="flex" flexDirection="column" sx={{ my: 5 }}>
-          <Field.Text name="email" fullWidth label="Email" required />
-          <Field.Text
+          <RHFTextField name="email" fullWidth label="Email" required />
+          <RHFTextField
             name="message"
             fullWidth
             label={t('landing.contact.message')}

@@ -1,7 +1,7 @@
 import { Box, Card, Typography, useColorScheme } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { Field } from 'src/components/hook-form';
+import { RHFCheckbox } from 'src/components/hook-form/rhf-checkbox';
 import { varAlpha } from 'src/theme/styles';
 import { Feature } from 'src/types/ProductIdea';
 
@@ -37,7 +37,7 @@ export function FeatureOption({ feature }: { feature: Feature }) {
         setValue(feature.id, !isSelected);
       }}
     >
-      <Field.Checkbox name={feature.id} label="" />
+      <RHFCheckbox name={feature.id} label="" />
       <Box>
         <Typography variant="body1" sx={{ fontWeight: 'bold', mt: 1 }}>
           {feature.title}

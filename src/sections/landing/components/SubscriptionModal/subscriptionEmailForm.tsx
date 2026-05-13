@@ -2,7 +2,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingButton } from '@mui/lab';
 import { Button, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { Field, Form } from 'src/components/hook-form';
+import { RHFTextField } from 'src/components/hook-form/rhf-text-field';
+import { Form } from 'src/components/hook-form/form-provider';
 
 import { toast } from 'sonner';
 import { useTranslate } from 'src/locales';
@@ -49,7 +50,7 @@ export function SubscriptionEmailForm() {
 
       <DialogContent>
         <Typography>{t('landing.subscription.description')}</Typography>
-        <Field.Text name="email" label="Email" sx={{ mt: 3 }} autoFocus />
+        <RHFTextField name="email" label="Email" sx={{ mt: 3 }} autoFocus />
       </DialogContent>
       <DialogActions>
         <Button onClick={() => setOpenModal(false)}>{t('landing.subscription.cancel')}</Button>
