@@ -44,6 +44,7 @@ export function Heading({
             `300deg, ${theme.vars.palette.primary.main} 0%, ${theme.vars.palette.warning.main} 25%, ${theme.vars.palette.primary.main} 50%, ${theme.vars.palette.warning.main} 75%, ${theme.vars.palette.primary.main} 100%`
           ),
           backgroundSize: '400%',
+          willChange: 'background-position',
           ml: { xs: 0.75, md: 1, xl: 1.5 },
           animation: `${gradientShift} 40s linear infinite alternate`,
           '@media (prefers-reduced-motion: reduce)': { animation: 'none' },

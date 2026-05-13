@@ -30,10 +30,12 @@
     "production": [
       ">0.5%",
       "last 2 versions",
-      "Firefox ESR",
       "not dead",
+      "since 2021",
       "not op_mini all",
-      "not IE 11"
+      "not IE 11",
+      "not samsung 4",
+      "not android 4.4-4.4.4"
     ],
     "development": [
       "last 1 chrome version",
