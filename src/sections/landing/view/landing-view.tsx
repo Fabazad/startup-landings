@@ -49,7 +49,7 @@ export function LandingView() {
           position: 'relative',
           bgcolor: 'background.default',
           contentVisibility: 'auto',
-          containIntrinsicSize: '100% 4200px',
+          containIntrinsicSize: '1px 4200px',
         }}
       >
         <LandingFlow />

@@ -26,13 +26,6 @@ body,
   flex: 1 1 auto;
   min-height: 100%;
   flex-direction: column;
-  /* Layout CSS vars – available at paint time (not deferred by client hydration) */
-  --layout-nav-zIndex: 1101;
-  --layout-nav-mobile-width: 320px;
-  --layout-header-blur: 8px;
-  --layout-header-zIndex: 1100;
-  --layout-header-mobile-height: 64px;
-  --layout-header-desktop-height: 72px;
 }
 
 img {

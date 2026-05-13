@@ -1,8 +1,8 @@
 import { Box, BoxProps, keyframes } from '@mui/material';
 
-const fadeIn = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
+const fadeInUp = keyframes`
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
 `;
 
 /**
@@ -17,7 +17,7 @@ export function AnimatedDiv({ children, sx, ...other }: BoxProps & { children: R
     <Box
       {...other}
       sx={{
-        animation: `${fadeIn} 400ms ease-out both`,
+        animation: `${fadeInUp} 640ms cubic-bezier(0.43, 0.13, 0.23, 0.96) both`,
         '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
         ...sx,
       }}
