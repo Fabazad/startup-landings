@@ -1,5 +1,9 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { Box, Breakpoint, keyframes } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
 import Box from '@mui/material/Box';
 
 import { textGradient } from 'src/theme/styles';
@@ -17,6 +21,29 @@ export function Heading({
   headingPart1: string;
   headingPart2: string;
 }) {
+  const theme = useTheme();
+
+  // Defer the gradient animation until after first paint. Running it from
+  // the initial render keeps the LCP element "unstable" in Lighthouse, which
+  // pushes the LCP timing out to seconds beyond the actual visible paint.
+  // Starting the animation post-load lets the static gradient act as a stable
+  // LCP, then layers in the motion for users who linger.
+  const [animate, setAnimate] = useState(false);
+  useEffect(() => {
+    const start = () => setAnimate(true);
+    if (document.readyState === 'complete') {
+      const ric: any = (window as any).requestIdleCallback;
+      if (typeof ric === 'function') {
+        const id = ric(start, { timeout: 1000 });
+        return () => (window as any).cancelIdleCallback?.(id);
+      }
+      const t = window.setTimeout(start, 250);
+      return () => window.clearTimeout(t);
+    }
+    window.addEventListener('load', start, { once: true });
+    return () => window.removeEventListener('load', start);
+  }, []);
+
   return (
     <Box
       component="h1"
@@ -46,6 +73,10 @@ export function Heading({
           ),
           backgroundSize: '400%',
           ml: { xs: 0.75, md: 1, xl: 1.5 },
+          ...(animate && {
+            animation: `${gradientShift} 40s linear infinite alternate`,
+            '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
+          }),
         }}
       >
         {headingPart2}

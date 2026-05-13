@@ -3,6 +3,12 @@ import type { TextFieldProps } from '@mui/material/TextField';
 import type { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import type { MobileDateTimePickerProps } from '@mui/x-date-pickers/MobileDateTimePicker';
 
+// Type-only import: registers the `Dayjs` adapter as the picker date type
+// so DateCalendar/DatePicker/etc. accept a Dayjs value globally. This was
+// previously side-effected via the global LocalizationProvider; we keep the
+// type augmentation here without re-introducing the runtime weight.
+import type {} from '@mui/x-date-pickers/AdapterDayjs';
+
 import dayjs from 'dayjs';
 import { Controller, useFormContext } from 'react-hook-form';
 
