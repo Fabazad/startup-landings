@@ -1,7 +1,6 @@
 'use client';
 
 import { DEFAULT_AUTHOR, type BlogPost, type IPostItem } from 'src/types/blog';
-import { usePostHog } from 'posthog-js/react';
 import type { BoxProps } from '@mui/material/Box';
 import type { CardProps } from '@mui/material/Card';
 
@@ -23,6 +22,7 @@ import { AvatarShape } from 'src/assets/illustrations';
 
 import { Image } from 'src/components/image';
 import { Iconify } from 'src/components/iconify';
+import { capturePostHog } from 'src/app/providers/posthog-client';
 
 // ----------------------------------------------------------------------
 
@@ -31,11 +31,10 @@ type PostItemProps = CardProps & {
 };
 
 export function PostItem({ post, sx, ...other }: PostItemProps) {
-  const posthog = usePostHog();
   const linkTo = paths.post.details(post.slug);
 
   const handleClick = () => {
-    posthog.capture('blog_post_clicked', {
+    capturePostHog('blog_post_clicked', {
       title: post.title,
       slug: post.slug,
       source: 'blog_list',
@@ -115,11 +114,10 @@ type PostItemLatestProps = {
 };
 
 export function PostItemLatest({ post, index }: PostItemLatestProps) {
-  const posthog = usePostHog();
   const linkTo = paths.post.details(post.slug);
 
   const handleClick = () => {
-    posthog.capture('blog_post_clicked', {
+    capturePostHog('blog_post_clicked', {
       title: post.title,
       slug: post.slug,
       source: 'latest_posts',

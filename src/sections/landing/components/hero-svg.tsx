@@ -219,9 +219,10 @@ export function Texts({ sx = {}, ...other }: BoxProps = {}) {
         left: 0,
         width: 1,
         bottom: 0,
-        zIndex: 99,
+        zIndex: 1,
         height: 200,
         position: 'absolute',
+        pointerEvents: 'none',
         ...sx,
       }}
       {...other}

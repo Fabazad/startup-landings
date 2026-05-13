@@ -159,12 +159,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       className={`${barlow.variable} ${nunitoSans.variable}`}
     >
       <head>
-        <link
-          rel="preload"
-          as="image"
-          href={`${CONFIG.assetsDir}/assets/background/background-3.webp`}
-          type="image/webp"
-        />
         {/* Keep critical connections focused on first paint; analytics/chat load after intent. */}
         <link rel="preconnect" href="https://api.iconify.design" crossOrigin="anonymous" />
         {rawProductIdea?.name === PRODUCT_IDEA_NAMES.ENVY && (

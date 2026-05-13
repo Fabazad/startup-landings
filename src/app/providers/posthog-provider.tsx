@@ -1,18 +1,12 @@
 // app/providers.tsx
 
-/* eslint-disable no-console */
-
 'use client';
 
-import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
-import { CONFIG } from 'src/config-global';
-
-const PostHogRuntime = dynamic(() => import('./posthog-runtime'), { ssr: false });
+import { useEffect } from 'react';
+import PostHogPageView from './posthog-page-view';
+import { getPostHogClient } from './posthog-client';
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
-  const [client, setClient] = useState<any>(null);
-
   useEffect(() => {
     let loaded = false;
     let timeoutId: number | undefined;
@@ -24,18 +18,10 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
       events.forEach((eventName) => window.removeEventListener(eventName, initPostHog));
       if (timeoutId !== undefined) window.clearTimeout(timeoutId);
 
-      try {
-        const { default: posthog } = await import('posthog-js');
-        posthog.init(CONFIG.posthog.key, {
-          api_host: CONFIG.posthog.host,
-          person_profiles: 'identified_only',
-          defaults: '2025-05-24',
-          capture_pageview: false, // We handle pageview manually with PostHogPageView
-        });
-        setClient(posthog);
-      } catch (error) {
+      getPostHogClient().catch((error) => {
+        // eslint-disable-next-line no-console
         console.error('Failed to initialize PostHog', error);
-      }
+      });
     };
 
     const listenerOpts: AddEventListenerOptions = { once: true, passive: true };
@@ -48,9 +34,10 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  if (client) {
-    return <PostHogRuntime client={client}>{children}</PostHogRuntime>;
-  }
-
-  return children;
+  return (
+    <>
+      <PostHogPageView />
+      {children}
+    </>
+  );
 }

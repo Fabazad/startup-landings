@@ -53,6 +53,7 @@ export function HeroBackground({ sx, ...other }: BoxProps) {
         width: 1,
         height: 1,
         position: 'absolute',
+        pointerEvents: 'none',
         ...sx,
       }}
       {...other}
