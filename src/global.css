@@ -1,16 +1,12 @@
-/** **************************************
-* Fonts: app
-*************************************** */
-/* Barlow: used for h1-h3 headings (fontSecondaryFamily) */
-@import '@fontsource/barlow/600.css';
-@import '@fontsource/barlow/700.css';
-@import '@fontsource/barlow/800.css';
-
-/** **************************************
-* Fonts: options
-*************************************** */
-/* Nunito Sans: primary font for Envy */
-@import '@fontsource-variable/nunito-sans';
+/**
+ * Fonts (Barlow + Nunito Sans) are loaded via `next/font/google` in
+ * `src/app/layout.tsx`. They are self-hosted, preloaded by the framework,
+ * use `font-display: swap`, and inject CSS metric overrides (`size-adjust`,
+ * `ascent-override`, …) that keep CLS low when the web font swaps in.
+ *
+ * Avoid `@import`-ing `@fontsource` here: it adds render-blocking CSS round
+ * trips that delay LCP.
+ */
 
 /** **************************************
 * Plugins

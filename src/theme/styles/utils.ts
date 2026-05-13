@@ -14,10 +14,22 @@ export const mediaQueries = {
 };
 
 /**
- * Set font family
+ * Set font family. Resolves to the matching `next/font` CSS variable when one
+ * is registered so the browser uses the self-hosted, preloaded font and
+ * `size-adjust` metric overrides — keeping LCP fast and CLS low — and falls
+ * back to a system stack otherwise.
  */
+const NEXT_FONT_VARIABLES: Record<string, string> = {
+  Barlow: 'var(--font-secondary)',
+  'Nunito Sans': 'var(--font-primary)',
+  'Nunito Sans Variable': 'var(--font-primary)',
+  'Public Sans Variable': 'var(--font-primary)',
+};
+
 export function setFont(fontName: string) {
-  return `"${fontName}",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`;
+  const variable = NEXT_FONT_VARIABLES[fontName];
+  const primary = variable ? `${variable}, "${fontName}"` : `"${fontName}"`;
+  return `${primary},-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`;
 }
 
 /**

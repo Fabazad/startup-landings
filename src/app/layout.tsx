@@ -29,6 +29,7 @@ import { DeferredAnalytics } from './providers/deferred-analytics';
 import { DeferredCrisp } from './providers/deferred-crisp';
 import ReactQueryProvider from './providers/react-query-provider';
 import { getRawProductIdea } from './getProductIdea';
+import { barlow, nunitoSans } from './fonts';
 
 const SettingsDrawer = dynamic(
   () => import('src/components/settings/drawer').then((m) => m.SettingsDrawer),
@@ -152,7 +153,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const baseUrl = `${protocol}://${host}`;
 
   return (
-    <html lang={lang ?? 'en'} suppressHydrationWarning>
+    <html
+      lang={lang ?? 'en'}
+      suppressHydrationWarning
+      className={`${barlow.variable} ${nunitoSans.variable}`}
+    >
       <head>
         <link
           rel="preload"
