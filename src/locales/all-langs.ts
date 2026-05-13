@@ -2,15 +2,19 @@
 
 // core (MUI)
 import { frFR as frFRCore } from '@mui/material/locale';
-// date pickers (MUI)
-import { enUS as enUSDate, frFR as frFRDate } from '@mui/x-date-pickers/locales';
-// data grid (MUI)
-import { enUS as enUSDataGrid, frFR as frFRDataGrid } from '@mui/x-data-grid/locales';
 
 import { LanguageValue } from './config-locales';
 
 // ----------------------------------------------------------------------
 
+/**
+ * `systemValue.components` previously merged MUI X DataGrid / DatePicker /
+ * DataGrid locales here. Those packages are not rendered on any route in the
+ * current product surface, so importing their `locales` modules just to copy
+ * component label strings dragged 1–2 KB of MUI X into the shared landing
+ * chunk for no visible effect. The component overrides are left empty until
+ * a date picker / data grid is actually mounted.
+ */
 export const allLangs = [
   {
     value: LanguageValue.EN,
@@ -19,7 +23,7 @@ export const allLangs = [
     adapterLocale: 'en',
     numberFormat: { code: 'en-US', currency: 'USD' },
     systemValue: {
-      components: { ...enUSDate.components, ...enUSDataGrid.components },
+      components: {},
     },
   },
   {
@@ -29,7 +33,7 @@ export const allLangs = [
     adapterLocale: 'fr',
     numberFormat: { code: 'fr-Fr', currency: 'EUR' },
     systemValue: {
-      components: { ...frFRCore.components, ...frFRDate.components, ...frFRDataGrid.components },
+      components: { ...frFRCore.components },
     },
   },
 ];
