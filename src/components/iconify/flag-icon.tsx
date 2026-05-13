@@ -42,6 +42,8 @@ export const FlagIcon = forwardRef<HTMLSpanElement, FlagIconProps>(
         <Box
           component="img"
           loading="lazy"
+          width={26}
+          height={20}
           alt={code}
           src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${code?.toUpperCase()}.svg`}
           sx={{

@@ -26,21 +26,15 @@ export function LayoutSection({
   headerSection = null,
   sidebarSection = null,
 }: LayoutSectionProps) {
-  const inputGlobalStyles = (
+  const hasOverrides = cssVars && Object.keys(cssVars).length > 0;
+
+  const inputGlobalStyles = hasOverrides ? (
     <GlobalStyles
       styles={{
-        body: {
-          '--layout-nav-zIndex': 1101,
-          '--layout-nav-mobile-width': '320px',
-          '--layout-header-blur': '8px',
-          '--layout-header-zIndex': 1100,
-          '--layout-header-mobile-height': '64px',
-          '--layout-header-desktop-height': '72px',
-          ...cssVars,
-        },
+        body: cssVars,
       }}
     />
-  );
+  ) : null;
 
   return (
     <>
