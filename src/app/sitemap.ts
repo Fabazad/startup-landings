@@ -77,7 +77,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const { data: blogs } = await supabase
       .from('blogs')
       .select('slug, language, updated_at')
-      .or(`product_idea_id.eq."${productIdea.name}",product_idea_id.eq."${productIdea.id}"`)
+      .eq('product_idea_id', productIdea.name)
       .eq('published', true);
 
     if (blogs && blogs.length > 0) {
