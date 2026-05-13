@@ -82,7 +82,7 @@ export const common = createPaletteChannel(COLORS.common);
 
 // Text
 export const text = {
-  light: createPaletteChannel({ primary: grey[800], secondary: grey[600], disabled: grey[500] }),
+  light: createPaletteChannel({ primary: grey[800], secondary: grey[700], disabled: grey[500] }),
   dark: createPaletteChannel({ primary: '#FFFFFF', secondary: grey[500], disabled: grey[600] }),
 };
 

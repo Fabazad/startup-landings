@@ -82,7 +82,11 @@ export function NavMobile({
               <ThemeButton />
               <LanguageButton />
 
-              <IconButton onClick={onClose} sx={{ ml: 'auto' }}>
+              <IconButton
+                onClick={onClose}
+                sx={{ ml: 'auto' }}
+                aria-label="Close navigation menu"
+              >
                 <Iconify icon="mdi:close" width={28} />
               </IconButton>
             </ListSubheader>

@@ -9,7 +9,7 @@ export type MenuButtonProps = IconButtonProps;
 
 export function MenuButton({ sx, ...other }: IconButtonProps) {
   return (
-    <IconButton sx={sx} {...other}>
+    <IconButton aria-label="Toggle menu" sx={sx} {...other}>
       <SvgIcon>
         <path
           opacity="0.32"
