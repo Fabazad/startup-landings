@@ -160,13 +160,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           href={`${CONFIG.assetsDir}/assets/background/background-3.webp`}
           type="image/webp"
         />
-        {/* Preconnect to third-party origins for faster resource loading */}
-        <link rel="preconnect" href="https://eu.i.posthog.com" />
-        <link rel="preconnect" href="https://eu-assets.i.posthog.com" crossOrigin="anonymous" />
+        {/* Keep critical connections focused on first paint; analytics/chat load after intent. */}
         <link rel="preconnect" href="https://api.iconify.design" crossOrigin="anonymous" />
         {rawProductIdea?.name === PRODUCT_IDEA_NAMES.ENVY && (
           <>
-            <link rel="preconnect" href="https://client.crisp.chat" crossOrigin="anonymous" />
             {/* @ts-expect-error: impact specifically requests 'value' attribute */}
             <meta name="impact-site-verification" value="264b8bdb-8b2d-424f-bec6-5c55a7306a39" />
             <meta name="fo-verify" content="f3a44355-3cf6-4dd8-a9ae-4cc39d425637" />
