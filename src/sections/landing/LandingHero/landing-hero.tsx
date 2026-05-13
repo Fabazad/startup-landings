@@ -14,8 +14,6 @@ import { HeroDescription } from './hero-description';
 import { Ratings } from './ratings';
 import { DeferredHeroBackground } from './deferred-hero-background';
 import { HeroBackgroundImage } from '../components/hero-background-image';
-import { useScrollPercent } from './useScrollPercent';
-import { useTransformY } from './useTransformY';
 
 // ----------------------------------------------------------------------
 
