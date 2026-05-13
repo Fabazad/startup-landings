@@ -1,9 +1,13 @@
-import { Box, Breakpoint } from '@mui/material';
+import { Box, Breakpoint, keyframes } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-import { m } from 'framer-motion';
 import { textGradient } from 'src/theme/styles';
 import { AnimatedDiv } from './animated-div';
+
+const gradientShift = keyframes`
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+`;
 
 export function Heading({
   lgKey,
@@ -36,20 +40,15 @@ export function Heading({
         </Box>
 
         <Box
-          component={m.span}
-          animate={{ backgroundPosition: '200% center' }}
-          transition={{
-            duration: 20,
-            ease: 'linear',
-            repeat: Infinity,
-            repeatType: 'reverse',
-          }}
+          component="span"
           sx={{
             ...textGradient(
               `300deg, ${theme.vars.palette.primary.main} 0%, ${theme.vars.palette.warning.main} 25%, ${theme.vars.palette.primary.main} 50%, ${theme.vars.palette.warning.main} 75%, ${theme.vars.palette.primary.main} 100%`
             ),
             backgroundSize: '400%',
             ml: { xs: 0.75, md: 1, xl: 1.5 },
+            animation: `${gradientShift} 40s linear infinite alternate`,
+            '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
           }}
         >
           {headingPart2}

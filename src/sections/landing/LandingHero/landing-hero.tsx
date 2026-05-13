@@ -1,7 +1,6 @@
 'use client';
 
 import type { BoxProps } from '@mui/material/Box';
-import type { MotionValue } from 'framer-motion';
 
 import { m, useTransform } from 'framer-motion';
 import Box from '@mui/material/Box';
@@ -12,11 +11,11 @@ import { useTheme } from '@mui/material/styles';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { MotionContainer } from 'src/components/animate';
 import { useProductIdea } from 'src/app/product-idea-provider';
-import { HeroBackground } from '../components/hero-background';
 import { Buttons } from './buttons';
 import { Heading } from './heading';
 import { HeroDescription } from './hero-description';
 import { Ratings } from './ratings';
+import { DeferredHeroBackground } from './deferred-hero-background';
 import { useScrollPercent } from './useScrollPercent';
 import { useTransformY } from './useTransformY';
 
@@ -25,43 +24,25 @@ import { useTransformY } from './useTransformY';
 const mdKey = 'md';
 const lgKey = 'lg';
 
-/**
- * Landing Hero Component
- *
- * SSR OPTIMIZATION NOTES:
- * - This component uses 'use client' due to framer-motion animations
- * - However, the content (headings, description, ratings, buttons) is still rendered on the server
- * - Only the animation logic runs on the client
- * - Search engines can still crawl and index all text content
- *
- * FURTHER SSR IMPROVEMENTS (if needed):
- * 1. Extract Heading, HeroDescription, Ratings, Buttons into a separate server component
- * 2. Create a client wrapper that only handles animations
- * 3. Use CSS-based animations instead of framer-motion for critical content
- * 4. Implement progressive enhancement: show static content first, add animations after hydration
- */
 export function LandingHero({ sx, ...other }: BoxProps) {
   const {
     heroTexts: { description, headingPart1, headingPart2 },
   } = useProductIdea();
   const theme = useTheme();
 
-  const scroll = useScrollPercent();
-
   const mdUp = useResponsive('up', mdKey);
 
-  const distance = mdUp ? scroll.percent : 0;
+  const scroll = useScrollPercent();
 
-  const y1 = useTransformY(scroll.scrollY, distance * -7);
-  const y2 = useTransformY(scroll.scrollY, distance * -6);
-  const y3 = useTransformY(scroll.scrollY, distance * -5);
-  const y4 = useTransformY(scroll.scrollY, distance * -4);
+  // Parallax (per 1% of scroll progress). On mobile we zero it out so the
+  // spring animations stay inert and don't burn frames during scroll.
+  const factor = mdUp ? 1 : 0;
+  const y1 = useTransformY(scroll.scrollY, scroll.percent, -7 * factor);
+  const y2 = useTransformY(scroll.scrollY, scroll.percent, -6 * factor);
+  const y3 = useTransformY(scroll.scrollY, scroll.percent, -5 * factor);
+  const y4 = useTransformY(scroll.scrollY, scroll.percent, -4 * factor);
 
-  const opacity: MotionValue<number> = useTransform(
-    scroll.scrollY,
-    [0, 1],
-    [1, mdUp ? Number((1 - scroll.percent / 100).toFixed(1)) : 1]
-  );
+  const opacity = useTransform(scroll.percent, (p) => (mdUp ? Math.max(0, 1 - p / 100) : 1));
 
   return (
     <Box
@@ -127,7 +108,7 @@ export function LandingHero({ sx, ...other }: BoxProps) {
           </m.div>
         </Container>
 
-        <HeroBackground />
+        <DeferredHeroBackground />
       </Box>
     </Box>
   );

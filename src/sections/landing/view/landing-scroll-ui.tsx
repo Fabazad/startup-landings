@@ -1,25 +1,31 @@
 'use client';
 
-import { BackToTop } from 'src/components/animate/back-to-top';
-import { ScrollProgress, useScrollProgress } from 'src/components/animate/scroll-progress';
+import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 
-// ----------------------------------------------------------------------
+const InnerScrollUI = dynamic(
+  () => import('./inner-scroll-ui').then((m) => ({ default: m.InnerScrollUI })),
+  { ssr: false }
+);
 
 /**
- * Client-side wrapper for scroll-based UI elements
- * Handles scroll progress bar and back-to-top button
+ * Mounts the scroll-driven UI (progress bar + back-to-top) only after the
+ * browser is idle, keeping its scroll listeners, spring, and framer-motion
+ * subscriptions out of the Total Blocking Time window.
  */
 export function LandingScrollUI() {
-  const pageProgress = useScrollProgress();
+  const [ready, setReady] = useState(false);
 
-  return (
-    <>
-      <ScrollProgress
-        variant="linear"
-        progress={pageProgress.scrollYProgress}
-        sx={{ position: 'fixed' }}
-      />
-      <BackToTop />
-    </>
-  );
+  useEffect(() => {
+    const ric: any = (window as any).requestIdleCallback;
+    if (typeof ric === 'function') {
+      const id = ric(() => setReady(true), { timeout: 4000 });
+      return () => (window as any).cancelIdleCallback?.(id);
+    }
+    const t = window.setTimeout(() => setReady(true), 2500);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  if (!ready) return null;
+  return <InnerScrollUI />;
 }
