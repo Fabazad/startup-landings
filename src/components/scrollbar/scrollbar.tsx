@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import SimpleBar from 'simplebar-react';
+import './styles.css';
 
 import Box from '@mui/material/Box';
 

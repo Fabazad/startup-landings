@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 
 import { Iconify } from '../iconify';
 import { lightboxClasses } from './classes';
+import './styles.css';
 
 import type { LightBoxProps } from './types';
 

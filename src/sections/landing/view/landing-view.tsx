@@ -44,7 +44,14 @@ export function LandingView() {
       <LandingScrollUI />
       <LandingHero />
 
-      <Stack sx={{ position: 'relative', bgcolor: 'background.default' }}>
+      <Stack
+        sx={{
+          position: 'relative',
+          bgcolor: 'background.default',
+          contentVisibility: 'auto',
+          containIntrinsicSize: '1px 4200px',
+        }}
+      >
         <LandingFlow />
 
         <LandingBenefits />

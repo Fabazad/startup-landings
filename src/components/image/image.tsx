@@ -9,6 +9,7 @@ import { styled } from '@mui/material/styles';
 import { CONFIG } from 'src/config-global';
 
 import { imageClasses } from './classes';
+import './styles.css';
 
 import type { ImageProps } from './types';
 

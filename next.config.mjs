@@ -12,6 +12,7 @@ const isStaticExport = 'false';
 
 const nextConfig = {
   trailingSlash: true,
+  poweredByHeader: false,
   env: {
     BUILD_STATIC_EXPORT: isStaticExport,
   },
@@ -86,7 +87,38 @@ const nextConfig = {
           destination: 'https://envy2.onama.io/envy/:path*',
         },
       ],
-    }
+    };
+  },
+  async headers() {
+    return [
+      {
+        source: '/assets/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/logo/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/favicon/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
   },
 };
 

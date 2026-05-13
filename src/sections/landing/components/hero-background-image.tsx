@@ -27,7 +27,7 @@ export function HeroBackgroundImage() {
         position: 'absolute',
         overflow: 'hidden',
         [stylesMode.dark]: {
-          backgroundImage: `url('${CONFIG.assetsDir}/assets/images/home/hero-blur.webp')`,
+          backgroundImage: `url('${CONFIG.assetsDir}/assets/background/background-3-blur.webp')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

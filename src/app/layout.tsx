@@ -12,12 +12,12 @@ import { detectLanguage } from 'src/locales/server';
 import { schemeConfig } from 'src/theme/scheme-config';
 import { ThemeProvider } from 'src/theme/theme-provider';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
-import { ProgressBar } from 'src/components/progress-bar';
+import { DeferredProgressBar } from 'src/components/progress-bar/deferred-progress-bar';
 import { defaultSettings } from 'src/components/settings/config-settings';
 import { DeferredSettingsDrawer } from 'src/components/settings/deferred-settings-drawer';
 import { PrimaryColor } from 'src/components/settings/types';
 import { SettingsProvider } from 'src/components/settings/context';
-import { Snackbar } from 'src/components/snackbar';
+import { DeferredSnackbar } from 'src/components/snackbar/deferred-snackbar';
 import { headers } from 'next/headers';
 import { GlobalStructuredData } from 'src/components/seo/structured-data';
 import { languages } from 'src/locales/config-locales';
@@ -187,16 +187,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                       {rawProductIdea ? (
                         <ProductIdeaProvider rawProductIdea={rawProductIdea}>
                           <SubscriptionModalProvider>
-                            <Snackbar />
-                            <ProgressBar />
+                            <DeferredSnackbar />
+                            <DeferredProgressBar />
                             <DeferredSettingsDrawer />
                             {children}
                           </SubscriptionModalProvider>
                         </ProductIdeaProvider>
                       ) : (
                         <SubscriptionModalProvider>
-                          <Snackbar />
-                          <ProgressBar />
+                          <DeferredSnackbar />
+                          <DeferredProgressBar />
                           <DeferredSettingsDrawer />
                           {children}
                         </SubscriptionModalProvider>
