@@ -1,64 +1,59 @@
 import { Metadata } from 'next';
-import { headers } from 'next/headers';
-import { languages } from 'src/locales/config-locales';
-import { SoftwareStructuredData } from 'src/components/seo/structured-data';
-import { LandingView, ProjectsDirectoryView } from 'src/sections/landing/view';
-import { detectLanguage, getServerTranslations } from 'src/locales/server';
-import { RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
-import { translateProductIdea } from 'src/types/ProductIdea';
+
+import { GlobalStructuredData, SoftwareStructuredData } from 'src/components/seo/structured-data';
+import { LandingView } from 'src/sections/landing/view';
+import { RAW_PRODUCT_IDEAS, PRODUCT_IDEA_NAMES } from 'src/ProductIdeas';
 import { AuthProvider } from '../providers/auth-provider';
-import { getRawProductIdea } from '../getProductIdea';
 
 // Revalidate this page every hour (ISR)
 export const revalidate = 3600;
 
-export async function generateMetadata(): Promise<Metadata> {
-  const headersList = await headers();
-  const host = headersList.get('x-forwarded-host') || headersList.get('host') || '';
-  const protocol = headersList.get('x-forwarded-proto') || 'https';
-  const baseUrl = `${protocol}://${host}`;
+const envy = RAW_PRODUCT_IDEAS[PRODUCT_IDEA_NAMES.ENVY];
 
-  return {
-    alternates: {
-      canonical: baseUrl,
-      languages: Object.fromEntries(languages.map((lang) => [lang, `${baseUrl}?lang=${lang}`])),
+export const metadata: Metadata = {
+  title: `${envy.name} - ${envy.heroTexts.headingPart1.fr} ${envy.heroTexts.headingPart2.fr}`,
+  description: envy.heroTexts.description.fr,
+  keywords: envy.keywords.join(', '),
+  icons: {
+    icon: `/favicon/${envy.themeColor}-${envy.logo}.png`,
+  },
+  alternates: {
+    canonical: 'https://envynest.fr',
+    languages: {
+      fr: 'https://envynest.fr?lang=fr',
+      en: 'https://envynest.fr?lang=en',
     },
-  };
-}
+  },
+  openGraph: {
+    type: 'website',
+    url: 'https://envynest.fr',
+    title: `${envy.name} - ${envy.heroTexts.headingPart1.fr} ${envy.heroTexts.headingPart2.fr}`,
+    description: envy.heroTexts.description.fr,
+    siteName: envy.name,
+    locale: 'fr_FR',
+    alternateLocale: 'en_US',
+    images: [
+      {
+        url: `https://envynest.fr/logo/${envy.themeColor}-${envy.logo}.webp`,
+        width: 1200,
+        height: 630,
+        alt: envy.name,
+      },
+    ],
+  },
+};
 
-export default async function Page() {
-  const rawProductIdea = await getRawProductIdea();
-
-  if (!rawProductIdea) {
-    const headersList = await headers();
-    const host = headersList.get('x-forwarded-host') || headersList.get('host') || '';
-    const protocol = headersList.get('x-forwarded-proto') || 'https';
-    const lang = await detectLanguage();
-    const productIdeas = Object.values(RAW_PRODUCT_IDEAS).map((idea) =>
-      translateProductIdea(idea, lang)
-    );
-
-    return (
-      <AuthProvider productName={'Onama' as any}>
-        <ProjectsDirectoryView productIdeas={productIdeas} baseUrl={host} protocol={protocol} />
-      </AuthProvider>
-    );
-  }
-
-  const lang = await detectLanguage();
-  const { heroTexts, plans, name } = rawProductIdea;
-  const { t } = await getServerTranslations();
-  const ratingsText = t('landing.hero.ratings');
-
+export default function Page() {
   return (
-    <AuthProvider productName={name}>
-      <SoftwareStructuredData rawProductIdea={rawProductIdea} />
+    <AuthProvider productName={envy.name}>
+      <GlobalStructuredData rawProductIdea={envy} baseUrl="https://envynest.fr" />
+      <SoftwareStructuredData rawProductIdea={envy} />
       <LandingView
-        headingPart1={heroTexts.headingPart1[lang]}
-        headingPart2={heroTexts.headingPart2[lang]}
-        description={heroTexts.description[lang]}
-        hasPlans={!!plans}
-        ratingsText={ratingsText}
+        headingPart1={envy.heroTexts.headingPart1.fr}
+        headingPart2={envy.heroTexts.headingPart2.fr}
+        description={envy.heroTexts.description.fr}
+        hasPlans={!!envy.plans}
+        ratingsText="+160 Utilisateurs satisfaits"
       />
     </AuthProvider>
   );

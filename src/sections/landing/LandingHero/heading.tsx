@@ -1,23 +1,14 @@
 'use client';
 
 import Box from '@mui/material/Box';
-import { keyframes } from '@mui/material';
 
 import { textGradient } from 'src/theme/styles';
 
-const gradientShift = keyframes`
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
-`;
-
 /**
- * Server-component-safe hero heading.
- *
- * Previously depended on `useTheme()` for typography presets, font family,
- * breakpoints, and palette colours. These are now expressed as inline
- * CSS or MUI CSS custom properties (the CssVarsProvider sets
- * `--palette-*` variables on the root). This removes the component from
- * the hydration critical path entirely.
+ * Hero heading. The gradient shift animation was removed because
+ * `background-position-x` is not composited in Chrome and caused
+ * unnecessary rendering work. The static gradient is already visually
+ * striking and the 40-second animation was barely noticeable.
  */
 export function Heading({
   headingPart1,
@@ -54,10 +45,7 @@ export function Heading({
             `300deg, var(--palette-primary-main) 0%, var(--palette-warning-main) 25%, var(--palette-primary-main) 50%, var(--palette-warning-main) 75%, var(--palette-primary-main) 100%`
           ),
           backgroundSize: '400%',
-          willChange: 'background-position',
           ml: { xs: 0.75, md: 1, xl: 1.5 },
-          animation: `${gradientShift} 40s linear infinite alternate`,
-          '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
         }}
       >
         {headingPart2}

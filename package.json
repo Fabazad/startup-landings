@@ -28,14 +28,11 @@
   "packageManager": "yarn@1.22.22",
   "browserslist": {
     "production": [
-      ">0.5%",
-      "last 2 versions",
-      "not dead",
-      "since 2021",
-      "not op_mini all",
-      "not IE 11",
-      "not samsung 4",
-      "not android 4.4-4.4.4"
+      "last 2 Chrome versions",
+      "last 2 Firefox versions",
+      "last 2 Safari versions",
+      "last 2 Edge versions",
+      "not dead"
     ],
     "development": [
       "last 1 chrome version",
