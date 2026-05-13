@@ -28,12 +28,13 @@
   "packageManager": "yarn@1.22.22",
   "browserslist": {
     "production": [
-      ">0.5%",
-      "last 2 versions",
-      "Firefox ESR",
+      "chrome >= 100",
+      "firefox >= 100",
+      "edge >= 100",
+      "safari >= 15.4",
+      "ios_saf >= 15.4",
       "not dead",
-      "not op_mini all",
-      "not IE 11"
+      "not op_mini all"
     ],
     "development": [
       "last 1 chrome version",

@@ -161,8 +161,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           type="image/webp"
           fetchPriority="high"
         />
-        {/* Keep critical connections focused on first paint; analytics/chat load after intent. */}
-        <link rel="preconnect" href="https://api.iconify.design" crossOrigin="anonymous" />
         {rawProductIdea?.name === PRODUCT_IDEA_NAMES.ENVY && (
           <>
             {/* @ts-expect-error: impact specifically requests 'value' attribute */}
