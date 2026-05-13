@@ -1,12 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Box, Breakpoint, keyframes } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 
 import { textGradient } from 'src/theme/styles';
+import { keyframes } from '@mui/material';
+
+const gradientShift = keyframes`
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+`;
 
 /**
  * Hero heading. The gradient shift animation was removed because
@@ -21,8 +25,6 @@ export function Heading({
   headingPart1: string;
   headingPart2: string;
 }) {
-  const theme = useTheme();
-
   // Defer the gradient animation until after first paint. Running it from
   // the initial render keeps the LCP element "unstable" in Lighthouse, which
   // pushes the LCP timing out to seconds beyond the actual visible paint.

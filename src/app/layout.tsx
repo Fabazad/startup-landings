@@ -31,14 +31,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="image/webp"
           fetchPriority="high"
         />
-        {rawProductIdea?.name === PRODUCT_IDEA_NAMES.ENVY && (
-          <>
-            {/* @ts-expect-error: impact specifically requests 'value' attribute */}
-            <meta name="impact-site-verification" value="264b8bdb-8b2d-424f-bec6-5c55a7306a39" />
-            <meta name="fo-verify" content="f3a44355-3cf6-4dd8-a9ae-4cc39d425637" />
-            <meta name="mylead-verification" content="b29df0cc12dd544d785a848089b958d2" />
-          </>
-        )}
+        {/* @ts-expect-error: impact specifically requests 'value' attribute */}
+        <meta name="impact-site-verification" value="264b8bdb-8b2d-424f-bec6-5c55a7306a39" />
+        <meta name="fo-verify" content="f3a44355-3cf6-4dd8-a9ae-4cc39d425637" />
+        <meta name="mylead-verification" content="b29df0cc12dd544d785a848089b958d2" />
       </head>
       <body>
         <ClientAppShell>{children}</ClientAppShell>
