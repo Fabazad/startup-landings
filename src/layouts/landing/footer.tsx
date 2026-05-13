@@ -107,11 +107,7 @@ export function Footer({ layoutQuery, sx = {}, hasBlog = false }: FooterProps) {
               }}
             >
               {_socials.map((social) => (
-                <IconButton
-                  key={social.label}
-                  color="inherit"
-                  aria-label={social.label}
-                >
+                <IconButton key={social.label} color="inherit" aria-label={social.label}>
                   {social.value === 'twitter' && <TwitterIcon />}
                   {social.value === 'facebook' && <FacebookIcon />}
                   {social.value === 'instagram' && <InstagramIcon />}
