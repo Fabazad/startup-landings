@@ -1,3 +1,5 @@
+'use client';
+
 import { Box, BoxProps, keyframes } from '@mui/material';
 
 const fadeInUp = keyframes`

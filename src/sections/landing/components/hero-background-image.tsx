@@ -1,67 +1,33 @@
-'use client';
-
 import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
 
 import { CONFIG } from 'src/config-global';
-import { varAlpha, stylesMode } from 'src/theme/styles';
 
 /**
- * Hero background layer. Uses a plain <img> (not next/image) so the asset URL
- * matches the explicit <link rel="preload"> declared in the root layout head,
- * letting the browser fetch the LCP resource the moment HTML parsing reaches
- * it — without waiting for React hydration or the Next/Image optimization
- * route.
+ * LCP hero background image. Server-component-safe — no hooks.
+ *
+ * Uses a plain <img> (not next/image) so the asset URL matches the
+ * HTTP Link-header preload (set in next.config.mjs) and the
+ * <link rel="preload"> in the root layout head. The browser can
+ * start fetching the LCP resource the moment it sees the Link header
+ * (at TTFB), well before React hydration begins.
  */
 export function HeroBackgroundImage() {
-  const theme = useTheme();
-  const src = `${CONFIG.assetsDir}/assets/background/background-3.webp`;
-
   return (
     <Box
+      component="img"
+      src={`${CONFIG.assetsDir}/assets/background/background-3.webp`}
+      alt=""
       aria-hidden
+      fetchPriority="high"
+      decoding="async"
       sx={{
-        top: 0,
-        left: 0,
-        width: 1,
-        height: 1,
-        zIndex: -1,
         position: 'absolute',
-        overflow: 'hidden',
-        [stylesMode.dark]: {
-          backgroundImage: `url('${CONFIG.assetsDir}/assets/background/background-3-blur.webp')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        },
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        zIndex: -1,
       }}
-    >
-      <Box
-        component="img"
-        src={src}
-        alt=""
-        aria-hidden
-        fetchPriority="high"
-        decoding="async"
-        sx={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-        }}
-      />
-      <Box
-        aria-hidden
-        sx={{
-          position: 'absolute',
-          inset: 0,
-          background: `linear-gradient(180deg, ${theme.vars.palette.background.default} 12%, ${varAlpha(theme.vars.palette.background.defaultChannel, 0.92)} 50%, ${theme.vars.palette.background.default} 88%)`,
-          [stylesMode.dark]: {
-            background: `linear-gradient(180deg, ${theme.vars.palette.background.default} 12%, ${varAlpha(theme.vars.palette.background.defaultChannel, 0.96)} 50%, ${theme.vars.palette.background.default} 88%)`,
-          },
-        }}
-      />
-    </Box>
+    />
   );
 }

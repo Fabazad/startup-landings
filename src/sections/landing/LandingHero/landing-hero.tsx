@@ -1,53 +1,47 @@
-'use client';
-
 import type { BoxProps } from '@mui/material/Box';
 
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
 
-import { useProductIdea } from 'src/app/product-idea-provider';
 import { Buttons } from './buttons';
 import { Heading } from './heading';
 import { HeroDescription } from './hero-description';
 import { Ratings } from './ratings';
 import { DeferredHeroBackground } from './deferred-hero-background';
 import { HeroBackgroundImage } from '../components/hero-background-image';
-
-// ----------------------------------------------------------------------
-
-const mdKey = 'md';
-const lgKey = 'lg';
+import { HeroBackgroundGradient } from '../components/hero-background-gradient';
 
 /**
- * Landing Hero — static, framer-motion-free render path.
- *
- * Previous versions used framer-motion for:
- *   - 4× `AnimatedDiv` fade-ins (Heading / HeroDescription / Ratings / Buttons)
- *   - 4× `m.div` parallax wrappers driven by `useSpring` / `useTransform`
- *   - 1× `m.div` opacity wrapper driven by scrollY
- *   - 1× `MotionContainer` (variants + stagger)
- *
- * All of that hydrated on the critical path and contributed to Total Blocking
- * Time. The fade-ins are now CSS keyframes (handled inside `AnimatedDiv`),
- * the gradient text uses a CSS keyframe, and the parallax / scroll-opacity
- * effect is dropped — it was desktop-only eye candy. The decorative
- * `HeroBackground` SVG still mounts after the browser is idle.
+ * Landing Hero — server component. All theme-dependent values are
+ * expressed as CSS custom properties (set by MUI's CssVarsProvider)
+ * or inline CSS, so no client hydration is required for the hero
+ * structure, heading, description, or LCP image. Only the interactive
+ * sub-components (Buttons, Ratings, DeferredHeroBackground) are
+ * client-boundary leaf nodes.
  */
-export function LandingHero({ sx, ...other }: BoxProps) {
-  const {
-    heroTexts: { description, headingPart1, headingPart2 },
-  } = useProductIdea();
-  const theme = useTheme();
-
+export function LandingHero({
+  headingPart1,
+  headingPart2,
+  description,
+  hasPlans,
+  ratingsText = '',
+  sx,
+  ...other
+}: BoxProps & {
+  headingPart1: string;
+  headingPart2: string;
+  description: string;
+  hasPlans: boolean;
+  ratingsText?: string;
+}) {
   return (
     <Box
       component="section"
       sx={{
         overflow: 'hidden',
         position: 'relative',
-        [theme.breakpoints.up(mdKey)]: {
+        '@media (min-width: 900px)': {
           minHeight: 760,
           maxHeight: 1440,
           display: 'block',
@@ -64,7 +58,7 @@ export function LandingHero({ sx, ...other }: BoxProps) {
           display: 'flex',
           position: 'relative',
           flexDirection: 'column',
-          [theme.breakpoints.up(mdKey)]: { minHeight: 760 },
+          '@media (min-width: 900px)': { minHeight: 760 },
         }}
       >
         <Container
@@ -75,7 +69,7 @@ export function LandingHero({ sx, ...other }: BoxProps) {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
-            [theme.breakpoints.up(mdKey)]: {
+            '@media (min-width: 900px)': {
               flex: '1 1 auto',
               justifyContent: 'center',
               py: 'var(--layout-header-desktop-height)',
@@ -83,16 +77,17 @@ export function LandingHero({ sx, ...other }: BoxProps) {
           }}
         >
           <Stack spacing={3} sx={{ textAlign: 'center' }}>
-            <Heading lgKey={lgKey} headingPart1={headingPart1} headingPart2={headingPart2} />
+            <Heading headingPart1={headingPart1} headingPart2={headingPart2} />
             <Box sx={{ whiteSpace: 'normal' }}>
-              <HeroDescription lgKey={lgKey}>{description}</HeroDescription>
+              <HeroDescription>{description}</HeroDescription>
             </Box>
           </Stack>
-          <Ratings />
-          <Buttons />
+          <Ratings ratingsText={ratingsText} />
+          <Buttons hasPlans={hasPlans} />
         </Container>
 
         <HeroBackgroundImage />
+        <HeroBackgroundGradient />
         <DeferredHeroBackground />
       </Box>
     </Box>

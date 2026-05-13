@@ -95,6 +95,15 @@ const nextConfig = {
   async headers() {
     return [
       {
+        source: '/',
+        headers: [
+          {
+            key: 'Link',
+            value: '</assets/background/background-3.webp>; rel=preload; as=image',
+          },
+        ],
+      },
+      {
         source: '/assets/:path*',
         headers: [
           {

@@ -1,5 +1,7 @@
-import { Box, Breakpoint, keyframes } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+'use client';
+
+import Box from '@mui/material/Box';
+import { keyframes } from '@mui/material';
 
 import { textGradient } from 'src/theme/styles';
 
@@ -8,16 +10,22 @@ const gradientShift = keyframes`
   100% { background-position: 200% center; }
 `;
 
+/**
+ * Server-component-safe hero heading.
+ *
+ * Previously depended on `useTheme()` for typography presets, font family,
+ * breakpoints, and palette colours. These are now expressed as inline
+ * CSS or MUI CSS custom properties (the CssVarsProvider sets
+ * `--palette-*` variables on the root). This removes the component from
+ * the hydration critical path entirely.
+ */
 export function Heading({
-  lgKey,
   headingPart1,
   headingPart2,
 }: {
-  lgKey: number | Breakpoint;
   headingPart1: string;
   headingPart2: string;
 }) {
-  const theme = useTheme();
   return (
     <Box
       component="h1"
@@ -25,12 +33,14 @@ export function Heading({
       flexWrap="wrap"
       justifyContent="center"
       sx={{
-        ...theme.typography.h2,
+        fontWeight: 800,
+        lineHeight: 1.333,
+        fontSize: { xs: 32, sm: 40, md: 44, lg: 48 },
+        fontFamily: 'var(--font-secondary)',
         my: 0,
         mx: 'auto',
         maxWidth: 1000,
-        fontFamily: theme.typography.fontSecondaryFamily,
-        [theme.breakpoints.up(lgKey)]: { fontSize: 72, lineHeight: '90px' },
+        '@media (min-width: 1200px)': { fontSize: 72, lineHeight: '90px' },
       }}
     >
       <Box component="span" sx={{ width: 1, opacity: 1 }}>
@@ -41,7 +51,7 @@ export function Heading({
         component="span"
         sx={{
           ...textGradient(
-            `300deg, ${theme.vars.palette.primary.main} 0%, ${theme.vars.palette.warning.main} 25%, ${theme.vars.palette.primary.main} 50%, ${theme.vars.palette.warning.main} 75%, ${theme.vars.palette.primary.main} 100%`
+            `300deg, var(--palette-primary-main) 0%, var(--palette-warning-main) 25%, var(--palette-primary-main) 50%, var(--palette-warning-main) 75%, var(--palette-primary-main) 100%`
           ),
           backgroundSize: '400%',
           willChange: 'background-position',

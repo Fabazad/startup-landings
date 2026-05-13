@@ -1,11 +1,11 @@
+'use client';
+
 import { Box, Stack } from '@mui/material';
-import { useProductIdea } from 'src/app/product-idea-provider';
 import { TryForFreeButton } from '../components/try-for-free-button';
 import { AnimatedDiv } from './animated-div';
 import { GetStartedButton } from '../components/get-started-button';
 
-export function Buttons() {
-  const { plans } = useProductIdea();
+export function Buttons({ hasPlans }: { hasPlans: boolean }) {
   return (
     <Box
       display="flex"
@@ -16,7 +16,7 @@ export function Buttons() {
     >
       <AnimatedDiv>
         <Stack alignItems="center" spacing={2.5}>
-          {plans ? (
+          {hasPlans ? (
             <TryForFreeButton buttonName="try-for-free-hero" />
           ) : (
             <GetStartedButton size="large" buttonName="get-started-hero" />

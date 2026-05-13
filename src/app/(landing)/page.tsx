@@ -3,7 +3,7 @@ import { headers } from 'next/headers';
 import { languages } from 'src/locales/config-locales';
 import { SoftwareStructuredData } from 'src/components/seo/structured-data';
 import { LandingView, ProjectsDirectoryView } from 'src/sections/landing/view';
-import { detectLanguage } from 'src/locales/server';
+import { detectLanguage, getServerTranslations } from 'src/locales/server';
 import { RAW_PRODUCT_IDEAS } from 'src/ProductIdeas';
 import { translateProductIdea } from 'src/types/ProductIdea';
 import { AuthProvider } from '../providers/auth-provider';
@@ -45,10 +45,21 @@ export default async function Page() {
     );
   }
 
+  const lang = await detectLanguage();
+  const { heroTexts, plans, name } = rawProductIdea;
+  const { t } = await getServerTranslations();
+  const ratingsText = t('landing.hero.ratings');
+
   return (
-    <AuthProvider productName={rawProductIdea.name}>
+    <AuthProvider productName={name}>
       <SoftwareStructuredData rawProductIdea={rawProductIdea} />
-      <LandingView />
+      <LandingView
+        headingPart1={heroTexts.headingPart1[lang]}
+        headingPart2={heroTexts.headingPart2[lang]}
+        description={heroTexts.description[lang]}
+        hasPlans={!!plans}
+        ratingsText={ratingsText}
+      />
     </AuthProvider>
   );
 }

@@ -1,10 +1,10 @@
+'use client';
+
 import { Avatar, AvatarGroup, Box, avatarClasses } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 import { _mock } from 'src/_mock';
 import { AnimatedDiv } from './animated-div';
 
-export function Ratings() {
-  const { t } = useTranslation();
+export function Ratings({ ratingsText = '' }: { ratingsText?: string }) {
   return (
     <AnimatedDiv>
       <Box
@@ -24,7 +24,7 @@ export function Ratings() {
             />
           ))}
         </AvatarGroup>
-        {t('landing.hero.ratings')}
+        {ratingsText}
       </Box>
     </AnimatedDiv>
   );

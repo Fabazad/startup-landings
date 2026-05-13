@@ -38,11 +38,29 @@ const LandingAdvertisement = dynamic(() =>
  * Main landing page view - Server Component
  * Content is server-rendered for better SEO and initial page load
  */
-export function LandingView() {
+export function LandingView({
+  headingPart1,
+  headingPart2,
+  description,
+  hasPlans,
+  ratingsText = '',
+}: {
+  headingPart1: string;
+  headingPart2: string;
+  description: string;
+  hasPlans: boolean;
+  ratingsText?: string;
+}) {
   return (
     <>
       <LandingScrollUI />
-      <LandingHero />
+      <LandingHero
+        headingPart1={headingPart1}
+        headingPart2={headingPart2}
+        description={description}
+        hasPlans={hasPlans}
+        ratingsText={ratingsText}
+      />
 
       <Stack
         sx={{
