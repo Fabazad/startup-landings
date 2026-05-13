@@ -4,9 +4,15 @@ type BlogStructuredDataProps = {
   post: Blog;
   baseUrl: string;
   productName: string;
+  logoUrl: string;
 };
 
-export function BlogStructuredData({ post, baseUrl, productName }: BlogStructuredDataProps) {
+export function BlogStructuredData({
+  post,
+  baseUrl,
+  productName,
+  logoUrl,
+}: BlogStructuredDataProps) {
   const blogPostingSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -24,7 +30,7 @@ export function BlogStructuredData({ post, baseUrl, productName }: BlogStructure
       name: productName,
       logo: {
         '@type': 'ImageObject',
-        url: `${baseUrl}/favicon.ico`,
+        url: logoUrl,
       },
     },
     mainEntityOfPage: {

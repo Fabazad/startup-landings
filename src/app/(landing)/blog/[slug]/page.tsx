@@ -55,6 +55,7 @@ export async function generateMetadata({
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const productIdea = await getLandingProductIdea();
   const { name: productIdeaName } = productIdea;
+  const logoUrl = `/logo/${productIdea.themeColor}-${productIdea.logo}.webp`;
 
   const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
 
@@ -80,7 +81,12 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
   return (
     <>
-      <BlogStructuredData post={blog} baseUrl={baseUrl} productName={productIdeaName} />
+      <BlogStructuredData
+        post={blog}
+        baseUrl={baseUrl}
+        productName={productIdeaName}
+        logoUrl={`${baseUrl}${logoUrl}`}
+      />
       <PostDetailsHomeView post={blog} latestPosts={[]} />
     </>
   );

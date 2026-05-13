@@ -92,8 +92,8 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords,
     icons: {
       icon: rawProductIdea
-        ? `/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.webp`
-        : '/favicon/blue-octopus.webp',
+        ? `/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.ico`
+        : '/favicon/blue-octopus.ico',
     },
     alternates,
     openGraph: {
