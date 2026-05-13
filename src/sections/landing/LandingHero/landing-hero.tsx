@@ -16,6 +16,7 @@ import { Heading } from './heading';
 import { HeroDescription } from './hero-description';
 import { Ratings } from './ratings';
 import { DeferredHeroBackground } from './deferred-hero-background';
+import { HeroBackgroundImage } from '../components/hero-background-image';
 import { useScrollPercent } from './useScrollPercent';
 import { useTransformY } from './useTransformY';
 
@@ -108,6 +109,7 @@ export function LandingHero({ sx, ...other }: BoxProps) {
           </m.div>
         </Container>
 
+        <HeroBackgroundImage />
         <DeferredHeroBackground />
       </Box>
     </Box>
