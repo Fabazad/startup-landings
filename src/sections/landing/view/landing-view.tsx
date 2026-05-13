@@ -1,14 +1,36 @@
+import dynamic from 'next/dynamic';
 import Stack from '@mui/material/Stack';
-import { LandingAdvertisement } from '../landing-advertisement';
-import { LandingContact } from '../landing-contact';
-import { LandingFeatures } from '../LandingFeatures/landing-features';
-import { LandingFlow } from '../LandingFlow/landing-flow';
-import { LandingBenefits } from '../LandingBenefits/landing-benefits';
 import { LandingHero } from '../LandingHero/landing-hero';
-import { LandingPricing } from '../LandingPricing/landing-pricing';
-import { LandingTestimonials } from '../LandingTestimonials/landing-testimonials';
 import { LandingScrollUI } from './landing-scroll-ui';
-import { LandingFAQ } from '../LandingFAQ/index';
+
+// Below-the-fold sections are code-split into separate chunks so they don't
+// block parse/hydration of the hero. SSR is preserved for SEO.
+const LandingFlow = dynamic(() =>
+  import('../LandingFlow/landing-flow').then((m) => ({ default: m.LandingFlow }))
+);
+const LandingBenefits = dynamic(() =>
+  import('../LandingBenefits/landing-benefits').then((m) => ({ default: m.LandingBenefits }))
+);
+const LandingFeatures = dynamic(() =>
+  import('../LandingFeatures/landing-features').then((m) => ({ default: m.LandingFeatures }))
+);
+const LandingTestimonials = dynamic(() =>
+  import('../LandingTestimonials/landing-testimonials').then((m) => ({
+    default: m.LandingTestimonials,
+  }))
+);
+const LandingPricing = dynamic(() =>
+  import('../LandingPricing/landing-pricing').then((m) => ({ default: m.LandingPricing }))
+);
+const LandingContact = dynamic(() =>
+  import('../landing-contact').then((m) => ({ default: m.LandingContact }))
+);
+const LandingFAQ = dynamic(() =>
+  import('../LandingFAQ/index').then((m) => ({ default: m.LandingFAQ }))
+);
+const LandingAdvertisement = dynamic(() =>
+  import('../landing-advertisement').then((m) => ({ default: m.LandingAdvertisement }))
+);
 
 // ----------------------------------------------------------------------
 

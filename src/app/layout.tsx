@@ -17,17 +17,16 @@ import { defaultSettings } from 'src/components/settings/config-settings';
 import { PrimaryColor } from 'src/components/settings/types';
 import { SettingsProvider } from 'src/components/settings/context';
 import { Snackbar } from 'src/components/snackbar';
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { headers } from 'next/headers';
 import dynamic from 'next/dynamic';
-import Script from 'next/script';
 import { GlobalStructuredData } from 'src/components/seo/structured-data';
 import { languages } from 'src/locales/config-locales';
 import { SubscriptionModalProvider } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
 import { PRODUCT_IDEA_NAMES } from 'src/ProductIdeas';
 import { ProductIdeaProvider } from './product-idea-provider';
 import { PostHogProvider } from './providers/posthog-provider';
+import { DeferredAnalytics } from './providers/deferred-analytics';
+import { DeferredCrisp } from './providers/deferred-crisp';
 import ReactQueryProvider from './providers/react-query-provider';
 import { getRawProductIdea } from './getProductIdea';
 
@@ -220,16 +219,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </SettingsProvider>
           </LocalizationProvider>
         </I18nProvider>
-        <Analytics />
-        <SpeedInsights />
+        <DeferredAnalytics />
         {rawProductIdea?.name === PRODUCT_IDEA_NAMES.ENVY && (
-          <Script
-            id="crisp-chat"
-            strategy="lazyOnload"
-            dangerouslySetInnerHTML={{
-              __html: `window.CRISP_RUNTIME_CONFIG = { locale: "${lang ?? 'en'}" };window.$crisp=[];window.CRISP_WEBSITE_ID="58dbd684-000f-45ec-99c8-932b871cf9fc";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`,
-            }}
-          />
+          <DeferredCrisp websiteId="58dbd684-000f-45ec-99c8-932b871cf9fc" locale={lang ?? 'en'} />
         )}
       </body>
     </html>
