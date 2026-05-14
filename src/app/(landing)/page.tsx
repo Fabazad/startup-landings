@@ -5,7 +5,6 @@ import { LandingView } from 'src/sections/landing/view';
 import { RAW_PRODUCT_IDEAS, PRODUCT_IDEA_NAMES } from 'src/ProductIdeas';
 import { AuthProvider } from '../providers/auth-provider';
 import { getRawProductIdea } from '../getProductIdea';
-import { ProductIdeaProvider } from '../product-idea-provider';
 
 // Revalidate this page every hour (ISR)
 export const revalidate = 3600;
