@@ -4,10 +4,9 @@ import './code-highlight-block.css';
 
 import type { Options } from 'react-markdown';
 
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import rehypeHighlight from 'rehype-highlight';
 
 import Link from '@mui/material/Link';
 
@@ -29,7 +28,7 @@ type ComponentTag = {
   [key: string]: any;
 };
 
-const rehypePlugins = [rehypeRaw, rehypeHighlight, [remarkGfm, { singleTilde: false }]];
+type RehypeHighlight = typeof import('rehype-highlight').default;
 
 const components = {
   img: ({ ...other }: ComponentTag) => (
@@ -80,6 +79,28 @@ export function Markdown({ children, sx, ...other }: MarkdownProps) {
     }
     return htmlToMarkdown(`${children}`.trim());
   }, [children]);
+
+  // Defer rehype-highlight (pulls highlight.js, ~50KB) off the critical path.
+  // Code blocks render unhighlighted on first paint, then upgrade once loaded.
+  const [rehypeHighlight, setRehypeHighlight] = useState<RehypeHighlight | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    import('rehype-highlight').then((mod) => {
+      if (!cancelled) setRehypeHighlight(() => mod.default);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const rehypePlugins = useMemo(
+    () => [
+      rehypeRaw,
+      ...(rehypeHighlight ? [rehypeHighlight] : []),
+      [remarkGfm, { singleTilde: false }],
+    ],
+    [rehypeHighlight]
+  );
 
   return (
     <StyledRoot
