@@ -4,55 +4,73 @@ import { GlobalStructuredData, SoftwareStructuredData } from 'src/components/seo
 import { LandingView } from 'src/sections/landing/view';
 import { RAW_PRODUCT_IDEAS, PRODUCT_IDEA_NAMES } from 'src/ProductIdeas';
 import { AuthProvider } from '../providers/auth-provider';
+import { getRawProductIdea } from '../getProductIdea';
+import { ProductIdeaProvider } from '../product-idea-provider';
 
 // Revalidate this page every hour (ISR)
 export const revalidate = 3600;
 
-const envy = RAW_PRODUCT_IDEAS[PRODUCT_IDEA_NAMES.ENVY];
+export async function generateMetadata(): Promise<Metadata> {
+  const rawProductIdea = await getRawProductIdea();
+  if (!rawProductIdea) {
+    return {};
+  }
 
-export const metadata: Metadata = {
-  title: `${envy.name} - ${envy.heroTexts.headingPart1.fr} ${envy.heroTexts.headingPart2.fr}`,
-  description: envy.heroTexts.description.fr,
-  keywords: envy.keywords.join(', '),
-  icons: {
-    icon: `/favicon/${envy.themeColor}-${envy.logo}.png`,
-  },
-  alternates: {
-    canonical: 'https://envynest.fr',
-    languages: {
-      fr: 'https://envynest.fr?lang=fr',
-      en: 'https://envynest.fr?lang=en',
+  const isEnvy = rawProductIdea.id === RAW_PRODUCT_IDEAS[PRODUCT_IDEA_NAMES.ENVY].id;
+  const baseUrl = isEnvy ? 'https://envynest.fr' : `https://${rawProductIdea.id}.onama.io`;
+
+  return {
+    title: `${rawProductIdea.name} - ${rawProductIdea.heroTexts.headingPart1.fr} ${rawProductIdea.heroTexts.headingPart2.fr}`,
+    description: rawProductIdea.heroTexts.description.fr,
+    keywords: rawProductIdea.keywords.join(', '),
+    icons: {
+      icon: `/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`,
     },
-  },
-  openGraph: {
-    type: 'website',
-    url: 'https://envynest.fr',
-    title: `${envy.name} - ${envy.heroTexts.headingPart1.fr} ${envy.heroTexts.headingPart2.fr}`,
-    description: envy.heroTexts.description.fr,
-    siteName: envy.name,
-    locale: 'fr_FR',
-    alternateLocale: 'en_US',
-    images: [
-      {
-        url: `https://envynest.fr/logo/${envy.themeColor}-${envy.logo}.webp`,
-        width: 1200,
-        height: 630,
-        alt: envy.name,
+    alternates: {
+      canonical: baseUrl,
+      languages: {
+        fr: `${baseUrl}?lang=fr`,
+        en: `${baseUrl}?lang=en`,
       },
-    ],
-  },
-};
+    },
+    openGraph: {
+      type: 'website',
+      url: baseUrl,
+      title: `${rawProductIdea.name} - ${rawProductIdea.heroTexts.headingPart1.fr} ${rawProductIdea.heroTexts.headingPart2.fr}`,
+      description: rawProductIdea.heroTexts.description.fr,
+      siteName: rawProductIdea.name,
+      locale: 'fr_FR',
+      alternateLocale: 'en_US',
+      images: [
+        {
+          url: `${baseUrl}/logo/${rawProductIdea.themeColor}-${rawProductIdea.logo}.webp`,
+          width: 1200,
+          height: 630,
+          alt: rawProductIdea.name,
+        },
+      ],
+    },
+  };
+}
 
-export default function Page() {
+export default async function Page() {
+  const rawProductIdea = await getRawProductIdea();
+  if (!rawProductIdea) {
+    return null;
+  }
+
+  const isEnvy = rawProductIdea.id === RAW_PRODUCT_IDEAS[PRODUCT_IDEA_NAMES.ENVY].id;
+  const baseUrl = isEnvy ? 'https://envynest.fr' : `https://${rawProductIdea.id}.onama.io`;
+
   return (
-    <AuthProvider productName={envy.name}>
-      <GlobalStructuredData rawProductIdea={envy} baseUrl="https://envynest.fr" />
-      <SoftwareStructuredData rawProductIdea={envy} />
+    <AuthProvider productName={rawProductIdea.name}>
+      <GlobalStructuredData rawProductIdea={rawProductIdea} baseUrl={baseUrl} />
+      <SoftwareStructuredData rawProductIdea={rawProductIdea} />
       <LandingView
-        headingPart1={envy.heroTexts.headingPart1.fr}
-        headingPart2={envy.heroTexts.headingPart2.fr}
-        description={envy.heroTexts.description.fr}
-        hasPlans={!!envy.plans}
+        headingPart1={rawProductIdea.heroTexts.headingPart1.fr}
+        headingPart2={rawProductIdea.heroTexts.headingPart2.fr}
+        description={rawProductIdea.heroTexts.description.fr}
+        hasPlans={!!rawProductIdea.plans}
         ratingsText="+160 Utilisateurs satisfaits"
       />
     </AuthProvider>

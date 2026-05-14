@@ -12,7 +12,8 @@ import { DeferredSettingsDrawer } from 'src/components/settings/deferred-setting
 import { SettingsProvider } from 'src/components/settings/context';
 import { DeferredSnackbar } from 'src/components/snackbar/deferred-snackbar';
 import { SubscriptionModalProvider } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
-import { RAW_PRODUCT_IDEAS, PRODUCT_IDEA_NAMES } from 'src/ProductIdeas';
+import { PRODUCT_IDEA_NAMES } from 'src/ProductIdeas';
+import { RawProductIdea } from 'src/types/ProductIdea';
 import { PostHogProvider } from './providers/posthog-provider';
 import { DeferredAnalytics } from './providers/deferred-analytics';
 import { DeferredCrisp } from './providers/deferred-crisp';
@@ -24,9 +25,13 @@ import { ProductIdeaProvider } from './product-idea-provider';
  * Moving them here makes the root layout fully static, which enables
  * back/forward cache (bfcache) and ISR caching.
  */
-export function ClientAppShell({ children }: { children: React.ReactNode }) {
-  const rawProductIdea = RAW_PRODUCT_IDEAS.Envy;
-
+export function ClientAppShell({
+  children,
+  rawProductIdea,
+}: {
+  children: React.ReactNode;
+  rawProductIdea: RawProductIdea;
+}) {
   return (
     <>
       <InitColorSchemeScript
