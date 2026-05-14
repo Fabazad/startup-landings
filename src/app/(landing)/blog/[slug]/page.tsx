@@ -44,6 +44,9 @@ export async function generateMetadata({
     description:
       blog.seo_description || blog.excerpt || t('blog.meta.readOn', { name: productName }),
     keywords: blog.seo_keywords || [],
+    icons: {
+      icon: `/favicon/${productIdea.themeColor}-${productIdea.logo}.png`,
+    },
     openGraph: {
       title: blog.seo_title || blog.title,
       description: blog.seo_description || blog.excerpt || '',

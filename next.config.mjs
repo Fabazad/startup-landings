@@ -48,6 +48,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: '**',
       },
+      {
+        protocol: 'http',
+        hostname: 'res.cloudinary.com',
+      },
     ],
   },
   compress: true,
