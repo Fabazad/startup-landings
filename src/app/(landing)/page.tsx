@@ -1,10 +1,7 @@
 import { Metadata } from 'next';
 import { headers } from 'next/headers';
 
-import {
-  GlobalStructuredData,
-  SoftwareStructuredData,
-} from 'src/components/seo/structured-data';
+import { GlobalStructuredData, SoftwareStructuredData } from 'src/components/seo/structured-data';
 import { LandingView, ProjectsDirectoryView } from 'src/sections/landing/view';
 import { RAW_PRODUCT_IDEAS, PRODUCT_IDEA_NAMES } from 'src/ProductIdeas';
 import { translateProductIdea } from 'src/types/ProductIdea';

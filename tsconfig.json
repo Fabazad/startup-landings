@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "es5",
+    "target": "es2020",
     "lib": [
       "dom",
       "esnext",
@@ -30,7 +30,7 @@
         "name": "next"
       }
     ],
-    "downlevelIteration": true
+    "downlevelIteration": false
   },
   "include": [
     "next-env.d.ts",

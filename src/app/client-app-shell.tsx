@@ -43,7 +43,7 @@ export function ClientAppShell({
           <SettingsProvider
             settings={{
               ...defaultSettings,
-                primaryColor: rawProductIdea?.themeColor || 'blue',
+              primaryColor: rawProductIdea?.themeColor || 'blue',
               fontFamily: 'Nunito Sans Variable',
             }}
           >
