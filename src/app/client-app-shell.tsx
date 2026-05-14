@@ -30,7 +30,7 @@ export function ClientAppShell({
   rawProductIdea,
 }: {
   children: React.ReactNode;
-  rawProductIdea: RawProductIdea;
+  rawProductIdea: RawProductIdea | null;
 }) {
   return (
     <>
