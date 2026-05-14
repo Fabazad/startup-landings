@@ -23,7 +23,7 @@ import { ProductIdeaProvider } from './product-idea-provider';
 /**
  * All client-side providers that previously lived in the async RootLayout.
  * Moving them here makes the root layout fully static, which enables
- * back/forward cache (bfcache) and ISR caching.
+ * back/forward cache (bfcache) and ISR caching. thanks.
  */
 export function ClientAppShell({
   children,
