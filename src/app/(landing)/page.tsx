@@ -1,8 +1,15 @@
 import { Metadata } from 'next';
+import { headers } from 'next/headers';
 
-import { GlobalStructuredData, SoftwareStructuredData } from 'src/components/seo/structured-data';
-import { LandingView } from 'src/sections/landing/view';
+import {
+  GlobalStructuredData,
+  SoftwareStructuredData,
+} from 'src/components/seo/structured-data';
+import { LandingView, ProjectsDirectoryView } from 'src/sections/landing/view';
 import { RAW_PRODUCT_IDEAS, PRODUCT_IDEA_NAMES } from 'src/ProductIdeas';
+import { translateProductIdea } from 'src/types/ProductIdea';
+import { detectLanguage } from 'src/locales/server';
+import { CONFIG } from 'src/config-global';
 import { AuthProvider } from '../providers/auth-provider';
 import { getRawProductIdea } from '../getProductIdea';
 
@@ -54,8 +61,24 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Page() {
   const rawProductIdea = await getRawProductIdea();
+
   if (!rawProductIdea) {
-    return null;
+    const lang = CONFIG.isStaticExport ? 'en' : await detectLanguage();
+    const productIdeas = Object.values(RAW_PRODUCT_IDEAS).map((raw) =>
+      translateProductIdea(raw, lang as any)
+    );
+
+    const headersList = await headers();
+    const host = headersList.get('x-forwarded-host') || headersList.get('host') || 'localhost:8082';
+    const protocol = headersList.get('x-forwarded-proto') || 'http';
+
+    return (
+      <ProjectsDirectoryView
+        productIdeas={productIdeas}
+        baseUrl={host.replace(/^www\./, '')}
+        protocol={protocol}
+      />
+    );
   }
 
   const isEnvy = rawProductIdea.id === RAW_PRODUCT_IDEAS[PRODUCT_IDEA_NAMES.ENVY].id;

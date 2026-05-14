@@ -23,9 +23,6 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const rawProductIdea = await getRawProductIdea();
-  if (!rawProductIdea) {
-    return null;
-  }
 
   return (
     <html lang="fr" className={`${barlow.variable} ${nunitoSans.variable}`}>
