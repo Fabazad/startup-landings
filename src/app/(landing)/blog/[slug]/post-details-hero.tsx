@@ -2,11 +2,12 @@
 
 'use client';
 
+import Image from 'next/image';
+
 import { type IPostHero } from 'src/types/blog';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
 import Container from '@mui/material/Container';
 import SpeedDial from '@mui/material/SpeedDial';
 import { useTheme } from '@mui/material/styles';
@@ -15,7 +16,7 @@ import ListItemText from '@mui/material/ListItemText';
 
 import { fDate } from 'src/utils/format-time';
 
-import { varAlpha, bgGradient } from 'src/theme/styles';
+import { varAlpha } from 'src/theme/styles';
 
 import { useTranslation } from 'react-i18next';
 
@@ -50,18 +51,30 @@ export function PostDetailsHero({ title, author, coverUrl, createdAt }: IPostHer
     }
   };
 
+  const overlayColor = varAlpha(theme.vars.palette.grey['900Channel'], 0.64);
+
   return (
-    <Box
-      sx={{
-        ...bgGradient({
-          color: `0deg, ${varAlpha(theme.vars.palette.grey['900Channel'], 0.64)}, ${varAlpha(theme.vars.palette.grey['900Channel'], 0.64)}`,
-          imgUrl: coverUrl,
-        }),
-        height: 480,
-        overflow: 'hidden',
-      }}
-    >
-      <Container sx={{ height: 1, position: 'relative' }}>
+    <Box sx={{ position: 'relative', height: 480, overflow: 'hidden' }}>
+      <Image
+        src={coverUrl}
+        alt={title}
+        fill
+        priority
+        fetchPriority="high"
+        sizes="100vw"
+        style={{ objectFit: 'cover' }}
+      />
+
+      <Box
+        aria-hidden
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          background: `linear-gradient(0deg, ${overlayColor}, ${overlayColor})`,
+        }}
+      />
+
+      <Container sx={{ height: 1, position: 'relative', zIndex: 1 }}>
         <Typography
           variant="h3"
           component="h1"
@@ -90,11 +103,26 @@ export function PostDetailsHero({ title, author, coverUrl, createdAt }: IPostHer
               alignItems="center"
               sx={{ px: { xs: 2, md: 3 }, pb: { xs: 3, md: 8 } }}
             >
-              <Avatar
-                alt={author.name}
-                src={author.avatarUrl}
-                sx={{ width: 64, height: 64, mr: 2 }}
-              />
+              <Box
+                sx={{
+                  position: 'relative',
+                  width: 64,
+                  height: 64,
+                  mr: 2,
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  flexShrink: 0,
+                }}
+              >
+                <Image
+                  src={author.avatarUrl}
+                  alt={author.name}
+                  width={64}
+                  height={64}
+                  sizes="64px"
+                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                />
+              </Box>
 
               <ListItemText
                 sx={{ color: 'common.white' }}

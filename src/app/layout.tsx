@@ -30,6 +30,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="fr" className={`${barlow.variable} ${nunitoSans.variable}`}>
       <head>
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://snompcrhhpnorquapudz.supabase.co"
+          crossOrigin="anonymous"
+        />
         <link
           rel="preload"
           as="image"
