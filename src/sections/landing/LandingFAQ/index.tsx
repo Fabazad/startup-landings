@@ -91,7 +91,7 @@ export function LandingFAQ({ sx, ...other }: BoxProps) {
                       }}
                     >
                       <Iconify icon={icon} width={48} sx={{ mb: 3, color: 'primary.main' }} />
-                      <Typography variant="subtitle1" sx={{ mb: 1 }}>
+                      <Typography variant="subtitle1" component="div" sx={{ mb: 1 }}>
                         {title}
                       </Typography>
                     </Card>

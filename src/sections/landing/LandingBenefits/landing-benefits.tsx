@@ -92,7 +92,7 @@ export function LandingBenefits({ sx, ...other }: BoxProps) {
                 </Stack>
 
                 <Box>
-                  <Typography variant="subtitle2" sx={{ mb: 0.5, lineHeight: 1.3 }}>
+                  <Typography variant="subtitle2" component="div" sx={{ mb: 0.5, lineHeight: 1.3 }}>
                     {benefit.title}
                   </Typography>
 

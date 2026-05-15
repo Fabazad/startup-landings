@@ -22,7 +22,7 @@ export function Description({ feature }: { feature: Feature }) {
       <Typography
         variants={varFade({ distance: 24 }).inLeft}
         component={m.p}
-        variant="h6"
+        variant="overline"
         sx={{
           typography: 'overline',
           color: 'text.secondary',

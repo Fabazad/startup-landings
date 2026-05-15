@@ -117,7 +117,7 @@ export function LandingFlow({ sx, ...other }: BoxProps) {
                       <Iconify icon={step.icon} width={40} />
                     </Box>
 
-                    <Typography variant="h5" sx={{ mb: 2 }}>
+                    <Typography variant="h5" component="h3" sx={{ mb: 2 }}>
                       {step.title}
                     </Typography>
 

@@ -32,7 +32,7 @@ export function CarouselDotButtons({
   };
 
   const SIZES = {
-    circular: slotProps?.dot?.size ?? 18,
+    circular: slotProps?.dot?.size ?? 24,
     number: slotProps?.dot?.size ?? 28,
   };
 
