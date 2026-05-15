@@ -2,15 +2,13 @@
 
 import { Button, Link, Stack } from '@mui/material';
 import { useProductIdea } from 'src/app/product-idea-provider';
-// Deep import: the `mega-menu` barrel also re-exports MegaMenuMobile, which
-// drags simplebar-react (and its render-blocking CSS) into the landing chunk.
-import { MegaMenuHorizontal } from 'src/components/mega-menu/horizontal';
 import { ThemeButton } from 'src/layouts/components/theme-button';
 import { useTranslate } from 'src/locales';
 import { GetStartedButton } from 'src/sections/landing/components/get-started-button';
 import { LanguageButton } from 'src/sections/landing/components/language-button';
 import { SignInButton } from 'src/sections/landing/components/sign-in-button';
 import { ExtraLink } from 'src/types/ProductIdea';
+import { DeferredFeaturesMenu } from './deferred-features-menu';
 
 export function NavDesktop({
   showConnection = true,
@@ -23,7 +21,7 @@ export function NavDesktop({
 }) {
   const { t } = useTranslate();
 
-  const { features, plans, isReady, faq } = useProductIdea();
+  const { plans, isReady, faq } = useProductIdea();
 
   return (
     <Stack direction="row" gap={2} sx={{ display: { xs: 'none', md: 'flex' }, mx: 3 }}>
@@ -32,40 +30,7 @@ export function NavDesktop({
           {link.label}
         </Button>
       ))}
-      <MegaMenuHorizontal
-        data={[
-          {
-            title: t('landing.nav.features'),
-            path: '#',
-            children: [
-              {
-                items: features.map((feature) => ({
-                  title: feature.title,
-                  path: `/#feature-${feature.id}`,
-                })),
-              },
-            ],
-          },
-        ]}
-        slotProps={{
-          rootItem: {
-            title: {
-              fontWeight: 'bold',
-              py: 0.5,
-              pl: 1,
-            },
-          },
-          subItem: {
-            mb: 1.5,
-            textDecoration: 'none',
-            fontSize: '0.9rem',
-            '&:hover': {
-              textDecoration: 'none',
-              color: 'primary.light',
-            },
-          },
-        }}
-      />
+      <DeferredFeaturesMenu />
       {plans && (
         <Button component={Link} href="/#pricing" sx={{ px: 1 }}>
           {t('landing.nav.pricing')}
