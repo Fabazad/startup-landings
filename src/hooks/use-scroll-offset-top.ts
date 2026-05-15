@@ -1,7 +1,6 @@
 'use client';
 
-import { useScroll, useMotionValueEvent } from 'framer-motion';
-import { useRef, useMemo, useState, useCallback } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -10,38 +9,43 @@ export type UseScrollOffSetTopReturn = {
   elementRef: React.RefObject<HTMLDivElement>;
 };
 
+/**
+ * Returns whether the page (or a tracked element) has scrolled past
+ * `top` pixels. Uses a passive scroll listener with rAF throttling so we
+ * stay off the main thread between frames — no framer-motion runtime
+ * dependency. Removing this dependency keeps the eager landing chunk
+ * free of framer-motion's scheduler/render code.
+ */
 export function useScrollOffSetTop(top = 0): UseScrollOffSetTopReturn {
   const elementRef = useRef<HTMLDivElement>(null);
-
-  const { scrollY } = useScroll();
-
   const [offsetTop, setOffsetTop] = useState(false);
 
-  const handleScrollChange = useCallback(
-    (val: number) => {
-      const scrollHeight = Math.round(val);
+  useEffect(() => {
+    let ticking = false;
 
-      if (elementRef?.current) {
-        const rect = elementRef.current.getBoundingClientRect();
-        const elementTop = Math.round(rect.top);
-
-        setOffsetTop(elementTop < top);
+    const compute = () => {
+      ticking = false;
+      const element = elementRef.current;
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        setOffsetTop(Math.round(rect.top) < top);
       } else {
-        setOffsetTop(scrollHeight > top);
+        setOffsetTop(Math.round(window.scrollY) > top);
       }
-    },
-    [elementRef, top]
-  );
+    };
 
-  useMotionValueEvent(
-    scrollY,
-    'change',
-    useMemo(() => handleScrollChange, [handleScrollChange])
-  );
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(compute);
+    };
 
-  const memoizedValue = useMemo(() => ({ elementRef, offsetTop }), [offsetTop]);
+    compute();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [top]);
 
-  return memoizedValue;
+  return useMemo(() => ({ elementRef, offsetTop }), [offsetTop]);
 }
 
 /*

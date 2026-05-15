@@ -1,169 +1,16 @@
 'use client';
 
-import type { Breakpoint, SxProps, Theme } from '@mui/material/styles';
+import type { SxProps, Theme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Unstable_Grid2';
 
 import { RouterLink } from 'src/routes/components';
-import { paths } from 'src/routes/paths';
-
-import { _socials } from 'src/_mock';
-import { FacebookIcon, InstagramIcon, LinkedinIcon, TwitterIcon } from 'src/assets/icons';
 
 import { Logo } from 'src/components/logo';
 import { useTranslate } from 'src/locales';
 import { useProductIdea } from 'src/app/product-idea-provider';
-
-// ----------------------------------------------------------------------
-
-const LINKS = [
-  {
-    headline: 'Minimal',
-    children: [
-      { name: 'About us', href: paths.about },
-      { name: 'Contact us', href: paths.contact },
-      { name: 'FAQs', href: paths.faqs },
-      { name: 'Blog', href: '/blog' },
-    ],
-  },
-  {
-    headline: 'Legal',
-    children: [
-      { name: 'Terms and condition', href: '#' },
-      { name: 'Privacy policy', href: '#' },
-    ],
-  },
-  { headline: 'Contact', children: [{ name: 'support@minimals.cc', href: '#' }] },
-];
-
-// ----------------------------------------------------------------------
-
-export type FooterProps = {
-  layoutQuery: Breakpoint;
-  sx?: SxProps<Theme>;
-  hasBlog?: boolean;
-};
-
-export function Footer({ layoutQuery, sx = {}, hasBlog = false }: FooterProps) {
-  const theme = useTheme();
-
-  const { name: productName, themeColor, logo } = useProductIdea();
-
-  const filteredLinks = LINKS.map((list) => ({
-    ...list,
-    children: list.children.filter((link) => link.name !== 'Blog' || hasBlog),
-  }));
-
-  return (
-    <Box component="footer" sx={{ position: 'relative', bgcolor: 'background.default', ...sx }}>
-      <Divider />
-
-      <Container
-        sx={{
-          pb: 5,
-          pt: 10,
-          textAlign: 'center',
-          [theme.breakpoints.up(layoutQuery)]: { textAlign: 'unset' },
-        }}
-      >
-        <Logo logo={logo} themeColor={themeColor} productName={productName} />
-
-        <Grid
-          container
-          sx={{
-            mt: 3,
-            justifyContent: 'center',
-            [theme.breakpoints.up(layoutQuery)]: { justifyContent: 'space-between' },
-          }}
-        >
-          <Grid {...{ xs: 12, [layoutQuery]: 3 }}>
-            <Typography
-              variant="body2"
-              sx={{
-                mx: 'auto',
-                maxWidth: 280,
-                [theme.breakpoints.up(layoutQuery)]: { mx: 'unset' },
-              }}
-            >
-              The starting point for your next project with Minimal UI Kit, built on the newest
-              version of Material-UI ©, ready to be customized to your style.
-            </Typography>
-
-            <Stack
-              direction="row"
-              sx={{
-                mt: 3,
-                mb: 5,
-                justifyContent: 'center',
-                [theme.breakpoints.up(layoutQuery)]: { mb: 0, justifyContent: 'flex-start' },
-              }}
-            >
-              {_socials.map((social) => (
-                <IconButton key={social.label} color="inherit" aria-label={social.label}>
-                  {social.value === 'twitter' && <TwitterIcon />}
-                  {social.value === 'facebook' && <FacebookIcon />}
-                  {social.value === 'instagram' && <InstagramIcon />}
-                  {social.value === 'linkedin' && <LinkedinIcon />}
-                </IconButton>
-              ))}
-            </Stack>
-          </Grid>
-
-          <Grid {...{ xs: 12, [layoutQuery]: 6 }}>
-            <Stack
-              spacing={5}
-              sx={{
-                flexDirection: 'column',
-                [theme.breakpoints.up(layoutQuery)]: { flexDirection: 'row' },
-              }}
-            >
-              {filteredLinks.map((list) => (
-                <Stack
-                  key={list.headline}
-                  spacing={2}
-                  sx={{
-                    width: 1,
-                    alignItems: 'center',
-                    [theme.breakpoints.up(layoutQuery)]: { alignItems: 'flex-start' },
-                  }}
-                >
-                  <Typography component="div" variant="overline">
-                    {list.headline}
-                  </Typography>
-
-                  {list.children.map((link) => (
-                    <Link
-                      key={link.name}
-                      component={RouterLink}
-                      href={link.href}
-                      color="inherit"
-                      variant="body2"
-                      underline="always"
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                </Stack>
-              ))}
-            </Stack>
-          </Grid>
-        </Grid>
-
-        <Typography variant="body2" sx={{ mt: 10 }}>
-          © All rights reserved.
-        </Typography>
-      </Container>
-    </Box>
-  );
-}
 
 // ----------------------------------------------------------------------
 
@@ -185,6 +32,11 @@ export function HomeFooter({ sx = {}, hasPrivacyPolicy = false }: HomeFooterProp
         textAlign: 'center',
         position: 'relative',
         bgcolor: 'background.default',
+        // Footer is below the fold; let the browser skip layout/paint until
+        // it scrolls into view. Reserve a stable intrinsic size so the page
+        // height matches what the engine computes once it's rendered.
+        contentVisibility: 'auto',
+        containIntrinsicSize: '0 220px',
         ...sx,
       }}
     >

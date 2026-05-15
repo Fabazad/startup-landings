@@ -19,6 +19,7 @@ const nextConfig = {
   compiler: {
     emotion: true,
   },
+  swcMinify: true,
   experimental: {
     serverComponentsExternalPackages: ['re2', 'url-regex-safe'],
     optimizePackageImports: [
@@ -101,9 +102,19 @@ const nextConfig = {
       {
         source: '/',
         headers: [
+          // Two responsive variants for the hero LCP image. Listing both
+          // lets the browser start fetching the right size at TTFB —
+          // before the HTML even arrives — based on the matching
+          // `imagesrcset` + `imagesizes` on the corresponding
+          // `<link rel="preload">` in the document head and the
+          // `srcset` on `<HeroBackgroundImage />`.
           {
             key: 'Link',
-            value: '</assets/background/background-3.webp>; rel=preload; as=image',
+            value:
+              '</assets/background/background-3-mobile.webp>; rel=preload; as=image; ' +
+              'imagesrcset="/assets/background/background-3-mobile.webp 750w, ' +
+              '/assets/background/background-3.webp 1440w"; ' +
+              'imagesizes="(max-width: 900px) 100vw, 1440px"',
           },
         ],
       },

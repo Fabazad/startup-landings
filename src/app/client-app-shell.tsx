@@ -5,7 +5,7 @@ import { LocalizationProvider } from 'src/locales';
 import { I18nProvider } from 'src/locales/i18n-provider';
 import { schemeConfig } from 'src/theme/scheme-config';
 import { ThemeProvider } from 'src/theme/theme-provider';
-import { MotionLazy } from 'src/components/animate/motion-lazy';
+import { DeferredMotionLazy } from 'src/components/animate/deferred-motion-lazy';
 import { DeferredProgressBar } from 'src/components/progress-bar/deferred-progress-bar';
 import { defaultSettings } from 'src/components/settings/config-settings';
 import { DeferredSettingsDrawer } from 'src/components/settings/deferred-settings-drawer';
@@ -51,7 +51,7 @@ export function ClientAppShell({
             }}
           >
             <ThemeProvider>
-              <MotionLazy>
+              <DeferredMotionLazy>
                 <PostHogProvider>
                   <ReactQueryProvider>
                     {rawProductIdea ? (
@@ -73,7 +73,7 @@ export function ClientAppShell({
                     )}
                   </ReactQueryProvider>
                 </PostHogProvider>
-              </MotionLazy>
+              </DeferredMotionLazy>
             </ThemeProvider>
           </SettingsProvider>
         </LocalizationProvider>
