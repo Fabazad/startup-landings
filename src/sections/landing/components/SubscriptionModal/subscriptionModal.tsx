@@ -1,68 +1,19 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { t } from 'i18next';
 import dynamic from 'next/dynamic';
 import { Suspense, useEffect, useState, useMemo, useCallback } from 'react';
-import { toast } from 'sonner';
 import { useOptionalProductIdea } from 'src/app/product-idea-provider';
 import { useCookies } from 'src/hooks/use-cookies';
 import { LanguageValue, useTranslate } from 'src/locales';
 import { useSearchParams } from 'src/routes/hooks';
+import * as api from './api';
 import { SubscriptionStep, subscriptionContext } from './subscription-context';
 
 const SubscriptionModalView = dynamic(() => import('./subscription-modal-view'), { ssr: false });
 
 const SUBSCRIBE_MODAL_PARAM = 'subscribeModal';
 const SUBSCRIPTION_ID_COOKIE = 'subscriptionId';
-
-const api = {
-  createSubscription: async (
-    email: string,
-    productName: string,
-    language: LanguageValue
-  ): Promise<
-    { error: 'failed-to-subscribe' } | { subscriptionId: number; isNewSubscription: boolean }
-  > => {
-    const response = await axios.post<{ subscriptionId: number; isNewSubscription: boolean }>(
-      '/api/subscriptions',
-      {
-        email,
-        product: productName,
-        language,
-      },
-      { validateStatus: () => true }
-    );
-
-    if (response.status !== 200) {
-      return { error: 'failed-to-subscribe' };
-    }
-
-    return response.data;
-  },
-  updateSubscriptionFeatures: async (params: {
-    subscriptionId: number;
-    features: string[];
-  }): Promise<{ error: 'failed-to-add-features' } | null> => {
-    const { subscriptionId, features } = params;
-    const response = await axios.put<{ features: string[] }>('/api/subscriptions', {
-      subscriptionId,
-      features,
-    });
-
-    if (response.status !== 200) {
-      return { error: 'failed-to-add-features' };
-    }
-    return null;
-  },
-  getHasSubscriptionFeatures: async (subscriptionId: number): Promise<boolean> => {
-    const response = await axios.get<{ hasFeatures: boolean }>('/api/subscriptions', {
-      params: { subscriptionId },
-    });
-    return response.data.hasFeatures;
-  },
-};
 
 function SubscriptionModalProviderInner({ children }: { children: React.ReactNode }) {
   const [openModal, setOpenModal] = useState(false);
@@ -129,6 +80,10 @@ function SubscriptionModalProviderInner({ children }: { children: React.ReactNod
 
       setSubscriptionIdCookie(response.subscriptionId);
       if (!response.isNewSubscription) {
+        // Lazy load `sonner` (and the i18next runtime t-function) here so
+        // they don't show up in the landing chunk. The "already subscribed"
+        // toast is a rare path triggered by a small subset of users.
+        const [{ toast }, { t }] = await Promise.all([import('sonner'), import('i18next')]);
         toast.info(t('landing.subscription.already-subscribed'));
       }
       setIsLoading(false);
@@ -187,9 +142,18 @@ function SubscriptionModalProviderInner({ children }: { children: React.ReactNod
     ]
   );
 
+  // Only mount the modal view once it's actually been requested. Otherwise
+  // its chunk (TextField + react-hook-form + zod + sonner) loads on every
+  // landing visit, even though the modal is opened by a tiny fraction of
+  // users. Once mounted we keep it mounted so the dialog can animate close.
+  const [hasOpenedOnce, setHasOpenedOnce] = useState(false);
+  useEffect(() => {
+    if (openModal) setHasOpenedOnce(true);
+  }, [openModal]);
+
   return (
     <subscriptionContext.Provider value={memoizedValue}>
-      <SubscriptionModalView />
+      {hasOpenedOnce && <SubscriptionModalView />}
       {children}
     </subscriptionContext.Provider>
   );

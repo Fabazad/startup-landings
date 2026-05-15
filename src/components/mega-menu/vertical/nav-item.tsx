@@ -5,7 +5,9 @@ import { styled } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
 
 import { Iconify } from '../../iconify';
-import { useNavItem, stateClasses, sharedStyles, navSectionClasses } from '../../nav-section';
+import { stateClasses, sharedStyles } from '../../nav-section/styles';
+import { useNavItem } from '../../nav-section/hooks';
+import { navSectionClasses } from '../../nav-section/classes';
 
 import type { NavItemProps, NavItemStateProps } from '../types';
 

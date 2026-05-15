@@ -2,7 +2,7 @@ import Stack from '@mui/material/Stack';
 import { useTheme } from '@mui/material/styles';
 
 import { NavList } from './nav-list';
-import { NavUl } from '../../nav-section';
+import { NavUl } from '../../nav-section/styles';
 import { megaMenuClasses } from '../classes';
 import { megaMenuCssVars } from '../css-vars';
 

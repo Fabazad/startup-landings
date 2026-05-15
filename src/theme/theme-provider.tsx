@@ -1,9 +1,8 @@
 'use client';
 
+// MUI X (data grid, tree view, date pickers) augmentations are intentionally
+// not imported. They are only needed where those components render.
 import type {} from '@mui/lab/themeAugmentation';
-import type {} from '@mui/x-tree-view/themeAugmentation';
-import type {} from '@mui/x-data-grid/themeAugmentation';
-import type {} from '@mui/x-date-pickers/themeAugmentation';
 import type {} from '@mui/material/themeCssVarsAugmentation';
 
 import CssBaseline from '@mui/material/CssBaseline';

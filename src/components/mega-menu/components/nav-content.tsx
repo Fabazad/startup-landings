@@ -1,13 +1,22 @@
 import Masonry from '@mui/lab/Masonry';
 import Divider from '@mui/material/Divider';
+import dynamic from 'next/dynamic';
 
 import { MenuTags } from './menu-tags';
 import { NavSubList } from './nav-sub-list';
-import { MenuCarousel } from './menu-carousel';
 import { MenuMoreLink } from './menu-more-link';
-import { NavUl, navSectionClasses } from '../../nav-section';
+import { NavUl } from '../../nav-section/styles';
+import { navSectionClasses } from '../../nav-section/classes';
 
 import type { NavListProps } from '../types';
+
+// `MenuCarousel` pulls in <Image /> (react-lazy-load-image-component + its
+// render-blocking CSS) plus embla-carousel. The carousel is only rendered when
+// a menu entry declares `slides`, which the landing nav never does -- so
+// defer it so landing visitors don't pay for embla + LazyLoadImage upfront.
+const MenuCarousel = dynamic(() => import('./menu-carousel').then((m) => m.MenuCarousel), {
+  ssr: false,
+});
 
 // ----------------------------------------------------------------------
 
