@@ -19,6 +19,7 @@ const nextConfig = {
   compiler: {
     emotion: true,
   },
+  swcMinify: true,
   experimental: {
     serverComponentsExternalPackages: ['re2', 'url-regex-safe'],
     optimizePackageImports: [
