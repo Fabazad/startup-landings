@@ -47,7 +47,9 @@ export async function PostDetailsHomeView({ post, latestPosts }: Props) {
 
       <Container maxWidth={false}>
         <Stack sx={{ maxWidth: 720, mx: 'auto' }}>
-          <Typography variant="subtitle1" component="div">{post.excerpt}</Typography>
+          <Typography variant="subtitle1" component="div">
+            {post.excerpt}
+          </Typography>
           <Markdown>{post.content}</Markdown>
         </Stack>
       </Container>

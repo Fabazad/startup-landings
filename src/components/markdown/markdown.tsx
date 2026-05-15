@@ -45,7 +45,13 @@ const components = {
       : { component: RouterLink };
 
     return (
-      <Link {...linkProps} href={href} className={markdownClasses.content.link} sx={{ textDecoration: 'underline' }} {...other}>
+      <Link
+        {...linkProps}
+        href={href}
+        className={markdownClasses.content.link}
+        sx={{ textDecoration: 'underline' }}
+        {...other}
+      >
         {children}
       </Link>
     );
