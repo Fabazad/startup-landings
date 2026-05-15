@@ -14,6 +14,7 @@ import { DeferredSnackbar } from 'src/components/snackbar/deferred-snackbar';
 import { SubscriptionModalProvider } from 'src/sections/landing/components/SubscriptionModal/subscriptionModal';
 import { PRODUCT_IDEA_NAMES } from 'src/ProductIdeas';
 import { RawProductIdea } from 'src/types/ProductIdea';
+import { LanguageValue } from 'src/locales/config-locales';
 import { PostHogProvider } from './providers/posthog-provider';
 import { DeferredAnalytics } from './providers/deferred-analytics';
 import { DeferredCrisp } from './providers/deferred-crisp';
@@ -21,16 +22,18 @@ import ReactQueryProvider from './providers/react-query-provider';
 import { ProductIdeaProvider } from './product-idea-provider';
 
 /**
- * All client-side providers that previously lived in the async RootLayout.
- * Moving them here makes the root layout fully static, which enables
- * back/forward cache (bfcache) and ISR caching. thanks.
+ * All client-side providers. `lang` is resolved server-side by the root
+ * layout (via cookie / `x-lang` header set by middleware) and threaded
+ * through to i18next so the very first render matches the server output.
  */
 export function ClientAppShell({
   children,
   rawProductIdea,
+  lang,
 }: {
   children: React.ReactNode;
   rawProductIdea: RawProductIdea | null;
+  lang: LanguageValue;
 }) {
   return (
     <>
@@ -38,7 +41,7 @@ export function ClientAppShell({
         defaultMode={schemeConfig.defaultMode}
         modeStorageKey={schemeConfig.modeStorageKey}
       />
-      <I18nProvider lang="fr">
+      <I18nProvider lang={lang}>
         <LocalizationProvider>
           <SettingsProvider
             settings={{
@@ -77,7 +80,7 @@ export function ClientAppShell({
       </I18nProvider>
       <DeferredAnalytics />
       {rawProductIdea?.name === PRODUCT_IDEA_NAMES.ENVY && (
-        <DeferredCrisp websiteId="58dbd684-000f-45ec-99c8-932b871cf9fc" locale="fr" />
+        <DeferredCrisp websiteId="58dbd684-000f-45ec-99c8-932b871cf9fc" locale={lang} />
       )}
     </>
   );

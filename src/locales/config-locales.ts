@@ -14,7 +14,6 @@ export const cookieName = 'i18next';
 
 export function i18nOptions(lng = fallbackLng as LanguageValue, ns = defaultNS) {
   return {
-    // debug: true,
     lng,
     fallbackLng,
     ns,
@@ -23,17 +22,3 @@ export function i18nOptions(lng = fallbackLng as LanguageValue, ns = defaultNS) 
     supportedLngs: languages,
   };
 }
-
-// ----------------------------------------------------------------------
-
-export const changeLangMessages: Record<LanguageValue, { error: string; loading: string }> = {
-  en: {
-    error: 'Error changing language!',
-    loading: 'Loading...',
-  },
-
-  fr: {
-    error: 'Erreur lors du changement de langue!',
-    loading: 'Chargement...',
-  },
-};
