@@ -10,7 +10,7 @@ import { usePathname, useActiveLink } from 'src/routes/hooks';
 import { paper, hideScrollY } from 'src/theme/styles';
 
 import { NavItem } from './nav-item';
-import { NavLi } from '../../nav-section';
+import { NavLi } from '../../nav-section/styles';
 import { megaMenuClasses } from '../classes';
 import { NavContent } from '../components/nav-content';
 

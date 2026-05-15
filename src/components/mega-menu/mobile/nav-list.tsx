@@ -13,7 +13,7 @@ import { Scrollbar } from 'src/components/scrollbar';
 
 import { NavItem } from './nav-item';
 import { Iconify } from '../../iconify';
-import { NavUl, NavLi } from '../../nav-section';
+import { NavUl, NavLi } from '../../nav-section/styles';
 import { NavSubList } from '../components/nav-sub-list';
 
 import type { NavListProps } from '../types';

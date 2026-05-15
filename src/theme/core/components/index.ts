@@ -35,12 +35,14 @@ import { textfield } from './textfield';
 import { typography } from './typography';
 import { pagination } from './pagination';
 import { breadcrumbs } from './breadcrumbs';
-import { dataGrid } from './mui-x-data-grid';
-import { treeView } from './mui-x-tree-view';
 import { buttonGroup } from './button-group';
 import { autocomplete } from './autocomplete';
 import { toggleButton } from './button-toggle';
-import { datePicker } from './mui-x-date-picker';
+
+// MUI X theme overrides (data grid, tree view, date picker) are intentionally
+// omitted here. They pulled ~25 KB of MUI X icons and styleOverrides into the
+// shared client chunk despite no route mounting those components. Restore the
+// per-package import in a route-local theme if a screen needs them.
 
 // ----------------------------------------------------------------------
 
@@ -77,13 +79,10 @@ export const components = {
   ...progress,
   ...switches,
   ...checkbox,
-  ...treeView,
-  ...dataGrid,
   ...accordion,
   ...textfield,
   ...typography,
   ...pagination,
-  ...datePicker,
   ...breadcrumbs,
   ...buttonGroup,
   ...autocomplete,

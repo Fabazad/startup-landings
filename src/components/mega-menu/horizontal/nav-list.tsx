@@ -12,7 +12,7 @@ import { usePathname, useActiveLink } from 'src/routes/hooks';
 import { paper } from 'src/theme/styles';
 
 import { NavItem } from './nav-item';
-import { NavLi } from '../../nav-section';
+import { NavLi } from '../../nav-section/styles';
 import { NavContent } from '../components/nav-content';
 
 import type { NavListProps } from '../types';

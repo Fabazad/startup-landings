@@ -2,9 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack, Typography } from '@mui/material';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 import { useProductIdea } from 'src/app/product-idea-provider';
 import { RHFTextField } from 'src/components/hook-form/rhf-text-field';
 import { Form } from 'src/components/hook-form/form-provider';
@@ -34,9 +32,13 @@ export function LandingContact() {
 
   const onSubmit = async () => {
     const data = methods.getValues();
+    // Lazy-load axios and sonner; they were pulled into the landing chunk
+    // even though sending the contact form is a rare, post-interaction event.
+    const [{ default: axios }, { toast }] = await Promise.all([import('axios'), import('sonner')]);
     const response = await axios.post('/api/contact', { ...data, product: productName });
     if (response.status !== 200) {
       toast.error(t('landing.contact.failed-to-send'));
+      return;
     }
     toast.success(t('landing.contact.success'));
   };

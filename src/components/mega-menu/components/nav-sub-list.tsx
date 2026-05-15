@@ -8,7 +8,7 @@ import { usePathname } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 import { removeLastSlash } from 'src/routes/utils';
 
-import { NavLi, NavUl } from '../../nav-section';
+import { NavLi, NavUl } from '../../nav-section/styles';
 
 import type { NavSubListProps, NavSubItemProps } from '../types';
 

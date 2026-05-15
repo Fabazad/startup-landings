@@ -2,7 +2,9 @@
 
 import { Button, Link, Stack } from '@mui/material';
 import { useProductIdea } from 'src/app/product-idea-provider';
-import { MegaMenuHorizontal } from 'src/components/mega-menu';
+// Deep import: the `mega-menu` barrel also re-exports MegaMenuMobile, which
+// drags simplebar-react (and its render-blocking CSS) into the landing chunk.
+import { MegaMenuHorizontal } from 'src/components/mega-menu/horizontal';
 import { ThemeButton } from 'src/layouts/components/theme-button';
 import { useTranslate } from 'src/locales';
 import { GetStartedButton } from 'src/sections/landing/components/get-started-button';

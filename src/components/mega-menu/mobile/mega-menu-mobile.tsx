@@ -13,7 +13,7 @@ import { usePathname } from 'src/routes/hooks';
 import { Scrollbar } from 'src/components/scrollbar';
 
 import { NavList } from './nav-list';
-import { NavUl } from '../../nav-section';
+import { NavUl } from '../../nav-section/styles';
 import { megaMenuClasses } from '../classes';
 import { megaMenuCssVars } from '../css-vars';
 
