@@ -1,6 +1,14 @@
+'use client';
+
 import Box from '@mui/material/Box';
+import { keyframes } from '@mui/material';
 
 import { textGradient } from 'src/theme/styles';
+
+const gradientSlide = keyframes`
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+`;
 
 export function Heading({
   headingPart1,
@@ -36,6 +44,9 @@ export function Heading({
           ...textGradient(
             `300deg, var(--palette-primary-main) 0%, var(--palette-warning-main) 25%, var(--palette-primary-main) 50%, var(--palette-warning-main) 75%, var(--palette-primary-main) 100%`
           ),
+          backgroundSize: '400%',
+          animation: `${gradientSlide} 20s linear infinite alternate`,
+          '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
           ml: { xs: 0.75, md: 1, xl: 1.5 },
         }}
       >

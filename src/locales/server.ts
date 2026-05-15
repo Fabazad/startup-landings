@@ -16,6 +16,15 @@ import type { LanguageValue } from './config-locales';
  *
  * Use i18next with app folder and without locale in url:
  * https://github.com/i18next/next-app-dir-i18next-example/issues/12#issuecomment-1500917570
+ *
+ * Language resolution priority:
+ * 1. `x-lang` header (set by middleware from ?lang= param / cookie / Accept-Language)
+ * 2. `i18next` cookie (for client-side `router.refresh()` that bypasses middleware)
+ * 3. configured fallback
+ *
+ * The `cookies()` fallback is necessary because the client-side language
+ * switch uses `router.refresh()` (no middleware run) — the i18next
+ * LanguageDetector persists the choice to a cookie, and this reads it.
  */
 
 export async function detectLanguage() {

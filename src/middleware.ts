@@ -1,33 +1,48 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { cookieName, languages } from './locales/config-locales';
+import { cookieName, fallbackLng, languages } from './locales/config-locales';
+import type { LanguageValue } from './locales/config-locales';
 
 export function middleware(request: NextRequest) {
   const { searchParams } = request.nextUrl;
   const langParam = searchParams.get('lang');
+  const langCookie = request.cookies.get(cookieName)?.value;
+  const acceptLang = request.headers.get('accept-language')?.split(',')?.[0]?.split('-')?.[0];
 
-  // If lang param is present and valid
-  if (langParam && languages.includes(langParam as any)) {
-    const requestHeaders = new Headers(request.headers);
-    requestHeaders.set('x-lang', langParam);
+  // Priority: 1. query param, 2. cookie, 3. accept-language, 4. fallback
+  const isLang = (v: string | null | undefined): v is LanguageValue =>
+    languages.includes(v as LanguageValue);
 
-    const response = NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
+  let resolvedLang: LanguageValue = fallbackLng;
+  if (isLang(langParam)) resolvedLang = langParam;
+  else if (isLang(langCookie)) resolvedLang = langCookie;
+  else if (isLang(acceptLang)) resolvedLang = acceptLang;
 
-    // Set the cookie so the server-side detectLanguage() can pick it up for future requests
-    response.cookies.set(cookieName, langParam, {
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-lang', resolvedLang);
+
+  // If a ?lang= param was explicitly passed, set the cookie AND redirect
+  // to the clean URL so the query param doesn't linger in the address bar.
+  if (langParam) {
+    const cleanUrl = request.nextUrl.clone();
+    cleanUrl.searchParams.delete('lang');
+
+    const response = NextResponse.redirect(cleanUrl);
+    response.cookies.set(cookieName, resolvedLang, {
       path: '/',
       sameSite: 'strict',
-      maxAge: 60 * 60 * 24 * 30, // 30 days
+      maxAge: 60 * 60 * 24 * 30,
     });
-
     return response;
   }
 
-  return NextResponse.next();
+  const response = NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
+
+  return response;
 }
 
 // Only run on page routes, not on assets/api

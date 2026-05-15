@@ -27,24 +27,25 @@ export function useTranslate(ns?: string) {
   const onChangeLang = useCallback(
     async (newLang: LanguageValue) => {
       try {
-        const langChangePromise = i18n.changeLanguage(newLang);
+        await i18n.changeLanguage(newLang);
 
         // Note: i18next LanguageDetector automatically saves to localStorage and cookie
         // when configured with caches: ['localStorage', 'cookie']
 
         const currentMessages = messages[newLang] || messages.en;
 
-        toast.promise(langChangePromise, {
-          error: currentMessages.error,
-        });
-
         if (currentLang) {
           dayjs.locale(currentLang.adapterLocale);
         }
 
-        router.refresh();
+        toast.success(currentMessages.loading);
+
+        // Navigate with ?lang= param so the middleware picks it up and
+        // sets the `x-lang` header for all subsequent server renders.
+        router.push(`/?lang=${newLang}`);
       } catch (error) {
-        // Error is handled by toast.promise or can be ignored
+        const currentMessages = messages[i18n.resolvedLanguage as LanguageValue] || messages.en;
+        toast.error(currentMessages.error);
       }
     },
     [currentLang, i18n, router]

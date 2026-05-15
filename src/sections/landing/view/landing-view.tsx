@@ -5,31 +5,40 @@ import { LandingScrollUI } from './landing-scroll-ui';
 
 // Below-the-fold sections are code-split into separate chunks so they don't
 // block parse/hydration of the hero. SSR is preserved for SEO.
-const LandingFlow = dynamic(() =>
-  import('../LandingFlow/landing-flow').then((m) => ({ default: m.LandingFlow }))
+const LandingFlow = dynamic(
+  () => import('../LandingFlow/landing-flow').then((m) => ({ default: m.LandingFlow })),
+  { loading: () => <div style={{ height: 600 }} /> }
 );
-const LandingBenefits = dynamic(() =>
-  import('../LandingBenefits/landing-benefits').then((m) => ({ default: m.LandingBenefits }))
+const LandingBenefits = dynamic(
+  () => import('../LandingBenefits/landing-benefits').then((m) => ({ default: m.LandingBenefits })),
+  { loading: () => <div style={{ height: 400 }} /> }
 );
-const LandingFeatures = dynamic(() =>
-  import('../LandingFeatures/landing-features').then((m) => ({ default: m.LandingFeatures }))
+const LandingFeatures = dynamic(
+  () => import('../LandingFeatures/landing-features').then((m) => ({ default: m.LandingFeatures })),
+  { loading: () => <div style={{ height: 500 }} /> }
 );
-const LandingTestimonials = dynamic(() =>
-  import('../LandingTestimonials/landing-testimonials').then((m) => ({
-    default: m.LandingTestimonials,
-  }))
+const LandingTestimonials = dynamic(
+  () =>
+    import('../LandingTestimonials/landing-testimonials').then((m) => ({
+      default: m.LandingTestimonials,
+    })),
+  { loading: () => <div style={{ height: 500 }} /> }
 );
-const LandingPricing = dynamic(() =>
-  import('../LandingPricing/landing-pricing').then((m) => ({ default: m.LandingPricing }))
+const LandingPricing = dynamic(
+  () => import('../LandingPricing/landing-pricing').then((m) => ({ default: m.LandingPricing })),
+  { loading: () => <div style={{ height: 600 }} /> }
 );
-const LandingContact = dynamic(() =>
-  import('../landing-contact').then((m) => ({ default: m.LandingContact }))
+const LandingContact = dynamic(
+  () => import('../landing-contact').then((m) => ({ default: m.LandingContact })),
+  { loading: () => <div style={{ height: 500 }} /> }
 );
-const LandingFAQ = dynamic(() =>
-  import('../LandingFAQ/index').then((m) => ({ default: m.LandingFAQ }))
+const LandingFAQ = dynamic(
+  () => import('../LandingFAQ/index').then((m) => ({ default: m.LandingFAQ })),
+  { loading: () => <div style={{ height: 400 }} /> }
 );
-const LandingAdvertisement = dynamic(() =>
-  import('../landing-advertisement').then((m) => ({ default: m.LandingAdvertisement }))
+const LandingAdvertisement = dynamic(
+  () => import('../landing-advertisement').then((m) => ({ default: m.LandingAdvertisement })),
+  { loading: () => <div style={{ height: 300 }} /> }
 );
 
 // ----------------------------------------------------------------------

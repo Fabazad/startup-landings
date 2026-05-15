@@ -28,11 +28,11 @@
   "packageManager": "yarn@1.22.22",
   "browserslist": {
     "production": [
-      "chrome >= 100",
-      "firefox >= 100",
-      "edge >= 100",
-      "safari >= 15.4",
-      "ios_saf >= 15.4",
+      "chrome >= 120",
+      "firefox >= 120",
+      "edge >= 120",
+      "safari >= 17",
+      "ios_saf >= 17",
       "not dead",
       "not op_mini all"
     ],
