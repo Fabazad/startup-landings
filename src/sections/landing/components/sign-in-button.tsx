@@ -1,24 +1,24 @@
 'use client';
 
-import { Button } from '@mui/material';
-import Link from 'next/link';
+import { Button, Link } from '@mui/material';
 import { useTranslate } from 'src/locales/use-locales';
 import { paths } from 'src/routes/paths';
 
 export function SignInButton() {
   const { t } = useTranslate();
   return (
-    <Link href={paths.auth.signIn}>
-      <Button
-        variant="contained"
-        sx={{
-          display: 'inline-flex',
-          borderRadius: '9999px',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {t('landing.hero.buttons.signIn')}
-      </Button>
-    </Link>
+    <Button
+      component={Link}
+      href={paths.auth.signIn}
+      variant="contained"
+      sx={{
+        display: 'inline-flex',
+        borderRadius: '9999px',
+        whiteSpace: 'nowrap',
+        minHeight: 40,
+      }}
+    >
+      {t('landing.hero.buttons.signIn')}
+    </Button>
   );
 }
