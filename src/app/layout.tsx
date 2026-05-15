@@ -22,10 +22,19 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang={lang} className={`${barlow.variable} ${nunitoSans.variable}`}>
       <head>
+        {/*
+          Preload the LCP hero background. The responsive variants below
+          let the browser pick the small mobile-optimised version (≈5 KB)
+          on phones and the desktop-quality version (≈15 KB) elsewhere
+          — matching the `srcset` on `<HeroBackgroundImage />`. `href`
+          is required by Safari/Firefox as the fallback.
+        */}
         <link
           rel="preload"
           as="image"
           href="/assets/background/background-3.webp"
+          imageSrcSet="/assets/background/background-3-mobile.webp 750w, /assets/background/background-3.webp 1440w"
+          imageSizes="(max-width: 900px) 100vw, 1440px"
           type="image/webp"
           fetchPriority="high"
         />
