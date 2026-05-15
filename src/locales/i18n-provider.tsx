@@ -3,7 +3,7 @@
 import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import resourcesToBackend from 'i18next-resources-to-backend';
-import { useMemo } from 'react';
+import { useEffect } from 'react';
 import { initReactI18next, I18nextProvider as Provider } from 'react-i18next';
 
 import { localStorageGetItem } from 'src/utils/storage-available';
@@ -18,11 +18,6 @@ import type { LanguageValue } from './config-locales';
 
 let lng: LanguageValue | undefined;
 
-/**
- * [1] localStorage
- * Auto detection:
- * const lng = localStorageGetItem('i18nextLng')
- */
 if (CONFIG.isStaticExport) {
   lng = localStorageGetItem('i18nextLng', fallbackLng) as LanguageValue | undefined;
 }
@@ -40,26 +35,38 @@ const init = CONFIG.isStaticExport
       },
     };
 
-i18next
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .use(resourcesToBackend((lang: string, ns: string) => import(`./langs/${lang}/${ns}.json`)))
-  .init(init);
+if (!i18next.isInitialized) {
+  i18next
+    .use(LanguageDetector)
+    .use(initReactI18next)
+    .use(resourcesToBackend((lang: string, ns: string) => import(`./langs/${lang}/${ns}.json`)))
+    .init(init);
+}
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  lang?: LanguageValue | undefined;
+  lang?: LanguageValue;
   children: React.ReactNode;
 };
 
+/**
+ * Synchronises i18next with the server-resolved language. The first render
+ * must match the server's lang attribute to avoid hydration mismatches and
+ * Lighthouse SEO penalties, so we set it synchronously the first time.
+ * Subsequent prop changes (e.g. after middleware redirect) are picked up
+ * via the effect.
+ */
 export function I18nProvider({ lang = undefined, children }: Props) {
-  useMemo(() => {
-    if (lang) {
+  if (lang && i18next.language !== lang) {
+    i18next.changeLanguage(lang);
+  }
+
+  useEffect(() => {
+    if (lang && i18next.language !== lang) {
       i18next.changeLanguage(lang);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [lang]);
 
   return <Provider i18n={i18next}>{children}</Provider>;
 }
