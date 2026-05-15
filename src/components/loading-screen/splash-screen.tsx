@@ -3,7 +3,12 @@
 import type { BoxProps } from '@mui/material/Box';
 import Box from '@mui/material/Box';
 import Portal from '@mui/material/Portal';
-import { AnimateLogo } from 'src/components/animate';
+// Direct import: pulling from `src/components/animate` re-exports ~10
+// other client modules (motion-viewport, scroll-progress, animate-text,
+// …) which all import framer-motion. Importing the file directly keeps
+// framer-motion out of the SplashScreen chunk, which Next.js loads for
+// every route as the global suspense fallback.
+import { AnimateLogo } from 'src/components/animate/animate-logo';
 
 // ----------------------------------------------------------------------
 

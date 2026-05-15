@@ -2,9 +2,8 @@
 
 import type { BoxProps } from '@mui/material/Box';
 
-import { m } from 'framer-motion';
-
 import Box from '@mui/material/Box';
+import { keyframes } from '@mui/material';
 
 import { varAlpha } from 'src/theme/styles';
 
@@ -12,6 +11,39 @@ import { useProductIdea } from 'src/app/product-idea-provider';
 import { Logo } from '../logo';
 
 // ----------------------------------------------------------------------
+
+// CSS keyframes replace the previous framer-motion animations. Loading
+// the framer-motion runtime here would put it in `app/loading.tsx`'s
+// chunk — which Next.js loads for every route as the global suspense
+// fallback — and that chunk is in turn pre-loaded as `<script async>`
+// on the landing critical path. CSS animations run entirely off the
+// main JS thread so they don't add to TBT either.
+
+const logoPulse = keyframes`
+  0% { transform: scale(1); opacity: 1; }
+  20% { transform: scale(0.9); opacity: 0.48; }
+  60% { transform: scale(0.9); opacity: 0.48; }
+  80% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+`;
+
+const outerOrbit = keyframes`
+  0% { transform: rotate(270deg) scale(1.6); opacity: 0.25; border-radius: 25%; }
+  20% { transform: rotate(0deg) scale(1); opacity: 1; border-radius: 25%; }
+  40% { transform: rotate(0deg) scale(1); opacity: 1; border-radius: 50%; }
+  60% { transform: rotate(0deg) scale(1); opacity: 1; border-radius: 50%; }
+  80% { transform: rotate(270deg) scale(1.6); opacity: 0.25; border-radius: 25%; }
+  100% { transform: rotate(270deg) scale(1.6); opacity: 0.25; border-radius: 25%; }
+`;
+
+const innerOrbit = keyframes`
+  0% { transform: rotate(0deg) scale(1); opacity: 1; border-radius: 25%; }
+  20% { transform: rotate(270deg) scale(1.2); opacity: 0.25; border-radius: 25%; }
+  40% { transform: rotate(270deg) scale(1.2); opacity: 0.25; border-radius: 50%; }
+  60% { transform: rotate(0deg) scale(1); opacity: 0.25; border-radius: 50%; }
+  80% { transform: rotate(0deg) scale(1); opacity: 1; border-radius: 25%; }
+  100% { transform: rotate(0deg) scale(1); opacity: 1; border-radius: 25%; }
+`;
 
 export type AnimateLogoProps = BoxProps;
 
@@ -32,15 +64,11 @@ export function AnimateLogo({ sx, ...other }: AnimateLogoProps) {
       {...other}
     >
       <Box
-        component={m.div}
-        animate={{ scale: [1, 0.9, 0.9, 1, 1], opacity: [1, 0.48, 0.48, 1, 1] }}
-        transition={{
-          duration: 2,
-          repeatDelay: 1,
-          repeat: Infinity,
-          ease: 'easeInOut',
+        sx={{
+          display: 'inline-flex',
+          animation: `${logoPulse} 3s ease-in-out infinite`,
+          '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
         }}
-        sx={{ display: 'inline-flex' }}
       >
         {logo && (
           <Logo
@@ -54,36 +82,24 @@ export function AnimateLogo({ sx, ...other }: AnimateLogoProps) {
       </Box>
 
       <Box
-        component={m.div}
-        animate={{
-          scale: [1.6, 1, 1, 1.6, 1.6],
-          rotate: [270, 0, 0, 270, 270],
-          opacity: [0.25, 1, 1, 1, 0.25],
-          borderRadius: ['25%', '25%', '50%', '50%', '25%'],
-        }}
-        transition={{ ease: 'linear', duration: 3.2, repeat: Infinity }}
         sx={{
           position: 'absolute',
           width: 'calc(100% - 20px)',
           height: 'calc(100% - 20px)',
           border: (theme) => `solid 3px ${varAlpha(theme.vars.palette.primary.darkChannel, 0.24)}`,
+          animation: `${outerOrbit} 3.2s linear infinite`,
+          '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
         }}
       />
 
       <Box
-        component={m.div}
-        animate={{
-          scale: [1, 1.2, 1.2, 1, 1],
-          rotate: [0, 270, 270, 0, 0],
-          opacity: [1, 0.25, 0.25, 0.25, 1],
-          borderRadius: ['25%', '25%', '50%', '50%', '25%'],
-        }}
-        transition={{ ease: 'linear', duration: 3.2, repeat: Infinity }}
         sx={{
           width: 1,
           height: 1,
           position: 'absolute',
           border: (theme) => `solid 8px ${varAlpha(theme.vars.palette.primary.darkChannel, 0.24)}`,
+          animation: `${innerOrbit} 3.2s linear infinite`,
+          '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
         }}
       />
     </Box>
