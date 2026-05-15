@@ -91,7 +91,11 @@ export function ProjectsDirectoryView({ productIdeas, baseUrl, protocol }: Props
                     height={48}
                   />
                 </Box>
-                <Typography variant="h5" component="h3" sx={{ mb: 1, fontWeight: 'fontWeightBold' }}>
+                <Typography
+                  variant="h5"
+                  component="h3"
+                  sx={{ mb: 1, fontWeight: 'fontWeightBold' }}
+                >
                   {idea.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ flexGrow: 1 }}>
