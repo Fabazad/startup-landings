@@ -28,16 +28,20 @@ export async function POST(req: Request) {
       );
     }
 
-    const { data, error } = await supabase.from('blogs').insert([parsed.data]).select().single();
+    const { data, error } = await supabase
+      .from('blogs')
+      .upsert(parsed.data, { onConflict: 'product_idea_id,language,slug' })
+      .select()
+      .single();
 
     if (error) {
-      console.error('Error inserting blog:', error);
+      console.error('Error upserting blog:', error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ success: true, blog: data }, { status: 201 });
+    return NextResponse.json({ success: true, blog: data }, { status: 200 });
   } catch (error: any) {
-    console.error('Error in blog publishing:', error);
+    console.error('Error in blog upserting:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
