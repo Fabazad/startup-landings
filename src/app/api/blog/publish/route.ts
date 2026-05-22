@@ -28,18 +28,31 @@ export async function POST(req: Request) {
       );
     }
 
-    const { data, error } = await supabase
+    const { data: existingBlog, error: findError } = await supabase
       .from('blogs')
-      .upsert(parsed.data, { onConflict: 'product_idea_id,language,slug' })
-      .select()
-      .single();
+      .select('id')
+      .eq('product_idea_id', parsed.data.product_idea_id)
+      .eq('language', parsed.data.language)
+      .eq('slug', parsed.data.slug)
+      .maybeSingle();
 
-    if (error) {
-      console.error('Error upserting blog:', error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    if (findError) {
+      console.error('Error finding blog before upsert:', findError);
+      return NextResponse.json({ error: findError.message }, { status: 500 });
     }
 
-    return NextResponse.json({ success: true, blog: data }, { status: 200 });
+    const query = existingBlog
+      ? supabase.from('blogs').update(parsed.data).eq('id', existingBlog.id)
+      : supabase.from('blogs').insert([parsed.data]);
+
+    const { data: blog, error: upsertError } = await query.select().single();
+
+    if (upsertError) {
+      console.error('Error upserting blog:', upsertError);
+      return NextResponse.json({ error: upsertError.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true, blog }, { status: existingBlog ? 200 : 201 });
   } catch (error: any) {
     console.error('Error in blog upserting:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
