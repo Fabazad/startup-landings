@@ -52,15 +52,28 @@ export type IPostItem = {
   author: { name: string; avatarUrl?: string };
 };
 
+const jsonValueSchema: z.ZodType<unknown> = z.lazy(() =>
+  z.union([
+    z.string(),
+    z.number(),
+    z.boolean(),
+    z.null(),
+    z.array(jsonValueSchema),
+    z.record(jsonValueSchema),
+  ])
+);
+
 export const blogDataSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   slug: z.string().min(1, 'Slug is required'),
   content: z.string().min(1, 'Content is required'),
   excerpt: z.string().optional(),
   cover_image: z.string().url().optional().or(z.literal('')),
+  cover_image_alt: z.string().optional(),
   seo_title: z.string().optional(),
   seo_description: z.string().optional(),
   seo_keywords: z.array(z.string()).optional(),
+  schema: jsonValueSchema.optional(),
   product_idea_id: z.nativeEnum(PRODUCT_IDEA_NAMES),
   language: z.string().default('fr'),
   published: z.boolean().default(true),
