@@ -85,6 +85,19 @@ export const blogDataSchema = z.object({
   content_refreshed_at: z.string().datetime({ offset: true }).nullable().optional(),
 });
 
+// Input schema for the /publish upsert. Unlike blogDataSchema (the canonical full-blog shape that
+// backs the read types), title/content are optional here so an existing post can be patched —
+// e.g. resurfaced — without resending them; the route requires them only when CREATING. slug +
+// product_idea_id still identify the row. No language/published/author defaults: applying them
+// would clobber those columns on a partial update, so the route fills them in on insert only.
+export const blogUpsertSchema = blogDataSchema.extend({
+  title: z.string().min(1, 'Title is required').optional(),
+  content: z.string().min(1, 'Content is required').optional(),
+  language: z.string().optional(),
+  published: z.boolean().optional(),
+  author: z.string().optional(),
+});
+
 export const blogSchema = blogDataSchema.extend({
   id: z.string(),
   // First publication date (datePublished). Stable — never changes on edits.

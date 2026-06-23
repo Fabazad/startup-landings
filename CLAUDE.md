@@ -51,7 +51,7 @@ Localized URL slugs: FAQ pages declare `slug: { en, fr }` (e.g. `birthday-wishli
 ### Routing layout
 
 - `src/app/(landing)/` — the actual customer-facing app: `page.tsx` (landing/directory), `blog/`, `blog/[slug]/`, `faq/[slug]/`, `privacy-policy/`.
-- `src/app/api/` — `scrap/` (URL scraping), `blog/list|publish|unpublish`, `contact/`, `subscriptions/`. `blog/publish` is an upsert; include `content_refreshed_at` (ISO timestamp) in the payload to resurface a post to the top of the list, `null` to un-resurface, or omit it to leave ordering untouched (a normal edit must not resurface a post).
+- `src/app/api/` — `scrap/` (URL scraping), `blog/list|publish|unpublish`, `contact/`, `subscriptions/`. `blog/publish` is an upsert keyed by `product_idea_id`+`language`+`slug` (input validated by `blogUpsertSchema`): `title`/`content` are required only when creating a post — an existing one can be patched with any subset of fields. Include `content_refreshed_at` (ISO timestamp) to resurface a post to the top of the list, `null` to un-resurface, or omit it to leave ordering untouched (a normal edit must not resurface a post).
 - `src/sections/landing/` — the landing page sections (`LandingHero`, `LandingFeatures`, `LandingFlow`, `LandingBenefits`, `LandingTestimonials`, `LandingPricing`, `LandingFAQ`) and the directory view. `LandingView` and `ProjectsDirectoryView` are imported via `next/dynamic` from `page.tsx`.
 - `src/routes/paths.ts` — most of `paths.*` is template boilerplate; `paths.envy.*` is the live one used as `auth.redirectPath`.
 
