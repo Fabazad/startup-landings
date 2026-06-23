@@ -36,13 +36,19 @@ export default async function BlogPage() {
     count,
   } = await supabase
     .from('blogs')
-    .select<any, BlogPost>('id, title, slug, excerpt, cover_image, created_at, author_avatar', {
-      count: 'exact',
-    })
+    .select<any, BlogPost>(
+      'id, title, slug, excerpt, cover_image, created_at, feed_date, author_avatar',
+      {
+        count: 'exact',
+      }
+    )
     .eq('product_idea_id', productIdeaName)
     .eq('language', lang ?? 'fr')
     .eq('published', true)
-    .order('created_at', { ascending: false })
+    // Keep this ordering in sync with /api/blog/list (load-more) so the paginated
+    // results don't overlap or skip. feed_date resurfaces refreshed posts; id breaks ties.
+    .order('feed_date', { ascending: false })
+    .order('id', { ascending: false })
     .range(0, 6);
 
   if (error) {

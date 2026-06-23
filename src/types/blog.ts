@@ -83,14 +83,30 @@ export const blogDataSchema = z.object({
 
 export const blogSchema = blogDataSchema.extend({
   id: z.string(),
+  // First publication date (datePublished). Stable — never changes on edits.
   created_at: z.string(),
+  // Bumped on every edit by a DB trigger. Drives <lastmod> / schema.org dateModified.
   updated_at: z.string(),
+  // Manual "major refresh" marker. NULL for normal edits; set to now() only on a
+  // substantial rewrite to deliberately resurface the post at the top of the list.
+  content_refreshed_at: z.string().nullable(),
+  // Ordering key for the blog list = coalesce(content_refreshed_at, created_at).
+  // Generated column — never written directly.
+  feed_date: z.string(),
 });
 
 export type Blog = z.infer<typeof blogSchema>;
 export type BlogPost = Pick<
   Blog,
-  'id' | 'title' | 'slug' | 'excerpt' | 'cover_image' | 'created_at' | 'author' | 'author_avatar'
+  | 'id'
+  | 'title'
+  | 'slug'
+  | 'excerpt'
+  | 'cover_image'
+  | 'created_at'
+  | 'feed_date'
+  | 'author'
+  | 'author_avatar'
 >;
 
 export const DEFAULT_AUTHOR = {

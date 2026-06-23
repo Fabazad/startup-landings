@@ -31,7 +31,7 @@ export async function PostDetailsHomeView({ post, latestPosts }: Props) {
         title={post.title}
         author={{ name: post.author, avatarUrl: post.author_avatar || DEFAULT_AUTHOR.avatarUrl }}
         coverUrl={post.cover_image || ''}
-        createdAt={post.created_at}
+        createdAt={post.feed_date}
       />
 
       <Container maxWidth={false} sx={{ py: 3, mb: 5, borderBottom: 'solid 1px divider' }}>

@@ -88,7 +88,7 @@ export function PostItem({ post, sx, ...other }: PostItemProps) {
 
         <CardContent sx={{ pt: 6 }}>
           <Typography variant="caption" component="div" sx={{ mb: 1, color: 'text.disabled' }}>
-            {fDate(post.created_at)}
+            {fDate(post.feed_date)}
           </Typography>
 
           <Typography
@@ -174,7 +174,7 @@ export function PostItemLatest({ post, index }: PostItemLatestProps) {
           }}
         >
           <Typography variant="caption" component="div" sx={{ mb: 1, opacity: 0.64 }}>
-            {fDate(post.created_at)}
+            {fDate(post.feed_date)}
           </Typography>
 
           <Typography
