@@ -17,11 +17,16 @@ export async function GET(request: Request) {
 
     const { data: blogs, error } = await supabase
       .from('blogs')
-      .select('id, title, slug, excerpt, cover_image, created_at', { count: 'exact' })
+      .select('id, title, slug, excerpt, cover_image, created_at, feed_date, author_avatar', {
+        count: 'exact',
+      })
       .eq('product_idea_id', productIdeaName)
       .eq('language', lang)
       .eq('published', true)
-      .order('created_at', { ascending: false })
+      // feed_date = coalesce(content_refreshed_at, created_at): newest/resurfaced first.
+      // id is a deterministic tiebreaker so pagination stays stable across requests.
+      .order('feed_date', { ascending: false })
+      .order('id', { ascending: false })
       .range(offset, offset + limit - 1);
 
     if (error) {

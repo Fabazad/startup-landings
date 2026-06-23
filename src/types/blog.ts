@@ -79,18 +79,48 @@ export const blogDataSchema = z.object({
   published: z.boolean().default(true),
   author: z.string().default('AI'),
   author_avatar: z.string().optional(),
+  // Optional refresh marker. Set to an ISO timestamp to resurface the post to the top of the blog
+  // list (its feed_date becomes this value); pass null to drop it back to its original position.
+  // Omit on an update to leave ordering untouched — a normal edit must not resurface a post.
+  content_refreshed_at: z.string().datetime({ offset: true }).nullable().optional(),
+});
+
+// Input schema for the /publish upsert. Unlike blogDataSchema (the canonical full-blog shape that
+// backs the read types), title/content are optional here so an existing post can be patched —
+// e.g. resurfaced — without resending them; the route requires them only when CREATING. slug +
+// product_idea_id still identify the row. No language/published/author defaults: applying them
+// would clobber those columns on a partial update, so the route fills them in on insert only.
+export const blogUpsertSchema = blogDataSchema.extend({
+  title: z.string().min(1, 'Title is required').optional(),
+  content: z.string().min(1, 'Content is required').optional(),
+  language: z.string().optional(),
+  published: z.boolean().optional(),
+  author: z.string().optional(),
 });
 
 export const blogSchema = blogDataSchema.extend({
   id: z.string(),
+  // First publication date (datePublished). Stable — never changes on edits.
   created_at: z.string(),
+  // Bumped on every edit by a DB trigger. Drives <lastmod> / schema.org dateModified.
   updated_at: z.string(),
+  // Ordering key for the blog list = coalesce(content_refreshed_at, created_at).
+  // Generated column — never written directly.
+  feed_date: z.string(),
 });
 
 export type Blog = z.infer<typeof blogSchema>;
 export type BlogPost = Pick<
   Blog,
-  'id' | 'title' | 'slug' | 'excerpt' | 'cover_image' | 'created_at' | 'author' | 'author_avatar'
+  | 'id'
+  | 'title'
+  | 'slug'
+  | 'excerpt'
+  | 'cover_image'
+  | 'created_at'
+  | 'feed_date'
+  | 'author'
+  | 'author_avatar'
 >;
 
 export const DEFAULT_AUTHOR = {
