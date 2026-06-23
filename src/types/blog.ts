@@ -79,6 +79,10 @@ export const blogDataSchema = z.object({
   published: z.boolean().default(true),
   author: z.string().default('AI'),
   author_avatar: z.string().optional(),
+  // Optional refresh marker. Set to an ISO timestamp to resurface the post to the top of the blog
+  // list (its feed_date becomes this value); pass null to drop it back to its original position.
+  // Omit on an update to leave ordering untouched — a normal edit must not resurface a post.
+  content_refreshed_at: z.string().datetime({ offset: true }).nullable().optional(),
 });
 
 export const blogSchema = blogDataSchema.extend({
@@ -87,9 +91,6 @@ export const blogSchema = blogDataSchema.extend({
   created_at: z.string(),
   // Bumped on every edit by a DB trigger. Drives <lastmod> / schema.org dateModified.
   updated_at: z.string(),
-  // Manual "major refresh" marker. NULL for normal edits; set to now() only on a
-  // substantial rewrite to deliberately resurface the post at the top of the list.
-  content_refreshed_at: z.string().nullable(),
   // Ordering key for the blog list = coalesce(content_refreshed_at, created_at).
   // Generated column — never written directly.
   feed_date: z.string(),
