@@ -22,7 +22,7 @@ export type ConfigValue = {
   amazon: { affiliateTag: string; accessKey: string; secretKey: string };
   openai: { apiKey: string };
   listy: { projectSession: string };
-  blog: { aiSecret: string };
+  blog: { aiSecret: string; envyFrontDeployHookUrl: string };
 };
 
 // ----------------------------------------------------------------------
@@ -77,5 +77,9 @@ export const CONFIG: ConfigValue = {
   },
   blog: {
     aiSecret: process.env.AI_BLOG_SECRET ?? '',
+    // Vercel deploy hook of the envynest.fr static front (repo envy-gift-wishlist).
+    // Fired on publish/update/unpublish of an Envy post so the front is rebuilt and
+    // actually serves the article (its pages are prerendered at deploy time).
+    envyFrontDeployHookUrl: process.env.ENVY_FRONT_DEPLOY_HOOK_URL ?? '',
   },
 };
