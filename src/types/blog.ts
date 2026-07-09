@@ -93,6 +93,9 @@ export const blogDataSchema = z.object({
 export const blogUpsertSchema = blogDataSchema.extend({
   title: z.string().min(1, 'Title is required').optional(),
   content: z.string().min(1, 'Content is required').optional(),
+  // A post can legitimately have no cover (image generation is fail-open upstream):
+  // null must not make it unpublishable.
+  cover_image: z.string().url().nullable().optional().or(z.literal('')),
   language: z.string().optional(),
   published: z.boolean().optional(),
   author: z.string().optional(),

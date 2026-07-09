@@ -10,7 +10,10 @@ export async function POST(req: Request) {
   try {
     const authHeader = req.headers.get('authorization');
 
+    // Fail closed: with AI_BLOG_SECRET unset, CONFIG.blog.aiSecret is '' and an
+    // empty Bearer token would otherwise match — nothing must be publishable then.
     if (
+      !CONFIG.blog.aiSecret ||
       !authHeader ||
       !authHeader.startsWith('Bearer ') ||
       authHeader.split('Bearer ')[1] !== CONFIG.blog.aiSecret
