@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { headers } from 'next/headers';
 import { getLandingProductIdea } from 'src/app/getProductIdea';
+import { RAW_PRODUCT_IDEAS, PRODUCT_IDEA_NAMES } from 'src/ProductIdeas';
 import { createClient } from '@supabase/supabase-js';
 import { CONFIG } from 'src/config-global';
 import { detectLanguage, getServerTranslations } from 'src/locales/server';
@@ -39,6 +40,13 @@ export async function generateMetadata({
     };
   }
 
+  // Le même article est servi sur plusieurs hosts (envy.onama.io, envynest.fr,
+  // previews Vercel) : le canonical pointe toujours le domaine officiel du
+  // produit pour éviter que Google le voie en contenu dupliqué.
+  const isEnvy = productIdea.id === RAW_PRODUCT_IDEAS[PRODUCT_IDEA_NAMES.ENVY].id;
+  const canonicalBase = isEnvy ? 'https://envynest.fr' : `https://${productIdea.id}.onama.io`;
+  const canonicalUrl = `${canonicalBase}/blog/${params.slug}/`;
+
   return {
     title: blog.seo_title || `${blog.title} | ${productName}`,
     description:
@@ -47,10 +55,21 @@ export async function generateMetadata({
     icons: {
       icon: `/favicon/${productIdea.themeColor}-${productIdea.logo}.png`,
     },
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
+      type: 'article',
+      url: canonicalUrl,
       title: blog.seo_title || blog.title,
       description: blog.seo_description || blog.excerpt || '',
       images: blog.cover_image ? [{ url: blog.cover_image }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: blog.seo_title || blog.title,
+      description: blog.seo_description || blog.excerpt || '',
+      images: blog.cover_image ? [blog.cover_image] : [],
     },
   };
 }

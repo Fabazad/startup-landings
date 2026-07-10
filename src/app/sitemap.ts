@@ -76,7 +76,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.adminKey);
     const { data: blogs } = await supabase
       .from('blogs')
-      .select('slug, language, updated_at')
+      .select('slug, language, updated_at, cover_image')
       .eq('product_idea_id', productIdea.name)
       .eq('published', true);
 
@@ -84,7 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       // Group blogs by slug to organize alternates
       const blogGroupBySlug: Record<
         string,
-        { slug: string; language: string; updated_at: string }[]
+        { slug: string; language: string; updated_at: string; cover_image: string | null }[]
       > = {};
       blogs.forEach((blog) => {
         if (!blogGroupBySlug[blog.slug]) {
@@ -114,6 +114,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             alternates: {
               languages: blogAlternates,
             },
+            // Sitemap images : aide Google Images à découvrir les couvertures.
+            ...(blog.cover_image && { images: [blog.cover_image] }),
           });
         });
       });

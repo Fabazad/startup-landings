@@ -2,7 +2,7 @@ import 'src/global.css';
 
 // ----------------------------------------------------------------------
 
-import type { Viewport } from 'next';
+import type { Metadata, Viewport } from 'next';
 
 import { detectLanguage } from 'src/locales/server';
 
@@ -14,6 +14,16 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: '#7A44D4',
+};
+
+// Sans max-image-preview:large, Google n'affiche jamais les grandes vignettes
+// (Discover, résultats enrichis) même quand l'image fait plus de 1200px.
+export const metadata: Metadata = {
+  robots: {
+    'max-image-preview': 'large',
+    'max-snippet': -1,
+    'max-video-preview': -1,
+  },
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
