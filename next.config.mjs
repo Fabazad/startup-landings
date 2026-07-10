@@ -83,6 +83,25 @@ const nextConfig = {
   ...(isStaticExport === 'true' && {
     output: 'export',
   }),
+  async redirects() {
+    return [
+      // Envy est résolu par sous-domaine : envy.onama.io sert exactement le
+      // même contenu que le domaine officiel envynest.fr, ce que Google voit
+      // comme du contenu dupliqué. Un seul host doit rester indexable.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'envy.onama.io' }],
+        destination: 'https://envynest.fr/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.envynest.fr' }],
+        destination: 'https://envynest.fr/:path*',
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     return {
       beforeFiles: [
