@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { CONFIG } from 'src/config-global';
+import { revalidateFront } from 'src/lib/blog-front-revalidate';
 
 const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.adminKey || CONFIG.supabase.key);
 
@@ -34,7 +35,10 @@ export async function POST(req: Request, { params }: { params: { slug: string } 
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ success: true, blog: data }, { status: 200 });
+    // Revalidate the front so the unpublished article stops being served.
+    const revalidated = await revalidateFront(data.product_idea_id, data.slug);
+
+    return NextResponse.json({ success: true, blog: data, revalidated }, { status: 200 });
   } catch (error: any) {
     console.error(`Error in blog unpublishing ${params?.slug}:`, error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

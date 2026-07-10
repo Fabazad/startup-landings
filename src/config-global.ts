@@ -22,7 +22,7 @@ export type ConfigValue = {
   amazon: { affiliateTag: string; accessKey: string; secretKey: string };
   openai: { apiKey: string };
   listy: { projectSession: string };
-  blog: { aiSecret: string };
+  blog: { aiSecret: string; envyFrontUrl: string; revalidateSecret: string };
 };
 
 // ----------------------------------------------------------------------
@@ -77,5 +77,11 @@ export const CONFIG: ConfigValue = {
   },
   blog: {
     aiSecret: process.env.AI_BLOG_SECRET ?? '',
+    // Base URL of the Envy front (repo envy-gift-wishlist, Next.js on Vercel).
+    // On publish/unpublish we call its /api/revalidate endpoint so the change is
+    // served within seconds via on-demand ISR (no full rebuild).
+    envyFrontUrl: process.env.ENVY_FRONT_URL ?? 'https://envynest.fr',
+    // Shared secret expected by the front's /api/revalidate endpoint.
+    revalidateSecret: process.env.REVALIDATE_SECRET ?? '',
   },
 };
