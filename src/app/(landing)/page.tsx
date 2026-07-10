@@ -32,7 +32,6 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = rawProductIdea.heroTexts.description[lang];
   const title = `${rawProductIdea.name} - ${headingPart1} ${headingPart2}`;
 
-  const alternateLanguages = Object.fromEntries(languages.map((l) => [l, `${baseUrl}?lang=${l}`]));
   const alternateLocale = languages.filter((l) => l !== lang).map((l) => OG_LOCALE[l] ?? l);
 
   return {
@@ -42,9 +41,11 @@ export async function generateMetadata(): Promise<Metadata> {
     icons: {
       icon: `/favicon/${rawProductIdea.themeColor}-${rawProductIdea.logo}.png`,
     },
+    // Pas de hreflang : les URLs ?lang= redirigent vers l'URL propre (la
+    // langue vit dans un cookie), et un hreflang vers une redirection est
+    // ignoré par Google et pollue les rapports d'indexation.
     alternates: {
       canonical: baseUrl,
-      languages: alternateLanguages,
     },
     openGraph: {
       type: 'website',

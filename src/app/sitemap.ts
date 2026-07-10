@@ -17,31 +17,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const productIdea = await getRawProductIdea();
 
-  // Base pages for each language
+  // La langue est résolue par cookie/Accept-Language, pas par l'URL : les
+  // variantes ?lang= redirigent (302) vers l'URL propre via le middleware.
+  // Le sitemap ne doit donc émettre QUE des URLs propres — une entrée ?lang=
+  // finit en « Page avec redirection » dans Search Console.
   const pages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 1,
-      alternates: {
-        languages: Object.fromEntries(languages.map((lang) => [lang, `${baseUrl}?lang=${lang}`])),
-      },
     },
   ];
-
-  // Add language-specific pages
-  languages.forEach((lang) => {
-    pages.push({
-      url: `${baseUrl}?lang=${lang}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-      alternates: {
-        languages: Object.fromEntries(languages.map((l) => [l, `${baseUrl}?lang=${l}`])),
-      },
-    });
-  });
 
   // Add FAQ pages if the product idea has them
   if (productIdea?.faq?.pages) {
@@ -76,45 +63,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.adminKey);
     const { data: blogs } = await supabase
       .from('blogs')
-      .select('slug, language, updated_at')
+      .select('slug, language, updated_at, cover_image')
       .eq('product_idea_id', productIdea.name)
       .eq('published', true);
 
     if (blogs && blogs.length > 0) {
-      // Group blogs by slug to organize alternates
-      const blogGroupBySlug: Record<
-        string,
-        { slug: string; language: string; updated_at: string }[]
-      > = {};
+      // Un slug n'a qu'une seule URL adressable (la langue vient du cookie,
+      // pas de l'URL) : une entrée par slug, la plus récente si le slug
+      // existe dans plusieurs langues.
+      const blogBySlug: Record<string, { updated_at: string; cover_image: string | null }> = {};
       blogs.forEach((blog) => {
-        if (!blogGroupBySlug[blog.slug]) {
-          blogGroupBySlug[blog.slug] = [];
+        const existing = blogBySlug[blog.slug];
+        if (!existing || new Date(blog.updated_at) > new Date(existing.updated_at)) {
+          blogBySlug[blog.slug] = {
+            updated_at: blog.updated_at,
+            cover_image: blog.cover_image ?? existing?.cover_image ?? null,
+          };
         }
-        blogGroupBySlug[blog.slug].push(blog);
       });
 
-      // For each slug, output one page entry per language
-      Object.entries(blogGroupBySlug).forEach(([slug, blogGroup]) => {
-        // Build alternates record for this blog slug
-        const blogAlternates: Record<string, string> = {};
-        blogGroup.forEach((blog) => {
-          const langQuery = blog.language && blog.language !== 'fr' ? `?lang=${blog.language}` : '';
-          blogAlternates[blog.language] = `${baseUrl}/blog/${slug}/${langQuery}`;
-        });
-
-        // Push each language version of the blog to sitemap
-        blogGroup.forEach((blog) => {
-          const langQuery = blog.language && blog.language !== 'fr' ? `?lang=${blog.language}` : '';
-          const blogUrl = `${baseUrl}/blog/${slug}/${langQuery}`;
-          pages.push({
-            url: blogUrl,
-            lastModified: new Date(blog.updated_at || new Date()),
-            changeFrequency: 'weekly' as const,
-            priority: 0.7,
-            alternates: {
-              languages: blogAlternates,
-            },
-          });
+      Object.entries(blogBySlug).forEach(([slug, blog]) => {
+        pages.push({
+          url: `${baseUrl}/blog/${slug}/`,
+          lastModified: new Date(blog.updated_at || new Date()),
+          changeFrequency: 'weekly' as const,
+          priority: 0.7,
+          // Sitemap images : aide Google Images à découvrir les couvertures.
+          ...(blog.cover_image && { images: [blog.cover_image] }),
         });
       });
     }
