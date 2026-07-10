@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { CONFIG } from 'src/config-global';
 import { blogUpsertSchema } from 'src/types/blog';
-import { triggerFrontRebuild } from 'src/lib/blog-front-rebuild';
+import { revalidateFront } from 'src/lib/blog-front-revalidate';
 
 const supabase = createClient(CONFIG.supabase.url, CONFIG.supabase.adminKey || CONFIG.supabase.key);
 
@@ -74,12 +74,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: upsertError.message }, { status: 500 });
     }
 
-    // The Envy blog is served by a static, prerendered front: rebuild it so the change
-    // (new post or edit) is actually served. Fail-open — the post is stored either way.
-    const frontRebuild = await triggerFrontRebuild(blog.product_idea_id);
+    // Tell the Envy front to revalidate this article (+ index/sitemap/RSS) so the
+    // change is served within seconds. Fail-open — the post is stored either way.
+    const revalidated = await revalidateFront(blog.product_idea_id, blog.slug);
 
     return NextResponse.json(
-      { success: true, blog, front_rebuild: frontRebuild },
+      { success: true, blog, revalidated },
       { status: existingBlog ? 200 : 201 }
     );
   } catch (error: any) {
